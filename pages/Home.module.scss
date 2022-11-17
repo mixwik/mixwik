@@ -1,62 +1,30 @@
 .header {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 1rem;
   align-items: center;
   height: 100vh;
 
-  .nav {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    align-items: center;
-    width: 100%;
-    top: 0;
-    left: 0;
-
-    .logo {
-      width: 200px;
-    }
-
-    .links {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-
-      button {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: .5em;
-        border: 1px solid white;
-        width: 160px;
-        cursor: pointer;
-
-        svg {
-          width: 15px;
-          height: 15px;
-        }
-      }
-
-      svg {
-        width: 30px;
-        height: 30px;
-      }
-    }
-  }
-
   h1 {
-    font-size: 2.5em;
+    font-size: 1.5em;
+    text-align: center;
+
+    @media screen and (min-width: 768px) {
+      font-size: 2.5em;
+    }
   }
 
   .games {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 1rem;
+
+    @media screen and (min-width: 768px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

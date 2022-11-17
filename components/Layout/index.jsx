@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Nav from '../Nav'
 
 const Layout = ({ children, title }) => {
   return (
@@ -6,6 +7,7 @@ const Layout = ({ children, title }) => {
       <Head>
         <title>{title}</title>
       </Head>
+      <Nav />
       {children}
     </>
   )

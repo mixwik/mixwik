@@ -1,0 +1,92 @@
+.nav {
+  background-color: rgba(0, 0, 0, 0.474);
+  backdrop-filter: blur(2px);
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  @media screen and (min-width:768px) {
+    top: 0;
+    bottom: auto;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  .links {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    @media screen and (min-width:768px) {
+      display: flex;
+    }
+
+    button {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: .5em;
+      border: 1px solid white;
+      width: 160px;
+      cursor: pointer;
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .burguerButtom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: .2rem;
+
+    @media screen and (min-width:768px) {
+      display: none;
+    }
+
+    div {
+      position: relative;
+      width: 100%;
+      height: 4px;
+      background-color: white;
+      border-radius: 2px;
+
+      &::after,
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: white;
+        border-radius: 2px;
+      }
+
+      &::before {
+        top: -10px;
+      }
+
+      &::after {
+        top: 10px;
+      }
+    }
+  }
+}
