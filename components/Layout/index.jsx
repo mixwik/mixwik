@@ -1,3 +1,5 @@
+import styles from './Layout.module.scss'
+
 import Head from 'next/head'
 import Nav from '../Nav'
 
@@ -8,7 +10,9 @@ const Layout = ({ children, title }) => {
         <title>{title}</title>
       </Head>
       <Nav />
-      {children}
+      <main className={styles.main}>
+        {children}
+      </main>
     </>
   )
 }

@@ -11,20 +11,23 @@ import { PlusIcon, UserIcon } from '../../components/Svg'
 
 const Nav = () => {
   return (
-    <nav className={styles.nav}>
-      <div className={styles.logo}>
-        <Image layout='responsive' src={logo} alt='logo de MixWik' />
-      </div>
-      <div className={styles.links}>
-        <Link href='null'>Contáctanos</Link>
-        <Link href='null'>¿Quiénes Somos?</Link>
-        <button><PlusIcon />Players / equipo</button>
-        <UserIcon />
-      </div>
-      <button className={styles.burguerButtom}>
-        <div />
-      </button>
-    </nav>
+    <>
+      <nav className={styles.nav}>
+        <div className={styles.logo}>
+          <Image layout='responsive' src={logo} alt='logo de MixWik' />
+        </div>
+        <div className={styles.links}>
+          <Link href='null'>Contáctanos</Link>
+          <Link href='null'>¿Quiénes Somos?</Link>
+          <button><PlusIcon />Players / equipo</button>
+          <UserIcon />
+        </div>
+        <button className={styles.burguerButton}>
+          <div />
+        </button>
+      </nav>
+      <div className={styles.placeHolder} />
+    </>
   )
 }
 export default Nav

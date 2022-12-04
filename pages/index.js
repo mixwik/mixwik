@@ -1,6 +1,6 @@
 import styles from './Home.module.scss'
 import Layout from '../components/Layout'
-import Video from '../components/video'
+import Video from '../components/Video'
 import ButtonGame from '../components/ButtonGame'
 
 export default function Home () {

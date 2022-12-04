@@ -1,0 +1,12 @@
+.filter {
+  color: black;
+
+  .age {
+    label {
+      display: flex;
+      gap: 1rem;
+
+      input {}
+    }
+  }
+}
