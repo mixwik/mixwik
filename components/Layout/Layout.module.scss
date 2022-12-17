@@ -1,3 +1,9 @@
 .main {
   display: flex;
+  flex-direction: column;
+  margin-bottom: 10vh;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 }

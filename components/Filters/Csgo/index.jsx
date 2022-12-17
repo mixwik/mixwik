@@ -1,18 +1,22 @@
+// Hooks
+import { useState } from 'react'
+
+// Styles
 import styles from './FilterCsgo.module.scss'
 
+// Components
+import FormAge from '../../Forms/age'
+import TypeOfGamer from '../../Forms/TypeOfGamer'
+
 const FilterCsgo = () => {
+  const [age, setAge] = useState(0)
   return (
     <section className={styles.filter}>
-      <span>Filtro CSGO</span>
       <form>
-        <section className={styles.age}>
-          <h2>Edad</h2>
-          <label>
-            18-25
-            <input value='18-25' name='age' type='checkbox' />
-          </label>
-        </section>
+        <FormAge state={age} setState={setAge} />
+        <TypeOfGamer />
       </form>
+      {age}
     </section>
   )
 }

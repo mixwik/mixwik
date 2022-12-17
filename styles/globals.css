@@ -145,13 +145,8 @@ label {
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
-  background-color: transparent;
   color: inherit;
   display: block;
-  /* opcional */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
 }
 
 /* Reseteamos las tablas */

@@ -14,7 +14,7 @@ const Csgo = () => {
   const [filter, setFilter] = useState(false)
   const DB = { ...db }
   const DBFilter = DB.venues.filter(res => res.name === 'Maruan')
-  console.log(DBFilter)
+
   return (
     <Layout>
       <section className={styles.csgo}>

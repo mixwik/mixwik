@@ -10,7 +10,7 @@ specifiers:
   next-videos: 1.5.0
   react: 18.2.0
   react-dom: 18.2.0
-  react-leaflet: ^4.1.0
+  react-leaflet: ^4.2.0
   react-player: 2.11.0
   sass: 1.56.1
   standard: 17.0.0
@@ -25,7 +25,7 @@ dependencies:
   next-videos: 1.5.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  react-leaflet: 4.1.0_ck4vhzg7aizutrwygiu3aueify
+  react-leaflet: 4.2.0_ck4vhzg7aizutrwygiu3aueify
   react-player: 2.11.0_react@18.2.0
   sass: 1.56.1
   standard: 17.0.0
@@ -2653,8 +2653,8 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
-  /react-leaflet/4.1.0_ck4vhzg7aizutrwygiu3aueify:
-    resolution: {integrity: sha512-i+V9pX5lywJ48O2+K3USeeTdYLIhxnLMweH+YLd/UPqVIj3uKzE3Q29bzt83PBtViyZmxDlulzC6uoR3JLiE9A==}
+  /react-leaflet/4.2.0_ck4vhzg7aizutrwygiu3aueify:
+    resolution: {integrity: sha512-9d8T7hzYrQA5GLe3vn0qtRLJzQKgjr080NKa45yArGwuSl1nH/6aK9gp7DeYdktpdO1vKGSUTGW5AsUS064X0A==}
     peerDependencies:
       leaflet: ^1.9.0
       react: ^18.0.0

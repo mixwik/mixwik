@@ -1,9 +1,8 @@
 import { Popup, Marker } from 'react-leaflet'
-import { IconLocation } from './icon'
 
 const Markers = ({ position, popup }) => {
   return (
-    <Marker position={position} icon={IconLocation}>
+    <Marker position={position}>
       <Popup>
         {popup}
       </Popup>

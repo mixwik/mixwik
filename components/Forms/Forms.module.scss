@@ -1,0 +1,18 @@
+.age {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem;
+
+  .title {
+    grid-column: 1/4;
+    text-align: center;
+  }
+
+  label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+  }
+}
