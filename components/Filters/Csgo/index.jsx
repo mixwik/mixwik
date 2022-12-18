@@ -5,7 +5,7 @@ import { useState } from 'react'
 import styles from './FilterCsgo.module.scss'
 
 // Components
-import FormAge from '../../Forms/age'
+import FormAge from '../../Forms/Age'
 import TypeOfGamer from '../../Forms/TypeOfGamer'
 
 const FilterCsgo = () => {
