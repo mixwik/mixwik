@@ -8,11 +8,46 @@
     width: 60vw;
   }
 
+  .kmSelector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    color: black;
+    padding: 2rem;
+
+    input[type="range"] {
+      /* estilos para el elemento input */
+      appearance: none;
+      width: 30%;
+      height: .5rem;
+      background: blue;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      /* estilos para el control deslizante */
+      appearance: none;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: #4caf50;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+
   h1 {
     text-align: center;
     padding: 1rem;
     font-size: 2rem;
     color: black;
+  }
+
+  .gamers {
+    color: black;
+    padding: .3rem;
   }
 
   button {

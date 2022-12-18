@@ -24,18 +24,11 @@ const Map = ({ location, db }) => {
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
         {
-        db.venues.map((res, index) => (
+        db.map((res, index) => (
           <Markers key={index} position={res.geometry} popup={res.name} />
         ))
       }
       </MapContainer>
-      <div>
-        {
-          db.venues.map((res, index) => (
-            <li key={index}>{res.geometry[0] * res.geometry[1]}</li>
-          ))
-        }
-      </div>
     </>
   )
 }
