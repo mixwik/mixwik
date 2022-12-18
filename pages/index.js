@@ -3,7 +3,7 @@ import styles from './Home.module.scss'
 
 // Components
 import Layout from '../components/Layout'
-import Video from '../components/Video'
+import Video from '../components/Home-video'
 import ButtonGame from '../components/ButtonGame'
 
 export default function Home () {

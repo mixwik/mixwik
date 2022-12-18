@@ -7,7 +7,7 @@ import styles from './Csgo.module.scss'
 // Components
 import Map from '../../components/Map'
 import Layout from '../../components/Layout'
-import FilterCsgo from '../../components/Filters/csgo'
+import FilterCsgo from '../../components/Filters/Csgo'
 import db from '../../db/localization.json'
 
 // Customs Hooks
