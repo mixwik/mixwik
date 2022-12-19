@@ -15,7 +15,8 @@ import { useUserFilter } from '../../hooks/useUsersFilterDistance'
 
 const Csgo = () => {
   const [filter, setFilter] = useState(false)
-  const [value, setValue] = useState(10)
+  const [value, setValue] = useState(700)
+
   const DB = { ...db }
   const user = DB.venues.find(res => res.name === 'Maruan')
   const distance = value
@@ -30,7 +31,7 @@ const Csgo = () => {
           <input
             type='range'
             min={1}
-            max={10}
+            max={700}
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />

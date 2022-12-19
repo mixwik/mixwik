@@ -5,7 +5,7 @@ const TypeOfGamer = ({ state, setState }) => {
     setState(e.target.value)
   }
   return (
-    <section className={styles.age}>
+    <section className={styles.formFilter}>
       <h3 className={styles.title}>Tipo de Jugador</h3>
       <label htmlFor='age'>
         Casual

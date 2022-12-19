@@ -5,7 +5,7 @@ const FormAge = ({ state, setState }) => {
     setState(e.target.value)
   }
   return (
-    <section className={styles.age}>
+    <section className={styles.formFilter}>
       <h3 className={styles.title}>Edad</h3>
       <label htmlFor='age'>
         18 - 25

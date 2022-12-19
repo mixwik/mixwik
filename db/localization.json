@@ -1,84 +1,193 @@
 {
     "venues": [
         {
+            "id": 0,
             "description": "Schon seit längerem wollte Rummel sich sein kleines Paradies schaffen, hat tiefe stille Wasser betörnt und stürmischen Zeiten getrotzt und hat endlich geankert - in einer schönen kleinen Bucht nicht weit von Euch! In diese Bucht läd Rummel von Mai bis Mitte September zum Chillen und Grillen, zum Schunkeln, Munkeln und natürlich Trunkeln. Und wenn Rummel mal so richtig gut drauf ist, dann wird auch mal ordentlich gerummelt! So oder so, zu Wasser wie zur Bucht, auch der Rummel ist nichts ohne seine Crew. Also Leichtmatrosen und Matrösinnen - kommt rum und lasst es Euch gut gehn! Ahoi* Ach ja, geöffnet ist nur an sonnigen und regenfreien Tagen :) ________________ Reservierungsanfragen sind nur per Mail möglich bucht@rummels-welt.de (Reservierungsanfragen werden nur zwischen Di-Fr beantwortet) ",
             "name": "Maruan",
             "geometry": [
-                52.500772,
-                13.472764
-            ]
+                37.389892576741424,
+                -4.766635076752695
+            ],
+            "Age": 18,
+            "csgo": {
+                "position": [
+                    "lurker",
+                    "support"
+                ],
+                "level": "silver",
+                "typeOfGamer": "Casual",
+                "hours": 25
+            }
         },
         {
+            "id": 1,
             "description": "Das SEZ bietet ein großes Sport-, Freizeit- und Erholungsangebot. Ab sofort könnt ihr das SEZ für Events unter: sez@glut.berlin anmieten. Kommt vorbei und genießt den industriellen Charm einer in Vergessenheit geglaubten Location. ",
             "name": "SEZ Berlin",
             "geometry": [
-                52.527025,
-                13.446139
-            ]
+                37.39623438282091,
+                -4.759167806744201
+            ],
+            "Age": 35,
+            "csgo": {
+                "position": [
+                    "lurker",
+                    "playmaker"
+                ],
+                "level": "Doble Ak",
+                "typeOfGamer": "Competitive",
+                "hours": 2000
+            }
         },
         {
+            "id": 2,
             "description": "Das Huxleys seit fast einem Jahrhundert ein Name in Berlin. Varietébühne, Sportpalast, Rollschuhbahn und Ausflugsziel am Rande des Volksparks Hasenheide. Das HUXLEYS hat eine lange Geschichte, und die ist verbunden mit Entertainment, Vergnügen und Livemusik.",
             "name": "Huxley's Neue Welt",
             "geometry": [
-                52.486319,
-                13.421437
-            ]
+                37.36386072170253,
+                -4.850282074643562
+            ],
+            "Age": 48,
+            "csgo": {
+                "position": [
+                    "Entry Fragger"
+                ],
+                "level": "Supreme",
+                "typeOfGamer": "Competitive",
+                "hours": 3000
+            }
         },
         {
+            "id": 3,
             "description": "Wir sind ein Veranstaltungsort. Eine Plattform. Wir sind ein Kollektiv. Basisdemokratisch und solidarisch. Wir sind das Mensch Meier. Und ihr seid es auch, wenn ihr da seid. Wir wollen einen Raum erschaffen, in dem wir unsere Beziehungen selbstbestimmt formen. Das ist im Kapitalismus, im Patriarchat, leider kein erreichbares Ziel. Aber wir haben einfach schon mal angefangen, uns dieses Ziel als Weg formuliert. Für unsere Zukunft. In einem Raum für Inspiration, Intervention und Bewegung. KulturKunstPartyPolitik. Mit den Mitteln der Kritik und den Waffen der Kunst unordentlich Theater machen. Mensch Meier ",
             "name": "Mensch Meier",
             "geometry": [
-                52.535069,
-                13.452312
-            ]
+                37.89600060025221,
+                -4.781000612123971
+            ],
+            "Age": 22,
+            "csgo": {
+                "position": [
+                    "AWPer"
+                ],
+                "level": "In-game leader",
+                "typeOfGamer": "Casual",
+                "hours": 30
+            }
         },
         {
+            "id": 4,
             "description": "The club is located in a former underground gay cruising toilet under the Yorckstrasse in Kreuzberg.",
             "name": "Zur Klappe",
             "geometry": [
-                52.493039,
-                13.387248
-            ]
+                37.91969007310024,
+                -4.803519124555519
+            ],
+            "Age": 58,
+            "csgo": {
+                "position": [
+                    "Secondary AWPer",
+                    "Entrenador",
+                    "AWPer"
+                ],
+                "level": "Global Elite",
+                "typeOfGamer": "Competitive",
+                "hours": 4000
+            }
         },
         {
+            "id": 5,
             "description": "Formerly Shift Bar in the Kraftwerk complex which also houses Tresor.",
             "name": "OHM",
             "geometry": [
-                52.510507,
-                13.42022
-            ]
+                36.732593968823366,
+                -4.438699019171522
+            ],
+            "Age": 36,
+            "csgo": {
+                "position": [
+                    "Entrenador"
+                ],
+                "level": "Nova",
+                "typeOfGamer": "Casual",
+                "hours": 120
+            }
         },
         {
+            "id": 6,
             "description": "Club for electronic Music directly in the heart of Berlin! Between Hakescher Markt and 1 min. away from S Alexanderplatz. Stylish Crowd and many of Berlins most known artists.",
             "name": "M-BIA",
             "geometry": [
-                52.522437,
-                13.409063
-            ]
+                37.542553490062055,
+                -5.081773207224663
+            ],
+            "Age": 21,
+            "csgo": {
+                "position": [
+                    "playmaker"
+                ],
+                "level": "Ak",
+                "typeOfGamer": "Casual",
+                "hours": 165
+            }
         },
         {
+            "id": 7,
             "description": "Booze, Karaoke and Rock'n'Roll! Sparkles, disco lights, 14 private karaoke cabins and a big stage waiting for your performance! We have 10 cabins for walk-ins (for up to 10 guests) and 4 larger cabins for larger groups, which can be reserved in advance (for up to 18 guests). Mondays - MultiSEXual BOXhopping! Queer + Friends. Mix + Mingle! Box Sharing + Caring! 3,- Entry. Sing in the karaoke boxes all night long! Big stage opens at 22h. Tuesdays - The House of Presents’ Drag Show Doors at 9, pre-show at 10, main show at 11 Wednesdays - BOX HAPPY HOUR All cabins half-priced from 7pm - midnight Thursdays - Mixed Bag! Special Events, DJs, Live Musik, Queer Events, and more! Fridays / Saturday / Sunday: SING ON STAGE!",
             "name": "Monster Ronson's Ichiban Karaoke",
             "geometry": [
-                52.505188,
-                13.448437
-            ]
+                37.61955910137119,
+                -4.324436584816258
+            ],
+            "Age": 59,
+            "csgo": {
+                "position": [
+                    "lurker"
+                ],
+                "level": "Nova",
+                "typeOfGamer": "Casual",
+                "hours": 120
+            }
         },
         {
+            "id": 8,
             "description": "Ägyptisches & Arabisches Restaurant · Smoker's Lounge · Club · Café · Cocktail Bar · Der feine Orient in Berlin",
             "name": "Marooush Restaurant - Lounge - Bar - Club",
             "geometry": [
-                52.500938,
-                13.321438
-            ]
+                37.40471278466533,
+                -5.9749488525691214
+            ],
+            "Age": 29,
+            "csgo": {
+                "position": [
+                    "Entrenador",
+                    "Entry Fragger"
+                ],
+                "level": "Chapa",
+                "typeOfGamer": "Competitive",
+                "hours": 1658
+            }
         },
         {
+            "id": 9,
             "description": "Kater Blau gives you everything you need for a party: House, Techno, Konfetti. Chill next to the Spree. All this on the ex wood markt area.",
             "name": "Kater Blau",
             "geometry": [
-                52.512187,
-                13.425563
-            ]
+                43.27882715353206,
+                -2.955468370421279
+            ],
+            "Age": 46,
+            "csgo": {
+                "position": [
+                    "support",
+                    "lurker",
+                    "AWPer",
+                    "Secondary AWPer",
+                    "Entrenador"
+                ],
+                "level": "Global Elite",
+                "typeOfGamer": "Competitive",
+                "hours": 7500
+            }
         }
     ]
 }
