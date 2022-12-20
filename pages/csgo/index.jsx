@@ -51,7 +51,7 @@ const Csgo = () => {
         }
       </section>
       <div className={styles.map}>
-        <Map location={user.geometry} db={listUsers} />
+        <Map distance={value} location={user.geometry} db={listUsers} />
       </div>
     </Layout>
   )

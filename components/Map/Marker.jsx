@@ -1,15 +1,20 @@
 import { Popup, Marker } from 'react-leaflet'
+// import ReactDOMServer from 'react-dom/server'
+// import Icon from './Icon'
 import L from 'leaflet'
+import styles from './Map.module.scss'
 
-const circuloIcon = L.icon({
-  iconUrl: require('../../public/circulo.png'),
-  iconSize: [50, 50]
-})
+const Markers = ({ position, popup, distance }) => {
+  const icon = L.divIcon({
+    className: styles.customIcon,
+    iconSize: [100, 100],
+    crossOrigin: true
+    // html: ReactDOMServer.renderToString(<Icon />)
+  })
 
-const Markers = ({ position, popup }) => {
   return (
 
-    <Marker position={position} icon={circuloIcon}>
+    <Marker position={position} icon={icon}>
       <Popup>
         {popup}
       </Popup>

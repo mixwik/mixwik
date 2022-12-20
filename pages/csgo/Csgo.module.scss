@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .csgo {
   width: 90vw;
   display: flex;
@@ -14,15 +16,15 @@
     align-items: center;
     width: 100%;
     gap: 1rem;
-    color: black;
+    color: $BLACK;
     padding: 2rem;
 
     input[type="range"] {
       /* estilos para el elemento input */
       appearance: none;
-      width: 30%;
+      max-width: 10rem;
       height: .5rem;
-      background: blue;
+      background: $GRADIENT;
       border-radius: 5px;
       outline: none;
     }
@@ -32,7 +34,7 @@
       appearance: none;
       width: 1.5rem;
       height: 1.5rem;
-      background: #4caf50;
+      background: $PURPLE;
       border-radius: 50%;
       cursor: pointer;
     }
@@ -42,19 +44,17 @@
     text-align: center;
     padding: 1rem;
     font-size: 2rem;
-    color: black;
+    color: $BLACK;
   }
 
   .gamers {
-    color: black;
+    color: $BLACK;
     padding: .3rem;
   }
 
   button {
     padding: 1rem;
-    background-color: black;
+    background-color: $BLACK;
     border-radius: .5rem;
   }
 }
-
-.map {}

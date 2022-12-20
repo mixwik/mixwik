@@ -1,12 +1,20 @@
+@import '../../styles/colors.scss';
+
 .map {
   width: 100vw;
   height: 50vh;
   overflow: hidden;
-  background-color: white;
+  background-color: $WHITE;
   z-index: 1;
 
   @media screen and (min-width: 768px) {
     width: 40vw;
     height: 90vh;
   }
+}
+
+.customIcon {
+  background-color: $PURPLE;
+  border-radius: 50%;
+  opacity: .5;
 }
