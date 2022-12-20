@@ -38,9 +38,9 @@ const Csgo = () => {
           {value} km
         </div>
         <h1>Counter Strike Global Ofensive</h1>
-        <button onClick={() => setFilter(!filter)}>Filtro</button>
+        <button onClick={() => setFilter(!filter)}>Filtros</button>
         {
-          filter ? <div className={styles.filter}><FilterCsgo /></div> : <div className={styles.placeHolder} />
+          filter ? <div className={styles.filter}><FilterCsgo isOpen={filter} setIsOpen={setFilter} /></div> : <div className={styles.placeHolder} />
         }
         {
           listUsers.map((res, index) => (
@@ -51,7 +51,7 @@ const Csgo = () => {
         }
       </section>
       <div className={styles.map}>
-        <Map distance={value} location={user.geometry} db={listUsers} />
+        <Map location={user.geometry} db={listUsers} zoom={6} size={20} />
       </div>
     </Layout>
   )

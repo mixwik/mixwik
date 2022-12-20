@@ -1,5 +1,42 @@
 @import '../../../styles/colors.scss';
 
 .filter {
-  color: $BLACK
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  color: $BLACK;
+  z-index: 10;
+  background-color: $WHITE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+  padding-top: 7rem;
+
+  @media screen and (min-width: 768px) {
+    top: 10vh;
+    width: 60vw;
+    height: 90vh;
+    padding-top: 12rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buttonClose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 50%;
+  }
 }

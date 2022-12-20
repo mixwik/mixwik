@@ -7,27 +7,27 @@ const FormAge = ({ state, setState }) => {
   return (
     <section className={styles.formFilter}>
       <h3 className={styles.title}>Edad</h3>
-      <label htmlFor='age'>
+      <label name='age'>
         18 - 25
         <input type='checkbox' value={18} name='age' onClick={(e) => handleAge(e)} />
       </label>
-      <label htmlFor='age'>
+      <label name='age'>
         26 - 30
         <input type='checkbox' value={26} name='age' onChange={(e) => handleAge(e)} />
       </label>
-      <label htmlFor='age'>
+      <label name='age'>
         31 - 40
         <input type='checkbox' value={31} name='age' onChange={(e) => handleAge(e)} />
       </label>
-      <label htmlFor='age'>
+      <label name='age'>
         41 - 50
         <input type='checkbox' value={41} name='age' onChange={(e) => handleAge(e)} />
       </label>
-      <label htmlFor='age'>
+      <label name='age'>
         51 - 60
         <input type='checkbox' value={51} name='age' onChange={(e) => handleAge(e)} />
       </label>
-      <label htmlFor='age'>
+      <label name='age'>
         61 - 70
         <input type='checkbox' value={61} name='age' onChange={(e) => handleAge(e)} />
       </label>

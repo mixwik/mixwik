@@ -10,7 +10,7 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 // Components
 import Markers from './Marker'
 
-const Map = ({ location, db, distance }) => {
+const Map = ({ location, db, zoom, size }) => {
   return (
     <MapContainer
       className={styles.map}
@@ -19,14 +19,14 @@ const Map = ({ location, db, distance }) => {
       zoomControl={false}
       scrollWheelZoom={false}
       doubleClickZoom={false}
-      zoom={14}
+      zoom={zoom}
     >
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {
           db.map((res, index) => (
-            <Markers key={index} distance={distance} position={res.geometry} popup={res.name} />
+            <Markers key={index} position={res.geometry} popup={res.name} size={size} />
           ))
         }
     </MapContainer>

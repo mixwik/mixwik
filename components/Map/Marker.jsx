@@ -4,10 +4,10 @@ import { Popup, Marker } from 'react-leaflet'
 import L from 'leaflet'
 import styles from './Map.module.scss'
 
-const Markers = ({ position, popup, distance }) => {
+const Markers = ({ position, popup, size }) => {
   const icon = L.divIcon({
     className: styles.customIcon,
-    iconSize: [100, 100],
+    iconSize: [size, size],
     crossOrigin: true
     // html: ReactDOMServer.renderToString(<Icon />)
   })
