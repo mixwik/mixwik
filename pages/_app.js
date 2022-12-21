@@ -1,11 +1,12 @@
+import DataProvider from '../context'
 import '../styles/globals.css'
 
 function MyApp ({ Component, pageProps }) {
   return (
-<DataProvaider
-    <Component {...pageProps} />
-  ) 
-  
+    <DataProvider>
+      <Component {...pageProps} />
+    </DataProvider>
+  )
 }
 
 export default MyApp

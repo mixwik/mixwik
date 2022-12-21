@@ -11,7 +11,8 @@
     text-align: center;
   }
 
-  label {
+  label,
+  .rageAge {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,6 +50,35 @@
       background-color: $PURPLE;
       border-color: $WHITE;
       color: $WHITE;
+    }
+  }
+
+  .rangeAge {
+    grid-column: 1/3;
+    width: 100%;
+    flex-direction: column;
+
+    .range {
+      display: flex;
+
+      input[type="range"] {
+        /* estilos para el elemento input */
+        appearance: none;
+        max-width: 10rem;
+        height: .5rem;
+        background: $PURPLE;
+        outline: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        /* estilos para el control deslizante */
+        appearance: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: $PURPLE;
+        border-radius: 50%;
+        cursor: pointer;
+      }
     }
   }
 

@@ -11,8 +11,8 @@
             "Age": 18,
             "csgo": {
                 "position": [
-                    "lurker",
-                    "support"
+                    "Lurker",
+                    "Support"
                 ],
                 "level": "silver",
                 "typeOfGamer": "Casual",
@@ -30,8 +30,8 @@
             "Age": 35,
             "csgo": {
                 "position": [
-                    "lurker",
-                    "playmaker"
+                    "Lurker",
+                    "Playmaker"
                 ],
                 "level": "Doble Ak",
                 "typeOfGamer": "Competitive",
@@ -49,7 +49,7 @@
             "Age": 48,
             "csgo": {
                 "position": [
-                    "Entry Fragger"
+                    "Entry fragger"
                 ],
                 "level": "Supreme",
                 "typeOfGamer": "Competitive",
@@ -67,9 +67,10 @@
             "Age": 22,
             "csgo": {
                 "position": [
-                    "AWPer"
+                    "AWPer",
+                    "In-game leader"
                 ],
-                "level": "In-game leader",
+                "level": "Nova",
                 "typeOfGamer": "Casual",
                 "hours": 30
             }
@@ -123,7 +124,7 @@
             "Age": 21,
             "csgo": {
                 "position": [
-                    "playmaker"
+                    "Playmaker"
                 ],
                 "level": "Ak",
                 "typeOfGamer": "Casual",
@@ -141,7 +142,7 @@
             "Age": 59,
             "csgo": {
                 "position": [
-                    "lurker"
+                    "Lurker"
                 ],
                 "level": "Nova",
                 "typeOfGamer": "Casual",
@@ -160,7 +161,7 @@
             "csgo": {
                 "position": [
                     "Entrenador",
-                    "Entry Fragger"
+                    "Entry fragger"
                 ],
                 "level": "Chapa",
                 "typeOfGamer": "Competitive",
@@ -178,8 +179,8 @@
             "Age": 46,
             "csgo": {
                 "position": [
-                    "support",
-                    "lurker",
+                    "Support",
+                    "Lurker",
                     "AWPer",
                     "Secondary AWPer",
                     "Entrenador"

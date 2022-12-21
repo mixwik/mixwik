@@ -12,9 +12,11 @@ import db from '../../db/localization.json'
 
 // Customs Hooks
 import { useUserFilter } from '../../hooks/useUsersFilterDistance'
+import { useFilterContext } from '../../context'
 
 const Csgo = () => {
-  const [filter, setFilter] = useState(false)
+  const filter = useFilterContext()
+  const [_filter, _setFilter] = useState(false)
   const [value, setValue] = useState(700)
 
   const DB = { ...db }
@@ -22,6 +24,12 @@ const Csgo = () => {
   const distance = value
 
   const listUsers = useUserFilter(user, DB.venues, distance)
+
+  const listUsersFilter = listUsers.filter(res => {
+    return filter.position.some((fil) => {
+      return res.csgo.position.includes(fil)
+    })
+  })
 
   return (
     <Layout>
@@ -38,12 +46,12 @@ const Csgo = () => {
           {value} km
         </div>
         <h1>Counter Strike Global Ofensive</h1>
-        <button onClick={() => setFilter(!filter)}>Filtros</button>
+        <button onClick={() => _setFilter(!_filter)}>Filtros</button>
         {
-          filter ? <div className={styles.filter}><FilterCsgo isOpen={filter} setIsOpen={setFilter} /></div> : <div className={styles.placeHolder} />
+          _filter ? <div className={styles.filter}><FilterCsgo isOpen={_filter} setIsOpen={_setFilter} /></div> : <div className={styles.placeHolder} />
         }
         {
-          listUsers.map((res, index) => (
+          listUsersFilter.map((res, index) => (
             <div className={styles.gamers} key={index}>
               {res.name}
             </div>
@@ -51,7 +59,7 @@ const Csgo = () => {
         }
       </section>
       <div className={styles.map}>
-        <Map location={user.geometry} db={listUsers} zoom={6} size={20} />
+        <Map location={user.geometry} db={listUsersFilter} zoom={6} size={20} />
       </div>
     </Layout>
   )
