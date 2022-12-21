@@ -10,9 +10,10 @@ import TypeOfGamer from '../../Forms/TypeOfGamer'
 import FormPosition from '../../Forms/Csgo/Position'
 
 const FilterCsgo = ({ isOpen, setIsOpen }) => {
-  const [age, setAge] = useState('')
-  const [typeOfGamer, setTypeOfGamer] = useState('')
-  const [position, setPosition] = useState('')
+  const [age, setAge] = useState([])
+  const [typeOfGamer, setTypeOfGamer] = useState([])
+  const [position, setPosition] = useState([])
+
   return (
     <section className={styles.filter}>
       <button className={styles.buttonClose} onClick={() => setIsOpen(!isOpen)}>X</button>
