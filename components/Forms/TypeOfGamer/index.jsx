@@ -11,8 +11,8 @@ const TypeOfGamer = () => {
         Casual
         <input
           type='checkbox'
-          checked={filter.typeOfGamer.includes('casual')}
-          value='casual'
+          checked={filter.typeOfGamer.includes('Casual')}
+          value='Casual'
           name='typeOfGamer'
           onClick={(e) => handleSetFilter(e.target)}
         />
@@ -21,8 +21,8 @@ const TypeOfGamer = () => {
         Competitivo
         <input
           type='checkbox'
-          checked={filter.typeOfGamer.includes('competitive')}
-          value='competitive'
+          checked={filter.typeOfGamer.includes('Competitive')}
+          value='Competitive'
           name='typeOfGamer'
           onChange={(e) => handleSetFilter(e.target)}
         />

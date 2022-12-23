@@ -12,7 +12,7 @@ const DataProvider = ({ children }) => {
       min: 18,
       max: 90
     },
-    typeOfGamer: [],
+    typeOfGamer: '',
     position: []
   })
 
@@ -22,11 +22,10 @@ const DataProvider = ({ children }) => {
     } else if (e.name === 'max') {
       setFilter({ ...filter, age: { min: filter.age.min, max: e.value } })
     } else if (e.name === 'typeOfGamer') {
-      if (filter.typeOfGamer.includes(e.value)) {
-        const newState = filter.typeOfGamer.filter(item => item !== e.value)
-        setFilter({ ...filter, typeOfGamer: newState })
+      if (filter.typeOfGamer === e.value) {
+        setFilter({ ...filter, typeOfGamer: '' })
       } else {
-        setFilter({ ...filter, typeOfGamer: filter.typeOfGamer.concat(e.value) })
+        setFilter({ ...filter, typeOfGamer: e.value })
       }
     } else if (e.name === 'position') {
       if (filter.position.includes(e.value)) {

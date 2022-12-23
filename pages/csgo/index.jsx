@@ -16,7 +16,7 @@ import { useFilterContext } from '../../context'
 
 const Csgo = () => {
   const filter = useFilterContext()
-  const [_filter, _setFilter] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [value, setValue] = useState(700)
 
   const DB = { ...db }
@@ -25,11 +25,19 @@ const Csgo = () => {
 
   const listUsers = useUserFilter(user, DB.venues, distance)
 
-  const listUsersFilter = listUsers.filter(res => {
-    return filter.position.some((fil) => {
-      return res.csgo.position.includes(fil)
+  const listUsersAge = listUsers.filter(fil => fil.age >= filter.age.min && fil.age <= filter.age.max)
+
+  const listUsersPosition = filter.position.length
+    ? listUsersAge.filter(fil => {
+      return filter.position.some((fil2) => {
+        return fil.csgo.position.includes(fil2)
+      })
     })
-  })
+    : listUsersAge
+
+  const listUsersTypeOfGamer = filter.typeOfGamer.length
+    ? listUsersPosition.filter(fil => fil.csgo.typeOfGamer === filter.typeOfGamer)
+    : listUsersPosition
 
   return (
     <Layout>
@@ -46,12 +54,12 @@ const Csgo = () => {
           {value} km
         </div>
         <h1>Counter Strike Global Ofensive</h1>
-        <button onClick={() => _setFilter(!_filter)}>Filtros</button>
+        <button onClick={() => setIsOpen(!isOpen)}>Filtros</button>
         {
-          _filter ? <div className={styles.filter}><FilterCsgo isOpen={_filter} setIsOpen={_setFilter} /></div> : <div className={styles.placeHolder} />
+          isOpen ? <div className={styles.filter}><FilterCsgo isOpen={isOpen} setIsOpen={setIsOpen} /></div> : <div className={styles.placeHolder} />
         }
         {
-          listUsersFilter.map((res, index) => (
+          listUsersTypeOfGamer.map((res, index) => (
             <div className={styles.gamers} key={index}>
               {res.name}
             </div>
@@ -59,7 +67,7 @@ const Csgo = () => {
         }
       </section>
       <div className={styles.map}>
-        <Map location={user.geometry} db={listUsersFilter} zoom={6} size={20} />
+        <Map location={user.geometry} db={listUsersTypeOfGamer} zoom={6} size={20} />
       </div>
     </Layout>
   )

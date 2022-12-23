@@ -2,13 +2,13 @@
     "venues": [
         {
             "id": 0,
-            "description": "Schon seit längerem wollte Rummel sich sein kleines Paradies schaffen, hat tiefe stille Wasser betörnt und stürmischen Zeiten getrotzt und hat endlich geankert - in einer schönen kleinen Bucht nicht weit von Euch! In diese Bucht läd Rummel von Mai bis Mitte September zum Chillen und Grillen, zum Schunkeln, Munkeln und natürlich Trunkeln. Und wenn Rummel mal so richtig gut drauf ist, dann wird auch mal ordentlich gerummelt! So oder so, zu Wasser wie zur Bucht, auch der Rummel ist nichts ohne seine Crew. Also Leichtmatrosen und Matrösinnen - kommt rum und lasst es Euch gut gehn! Ahoi* Ach ja, geöffnet ist nur an sonnigen und regenfreien Tagen :) ________________ Reservierungsanfragen sind nur per Mail möglich bucht@rummels-welt.de (Reservierungsanfragen werden nur zwischen Di-Fr beantwortet) ",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Maruan",
             "geometry": [
                 37.389892576741424,
                 -4.766635076752695
             ],
-            "Age": 18,
+            "age": 18,
             "csgo": {
                 "position": [
                     "Lurker",
@@ -16,18 +16,19 @@
                 ],
                 "level": "silver",
                 "typeOfGamer": "Casual",
-                "hours": 25
+                "hours": 25,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 1,
-            "description": "Das SEZ bietet ein großes Sport-, Freizeit- und Erholungsangebot. Ab sofort könnt ihr das SEZ für Events unter: sez@glut.berlin anmieten. Kommt vorbei und genießt den industriellen Charm einer in Vergessenheit geglaubten Location. ",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "SEZ Berlin",
             "geometry": [
                 37.39623438282091,
                 -4.759167806744201
             ],
-            "Age": 35,
+            "age": 35,
             "csgo": {
                 "position": [
                     "Lurker",
@@ -35,36 +36,37 @@
                 ],
                 "level": "Doble Ak",
                 "typeOfGamer": "Competitive",
-                "hours": 2000
+                "hours": 2000,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 2,
-            "description": "Das Huxleys seit fast einem Jahrhundert ein Name in Berlin. Varietébühne, Sportpalast, Rollschuhbahn und Ausflugsziel am Rande des Volksparks Hasenheide. Das HUXLEYS hat eine lange Geschichte, und die ist verbunden mit Entertainment, Vergnügen und Livemusik.",
-            "name": "Huxley's Neue Welt",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "geometry": [
                 37.36386072170253,
                 -4.850282074643562
             ],
-            "Age": 48,
+            "age": 48,
             "csgo": {
                 "position": [
                     "Entry fragger"
                 ],
                 "level": "Supreme",
                 "typeOfGamer": "Competitive",
-                "hours": 3000
+                "hours": 3000,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 3,
-            "description": "Wir sind ein Veranstaltungsort. Eine Plattform. Wir sind ein Kollektiv. Basisdemokratisch und solidarisch. Wir sind das Mensch Meier. Und ihr seid es auch, wenn ihr da seid. Wir wollen einen Raum erschaffen, in dem wir unsere Beziehungen selbstbestimmt formen. Das ist im Kapitalismus, im Patriarchat, leider kein erreichbares Ziel. Aber wir haben einfach schon mal angefangen, uns dieses Ziel als Weg formuliert. Für unsere Zukunft. In einem Raum für Inspiration, Intervention und Bewegung. KulturKunstPartyPolitik. Mit den Mitteln der Kritik und den Waffen der Kunst unordentlich Theater machen. Mensch Meier ",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Mensch Meier",
             "geometry": [
                 37.89600060025221,
                 -4.781000612123971
             ],
-            "Age": 22,
+            "age": 22,
             "csgo": {
                 "position": [
                     "AWPer",
@@ -72,18 +74,18 @@
                 ],
                 "level": "Nova",
                 "typeOfGamer": "Casual",
-                "hours": 30
+                "hours": 30,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 4,
-            "description": "The club is located in a former underground gay cruising toilet under the Yorckstrasse in Kreuzberg.",
-            "name": "Zur Klappe",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "geometry": [
                 37.91969007310024,
                 -4.803519124555519
             ],
-            "Age": 58,
+            "age": 58,
             "csgo": {
                 "position": [
                     "Secondary AWPer",
@@ -92,72 +94,73 @@
                 ],
                 "level": "Global Elite",
                 "typeOfGamer": "Competitive",
-                "hours": 4000
+                "hours": 4000,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 5,
-            "description": "Formerly Shift Bar in the Kraftwerk complex which also houses Tresor.",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "OHM",
             "geometry": [
                 36.732593968823366,
                 -4.438699019171522
             ],
-            "Age": 36,
+            "age": 36,
             "csgo": {
                 "position": [
                     "Entrenador"
                 ],
                 "level": "Nova",
                 "typeOfGamer": "Casual",
-                "hours": 120
+                "hours": 120,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 6,
-            "description": "Club for electronic Music directly in the heart of Berlin! Between Hakescher Markt and 1 min. away from S Alexanderplatz. Stylish Crowd and many of Berlins most known artists.",
-            "name": "M-BIA",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "geometry": [
                 37.542553490062055,
                 -5.081773207224663
             ],
-            "Age": 21,
+            "age": 21,
             "csgo": {
                 "position": [
                     "Playmaker"
                 ],
                 "level": "Ak",
                 "typeOfGamer": "Casual",
-                "hours": 165
+                "hours": 165,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 7,
-            "description": "Booze, Karaoke and Rock'n'Roll! Sparkles, disco lights, 14 private karaoke cabins and a big stage waiting for your performance! We have 10 cabins for walk-ins (for up to 10 guests) and 4 larger cabins for larger groups, which can be reserved in advance (for up to 18 guests). Mondays - MultiSEXual BOXhopping! Queer + Friends. Mix + Mingle! Box Sharing + Caring! 3,- Entry. Sing in the karaoke boxes all night long! Big stage opens at 22h. Tuesdays - The House of Presents’ Drag Show Doors at 9, pre-show at 10, main show at 11 Wednesdays - BOX HAPPY HOUR All cabins half-priced from 7pm - midnight Thursdays - Mixed Bag! Special Events, DJs, Live Musik, Queer Events, and more! Fridays / Saturday / Sunday: SING ON STAGE!",
-            "name": "Monster Ronson's Ichiban Karaoke",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "geometry": [
                 37.61955910137119,
                 -4.324436584816258
             ],
-            "Age": 59,
+            "age": 59,
             "csgo": {
                 "position": [
                     "Lurker"
                 ],
                 "level": "Nova",
                 "typeOfGamer": "Casual",
-                "hours": 120
+                "hours": 120,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 8,
-            "description": "Ägyptisches & Arabisches Restaurant · Smoker's Lounge · Club · Café · Cocktail Bar · Der feine Orient in Berlin",
-            "name": "Marooush Restaurant - Lounge - Bar - Club",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "geometry": [
                 37.40471278466533,
                 -5.9749488525691214
             ],
-            "Age": 29,
+            "age": 29,
             "csgo": {
                 "position": [
                     "Entrenador",
@@ -165,18 +168,19 @@
                 ],
                 "level": "Chapa",
                 "typeOfGamer": "Competitive",
-                "hours": 1658
+                "hours": 1658,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
             "id": 9,
-            "description": "Kater Blau gives you everything you need for a party: House, Techno, Konfetti. Chill next to the Spree. All this on the ex wood markt area.",
+            "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Kater Blau",
             "geometry": [
                 43.27882715353206,
                 -2.955468370421279
             ],
-            "Age": 46,
+            "age": 46,
             "csgo": {
                 "position": [
                     "Support",
@@ -187,7 +191,8 @@
                 ],
                 "level": "Global Elite",
                 "typeOfGamer": "Competitive",
-                "hours": 7500
+                "hours": 7500,
+                "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         }
     ]
