@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
-export const useUserFilter = (locationUser, users, distance) => {
-  const [filteredUsers, setFilteredUsers] = useState([])
+export const useUserFilterDistance = (locationUser, users, distance) => {
+  const [filteredUsersDistance, setFilteredUsersDistance] = useState([])
   const radius = distance
   useEffect(() => {
     if (locationUser) {
@@ -10,7 +10,7 @@ export const useUserFilter = (locationUser, users, distance) => {
         const distance = getDistance(locationUser.geometry, user.geometry)
         return distance <= radius
       })
-      setFilteredUsers(filtered)
+      setFilteredUsersDistance(filtered)
     }
   }, [locationUser, users, radius])
 
@@ -29,6 +29,5 @@ export const useUserFilter = (locationUser, users, distance) => {
     const distance = R * c
     return distance
   }
-
-  return filteredUsers
+  return filteredUsersDistance
 }

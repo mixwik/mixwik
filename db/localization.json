@@ -3,7 +3,7 @@
         {
             "id": 0,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
-            "name": "Maruan",
+            "name": "Maruan Vicente",
             "geometry": [
                 37.389892576741424,
                 -4.766635076752695
@@ -23,7 +23,7 @@
         {
             "id": 1,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
-            "name": "SEZ Berlin",
+            "name": "Roberto Robles",
             "geometry": [
                 37.39623438282091,
                 -4.759167806744201
@@ -43,6 +43,7 @@
         {
             "id": 2,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
+            "name": "Antonio Rodriguez",
             "geometry": [
                 37.36386072170253,
                 -4.850282074643562
@@ -61,7 +62,7 @@
         {
             "id": 3,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
-            "name": "Mensch Meier",
+            "name": "Paco Austero",
             "geometry": [
                 37.89600060025221,
                 -4.781000612123971
@@ -81,6 +82,7 @@
         {
             "id": 4,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
+            "name": "Raúl Garcia",
             "geometry": [
                 37.91969007310024,
                 -4.803519124555519
@@ -101,7 +103,7 @@
         {
             "id": 5,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
-            "name": "OHM",
+            "name": "Pedro Laurel",
             "geometry": [
                 36.732593968823366,
                 -4.438699019171522
@@ -120,6 +122,7 @@
         {
             "id": 6,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
+            "name": "Ramón Cárdenas",
             "geometry": [
                 37.542553490062055,
                 -5.081773207224663
@@ -138,6 +141,7 @@
         {
             "id": 7,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
+            "name": "Manuel Borrego",
             "geometry": [
                 37.61955910137119,
                 -4.324436584816258
@@ -156,6 +160,7 @@
         {
             "id": 8,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
+            "name": "Sandra Belmonte",
             "geometry": [
                 37.40471278466533,
                 -5.9749488525691214
@@ -175,7 +180,7 @@
         {
             "id": 9,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
-            "name": "Kater Blau",
+            "name": "Laura Rodríguez",
             "geometry": [
                 43.27882715353206,
                 -2.955468370421279
