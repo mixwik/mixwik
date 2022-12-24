@@ -13,7 +13,8 @@ const DataProvider = ({ children }) => {
       max: 90
     },
     typeOfGamer: '',
-    position: []
+    position: [],
+    level: ''
   })
 
   const handleSetFilter = (e) => {
@@ -33,6 +34,12 @@ const DataProvider = ({ children }) => {
         setFilter({ ...filter, position: newState })
       } else {
         setFilter({ ...filter, position: filter.position.concat(e.value) })
+      }
+    } else if (e.name === 'level') {
+      if (filter.level === e.value) {
+        setFilter({ ...filter, level: '' })
+      } else {
+        setFilter({ ...filter, level: e.value })
       }
     }
   }
