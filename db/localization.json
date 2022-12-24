@@ -4,6 +4,7 @@
             "id": 0,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Maruan Vicente",
+            "image": "https://picsum.photos/100/200?random",
             "geometry": [
                 37.389892576741424,
                 -4.766635076752695
@@ -24,6 +25,7 @@
             "id": 1,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Roberto Robles",
+            "image": "https://picsum.photos/200/300?random",
             "geometry": [
                 37.39623438282091,
                 -4.759167806744201
@@ -44,6 +46,7 @@
             "id": 2,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Antonio Rodriguez",
+            "image": "https://picsum.photos/300/400?random",
             "geometry": [
                 37.36386072170253,
                 -4.850282074643562
@@ -63,6 +66,7 @@
             "id": 3,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Paco Austero",
+            "image": "https://picsum.photos/400/500?random",
             "geometry": [
                 37.89600060025221,
                 -4.781000612123971
@@ -83,6 +87,7 @@
             "id": 4,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Raúl Garcia",
+            "image": "https://picsum.photos/500/600?random",
             "geometry": [
                 37.91969007310024,
                 -4.803519124555519
@@ -104,6 +109,7 @@
             "id": 5,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Pedro Laurel",
+            "image": "https://picsum.photos/600/700?random",
             "geometry": [
                 36.732593968823366,
                 -4.438699019171522
@@ -123,6 +129,7 @@
             "id": 6,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Ramón Cárdenas",
+            "image": "https://picsum.photos/700/800?random",
             "geometry": [
                 37.542553490062055,
                 -5.081773207224663
@@ -142,6 +149,7 @@
             "id": 7,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Manuel Borrego",
+            "image": "https://picsum.photos/800/900?random",
             "geometry": [
                 37.61955910137119,
                 -4.324436584816258
@@ -161,6 +169,7 @@
             "id": 8,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Sandra Belmonte",
+            "image": "https://picsum.photos/900/1000?random",
             "geometry": [
                 37.40471278466533,
                 -5.9749488525691214
@@ -181,6 +190,7 @@
             "id": 9,
             "description": "Descripción general del usuario donde definir sus gustos personales y que tipo de videojuegos le gusta.",
             "name": "Laura Rodríguez",
+            "image": "https://picsum.photos/1000/1100?random",
             "geometry": [
                 43.27882715353206,
                 -2.955468370421279

@@ -1,7 +1,7 @@
 @import '../../styles/colors.scss';
 
 .csgo {
-  width: 90vw;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,16 +40,54 @@
     }
   }
 
-  h1 {
-    text-align: center;
-    padding: 1rem;
-    font-size: 2rem;
-    color: $BLACK;
-  }
+  .gamersBox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    padding: 2rem;
+    gap: 2rem 0;
 
-  .gamers {
-    color: $BLACK;
-    padding: .3rem;
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .title {
+      grid-column: 1/3;
+      text-align: center;
+      padding: 1rem;
+      font-size: 2rem;
+      color: $BLACK;
+
+      @media screen and (min-width: 768px) {
+        grid-column: 1 / 4;
+      }
+    }
+
+    .gamers {
+      justify-self: center;
+      width: 8rem;
+      height: 10rem;
+      border-radius: 1rem;
+      color: $BLACK;
+      overflow: hidden;
+      box-shadow: 0px 0px 5px $PURPLE;
+      cursor: pointer;
+
+      @media screen and (min-width: 768px) {
+        width: 10rem;
+        height: 12rem;
+      }
+
+      img {
+        width: 100%;
+        height: 6rem;
+        object-fit: cover;
+      }
+
+      .name {
+        text-align: center;
+      }
+    }
   }
 
   button {

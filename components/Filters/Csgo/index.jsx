@@ -9,7 +9,7 @@ import FormAge from '../../Forms/Age'
 import TypeOfGamer from '../../Forms/TypeOfGamer'
 import FormPosition from '../../Forms/Csgo/Position'
 
-const FilterCsgo = ({ isOpen, setIsOpen }) => {
+const FilterCsgo = ({ isOpen, setIsOpen, users }) => {
   const [age, setAge] = useState([])
   const [typeOfGamer, setTypeOfGamer] = useState([])
   const [position, setPosition] = useState([])
@@ -17,6 +17,9 @@ const FilterCsgo = ({ isOpen, setIsOpen }) => {
   return (
     <section className={styles.filter}>
       <button className={styles.buttonClose} onClick={() => setIsOpen(!isOpen)}>X</button>
+      <div className={styles.numberOfUsers}>
+        Usuarios encontrados: {users.length}
+      </div>
       <form>
         <FormPosition state={position} setState={setPosition} />
         <FormAge state={age} setState={setAge} />

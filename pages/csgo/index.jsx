@@ -13,6 +13,7 @@ import db from '../../db/localization.json'
 // Customs Hooks
 import { useUserFilterDistance } from '../../hooks/useUsersFilterDistance'
 import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
+import Image from 'next/image'
 
 const Csgo = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -39,18 +40,21 @@ const Csgo = () => {
           />
           {value} km
         </div>
-        <h1>Counter Strike Global Ofensive</h1>
         <button onClick={() => setIsOpen(!isOpen)}>Filtros</button>
         {
-          isOpen ? <div className={styles.filter}><FilterCsgo isOpen={isOpen} setIsOpen={setIsOpen} /></div> : <div className={styles.placeHolder} />
+          isOpen ? <div className={styles.filter}><FilterCsgo isOpen={isOpen} setIsOpen={setIsOpen} users={listUserCsgo} /></div> : <div className={styles.placeHolder} />
         }
-        {
+        <section className={styles.gamersBox}>
+          <h1 className={styles.title}>Counter Strike Global Ofensive</h1>
+          {
           listUserCsgo.map((res, index) => (
-            <div className={styles.gamers} key={index}>
-              {res.name}
-            </div>
+            <section className={styles.gamers} key={index}>
+              <Image width={0} height={0} src={res.image} alt={res.name} />
+              <h3 className={styles.name}>{res.name}</h3>
+            </section>
           ))
         }
+        </section>
       </section>
       <div className={styles.map}>
         <Map location={user.geometry} db={listUserCsgo} zoom={6} size={20} />
