@@ -1,4 +1,4 @@
-@import '../../../styles/colors.scss';
+@import '../../styles/colors.scss';
 
 .filter {
   position: fixed;
@@ -11,15 +11,28 @@
   background-color: $WHITE;
   display: flex;
   justify-content: center;
-  align-items: center;
   overflow: scroll;
-  padding-top: 7rem;
+  padding-top: 1rem;
+
+  &::-webkit-scrollbar {
+    width: .5rem;
+    height: 0px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $WHITE;
+    border-radius: .5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $PURPLE;
+    border-radius: .5rem;
+  }
 
   @media screen and (min-width: 768px) {
     top: 10vh;
     width: 60vw;
     height: 90vh;
-    padding-top: 12rem;
   }
 
   .numberOfUsers {
@@ -52,5 +65,7 @@
     height: 2rem;
     padding: 0;
     border-radius: 50%;
+    background-color: $PURPLE;
+    color: $WHITE;
   }
 }

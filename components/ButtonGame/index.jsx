@@ -7,46 +7,46 @@ import Image from 'next/image'
 // images
 import clashRoyal from '../../public/logos/Clash-Royal2.png'
 import csgo from '../../public/logos/csgo.png'
-import fornite from '../../public/logos/fortnite.png'
+import fortnite from '../../public/logos/fortnite.png'
 import lol from '../../public/logos/LOL3.png'
-import roquet from '../../public/logos/rocket.png'
+import rocket from '../../public/logos/rocket.png'
 import minecraft from '../../public/logos/Minecraft2.png'
 import Link from 'next/link'
 
 const games = [{
   image: csgo,
   title: 'Counter Strike Global Offensive',
-  alt: 'Icono del videojugo csgo',
+  alt: 'Icono del videojuego csgo',
   available: true,
   link: 'csgo'
 }, {
+  image: fortnite,
+  title: 'Fortnite',
+  alt: 'Icono del videojuego Fornite',
+  available: true,
+  link: 'fortnite'
+}, {
   image: clashRoyal,
   title: 'Clash Royal',
-  alt: 'Icono del videojugo Clash Royal',
-  available: false,
-  link: ''
-}, {
-  image: fornite,
-  title: 'Fornite',
-  alt: 'Icono del videojugo Fornite',
+  alt: 'Icono del videojuego Clash Royal',
   available: false,
   link: ''
 }, {
   image: lol,
   title: 'League of Legends',
-  alt: 'Icono del videojugo League of Legends',
+  alt: 'Icono del videojuego League of Legends',
   available: false,
   link: ''
 }, {
-  image: roquet,
+  image: rocket,
   title: 'Rocket League',
-  alt: 'Icono del videojugo Rocket League',
+  alt: 'Icono del videojuego Rocket League',
   available: false,
   link: ''
 }, {
   image: minecraft,
   title: 'Minecraft',
-  alt: 'Icono del videojugo Minecraft',
+  alt: 'Icono del videojuego Minecraft',
   available: false,
   link: ''
 }]

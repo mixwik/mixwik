@@ -82,4 +82,33 @@
     }
   }
 
+
+}
+
+.kmSelector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  color: $BLACK;
+  padding: 2rem;
+
+  input[type="range"] {
+    appearance: none;
+    max-width: 10rem;
+    height: .4rem;
+    background-color: $PURPLE;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: $PURPLE;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }

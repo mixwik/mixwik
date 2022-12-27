@@ -14,7 +14,8 @@ const DataProvider = ({ children }) => {
     },
     typeOfGamer: '',
     position: [],
-    level: ''
+    level: '',
+    preferenceTeam: ''
   })
 
   const handleSetFilter = (e) => {
@@ -40,6 +41,12 @@ const DataProvider = ({ children }) => {
         setFilter({ ...filter, level: '' })
       } else {
         setFilter({ ...filter, level: e.value })
+      }
+    } else if (e.name === 'preferenceTeam') {
+      if (filter.preferenceTeam === e.value) {
+        setFilter({ ...filter, preferenceTeam: '' })
+      } else {
+        setFilter({ ...filter, preferenceTeam: e.value })
       }
     }
   }

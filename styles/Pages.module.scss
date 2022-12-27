@@ -1,0 +1,97 @@
+@import './colors.scss';
+
+.pages {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    width: 60vw;
+  }
+
+  .kmSelector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    color: $BLACK;
+    padding: 2rem;
+
+    input[type="range"] {
+      /* estilos para el elemento input */
+      appearance: none;
+      max-width: 10rem;
+      height: .4rem;
+      background-color: $PURPLE;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      /* estilos para el control deslizante */
+      appearance: none;
+      width: 1.2rem;
+      height: 1.2rem;
+      background: $PURPLE;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+
+  .gamersBox {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+    height: 90vh;
+    padding: 2rem 0;
+    gap: 2rem 0;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+      width: .5rem;
+      height: 0px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $WHITE;
+      border-radius: .5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $PURPLE;
+      border-radius: .5rem;
+    }
+
+
+
+    @media screen and (min-width: 1100px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .title {
+      grid-column: 1/2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      font-size: 2rem;
+      color: $BLACK;
+
+      button {
+        padding: .5rem 2rem;
+        font-size: 1rem;
+        background-color: $PURPLE;
+        color: $WHITE;
+        border-radius: .5rem;
+      }
+
+      @media screen and (min-width: 1100px) {
+        grid-column: 1 / 3;
+      }
+    }
+  }
+
+}

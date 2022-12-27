@@ -19,6 +19,15 @@
                 "typeOfGamer": "Casual",
                 "hours": 25,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "Support"
+                ],
+                "preferenceTeam": "2 vs 2",
+                "typeOfGamer": "Casual",
+                "hours": 60,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -40,6 +49,17 @@
                 "typeOfGamer": "Competitive",
                 "hours": 2000,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "Fragger",
+                    "In-game leader",
+                    "Support"
+                ],
+                "preferenceTeam": "2 vs 2",
+                "typeOfGamer": "Competitive",
+                "hours": 8500,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -60,6 +80,15 @@
                 "typeOfGamer": "Competitive",
                 "hours": 3000,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "Support"
+                ],
+                "preferenceTeam": "4 vs 4",
+                "typeOfGamer": "Competitive",
+                "hours": 1500,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -81,6 +110,15 @@
                 "typeOfGamer": "Casual",
                 "hours": 30,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "In-game leader"
+                ],
+                "preferenceTeam": "2 vs 2",
+                "typeOfGamer": "Competitive",
+                "hours": 600,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -103,6 +141,15 @@
                 "typeOfGamer": "Competitive",
                 "hours": 4000,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "Support"
+                ],
+                "preferenceTeam": "3 vs 3",
+                "typeOfGamer": "Casual",
+                "hours": 60,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -123,6 +170,16 @@
                 "typeOfGamer": "Casual",
                 "hours": 120,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "Support",
+                    "Fragger"
+                ],
+                "preferenceTeam": "2 vs 2",
+                "typeOfGamer": "Casual",
+                "hours": 100,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -143,6 +200,15 @@
                 "typeOfGamer": "Casual",
                 "hours": 165,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "Fragger"
+                ],
+                "preferenceTeam": "4 vs 4",
+                "typeOfGamer": "Competitive",
+                "hours": 500,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -163,6 +229,16 @@
                 "typeOfGamer": "Casual",
                 "hours": 120,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "Fragger",
+                    "In-game leader"
+                ],
+                "preferenceTeam": "3 vs 3",
+                "typeOfGamer": "Competitive",
+                "hours": 1500,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -184,6 +260,15 @@
                 "typeOfGamer": "Competitive",
                 "hours": 1658,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "In-game leader"
+                ],
+                "preferenceTeam": "2 vs 2",
+                "typeOfGamer": "Casual",
+                "hours": 50,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         },
         {
@@ -208,6 +293,15 @@
                 "typeOfGamer": "Competitive",
                 "hours": 7500,
                 "description": "Soy jugador de CSGO busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
+            },
+            "fortnite": {
+                "position": [
+                    "Support"
+                ],
+                "preferenceTeam": "2 vs 2",
+                "typeOfGamer": "Competitive",
+                "hours": 6500,
+                "description": "Soy jugador de Fortnite busco gente de mi zona para poder competir y pasar un buen rato, si quieres echar unas partidas no dudes en contactar conmigo :)"
             }
         }
     ]

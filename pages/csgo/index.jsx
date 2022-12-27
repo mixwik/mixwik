@@ -2,56 +2,44 @@
 import { useState } from 'react'
 
 // Styles
-import styles from './Csgo.module.scss'
+import styles from '../../styles/Pages.module.scss'
 
 // Components
 import Map from '../../components/Map'
 import Layout from '../../components/Layout'
 import FilterCsgo from '../../components/Filters/Csgo'
+import Card from '../../components/Card'
+
+// DB
 import db from '../../db/localization.json'
 
 // Customs Hooks
-import { useUserFilterDistance } from '../../hooks/useUsersFilterDistance'
 import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
-import Image from 'next/image'
+
+// images
+import csgo from '../../public/logos/csgo.png'
 
 const Csgo = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [value, setValue] = useState(700)
+  const [distance, setDistance] = useState(700)
 
   const DB = { ...db }
   const user = DB.venues.find(res => res.name === 'Maruan Vicente')
-  const distance = value
 
-  const listUsers = useUserFilterDistance(user, DB.venues, distance)
-  const listUserCsgo = useUserCsgoFilters(listUsers)
+  const listUserCsgo = useUserCsgoFilters(user, DB.venues, distance)
 
   return (
     <Layout>
-      <section className={styles.csgo}>
-        <div className={styles.kmSelector}>
-          Distancia
-          <input
-            type='range'
-            min={1}
-            max={700}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          />
-          {value} km
-        </div>
-        <button onClick={() => setIsOpen(!isOpen)}>Filtros</button>
+      <section className={styles.pages}>
+
         {
-          isOpen ? <div className={styles.filter}><FilterCsgo isOpen={isOpen} setIsOpen={setIsOpen} users={listUserCsgo} /></div> : <div className={styles.placeHolder} />
+          isOpen ? <div className={styles.filter}><FilterCsgo isOpen={isOpen} setIsOpen={setIsOpen} users={listUserCsgo} distance={distance} setDistance={setDistance} /></div> : <div className={styles.placeHolder} />
         }
         <section className={styles.gamersBox}>
-          <h1 className={styles.title}>Counter Strike Global Ofensive</h1>
+          <h1 className={styles.title}>Counter Strike Global Ofensive<button onClick={() => setIsOpen(!isOpen)}>Filtros</button></h1>
           {
           listUserCsgo.map((res, index) => (
-            <section className={styles.gamers} key={index}>
-              <Image width={0} height={0} src={res.image} alt={res.name} />
-              <h3 className={styles.name}>{res.name}</h3>
-            </section>
+            <Card key={index} general={res} specific={res.csgo} image={csgo} />
           ))
         }
         </section>
