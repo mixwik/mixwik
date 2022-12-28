@@ -19,7 +19,7 @@ const Nav = () => {
           </Link>
         </div>
         <div className={styles.links}>
-          <Link href='null'>Contáctanos</Link>
+          <Link href='/contacto'>Contáctanos</Link>
           <Link href='null'>¿Quiénes Somos?</Link>
           <button><PlusIcon />Players / equipo</button>
           <UserIcon />
