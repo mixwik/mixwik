@@ -11,13 +11,10 @@ import FilterFortnite from '../../components/Filters/Fortnite'
 import db from '../../db/localization.json'
 
 // Customs Hooks
-import { useUserFortniteFilters } from '../../hooks/useUserFortniteFlters'
+import { useUserFortniteFilters } from '../../hooks/useUserFortniteFilters'
 
 // DB
 import Card from '../../components/Card'
-
-// Image
-import fortnite from '../../public/logos/fortnite.png'
 
 const Fortnite = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -38,14 +35,12 @@ const Fortnite = () => {
           <h1 className={styles.title}>Fortnite <button onClick={() => setIsOpen(!isOpen)}>Filtros</button></h1>
           {
           listUsersFiltered.map((res, index) => (
-            <Card key={index} general={res} specific={res.fortnite} image={fortnite} />
+            <Card key={index} general={res} specific={res.fortnite} />
           ))
         }
         </section>
       </section>
-      <div className={styles.map}>
-        <Map location={user.geometry} db={listUsersFiltered} zoom={6} size={20} />
-      </div>
+      <Map location={user.geometry} db={listUsersFiltered} zoom={6} size={30} />
     </Layout>
   )
 }

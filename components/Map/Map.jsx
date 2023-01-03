@@ -16,10 +16,9 @@ const Map = ({ location, db, zoom, size }) => {
       className={styles.map}
       center={location}
       zoomAnimation
-      zoomControl={false}
-      scrollWheelZoom={false}
       doubleClickZoom={false}
       zoom={zoom}
+      maxZoom={14}
     >
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

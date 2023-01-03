@@ -2,78 +2,23 @@
 
 .card {
   justify-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 20rem;
-  height: 22rem;
-  border-radius: 1rem;
-  color: $WHITE;
-  overflow: hidden;
-  box-shadow: 0px 0px 5px $SKYBLUE;
-  background: linear-gradient(70deg, $PURPLE, $BLACK);
-  cursor: pointer;
+  width: 10rem;
 
-
-  .head {
-    display: flex;
-    justify-content: center;
+  img {
     width: 100%;
-    height: 10rem;
+    height: 13rem;
+    border-radius: 1rem;
+  }
 
-    img {
-      width: 40%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 0 0 0 1rem;
-
-    }
-
-    .name {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 60%;
-      text-align: center;
-      font-weight: bold;
-
-      .typeOfGamer {
-        padding: .1rem;
-        background: $GRADIENT;
-        color: $BLACK;
-        width: 100%;
-      }
-
-      .title {
-        text-align: center;
-        padding: .5rem;
-      }
-
-      img {
-        width: 5rem;
-        height: 5rem;
-      }
-    }
+  .title {
+    font-weight: bold;
+    padding: .5rem 0;
   }
 
   .description {
-    padding: 1rem;
-    height: 10rem;
-  }
-
-  .position {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 90%;
-    gap: .4rem;
-    padding: .1rem;
+    font-size: .8em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     overflow: hidden;
-    height: 2rem;
-
-    li {
-      padding: .1rem;
-    }
   }
 }
