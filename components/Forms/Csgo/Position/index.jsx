@@ -1,7 +1,7 @@
 import styles from '../../Forms.module.scss'
 import { useSetFilterContext, useFilterContext } from '../../../../context'
 
-const FormPosition = ({ state, setState }) => {
+const FormPosition = () => {
   const handleSetFilter = useSetFilterContext()
   const filter = useFilterContext()
   return (

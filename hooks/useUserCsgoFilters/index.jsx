@@ -24,7 +24,11 @@ export const useUserCsgoFilters = (user, DB, distance) => {
     : listUsersPosition
 
   const listUsersLevel = filter.level.length
-    ? listUsersTypeOfGamer.filter(fil => fil.csgo.level === filter.level)
+    ? listUsersTypeOfGamer.filter(fil => {
+      return filter.level.some((fil2) => {
+        return fil.csgo.level.includes(fil2)
+      })
+    })
     : listUsersTypeOfGamer
 
   const usersFiltered = useUserGeneralFilters(listUsersLevel)

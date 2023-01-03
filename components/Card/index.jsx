@@ -12,6 +12,7 @@ const Card = ({ general, specific }) => {
       <div className={styles.description}>
         {specific.description}
       </div>
+      <div className={styles.typeOfGamer}>{specific.typeOfGamer}</div>
     </section>
   )
 }

@@ -21,8 +21,8 @@ const TypeOfGamer = () => {
         Competitivo
         <input
           type='checkbox'
-          checked={filter.typeOfGamer.includes('Competitive')}
-          value='Competitive'
+          checked={filter.typeOfGamer.includes('Competitivo')}
+          value='Competitivo'
           name='typeOfGamer'
           onChange={(e) => handleSetFilter(e.target)}
         />

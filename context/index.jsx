@@ -14,7 +14,7 @@ const DataProvider = ({ children }) => {
     },
     typeOfGamer: [],
     position: [],
-    level: '',
+    level: [],
     preferenceTeam: []
   })
 
@@ -38,10 +38,11 @@ const DataProvider = ({ children }) => {
         setFilter({ ...filter, position: filter.position.concat(e.value) })
       }
     } else if (e.name === 'level') {
-      if (filter.level === e.value) {
-        setFilter({ ...filter, level: '' })
+      if (filter.level.includes(e.value)) {
+        const newState = filter.level.filter(item => item !== e.value)
+        setFilter({ ...filter, level: newState })
       } else {
-        setFilter({ ...filter, level: e.value })
+        setFilter({ ...filter, level: filter.level.concat(e.value) })
       }
     } else if (e.name === 'preferenceTeam') {
       if (filter.preferenceTeam.includes(e.value)) {

@@ -6,7 +6,7 @@ const FormLevel = () => {
   const filter = useFilterContext()
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title}>Posición</h3>
+      <h3 className={styles.title}>Nivel</h3>
       <label name='level'>
         Silver
         <input
@@ -33,7 +33,7 @@ const FormLevel = () => {
           type='checkbox'
           value='Ak'
           name='level'
-          checked={filter.level === 'Ak'}
+          checked={filter.level.includes('Ak')}
           onChange={(e) => handleSetFilter(e.target)}
         />
       </label>
@@ -43,7 +43,7 @@ const FormLevel = () => {
           type='checkbox'
           value='Ak laurel'
           name='level'
-          checked={filter.level === 'Ak laurel'}
+          checked={filter.level.includes('Ak laurel')}
           onChange={(e) => handleSetFilter(e.target)}
         />
       </label>
@@ -73,7 +73,7 @@ const FormLevel = () => {
           type='checkbox'
           value='Aguila'
           name='level'
-          checked={filter.level === 'Aguila'}
+          checked={filter.level.includes('Aguila')}
           onChange={(e) => handleSetFilter(e.target)}
         />
       </label>
