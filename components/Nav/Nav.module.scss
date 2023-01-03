@@ -57,42 +57,28 @@
   }
 
   .burguerButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     width: 40px;
     height: 40px;
-    padding: .2rem;
+    padding: .3rem;
+    gap: .3rem;
+    border: none;
+    background: $GRADIENT;
+    border-radius: .3rem;
 
     @media screen and (min-width:768px) {
       display: none;
     }
 
-    div {
-      position: relative;
+    .grid1,
+    .grid2,
+    .grid3,
+    .grid4 {
       width: 100%;
-      height: 4px;
+      height: 100%;
       background-color: $WHITE;
-      border-radius: 2px;
-
-      &::after,
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background-color: $WHITE;
-        border-radius: 2px;
-      }
-
-      &::before {
-        top: -10px;
-      }
-
-      &::after {
-        top: 10px;
-      }
+      border-radius: .2rem;
     }
   }
 }

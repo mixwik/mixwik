@@ -25,7 +25,10 @@ const Nav = () => {
           <UserIcon />
         </div>
         <button className={styles.burguerButton}>
-          <div />
+          <div className={styles.grid1} />
+          <div className={styles.grid2} />
+          <div className={styles.grid3} />
+          <div className={styles.grid4} />
         </button>
       </nav>
       <div className={styles.placeHolder} />
