@@ -12,10 +12,10 @@ const DataProvider = ({ children }) => {
       min: 18,
       max: 90
     },
-    typeOfGamer: '',
+    typeOfGamer: [],
     position: [],
     level: '',
-    preferenceTeam: ''
+    preferenceTeam: []
   })
 
   const handleSetFilter = (e) => {
@@ -24,10 +24,11 @@ const DataProvider = ({ children }) => {
     } else if (e.name === 'max') {
       setFilter({ ...filter, age: { min: filter.age.min, max: e.value } })
     } else if (e.name === 'typeOfGamer') {
-      if (filter.typeOfGamer === e.value) {
-        setFilter({ ...filter, typeOfGamer: '' })
+      if (filter.typeOfGamer.includes(e.value)) {
+        const newState = filter.typeOfGamer.filter(item => item !== e.value)
+        setFilter({ ...filter, typeOfGamer: newState })
       } else {
-        setFilter({ ...filter, typeOfGamer: e.value })
+        setFilter({ ...filter, typeOfGamer: filter.typeOfGamer.concat(e.value) })
       }
     } else if (e.name === 'position') {
       if (filter.position.includes(e.value)) {
@@ -43,10 +44,11 @@ const DataProvider = ({ children }) => {
         setFilter({ ...filter, level: e.value })
       }
     } else if (e.name === 'preferenceTeam') {
-      if (filter.preferenceTeam === e.value) {
-        setFilter({ ...filter, preferenceTeam: '' })
+      if (filter.preferenceTeam.includes(e.value)) {
+        const newState = filter.preferenceTeam.filter(item => item !== e.value)
+        setFilter({ ...filter, preferenceTeam: newState })
       } else {
-        setFilter({ ...filter, preferenceTeam: e.value })
+        setFilter({ ...filter, preferenceTeam: filter.preferenceTeam.concat(e.value) })
       }
     }
   }
