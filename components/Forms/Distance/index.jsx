@@ -1,18 +1,26 @@
 import styles from '../Forms.module.scss'
 
-const Distance = ({ distance, setDistance }) => {
+const Distance = ({ distance, setDistance, isOpen, handleOpen }) => {
   return (
-    <div className={styles.kmSelector}>
-      Distancia
-      <input
-        type='range'
-        min={1}
-        max={700}
-        value={distance}
-        onChange={(e) => setDistance(e.target.value)}
-      />
-      {distance}
-    </div>
+    <section className={styles.formFilter}>
+      <h3 className={styles.title} onClick={() => handleOpen('distance')}>Distancia</h3>
+      {
+        isOpen === 'distance' && (
+          <div className={styles.inputsBox}>
+            <label className={styles.distance}>
+              <input
+                type='range'
+                min={1}
+                max={700}
+                value={distance}
+                onChange={(e) => setDistance(e.target.value)}
+              />
+              <span>{distance}Km</span>
+            </label>
+          </div>
+        )
+      }
+    </section>
   )
 }
 

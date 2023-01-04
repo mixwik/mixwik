@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 // Styles
 import styles from '../Filters.module.scss'
 
@@ -8,21 +10,20 @@ import FormPosition from '../../Forms/Csgo/Position'
 import FormLevel from '../../Forms/Csgo/Level'
 import Distance from '../../Forms/Distance'
 
-const FilterCsgo = ({ isOpen, setIsOpen, users, distance, setDistance }) => {
+const FilterCsgo = ({ distance, setDistance }) => {
+  const [isOpen, setIsOpen] = useState('')
+  const handleOpen = (name) => {
+    if (name === isOpen) setIsOpen('')
+    else setIsOpen(name)
+  }
   return (
-    <section className={styles.filter}>
-      <button className={styles.buttonClose} onClick={() => setIsOpen(!isOpen)}>X</button>
-      <div className={styles.numberOfUsers}>
-        Usuarios encontrados: {users.length}
-      </div>
-      <form>
-        <Distance distance={distance} setDistance={setDistance} />
-        <FormPosition />
-        <FormLevel />
-        <FormAge />
-        <TypeOfGamer />
-      </form>
-    </section>
+    <form className={styles.filter}>
+      <Distance isOpen={isOpen} handleOpen={handleOpen} distance={distance} setDistance={setDistance} />
+      <FormAge isOpen={isOpen} handleOpen={handleOpen} />
+      <FormPosition isOpen={isOpen} handleOpen={handleOpen} />
+      <FormLevel isOpen={isOpen} handleOpen={handleOpen} />
+      <TypeOfGamer isOpen={isOpen} handleOpen={handleOpen} />
+    </form>
   )
 }
 
