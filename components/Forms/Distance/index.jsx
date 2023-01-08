@@ -1,9 +1,10 @@
+import { PositionMap } from '../../Svg'
 import styles from '../Forms.module.scss'
 
 const Distance = ({ distance, setDistance, isOpen, handleOpen }) => {
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title} onClick={() => handleOpen('distance')}>Distancia</h3>
+      <h3 className={styles.title} onClick={() => handleOpen('distance')}><PositionMap /> Distancia</h3>
       {
         isOpen === 'distance' && (
           <div className={styles.inputsBox}>

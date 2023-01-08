@@ -28,11 +28,9 @@ const Fortnite = () => {
   return (
     <Layout>
       <section className={styles.pages}>
-        {
-          isOpen ? <div className={styles.filter}><FilterFortnite isOpen={isOpen} setIsOpen={setIsOpen} users={listUsersFiltered} distance={distance} setDistance={setDistance} /></div> : <div className={styles.placeHolder} />
-        }
+        <h1 className={styles.title}>Fortnite</h1>
+        <FilterFortnite isOpen={isOpen} setIsOpen={setIsOpen} users={listUsersFiltered} distance={distance} setDistance={setDistance} />
         <section className={styles.gamersBox}>
-          <h1 className={styles.title}>Fortnite <button onClick={() => setIsOpen(!isOpen)}>Filtros</button></h1>
           {
           listUsersFiltered.map((res, index) => (
             <Card key={index} general={res} specific={res.fortnite} />

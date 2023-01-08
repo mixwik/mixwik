@@ -6,11 +6,44 @@
   color: $BLACK;
   z-index: 10;
   background-color: $WHITE;
-  box-shadow: 0px 0px 5px $BLUE;
+  box-shadow: 0px 0px 5px $PURPLE;
   display: flex;
   overflow: scroll;
+
 
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media screen and (min-width: 768px) {
+    &::-webkit-scrollbar {
+      display: flex;
+      background-color: red;
+      color: white;
+      height: .3rem;
+
+      &:vertical {
+        display: none;
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $WHITE;
+      border-radius: .5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $PURPLE;
+      border-radius: .5rem;
+    }
+  }
+
+  @media screen and (min-width: 1100px) {
+    justify-content: space-between;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
 }

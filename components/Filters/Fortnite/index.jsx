@@ -1,3 +1,4 @@
+import { useState } from 'react'
 // Styles
 import styles from '../Filters.module.scss'
 
@@ -8,21 +9,20 @@ import FormPosition from '../../Forms/Fortnite/Positon'
 import FormPreferenceTeam from '../../Forms/Fortnite/PreferenceTeam'
 import Distance from '../../Forms/Distance'
 
-const FilterFortnite = ({ isOpen, setIsOpen, users, distance, setDistance }) => {
+const FilterFortnite = ({ distance, setDistance }) => {
+  const [isOpen, setIsOpen] = useState('')
+  const handleOpen = (name) => {
+    if (name === isOpen) setIsOpen('')
+    else setIsOpen(name)
+  }
   return (
-    <section className={styles.filter}>
-      <button className={styles.buttonClose} onClick={() => setIsOpen(!isOpen)}>X</button>
-      <div className={styles.numberOfUsers}>
-        Usuarios encontrados: {users.length}
-      </div>
-      <form>
-        <Distance distance={distance} setDistance={setDistance} />
-        <FormPosition />
-        <FormPreferenceTeam />
-        <FormAge />
-        <TypeOfGamer />
-      </form>
-    </section>
+    <form className={styles.filter}>
+      <Distance distance={distance} setDistance={setDistance} isOpen={isOpen} handleOpen={handleOpen} />
+      <FormPosition isOpen={isOpen} handleOpen={handleOpen} />
+      <FormPreferenceTeam isOpen={isOpen} handleOpen={handleOpen} />
+      <FormAge isOpen={isOpen} handleOpen={handleOpen} />
+      <TypeOfGamer isOpen={isOpen} handleOpen={handleOpen} />
+    </form>
   )
 }
 

@@ -4,9 +4,7 @@
   justify-self: center;
   width: 10rem;
   color: $BLACK;
-  box-shadow: 0px 0px 5px $PURPLE;
   border-radius: 1rem;
-  padding: .5rem;
 
   img {
     width: 100%;
@@ -26,6 +24,4 @@
     text-overflow: ellipsis;
     overflow: hidden;
   }
-
-  .typeOfGamer {}
 }

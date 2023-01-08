@@ -1,4 +1,5 @@
 import { useSetFilterContext, useFilterContext } from '../../../context'
+import { GamerType } from '../../Svg'
 import styles from '../Forms.module.scss'
 
 const TypeOfGamer = ({ isOpen, handleOpen }) => {
@@ -6,7 +7,7 @@ const TypeOfGamer = ({ isOpen, handleOpen }) => {
   const filter = useFilterContext()
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title} onClick={() => handleOpen('typeOfGamer')}>Tipo de Jugador</h3>
+      <h3 className={styles.title} onClick={() => handleOpen('typeOfGamer')}><GamerType /> Tipo de Jugador</h3>
       {
         isOpen === 'typeOfGamer' && (
           <div className={styles.inputsBox}>
