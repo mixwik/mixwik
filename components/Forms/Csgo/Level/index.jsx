@@ -1,10 +1,12 @@
 import styles from '../../Forms.module.scss'
-import { useSetFilterContext, useFilterContext } from '../../../../context'
+import { useSetFilterContext, useFilterContext, useOpenContext, useHandleOpenContext } from '../../../../context'
 import { GameLevel } from '../../../Svg'
 
-const FormLevel = ({ isOpen, handleOpen }) => {
+const FormLevel = () => {
   const handleSetFilter = useSetFilterContext()
   const filter = useFilterContext()
+  const isOpen = useOpenContext()
+  const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
       <h3 className={styles.title} onClick={() => handleOpen('level')}><GameLevel /> Nivel</h3>

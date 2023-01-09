@@ -2,11 +2,16 @@ import { useState, createContext, useContext } from 'react'
 
 const filterContext = createContext()
 const setFilterContext = createContext()
+const openContext = createContext()
+const handleOpenContex = createContext()
 
 export const useFilterContext = () => useContext(filterContext)
 export const useSetFilterContext = () => useContext(setFilterContext)
+export const useOpenContext = () => useContext(openContext)
+export const useHandleOpenContext = () => useContext(handleOpenContex)
 
 const DataProvider = ({ children }) => {
+  const [isOpen, setIsOpen] = useState('')
   const [filter, setFilter] = useState({
     age: {
       min: 18,
@@ -54,10 +59,18 @@ const DataProvider = ({ children }) => {
     }
   }
 
+  const handleOpen = (name) => {
+    if (name === isOpen) setIsOpen('')
+    else setIsOpen(name)
+  }
   return (
     <filterContext.Provider value={filter}>
       <setFilterContext.Provider value={handleSetFilter}>
-        {children}
+        <openContext.Provider value={isOpen}>
+          <handleOpenContex.Provider value={handleOpen}>
+            {children}
+          </handleOpenContex.Provider>
+        </openContext.Provider>
       </setFilterContext.Provider>
     </filterContext.Provider>
   )

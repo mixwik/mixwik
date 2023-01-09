@@ -1,10 +1,12 @@
-import { useSetFilterContext, useFilterContext } from '../../../context'
+import { useSetFilterContext, useFilterContext, useOpenContext, useHandleOpenContext } from '../../../context'
 import { RangeAge } from '../../Svg'
 import styles from '../Forms.module.scss'
 
-const FormAge = ({ isOpen, handleOpen }) => {
+const FormAge = () => {
   const handleSetFilter = useSetFilterContext()
   const filter = useFilterContext()
+  const isOpen = useOpenContext()
+  const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
       <h3 className={styles.title} onClick={() => handleOpen('age')}><RangeAge /> Edad</h3>

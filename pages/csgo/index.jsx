@@ -10,13 +10,17 @@ import Layout from '../../components/Layout'
 import FilterCsgo from '../../components/Filters/Csgo'
 import Card from '../../components/Card'
 
-// DB
+// Data Base
 import db from '../../db/localization.json'
 
 // Customs Hooks
 import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
 
+// Context
+import { useHandleOpenContext } from '../../context'
+
 const Csgo = () => {
+  const handleOpen = useHandleOpenContext()
   const [distance, setDistance] = useState(700)
 
   const DB = { ...db }
@@ -29,7 +33,7 @@ const Csgo = () => {
       <section className={styles.pages}>
         <h1 className={styles.title}>Counter Strike Global Ofensive</h1>
         <FilterCsgo users={listUserCsgo} distance={distance} setDistance={setDistance} />
-        <div className={styles.gamersBox}>
+        <div className={styles.gamersBox} onClick={() => handleOpen('')}>
           {
           listUserCsgo.map((res, index) => (
             <Card key={index} general={res} specific={res.csgo} />

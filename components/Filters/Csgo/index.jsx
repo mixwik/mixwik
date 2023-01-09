@@ -11,18 +11,13 @@ import FormLevel from '../../Forms/Csgo/Level'
 import Distance from '../../Forms/Distance'
 
 const FilterCsgo = ({ distance, setDistance }) => {
-  const [isOpen, setIsOpen] = useState('')
-  const handleOpen = (name) => {
-    if (name === isOpen) setIsOpen('')
-    else setIsOpen(name)
-  }
   return (
     <form className={styles.filter}>
-      <Distance isOpen={isOpen} handleOpen={handleOpen} distance={distance} setDistance={setDistance} />
-      <FormAge isOpen={isOpen} handleOpen={handleOpen} />
-      <FormPosition isOpen={isOpen} handleOpen={handleOpen} />
-      <FormLevel isOpen={isOpen} handleOpen={handleOpen} />
-      <TypeOfGamer isOpen={isOpen} handleOpen={handleOpen} />
+      <Distance distance={distance} setDistance={setDistance} />
+      <FormAge />
+      <FormPosition />
+      <FormLevel />
+      <TypeOfGamer />
     </form>
   )
 }

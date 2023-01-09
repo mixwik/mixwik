@@ -1,9 +1,11 @@
 import styles from '../../Forms.module.scss'
-import { useSetFilterContext, useFilterContext } from '../../../../context'
+import { useSetFilterContext, useFilterContext, useHandleOpenContext, useOpenContext } from '../../../../context'
 
-const FormPreferenceTeam = ({ isOpen, handleOpen }) => {
+const FormPreferenceTeam = () => {
   const handleSetFilter = useSetFilterContext()
   const filter = useFilterContext()
+  const isOpen = useOpenContext()
+  const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
       <h3 className={styles.title} onClick={() => handleOpen('preferenceTeam')}>Preferencia team</h3>

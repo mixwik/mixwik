@@ -1,7 +1,10 @@
+import { useHandleOpenContext, useOpenContext } from '../../../context'
 import { PositionMap } from '../../Svg'
 import styles from '../Forms.module.scss'
 
-const Distance = ({ distance, setDistance, isOpen, handleOpen }) => {
+const Distance = ({ distance, setDistance }) => {
+  const isOpen = useOpenContext()
+  const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
       <h3 className={styles.title} onClick={() => handleOpen('distance')}><PositionMap /> Distancia</h3>
