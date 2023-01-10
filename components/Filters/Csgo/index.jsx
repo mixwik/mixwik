@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 // Styles
 import styles from '../Filters.module.scss'
 
