@@ -8,9 +8,8 @@ const User = () => {
   const router = useRouter()
   const { id } = router.query
   const DB = { ...db }
-  console.log(id)
   const user = DB.venues.find(res => res.id === parseInt(id))
-  console.log(user)
+  if (!user) return <div>Loading...</div>
 
   return (
     <Layout>
