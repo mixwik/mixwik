@@ -7,7 +7,7 @@
   align-items: center;
 
   @media screen and (min-width: 768px) {
-    width: 60vw;
+    width: 45vw;
   }
 
   .title {
@@ -52,7 +52,7 @@
     }
 
     @media screen and (min-width: 1100px) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
 
 

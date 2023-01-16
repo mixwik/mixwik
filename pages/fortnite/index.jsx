@@ -38,7 +38,7 @@ const Fortnite = () => {
         }
         </section>
       </section>
-      <Map location={user.geometry} db={listUsersFiltered} zoom={6} size={30} />
+      <Map location={user.geometry} db={listUsersFiltered} zoom={7} size={30} />
     </Layout>
   )
 }

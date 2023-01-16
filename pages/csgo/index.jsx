@@ -41,7 +41,7 @@ const Csgo = () => {
         }
         </div>
       </section>
-      <Map location={user.geometry} db={listUserCsgo} zoom={6} size={30} />
+      <Map location={user.geometry} db={listUserCsgo} zoom={7} size={30} />
     </Layout>
   )
 }
