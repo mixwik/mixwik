@@ -17,4 +17,8 @@
   background-color: $PURPLE;
   border-radius: 50%;
   opacity: .5;
+
+  &[dataChange=true] {
+    background-color: red;
+  }
 }

@@ -9,7 +9,14 @@ const TypeOfGamer = () => {
   const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title} onClick={() => handleOpen('typeOfGamer')}><GamerType /> Tipo de Jugador</h3>
+      <h3
+        className={styles.title}
+        onClick={() => handleOpen('typeOfGamer')}
+        data-active={filter.typeOfGamer.length > 0}
+      >
+        <GamerType />
+        Tipo de Jugador
+      </h3>
       {
         isOpen === 'typeOfGamer' && (
           <div className={styles.inputsBox}>

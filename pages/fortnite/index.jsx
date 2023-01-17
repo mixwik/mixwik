@@ -16,6 +16,10 @@ import { useUserFortniteFilters } from '../../hooks/useUserFortniteFilters'
 // DB
 import Card from '../../components/Card'
 
+// Images
+import fortniteImage from '../../public/logos/fortnite.png'
+import Image from 'next/image'
+
 const Fortnite = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [distance, setDistance] = useState(700)
@@ -28,7 +32,10 @@ const Fortnite = () => {
   return (
     <Layout>
       <section className={styles.pages}>
-        <h1 className={styles.title}>Fortnite</h1>
+        <h1 className={styles.title}>
+          <Image src={fortniteImage} alt='Logotipo de Fortnite' />
+          Fortnite
+        </h1>
         <FilterFortnite isOpen={isOpen} setIsOpen={setIsOpen} users={listUsersFiltered} distance={distance} setDistance={setDistance} />
         <section className={styles.gamersBox}>
           {

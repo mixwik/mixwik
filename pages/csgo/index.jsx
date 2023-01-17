@@ -19,6 +19,9 @@ import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
 // Context
 import { useHandleOpenContext } from '../../context'
 
+import csgoImage from '../../public/logos/csgo.png'
+import Image from 'next/image'
+
 const Csgo = () => {
   const handleOpen = useHandleOpenContext()
   const [distance, setDistance] = useState(700)
@@ -31,7 +34,10 @@ const Csgo = () => {
   return (
     <Layout>
       <section className={styles.pages}>
-        <h1 className={styles.title}>Counter Strike Global Ofensive</h1>
+        <h1 className={styles.title}>
+          <Image src={csgoImage} alt='Logotipo de Counter Strike Global Ofensive' />
+          Counter Strike Global Ofensive
+        </h1>
         <FilterCsgo users={listUserCsgo} distance={distance} setDistance={setDistance} />
         <div className={styles.gamersBox} onClick={() => handleOpen('')}>
           {

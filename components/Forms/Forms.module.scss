@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 .5rem;
   cursor: pointer;
 
   .title {
@@ -13,6 +13,18 @@
     justify-content: center;
     align-items: center;
     gap: .2rem;
+    padding: .5rem;
+    transition: background-color 1s;
+    border-radius: .5rem;
+
+    &[data-active=true] {
+      background-color: $PURPLE;
+      color: $WHITE;
+
+      svg {
+        color: $WHITE;
+      }
+    }
 
     svg {
       width: 1rem;
@@ -84,7 +96,7 @@
     .rangeAge {
       grid-column: 1/3;
       justify-self: center;
-      width: 18rem;
+      width: 23rem;
       gap: 1rem;
       flex-direction: column;
 
@@ -95,7 +107,7 @@
           /* estilos para el elemento input */
           appearance: none;
           max-width: 10rem;
-          height: .5rem;
+          height: .4rem;
           background: $PURPLE;
           outline: none;
         }
@@ -103,8 +115,8 @@
         input[type="range"]::-webkit-slider-thumb {
           /* estilos para el control deslizante */
           appearance: none;
-          width: 1.5rem;
-          height: 1.5rem;
+          width: 1.2rem;
+          height: 1.2rem;
           background: $PURPLE;
           border-radius: 50%;
           cursor: pointer;
@@ -115,12 +127,10 @@
     .distance {
       grid-column: 1/3;
       justify-self: center;
+      display: flex;
+      flex-direction: column;
       gap: 1rem;
-      width: 250px;
-
-      span {
-        width: 100px
-      }
+      width: 23rem;
 
       input[type="range"] {
         appearance: none;

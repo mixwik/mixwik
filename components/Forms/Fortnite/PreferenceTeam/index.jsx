@@ -8,7 +8,13 @@ const FormPreferenceTeam = () => {
   const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title} onClick={() => handleOpen('preferenceTeam')}>Preferencia team</h3>
+      <h3
+        className={styles.title}
+        onClick={() => handleOpen('preferenceTeam')}
+        data-active={filter.preferenceTeam.length > 0}
+      >
+        Preferencia team
+      </h3>
       {
         isOpen === 'preferenceTeam' && (
           <div className={styles.inputsBox}>

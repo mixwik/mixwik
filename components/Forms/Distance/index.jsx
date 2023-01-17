@@ -7,11 +7,19 @@ const Distance = ({ distance, setDistance }) => {
   const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title} onClick={() => handleOpen('distance')}><PositionMap /> Distancia</h3>
+      <h3
+        className={styles.title}
+        onClick={() => handleOpen('distance')}
+        data-active={distance < 700}
+      >
+        <PositionMap />
+        Distancia
+      </h3>
       {
         isOpen === 'distance' && (
           <div className={styles.inputsBox}>
             <label className={styles.distance}>
+              <span>Elige la distancia</span>
               <input
                 type='range'
                 min={1}

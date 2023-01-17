@@ -9,7 +9,14 @@ const FormAge = () => {
   const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title} onClick={() => handleOpen('age')}><RangeAge /> Edad</h3>
+      <h3
+        className={styles.title}
+        onClick={() => handleOpen('age')}
+        data-active={filter.age.min > 18 || filter.age.max < 90}
+      >
+        <RangeAge />
+        Edad
+      </h3>
       {
         isOpen === 'age' && (
           <div className={styles.inputsBox}>

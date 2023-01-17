@@ -9,7 +9,14 @@ const FormLevel = () => {
   const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title} onClick={() => handleOpen('level')}><GameLevel /> Nivel</h3>
+      <h3
+        className={styles.title}
+        onClick={() => handleOpen('level')}
+        data-active={filter.level.length > 0}
+      >
+        <GameLevel />
+        Nivel
+      </h3>
       {
         isOpen === 'level' && (
           <div className={styles.inputsBox}>

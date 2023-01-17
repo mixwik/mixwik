@@ -9,7 +9,14 @@ const FormPosition = () => {
   const handleOpen = useHandleOpenContext()
   return (
     <section className={styles.formFilter}>
-      <h3 className={styles.title} onClick={() => handleOpen('position')}><GamePosition /> Posición</h3>
+      <h3
+        className={styles.title}
+        onClick={() => handleOpen('position')}
+        data-active={filter.position.length > 0}
+      >
+        <GamePosition />
+        Posición
+      </h3>
       {
         isOpen === 'position' && (
           <div className={styles.inputsBox}>
