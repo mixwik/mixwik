@@ -15,7 +15,7 @@ const Nav = () => {
       <nav className={styles.nav}>
         <div className={styles.logo}>
           <Link href='/'>
-            <Image layout='responsive' src={logo} alt='logo de MixWik' />
+            <Image src={logo} alt='logo de MixWik' />
           </Link>
         </div>
         <div className={styles.links}>

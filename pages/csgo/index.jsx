@@ -10,11 +10,9 @@ import Layout from '../../components/Layout'
 import FilterCsgo from '../../components/Filters/Csgo'
 import Card from '../../components/Card'
 
-// Data Base
-import db from '../../db/localization.json'
-
 // Customs Hooks
 import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
+import { useGetUsers } from '../../firebase/hooks/useGetUsers'
 
 // Context
 import { useHandleOpenContext } from '../../context'
@@ -26,10 +24,14 @@ const Csgo = () => {
   const handleOpen = useHandleOpenContext()
   const [distance, setDistance] = useState(700)
 
-  const DB = { ...db }
-  const user = DB.venues.find(res => res.name === 'Maruan Vicente')
+  const users = useGetUsers()
 
-  const listUserCsgo = useUserCsgoFilters(user, DB.venues, distance)
+  console.log(users)
+  const user = users.find(res => res.name === 'Maruan Vicente')
+
+  const listUserCsgo = useUserCsgoFilters(user, users, distance)
+
+  if (!user) return <div>Loading...</div>
 
   return (
     <Layout>
