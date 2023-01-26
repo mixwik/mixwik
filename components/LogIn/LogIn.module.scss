@@ -1,0 +1,42 @@
+@import '../../styles/colors.scss';
+
+.logIn {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  section {
+    position: relative;
+    width: 50vw;
+    height: 50vh;
+    background-color: $PURPLE--TRANSPARENT;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logInGoogle {
+      background-color: transparent;
+
+      svg {
+        width: 3rem;
+        height: 3rem;
+        color: $WHITE;
+      }
+    }
+
+    .close {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      background-color: transparent;
+      font-size: 2rem;
+    }
+  }
+}
