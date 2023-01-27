@@ -12,7 +12,7 @@ import Card from '../../components/Card'
 
 // Customs Hooks
 import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
-import { useGetUsers } from '../../firebase/hooks/useGetUsers'
+import { useGetUsers } from '../../firebase/hooks/getMethod/useGetUsers'
 
 // Context
 import { useHandleOpenContext } from '../../context'

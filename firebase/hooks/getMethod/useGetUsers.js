@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../initialize.jsx'
+import { db } from '../../initialize.jsx'
 
 export const useGetUsers = () => {
   const [data, setData] = useState([])

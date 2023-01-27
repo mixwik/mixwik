@@ -1,18 +1,30 @@
 // Styles
 import styles from './LogIn.module.scss'
 
-import { GoogleAuthProvider } from 'firebase/auth'
+// LogIn
+import { GoogleAuthProvider, getAuth } from 'firebase/auth'
 import { logIn } from '../../firebase/auth/useLogIn'
-import { useGetUids } from '../../firebase/hooks/useGetUids'
+
+// Next Components
+import { useRouter } from 'next/router'
+
+// Icons
 import { GoogleIcon } from '../Svg'
 
 const LogIn = ({ setIsOpen }) => {
   const google = new GoogleAuthProvider()
-  const uids = useGetUids()
+  const auth = getAuth()
+  const user = auth.currentUser
+  const router = useRouter()
+
   const handleLogin = (provider) => {
     logIn(provider)
-    console.log(uids)
   }
+
+  if (user) {
+    router.push('/nuevo-usuario')
+  }
+
   return (
     <div className={styles.logIn}>
       <section>
