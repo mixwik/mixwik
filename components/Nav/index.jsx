@@ -13,9 +13,13 @@ import logo from '../../public/logos/mixwik-logo.png'
 import { PlusIcon, UserIcon } from '../../components/Svg'
 import LogIn from '../LogIn'
 
+// Log In
+import { useSession } from '../../firebase/auth/useSession'
+
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false)
-
+  const user = useSession()
+  console.log(user)
   return (
     <>
       <nav className={styles.nav}>
@@ -31,7 +35,16 @@ const Nav = () => {
             <PlusIcon />Players / equipo
           </button>
           <button className={styles.logInButton} onClick={() => setIsOpen(!isOpen)}>
-            <UserIcon />
+            {
+              user.uid
+                ? (
+                  <Image quality={75} width={0} height={0} src={user.image} alt={user.name} />
+                  )
+                : (
+
+                  <UserIcon />
+                  )
+            }
           </button>
         </div>
         <button className={styles.burguerButton}>

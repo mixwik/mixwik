@@ -3,12 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos'
-      }
-    ]
+    domains: ['picsum.photos', 'lh3.googleusercontent.com']
   },
   webpack (config, { isServer }) {
     const prefix = config.assetPrefix ?? config.basePath ?? ''

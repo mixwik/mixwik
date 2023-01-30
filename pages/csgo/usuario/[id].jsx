@@ -2,8 +2,7 @@ import styles from './User.module.scss'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Layout from '../../../components/Layout'
-import { useGetOneUser } from '../../../firebase/hooks/useGetOneUser'
-import { useGetUsers } from '../../../firebase/hooks/useGetUsers'
+import { useGetUsers } from '../../../firebase/hooks/getMethod/useGetUsers'
 
 const User = () => {
   const router = useRouter()
@@ -11,8 +10,6 @@ const User = () => {
 
   const users = useGetUsers()
   const user = users.find(user => user.id === id)
-
-  const userss = useGetOneUser(id)
 
   if (!user) return <div>Loading...</div>
 

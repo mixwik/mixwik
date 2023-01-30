@@ -11,7 +11,7 @@ const Card = ({ general, specific }) => {
   return (
     <Link href={`${router.asPath}/usuario/${general.id}`}>
       <section className={styles.card}>
-        <Image width={0} height={0} src={general.image} alt={general.name} />
+        <Image width={0} height={0} quality={100} src={general.image} alt={general.name} />
         <h3 className={styles.title}>{general.name}</h3>
         <div className={styles.description}>
           {specific.description}
