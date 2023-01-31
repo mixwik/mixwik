@@ -19,7 +19,6 @@ import { useSession } from '../../firebase/auth/useSession'
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false)
   const user = useSession()
-  console.log(user)
   return (
     <>
       <nav className={styles.nav}>

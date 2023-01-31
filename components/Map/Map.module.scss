@@ -13,12 +13,13 @@
   }
 }
 
-.customIcon {
+.customIcon,
+.currentIcon {
   background-color: $PURPLE;
   border-radius: 50%;
   opacity: .5;
+}
 
-  &[dataChange=true] {
-    background-color: red;
-  }
+.currentIcon {
+  background-color: red;
 }

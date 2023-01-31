@@ -1,24 +1,41 @@
 import { Popup, Marker } from 'react-leaflet'
-// import ReactDOMServer from 'react-dom/server'
-// import Icon from './Icon'
 import L from 'leaflet'
 import styles from './Map.module.scss'
 
-const Markers = ({ position, popup, size }) => {
+const Markers = ({ position, size, currentPosition }) => {
   const icon = L.divIcon({
     className: styles.customIcon,
     iconSize: [size, size],
     crossOrigin: true
-    // html: ReactDOMServer.renderToString(<Icon />)
+  })
+  const currentIcon = L.divIcon({
+    className: styles.currentIcon,
+    iconSize: [size, size],
+    crossOrigin: true
   })
 
   return (
+    <>
+      {
+      position.map((res, index) => (
 
-    <Marker position={position} icon={icon}>
-      <Popup>
-        {popup}
-      </Popup>
-    </Marker>
+        <Marker key={index} position={res.geometry} icon={icon}>
+          <Popup>
+            {res.name}
+          </Popup>
+        </Marker>
+      ))
+    }
+      {
+        currentPosition && (
+          <Marker position={currentPosition} icon={currentIcon}>
+            <Popup>
+              Mi posición actual
+            </Popup>
+          </Marker>
+        )
+      }
+    </>
 
   )
 }

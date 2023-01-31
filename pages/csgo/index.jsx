@@ -19,14 +19,16 @@ import { useHandleOpenContext } from '../../context'
 
 import csgoImage from '../../public/logos/csgo.png'
 import Image from 'next/image'
+import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 
 const Csgo = () => {
+  const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const [distance, setDistance] = useState(700)
 
   const users = useGetUsers()
 
-  console.log(users)
+  // filter current user of the list of users
   const user = users.find(res => res.name === 'Maruan Vicente')
 
   const listUserCsgo = useUserCsgoFilters(user, users, distance)
@@ -49,7 +51,7 @@ const Csgo = () => {
         }
         </div>
       </section>
-      <Map location={user.geometry} db={listUserCsgo} zoom={7} size={30} />
+      <Map location={user.geometry} currentPosition={currentPosition} db={listUserCsgo} zoom={7} size={30} />
     </Layout>
   )
 }
