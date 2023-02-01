@@ -5,13 +5,14 @@ import styles from './Card.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { myLoader } from '../myLoader'
 
 const Card = ({ general, specific }) => {
   const router = useRouter()
   return (
     <Link href={`${router.asPath}/usuario/${general.id}`}>
       <section className={styles.card}>
-        <Image width={0} height={0} quality={100} src={general.image} alt={general.name} />
+        <Image loader={myLoader} width={0} height={0} src={general.image} alt={general.name} />
         <h3 className={styles.title}>{general.name}</h3>
         <div className={styles.description}>
           {specific.description}

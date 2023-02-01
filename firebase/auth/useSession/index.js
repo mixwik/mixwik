@@ -14,7 +14,7 @@ export const useSession = () => {
           uid: user.uid
         })
       } else {
-        console.log('Sesión cerrada')
+        setUser(false)
       }
     })
   }, [])

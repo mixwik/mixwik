@@ -15,9 +15,11 @@ import LogIn from '../LogIn'
 
 // Log In
 import { useSession } from '../../firebase/auth/useSession'
+import { myLoader } from '../myLoader'
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const user = useSession()
   return (
     <>
@@ -27,26 +29,32 @@ const Nav = () => {
             <Image src={logo} alt='logo de MixWik' />
           </Link>
         </div>
-        <div className={styles.links}>
-          <Link href='/contacto'>Contáctanos</Link>
-          <Link href='null'>¿Quiénes Somos?</Link>
+        <div data-open={menuOpen} className={styles.links}>
+          <Link className={styles.contact} href='/contacto'>Contáctanos</Link>
+          <Link className={styles.us} href='null'>¿Quiénes Somos?</Link>
           <button>
             <PlusIcon />Players / equipo
           </button>
-          <button className={styles.logInButton} onClick={() => setIsOpen(!isOpen)}>
+          <div className={styles.logInButton}>
             {
               user.uid
                 ? (
-                  <Image quality={75} width={0} height={0} src={user.image} alt={user.name} />
+                  <Link href='/dashboard'>
+                    <Image width={0} height={0} src={user.image} alt={user.name} loader={myLoader} quality={1} />
+                  </Link>
                   )
                 : (
-
-                  <UserIcon />
+                  <button onClick={() => setIsOpen(!isOpen)}>
+                    <UserIcon />
+                  </button>
                   )
             }
-          </button>
+          </div>
         </div>
-        <button className={styles.burguerButton}>
+        <button
+          className={styles.burguerButton} onClick={() => setMenuOpen(!menuOpen)}
+          data-open={menuOpen}
+        >
           <div className={styles.grid1} />
           <div className={styles.grid2} />
           <div className={styles.grid3} />

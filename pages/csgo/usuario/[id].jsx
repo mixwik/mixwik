@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Layout from '../../../components/Layout'
 import { useGetUsers } from '../../../firebase/hooks/getMethod/useGetUsers'
+import { myLoader } from '../../../components/myLoader'
 
 const User = () => {
   const router = useRouter()
@@ -20,7 +21,7 @@ const User = () => {
           <h1 className={styles.title}>
             {user.name}
           </h1>
-          <Image width={0} height={0} src={user.image} alt={user.name} />
+          <Image loader={myLoader} width={0} height={0} src={user.image} alt={user.name} />
           <p className={styles.description}>{user.csgo.description}</p>
           <article className={styles.position}>
             <h2>{user.csgo.position.length === 1 ? 'Posición' : 'Posiciones'}</h2>
