@@ -10,7 +10,7 @@ import Link from 'next/link'
 
 // Images
 import logo from '../../public/logos/mixwik-logo.png'
-import { PlusIcon, UserIcon } from '../../components/Svg'
+import { ContatUs, UserIcon } from '../../components/Svg'
 import LogIn from '../LogIn'
 
 // Log In
@@ -19,7 +19,7 @@ import { myLoader } from '../myLoader'
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  // const [menuOpen, setMenuOpen] = useState(false)
   const user = useSession()
   return (
     <>
@@ -29,14 +29,12 @@ const Nav = () => {
             <Image src={logo} alt='logo de MixWik' />
           </Link>
         </div>
-        <div data-open={menuOpen} className={styles.links}>
-          <Link className={styles.contact} href='/contacto'>Contáctanos</Link>
-          <Link className={styles.us} href='null'>¿Quiénes Somos?</Link>
-          <button>
-            <PlusIcon />Players / equipo
-          </button>
-          <div className={styles.logInButton}>
-            {
+        <Link className={styles.contact} href='/contacto'> <ContatUs /> Contáctanos</Link>
+        <Link className={styles.us} href='null'>
+          ¿Qué es MixWik?
+        </Link>
+        <div className={styles.logIn}>
+          {
               user.uid
                 ? (
                   <Link href='/dashboard'>
@@ -44,14 +42,13 @@ const Nav = () => {
                   </Link>
                   )
                 : (
-                  <button onClick={() => setIsOpen(!isOpen)}>
+                  <button className={styles.logInButton} onClick={() => setIsOpen(!isOpen)}>
                     <UserIcon />
                   </button>
                   )
             }
-          </div>
         </div>
-        <button
+        {/* <button
           className={styles.burguerButton} onClick={() => setMenuOpen(!menuOpen)}
           data-open={menuOpen}
         >
@@ -59,7 +56,7 @@ const Nav = () => {
           <div className={styles.grid2} />
           <div className={styles.grid3} />
           <div className={styles.grid4} />
-        </button>
+        </button> */}
       </nav>
       {
         isOpen && <LogIn setIsOpen={setIsOpen} />
