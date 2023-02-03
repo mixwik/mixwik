@@ -12,15 +12,17 @@
   color: $PURPLE;
   font-weight: bold;
   display: grid;
-  grid-template-columns: 1.5fr repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   place-items: center;
   width: 100%;
   background-color: $WHITE;
+  box-shadow: 1px 0px 3px $BLUE;
 
   @media screen and (min-width:768px) {
     top: 0;
     bottom: auto;
     padding: 1rem;
+    box-shadow: 0px 1px 3px $BLUE;
   }
 
   .logo {
@@ -33,28 +35,10 @@
     }
   }
 
-  .contact {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: .7em;
-
-    svg {
-      width: 30px;
-      height: 30px;
-    }
-  }
-
-  .us {
-    font-size: .8em;
-    text-align: center;
-  }
-
   .logIn {
     img {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       background-color: $PURPLE;
       border-radius: 50%;
     }
@@ -65,8 +49,8 @@
       width: auto;
 
       svg {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
       }
 
     }

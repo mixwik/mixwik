@@ -1,65 +1,72 @@
 @import './colors.scss';
 
-.pages {
-  width: 100vw;
+.pageBox {
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   @media screen and (min-width: 768px) {
-    width: 45vw;
+    flex-direction: row;
   }
 
-  .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.001rem;
-    color: $BLACK;
-    height: 10vh;
-
-    img {
-      width: 5rem;
-    }
-
-    @media screen and (min-width: 1100px) {
-      grid-column: 1 / 5;
-    }
-  }
-
-  .gamersBox {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+  .pages {
     width: 100%;
-    padding: 2rem 0;
-    gap: 2rem 0;
-    place-items: center;
-
-    &::-webkit-scrollbar {
-      width: .5rem;
-      height: 0px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: $WHITE;
-      border-radius: .5rem;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $PURPLE;
-      border-radius: .5rem;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @media screen and (min-width: 768px) {
-      overflow: scroll;
-      height: 70vh;
+      width: 45vw;
     }
 
-    @media screen and (min-width: 1100px) {
-      grid-template-columns: repeat(2, 1fr);
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.001rem;
+      color: $BLACK;
+      height: 10vh;
+
+      img {
+        width: 5rem;
+      }
+
+      @media screen and (min-width: 1100px) {
+        grid-column: 1 / 5;
+      }
     }
 
+    .gamersBox {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      width: 100%;
+      padding: 2rem 0;
+      gap: 2rem 0;
+      place-items: center;
+
+      &::-webkit-scrollbar {
+        width: .5rem;
+        height: 0px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: $WHITE;
+        border-radius: .5rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $PURPLE;
+        border-radius: .5rem;
+      }
+
+      @media screen and (min-width: 768px) {
+        overflow: scroll;
+        height: 70vh;
+      }
+
+      @media screen and (min-width: 1100px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
   }
-
 }

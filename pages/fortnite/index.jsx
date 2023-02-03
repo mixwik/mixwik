@@ -31,21 +31,23 @@ const Fortnite = () => {
 
   return (
     <Layout>
-      <section className={styles.pages}>
-        <h1 className={styles.title}>
-          <Image src={fortniteImage} alt='Logotipo de Fortnite' />
-          Fortnite
-        </h1>
-        <FilterFortnite isOpen={isOpen} setIsOpen={setIsOpen} users={listUsersFiltered} distance={distance} setDistance={setDistance} />
-        <section className={styles.gamersBox}>
-          {
+      <div className={styles.pageBox}>
+        <section className={styles.pages}>
+          <h1 className={styles.title}>
+            <Image src={fortniteImage} alt='Logotipo de Fortnite' />
+            Fortnite
+          </h1>
+          <FilterFortnite isOpen={isOpen} setIsOpen={setIsOpen} users={listUsersFiltered} distance={distance} setDistance={setDistance} />
+          <section className={styles.gamersBox}>
+            {
           listUsersFiltered.map((res, index) => (
             <Card key={index} general={res} specific={res.fortnite} />
           ))
         }
+          </section>
         </section>
-      </section>
-      <Map location={user.geometry} db={listUsersFiltered} zoom={7} size={30} />
+        <Map location={user.geometry} db={listUsersFiltered} zoom={7} size={30} />
+      </div>
     </Layout>
   )
 }

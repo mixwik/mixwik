@@ -38,21 +38,23 @@ const Csgo = () => {
 
   return (
     <Layout>
-      <section className={styles.pages}>
-        <h1 className={styles.title}>
-          <Image src={csgoImage} alt='Logotipo de Counter Strike Global Ofensive' />
-          Counter Strike Global Ofensive
-        </h1>
-        <FilterCsgo users={listUserCsgo} distance={distance} setDistance={setDistance} />
-        <div className={styles.gamersBox} onClick={() => handleOpen('')}>
-          {
+      <div className={styles.pageBox}>
+        <section className={styles.pages}>
+          <FilterCsgo users={listUserCsgo} distance={distance} setDistance={setDistance} />
+          <h1 className={styles.title}>
+            <Image src={csgoImage} alt='Logotipo de Counter Strike Global Ofensive' />
+            Counter Strike Global Ofensive
+          </h1>
+          <div className={styles.gamersBox} onClick={() => handleOpen('')}>
+            {
           listUserCsgo.map((res, index) => (
             <Card key={index} general={res} specific={res.csgo} />
           ))
         }
-        </div>
-      </section>
-      <Map location={user.geometry} currentPosition={currentPosition} db={listUserCsgo} zoom={7} size={30} />
+          </div>
+        </section>
+        <Map location={user.geometry} currentPosition={currentPosition} db={listUserCsgo} zoom={7} size={30} />
+      </div>
     </Layout>
   )
 }
