@@ -1,17 +1,31 @@
-import styles from './Dashboard.module.scss'
-import { useSession } from '../../firebase/auth/useSession'
-import PrivateRoute from '../../firebase/auth/PrivateRoute'
-import Layout from '../../components/Layout'
+// React hooks
 import { useState } from 'react'
+
+// styles
+import styles from './Dashboard.module.scss'
+
+// db
+import { useSession } from '../../firebase/auth/useSession'
+import { useGetUsers } from '../../firebase/hooks/getMethod/useGetUsers'
+import PrivateRoute from '../../firebase/auth/PrivateRoute'
+
+// Componentes
+import Layout from '../../components/Layout'
+import NewUser from '../../components/NewUser'
 
 export default function Dashboard () {
   const [menuOpen, setMenuOpen] = useState()
   const user = useSession()
+  const users = useGetUsers()
+
+  const currentUser = users.find(find => find.uid === user.uid)
+
+  if (!currentUser) return <NewUser />
 
   return (
     <Layout>
       <section data-open={menuOpen} className={styles.dashboard}>
-        <h1>{user.name}</h1>
+        <h1>{currentUser.name}</h1>
         <nav data-open={menuOpen} className={styles.nav}>
           <ul>
             <li>Añadir publicación</li>
