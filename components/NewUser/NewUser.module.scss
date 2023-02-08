@@ -1,8 +1,10 @@
+@import '../../styles/colors.scss';
+
 .newUser {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  min-height: 90vh;
 
   .title {
     text-align: center;

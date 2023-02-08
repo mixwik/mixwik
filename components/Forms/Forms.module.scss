@@ -18,18 +18,18 @@
     border-radius: .5rem;
 
     &[data-active=true] {
-      background-color: $PURPLE;
-      color: $WHITE;
+      background-color: $pennBlue;
+      color: $white;
 
       svg {
-        color: $WHITE;
+        color: $white;
       }
     }
 
     svg {
       width: 1rem;
       height: 1rem;
-      color: $PURPLE;
+      color: $pennBlue;
     }
   }
 
@@ -42,7 +42,7 @@
     left: 0;
     width: 100%;
     align-items: center;
-    background-color: $WHITE;
+    background-color: $white;
     padding: 2rem 0;
 
     @media screen and (min-width: 768px) {
@@ -56,7 +56,7 @@
       justify-content: space-between;
       align-items: center;
       padding: .5rem;
-      box-shadow: 0px 0px 5px $PURPLE;
+      box-shadow: 0px 0px 5px $pennBlue;
       border-radius: .5rem;
       width: 90%;
       justify-self: center;
@@ -78,8 +78,8 @@
         display: inline-block;
         width: 100%;
         height: 100%;
-        background-color: $WHITE;
-        border: 1px solid $PURPLE;
+        background-color: $white;
+        border: 1px solid $pennBlue;
       }
 
       input[type="checkbox"]:checked:after {
@@ -87,9 +87,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $PURPLE;
-        border-color: $WHITE;
-        color: $WHITE;
+        background-color: $pennBlue;
+        border-color: $white;
+        color: $white;
       }
     }
 
@@ -108,7 +108,7 @@
           appearance: none;
           max-width: 10rem;
           height: .4rem;
-          background: $PURPLE;
+          background: $pennBlue;
           outline: none;
         }
 
@@ -117,7 +117,7 @@
           appearance: none;
           width: 1.2rem;
           height: 1.2rem;
-          background: $PURPLE;
+          background: $pennBlue;
           border-radius: 50%;
           cursor: pointer;
         }
@@ -136,7 +136,7 @@
         appearance: none;
         width: 15rem;
         height: .4rem;
-        background-color: $PURPLE;
+        background-color: $pennBlue;
         border-radius: 5px;
         outline: none;
       }
@@ -145,7 +145,7 @@
         appearance: none;
         width: 1.2rem;
         height: 1.2rem;
-        background: $PURPLE;
+        background: $pennBlue;
         border-radius: 50%;
         cursor: pointer;
       }

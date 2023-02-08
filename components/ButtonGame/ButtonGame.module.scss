@@ -6,16 +6,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: $BLACK--TRANSPARENT;
+  background-color: $black--transparent;
   backdrop-filter: blur(8px);
   border-radius: .5em;
   width: 6em;
   height: 6em;
-  color: $WHITE;
+  color: $white;
   transition: background-color .5s;
 
   &:hover {
-    background-color: $PURPLE--TRANSPARENT;
+    background-color: $pennBlue--TRANSPARENT;
   }
 
   @media screen and (min-width:768px) {
@@ -43,7 +43,7 @@
     cursor: not-allowed;
     width: 100%;
     height: 100%;
-    background-color: $UNAVAILABLE;
+    background-color: $unavailable;
     border-radius: .5em;
 
     span {

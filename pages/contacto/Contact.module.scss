@@ -7,7 +7,7 @@
   align-items: center;
   width: 100%;
   height: 90vh;
-  color: $WHITE;
+  color: $white;
 
   .formBox {
     position: relative;
@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $BLACK--TRANSPARENT;
+    background-color: $black--transparent;
     backdrop-filter: blur(5px);
     padding: 3rem 1rem 1rem 1rem;
     width: 100%;
@@ -55,13 +55,13 @@
       textarea {
         padding: 1rem;
         background-color: transparent;
-        border: 1px solid $WHITE;
-        box-shadow: 0rem 0rem .5rem $PURPLE;
+        border: 1px solid $white;
+        box-shadow: 0rem 0rem .5rem $pennBlue;
         resize: none;
         border-radius: .3rem;
 
         &::placeholder {
-          color: $WHITE;
+          color: $white;
         }
       }
 
@@ -76,8 +76,8 @@
       }
 
       button {
-        background: $GRADIENT;
-        color: $BLACK;
+        background: $gradient;
+        color: $black;
         font-weight: bold;
         padding: 1rem;
         border-radius: .3rem;
