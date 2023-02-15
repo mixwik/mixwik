@@ -1,0 +1,15 @@
+.profile {
+  min-height: 85vh;
+  padding: 5vw;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  }
+}

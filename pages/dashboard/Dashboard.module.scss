@@ -1,6 +1,8 @@
 @import '../../styles/colors.scss';
 
 .dashboard {
+  background-color: $frenchBlue;
+
   @media screen and (min-width: 768px) {
     margin-left: 20vw;
     width: 80vw;

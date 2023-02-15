@@ -7,7 +7,7 @@ export const useGetUsers = () => {
   useEffect(() => {
     const getData = async () => {
       const arrData = []
-      const querySnapshot = await getDocs(collection(db, 'usuarios'))
+      const querySnapshot = await getDocs(collection(db, 'users'))
       querySnapshot.forEach((doc) => {
         arrData.push({ id: doc.id, ...doc.data() })
       })

@@ -1,5 +1,5 @@
 // styles
-import FormUserData from '../FormUserData'
+import FormUserData from './FormUserData'
 import Layout from '../Layout'
 import styles from './NewUser.module.scss'
 

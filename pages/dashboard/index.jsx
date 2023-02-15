@@ -1,5 +1,5 @@
 // React hooks
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // styles
 import styles from './Dashboard.module.scss'
@@ -12,29 +12,48 @@ import PrivateRoute from '../../firebase/auth/PrivateRoute'
 // Componentes
 import Layout from '../../components/Layout'
 import NewUser from '../../components/NewUser'
+import Profile from '../../components/Dashboard/Profile'
 
 export default function Dashboard () {
-  const [menuOpen, setMenuOpen] = useState()
+  const [isOpen, setIsOpen] = useState(false)
+  const [toggle, setToggle] = useState(false)
+  useEffect(() => {
+    setToggle('loading')
+    setTimeout(() => {
+      setToggle('profile')
+    }, 500)
+  }, [])
+
+  const handleToggle = (name) => {
+    setToggle(name)
+    setIsOpen(false)
+  }
+
   const user = useSession()
   const users = useGetUsers()
 
   const currentUser = users.find(find => find.uid === user.uid)
-
+  if (toggle === 'loading') return <div>Loading...</div>
   if (!currentUser) return <NewUser />
 
   return (
     <Layout>
-      <section data-open={menuOpen} className={styles.dashboard}>
-        <h1>{currentUser.name}</h1>
-        <nav data-open={menuOpen} className={styles.nav}>
+      <section data-open={isOpen} className={styles.dashboard}>
+        {toggle === 'profile' && <Profile user={currentUser} />}
+        <nav data-open={isOpen} className={styles.nav}>
           <ul>
-            <li>Añadir publicación</li>
-            <li>Añadir publicación</li>
+            <li onClick={() => handleToggle('profile')}>
+              Perfil
+            </li>
+            <li onClick={() => handleToggle('newPublication')}>
+              Añadir publicación
+            </li>
+            <li>Mis publicaciones</li>
           </ul>
         </nav>
         <button
-          className={styles.burguerButton} onClick={() => setMenuOpen(!menuOpen)}
-          data-open={menuOpen}
+          className={styles.burguerButton} onClick={() => setIsOpen(!isOpen)}
+          data-open={isOpen}
         >
           <div className={styles.grid1} />
           <div className={styles.grid2} />

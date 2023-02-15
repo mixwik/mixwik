@@ -12,7 +12,7 @@ export const useCurrentPosition = () => {
       }
 
       const onErrorDeUbicacion = () => {
-        setCurrentPosition(false)
+        setCurrentPosition([40.414971037098056, -3.7072115929025924])
       }
 
       const opcionesDeSolicitud = {
