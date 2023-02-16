@@ -1,5 +1,7 @@
+@import '../../../styles/colors.scss';
+
 .profile {
-  min-height: 85vh;
+  min-height: 90vh;
   padding: 5vw;
 
   .header {
@@ -10,6 +12,14 @@
     .title {
       font-weight: bold;
       font-size: 1.2em;
+    }
+
+    .signOut {
+      font-size: .9em;
+      padding: .5rem 1rem;
+      background-color: transparent;
+      border-radius: 2rem;
+      border: 1px solid $aero
     }
   }
 }

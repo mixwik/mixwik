@@ -19,7 +19,7 @@ const LogIn = ({ setIsOpen }) => {
   return (
     <div className={styles.logIn}>
       <section>
-        <h2>Log In</h2>
+        <h2>Iniciar Sesión</h2>
         <div>
           <button className={styles.logInGoogle} onClick={() => handleLogin(google)}>
             <GoogleIcon />
