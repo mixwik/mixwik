@@ -8,7 +8,7 @@ import { useLogIn } from '../../firebase/auth/useLogIn'
 // Icons
 import { GoogleIcon } from '../Svg'
 
-const LogIn = ({ setIsOpen }) => {
+const LogIn = ({ setIsOpen, isOpen }) => {
   const logIn = useLogIn()
   const google = new GoogleAuthProvider()
 
@@ -17,17 +17,17 @@ const LogIn = ({ setIsOpen }) => {
   }
 
   return (
-    <div className={styles.logIn}>
-      <section>
-        <h2>Iniciar Sesión</h2>
-        <div>
-          <button className={styles.logInGoogle} onClick={() => handleLogin(google)}>
-            <GoogleIcon />
-          </button>
-        </div>
-        <button className={styles.close} onClick={() => setIsOpen(false)}>X</button>
-      </section>
-    </div>
+
+    <section data-isOpen={isOpen} className={styles.logIn}>
+      <h2>Iniciar Sesión</h2>
+      <div>
+        <button className={styles.logInGoogle} onClick={() => handleLogin(google)}>
+          <GoogleIcon />
+        </button>
+      </div>
+      <button className={styles.close} onClick={() => setIsOpen(false)}>X</button>
+    </section>
+
   )
 }
 

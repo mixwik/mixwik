@@ -83,7 +83,7 @@ const FormUserData = ({ method }) => {
                 <Field as='textarea' name='description' rows='5' cols='10' />
               </label>
               <ErrorMessage name='description' component='span' />
-              <div>{values.description.length > 0 && values.description.length}</div>
+              <div>{values.description.length > 0 ? values.description.length : 0}/350</div>
               <div>Haz una breve descripción sobre ti, máximo 350 caracteres (opcional)</div>
             </div>
             <button type='submit' disabled={isSubmitting}>

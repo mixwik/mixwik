@@ -44,19 +44,8 @@ const Nav = () => {
                   )
             }
         </div>
-        {/* <button
-          className={styles.burguerButton} onClick={() => setMenuOpen(!menuOpen)}
-          data-open={menuOpen}
-        >
-          <div className={styles.grid1} />
-          <div className={styles.grid2} />
-          <div className={styles.grid3} />
-          <div className={styles.grid4} />
-        </button> */}
       </nav>
-      {
-        isOpen && <LogIn setIsOpen={setIsOpen} />
-      }
+      <LogIn setIsOpen={setIsOpen} isOpen={isOpen} />
       <div className={styles.placeHolder} />
     </>
   )
