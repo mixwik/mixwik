@@ -13,6 +13,7 @@ import PrivateRoute from '../../firebase/auth/PrivateRoute'
 import Layout from '../../components/Layout'
 import NewUser from '../../components/NewUser'
 import Profile from '../../components/Dashboard/Profile'
+import NewPublicationForm from '../../components/Dashboard/NewPublicationForm'
 
 export default function Dashboard () {
   const [isOpen, setIsOpen] = useState(false)
@@ -40,12 +41,19 @@ export default function Dashboard () {
     <Layout>
       <section data-open={isOpen} className={styles.dashboard}>
         {toggle === 'profile' && <Profile user={currentUser} />}
+        {toggle === 'profile' && <NewPublicationForm />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
-            <li onClick={() => handleToggle('profile')}>
+            <li 
+              data-isActive={toggle === 'profile'}
+              onClick={() => handleToggle('profile')}
+            >
               Perfil
             </li>
-            <li onClick={() => handleToggle('newPublication')}>
+            <li 
+              data-isActive={toggle === 'newPublication'}
+              onClick={() => handleToggle('newPublication')}
+            >
               Añadir publicación
             </li>
             <li>Mis publicaciones</li>

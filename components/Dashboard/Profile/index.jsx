@@ -34,6 +34,8 @@ const Profile = ({ user }) => {
             initialValues={initialValues}
             validate={values => {
               const errors = {}
+              if (!values.name) errors.name = 'Necesitamos tu nombre o nick'
+              if (!values.gender) errors.gender = 'Necesitamos tú genero, tranquilo no será visible para ningún otro usuario'
               if (values.description.length <= 10) errors.description = 'La descripción es muy corta'
               if (values.description.length >= 350) errors.description = 'La descripción es muy larga'
               if (typeof (values.age) !== 'number') errors.age = 'Sólo se admiten números'
@@ -101,7 +103,7 @@ const Profile = ({ user }) => {
                   <ErrorMessage name='gender' component='span' />
                 </div>
                 <div className={styles.group}>
-                  <label>
+                  <label className={styles.description}>
                     Descripción:
                     <Field
                       as='textarea' name='description'

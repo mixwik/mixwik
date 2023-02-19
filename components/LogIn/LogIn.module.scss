@@ -6,6 +6,7 @@
   height: 50vh;
   bottom: 10vh;
   background-color: $white;
+  color: $black;
   backdrop-filter: blur(5px);
   display: flex;
   flex-direction: column;
@@ -18,6 +19,12 @@
 
   &[data-isOpen=true] {
     transform: translateY(0)
+  }
+
+  @media screen and (min-width: 768px) {
+    transform: translateY(150%);
+    height: 90vh;
+    bottom: 0;
   }
 
   h2 {

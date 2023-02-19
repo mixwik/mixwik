@@ -10,7 +10,7 @@ import Link from 'next/link'
 
 // Images
 import logo from '../../public/logos/mixwik-logo.png'
-import { UserIcon } from '../../components/Svg'
+import { Company, ContactUs, UserIcon} from '../../components/Svg'
 import LogIn from '../LogIn'
 
 // Log In
@@ -30,6 +30,20 @@ const Nav = () => {
           </Link>
         </div>
         <div className={styles.logIn}>
+        <ul className={styles.links}>
+          <li>
+            <Link href='/'>
+              <Company />
+              Sobre nosotros
+            </Link>
+          </li>
+          <li>
+            <Link href='/contacto'>
+             <ContactUs />
+              Contáctanos
+            </Link>
+          </li>
+        </ul>
           {
               user.uid
                 ? (

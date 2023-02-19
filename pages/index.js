@@ -5,7 +5,6 @@ import styles from '../styles/Home.module.scss'
 import Layout from '../components/Layout'
 import Video from '../components/Home-video'
 import ButtonGame from '../components/ButtonGame'
-import Footer from '../components/Footer'
 
 export default function Home () {
   return (
@@ -17,7 +16,6 @@ export default function Home () {
           <ButtonGame />
         </div>
       </header>
-      <Footer />
     </Layout>
   )
 }

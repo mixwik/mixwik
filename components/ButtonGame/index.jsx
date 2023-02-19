@@ -15,7 +15,7 @@ import Link from 'next/link'
 
 const games = [{
   image: csgo,
-  title: 'Counter Strike Global Offensive',
+  title: 'CSGO',
   alt: 'Icono del videojuego csgo',
   available: true,
   link: 'csgo'

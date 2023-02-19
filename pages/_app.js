@@ -1,5 +1,5 @@
 import DataProvider from '../context'
-import '../styles/globals.css'
+import '../styles/globals.scss'
 
 const NoPrivate = ({ children }) => <>{children}</>
 
