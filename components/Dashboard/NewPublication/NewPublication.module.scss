@@ -1,0 +1,64 @@
+@import '../../../styles/colors.scss';
+
+.newPublication {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  min-height: 90vh;
+
+  .title {
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: left;
+    width: 90vw;
+
+    @media screen and (min-width: 768px) {
+      width: 60vw;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 2rem;
+    background-color: white;
+    padding: 1rem;
+    width: 90vw;
+
+    @media screen and (min-width: 768px) {
+      padding: 2rem;
+      width: 60vw;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid $aero;
+      padding: 0.5rem 1.5rem;
+      border-radius: .5rem;
+      cursor: pointer;
+
+      &:hover {
+        svg {
+          transform: translateX(1rem);
+        }
+      }
+
+      img {
+        height: 2rem;
+        width: 2rem;
+      }
+
+      svg {
+        color: $pennBlue;
+        height: 1.5rem;
+        width: 1.5rem;
+        transition: transform 1s;
+      }
+    }
+  }
+}

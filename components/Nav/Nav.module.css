@@ -1,0 +1,126 @@
+.nav {
+  position: fixed;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  bottom: 0;
+  left: 0;
+  height: 10vh;
+  z-index: 20;
+  color: #FFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100vw;
+  background-color: #000038;
+  border-top: 4px solid #00b9dc;
+}
+
+@media screen and (min-width: 768px) {
+  .nav {
+    top: 0;
+    bottom: auto;
+    border-top: none;
+    border-bottom: 4px solid #00b9dc;
+  }
+}
+
+.nav .logo img {
+  height: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .nav .logo img {
+    height: 40px;
+  }
+}
+
+.nav .logIn {
+  padding-right: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+}
+
+.nav .logIn .links {
+  display: none;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .nav .logIn .links {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.nav .logIn .links li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: .5rem;
+}
+
+.nav .logIn .links li a svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .nav .logIn {
+    padding-right: 1.5rem;
+  }
+}
+
+.nav .logIn img {
+  width: 40px;
+  height: 40px;
+  background-color: #000038;
+  border-radius: 50%;
+}
+
+.nav .logIn .logInButton {
+  border: none;
+  background-color: transparent;
+  margin-right: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .nav .logIn .logInButton {
+    padding-right: 1.5rem;
+  }
+}
+
+.nav .logIn .logInButton svg {
+  width: 30px;
+  height: 30px;
+}
+
+.placeHolder {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .placeHolder {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 10vh;
+  }
+}
+/*# sourceMappingURL=Nav.module.css.map */

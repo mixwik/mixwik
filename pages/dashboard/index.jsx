@@ -13,7 +13,11 @@ import PrivateRoute from '../../firebase/auth/PrivateRoute'
 import Layout from '../../components/Layout'
 import NewUser from '../../components/NewUser'
 import Profile from '../../components/Dashboard/Profile'
-import NewPublicationForm from '../../components/Dashboard/NewPublicationForm'
+import NewPublication from '../../components/Dashboard/NewPublication'
+import Link from 'next/link'
+import Image from 'next/image'
+import { myLoader } from '../../components/myLoader'
+import { Company, ContactUs, AddPublication, Publications } from '../../components/Svg'
 
 export default function Dashboard () {
   const [isOpen, setIsOpen] = useState(false)
@@ -41,22 +45,45 @@ export default function Dashboard () {
     <Layout>
       <section data-open={isOpen} className={styles.dashboard}>
         {toggle === 'profile' && <Profile user={currentUser} />}
-        {toggle === 'profile' && <NewPublicationForm />}
+        {toggle === 'newPublication' && <NewPublication user={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
-            <li 
+            <li
               data-isActive={toggle === 'profile'}
               onClick={() => handleToggle('profile')}
             >
+              <Image
+                width={0}
+                height={0}
+                loader={myLoader}
+                src={currentUser.profileImg}
+                alt={currentUser.name}
+              />
               Perfil
             </li>
-            <li 
+            <li
               data-isActive={toggle === 'newPublication'}
               onClick={() => handleToggle('newPublication')}
             >
+              <AddPublication />
               Añadir publicación
             </li>
-            <li>Mis publicaciones</li>
+            <li>
+              <Publications />
+              Mis publicaciones
+            </li>
+            <li>
+              <Link href='/'>
+                <Company />
+                Sobre Nosotros
+              </Link>
+            </li>
+            <li>
+              <Link href='/contacto'>
+                <ContactUs />
+                Contáctanos
+              </Link>
+            </li>
           </ul>
         </nav>
         <button

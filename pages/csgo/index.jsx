@@ -20,16 +20,17 @@ import { useHandleOpenContext } from '../../context'
 import csgoImage from '../../public/logos/csgo.png'
 import Image from 'next/image'
 import { useCurrentPosition } from '../../hooks/useCurrentPosition'
+import { useSession } from '../../firebase/auth/useSession'
 
 const Csgo = () => {
+  const [distance, setDistance] = useState(700)
+  const session = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
-  const [distance, setDistance] = useState(700)
-
   const users = useGetUsers()
 
   // filter current user of the list of users
-  const user = users.find(res => res.name === 'Maruan Vicente')
+  const user = users.find(res => res.uid === session.uid)
 
   // filter users list with different filters
   const listUserCsgo = useUserCsgoFilters(user, users, distance)
@@ -48,7 +49,14 @@ const Csgo = () => {
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {
           listUserCsgo.map((res, index) => (
-            <Card key={index} general={res} specific={res.csgo} />
+            res.csgo
+              ? (
+                <Card key={res.id} general={res} specific={res.csgo} />
+                )
+              : (
+                  index === 0 && <div key={res.id}>No hay jugadores de CSGO en este momento</div>
+                )
+
           ))
         }
           </div>

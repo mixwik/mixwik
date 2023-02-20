@@ -2,9 +2,10 @@
 
 .dashboard {
   color: $black;
+  width: 100vw;
 
   @media screen and (min-width: 768px) {
-    margin-left: 18vw;
+    margin-left: 20vw;
     width: 80vw;
   }
 
@@ -12,10 +13,11 @@
     background-color: $white;
     position: absolute;
     top: 0;
-    width: 50vw;
+    width: 70vw;
     height: 90vh;
     transform: translateX(-100%);
     transition: transform 1s;
+    padding: 1rem;
 
     &[data-open=true] {
       transform: translateX(0);
@@ -31,18 +33,46 @@
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
+      align-items: flex-start;
       height: 100%;
 
       li {
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: .5rem;
         cursor: pointer;
         transition: font-weight .5s;
 
-
         &[data-isActive=true] {
           font-weight: bold;
+        }
+
+        img,
+        svg,
+        a svg {
+          width: 1.5rem;
+          height: 1.5rem;
+          color: $pennBlue;
+          background-color: $pennBlue;
+          border-radius: 50%;
+        }
+
+        svg {
+          background-color: transparent;
+          border-radius: 0;
+        }
+
+        a {
+          display: flex;
+          justify-content: space-between;
+          gap: 0.5rem;
+          width: 100%;
+
+          svg {
+            background-color: transparent;
+            border-radius: 0;
+          }
         }
       }
     }
@@ -59,7 +89,7 @@
     padding: .3rem;
     gap: .3rem;
     border: none;
-    background-color: $aero;
+    background-color: $pennBlue;
     border-radius: .3rem;
     transition: gap 1s;
     place-items: center;

@@ -33,11 +33,11 @@ const Fortnite = () => {
     <Layout>
       <div className={styles.pageBox}>
         <section className={styles.pages}>
+          <FilterFortnite isOpen={isOpen} setIsOpen={setIsOpen} users={listUsersFiltered} distance={distance} setDistance={setDistance} />
           <h1 className={styles.title}>
             <Image src={fortniteImage} alt='Logotipo de Fortnite' />
             Fortnite
           </h1>
-          <FilterFortnite isOpen={isOpen} setIsOpen={setIsOpen} users={listUsersFiltered} distance={distance} setDistance={setDistance} />
           <section className={styles.gamersBox}>
             {
           listUsersFiltered.map((res, index) => (

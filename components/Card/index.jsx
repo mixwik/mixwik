@@ -9,6 +9,7 @@ import { myLoader } from '../myLoader'
 
 const Card = ({ general, specific }) => {
   const router = useRouter()
+
   return (
     <Link href={`${router.asPath}/usuario/${general.id}`}>
       <section className={styles.card}>

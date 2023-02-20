@@ -15,7 +15,9 @@ const FormUserData = ({ method }) => {
     gender: '',
     description: '',
     geometry: [],
-    uid: ''
+    uid: '',
+    profileImg: '',
+    email: ''
   }
   return (
     <div className={styles.form}>
@@ -34,7 +36,7 @@ const FormUserData = ({ method }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setNewUser(values.name, values.age, values.gender, values.description, currentPosition, user.uid)
+          setNewUser(values, currentPosition, user)
           setTimeout(() => {
             setSubmitting(false)
             location.reload()
