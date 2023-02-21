@@ -35,7 +35,7 @@ const Csgo = () => {
   // filter users list with different filters
   const listUserCsgo = useUserCsgoFilters(user, users, distance)
 
-  if (!user) return <div>Loading...</div>
+  if (!listUserCsgo) return <div>Loading...</div>
 
   return (
     <Layout>
@@ -61,7 +61,7 @@ const Csgo = () => {
         }
           </div>
         </section>
-        <Map location={user.geometry} currentPosition={currentPosition} db={listUserCsgo} zoom={7} size={30} />
+        <Map location={user} currentPosition={currentPosition} db={listUserCsgo} zoom={7} size={30} />
       </div>
     </Layout>
   )

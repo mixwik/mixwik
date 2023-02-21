@@ -11,10 +11,11 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 import Markers from './Marker'
 
 const Map = ({ location, db, zoom, size, currentPosition }) => {
+  if (currentPosition.length === 0) return <div>Loading...</div>
   return (
     <MapContainer
       className={styles.map}
-      center={currentPosition || location}
+      center={currentPosition || location.geometry}
       zoomAnimation
       doubleClickZoom={false}
       zoom={zoom}

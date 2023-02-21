@@ -3,6 +3,7 @@ import L from 'leaflet'
 import styles from './Map.module.scss'
 
 const Markers = ({ position, size, currentPosition }) => {
+  if (!position || !currentPosition) return <div>Loading...</div>
   const icon = L.divIcon({
     className: styles.customIcon,
     iconSize: [size, size],

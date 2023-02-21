@@ -6,9 +6,9 @@ export const useUserFilterDistance = (locationUser, users, distance) => {
   const [filteredUsersDistance, setFilteredUsersDistance] = useState([])
   const radius = distance
   useEffect(() => {
-    if (locationUser) {
-      const positionUser = currentPosition || locationUser.geometry
-      // Recorre la lista de usuarios y calcula la distancia entre cada uno de ellos y la ubicación del usuario de referencia
+    const positionUser = currentPosition || locationUser.geometry
+    // Recorre la lista de usuarios y calcula la distancia entre cada uno de ellos y la ubicación del usuario de referencia
+    if (positionUser) {
       const filtered = users.filter(user => {
         const distance = getDistance(positionUser, user.geometry)
         return distance <= radius
