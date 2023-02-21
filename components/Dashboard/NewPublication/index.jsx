@@ -43,7 +43,7 @@ const NewPublication = ({ user }) => {
           <Arrow />
         </li>
       </ul>
-      {toggle === 'csgo' && <CsgoPublication />}
+      <CsgoPublication toggle={toggle} setToggle={setToggle} />
     </section>
   )
 }

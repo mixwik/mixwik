@@ -21,6 +21,11 @@
     border-top: none;
     border-bottom: 4px solid $aero;
 
+    &[data-transparent=true] {
+      background-color: transparent;
+      border-bottom: none;
+    }
+
   }
 
   .logo {
