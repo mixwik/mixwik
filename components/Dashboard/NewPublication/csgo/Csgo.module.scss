@@ -1,16 +1,117 @@
+@import '../../../../styles/colors.scss';
+
 .csgo {
   position: absolute;
   width: 100vw;
   height: 90vh;
-  background: white;
-  transform: translateX(100%);
+  background-color: $frenchBlue;
+  transform: translateY(100%);
   transition: transform 1s;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &::-webkit-scrollbar {
+    width: .5rem;
+    height: 0px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $white;
+    border-radius: .5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $pennBlue;
+    border-radius: .5rem;
+  }
 
   @media screen and (min-width: 768px) {
     width: 80vw;
   }
 
   &[data-open=true] {
-    transform: translateX(0)
+    transform: translateY(0);
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-around;
+
+    .cancel {
+      font-size: .9em;
+      padding: .5rem 1rem;
+      background-color: transparent;
+      border-radius: 2rem;
+      border: 1px solid $aero
+    }
+  }
+
+  .newPublication {
+    height: 90vh;
+    width: 90vw;
+
+    @media screen and (min-width: 768px) {
+      width: 50vw;
+    }
+
+    .form {
+      form {
+        .group {
+          display: flex;
+          flex-direction: column;
+          height: 90vh;
+          scroll-snap-type: Y mandatory;
+
+          .position,
+          .level {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+
+            @media screen and (min-width: 768px) {
+              grid-template-columns: repeat(3, 1fr)
+            }
+
+            label {
+              border: 2px solid $aero;
+              padding: .7rem;
+              transition: background-color .5s, color .5s;
+              text-align: center;
+              font-weight: bold;
+              border-radius: .3rem;
+            }
+
+            input {
+              appearance: none;
+              position: absolute;
+
+              &:checked+label {
+                background-color: $pennBlue;
+                color: $white;
+              }
+            }
+          }
+
+          .position {
+            scroll-snap-align: center;
+          }
+
+          .hours {
+            background-color: yellow;
+          }
+
+          .typeOfGamer {
+            background-color: blueviolet;
+          }
+
+          .description {
+            background-color: yellowgreen
+          }
+
+        }
+      }
+    }
   }
 }
