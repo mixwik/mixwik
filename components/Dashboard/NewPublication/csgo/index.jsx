@@ -36,9 +36,9 @@ const CsgoPublication = ({ toggle, setToggle }) => {
           >
             {({ isSubmitting, values }) => (
               <Form>
-                <div className={styles.group}>
-                  Posición
-                  <div class={styles.position} role='group' aria-labelledby='my-radio-group'>
+                <section className={styles.position}>
+                  <h3 className={styles.title}>Position</h3>
+                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
                       value='Entry fragger'
@@ -113,10 +113,10 @@ const CsgoPublication = ({ toggle, setToggle }) => {
                     </label>
                   </div>
                   <ErrorMessage name='position' component='span' />
-                </div>
-                <div className={styles.group}>
-                  Level
-                  <div class={styles.level} role='group' aria-labelledby='my-radio-group'>
+                </section>
+                <section className={styles.level}>
+                  <h3 className={styles.title}>Level</h3>
+                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
                       value='Silver'
@@ -209,7 +209,7 @@ const CsgoPublication = ({ toggle, setToggle }) => {
                     </label>
                   </div>
                   <ErrorMessage name='level' component='span' />
-                </div>
+                </section>
                 <div className={styles.group}>
                   <label className={styles.hours}>
                     Horas jugadas
