@@ -1,24 +1,28 @@
 import styles from './Csgo.module.scss'
 
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { useSession } from '../../../../firebase/auth/useSession'
+import { useGetUsers } from '../../../../firebase/hooks/getMethod/useGetUsers'
+import { setCsgo } from '../../../../firebase/hooks/setMethod/setCsgo'
 
 const CsgoPublication = ({ toggle, setToggle }) => {
+  const user = useSession()
+  const users = useGetUsers()
+  const currentUser = users.find(find => find.uid === user.uid)
+  if (!currentUser) return <div>Loading...</div>
   const initialValues = {
     position: [],
     level: [],
     typeOfGamer: '',
     hours: '',
     description: '',
-    uid: ''
+    uid: '',
+    geometry: []
   }
   return (
     <section className={styles.csgo} data-open={toggle === 'csgo'}>
-      <div className={styles.head}>
-        <h2>Counter Strike Global Ofensive</h2>
-        <button className={styles.cancel} onClick={() => setToggle(false)}>Cancelar</button>
-      </div>
       <section className={styles.newPublication}>
-        <h2>Añadir publicación</h2>
+        <h2 className={styles.title}>Counter Strike Global Ofensive</h2>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -27,17 +31,18 @@ const CsgoPublication = ({ toggle, setToggle }) => {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              console.log(values.position)
-              // setTimeout(() => {
-              //   setSubmitting(false)
-              //   location.reload()
-              // }, 400)
+              setCsgo(values, currentUser.uid, currentUser.geometry)
+              setTimeout(() => {
+                setSubmitting(false)
+                location.reload()
+              }, 400)
             }}
           >
             {({ isSubmitting, values }) => (
               <Form>
-                <section className={styles.position}>
-                  <h3 className={styles.title}>Position</h3>
+                {/* <button className={styles.cancel} onClick={() => setToggle(false)}>X</button> */}
+                <article className={styles.position}>
+                  <h3 className={styles.title}>¿En que posición te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
@@ -113,9 +118,9 @@ const CsgoPublication = ({ toggle, setToggle }) => {
                     </label>
                   </div>
                   <ErrorMessage name='position' component='span' />
-                </section>
-                <section className={styles.level}>
-                  <h3 className={styles.title}>Level</h3>
+                </article>
+                <article className={styles.level}>
+                  <h3 className={styles.title}>¿Cuál es tu nivel?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
@@ -209,54 +214,70 @@ const CsgoPublication = ({ toggle, setToggle }) => {
                     </label>
                   </div>
                   <ErrorMessage name='level' component='span' />
-                </section>
-                <div className={styles.group}>
-                  <label className={styles.hours}>
-                    Horas jugadas
+                </article>
+                <article className={styles.hoursAndType}>
+                  <article className={styles.hours}>
+                    <h3>Horas jugadas</h3>
                     <Field
                       type='number'
                       name='hours'
                     />
-                  </label>
-                  <ErrorMessage name='hours' component='span' />
-                </div>
-                <div className={styles.group}>
-                  Tipo de jugador
-                  <div class={styles.typeOfGamer} role='group' aria-labelledby='my-radio-group'>
-                    <label>
-                      Competitivo
+                    <ErrorMessage name='hours' component='span' />
+                  </article>
+                  <article className={styles.typeOfGamer}>
+                    <h3>¿Que tipo de jugador te consideras?</h3>
+                    <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                       <Field
                         type='radio'
                         name='typeOfGamer'
                         value='Competitivo'
+                        id='competitivo'
                       />
-                    </label>
-                    <label>
-                      Casual
+                      <label for='competitivo'>
+                        Competitivo
+                      </label>
                       <Field
                         type='radio'
                         name='typeOfGamer'
                         value='Casual'
+                        id='casual'
                       />
-                    </label>
-                  </div>
-                  <ErrorMessage name='typeOfGamer' component='span' />
-                </div>
-                <div className={styles.group}>
-                  <label className={styles.description}>
-                    Descripción:
-                    <Field
-                      as='textarea' name='description'
-                      rows='5'
-                      cols='10'
-                    />
-                  </label>
+                      <label for='casual'>
+                        Casual
+                      </label>
+                    </div>
+                    <ErrorMessage name='typeOfGamer' component='span' />
+                  </article>
+                </article>
+                <article className={styles.description}>
+                  <h3>Describete como jugador de CSGO</h3>
+                  <Field
+                    as='textarea' name='description'
+                    rows='5'
+                    cols='10'
+                  />
                   <ErrorMessage name='description' component='span' />
-                  <div>{values.description.length > 0 ? values.description.length : 0}/350</div>
+                  <div>
+                    {values.description.length > 0 ? values.description.length : 0}/350
+                  </div>
+                </article>
+                <article className={styles.private}>
+                  <Field
+                    type='text'
+                    name='uid'
+                    value={currentUser.uid}
+                  />
+                  <Field
+                    type='text'
+                    name='geometry'
+                    value={currentUser.geometry}
+                  />
+                </article>
+                <div className={styles.buttons}>
+                  <button className={styles.submit} type='submit' disabled={isSubmitting}>
+                    Publicar
+                  </button>
                 </div>
-                <button type='submit' disabled={isSubmitting}>
-                  Guardar
-                </button>
               </Form>
             )}
           </Formik>
