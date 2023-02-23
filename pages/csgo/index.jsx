@@ -27,16 +27,17 @@ const Csgo = () => {
   const session = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
-  const users = useGetUsers()
+  const users = useGetUsers('users')
+  const csgo = useGetUsers('csgo')
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)
 
   // filter users list with different filters
-  const listUserCsgo = useUserCsgoFilters(user, users, distance)
+  const listUserCsgo = useUserCsgoFilters(user, csgo, distance)
 
   if (!listUserCsgo) return <div>Loading...</div>
-
+  console.log(listUserCsgo)
   return (
     <Layout>
       <div className={styles.pageBox}>
@@ -48,17 +49,16 @@ const Csgo = () => {
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {
-          listUserCsgo.map((res, index) => (
-            res.csgo
-              ? (
-                <Card key={res.id} general={res} specific={res.csgo} />
-                )
-              : (
-                  index === 0 && <div key={res.id}>No hay jugadores de CSGO en este momento</div>
-                )
-
-          ))
-        }
+              listUserCsgo.map((res, index) => (
+                res
+                  ? (
+                    <Card key={res.id} user={users} csgo={res} />
+                    )
+                  : (
+                      index === 0 && <div key={res.id}>No hay jugadores de CSGO en este momento</div>
+                    )
+              ))
+            }
           </div>
         </section>
         <Map location={user} currentPosition={currentPosition} db={listUserCsgo} zoom={7} size={30} />

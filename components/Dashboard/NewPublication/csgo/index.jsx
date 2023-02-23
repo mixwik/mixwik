@@ -1,15 +1,31 @@
 import styles from './Csgo.module.scss'
 
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useSession } from '../../../../firebase/auth/useSession'
-import { useGetUsers } from '../../../../firebase/hooks/getMethod/useGetUsers'
 import { setCsgo } from '../../../../firebase/hooks/setMethod/setCsgo'
+import { useState } from 'react'
+import { removeImageDB, setImageDB } from '../../../../firebase/storage'
+import Image from 'next/image'
+import { myLoader } from '../../../myLoader'
 
-const CsgoPublication = ({ toggle, setToggle }) => {
-  const user = useSession()
-  const users = useGetUsers()
-  const currentUser = users.find(find => find.uid === user.uid)
-  if (!currentUser) return <div>Loading...</div>
+const CsgoPublication = ({ toggle, currentUser }) => {
+  const [previewImage, setPreviewImage] = useState()
+  const [imgURL, setImgURL] = useState()
+  const [image, setImage] = useState()
+  const handleSetImage = async (e) => {
+    const reader = new FileReader()
+    setImage(e.target.files[0])
+    setImageDB('csgo', e.target.files[0], setImgURL)
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = () => {
+      setPreviewImage(reader.result)
+    }
+  }
+
+  const handleRemoveImage = async (e) => {
+    e.preventDefault()
+    removeImageDB('csgo', image.name)
+    setPreviewImage('')
+  }
   const initialValues = {
     position: [],
     level: [],
@@ -17,7 +33,8 @@ const CsgoPublication = ({ toggle, setToggle }) => {
     hours: '',
     description: '',
     uid: '',
-    geometry: []
+    geometry: [],
+    age: ''
   }
   return (
     <section className={styles.csgo} data-open={toggle === 'csgo'}>
@@ -31,7 +48,7 @@ const CsgoPublication = ({ toggle, setToggle }) => {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setCsgo(values, currentUser.uid, currentUser.geometry)
+              setCsgo(values, currentUser, imgURL)
               setTimeout(() => {
                 setSubmitting(false)
                 location.reload()
@@ -261,17 +278,22 @@ const CsgoPublication = ({ toggle, setToggle }) => {
                     {values.description.length > 0 ? values.description.length : 0}/350
                   </div>
                 </article>
-                <article className={styles.private}>
-                  <Field
-                    type='text'
-                    name='uid'
-                    value={currentUser.uid}
-                  />
-                  <Field
-                    type='text'
-                    name='geometry'
-                    value={currentUser.geometry}
-                  />
+                <article className={styles.image}>
+                  <label>
+                    Añadir imágen
+                    <input
+                      className='form__file'
+                      onChange={handleSetImage}
+                      type='file'
+                      placeholder='Minutos'
+                    />
+                  </label>
+                  {previewImage && (
+                    <div className='img'>
+                      <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
+                      <button onClick={handleRemoveImage}>Borrar</button>
+                    </div>
+                  )}
                 </article>
                 <div className={styles.buttons}>
                   <button className={styles.submit} type='submit' disabled={isSubmitting}>

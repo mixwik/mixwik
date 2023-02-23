@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useCurrentPosition } from '../useCurrentPosition'
 
-export const useUserFilterDistance = (locationUser, users, distance) => {
+export const useUserFilterDistance = (locationUser, csgo, distance) => {
   const currentPosition = useCurrentPosition()
   const [filteredUsersDistance, setFilteredUsersDistance] = useState([])
   const radius = distance
@@ -9,13 +9,13 @@ export const useUserFilterDistance = (locationUser, users, distance) => {
     const positionUser = currentPosition || locationUser.geometry
     // Recorre la lista de usuarios y calcula la distancia entre cada uno de ellos y la ubicación del usuario de referencia
     if (positionUser) {
-      const filtered = users.filter(user => {
+      const filtered = csgo.filter(user => {
         const distance = getDistance(positionUser, user.geometry)
         return distance <= radius
       })
       setFilteredUsersDistance(filtered)
     }
-  }, [users, radius, currentPosition, locationUser])
+  }, [csgo, radius, currentPosition, locationUser])
 
   // Función para calcular la distancia entre dos puntos utilizando la fórmula Haversine
   function getDistance (point1, point2) {

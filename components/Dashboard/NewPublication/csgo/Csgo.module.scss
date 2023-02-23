@@ -54,7 +54,8 @@
         .position,
         .level,
         .hoursAndType,
-        .description {
+        .description,
+        .image {
           height: 100%;
           scroll-snap-align: center;
           display: flex;

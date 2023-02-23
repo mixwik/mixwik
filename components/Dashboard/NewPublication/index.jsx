@@ -43,7 +43,7 @@ const NewPublication = ({ user }) => {
           <Arrow />
         </li>
       </ul>
-      <CsgoPublication toggle={toggle} setToggle={setToggle} />
+      <CsgoPublication toggle={toggle} currentUser={user} />
     </section>
   )
 }

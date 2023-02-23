@@ -35,7 +35,7 @@ export default function Dashboard () {
   }
 
   const user = useSession()
-  const users = useGetUsers()
+  const users = useGetUsers('users')
 
   const currentUser = users.find(find => find.uid === user.uid)
   if (toggle === 'loading') return <div>Loading...</div>
