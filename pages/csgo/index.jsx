@@ -37,7 +37,8 @@ const Csgo = () => {
   const listUserCsgo = useUserCsgoFilters(user, csgo, distance)
 
   if (!listUserCsgo) return <div>Loading...</div>
-  console.log(listUserCsgo)
+  // console.log(csgo)
+  // console.log(listUserCsgo)
   return (
     <Layout>
       <div className={styles.pageBox}>

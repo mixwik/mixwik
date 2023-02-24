@@ -14,7 +14,7 @@ const DataProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState('')
   const [filter, setFilter] = useState({
     age: {
-      min: 18,
+      min: 16,
       max: 90
     },
     typeOfGamer: [],
