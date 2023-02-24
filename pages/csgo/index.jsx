@@ -49,15 +49,15 @@ const Csgo = () => {
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {
-              listUserCsgo.map((res, index) => (
-                res
-                  ? (
-                    <Card key={res.id} user={users} csgo={res} />
-                    )
-                  : (
-                      index === 0 && <div key={res.id}>No hay jugadores de CSGO en este momento</div>
-                    )
-              ))
+              listUserCsgo.length > 0
+                ? (
+                    listUserCsgo.map((res) => (
+                      <Card key={res.id} user={users} csgo={res} />
+                    ))
+                  )
+                : (
+                  <div className={styles.gamersNoFound}>No hay jugadores de CSGO en este momento</div>
+                  )
             }
           </div>
         </section>

@@ -14,7 +14,7 @@ const Card = ({ user, csgo }) => {
   return (
     <Link href={`${router.asPath}/usuario/${csgo.id}`}>
       <section className={styles.card}>
-        <Image loader={myLoader} width={0} height={0} src={csgo.image} alt={csgoUser.name} />
+        <Image loader={myLoader} width={0} height={0} src={csgo.img} alt={csgoUser.name} />
         <h3 className={styles.title}>{csgoUser.name}</h3>
         <div className={styles.description}>
           {csgo.description}

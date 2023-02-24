@@ -6,15 +6,18 @@ import { useState } from 'react'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import Image from 'next/image'
 import { myLoader } from '../../../myLoader'
+import { DeleteIcon, ImageIcon } from '../../../Svg'
 
 const CsgoPublication = ({ toggle, currentUser }) => {
   const [previewImage, setPreviewImage] = useState()
   const [imgURL, setImgURL] = useState()
   const [image, setImage] = useState()
+  const [progress, setProgress] = useState()
+
   const handleSetImage = async (e) => {
     const reader = new FileReader()
     setImage(e.target.files[0])
-    setImageDB('csgo', e.target.files[0], setImgURL)
+    setImageDB('csgo', e.target.files[0], setImgURL, setProgress)
     reader.readAsDataURL(e.target.files[0])
     reader.onload = () => {
       setPreviewImage(reader.result)
@@ -140,7 +143,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                   <h3 className={styles.title}>¿Cuál es tu nivel?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Silver'
                       name='level'
                       id='silver'
@@ -149,7 +152,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Silver
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Nova'
                       name='level'
                       id='nova'
@@ -158,7 +161,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Nova
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Ak'
                       name='level'
                       id='ak'
@@ -167,7 +170,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Ak
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Ak laurel'
                       name='level'
                       id='ak-laurel'
@@ -176,7 +179,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Ak Laurel
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Doble ak'
                       name='level'
                       id='doble-ak'
@@ -185,7 +188,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Doble Ak
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Chapa'
                       name='level'
                       id='chapa'
@@ -194,7 +197,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Chapa
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Aguila'
                       name='level'
                       id='aguila'
@@ -203,7 +206,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Aguila
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Aguila laurel'
                       name='level'
                       id='aguil-laurel'
@@ -212,7 +215,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Aguila Laurel
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Supreme'
                       name='level'
                       id='supreme'
@@ -221,7 +224,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                       Supreme
                     </label>
                     <Field
-                      type='checkbox'
+                      type='radio'
                       value='Global elite'
                       name='level'
                       id='global-elite'
@@ -279,24 +282,38 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                   </div>
                 </article>
                 <article className={styles.image}>
+                  <h3>Añade una imagen</h3>
                   <label>
-                    Añadir imágen
+                    <ImageIcon />
                     <input
-                      className='form__file'
                       onChange={handleSetImage}
                       type='file'
                       placeholder='Minutos'
                     />
+                    {previewImage && (
+                      <div className={styles.previewImage}>
+                        <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
+                        <button onClick={handleRemoveImage}>
+                          <DeleteIcon />
+                        </button>
+                      </div>
+                    )}
                   </label>
-                  {previewImage && (
-                    <div className='img'>
-                      <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
-                      <button onClick={handleRemoveImage}>Borrar</button>
-                    </div>
-                  )}
                 </article>
                 <div className={styles.buttons}>
-                  <button className={styles.submit} type='submit' disabled={isSubmitting}>
+                  <button
+                    className={styles.submit}
+                    type='submit'
+                    disabled={
+                      values.hours === '' ||
+                      values.description.length === 0 ||
+                      values.level.length === 0 ||
+                      values.position.length === 0 ||
+                      values.typeOfGamer.length === 0 ||
+                      !progress ||
+                      isSubmitting
+                    }
+                  >
                     Publicar
                   </button>
                 </div>
