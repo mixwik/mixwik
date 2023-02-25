@@ -38,7 +38,7 @@ const Nav = () => {
         <div className={styles.logIn}>
           <ul className={styles.links}>
             <li>
-              <Link href='/'>
+              <Link href='/sobre-nosotros'>
                 <Company />
                 Sobre nosotros
               </Link>

@@ -57,7 +57,6 @@ const CsgoPublication = ({ toggle, currentUser }) => {
           >
             {({ isSubmitting, values }) => (
               <Form>
-                {/* <button className={styles.cancel} onClick={() => setToggle(false)}>X</button> */}
                 <article className={styles.position}>
                   <h3 className={styles.title}>¿En que posición te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
