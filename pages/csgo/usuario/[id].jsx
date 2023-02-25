@@ -21,10 +21,10 @@ const User = () => {
     <Layout>
       <div className={styles.user}>
         <section className={styles.userBox}>
+          <Image loader={myLoader} width={0} height={0} src={currentCsgo.img} alt={currentUser.name} />
           <h1 className={styles.title}>
             {currentUser.name}
           </h1>
-          <Image loader={myLoader} width={0} height={0} src={currentCsgo.image} alt={currentUser.name} />
           <p className={styles.description}>{currentCsgo.description}</p>
           <article className={styles.position}>
             <h2>{currentCsgo.position.length === 1 ? 'Posición' : 'Posiciones'}</h2>

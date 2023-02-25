@@ -12,7 +12,7 @@ const FormAge = () => {
       <h3
         className={styles.title}
         onClick={() => handleOpen('age')}
-        data-active={filter.age.min > 18 || filter.age.max < 90}
+        data-active={filter.age.min > 16 || filter.age.max < 90}
       >
         <RangeAge />
         Edad
@@ -27,7 +27,7 @@ const FormAge = () => {
                   type='range'
                   name='min'
                   value={filter.age.min}
-                  min={18}
+                  min={16}
                   max={90}
                   onChange={(e) => handleSetFilter(e.target)}
                 />

@@ -145,8 +145,69 @@
 
         }
 
-        .private {
-          display: none;
+        .image {
+          label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 15rem;
+            height: 15rem;
+            position: relative;
+            border: 2px solid $aero;
+            border-radius: .5rem;
+            overflow: hidden;
+
+            svg {
+              width: 3rem;
+              height: 3rem;
+            }
+
+            input {
+              display: none;
+            }
+
+            .previewImage {
+              position: absolute;
+              z-index: 1;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              img {
+                width: 15rem;
+                height: 15rem;
+              }
+
+              button {
+                position: absolute;
+                background-color: transparent;
+                box-shadow: 0px 0px 5px red;
+                width: 3.5rem;
+                height: 3.5rem;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: background-color 1s;
+                overflow: hidden;
+
+                &:hover {
+                  background-color: red;
+
+                  svg {
+                    color: $white;
+                  }
+                }
+
+                svg {
+                  color: red;
+                  width: 3rem;
+                  height: 3rem;
+                  transition: color 1s;
+                }
+              }
+            }
+          }
         }
 
         .buttons {
@@ -168,6 +229,11 @@
             color: $white;
             border-radius: .5rem;
             padding: 1rem 3rem;
+
+            &:disabled {
+              background-color: gray;
+              cursor: not-allowed;
+            }
 
             @media screen and (min-width: 768px) {
               padding: 1rem 5rem;
