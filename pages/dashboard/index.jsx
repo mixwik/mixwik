@@ -17,7 +17,10 @@ import NewPublication from '../../components/Dashboard/NewPublication'
 import Link from 'next/link'
 import Image from 'next/image'
 import { myLoader } from '../../components/myLoader'
-import { Company, ContactUs, AddPublication, Publications } from '../../components/Svg'
+import ChatHome from '../../Chat/Home'
+
+// Images
+import { Company, ContactUs, AddPublication, Publications, ChatIcon } from '../../components/Svg'
 
 export default function Dashboard () {
   const [isOpen, setIsOpen] = useState(false)
@@ -46,6 +49,7 @@ export default function Dashboard () {
       <section data-open={isOpen} className={styles.dashboard}>
         {toggle === 'profile' && <Profile user={currentUser} />}
         {toggle === 'newPublication' && <NewPublication user={currentUser} />}
+        {toggle === 'chat' && <ChatHome user={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -72,13 +76,20 @@ export default function Dashboard () {
               <Publications />
               Mis publicaciones
             </li>
-            <li>
-              <Link href='/'>
+            <li
+              data-isActive={toggle === 'chat'}
+              onClick={() => handleToggle('chat')}
+            >
+              <ChatIcon />
+              Chats
+            </li>
+            <li className={styles.ours}>
+              <Link href='/sobre-nosotros'>
                 <Company />
                 Sobre Nosotros
               </Link>
             </li>
-            <li>
+            <li className={styles.contact}>
               <Link href='/contacto'>
                 <ContactUs />
                 Contáctanos

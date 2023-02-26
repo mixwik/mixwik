@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Layout from '../../../components/Layout'
 import { useGetUsers } from '../../../firebase/hooks/getMethod/useGetUsers'
 import { myLoader } from '../../../components/myLoader'
+import Link from 'next/link'
 
 const User = () => {
   const router = useRouter()
@@ -20,6 +21,7 @@ const User = () => {
   return (
     <Layout>
       <div className={styles.user}>
+        <Link href={`/chat/${currentCsgo.uid}`}>Chat</Link>
         <section className={styles.userBox}>
           <Image loader={myLoader} width={0} height={0} src={currentCsgo.img} alt={currentUser.name} />
           <h1 className={styles.title}>
