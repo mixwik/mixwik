@@ -54,7 +54,16 @@ const Nav = () => {
               user.uid
                 ? (
                   <Link href='/dashboard'>
-                    <Image width={0} height={0} src={user.image} alt={user.name} loader={myLoader} quality={1} />
+                    {
+                    user.image
+                      ? (
+
+                        <Image width={0} height={0} src={user.image} alt={user.name} loader={myLoader} quality={1} />
+                        )
+                      : (
+                        <UserIcon />
+                        )
+                  }
                   </Link>
                   )
                 : (

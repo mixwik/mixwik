@@ -7,6 +7,7 @@ export const useSession = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(user)
         setUser({
           name: user.displayName,
           email: user.email,

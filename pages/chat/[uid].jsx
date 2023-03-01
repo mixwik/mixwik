@@ -21,36 +21,33 @@ export default function Chat () {
   const users = useGetUsers('users')
   const currentUser = useSession()
 
-  // El usuario A es el dueño del chat, al cuál nosotros hablamos
-  // El usuario B somos nosotros que iniciamos la conversación
-  const userA = users.find(find => find.uid === uid)
-  const userB = users.find(find => find.uid === currentUser.uid)
-
+  // El owner es el dueño del chat, al cuál nosotros hablamos
+  // El myself somos nosotros que iniciamos la conversación
+  const owner = users.find(find => find.uid === uid)
+  const myself = users.find(find => find.uid === currentUser.uid)
   const chats = useGetChats()
 
   // Con esta función buscamos el uid propio y el de la otra persona dentro de los datos del chat para tener la seguridad de que accedemos al chat correcto
-  const currentChat = chats.find(find => find.uids.includes(userB.uid) && userB.chatsUids.map((map) => find.uids.includes(map)))
+  const currentChatA = chats.find(find => find.ownerUid === myself.uid && find.participant === uid)
+  const currentChatB = chats.find(find => find.participant === myself.uid && find.ownerUid === uid)
+  const currentChat = currentChatA || currentChatB
 
-  if (!userA) return <div>Loading...</div>
-  if (!userB) return <div>Loading...</div>
-
-  if (currentChat) {
-    currentChat.messages.forEach((map, index) => {
-      if (!map.read && userB.name !== map.name) console.log('leído')
-    })
-  }
-
+  if (!currentChat) return <div>Loading...</div>
   return (
     <Layout>
       <div className={styles.chat}>
         <section className={styles.chatBox}>
-          <h1 className={styles.title}>{userA.name}</h1>
+          <h1 className={styles.title}>{owner.name}</h1>
           <ul className={styles.messages}>
             {
               currentChat
                 ? (
                     currentChat.messages.map(message => (
-                      <li data-user={userB.name === message.name} key={message.date}>{message.message}</li>
+                      <li data-user={myself.name === message.name} key={message.date}>
+                        <span>
+                          {message.message}
+                        </span>
+                      </li>
                     ))
                   )
                 : (
@@ -66,15 +63,15 @@ export default function Chat () {
               }
             validate={values => {
               const errors = {}
-              if (!values.message) errors.message = 'Este campo no puedo ir vacío'
+              if (!values.message) errors.message = 'Este campo no puede ir vacío'
               return errors
             }}
             onSubmit={(values, { resetForm }) => {
               if (!currentChat) {
-                setNewChat(userA.uid, userB.uid, userA.name, userA.profileImg, values.message, userB.name)
-                updateChatUid(userA.id, userB.uid)
-                updateChatUid(userB.id, userA.uid)
-              } else updateChat(currentChat.id, userB.name, values.message)
+                setNewChat(owner.uid, myself.uid, values.message, myself.name)
+                updateChatUid(owner.id, myself.uid)
+                updateChatUid(myself.id, owner.uid)
+              } else updateChat(currentChat.id, myself.name, values.message)
               resetForm()
             }}
           >

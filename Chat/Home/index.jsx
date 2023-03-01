@@ -1,3 +1,4 @@
+// import { useGetChats } from '../../firebase/hooks/getMethod/getChats'
 import styles from './Home.module.scss'
 
 const ChatHome = () => {
