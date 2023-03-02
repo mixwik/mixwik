@@ -6,7 +6,6 @@ import styles from './Dashboard.module.scss'
 
 // db
 import { useSession } from '../../firebase/auth/useSession'
-import { useGetUsers } from '../../firebase/hooks/getMethod/useGetUsers'
 import PrivateRoute from '../../firebase/auth/PrivateRoute'
 
 // Componentes
@@ -17,10 +16,10 @@ import NewPublication from '../../components/Dashboard/NewPublication'
 import Link from 'next/link'
 import Image from 'next/image'
 import { myLoader } from '../../components/myLoader'
-import ChatHome from '../../Chat/Home'
 
 // Images
-import { Company, ContactUs, AddPublication, Publications, ChatIcon } from '../../components/Svg'
+import { Company, ContactUs, AddPublication, Publications } from '../../components/Svg'
+import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 
 export default function Dashboard () {
   const [isOpen, setIsOpen] = useState(false)
@@ -38,9 +37,8 @@ export default function Dashboard () {
   }
 
   const user = useSession()
-  const users = useGetUsers('users')
+  const currentUser = useGetOneData('users', user.uid)
 
-  const currentUser = users.find(find => find.uid === user.uid)
   if (toggle === 'loading') return <div>Loading...</div>
   if (!currentUser) return <NewUser />
 
@@ -49,7 +47,6 @@ export default function Dashboard () {
       <section data-open={isOpen} className={styles.dashboard}>
         {toggle === 'profile' && <Profile user={currentUser} />}
         {toggle === 'newPublication' && <NewPublication user={currentUser} />}
-        {toggle === 'chat' && <ChatHome user={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -75,13 +72,6 @@ export default function Dashboard () {
             <li>
               <Publications />
               Mis publicaciones
-            </li>
-            <li
-              data-isActive={toggle === 'chat'}
-              onClick={() => handleToggle('chat')}
-            >
-              <ChatIcon />
-              Chats
             </li>
             <li className={styles.ours}>
               <Link href='/sobre-nosotros'>

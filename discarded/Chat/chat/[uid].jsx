@@ -2,23 +2,23 @@ import styles from './Chat.module.scss'
 
 // Components
 import { useRouter } from 'next/router'
-import Layout from '../../components/Layout'
+import Layout from '../../../components/Layout'
 import { Formik, Field, Form } from 'formik'
 
 // firebase
-import { useGetUsers } from '../../firebase/hooks/getMethod/useGetUsers'
-import PrivateRoute from '../../firebase/auth/PrivateRoute'
-import { useSession } from '../../firebase/auth/useSession'
-import { setNewChat } from '../../firebase/hooks/setMethod/setChats'
-import { useGetChats } from '../../firebase/hooks/getMethod/getChats'
-import { updateChat } from '../../firebase/hooks/updateMethod/updateChat'
-import { updateChatUid } from '../../firebase/hooks/updateMethod/updateUserData'
+import { useGetData } from '../../../firebase/hooks/getMethod/useGetData'
+import PrivateRoute from '../../../firebase/auth/PrivateRoute'
+import { useSession } from '../../../firebase/auth/useSession'
+import { setNewChat } from '../../setChats'
+import { useGetChats } from '../../getChats'
+import { updateChat } from '../../updateChat'
+import { updateChatUid } from '../../../firebase/hooks/updateMethod/updateUserData'
 
 export default function Chat () {
   const router = useRouter()
   const { uid } = router.query
 
-  const users = useGetUsers('users')
+  const users = useGetData('users')
   const currentUser = useSession()
 
   // El owner es el dueño del chat, al cuál nosotros hablamos

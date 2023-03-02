@@ -72,10 +72,15 @@
     }
 
     img {
-      width: 40px;
-      height: 40px;
+      width: 2rem;
+      height: 2rem;
       background-color: $pennBlue;
       border-radius: 50%;
+    }
+
+    svg {
+      width: 2rem;
+      height: 2rem;
     }
 
     .logInButton {

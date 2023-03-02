@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { collection, query, onSnapshot } from 'firebase/firestore'
-import { db } from '../../initialize.jsx'
+import { db } from '../../firebase/initialize.jsx'
 
 export const useGetChats = () => {
   const [data, setData] = useState([])

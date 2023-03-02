@@ -5,9 +5,35 @@ import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { setNewUser } from '../../../firebase/hooks/setMethod/setNewUser'
 import { useSession } from '../../../firebase/auth/useSession'
+import { removeImageDB, setImageDB } from '../../../firebase/storage'
+import { useState } from 'react'
+import { DeleteIcon, ImageIcon } from '../../Svg'
+import { myLoader } from '../../myLoader'
+import Image from 'next/image'
 
 const FormUserData = ({ method }) => {
+  const [previewImage, setPreviewImage] = useState()
+  const [imgURL, setImgURL] = useState()
+  const [image, setImage] = useState()
+  const [progress, setProgress] = useState()
   const currentPosition = useCurrentPosition()
+
+  const handleSetImage = async (e) => {
+    const reader = new FileReader()
+    setImage(e.target.files[0])
+    setImageDB('profile', e.target.files[0], setImgURL, setProgress)
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = () => {
+      setPreviewImage(reader.result)
+    }
+  }
+
+  const handleRemoveImage = async (e) => {
+    e.preventDefault()
+    removeImageDB('profile', image.name)
+    setPreviewImage('')
+  }
+
   const user = useSession()
   const initialValues = {
     name: '',
@@ -36,7 +62,7 @@ const FormUserData = ({ method }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setNewUser(values, currentPosition, user)
+          setNewUser(values, currentPosition, user, imgURL)
           setTimeout(() => {
             setSubmitting(false)
             location.reload()
@@ -45,6 +71,25 @@ const FormUserData = ({ method }) => {
       >
         {({ isSubmitting, values }) => (
           <Form>
+            <article className={styles.image}>
+              <h3>Cambia tu foto de perfil</h3>
+              <label>
+                <ImageIcon />
+                <input
+                  onChange={handleSetImage}
+                  type='file'
+                  placeholder='Minutos'
+                />
+                {previewImage && (
+                  <div className={styles.previewImage}>
+                    <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
+                    <button onClick={handleRemoveImage}>
+                      <DeleteIcon />
+                    </button>
+                  </div>
+                )}
+              </label>
+            </article>
             <div className={styles.group}>
               <label>
                 Nombre:
@@ -62,18 +107,34 @@ const FormUserData = ({ method }) => {
               <div>Solicitamos tú edad para que puedas encontrar otros usuarios con edad parecida a la tuya, en caso de que así lo desees.</div>
             </div>
             <div className={styles.group}>
+              Genero:
               <div class={styles.gender} role='group' aria-labelledby='my-radio-group'>
-                <label>
+                <Field
+                  type='radio'
+                  name='gender'
+                  value='M'
+                  id='M'
+                />
+                <label for='M'>
                   Masculino
-                  <Field type='radio' name='gender' value='M' />
                 </label>
-                <label>
+                <Field
+                  type='radio'
+                  name='gender'
+                  value='F'
+                  id='F'
+                />
+                <label for='F'>
                   Femenino
-                  <Field type='radio' name='gender' value='F' />
                 </label>
-                <label>
+                <Field
+                  type='radio'
+                  name='gender'
+                  value='O'
+                  id='O'
+                />
+                <label for='O'>
                   Otro
-                  <Field type='radio' name='gender' value='O' />
                 </label>
               </div>
               <ErrorMessage name='gender' component='span' />
@@ -88,7 +149,10 @@ const FormUserData = ({ method }) => {
               <div>{values.description.length > 0 ? values.description.length : 0}/350</div>
               <div>Haz una breve descripción sobre ti, máximo 350 caracteres (opcional)</div>
             </div>
-            <button type='submit' disabled={isSubmitting}>
+            <button
+              type='submit'
+              disabled={!progress || isSubmitting}
+            >
               Guardar
             </button>
           </Form>

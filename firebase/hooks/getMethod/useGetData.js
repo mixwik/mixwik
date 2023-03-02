@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../initialize.jsx'
 
-export const useGetUsers = (name) => {
+export const useGetData = (name) => {
   const [data, setData] = useState([])
   useEffect(() => {
     const getData = async () => {

@@ -47,32 +47,98 @@
 
       .gender {
         display: flex;
-        justify-content: space-around;
-        width: 100%;
-        padding: 1rem 0;
+        justify-content: space-between;
 
         label {
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          width: auto;
+          padding: 0.5rem 1rem;
+          border: 1px solid $aero;
+          border-radius: .5rem;
+          transition: background-color 1s, color 1s;
+          cursor: pointer;
+        }
 
-          input {
-            appearance: none;
-            width: 15px;
-            height: 15px;
-            padding: 0;
-            border-radius: 50%;
+        input {
+          appearance: none;
 
-            &:checked {
-              background-color: $aero;
-            }
+          &:checked+label {
+            background-color: $aero;
+            color: $white;
+
           }
         }
       }
 
       span {
         color: $error;
+      }
+    }
+
+    .image {
+      h3 {
+        text-align: center;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 10rem;
+        height: 10rem;
+        position: relative;
+        border: 2px solid $aero;
+        border-radius: 50%;
+        overflow: hidden;
+
+        svg {
+          width: 3rem;
+          height: 3rem;
+        }
+
+        input {
+          display: none;
+        }
+
+        .previewImage {
+          position: absolute;
+          z-index: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            width: 15rem;
+            height: 15rem;
+          }
+
+          button {
+            position: absolute;
+            background-color: transparent;
+            box-shadow: 0px 0px 5px red;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 1s;
+            overflow: hidden;
+
+            &:hover {
+              background-color: red;
+
+              svg {
+                color: $white;
+              }
+            }
+
+            svg {
+              color: red;
+              width: 3rem;
+              height: 3rem;
+              transition: color 1s;
+            }
+          }
+        }
       }
     }
 

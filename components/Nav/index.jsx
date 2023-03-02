@@ -11,12 +11,13 @@ import { useRouter } from 'next/router'
 
 // Images
 import logo from '../../public/logos/mixwik-logo.png'
-import { Company, ContactUs, UserIcon } from '../../components/Svg'
+import { Company, ContactUs, UserIcon, UserIconLogin } from '../../components/Svg'
 import { myLoader } from '../myLoader'
 
 // Log In
 import LogIn from '../LogIn'
 import { useSession } from '../../firebase/auth/useSession'
+import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 
 const Nav = () => {
   const router = useRouter()
@@ -26,7 +27,10 @@ const Nav = () => {
   }, [router.asPath])
   const [isOpen, setIsOpen] = useState(false)
   const [transparent, setTransparent] = useState(false)
+
   const user = useSession()
+  const currentUser = useGetOneData('users', user.uid)
+
   return (
     <>
       <nav className={styles.nav} data-transparent={transparent}>
@@ -55,15 +59,15 @@ const Nav = () => {
                 ? (
                   <Link href='/dashboard'>
                     {
-                    user.image
+                    currentUser.profileImg
                       ? (
 
-                        <Image width={0} height={0} src={user.image} alt={user.name} loader={myLoader} quality={1} />
+                        <Image width={0} height={0} src={currentUser.profileImg} alt={user.name} loader={myLoader} quality={1} />
                         )
                       : (
-                        <UserIcon />
+                        <UserIconLogin />
                         )
-                  }
+                    }
                   </Link>
                   )
                 : (

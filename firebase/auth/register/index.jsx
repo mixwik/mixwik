@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { auth } from '../../initialize'
 
 export const useRegister = () => {
+  const [errorRegister, setErrorRegister] = useState(false)
   const router = useRouter()
   const register = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -12,9 +14,9 @@ export const useRegister = () => {
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        console.log(errorCode, errorMessage)
+        setErrorRegister(errorCode, errorMessage)
       })
   }
 
-  return register
+  return [errorRegister, register]
 }

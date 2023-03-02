@@ -1,16 +1,35 @@
-import { getAuth, signInWithPopup } from 'firebase/auth'
+import { useState } from 'react'
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { useRouter } from 'next/router'
+import { auth } from '../../initialize'
 
-export const useLogIn = () => {
+export const useLogInProvider = () => {
+  const [error, setError] = useState(false)
   const router = useRouter()
-  const auth = getAuth()
-  const logIn = (provider) => {
+  const logInProvider = (provider) => {
     signInWithPopup(auth, provider)
       .then(() => {
         router.push('/dashboard')
       }).catch((error) => {
-        console.log(error)
+        setError(error)
       })
   }
-  return logIn
+  return [error, logInProvider]
+}
+
+export const useLogInEmail = () => {
+  const [error, setError] = useState(false)
+  const router = useRouter()
+  const logInEmail = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        router.push('/dashboard')
+      })
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        setError(errorCode, errorMessage)
+      })
+  }
+  return [error, logInEmail]
 }

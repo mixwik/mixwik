@@ -74,30 +74,34 @@ const Profile = ({ user }) => {
                   <ErrorMessage name='age' component='span' />
                 </div>
                 <div className={styles.group}>
+                  Genero:
                   <div class={styles.gender} role='group' aria-labelledby='my-radio-group'>
-                    <label>
+                    <Field
+                      type='radio'
+                      name='gender'
+                      value='M'
+                      id='M'
+                    />
+                    <label for='M'>
                       Masculino
-                      <Field
-                        type='radio'
-                        name='gender'
-                        value='M'
-                      />
                     </label>
-                    <label>
+                    <Field
+                      type='radio'
+                      name='gender'
+                      value='F'
+                      id='F'
+                    />
+                    <label for='F'>
                       Femenino
-                      <Field
-                        type='radio'
-                        name='gender'
-                        value='F'
-                      />
                     </label>
-                    <label>
+                    <Field
+                      type='radio'
+                      name='gender'
+                      value='O'
+                      id='O'
+                    />
+                    <label for='O'>
                       Otro
-                      <Field
-                        type='radio'
-                        name='gender'
-                        value='O'
-                      />
                     </label>
                   </div>
                   <ErrorMessage name='gender' component='span' />

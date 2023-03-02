@@ -12,7 +12,7 @@ import Card from '../../components/Card'
 
 // Customs Hooks
 import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
-import { useGetUsers } from '../../firebase/hooks/getMethod/useGetUsers'
+import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
 
 // Context
 import { useHandleOpenContext } from '../../context'
@@ -27,8 +27,8 @@ const Csgo = () => {
   const session = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
-  const users = useGetUsers('users')
-  const csgo = useGetUsers('csgo')
+  const users = useGetData('users')
+  const csgo = useGetData('csgo')
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)

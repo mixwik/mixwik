@@ -2,18 +2,15 @@ import styles from './User.module.scss'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Layout from '../../../components/Layout'
-import { useGetUsers } from '../../../firebase/hooks/getMethod/useGetUsers'
 import { myLoader } from '../../../components/myLoader'
-import Link from 'next/link'
+import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 
 const User = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const users = useGetUsers('users')
-  const csgo = useGetUsers('csgo')
-  const currentCsgo = csgo.find(user => user.id === id)
-  const currentUser = users.find(user => user.uid === currentCsgo.uid)
+  const currentCsgo = useGetOneData('csgo', id)
+  const currentUser = useGetOneData('users', currentCsgo.uid)
 
   if (!currentCsgo) return <div>Loading...</div>
   if (!currentUser) return <div>Loading...</div>
@@ -21,7 +18,6 @@ const User = () => {
   return (
     <Layout>
       <div className={styles.user}>
-        <Link href={`/chat/${currentCsgo.uid}`}>Chat</Link>
         <section className={styles.userBox}>
           <Image loader={myLoader} width={0} height={0} src={currentCsgo.img} alt={currentUser.name} />
           <h1 className={styles.title}>
