@@ -85,6 +85,12 @@ export default function Dashboard () {
                 Contáctanos
               </Link>
             </li>
+            <li className={styles.contact}>
+              <Link href='https://donate.stripe.com/test_7sI7v7fD1guj6K4aEF'>
+                <ContactUs />
+                COBRE
+              </Link>
+            </li>
           </ul>
         </nav>
         <button

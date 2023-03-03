@@ -32,7 +32,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
   const initialValues = {
     position: [],
     level: [],
-    typeOfGamer: '',
+    typeOfGamer: [],
     hours: '',
     description: '',
     uid: '',
@@ -247,7 +247,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                     <h3>¿Que tipo de jugador te consideras?</h3>
                     <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                       <Field
-                        type='radio'
+                        type='checkbox'
                         name='typeOfGamer'
                         value='Competitivo'
                         id='competitivo'
@@ -256,7 +256,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
                         Competitivo
                       </label>
                       <Field
-                        type='radio'
+                        type='checkbox'
                         name='typeOfGamer'
                         value='Casual'
                         id='casual'

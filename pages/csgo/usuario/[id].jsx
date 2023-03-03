@@ -4,16 +4,19 @@ import Image from 'next/image'
 import Layout from '../../../components/Layout'
 import { myLoader } from '../../../components/myLoader'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
+import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
 
 const User = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const currentCsgo = useGetOneData('csgo', id)
+  const currentCsgo = useGetOnePublication('csgo', id)
+  console.log(currentCsgo)
   const currentUser = useGetOneData('users', currentCsgo.uid)
+  console.log(currentUser)
 
-  if (!currentCsgo) return <div>Loading...</div>
-  if (!currentUser) return <div>Loading...</div>
+  if (currentCsgo.length === 0) return <div>Loading...</div>
+  if (currentUser.length === 0) return <div>Loading...</div>
 
   return (
     <Layout>
