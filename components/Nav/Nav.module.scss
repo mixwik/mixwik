@@ -13,13 +13,11 @@
   justify-content: space-between;
   width: 100vw;
   background-color: $pennBlue;
-  border-top: 4px solid $aero;
 
   @media screen and (min-width:768px) {
     top: 0;
     bottom: auto;
     border-top: none;
-    border-bottom: 4px solid $aero;
 
     &[data-transparent=true] {
       background-color: transparent;
