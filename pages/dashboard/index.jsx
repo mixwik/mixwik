@@ -20,6 +20,7 @@ import { myLoader } from '../../components/myLoader'
 // Images
 import { Company, ContactUs, AddPublication, Publications } from '../../components/Svg'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
+import MyPublications from '../../components/Dashboard/MyPublications'
 
 export default function Dashboard () {
   const [isOpen, setIsOpen] = useState(false)
@@ -47,6 +48,7 @@ export default function Dashboard () {
       <section data-open={isOpen} className={styles.dashboard}>
         {toggle === 'profile' && <Profile user={currentUser} />}
         {toggle === 'newPublication' && <NewPublication user={currentUser} />}
+        {toggle === 'myPublications' && <MyPublications user={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -69,7 +71,10 @@ export default function Dashboard () {
               <AddPublication />
               Añadir publicación
             </li>
-            <li>
+            <li
+              data-isActive={toggle === 'myPublications'}
+              onClick={() => handleToggle('myPublications')}
+            >
               <Publications />
               Mis publicaciones
             </li>
