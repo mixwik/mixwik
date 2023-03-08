@@ -7,6 +7,7 @@ import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import Image from 'next/image'
 import { myLoader } from '../../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
+import { updateUserCsgoPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 
 const CsgoPublication = ({ toggle, currentUser }) => {
   const [previewImage, setPreviewImage] = useState()
@@ -52,6 +53,7 @@ const CsgoPublication = ({ toggle, currentUser }) => {
             }}
             onSubmit={(values, { setSubmitting }) => {
               setCsgo(values, currentUser, imgURL)
+              updateUserCsgoPublications(currentUser.id)
               setTimeout(() => {
                 setSubmitting(false)
                 location.reload()

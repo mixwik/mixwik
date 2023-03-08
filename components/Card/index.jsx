@@ -19,13 +19,6 @@ const Card = ({ user, csgo }) => {
         <div className={styles.description}>
           {csgo.description}
         </div>
-        <ul className={styles.typeOfGamer}>
-          {
-          csgo.typeOfGamer.map((res) => (
-            <li key={res}>{res}</li>
-          ))
-          }
-        </ul>
       </section>
     </Link>
   )

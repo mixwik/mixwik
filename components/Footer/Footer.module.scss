@@ -8,6 +8,11 @@
   height: 20vh;
   background-color: $pennBlue;
   color: $white;
+  margin-bottom: 10vh;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 0,
+  }
 
   div {
     width: 100%;

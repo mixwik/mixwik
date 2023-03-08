@@ -10,14 +10,27 @@ import valorant from '../../../public/logos/VALORANT4.png'
 import Image from 'next/image'
 import { Arrow } from '../../Svg'
 import CsgoPublication from './csgo'
+import NoMorePublications from './noMorePublications'
 
 const NewPublication = ({ user }) => {
   const [toggle, setToggle] = useState()
+  const [noPremium, setNoPremium] = useState(false)
+  const handleCheck = (name) => {
+    if (!user.premium) {
+      if (!user.csgoPublications) {
+        setToggle(name)
+      } else if (user.CsgoPublication <= 1) {
+        setToggle(name)
+      } else {
+        setNoPremium(true)
+      }
+    }
+  }
   return (
     <section className={styles.newPublication}>
       <h1 className={styles.title}>Selecciona categoría</h1>
-      <ul>
-        <li onClick={() => setToggle('csgo')}>
+      <ul className={styles.listOfCategories}>
+        <li onClick={() => handleCheck('csgo')}>
           <Image src={csgo} alt='csgo' />
           CSGO
           <Arrow />
@@ -43,6 +56,7 @@ const NewPublication = ({ user }) => {
           <Arrow />
         </li>
       </ul>
+      <NoMorePublications noPremium={noPremium} currentUser={user} />
       <CsgoPublication toggle={toggle} currentUser={user} />
     </section>
   )

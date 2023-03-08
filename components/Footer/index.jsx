@@ -10,6 +10,11 @@ const Footer = () => {
       <div>
         MixWik sin ánimo de lucro
       </div>
+      <div>
+        <Link href='/legal/politica-de-cookies'>Cookies </Link>
+        -
+        <Link href='/legal/politica-de-privacidad'> Privacidad</Link>
+      </div>
     </footer>
   )
 }

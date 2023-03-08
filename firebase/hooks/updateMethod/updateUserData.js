@@ -1,4 +1,4 @@
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import { doc, increment, updateDoc } from 'firebase/firestore'
 import { db } from '../../initialize.jsx'
 
 export const updateUserData = async (id, data) => {
@@ -11,9 +11,9 @@ export const updateUserData = async (id, data) => {
   })
 }
 
-export const updateChatUid = async (id, data) => {
+export const updateUserCsgoPublications = async (id) => {
   const userRef = doc(db, 'users', id)
   await updateDoc(userRef, {
-    chatsUids: arrayUnion(data)
+    csgoPublications: increment(1)
   })
 }
