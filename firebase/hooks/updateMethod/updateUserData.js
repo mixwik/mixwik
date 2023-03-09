@@ -17,3 +17,13 @@ export const updateUserCsgoPublications = async (id) => {
     csgoPublications: increment(1)
   })
 }
+
+export const updateUserMixWikTeams = async (payID, id) => {
+  const userRef = doc(db, 'users', id)
+  await updateDoc(userRef, {
+    teams: {
+      payID,
+      date: new Date()
+    }
+  })
+}

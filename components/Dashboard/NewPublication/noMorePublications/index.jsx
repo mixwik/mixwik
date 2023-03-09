@@ -10,8 +10,8 @@ const NoMorePublications = ({ noPremium, currentUser }) => {
     <div className={styles.noMorePublications} data-open={noPremium}>
       <div className={styles.content}>
         <section className={styles.advantagesBox}>
-          <h1 className={styles.title}>MixWik Team</h1>
-          <p>Hazte de MixWik Team donando 5€ y obtendrás las siguientes ventajas:</p>
+          <h1 className={styles.title}>MixWik Teams</h1>
+          <p>Hazte de MixWik Teams donando 5€ y obtendrás las siguientes ventajas:</p>
           <ul className={styles.advantages}>
             <li>
               <CheckIcon />
@@ -33,7 +33,7 @@ const NoMorePublications = ({ noPremium, currentUser }) => {
         </section>
         <Image src={logo} alt='logo de MixWik' />
       </div>
-      <Link href={`https://buy.stripe.com/test_14kaHj1Mbb9Zd8s28a?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Donar 5€</Link>
+      <Link href={`https://buy.stripe.com/test_aEU2aN1Mb0vl2tO3cg?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Donar 5€</Link>
     </div>
   )
 }

@@ -15,6 +15,7 @@ specifiers:
   react-player: 2.11.0
   sass: 1.56.1
   standard: 17.0.0
+  stripe: ^11.13.0
 
 dependencies:
   eslint: 8.27.0
@@ -31,6 +32,7 @@ dependencies:
   react-player: 2.11.0_react@18.2.0
   sass: 1.56.1
   standard: 17.0.0
+  stripe: 11.13.0
 
 packages:
 
@@ -2744,6 +2746,13 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /qs/6.11.1:
+    resolution: {integrity: sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: 1.0.4
+    dev: false
+
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: false
@@ -3044,6 +3053,14 @@ packages:
   /strip-json-comments/3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+    dev: false
+
+  /stripe/11.13.0:
+    resolution: {integrity: sha512-Jx0nDbdvRsTtDSX5OFQ+4rLmYIftoiOE9HAXWIgyhAz1QjRFI3UIiJ/kCyhkdJBoHu019O5Ya6EmQ5Zf635XDw==}
+    engines: {node: '>=12.*'}
+    dependencies:
+      '@types/node': 18.11.19
+      qs: 6.11.1
     dev: false
 
   /styled-jsx/5.1.0_react@18.2.0:
