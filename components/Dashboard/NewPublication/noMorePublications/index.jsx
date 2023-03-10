@@ -15,7 +15,7 @@ const NoMorePublications = ({ noPremium, currentUser }) => {
           <ul className={styles.advantages}>
             <li>
               <CheckIcon />
-              Podrás publicar hasta 3 anuncios por categoría
+              Podrás publicar hasta 5 anuncios por categoría
             </li>
             <li>
               <CheckIcon />

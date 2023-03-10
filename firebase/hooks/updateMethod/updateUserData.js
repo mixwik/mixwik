@@ -18,12 +18,13 @@ export const updateUserCsgoPublications = async (id) => {
   })
 }
 
-export const updateUserMixWikTeams = async (payID, id) => {
+export const updateUserMixWikTeams = async (payID, id, router) => {
   const userRef = doc(db, 'users', id)
   await updateDoc(userRef, {
-    teams: {
-      payID,
-      date: new Date()
-    }
-  })
+    mixWikTeams: payID
+  }).then(
+    setTimeout(() => {
+      router.push('/')
+    }, 5000)
+  )
 }

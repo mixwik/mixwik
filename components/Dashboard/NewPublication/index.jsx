@@ -11,24 +11,38 @@ import Image from 'next/image'
 import { Arrow } from '../../Svg'
 import CsgoPublication from './csgo'
 import NoMorePublications from './noMorePublications'
+import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 
 const NewPublication = ({ user }) => {
   const [toggle, setToggle] = useState()
-  const [noPremium, setNoPremium] = useState(false)
+  const [teams, setTeams] = useState(false)
+  const mixWikTeams = useMixWikTeamsCheckSubscription(user.mixWikTeams)
   const handleCheck = (name) => {
-    if (!user.premium) {
-      if (!user.csgoPublications) {
-        setToggle(name)
-      } else if (user.CsgoPublication <= 1) {
-        setToggle(name)
-      } else {
-        setNoPremium(true)
+    if (name === 'csgo') {
+      if (!mixWikTeams) {
+        if (!user.csgoPublications) {
+          setToggle(name)
+        } else if (user.CsgoPublication <= 1) {
+          setToggle(name)
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.csgoPublications <= 5) {
+          setToggle(name)
+        } else {
+          setTeams('maxPublications')
+        }
       }
     }
   }
+  console.log(mixWikTeams)
   return (
     <section className={styles.newPublication}>
       <h1 className={styles.title}>Selecciona categoría</h1>
+      {
+        teams === 'maxPublications' && <p>Has llegado al límite de publicaciones</p>
+      }
       <ul className={styles.listOfCategories}>
         <li onClick={() => handleCheck('csgo')}>
           <Image src={csgo} alt='csgo' />
@@ -56,7 +70,7 @@ const NewPublication = ({ user }) => {
           <Arrow />
         </li>
       </ul>
-      <NoMorePublications noPremium={noPremium} currentUser={user} />
+      <NoMorePublications noPremium={teams === 'noMixWikTeams'} currentUser={user} />
       <CsgoPublication toggle={toggle} currentUser={user} />
     </section>
   )
