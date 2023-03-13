@@ -36,7 +36,6 @@ const NewPublication = ({ user }) => {
       }
     }
   }
-  console.log(mixWikTeams)
   return (
     <section className={styles.newPublication}>
       <h1 className={styles.title}>Selecciona categoría</h1>

@@ -5,35 +5,35 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility'
 
 // Leaflet
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 // Components
-import Markers from './Marker'
+import L from 'leaflet'
 
-const Map = ({ location, users, db, zoom, currentPosition }) => {
-  if (currentPosition.length === 0) return <div>Loading...</div>
+const Map = ({ user }) => {
+  const icon = L.divIcon({
+    className: styles.customIcon,
+    iconSize: [40, 40],
+    crossOrigin: true
+  })
+
   return (
     <MapContainer
       className={styles.map}
-      center={currentPosition || location.geometry}
+      center={user.geometry}
       zoomAnimation
       doubleClickZoom={false}
-      zoom={zoom}
+      zoom={13}
       maxZoom={14}
     >
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      {
-        db.map(position => (
-          <Markers
-            key={position.id}
-            position={position}
-            currentPosition={currentPosition}
-            users={users}
-          />
-        ))
-      }
+      <Marker position={user.geometry} icon={icon}>
+        <Popup>
+          {user.name}
+        </Popup>
+      </Marker>
 
     </MapContainer>
 

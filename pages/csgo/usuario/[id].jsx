@@ -5,6 +5,7 @@ import Layout from '../../../components/Layout'
 import { myLoader } from '../../../components/myLoader'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
+import UserMap from '../../../components/UserMap'
 
 const User = () => {
   const router = useRouter()
@@ -27,6 +28,20 @@ const User = () => {
             {currentUser.name}
           </h1>
           <p className={styles.description}>{currentCsgo.description}</p>
+          <article className={styles.typeOfGamer}>
+            <h2>Tipo de jugador</h2>
+            <ul>
+              {
+                currentCsgo.typeOfGamer.map((type, index) => (
+                  <li key={index}>{type}</li>
+                ))
+              }
+            </ul>
+          </article>
+          <article className={styles.level}>
+            <h2>Nivel</h2>
+            {currentCsgo.level}
+          </article>
           <article className={styles.position}>
             <h2>{currentCsgo.position.length === 1 ? 'Posición' : 'Posiciones'}</h2>
             <ul>
@@ -36,6 +51,13 @@ const User = () => {
                 ))
               }
             </ul>
+          </article>
+          <article className={styles.hours}>
+            <h2>Horas Jugadas</h2>
+            {currentCsgo.hours}
+          </article>
+          <article>
+            <UserMap user={currentUser} />
           </article>
         </section>
       </div>

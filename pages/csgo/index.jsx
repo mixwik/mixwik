@@ -37,8 +37,6 @@ const Csgo = () => {
   const listUserCsgo = useUserCsgoFilters(user, csgo, distance)
 
   if (!listUserCsgo) return <div>Loading...</div>
-  // console.log(csgo)
-  // console.log(listUserCsgo)
   return (
     <Layout>
       <div className={styles.pageBox}>
@@ -62,7 +60,14 @@ const Csgo = () => {
             }
           </div>
         </section>
-        <Map location={user} currentPosition={currentPosition} db={listUserCsgo} zoom={7} size={30} />
+        <Map
+          location={user}
+          users={users}
+          currentPosition={currentPosition}
+          db={listUserCsgo}
+          zoom={7}
+          size={30}
+        />
       </div>
     </Layout>
   )
