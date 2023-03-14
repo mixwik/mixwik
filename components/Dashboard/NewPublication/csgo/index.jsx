@@ -35,24 +35,36 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
   const handleSetImage = async (e, setImages, setImgsURL, setPreviewImages) => {
     const reader = new FileReader()
     setImages(e.target.files[0])
+    // copilot please comprobation if the format of images is correct
     if (
-      e.target.files[0].name !== image.name &&
+      image.type === 'image/jpg' ||
+      image.type === 'image/jpeg' ||
+      image.type === 'image/webp' ||
+      image.type === 'image/png'
+    ) {
+      if (
+        e.target.files[0].name !== image.name &&
       e.target.files[0].name !== image2.name &&
       e.target.files[0].name !== image3.name &&
       e.target.files[0].name !== image4.name &&
       e.target.files[0].name !== image5.name &&
       e.target.files[0].name !== image6.name
-    ) {
-      setImageDB('csgo', e.target.files[0], setImgsURL, setProgress)
-      reader.readAsDataURL(e.target.files[0])
-      reader.onload = () => {
-        setPreviewImages(reader.result)
+      ) {
+        setImageDB('csgo', e.target.files[0], setImgsURL, setProgress)
+        reader.readAsDataURL(e.target.files[0])
+        reader.onload = () => {
+          setPreviewImages(reader.result)
+        }
+      } else {
+        setImageError('No subas la misma imagen dos veces')
+        setTimeout(() => setImageError(''), 2000)
       }
     } else {
-      setImageError('No subas la misma imagen dos veces')
+      setImageError('El formato de la imagen no es válido')
       setTimeout(() => setImageError(''), 2000)
     }
   }
+  console.log(image)
 
   const handleRemoveImage = async (e, images, setPreviewImages, setImages) => {
     e.preventDefault()
