@@ -1,7 +1,7 @@
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../../initialize'
 
-export const setCsgo = async (value, userData, img) => {
+export const setCsgo = async (value, userData, img, img2, img3, img4, img5, img6) => {
   // Add a new document with a generated id.
   await addDoc(collection(db, 'csgo'), {
     position: value.position,
@@ -12,6 +12,11 @@ export const setCsgo = async (value, userData, img) => {
     uid: userData.uid,
     geometry: userData.geometry,
     age: userData.age,
-    img
+    img,
+    img2,
+    img3,
+    img4,
+    img5,
+    img6
   })
 }

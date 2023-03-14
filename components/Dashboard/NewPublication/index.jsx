@@ -70,7 +70,7 @@ const NewPublication = ({ user }) => {
         </li>
       </ul>
       <NoMorePublications noPremium={teams === 'noMixWikTeams'} currentUser={user} />
-      <CsgoPublication toggle={toggle} currentUser={user} />
+      <CsgoPublication teams={mixWikTeams} toggle={toggle} currentUser={user} />
     </section>
   )
 }

@@ -6,13 +6,6 @@
   overflow: hidden;
   background-color: $white;
   z-index: 1;
-  margin-bottom: 10vh;
-
-  @media screen and (min-width: 768px) {
-    width: 50vw;
-    height: 90vh;
-    margin-bottom: 0;
-  }
 }
 
 .customIcon {

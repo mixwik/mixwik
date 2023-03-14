@@ -146,7 +146,7 @@
         }
 
         .image {
-          label {
+          .principalImage {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -156,6 +156,7 @@
             border: 2px solid $aero;
             border-radius: .5rem;
             overflow: hidden;
+            cursor: pointer;
 
             svg {
               width: 3rem;
@@ -205,6 +206,45 @@
                   height: 3rem;
                   transition: color 1s;
                 }
+              }
+            }
+          }
+
+          .teams {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+
+            label {
+              width: 7rem;
+              height: 7rem;
+            }
+          }
+
+          .noTeams {
+            display: flex;
+            flex-direction: column;
+
+            a {
+              text-decoration: underline;
+              color: $aero;
+            }
+
+            div {
+              display: flex;
+              gap: 1rem;
+              margin-bottom: 1rem;
+
+              span {
+                width: 7rem;
+                height: 7rem;
+                border-radius: .2rem;
+                background-color: $white;
+                border: 1px solid gray;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: not-allowed;
               }
             }
           }

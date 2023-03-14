@@ -22,6 +22,7 @@
       text-align: left;
       text-transform: uppercase;
       font-weight: bold;
+      padding-bottom: 2rem;
     }
 
     img {
@@ -39,13 +40,15 @@
     .description,
     .level,
     .typeOfGamer,
-    .hours {
+    .hours,
+    .map {
       display: flex;
       flex-direction: column;
       gap: .5rem;
-      padding: 1rem;
-      margin: 1rem;
+      padding: 2rem 1rem;
       background-color: $white;
+      border-top: 1px solid $frenchBlue;
+
 
       ul {
         display: grid;
@@ -59,6 +62,13 @@
           border-radius: .3rem;
         }
       }
+    }
+
+    .typeOfGamer,
+    .level,
+    .hours {
+      flex-direction: row;
+      align-items: center;
     }
   }
 }
