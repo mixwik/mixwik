@@ -5,22 +5,22 @@ import { useState } from 'react'
 import styles from '../../styles/Pages.module.scss'
 
 // Components
-import Map from '../../components/Map'
-import Layout from '../../components/Layout'
-import FilterCsgo from '../../components/Filters/Csgo'
 import Card from '../../components/Card'
+import FilterCsgo from '../../components/Filters/Csgo'
+import Layout from '../../components/Layout'
+import Map from '../../components/Map'
 
 // Customs Hooks
-import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
 import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
+import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
 
 // Context
 import { useHandleOpenContext } from '../../context'
 
-import csgoImage from '../../public/logos/csgo.png'
 import Image from 'next/image'
-import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 import { useSession } from '../../firebase/auth/useSession'
+import { useCurrentPosition } from '../../hooks/useCurrentPosition'
+import csgoImage from '../../public/logos/csgo.png'
 
 const Csgo = () => {
   const [distance, setDistance] = useState(700)
@@ -48,10 +48,17 @@ const Csgo = () => {
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {
+              listUserCsgo.length > 0 && (
+                listUserCsgo.map((res) => (
+                  <Card key={res.id} user={users} csgo={res} />
+                ))
+              )
+            }
+            {
               listUserCsgo.length > 0
                 ? (
                     listUserCsgo.map((res) => (
-                      <Card key={res.id} user={users} csgo={res} />
+                      <Card key={res.id} user={users} csgo={res} teams />
                     ))
                   )
                 : (

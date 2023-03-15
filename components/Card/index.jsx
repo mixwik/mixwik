@@ -5,12 +5,12 @@ import styles from './Card.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { myLoader } from '../myLoader'
-import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
-import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
+import { myLoader } from '../myLoader'
 
-const Card = ({ user, csgo }) => {
+const Card = ({ user, csgo, teams }) => {
   const router = useRouter()
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const images = []
@@ -21,9 +21,11 @@ const Card = ({ user, csgo }) => {
   csgo.img5 && images.push(csgo.img5)
   csgo.img6 && images.push(csgo.img6)
   const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser.mixWikTeams)
+  if (teams && mixWikTeams) return null
+  if (!teams && !mixWikTeams) return null
 
   return (
-    <Link href={`${router.asPath}/usuario/${csgo.id}`}>
+    <Link target='_blanck' href={`${router.asPath}/usuario/${csgo.id}`}>
       <section className={styles.card} data-teams={mixWikTeams}>
         {
         mixWikTeams && (
@@ -37,6 +39,7 @@ const Card = ({ user, csgo }) => {
           showStatus={false}
           autoPlay
           infiniteLoop
+          showThumbs={false}
         >
           {
 

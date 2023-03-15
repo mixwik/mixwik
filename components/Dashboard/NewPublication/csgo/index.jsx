@@ -1,14 +1,14 @@
 import styles from './Csgo.module.scss'
 
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { setCsgo } from '../../../../firebase/hooks/setMethod/setCsgo'
-import { useState } from 'react'
-import { removeImageDB, setImageDB } from '../../../../firebase/storage'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { setCsgo } from '../../../../firebase/hooks/setMethod/setCsgo'
+import { updateUserCsgoPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
+import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { myLoader } from '../../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
-import { updateUserCsgoPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
-import Link from 'next/link'
 
 const CsgoPublication = ({ toggle, currentUser, teams }) => {
   const [imageError, setImageError] = useState()
@@ -35,12 +35,12 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
   const handleSetImage = async (e, setImages, setImgsURL, setPreviewImages) => {
     const reader = new FileReader()
     setImages(e.target.files[0])
-    // copilot please comprobation if the format of images is correct
+
     if (
-      image.type === 'image/jpg' ||
-      image.type === 'image/jpeg' ||
-      image.type === 'image/webp' ||
-      image.type === 'image/png'
+      e.target.files[0].type === 'image/jpg' ||
+      e.target.files[0].type === 'image/jpeg' ||
+      e.target.files[0].type === 'image/webp' ||
+      e.target.files[0].type === 'image/png'
     ) {
       if (
         e.target.files[0].name !== image.name &&
@@ -50,7 +50,7 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
       e.target.files[0].name !== image5.name &&
       e.target.files[0].name !== image6.name
       ) {
-        setImageDB('csgo', e.target.files[0], setImgsURL, setProgress)
+        setImageDB(currentUser.uid, e.target.files[0], setImgsURL, setProgress)
         reader.readAsDataURL(e.target.files[0])
         reader.onload = () => {
           setPreviewImages(reader.result)
@@ -64,11 +64,10 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
       setTimeout(() => setImageError(''), 2000)
     }
   }
-  console.log(image)
 
   const handleRemoveImage = async (e, images, setPreviewImages, setImages) => {
     e.preventDefault()
-    removeImageDB('csgo', images.name)
+    removeImageDB(currentUser.uid, images.name)
     setPreviewImages('')
     setImages('')
   }
@@ -94,12 +93,12 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setCsgo(values, currentUser, imgURL, imgURL2, imgURL3, imgURL4, imgURL5, imgURL6)
+              setCsgo(values, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name)
               updateUserCsgoPublications(currentUser.id)
-              setTimeout(() => {
-                setSubmitting(false)
-                location.reload()
-              }, 400)
+              // setTimeout(() => {
+              //   setSubmitting(false)
+              //   location.reload()
+              // }, 400)
             }}
           >
             {({ isSubmitting, values }) => (

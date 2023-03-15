@@ -42,3 +42,21 @@ export const useMixWikTeamsCheckSubscription = (stripeId) => {
 
   return success
 }
+
+export const useMixWikTeamsCheckSubscriptionFunction = () => {
+  const stripe = new Stripe('sk_test_51MhVdvEcw1KUgUdkaOYwTkXI17zpPW6BQixTZhI8yXSBIpGYkS6hF8QLpVrHTUvWB7DdX8rXva9geWEFumGEPqcJ00aXbUDaq2')
+
+  const checkSubscription = async (stripeId) => {
+    const subscriptions = await stripe.subscriptions.list({ customer: stripeId })
+
+    const activeSubscription = subscriptions.data.find(subscription => subscription.status === 'active')
+
+    if (activeSubscription) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  return checkSubscription
+}

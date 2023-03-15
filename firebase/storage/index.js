@@ -1,15 +1,13 @@
 
 import {
-  getStorage,
+  deleteObject, getDownloadURL, getStorage,
   ref,
-  uploadBytesResumable,
-  getDownloadURL,
-  deleteObject
+  uploadBytesResumable
 } from 'firebase/storage'
 
-export const setImageDB = async (categori, img, setImgURL, setProgress) => {
+export const setImageDB = async (userUid, img, setImgURL, setProgress) => {
   const storage = getStorage()
-  const storageRef = ref(storage, `${categori}/${img.name}`)
+  const storageRef = ref(storage, `${userUid}/${img.name}`)
   const uploadTask = uploadBytesResumable(storageRef, img)
 
   uploadTask.on('state_changed',
