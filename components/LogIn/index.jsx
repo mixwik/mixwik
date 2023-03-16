@@ -7,8 +7,8 @@ import { GoogleAuthProvider } from 'firebase/auth'
 import { useLogInEmail, useLogInProvider } from '../../firebase/auth/useLogIn'
 
 // Icons
-import { GoogleIcon } from '../Svg'
 import { useRegister } from '../../firebase/auth/register'
+import { GoogleIcon } from '../Svg'
 
 const LogIn = ({ setIsOpen, isOpen }) => {
   const emailRef = useRef()
@@ -32,7 +32,7 @@ const LogIn = ({ setIsOpen, isOpen }) => {
   }
 
   return (
-    <div data-isOpen={isOpen} className={styles.logInAndRegister}>
+    <div data-open={isOpen} className={styles.logInAndRegister}>
       <section className={styles.register}>
         <h2>Regístrate</h2>
         <form>

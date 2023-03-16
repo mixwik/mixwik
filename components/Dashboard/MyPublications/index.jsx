@@ -1,6 +1,6 @@
-import styles from './MyPublication.module.scss'
 import { useGetMyPublications } from '../../../firebase/hooks/getMethod/useGetMyPublications'
-import Image from 'next/image'
+import CardPublications from './CardPublications'
+import styles from './MyPublication.module.scss'
 
 const MyPublications = ({ user }) => {
   const publications = useGetMyPublications('csgo', user.uid)
@@ -8,18 +8,15 @@ const MyPublications = ({ user }) => {
   if (!publications) return <div>Loading...</div>
   console.log(publications)
   return (
-    <div>
+    <section className={styles.myPublications}>
       <div className={styles.gamersBox}>
         {
           publications.map((res) => (
-            <div key={res.id}>
-              <Image src={res.img} alt={res.name} />
-              {res.description}
-            </div>
+            <CardPublications key={res.id} imageUrl={res.img.url} title={user.name} description={res.description} />
           ))
         }
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -1,13 +1,13 @@
-import styles from './User.module.scss'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import Layout from '../../../components/Layout'
 import { myLoader } from '../../../components/myLoader'
+import UserMap from '../../../components/UserMap'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
-import UserMap from '../../../components/UserMap'
-import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
-import { Carousel } from 'react-responsive-carousel'
+import styles from './User.module.scss'
 
 const User = () => {
   const router = useRouter()
@@ -17,12 +17,13 @@ const User = () => {
   const currentUser = useGetOneData('users', currentCsgo.uid)
 
   const images = []
-  currentCsgo.img && images.push(currentCsgo.img)
-  currentCsgo.img2 && images.push(currentCsgo.img2)
-  currentCsgo.img3 && images.push(currentCsgo.img3)
-  currentCsgo.img4 && images.push(currentCsgo.img4)
-  currentCsgo.img5 && images.push(currentCsgo.img5)
-  currentCsgo.img6 && images.push(currentCsgo.img6)
+  currentCsgo.img.url !== '' && images.push(currentCsgo.img.url)
+  currentCsgo.img2.url !== '' && images.push(currentCsgo.img2.url)
+  currentCsgo.img3.url !== '' && images.push(currentCsgo.img3.url)
+  currentCsgo.img4.url !== '' && images.push(currentCsgo.img4.url)
+  currentCsgo.img5.url !== '' && images.push(currentCsgo.img5.url)
+  currentCsgo.img6.url !== '' && images.push(currentCsgo.img6.url)
+  currentCsgo.img7.url !== '' && images.push(currentCsgo.img7.url)
 
   if (currentCsgo.length === 0) return <div>Loading...</div>
   if (currentUser.length === 0) return <div>Loading...</div>

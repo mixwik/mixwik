@@ -2,16 +2,16 @@ import { useState } from 'react'
 import styles from './NewPublication.module.scss'
 
 // Images
+import Image from 'next/image'
+import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import clashRoyal from '../../../public/logos/Clash-Royal2.png'
 import csgo from '../../../public/logos/csgo.png'
 import fortnite from '../../../public/logos/fortnite.png'
 import lol from '../../../public/logos/LOL3.png'
 import valorant from '../../../public/logos/VALORANT4.png'
-import Image from 'next/image'
 import { Arrow } from '../../Svg'
 import CsgoPublication from './csgo'
 import NoMorePublications from './noMorePublications'
-import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 
 const NewPublication = ({ user }) => {
   const [toggle, setToggle] = useState()
@@ -69,8 +69,8 @@ const NewPublication = ({ user }) => {
           <Arrow />
         </li>
       </ul>
-      <NoMorePublications noPremium={teams === 'noMixWikTeams'} currentUser={user} />
-      <CsgoPublication teams={mixWikTeams} toggle={toggle} currentUser={user} />
+      <NoMorePublications setTeams={setTeams} noPremium={teams === 'noMixWikTeams'} currentUser={user} />
+      <CsgoPublication setTeams={setTeams} teams={mixWikTeams} toggle={toggle} currentUser={user} />
     </section>
   )
 }

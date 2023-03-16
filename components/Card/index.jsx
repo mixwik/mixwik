@@ -14,12 +14,14 @@ const Card = ({ user, csgo, teams }) => {
   const router = useRouter()
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const images = []
-  csgo.img && images.push(csgo.img)
-  csgo.img2 && images.push(csgo.img2)
-  csgo.img3 && images.push(csgo.img3)
-  csgo.img4 && images.push(csgo.img4)
-  csgo.img5 && images.push(csgo.img5)
-  csgo.img6 && images.push(csgo.img6)
+  csgo.img.url !== '' && images.push({ url: csgo.img.url, name: csgo.img.name })
+  csgo.img2.url !== '' && images.push({ url: csgo.img2.url, name: csgo.img2.name })
+  csgo.img3.url !== '' && images.push({ url: csgo.img3.url, name: csgo.img3.name })
+  csgo.img4.url !== '' && images.push({ url: csgo.img4.url, name: csgo.img4.name })
+  csgo.img5.url !== '' && images.push({ url: csgo.img5.url, name: csgo.img5.name })
+  csgo.img6.url !== '' && images.push({ url: csgo.img6.url, name: csgo.img6.name })
+  csgo.img7.url !== '' && images.push({ url: csgo.img7.url, name: csgo.img7.name })
+
   const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser.mixWikTeams)
   if (teams && mixWikTeams) return null
   if (!teams && !mixWikTeams) return null
@@ -44,7 +46,7 @@ const Card = ({ user, csgo, teams }) => {
           {
 
          images.map((res, index) => (
-           <Image key={index} loader={myLoader} width={0} height={0} src={res} alt={csgo.name} />
+           <Image key={index} loader={myLoader} width={0} height={0} src={res.url} alt={res.name} />
 
          ))
         }

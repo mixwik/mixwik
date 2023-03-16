@@ -44,7 +44,8 @@ const Csgo = () => {
           <FilterCsgo users={listUserCsgo} distance={distance} setDistance={setDistance} />
           <h1 className={styles.title}>
             <Image src={csgoImage} alt='Logotipo de Counter Strike Global Ofensive' />
-            Counter Strike Global Ofensive
+            Counter Strike
+            Global Ofensive
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {

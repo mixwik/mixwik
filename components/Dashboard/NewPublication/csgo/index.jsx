@@ -2,7 +2,6 @@ import styles from './Csgo.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useState } from 'react'
 import { setCsgo } from '../../../../firebase/hooks/setMethod/setCsgo'
 import { updateUserCsgoPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
@@ -10,7 +9,7 @@ import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { myLoader } from '../../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 
-const CsgoPublication = ({ toggle, currentUser, teams }) => {
+const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState()
   const [previewImage2, setPreviewImage2] = useState()
@@ -18,18 +17,21 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
   const [previewImage4, setPreviewImage4] = useState()
   const [previewImage5, setPreviewImage5] = useState()
   const [previewImage6, setPreviewImage6] = useState()
+  const [previewImage7, setPreviewImage7] = useState()
   const [imgURL, setImgURL] = useState()
   const [imgURL2, setImgURL2] = useState()
   const [imgURL3, setImgURL3] = useState()
   const [imgURL4, setImgURL4] = useState()
   const [imgURL5, setImgURL5] = useState()
   const [imgURL6, setImgURL6] = useState()
+  const [imgURL7, setImgURL7] = useState()
   const [image, setImage] = useState('')
   const [image2, setImage2] = useState('')
   const [image3, setImage3] = useState('')
   const [image4, setImage4] = useState('')
   const [image5, setImage5] = useState('')
   const [image6, setImage6] = useState('')
+  const [image7, setImage7] = useState('')
   const [progress, setProgress] = useState()
 
   const handleSetImage = async (e, setImages, setImgsURL, setPreviewImages) => {
@@ -48,7 +50,8 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
       e.target.files[0].name !== image3.name &&
       e.target.files[0].name !== image4.name &&
       e.target.files[0].name !== image5.name &&
-      e.target.files[0].name !== image6.name
+      e.target.files[0].name !== image6.name &&
+      e.target.files[0].name !== image7.name
       ) {
         setImageDB(currentUser.uid, e.target.files[0], setImgsURL, setProgress)
         reader.readAsDataURL(e.target.files[0])
@@ -93,12 +96,12 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setCsgo(values, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name)
+              setCsgo(values, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserCsgoPublications(currentUser.id)
-              // setTimeout(() => {
-              //   setSubmitting(false)
-              //   location.reload()
-              // }, 400)
+              setTimeout(() => {
+                setSubmitting(false)
+                location.reload()
+              }, 400)
             }}
           >
             {({ isSubmitting, values }) => (
@@ -281,9 +284,13 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
                   <article className={styles.hours}>
                     <h3>Horas jugadas</h3>
                     <Field
-                      type='number'
+                      type='range'
                       name='hours'
+                      min='0'
+                      max='10000'
+                      step='50'
                     />
+                    {values.hours}h
                     <ErrorMessage name='hours' component='span' />
                   </article>
                   <article className={styles.typeOfGamer}>
@@ -429,19 +436,35 @@ const CsgoPublication = ({ toggle, currentUser, teams }) => {
                             </div>
                           )}
                         </label>
+                        <label className={styles.principalImage}>
+                          <ImageIcon />
+                          <input
+                            onChange={(e) => handleSetImage(e, setImage7, setImgURL7, setPreviewImage7)}
+                            type='file'
+                            placeholder='Minutos'
+                          />
+                          {previewImage7 && (
+                            <div className={styles.previewImage}>
+                              <Image width={0} height={0} loader={myLoader} src={previewImage7} alt='precarga' />
+                              <button onClick={(e) => handleRemoveImage(e, image7, setPreviewImage7, setImage7)}>
+                                <DeleteIcon />
+                              </button>
+                            </div>
+                          )}
+                        </label>
                       </article>
                     )
                   }
                   {
                     !teams && (
                       <article className={styles.noTeams}>
-                        <h3>Con mixWikTeams añade hasta 5 imágenes <Link href={`https://buy.stripe.com/test_aEU2aN1Mb0vl2tO3cg?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Suscríbete</Link></h3>
                         <div>
-                          <span><ImageIcon /></span>
-                          <span><ImageIcon /></span>
-                          <span><ImageIcon /></span>
-                          <span><ImageIcon /></span>
-                          <span><ImageIcon /></span>
+                          <span onClick={() => setTeams('noMixWikTeams')}><ImageIcon /></span>
+                          <span onClick={() => setTeams('noMixWikTeams')}><ImageIcon /></span>
+                          <span onClick={() => setTeams('noMixWikTeams')}><ImageIcon /></span>
+                          <span onClick={() => setTeams('noMixWikTeams')}><ImageIcon /></span>
+                          <span onClick={() => setTeams('noMixWikTeams')}><ImageIcon /></span>
+                          <span onClick={() => setTeams('noMixWikTeams')}><ImageIcon /></span>
                         </div>
                       </article>
                     )

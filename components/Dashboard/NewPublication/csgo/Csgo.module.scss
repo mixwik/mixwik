@@ -113,10 +113,27 @@
           gap: 6rem;
 
           .hours {
-            input {
-              padding: 1rem;
-              border: 1px solid $aero;
-              border-radius: .5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            input[type="range"] {
+              appearance: none;
+              width: 10rem;
+              height: .4rem;
+              background: $aero;
+              outline: none;
+            }
+    
+            input[type="range"]::-webkit-slider-thumb {
+              /* estilos para el control deslizante */
+              appearance: none;
+              width: 1.2rem;
+              height: 1.2rem;
+              background: $aero;
+              border-radius: 50%;
+              cursor: pointer;
             }
           }
 
@@ -150,8 +167,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 15rem;
-            height: 15rem;
+            width: 10rem;
+            height: 10rem;
             position: relative;
             border: 2px solid $aero;
             border-radius: .5rem;
@@ -175,8 +192,8 @@
               align-items: center;
 
               img {
-                width: 15rem;
-                height: 15rem;
+                width: 10rem;
+                height: 10rem;
               }
 
               button {
@@ -211,33 +228,37 @@
           }
 
           .teams {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 1rem;
+              margin-bottom: 1rem;
+              @media screen and (min-width: 768px) {
+                display: flex;
+              }
 
             label {
-              width: 7rem;
-              height: 7rem;
+              width: 5rem;
+              height: 5rem;
+              @media screen and (min-width: 768px) {
+                width: 6rem;
+                height: 6rem;
+                
+              }
             }
           }
 
           .noTeams {
-            display: flex;
-            flex-direction: column;
-
-            a {
-              text-decoration: underline;
-              color: $aero;
-            }
-
             div {
-              display: flex;
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
               gap: 1rem;
               margin-bottom: 1rem;
-
+              @media screen and (min-width: 768px) {
+                display: flex;
+              }
               span {
-                width: 7rem;
-                height: 7rem;
+                width: 5rem;
+                height: 5rem;
                 border-radius: .2rem;
                 background-color: $white;
                 border: 1px solid gray;
@@ -245,6 +266,11 @@
                 align-items: center;
                 justify-content: center;
                 cursor: not-allowed;
+                @media screen and (min-width: 768px) {
+                  width: 6rem;
+                  height: 6rem;
+                  
+                }
               }
             }
           }
