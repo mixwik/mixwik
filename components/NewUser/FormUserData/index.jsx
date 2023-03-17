@@ -1,22 +1,28 @@
 import styles from './FormUserData.module.scss'
 
 // formik
-import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { setNewUser } from '../../../firebase/hooks/setMethod/setNewUser'
-import { useSession } from '../../../firebase/auth/useSession'
-import { removeImageDB, setImageDB } from '../../../firebase/storage'
-import { useState } from 'react'
-import { DeleteIcon, ImageIcon } from '../../Svg'
-import { myLoader } from '../../myLoader'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useUpdateDataUser } from '../../../firebase/auth/updateDataUser'
+import { useSession } from '../../../firebase/auth/useSession'
+import { setNewUser } from '../../../firebase/hooks/setMethod/setNewUser'
+import { removeImageDB, setImageDB } from '../../../firebase/storage'
+import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
+import { myLoader } from '../../myLoader'
+import { DeleteIcon, ImageIcon } from '../../Svg'
 
 const FormUserData = ({ method }) => {
+  const router = useRouter()
   const [previewImage, setPreviewImage] = useState()
   const [imgURL, setImgURL] = useState()
   const [image, setImage] = useState()
   const [progress, setProgress] = useState()
   const currentPosition = useCurrentPosition()
+  const [error, updateDataUser] = useUpdateDataUser()
+  const user = useSession()
+  console.log(error)
 
   const handleSetImage = async (e) => {
     const reader = new FileReader()
@@ -34,7 +40,6 @@ const FormUserData = ({ method }) => {
     setPreviewImage('')
   }
 
-  const user = useSession()
   const initialValues = {
     name: '',
     age: '',
@@ -54,18 +59,17 @@ const FormUserData = ({ method }) => {
           if (!values.name) errors.name = 'Necesitamos tu nombre o nick'
           if (!values.age) errors.age = 'Necesitamos saber tu edad'
           if (!values.gender) errors.gender = 'Necesitamos tú genero, tranquilo no será visible para ningún otro usuario'
-          if (values.description.length <= 10) errors.description = 'La descripción es muy corta'
-          if (values.description.length >= 350) errors.description = 'La descripción es muy larga'
           if (typeof (values.age) !== 'number') errors.age = 'Sólo se admiten números'
           if (values.age < 16) errors.age = 'MixWix es solo para mayores de 16 años'
           if (values.age > 90) errors.age = 'La edad introducida no es válida'
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setNewUser(values, currentPosition, user, imgURL)
+          setNewUser(values, currentPosition, user)
+          updateDataUser(values.name || user.name, imgURL || user.image)
           setTimeout(() => {
             setSubmitting(false)
-            location.reload()
+            router.push('/')
           }, 400)
         }}
       >
@@ -80,14 +84,25 @@ const FormUserData = ({ method }) => {
                   type='file'
                   placeholder='Minutos'
                 />
-                {previewImage && (
-                  <div className={styles.previewImage}>
-                    <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
-                    <button onClick={handleRemoveImage}>
-                      <DeleteIcon />
-                    </button>
-                  </div>
-                )}
+                {
+                  previewImage
+                    ? (
+                      <div className={styles.previewImage}>
+                        <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
+                        <button className={styles.deleteImage} onClick={handleRemoveImage}>
+                          <DeleteIcon />
+                        </button>
+                      </div>
+                      )
+                    : (
+                      <div className={styles.previewImage}>
+                        <Image width={0} height={0} loader={myLoader} src={user.image} alt='precarga' />
+                        <div className={styles.updateImage}>
+                          <ImageIcon />
+                        </div>
+                      </div>
+                      )
+                }
               </label>
             </article>
             <div className={styles.group}>
@@ -138,7 +153,7 @@ const FormUserData = ({ method }) => {
                 </label>
               </div>
               <ErrorMessage name='gender' component='span' />
-              <div>Para MixWik la igualdad es lo primero, así que por lo tanto nunca se mostrará tú genero a otras personas y nadie podrá filtrar usuarios por este campo</div>
+              <div>Para MixWik la igualdad es lo primero, así que por lo tanto nunca se mostrará tú genero a otras personas y nadie podrá filtrar usuarios por este campo.</div>
             </div>
             <div className={styles.group}>
               <label>

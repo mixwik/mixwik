@@ -1,14 +1,44 @@
 import styles from './Profile.module.scss'
 
 // formik
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { updateUserData } from '../../../firebase/hooks/updateMethod/updateUserData'
 
 // Session
+import Image from 'next/image'
+import { useState } from 'react'
 import { useSignOut } from '../../../firebase/auth/SignOut'
+import { useUpdateDataUser } from '../../../firebase/auth/updateDataUser'
+import { useSession } from '../../../firebase/auth/useSession'
+import { removeImageDB, setImageDB } from '../../../firebase/storage'
+import { myLoader } from '../../myLoader'
+import { DeleteIcon, ImageIcon } from '../../Svg'
 
 const Profile = ({ user }) => {
   const handleSignOut = useSignOut()
+  const [previewImage, setPreviewImage] = useState()
+  const [imgURL, setImgURL] = useState()
+  const [image, setImage] = useState()
+  const [progress, setProgress] = useState()
+  const [error, updateDataUser] = useUpdateDataUser()
+  const currentUser = useSession()
+
+  const handleSetImage = async (e) => {
+    const reader = new FileReader()
+    setImage(e.target.files[0])
+    setImageDB('profile', e.target.files[0], setImgURL, setProgress)
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = () => {
+      setPreviewImage(reader.result)
+    }
+  }
+
+  const handleRemoveImage = async (e) => {
+    e.preventDefault()
+    removeImageDB('profile', image.name)
+    setPreviewImage('')
+  }
+
   const initialValues = {
     name: user.name,
     age: user.age,
@@ -45,14 +75,50 @@ const Profile = ({ user }) => {
             }}
             onSubmit={(values, { setSubmitting }) => {
               updateUserData(user.id, values)
-              setTimeout(() => {
-                setSubmitting(false)
-                location.reload()
-              }, 400)
+              updateDataUser(values.name, imgURL || user.image)
+              if (!error) {
+                setTimeout(() => {
+                  setSubmitting(false)
+                  location.reload()
+                }, 400)
+              }
             }}
           >
             {({ isSubmitting, values }) => (
               <Form>
+                <article className={styles.image}>
+                  <h3>Cambia tu foto de perfil</h3>
+                  {
+                    error && <div>Ha ocurrido un error</div>
+                  }
+                  <label>
+                    <ImageIcon />
+                    <input
+                      onChange={handleSetImage}
+                      type='file'
+                      placeholder='Minutos'
+                    />
+                    {
+                  previewImage
+                    ? (
+                      <div className={styles.previewImage}>
+                        <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
+                        <button className={styles.deleteImage} onClick={handleRemoveImage}>
+                          <DeleteIcon />
+                        </button>
+                      </div>
+                      )
+                    : (
+                      <div className={styles.previewImage}>
+                        <Image width={0} height={0} loader={myLoader} src={currentUser.image} alt='precarga' />
+                        <div className={styles.updateImage}>
+                          <ImageIcon />
+                        </div>
+                      </div>
+                      )
+                }
+                  </label>
+                </article>
                 <div className={styles.group}>
                   <label>
                     Nombre:
@@ -118,7 +184,7 @@ const Profile = ({ user }) => {
                   <ErrorMessage name='description' component='span' />
                   <div>{values.description.length > 0 ? values.description.length : 0}/350</div>
                 </div>
-                <button type='submit' disabled={isSubmitting}>
+                <button type='submit' disabled={!progress || isSubmitting}>
                   Guardar
                 </button>
               </Form>

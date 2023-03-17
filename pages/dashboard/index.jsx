@@ -1,26 +1,26 @@
 // React hooks
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // styles
 import styles from './Dashboard.module.scss'
 
 // db
-import { useSession } from '../../firebase/auth/useSession'
 import PrivateRoute from '../../firebase/auth/PrivateRoute'
+import { useSession } from '../../firebase/auth/useSession'
 
 // Componentes
-import Layout from '../../components/Layout'
-import NewUser from '../../components/NewUser'
-import Profile from '../../components/Dashboard/Profile'
-import NewPublication from '../../components/Dashboard/NewPublication'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import NewPublication from '../../components/Dashboard/NewPublication'
+import Profile from '../../components/Dashboard/Profile'
+import Layout from '../../components/Layout'
 import { myLoader } from '../../components/myLoader'
+import NewUser from '../../components/NewUser'
 
 // Images
-import { Company, ContactUs, AddPublication, Publications } from '../../components/Svg'
-import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import MyPublications from '../../components/Dashboard/MyPublications'
+import { AddPublication, Company, ContactUs, Publications } from '../../components/Svg'
+import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 
 export default function Dashboard () {
   const [isOpen, setIsOpen] = useState(false)
@@ -39,9 +39,9 @@ export default function Dashboard () {
 
   const user = useSession()
   const currentUser = useGetOneData('users', user.uid)
-
+  console.log(currentUser)
   if (toggle === 'loading') return <div>Loading...</div>
-  if (!currentUser) return <NewUser />
+  if (currentUser.length === 0) return <NewUser />
 
   return (
     <Layout>
@@ -59,8 +59,8 @@ export default function Dashboard () {
                 width={0}
                 height={0}
                 loader={myLoader}
-                src={currentUser.profileImg}
-                alt={currentUser.name}
+                src={user.image}
+                alt={user.name}
               />
               Perfil
             </li>
