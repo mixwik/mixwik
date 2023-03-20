@@ -78,7 +78,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
     position: [],
     level: [],
     typeOfGamer: [],
-    hours: '',
+    hours: 0,
     description: '',
     uid: '',
     geometry: [],
@@ -107,7 +107,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
             {({ isSubmitting, values }) => (
               <Form>
                 <article className={styles.position}>
-                  <h3 className={styles.title}>¿En que posición te gusta jugar?</h3>
+                  <h3>¿En que posición te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
@@ -185,7 +185,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
                   <ErrorMessage name='position' component='span' />
                 </article>
                 <article className={styles.level}>
-                  <h3 className={styles.title}>¿Cuál es tu nivel?</h3>
+                  <h3>¿Cuál es tu nivel?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='radio'
@@ -286,6 +286,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
                     <Field
                       type='range'
                       name='hours'
+                      value={values.hours}
                       min='0'
                       max='10000'
                       step='50'
@@ -475,7 +476,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
                     className={styles.submit}
                     type='submit'
                     disabled={
-                      values.hours === '' ||
+                      values.hours === 0 ||
                       values.description.length === 0 ||
                       values.level.length === 0 ||
                       values.position.length === 0 ||

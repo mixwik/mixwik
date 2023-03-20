@@ -5,16 +5,29 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import Layout from '../../../components/Layout'
 import { myLoader } from '../../../components/myLoader'
 import UserMap from '../../../components/UserMap'
+import { useSession } from '../../../firebase/auth/useSession'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
+import { updatePublicationPosition } from '../../../firebase/hooks/updateMethod/updateUserData'
+import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
+import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 import styles from './User.module.scss'
 
 const User = () => {
   const router = useRouter()
   const { id } = router.query
-
+  const user = useSession()
+  const currentPosition = useCurrentPosition()
   const currentCsgo = useGetOnePublication('csgo', id)
   const currentUser = useGetOneData('users', currentCsgo.uid)
+  const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
+
+  if (currentCsgo.length === 0) return <div>Loading...</div>
+  if (currentUser.length === 0) return <div>Loading...</div>
+
+  const handleUpdatePosition = () => {
+    updatePublicationPosition('csgo', id, currentPosition)
+  }
 
   const images = []
   currentCsgo.img.url !== '' && images.push(currentCsgo.img.url)
@@ -24,9 +37,6 @@ const User = () => {
   currentCsgo.img5.url !== '' && images.push(currentCsgo.img5.url)
   currentCsgo.img6.url !== '' && images.push(currentCsgo.img6.url)
   currentCsgo.img7.url !== '' && images.push(currentCsgo.img7.url)
-
-  if (currentCsgo.length === 0) return <div>Loading...</div>
-  if (currentUser.length === 0) return <div>Loading...</div>
 
   return (
     <Layout>
@@ -76,7 +86,10 @@ const User = () => {
             {currentCsgo.hours}h
           </article>
           <article className={styles.map}>
-            <UserMap user={currentUser} />
+            {
+              limitedAdministrator && <button onClick={handleUpdatePosition}>Cambiar a posición actual</button>
+            }
+            <UserMap user={currentUser} publication={currentCsgo} />
           </article>
         </section>
       </div>

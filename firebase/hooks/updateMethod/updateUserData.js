@@ -28,3 +28,12 @@ export const updateUserMixWikTeams = async (payID, id, router) => {
     }, 5000)
   )
 }
+
+export const updatePublicationPosition = async (name, id, currentPosition) => {
+  console.log(currentPosition)
+  const userRef = doc(db, name, id)
+  await updateDoc(userRef, {
+    geometry: currentPosition
+  }).then(
+  )
+}

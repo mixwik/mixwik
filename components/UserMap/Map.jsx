@@ -1,8 +1,8 @@
 // Styles
-import styles from './Map.module.scss'
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
 import 'leaflet-defaulticon-compatibility'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
+import 'leaflet/dist/leaflet.css'
+import styles from './Map.module.scss'
 
 // Leaflet
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
@@ -10,7 +10,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 // Components
 import L from 'leaflet'
 
-const Map = ({ user }) => {
+const Map = ({ user, publication }) => {
   const icon = L.divIcon({
     className: styles.customIcon,
     iconSize: [40, 40],
@@ -20,7 +20,7 @@ const Map = ({ user }) => {
   return (
     <MapContainer
       className={styles.map}
-      center={user.geometry}
+      center={publication.geometry}
       zoomAnimation
       doubleClickZoom={false}
       zoom={13}
@@ -29,7 +29,7 @@ const Map = ({ user }) => {
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      <Marker position={user.geometry} icon={icon}>
+      <Marker position={publication.geometry} icon={icon}>
         <Popup>
           {user.name}
         </Popup>

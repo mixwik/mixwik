@@ -12,6 +12,7 @@
   justify-content: center;
   background-color: $white;
   z-index: 1;
+  top: 0;
 
   @media screen and (min-width: 768px) {
     background-color: $frenchBlue;
@@ -94,14 +95,14 @@
         }
 
         li {
-          display: flex;
-          align-items: center;
+          display: grid;
+          grid-template-columns: 1fr 5fr;
           width: 100%;
-          gap: 1rem;
-
           svg {
-            width: 1.5rem;
-            height: 1.5rem;
+            align-self: center;
+            justify-self: center;
+            min-width: 1.5rem;
+            min-height: 1.5rem;
             color: green;
           }
         }
