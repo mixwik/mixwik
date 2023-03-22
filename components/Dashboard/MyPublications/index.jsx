@@ -9,10 +9,11 @@ const MyPublications = ({ user }) => {
   console.log(publications)
   return (
     <section className={styles.myPublications}>
-      <div className={styles.gamersBox}>
+      <h2 className={styles.title}>Mis publicaciones</h2>
+      <div className={styles.cardBox}>
         {
           publications.map((res) => (
-            <CardPublications key={res.id} imageUrl={res.img.url} title={user.name} description={res.description} />
+            <CardPublications key={res.id} publication={res} user={user} category='csgo' />
           ))
         }
       </div>

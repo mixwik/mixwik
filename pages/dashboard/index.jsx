@@ -18,11 +18,14 @@ import { myLoader } from '../../components/myLoader'
 import NewUser from '../../components/NewUser'
 
 // Images
+import { useRouter } from 'next/router'
 import MyPublications from '../../components/Dashboard/MyPublications'
 import { AddPublication, Company, ContactUs, Publications } from '../../components/Svg'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 
 export default function Dashboard () {
+  const router = useRouter()
+  const { page } = router.query
   const [isOpen, setIsOpen] = useState(false)
   const [toggle, setToggle] = useState(false)
   useEffect(() => {
@@ -32,9 +35,11 @@ export default function Dashboard () {
     }, 500)
   }, [])
 
-  const handleToggle = (name) => {
-    setToggle(name)
-    setIsOpen(false)
+  function handleClick (name) {
+    router.push({
+      pathname: '/dashboard',
+      query: { page: name }
+    })
   }
 
   const user = useSession()
@@ -46,14 +51,14 @@ export default function Dashboard () {
   return (
     <Layout>
       <section data-open={isOpen} className={styles.dashboard}>
-        {toggle === 'profile' && <Profile user={currentUser} />}
-        {toggle === 'newPublication' && <NewPublication user={currentUser} />}
-        {toggle === 'myPublications' && <MyPublications user={currentUser} />}
+        {page === 'profile' && <Profile user={currentUser} />}
+        {page === 'newPublication' && <NewPublication user={currentUser} />}
+        {page === 'myPublications' && <MyPublications user={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
-              data-isActive={toggle === 'profile'}
-              onClick={() => handleToggle('profile')}
+              data-isActive={page === 'profile'}
+              onClick={() => handleClick('profile')}
             >
               <Image
                 width={0}
@@ -65,15 +70,15 @@ export default function Dashboard () {
               Perfil
             </li>
             <li
-              data-isActive={toggle === 'newPublication'}
-              onClick={() => handleToggle('newPublication')}
+              data-isActive={page === 'newPublication'}
+              onClick={() => handleClick('newPublication')}
             >
               <AddPublication />
               Añadir publicación
             </li>
             <li
-              data-isActive={toggle === 'myPublications'}
-              onClick={() => handleToggle('myPublications')}
+              data-isActive={page === 'myPublications'}
+              onClick={() => handleClick('myPublications')}
             >
               <Publications />
               Mis publicaciones

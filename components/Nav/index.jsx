@@ -55,7 +55,7 @@ const Nav = () => {
           {
               user.uid
                 ? (
-                  <Link href='/dashboard'>
+                  <Link href='/dashboard?page=profile'>
                     {
                     user.image
                       ? (

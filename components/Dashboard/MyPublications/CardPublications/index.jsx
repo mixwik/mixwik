@@ -1,23 +1,22 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { myLoader } from '../../../myLoader'
 import styles from './CardPublications.module.scss'
 
-const CardPublications = ({ imageUrl, title, description }) => {
+const CardPublications = ({ publication, user, category }) => {
   return (
     <div className={styles.CardPublications}>
-      <Image loader={myLoader} width={0} height={0} src={imageUrl} alt={title} />
-      <div className={styles.content}>
-        <h2 className={styles.title}>{title}</h2>
-        <p className={styles.description}>{description}</p>
-        <div className={styles.buttons}>
-          <button>
-            Editar
-          </button>
-          <button>
-            Eliminar
-          </button>
+      <Link className={styles.link} target='_blanck' href={`/${category}/usuario/${publication.id}`}>
+        <Image loader={myLoader} width={0} height={0} src={publication.img.url} alt={user.name} />
+        <div className={styles.content}>
+          <h2 className={styles.title}>{user.name}</h2>
+          <p className={styles.description}>{publication.description.slice(0, 15)}...</p>
+          <div className={styles.buttons} />
         </div>
-      </div>
+      </Link>
+      <button>
+        Eliminar
+      </button>
     </div>
   )
 }
