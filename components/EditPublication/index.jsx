@@ -1,32 +1,34 @@
 import Image from 'next/image'
+import { useState } from 'react'
+import { updatePublicationImages } from '../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../firebase/storage'
 import { myLoader } from '../myLoader'
 import { DeleteIcon, ImageIcon } from '../Svg'
 import styles from './EditPublication.module.scss'
 
-export const EditImages = ({ currentUser }) => {
+export const EditImages = ({ name, id, currentUser, prevImg, prevImg2, prevImg3, prevImg4, prevImg5, prevImg6, prevImg7, setEdit }) => {
   const [imageError, setImageError] = useState()
-  const [previewImage, setPreviewImage] = useState()
-  const [previewImage2, setPreviewImage2] = useState()
-  const [previewImage3, setPreviewImage3] = useState()
-  const [previewImage4, setPreviewImage4] = useState()
-  const [previewImage5, setPreviewImage5] = useState()
-  const [previewImage6, setPreviewImage6] = useState()
-  const [previewImage7, setPreviewImage7] = useState()
-  const [imgURL, setImgURL] = useState()
-  const [imgURL2, setImgURL2] = useState()
-  const [imgURL3, setImgURL3] = useState()
-  const [imgURL4, setImgURL4] = useState()
-  const [imgURL5, setImgURL5] = useState()
-  const [imgURL6, setImgURL6] = useState()
-  const [imgURL7, setImgURL7] = useState()
-  const [image, setImage] = useState('')
-  const [image2, setImage2] = useState('')
-  const [image3, setImage3] = useState('')
-  const [image4, setImage4] = useState('')
-  const [image5, setImage5] = useState('')
-  const [image6, setImage6] = useState('')
-  const [image7, setImage7] = useState('')
+  const [previewImage, setPreviewImage] = useState(prevImg.url)
+  const [previewImage2, setPreviewImage2] = useState(prevImg2.url)
+  const [previewImage3, setPreviewImage3] = useState(prevImg3.url)
+  const [previewImage4, setPreviewImage4] = useState(prevImg4.url)
+  const [previewImage5, setPreviewImage5] = useState(prevImg5.url)
+  const [previewImage6, setPreviewImage6] = useState(prevImg6.url)
+  const [previewImage7, setPreviewImage7] = useState(prevImg7.url)
+  const [imgURL, setImgURL] = useState(prevImg.url)
+  const [imgURL2, setImgURL2] = useState(prevImg2.url)
+  const [imgURL3, setImgURL3] = useState(prevImg3.url)
+  const [imgURL4, setImgURL4] = useState(prevImg4.url)
+  const [imgURL5, setImgURL5] = useState(prevImg5.url)
+  const [imgURL6, setImgURL6] = useState(prevImg6.url)
+  const [imgURL7, setImgURL7] = useState(prevImg7.url)
+  const [image, setImage] = useState(prevImg.name || '')
+  const [image2, setImage2] = useState(prevImg2.name || '')
+  const [image3, setImage3] = useState(prevImg3.name || '')
+  const [image4, setImage4] = useState(prevImg4.name || '')
+  const [image5, setImage5] = useState(prevImg5.name || '')
+  const [image6, setImage6] = useState(prevImg6.name || '')
+  const [image7, setImage7] = useState(prevImg7.name || '')
   const [progress, setProgress] = useState()
 
   const handleSetImage = async (e, setImages, setImgsURL, setPreviewImages) => {
@@ -69,6 +71,13 @@ export const EditImages = ({ currentUser }) => {
     setPreviewImages('')
     setImages('')
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    updatePublicationImages(name, id, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+    setTimeout(() => setEdit(false), 2000)
+  }
+
   return (
     <div className={styles.editImages}>
       <h1>EditImages</h1>
@@ -186,6 +195,9 @@ export const EditImages = ({ currentUser }) => {
           )}
         </label>
       </article>
+      {imageError && <p className={styles.error}>{imageError}</p>}
+      <button disabled={!progress} onClick={handleSubmit}>Guardar</button>
+      <button onClick={() => setEdit(false)}>Cancelar</button>
     </div>
   )
 }

@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { EditImages } from '../../../components/EditPublication'
 import Layout from '../../../components/Layout'
 import { myLoader } from '../../../components/myLoader'
 import UserMap from '../../../components/UserMap'
@@ -14,6 +16,7 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 import styles from './User.module.scss'
 
 const User = () => {
+  const [edit, setEdit] = useState(false)
   const router = useRouter()
   const { id } = router.query
   const user = useSession()
@@ -53,6 +56,21 @@ const User = () => {
          ))
         }
           </Carousel>
+          {limitedAdministrator && <button onClick={() => setEdit('images')}>Editar</button>}
+          {edit === 'images' && (
+            <EditImages
+              id={id}
+              name='csgo'
+              currentUser={currentUser}
+              prevImg={currentCsgo.img}
+              prevImg2={currentCsgo.img2}
+              prevImg3={currentCsgo.img3}
+              prevImg4={currentCsgo.img4}
+              prevImg5={currentCsgo.img5}
+              prevImg6={currentCsgo.img6}
+              prevImg7={currentCsgo.img7}
+              setEdit={setEdit}
+            />)}
           <h1 className={styles.title}>
             {currentUser.name}
           </h1>
