@@ -36,21 +36,22 @@ const Card = ({ user, csgo, teams }) => {
           </div>
         )
       }
-
-        <Carousel
-          showStatus={false}
-          autoPlay
-          infiniteLoop
-          showThumbs={false}
-        >
-          {
+        <div className={styles.imgBox}>
+          <Carousel
+            showStatus={false}
+            autoPlay
+            infiniteLoop
+            showThumbs={false}
+          >
+            {
 
          images.map((res, index) => (
            <Image key={index} loader={myLoader} width={0} height={0} src={res.url} alt={res.name} />
 
          ))
         }
-        </Carousel>
+          </Carousel>
+        </div>
         <h3 className={styles.title}>{csgoUser.name}</h3>
         <div className={styles.description}>
           {csgo.description}

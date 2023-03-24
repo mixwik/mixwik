@@ -3,14 +3,16 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { EditImages } from '../../../components/EditPublication'
+import { EditImages } from '../../../components/EditPublication/EditImages'
 import Layout from '../../../components/Layout'
 import { myLoader } from '../../../components/myLoader'
+import { EditIcon } from '../../../components/Svg'
 import UserMap from '../../../components/UserMap'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
 import { updatePublicationPosition } from '../../../firebase/hooks/updateMethod/updateUserData'
+import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 import styles from './User.module.scss'
@@ -24,6 +26,7 @@ const User = () => {
   const currentCsgo = useGetOnePublication('csgo', id)
   const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
+  const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
 
   if (currentCsgo.length === 0) return <div>Loading...</div>
   if (currentUser.length === 0) return <div>Loading...</div>
@@ -45,32 +48,34 @@ const User = () => {
     <Layout>
       <div className={styles.user}>
         <section className={styles.userBox}>
-          <Carousel
-            showStatus={false}
-          >
-            {
-
-         images.map((res, index) => (
-           res !== '' && <Image key={index} loader={myLoader} width={0} height={0} src={res} alt={currentUser.name} />
-
-         ))
-        }
-          </Carousel>
-          {limitedAdministrator && <button onClick={() => setEdit('images')}>Editar</button>}
-          {edit === 'images' && (
-            <EditImages
-              id={id}
-              name='csgo'
-              currentUser={currentUser}
-              prevImg={currentCsgo.img}
-              prevImg2={currentCsgo.img2}
-              prevImg3={currentCsgo.img3}
-              prevImg4={currentCsgo.img4}
-              prevImg5={currentCsgo.img5}
-              prevImg6={currentCsgo.img6}
-              prevImg7={currentCsgo.img7}
-              setEdit={setEdit}
-            />)}
+          <div className={styles.imgBox}>
+            <Carousel
+              className={styles.carousel}
+              showStatus={false}
+            >
+              {
+                images.map((res, index) => (
+                  res !== '' && <Image key={index} loader={myLoader} width={0} height={0} src={res} alt={currentUser.name} />
+                ))
+              }
+            </Carousel>
+            {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('images')}><EditIcon /></button>}
+            {edit === 'images' && (
+              <EditImages
+                id={id}
+                name='csgo'
+                currentUser={currentUser}
+                prevImg={currentCsgo.img}
+                prevImg2={currentCsgo.img2}
+                prevImg3={currentCsgo.img3}
+                prevImg4={currentCsgo.img4}
+                prevImg5={currentCsgo.img5}
+                prevImg6={currentCsgo.img6}
+                prevImg7={currentCsgo.img7}
+                setEdit={setEdit}
+                mixWikTeams={mixWikTeams}
+              />)}
+          </div>
           <h1 className={styles.title}>
             {currentUser.name}
           </h1>
