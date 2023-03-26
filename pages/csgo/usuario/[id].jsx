@@ -15,10 +15,10 @@ import { useState } from 'react'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
+import { updatePublicationPosition } from '../../../firebase/hooks/updateMethod/updateUserData'
 import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
-import { updatePublicationPosition } from '../../../firebase/hooks/updateMethod/updateUserData'
 
 // Components
 import { Carousel } from 'react-responsive-carousel'
@@ -125,9 +125,12 @@ const User = () => {
               : (
                 <>
                   <h2>Tipo de jugador:
-                    <button onClick={() => setEdit('typeOfGamer')}>
-                      <EditIcon />
-                    </button>
+                    {
+                    limitedAdministrator &&
+                      <button onClick={() => setEdit('typeOfGamer')}>
+                        <EditIcon />
+                      </button>
+                    }
                   </h2>
                   <ul>
                     {
@@ -150,11 +153,9 @@ const User = () => {
                   <>
                     <h2>
                       Nivel:
-                      <button onClick={() => setEdit('level')}>
-                        <EditIcon />
-                      </button>
+                      {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('level')}><EditIcon /></button>}
                     </h2>
-                    <div>
+                    <div className={styles.levelBox}>
                       {currentCsgo.level}
                     </div>
                   </>
@@ -171,16 +172,14 @@ const User = () => {
                   <>
                     <h2>
                       {currentCsgo.position.length === 1 ? 'Posición:' : 'Posiciones:'}
-                      <button onClick={() => setEdit('position')}>
-                        <EditIcon />
-                      </button>
+                      {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('position')}><EditIcon /></button>}
                     </h2>
                     <ul>
                       {
-                currentCsgo.position.map((pos, index) => (
-                  <li key={index}>{pos}</li>
-                ))
-              }
+                        currentCsgo.position.map((pos, index) => (
+                          <li key={index}>{pos}</li>
+                        ))
+                      }
                     </ul>
                   </>
                   )
@@ -194,17 +193,14 @@ const User = () => {
                   )
                 : (
                   <>
-
                     <h2>
                       Horas Jugadas:
-                      <button onClick={() => setEdit('hours')}>
-                        <EditIcon />
-                      </button>
+                      {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('hours')}><EditIcon /></button>}
                     </h2>
                     {currentCsgo.hours}h
                   </>
                   )
-          }
+            }
           </article>
           <article className={styles.map}>
             {

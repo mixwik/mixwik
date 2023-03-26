@@ -11,10 +11,10 @@ export const updateUserData = async (id, data) => {
   })
 }
 
-export const updateUserCsgoPublications = async (id) => {
+export const updateUserNumberPublications = async (id, number) => {
   const userRef = doc(db, 'users', id)
   await updateDoc(userRef, {
-    csgoPublications: increment(1)
+    csgoPublications: increment(number)
   })
 }
 
@@ -23,9 +23,7 @@ export const updateUserMixWikTeams = async (payID, id, router) => {
   await updateDoc(userRef, {
     mixWikTeams: payID
   }).then(
-    setTimeout(() => {
-      router.push('/')
-    }, 5000)
+    router.push('/')
   )
 }
 
