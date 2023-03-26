@@ -71,3 +71,34 @@ export const updatePublicationImages = async (category, id, img, name, img2, nam
     }
   })
 }
+
+export const updatePublicationDescription = async (category, id, description) => {
+  const userRef = doc(db, category, id)
+  await updateDoc(userRef, {
+    description
+  })
+}
+export const updatePublicationTypeOfGamer = async (category, id, typeOfGamer) => {
+  const userRef = doc(db, category, id)
+  await updateDoc(userRef, {
+    typeOfGamer
+  })
+}
+export const updatePublicationCsgoLevel = async (category, id, level) => {
+  const userRef = doc(db, category, id)
+  await updateDoc(userRef, {
+    level
+  })
+}
+export const updatePublicationCsgoPosition = async (category, id, position) => {
+  const userRef = doc(db, category, id)
+  await updateDoc(userRef, {
+    position
+  })
+}
+export const updatePublicationHours = async (category, id, hours) => {
+  const userRef = doc(db, category, id)
+  await updateDoc(userRef, {
+    hours
+  })
+}

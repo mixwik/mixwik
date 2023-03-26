@@ -6,7 +6,7 @@ import { myLoader } from '../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../Svg'
 import styles from './EditPublication.module.scss'
 
-export const EditImages = ({ name, id, currentUser, prevImg, prevImg2, prevImg3, prevImg4, prevImg5, prevImg6, prevImg7, setEdit, mixWikTeams }) => {
+export const EditImages = ({ category, id, currentUser, prevImg, prevImg2, prevImg3, prevImg4, prevImg5, prevImg6, prevImg7, setEdit, mixWikTeams }) => {
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState(prevImg.url)
   const [previewImage2, setPreviewImage2] = useState(prevImg2.url)
@@ -30,7 +30,6 @@ export const EditImages = ({ name, id, currentUser, prevImg, prevImg2, prevImg3,
   const [image6, setImage6] = useState(prevImg6.name || '')
   const [image7, setImage7] = useState(prevImg7.name || '')
   const [progress, setProgress] = useState(false)
-  console.log(prevImg)
   const handleSetImage = async (e, setImages, setImgsURL, setPreviewImages) => {
     const reader = new FileReader()
     setImages(e.target.files[0])
@@ -76,7 +75,7 @@ export const EditImages = ({ name, id, currentUser, prevImg, prevImg2, prevImg3,
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    updatePublicationImages(name, id, imgURL, image.name || image, imgURL2, image2.name || image2, imgURL3, image3.name || image3, imgURL4, image4.name || image4, imgURL5, image5.name || image5, imgURL6, image6.name || image6, imgURL7, image7.name || image7)
+    updatePublicationImages(category, id, imgURL, image.name || image, imgURL2, image2.name || image2, imgURL3, image3.name || image3, imgURL4, image4.name || image4, imgURL5, image5.name || image5, imgURL6, image6.name || image6, imgURL7, image7.name || image7)
     setTimeout(() => setEdit(false), 2000)
   }
 

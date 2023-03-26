@@ -118,6 +118,7 @@ const Profile = ({ user }) => {
                       )
                 }
                   </label>
+                  {progress && <div>Subido</div>}
                 </article>
                 <div className={styles.group}>
                   <label>
@@ -184,7 +185,7 @@ const Profile = ({ user }) => {
                   <ErrorMessage name='description' component='span' />
                   <div>{values.description.length > 0 ? values.description.length : 0}/350</div>
                 </div>
-                <button type='submit' disabled={!progress || isSubmitting}>
+                <button type='submit' disabled={isSubmitting}>
                   Guardar
                 </button>
               </Form>

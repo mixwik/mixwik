@@ -9,7 +9,7 @@ export const useLogInProvider = () => {
   const logInProvider = (provider) => {
     signInWithPopup(auth, provider)
       .then(() => {
-        router.push('/dashboard')
+        router.push('/dashboard?page=profile')
       }).catch((error) => {
         setError(error)
       })

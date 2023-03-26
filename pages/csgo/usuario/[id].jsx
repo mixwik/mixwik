@@ -1,20 +1,36 @@
+// Next Components
 import Image from 'next/image'
+
+// Edit components
+import EditLevel from '../../../components/EditPublication/Csgo/EditLevel'
+import EditPosition from '../../../components/EditPublication/Csgo/EditPosition'
+import EditDescription from '../../../components/EditPublication/EditDescription'
+import EditHours from '../../../components/EditPublication/EditHours'
+import { EditImages } from '../../../components/EditPublication/EditImages'
+import EditTypeOfGamer from '../../../components/EditPublication/EditTypeOfGamer'
+
+// Hooks
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { Carousel } from 'react-responsive-carousel'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { EditImages } from '../../../components/EditPublication/EditImages'
-import Layout from '../../../components/Layout'
-import { myLoader } from '../../../components/myLoader'
-import { EditIcon } from '../../../components/Svg'
-import UserMap from '../../../components/UserMap'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
-import { updatePublicationPosition } from '../../../firebase/hooks/updateMethod/updateUserData'
 import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
+import { updatePublicationPosition } from '../../../firebase/hooks/updateMethod/updateUserData'
+
+// Components
+import { Carousel } from 'react-responsive-carousel'
+import Layout from '../../../components/Layout'
+import { myLoader } from '../../../components/myLoader'
+import UserMap from '../../../components/UserMap'
+
+// Icons
+import { EditIcon } from '../../../components/Svg'
+
+// styles
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import styles from './User.module.scss'
 
 const User = () => {
@@ -63,7 +79,7 @@ const User = () => {
             {edit === 'images' && (
               <EditImages
                 id={id}
-                name='csgo'
+                category='csgo'
                 currentUser={currentUser}
                 prevImg={currentCsgo.img}
                 prevImg2={currentCsgo.img2}
@@ -79,34 +95,116 @@ const User = () => {
           <h1 className={styles.title}>
             {currentUser.name}
           </h1>
-          <p className={styles.description}>{currentCsgo.description}</p>
+          <div className={styles.description}>
+            {
+            edit === 'description'
+              ? (
+                <EditDescription
+                  category='csgo'
+                  id={id}
+                  setEdit={setEdit}
+                  description={currentCsgo.description}
+                />
+                )
+              : (
+                <p>{currentCsgo.description}
+                  {limitedAdministrator &&
+                    <button onClick={() => setEdit('description')}>
+                      <EditIcon />
+                    </button>}
+                </p>
+                )
+          }
+          </div>
           <article className={styles.typeOfGamer}>
-            <h2>Tipo de jugador:</h2>
-            <ul>
-              {
-                currentCsgo.typeOfGamer.map((type, index) => (
-                  <li key={index}>{type}</li>
-                ))
-              }
-            </ul>
+            {
+            edit === 'typeOfGamer'
+              ? (
+                <EditTypeOfGamer category='csgo' id={id} typeOfGamer={currentCsgo.typeOfGamer} setEdit={setEdit} />
+                )
+              : (
+                <>
+                  <h2>Tipo de jugador:
+                    <button onClick={() => setEdit('typeOfGamer')}>
+                      <EditIcon />
+                    </button>
+                  </h2>
+                  <ul>
+                    {
+                      currentCsgo.typeOfGamer.map((type, index) => (
+                        <li key={index}>{type}</li>
+                      ))
+                    }
+                  </ul>
+                </>
+                )
+          }
           </article>
           <article className={styles.level}>
-            <h2>Nivel:</h2>
-            {currentCsgo.level}
+            {
+              edit === 'level'
+                ? (
+                  <EditLevel category='csgo' id={id} level={currentCsgo.level} setEdit={setEdit} />
+                  )
+                : (
+                  <>
+                    <h2>
+                      Nivel:
+                      <button onClick={() => setEdit('level')}>
+                        <EditIcon />
+                      </button>
+                    </h2>
+                    <div>
+                      {currentCsgo.level}
+                    </div>
+                  </>
+                  )
+            }
           </article>
           <article className={styles.position}>
-            <h2>{currentCsgo.position.length === 1 ? 'Posición:' : 'Posiciones:'}</h2>
-            <ul>
-              {
+            {
+              edit === 'position'
+                ? (
+                  <EditPosition category='csgo' id={id} position={currentCsgo.position} setEdit={setEdit} />
+                  )
+                : (
+                  <>
+                    <h2>
+                      {currentCsgo.position.length === 1 ? 'Posición:' : 'Posiciones:'}
+                      <button onClick={() => setEdit('position')}>
+                        <EditIcon />
+                      </button>
+                    </h2>
+                    <ul>
+                      {
                 currentCsgo.position.map((pos, index) => (
                   <li key={index}>{pos}</li>
                 ))
               }
-            </ul>
+                    </ul>
+                  </>
+                  )
+            }
           </article>
           <article className={styles.hours}>
-            <h2>Horas Jugadas:</h2>
-            {currentCsgo.hours}h
+            {
+              edit === 'hours'
+                ? (
+                  <EditHours category='csgo' id={id} hours={currentCsgo.hours} setEdit={setEdit} />
+                  )
+                : (
+                  <>
+
+                    <h2>
+                      Horas Jugadas:
+                      <button onClick={() => setEdit('hours')}>
+                        <EditIcon />
+                      </button>
+                    </h2>
+                    {currentCsgo.hours}h
+                  </>
+                  )
+          }
           </article>
           <article className={styles.map}>
             {

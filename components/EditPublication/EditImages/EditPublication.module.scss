@@ -136,11 +136,21 @@
 
     button {
       background-color: $aero;
-      padding: .5rem 1rem;
       color: $white;
-
+      padding: .5rem 1rem;
+      border-radius: .2rem;
+      border: none;
+      border: 1px solid $aero;
+      cursor: pointer;
+      transition: all 1s;
+      &:hover {
+          background-color: $white;
+          color: $aero;
+          border: 1px solid $aero;
+      }
       &:disabled {
         background-color: gray;
+        cursor: not-allowed;
       }
     }
   }

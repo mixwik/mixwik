@@ -88,8 +88,18 @@
       padding: 2rem 1rem;
       background-color: $white;
       border-top: 1px solid $frenchBlue;
-
-
+      h2 {
+        display: flex;
+        gap: .5rem;
+        button {
+          background-color: transparent;
+          svg {
+            width: 1rem;
+            height: 1rem;
+            color: $aero;
+          }
+        }
+      }
       ul {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -97,13 +107,35 @@
 
         li {
           text-align: center;
-          box-shadow: 0 0 2px $frenchBlue;
+          box-shadow: 0 0 2px $aero;
           padding: .3rem;
           border-radius: .3rem;
         }
       }
     }
-
+    .level {
+      div {
+        text-align: center;
+        box-shadow: 0 0 2px $aero;
+        padding: 0.3rem 1rem;
+        border-radius: .3rem;
+      }
+    }
+    .description {
+      p {
+        display: flex;
+        align-items: flex-start;
+        gap: .5rem;
+        button {
+          background-color: transparent;
+          svg {
+            width: 1rem;
+            height: 1rem;
+            color: $aero;
+          }
+        }
+      }
+    }
     .typeOfGamer,
     .level,
     .hours {
@@ -115,5 +147,18 @@
   .map {
     padding: 0;
     width: 100%;
+    button {
+      padding: .5rem;
+      background-color: $aero;
+      color: $white;
+      border-radius: .3rem;
+      border: 1px solid $aero;
+      transition: all 1s;
+      &:hover {
+        background-color: $white;
+        color: $aero;
+        border: 1px solid $aero;
+      }
+    }
   }
 }
