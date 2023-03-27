@@ -22,6 +22,7 @@ import { useRouter } from 'next/router'
 import MyPublications from '../../components/Dashboard/MyPublications'
 import { AddPublication, Company, ContactUs, Publications } from '../../components/Svg'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
+import MixWikTeams from '../../components/Dashboard/MixWikTeams'
 
 export default function Dashboard () {
   const router = useRouter()
@@ -54,6 +55,7 @@ export default function Dashboard () {
         {page === 'profile' && <Profile user={currentUser} />}
         {page === 'newPublication' && <NewPublication user={currentUser} />}
         {page === 'myPublications' && <MyPublications user={currentUser} />}
+        {page === 'mixWikTeams' && <MixWikTeams user={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -95,11 +97,12 @@ export default function Dashboard () {
                 Contáctanos
               </Link>
             </li>
-            <li className={styles.contact}>
-              <Link href='https://donate.stripe.com/test_7sI7v7fD1guj6K4aEF'>
-                <ContactUs />
-                COBRE
-              </Link>
+            <li
+              data-isActive={page === 'mixWikTeams'}
+              onClick={() => handleClick('mixWikTeams')}
+            >
+              <Publications />
+              MixWik Teams
             </li>
           </ul>
         </nav>

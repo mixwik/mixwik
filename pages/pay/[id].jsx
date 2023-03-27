@@ -11,7 +11,7 @@ const Pay = () => {
   const currentUser = useSession()
   const user = useGetOneData('users', currentUser.uid)
   const stripeId = useCheckPay(id, currentUser.email)
-  if (stripeId) updateUserMixWikTeams(stripeId, user.id, router)
+  if (stripeId && user.id) updateUserMixWikTeams(stripeId, user.id, router)
   if (!stripeId) return <div>El pago no se ha realizado correctamente</div>
 }
 

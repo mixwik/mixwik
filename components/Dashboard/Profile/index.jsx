@@ -11,7 +11,6 @@ import { useSignOut } from '../../../firebase/auth/SignOut'
 import { useUpdateDataUser } from '../../../firebase/auth/updateDataUser'
 import { useSession } from '../../../firebase/auth/useSession'
 import { removeImageDB, setImageDB } from '../../../firebase/storage'
-import { useCancelRenovationSubscription, useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import { myLoader } from '../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../Svg'
 
@@ -23,8 +22,6 @@ const Profile = ({ user }) => {
   const [progress, setProgress] = useState()
   const [error, updateDataUser] = useUpdateDataUser()
   const currentUser = useSession()
-  const mixWikTeams = useMixWikTeamsCheckSubscription(user.mixWikTeams)
-  const cancelSuscription = useCancelRenovationSubscription()
 
   const handleSetImage = async (e) => {
     const reader = new FileReader()
@@ -195,9 +192,6 @@ const Profile = ({ user }) => {
             )}
           </Formik>
         </div>
-        {
-        mixWikTeams && <button onClick={() => cancelSuscription(user.mixWikTeams)}>Cancelar Suscripción mixWikTeams</button>
-        }
       </section>
     </section>
   )

@@ -76,3 +76,22 @@ export const useCancelRenovationSubscription = () => {
 
   return cancelSubscription
 }
+
+export const useComproveRenovationSubscription = (stipeId, mixWikTeams) => {
+  const [date, setDate] = useState('')
+  const stripe = new Stripe('sk_test_51MhVdvEcw1KUgUdkaOYwTkXI17zpPW6BQixTZhI8yXSBIpGYkS6hF8QLpVrHTUvWB7DdX8rXva9geWEFumGEPqcJ00aXbUDaq2')
+
+  useEffect(() => {
+    const checkSubscription = async (stripeId) => {
+      const subscriptions = await stripe.subscriptions.list({ customer: stripeId })
+
+      const activeSubscription = subscriptions.data[0].current_period_end
+
+      const expirationDate = new Date(activeSubscription * 1000)
+      setDate(expirationDate.toLocaleDateString())
+    }
+    if (mixWikTeams) checkSubscription(stipeId)
+  }, [stipeId, mixWikTeams])
+
+  return [date]
+}
