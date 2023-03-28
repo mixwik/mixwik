@@ -58,7 +58,7 @@ const Profile = ({ user }) => {
         </button>
       </div>
       <section className={styles.information}>
-        <h2>Información Pública</h2>
+        <p className={styles.paragraph}>Información Pública</p>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -184,6 +184,40 @@ const Profile = ({ user }) => {
                   </label>
                   <ErrorMessage name='description' component='span' />
                   <div>{values.description.length > 0 ? values.description.length : 0}/350</div>
+                </div>
+                <p className={styles.paragraph}>Información Privada</p>
+                <div className={styles.group}>
+                  Genero:
+                  <div class={styles.gender} role='group' aria-labelledby='my-radio-group'>
+                    <Field
+                      type='radio'
+                      name='gender'
+                      value='M'
+                      id='M'
+                    />
+                    <label for='M'>
+                      Masculino
+                    </label>
+                    <Field
+                      type='radio'
+                      name='gender'
+                      value='F'
+                      id='F'
+                    />
+                    <label for='F'>
+                      Femenino
+                    </label>
+                    <Field
+                      type='radio'
+                      name='gender'
+                      value='O'
+                      id='O'
+                    />
+                    <label for='O'>
+                      Otro
+                    </label>
+                  </div>
+                  <ErrorMessage name='gender' component='span' />
                 </div>
                 <button type='submit' disabled={isSubmitting}>
                   Guardar

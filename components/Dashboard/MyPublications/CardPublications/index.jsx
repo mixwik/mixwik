@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { deletePublication } from '../../../../firebase/hooks/deleteMethod'
 import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { myLoader } from '../../../myLoader'
+import { DeleteIcon } from '../../../Svg'
 import styles from './CardPublications.module.scss'
 
 const CardPublications = ({ publication, user, category }) => {
@@ -15,12 +16,12 @@ const CardPublications = ({ publication, user, category }) => {
       <Link className={styles.link} target='_blanck' href={`/${category}/usuario/${publication.id}`}>
         <Image loader={myLoader} width={0} height={0} src={publication.img.url} alt={user.name} />
         <div className={styles.content}>
-          <h2 className={styles.title}>{user.name}</h2>
+          <h2 className={styles.subtitle}>{user.name}</h2>
           <p className={styles.description}>{publication.description.slice(0, 15)}...</p>
         </div>
       </Link>
-      <button onClick={() => handleDelete(category, publication.id)}>
-        Eliminar
+      <button className={styles.delete} onClick={() => handleDelete(category, publication.id)}>
+        <DeleteIcon />
       </button>
     </div>
   )

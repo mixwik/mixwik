@@ -16,13 +16,16 @@ import Profile from '../../components/Dashboard/Profile'
 import Layout from '../../components/Layout'
 import { myLoader } from '../../components/myLoader'
 import NewUser from '../../components/NewUser'
+import MixWikTeams from '../../components/Dashboard/MixWikTeams'
+import MyPublications from '../../components/Dashboard/MyPublications'
 
 // Images
-import { useRouter } from 'next/router'
-import MyPublications from '../../components/Dashboard/MyPublications'
 import { AddPublication, Company, ContactUs, Publications } from '../../components/Svg'
+import iconMixWik from '../../public/logos/icon-logo.png'
+
+// hooks
+import { useRouter } from 'next/router'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
-import MixWikTeams from '../../components/Dashboard/MixWikTeams'
 
 export default function Dashboard () {
   const router = useRouter()
@@ -101,7 +104,7 @@ export default function Dashboard () {
               data-isActive={page === 'mixWikTeams'}
               onClick={() => handleClick('mixWikTeams')}
             >
-              <Publications />
+              <Image src={iconMixWik} alt='Icono del logo MixWik' />
               MixWik Teams
             </li>
           </ul>

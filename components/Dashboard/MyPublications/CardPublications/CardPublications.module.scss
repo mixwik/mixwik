@@ -1,16 +1,17 @@
+@import '../../../../styles/colors.scss';
+
 .CardPublications {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 2px $aero;
     padding: .5rem;
     width: 80vw;
-    justify-self: center;
-    align-self: flex-start;
-
     @media screen and (min-width: 768px) {
+        justify-self: center;
+        align-self: flex-start;
         width: 100%;
     }
 
@@ -18,6 +19,7 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+        width: 90%;
         img {
             width: 5rem;
             height: 5rem;
@@ -39,11 +41,14 @@
 
         }
     }
-
-    .buttons {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .delete {
+        background-color: transparent;
+        width: 10%;
+        svg {
+            width: 2rem;
+            height: 2rem;
+            color: red;
+            border-radius: 50%;
+        }
     }
 }

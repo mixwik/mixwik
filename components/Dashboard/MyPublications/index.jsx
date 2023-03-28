@@ -11,6 +11,7 @@ const MyPublications = ({ user }) => {
     <section className={styles.myPublications}>
       <h2 className={styles.title}>Mis publicaciones</h2>
       <div className={styles.cardBox}>
+        <h3 className={styles.subtitle}>Publicaciones de CSGO</h3>
         {
           publications.map((res) => (
             <CardPublications key={res.id} publication={res} user={user} category='csgo' />
