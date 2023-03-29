@@ -9,11 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "discord.js": "14.8.0",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "firebase": "9.16.0",
-    "formik": "^2.2.9",
+    "formik": "2.2.9",
     "leaflet": "1.9.2",
     "leaflet-defaulticon-compatibility": "0.1.1",
     "next": "13.0.3",
@@ -22,9 +21,9 @@
     "react-dom": "18.2.0",
     "react-leaflet": "4.2.0",
     "react-player": "2.11.0",
-    "react-responsive-carousel": "^3.2.23",
+    "react-responsive-carousel": "3.2.23",
     "sass": "1.56.1",
     "standard": "17.0.0",
-    "stripe": "^11.13.0"
+    "stripe": "11.13.0"
   }
 }
