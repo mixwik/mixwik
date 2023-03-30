@@ -4,6 +4,7 @@ import styles from './NewPublication.module.scss'
 // Images
 import Image from 'next/image'
 import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
+import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import clashRoyal from '../../../public/logos/Clash-Royal2.png'
 import csgo from '../../../public/logos/csgo.png'
 import fortnite from '../../../public/logos/fortnite.png'
@@ -14,6 +15,7 @@ import CsgoPublication from './csgo'
 import NoMorePublications from './noMorePublications'
 
 const NewPublication = ({ user }) => {
+  const currentPosition = useCurrentPosition()
   const [toggle, setToggle] = useState()
   const [teams, setTeams] = useState(false)
   const mixWikTeams = useMixWikTeamsCheckSubscription(user.mixWikTeams)
@@ -70,7 +72,7 @@ const NewPublication = ({ user }) => {
         </li>
       </ul>
       <NoMorePublications setTeams={setTeams} noPremium={teams === 'noMixWikTeams'} currentUser={user} />
-      <CsgoPublication setTeams={setTeams} teams={mixWikTeams} toggle={toggle} currentUser={user} />
+      <CsgoPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} toggle={toggle} currentUser={user} />
     </section>
   )
 }

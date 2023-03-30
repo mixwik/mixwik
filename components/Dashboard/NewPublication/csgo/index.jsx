@@ -9,7 +9,7 @@ import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { myLoader } from '../../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 
-const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
+const CsgoPublication = ({ toggle, currentUser, teams, setTeams, currentPosition }) => {
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState()
   const [previewImage2, setPreviewImage2] = useState()
@@ -97,7 +97,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setCsgo(values, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+              setCsgo(values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserNumberPublications(currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)

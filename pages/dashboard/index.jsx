@@ -50,7 +50,6 @@ export default function Dashboard () {
 
   const user = useSession()
   const currentUser = useGetOneData('users', user.uid)
-  console.log(currentUser)
   if (toggle === 'loading') return <div>Loading...</div>
   if (currentUser.length === 0) return <NewUser />
 
