@@ -23,6 +23,7 @@
   .newPublication {
     height: 90vh;
     width: 100vw;
+
     @media screen and (min-width: 768px) {
       width: 60vw;
     }
@@ -56,7 +57,7 @@
         .position,
         .level,
         .hoursAndType,
-        .description,
+        .descriptionBox,
         .image {
           height: 100%;
           scroll-snap-align: center;
@@ -97,8 +98,9 @@
               justify-content: center;
               align-items: center;
               cursor: pointer;
+
               @media screen and (min-width: 768px) {
-                padding: 1.5rem;  
+                padding: 1.5rem;
               }
             }
 
@@ -123,17 +125,19 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
+
             input[type="range"] {
               appearance: none;
               width: 90vw;
               height: .4rem;
               background: $aero;
               outline: none;
+
               @media screen and (min-width: 768px) {
-                width: 20vw;  
+                width: 20vw;
               }
             }
-    
+
             input[type="range"]::-webkit-slider-thumb {
               /* estilos para el control deslizante */
               appearance: none;
@@ -152,26 +156,58 @@
           }
         }
 
-        .description {
-          gap: 2rem;
+        .descriptionBox {
+          gap: 4rem;
+          .titlePublication,
+          .descriptionPublication {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+          .titlePublication {
+            .title {
+              font-weight: 100;
+              background-color: $white;
+              color: $black;
+              font-size: 1rem;
+              text-align: left;
+              width: 90%;
+              height: 3rem;
+              border-radius: .5rem;
+              padding: 1rem;
+              border: 1px solid $aero;
 
-          textarea {
-            width: 90%;
-            height: 15rem;
-            border-radius: .5rem;
-            padding: 1rem;
-            border: 1px solid $aero;
-            resize: none;
-
-            @media screen and (min-width: 768px) {
-              width: 50%;
+              @media screen and (min-width: 768px) {
+                width: 50%;
+              }
             }
           }
 
+          .descriptionPublication {
+
+            .description {
+              width: 90%;
+              height: 15rem;
+              border-radius: .5rem;
+              padding: 1rem;
+              border: 1px solid $aero;
+              resize: none;
+
+              @media screen and (min-width: 768px) {
+                width: 50%;
+              }
+            }
+          }
         }
 
         .image {
           gap: 2rem;
+
           .principalImage {
             display: flex;
             align-items: center;
@@ -237,21 +273,23 @@
           }
 
           .teams {
-              display: grid;
-              grid-template-columns: repeat(3, 1fr);
-              gap: 1rem;
-              margin-bottom: 1rem;
-              @media screen and (min-width: 768px) {
-                display: flex;
-              }
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+
+            @media screen and (min-width: 768px) {
+              display: flex;
+            }
 
             label {
               width: 5rem;
               height: 5rem;
+
               @media screen and (min-width: 768px) {
                 width: 6rem;
                 height: 6rem;
-                
+
               }
             }
           }
@@ -262,9 +300,11 @@
               grid-template-columns: repeat(3, 1fr);
               gap: 1rem;
               margin-bottom: 1rem;
+
               @media screen and (min-width: 768px) {
                 display: flex;
               }
+
               span {
                 width: 5rem;
                 height: 5rem;
@@ -275,10 +315,11 @@
                 align-items: center;
                 justify-content: center;
                 cursor: not-allowed;
+
                 @media screen and (min-width: 768px) {
                   width: 6rem;
                   height: 6rem;
-                  
+
                 }
               }
             }
@@ -295,6 +336,7 @@
           justify-content: center;
           gap: 2rem;
           background-color: white;
+
           @media screen and (min-width: 768px) {
             bottom: 0;
             width: 60vw;

@@ -11,23 +11,25 @@ import { useSession } from '../../firebase/auth/useSession'
 // Componentes
 import Image from 'next/image'
 import Link from 'next/link'
+import MixWikTeams from '../../components/Dashboard/MixWikTeams'
+import MyPublications from '../../components/Dashboard/MyPublications'
 import NewPublication from '../../components/Dashboard/NewPublication'
 import Profile from '../../components/Dashboard/Profile'
 import Layout from '../../components/Layout'
 import { myLoader } from '../../components/myLoader'
 import NewUser from '../../components/NewUser'
-import MixWikTeams from '../../components/Dashboard/MixWikTeams'
-import MyPublications from '../../components/Dashboard/MyPublications'
 
 // Images
-import { AddPublication, Company, ContactUs, Publications } from '../../components/Svg'
+import { AddPublication, Company, ContactUs, LogOutIcon, Publications } from '../../components/Svg'
 import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
 import { useRouter } from 'next/router'
+import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 
 export default function Dashboard () {
+  const handleSignOut = useSignOut()
   const router = useRouter()
   const { page } = router.query
   const [isOpen, setIsOpen] = useState(false)
@@ -106,6 +108,12 @@ export default function Dashboard () {
             >
               <Image src={iconMixWik} alt='Icono del logo MixWik' />
               MixWik Teams
+            </li>
+            <li
+              onClick={() => handleSignOut()}
+            >
+              <LogOutIcon />
+              Cerrar sesión
             </li>
           </ul>
         </nav>

@@ -3,6 +3,10 @@
 .dashboard {
   color: $black;
   width: 100vw;
+  background-image: url('../../public/background/bgGray.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 
   @media screen and (min-width: 768px) {
     margin-left: 15vw;

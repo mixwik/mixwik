@@ -8,6 +8,7 @@ export const setCsgo = async (value, userData, img, name, img2, name2, img3, nam
     level: value.level,
     typeOfGamer: value.typeOfGamer,
     hours: value.hours,
+    title: value.title,
     description: value.description,
     uid: userData.uid,
     geometry: userData.geometry,

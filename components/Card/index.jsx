@@ -52,9 +52,9 @@ const Card = ({ user, csgo, teams }) => {
         }
           </Carousel>
         </div>
-        <h3 className={styles.title}>{csgoUser.name}</h3>
+        <h3 className={styles.title}>{csgo.title.slice(0, 15)}...</h3>
         <div className={styles.description}>
-          {csgo.description}
+          {csgo.description.slice(0, 20)}...
         </div>
       </section>
     </Link>

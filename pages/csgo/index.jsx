@@ -20,7 +20,7 @@ import { useHandleOpenContext } from '../../context'
 import Image from 'next/image'
 import { useSession } from '../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../hooks/useCurrentPosition'
-import csgoImage from '../../public/logos/csgo.png'
+import csgoImage from '../../public/logos/csgo-page.svg'
 
 const Csgo = () => {
   const [distance, setDistance] = useState(700)

@@ -79,6 +79,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
     level: [],
     typeOfGamer: [],
     hours: 0,
+    title: '',
     description: '',
     uid: '',
     geometry: [],
@@ -319,18 +320,26 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
                     <ErrorMessage name='typeOfGamer' component='span' />
                   </article>
                 </article>
-                <article className={styles.description}>
-                  <h3>Describete como jugador de CSGO</h3>
-                  <Field
-                    as='textarea' name='description'
-                    rows='5'
-                    cols='10'
-                  />
-                  <ErrorMessage name='description' component='span' />
-                  <div>
-                    {values.description.length > 0 ? values.description.length : 0}/350
-                  </div>
-                </article>
+                <div className={styles.descriptionBox}>
+                  <label className={styles.titlePublication}>
+                    Pon un título a la publicación
+                    <Field className={styles.title} type='text' name='title' />
+                    <ErrorMessage name='title' component='span' />
+                  </label>
+                  <label className={styles.descriptionPublication}>
+                    Describete como jugador de CSGO
+                    <Field
+                      className={styles.description}
+                      as='textarea' name='description'
+                      rows='5'
+                      cols='10'
+                    />
+                    <ErrorMessage name='description' component='span' />
+                    <div>
+                      {values.description.length > 0 ? values.description.length : 0}/350
+                    </div>
+                  </label>
+                </div>
                 <article className={styles.image}>
                   <h3>
                     {
@@ -477,6 +486,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams }) => {
                     type='submit'
                     disabled={
                       values.hours === 0 ||
+                      values.title.length === 0 ||
                       values.description.length === 0 ||
                       values.level.length === 0 ||
                       values.position.length === 0 ||

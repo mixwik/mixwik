@@ -16,7 +16,7 @@ const CardPublications = ({ publication, user, category }) => {
       <Link className={styles.link} target='_blanck' href={`/${category}/usuario/${publication.id}`}>
         <Image loader={myLoader} width={0} height={0} src={publication.img.url} alt={user.name} />
         <div className={styles.content}>
-          <h2 className={styles.subtitle}>{user.name}</h2>
+          <h2 className={styles.subtitle}>{publication.title.slice(0, 15)}...</h2>
           <p className={styles.description}>{publication.description.slice(0, 15)}...</p>
         </div>
       </Link>

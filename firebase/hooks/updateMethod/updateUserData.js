@@ -76,6 +76,12 @@ export const updatePublicationDescription = async (category, id, description) =>
     description
   })
 }
+export const updatePublicationTitle = async (category, id, title) => {
+  const userRef = doc(db, category, id)
+  await updateDoc(userRef, {
+    title
+  })
+}
 export const updatePublicationTypeOfGamer = async (category, id, typeOfGamer) => {
   const userRef = doc(db, category, id)
   await updateDoc(userRef, {

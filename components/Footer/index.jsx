@@ -8,7 +8,7 @@ const Footer = () => {
         MixWik sin ánimo de lucro
       </div>
       <div>
-        Create by <Link href='https://maruan.es'>maruan.es</Link> - 603-296-922
+        Create by <Link href='https://maruan.es'>maruan.es</Link>
       </div>
       <div>
         <Link href='/legal/politica-de-cookies'>Cookies </Link>

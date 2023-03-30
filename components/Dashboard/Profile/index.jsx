@@ -7,7 +7,6 @@ import { updateUserData } from '../../../firebase/hooks/updateMethod/updateUserD
 // Session
 import Image from 'next/image'
 import { useState } from 'react'
-import { useSignOut } from '../../../firebase/auth/SignOut'
 import { useUpdateDataUser } from '../../../firebase/auth/updateDataUser'
 import { useSession } from '../../../firebase/auth/useSession'
 import { removeImageDB, setImageDB } from '../../../firebase/storage'
@@ -15,7 +14,6 @@ import { myLoader } from '../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../Svg'
 
 const Profile = ({ user }) => {
-  const handleSignOut = useSignOut()
   const [previewImage, setPreviewImage] = useState()
   const [imgURL, setImgURL] = useState()
   const [image, setImage] = useState()
@@ -50,12 +48,6 @@ const Profile = ({ user }) => {
     <section className={styles.profile}>
       <div className={styles.header}>
         <h1 className={styles.title}>Tu perfil</h1>
-        <button
-          className={styles.signOut}
-          onClick={() => handleSignOut()}
-        >
-          Cerrar Sesión
-        </button>
       </div>
       <section className={styles.information}>
         <p className={styles.paragraph}>Información Pública</p>
@@ -86,8 +78,10 @@ const Profile = ({ user }) => {
           >
             {({ isSubmitting, values }) => (
               <Form>
-                <article className={styles.image}>
-                  <h3>Cambia tu foto de perfil</h3>
+                <div className={styles.image}>
+                  <spna className={styles.title}>
+                    Cambiar foto:
+                  </spna>
                   {
                     error && <div>Ha ocurrido un error</div>
                   }
@@ -119,7 +113,7 @@ const Profile = ({ user }) => {
                 }
                   </label>
                   {progress && <div>Subido</div>}
-                </article>
+                </div>
                 <div className={styles.group}>
                   <label>
                     Nombre:
@@ -133,60 +127,34 @@ const Profile = ({ user }) => {
                 <div className={styles.group}>
                   <label>
                     Edad:
-                    <Field
-                      type='number'
-                      name='age'
-                    />
+                    <div className={styles.hours}>
+                      <Field
+                        type='range'
+                        min='16'
+                        max='90'
+                        name='age'
+                      />
+                      {values.age} años
+                    </div>
                   </label>
                   <ErrorMessage name='age' component='span' />
                 </div>
                 <div className={styles.group}>
-                  Genero:
-                  <div class={styles.gender} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='radio'
-                      name='gender'
-                      value='M'
-                      id='M'
-                    />
-                    <label for='M'>
-                      Masculino
+                  <div className={styles.descriptionBox}>
+                    <label className={styles.description}>
+                      Descripción:
+                      <Field
+                        as='textarea' name='description'
+                        rows='5'
+                        cols='10'
+                      />
                     </label>
-                    <Field
-                      type='radio'
-                      name='gender'
-                      value='F'
-                      id='F'
-                    />
-                    <label for='F'>
-                      Femenino
-                    </label>
-                    <Field
-                      type='radio'
-                      name='gender'
-                      value='O'
-                      id='O'
-                    />
-                    <label for='O'>
-                      Otro
-                    </label>
+                    <div className={styles.counter}>{values.description.length > 0 ? values.description.length : 0}/350</div>
                   </div>
-                  <ErrorMessage name='gender' component='span' />
-                </div>
-                <div className={styles.group}>
-                  <label className={styles.description}>
-                    Descripción:
-                    <Field
-                      as='textarea' name='description'
-                      rows='5'
-                      cols='10'
-                    />
-                  </label>
-                  <ErrorMessage name='description' component='span' />
-                  <div>{values.description.length > 0 ? values.description.length : 0}/350</div>
+                  <ErrorMessage className={styles.error} name='description' component='span' />
                 </div>
                 <p className={styles.paragraph}>Información Privada</p>
-                <div className={styles.group}>
+                <div className={styles.genderBox}>
                   Genero:
                   <div class={styles.gender} role='group' aria-labelledby='my-radio-group'>
                     <Field

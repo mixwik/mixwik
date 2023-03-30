@@ -31,6 +31,7 @@ import { EditIcon } from '../../../components/Svg'
 
 // styles
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import EditTitle from '../../../components/EditPublication/EditTitle'
 import styles from './User.module.scss'
 
 const User = () => {
@@ -92,9 +93,24 @@ const User = () => {
                 mixWikTeams={mixWikTeams}
               />)}
           </div>
-          <h1 className={styles.title}>
-            {currentUser.name}
-          </h1>
+          <div className={styles.publicationTitle}>
+            {
+              edit === 'title'
+                ? (
+                  <EditTitle category='csgo' id={id} title={currentCsgo.title} setEdit={setEdit} />
+                  )
+                : (
+                  <h1>
+                    {currentCsgo.title}
+                    {limitedAdministrator &&
+                      <button onClick={() => setEdit('title')}>
+                        <EditIcon />
+                      </button>}
+                  </h1>
+                  )
+            }
+
+          </div>
           <div className={styles.description}>
             {
             edit === 'description'
