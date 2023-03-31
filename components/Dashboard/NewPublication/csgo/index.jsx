@@ -322,7 +322,7 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams, currentPosition
                 </article>
                 <div className={styles.descriptionBox}>
                   <label className={styles.titlePublication}>
-                    Pon un título a la publicación
+                    Pon tu nombre de jugador
                     <Field className={styles.title} type='text' name='title' />
                     <ErrorMessage name='title' component='span' />
                   </label>
