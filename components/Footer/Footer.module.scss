@@ -1,9 +1,7 @@
 @import '../../styles/colors.scss';
 
 .footer {
-  position: fixed;
-  bottom: 0;
-  height: 5vh;
+  height: 15vh;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -14,8 +12,11 @@
   margin-bottom: 10vh;
   padding: 1rem;
   gap: .5rem;
-
+  
   @media screen and (min-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    height: 5vh;
     flex-direction: row;
     margin-bottom: 0;
     gap: 0;

@@ -2,14 +2,16 @@ import styles from './Csgo.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { setCsgo } from '../../../../firebase/hooks/setMethod/setCsgo'
 import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
-import { myLoader } from '../../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
+import { myLoader } from '../../../myLoader'
 
-const CsgoPublication = ({ toggle, currentUser, teams, setTeams, currentPosition }) => {
+const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
+  const router = useRouter()
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState()
   const [previewImage2, setPreviewImage2] = useState()
@@ -101,8 +103,8 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams, currentPosition
               updateUserNumberPublications(currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
-                location.reload()
-              }, 400)
+                router.push('/dashboard?page=myPublications')
+              }, 500)
             }}
           >
             {({ isSubmitting, values }) => (
@@ -496,6 +498,9 @@ const CsgoPublication = ({ toggle, currentUser, teams, setTeams, currentPosition
                     }
                   >
                     Publicar
+                  </button>
+                  <button type='button' onClick={() => setToggle(false)}>
+                    Cancelar
                   </button>
                 </div>
               </Form>

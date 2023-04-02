@@ -4,7 +4,7 @@
   position: absolute;
   width: 100vw;
   height: 90vh;
-  transform: translateY(100%);
+  transform: translateY(110%);
   transition: transform 1s;
   display: flex;
   flex-direction: column;
@@ -15,8 +15,8 @@
   top: 0;
 
   @media screen and (min-width: 768px) {
-    background-color: $frenchBlue;
-    width: 80vw;
+    background-image: url('../../../../public/background/bgGray.svg'); 
+    width: 100%;
   }
 
   &[data-open=true] {
@@ -36,10 +36,6 @@
     align-items: center;
     cursor: pointer;
     z-index: 2;
-
-    @media screen and (min-width: 768px) {
-      display: none;
-    }
 
     svg {
       width: 1.5rem;

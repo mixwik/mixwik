@@ -1,12 +1,9 @@
 import styles from './MixWikTeams.module.scss'
 
-import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import NoTeams from './NoTeams'
 import Teams from './Teams'
 
-const MixWikTeams = ({ user }) => {
-  const mixWikTeams = useMixWikTeamsCheckSubscription(user.mixWikTeams)
-
+const MixWikTeams = ({ user, mixWikTeams }) => {
   return (
     <section className={styles.mixWikTeams}>
       <div className={styles.header}>

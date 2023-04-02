@@ -4,7 +4,6 @@
   position: absolute;
   width: 100vw;
   height: 91vh;
-  background-color: $frenchBlue;
   transform: translateY(100%);
   transition: transform 1s;
   display: flex;
@@ -40,7 +39,7 @@
     .form {
       form {
         position: relative;
-        height: 80vh;
+        height: 73vh;
         overflow: scroll;
         scroll-snap-type: Y mandatory;
         background-color: $white;
@@ -50,8 +49,17 @@
           height: 0px;
         }
 
+        &::-webkit-scrollbar-track {
+          background: $pennBlue;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $aero;
+          border-radius: 1rem;
+        }
+
         @media screen and (min-width: 768px) {
-          height: 80vh;
+          height: 75vh;
         }
 
         .position,
@@ -76,7 +84,7 @@
           .inputBox {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            gap: 1rem;
             place-items: center;
             padding: 1rem;
 
@@ -157,7 +165,7 @@
         }
 
         .descriptionBox {
-          gap: 4rem;
+          gap: 1rem;
           .titlePublication,
           .descriptionPublication {
             width: 100%;
@@ -328,17 +336,14 @@
 
         .buttons {
           position: fixed;
-          bottom: .5rem;
+          bottom: .4rem;
           left: 0;
           z-index: 10;
           display: flex;
           width: 100vw;
           justify-content: center;
-          gap: 2rem;
           background-color: white;
-
           @media screen and (min-width: 768px) {
-            bottom: 0;
             width: 60vw;
             margin-left: 10vw;
           }
@@ -347,8 +352,8 @@
             background-color: $aero;
             color: $white;
             border-radius: .5rem;
-            padding: 1rem 3rem;
-            margin: 1rem;
+            padding: .5rem 3rem;
+            margin: .5rem;
 
             &:disabled {
               background-color: gray;

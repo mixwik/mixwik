@@ -6,7 +6,6 @@ const MyPublications = ({ user }) => {
   const publications = useGetMyPublications('csgo', user.uid)
 
   if (!publications) return <div>Loading...</div>
-  console.log(publications)
   return (
     <section className={styles.myPublications}>
       <h2 className={styles.title}>Mis publicaciones</h2>

@@ -3,22 +3,21 @@ import styles from './NewPublication.module.scss'
 
 // Images
 import Image from 'next/image'
-import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import clashRoyal from '../../../public/logos/Clash-Royal2.png'
-import csgo from '../../../public/logos/csgo.png'
-import fortnite from '../../../public/logos/fortnite.png'
 import lol from '../../../public/logos/LOL3.png'
 import valorant from '../../../public/logos/VALORANT4.png'
+import csgo from '../../../public/logos/csgo.png'
+import fortnite from '../../../public/logos/fortnite.png'
 import { Arrow } from '../../Svg'
 import CsgoPublication from './csgo'
 import NoMorePublications from './noMorePublications'
 
-const NewPublication = ({ user }) => {
+const NewPublication = ({ user, mixWikTeams }) => {
   const currentPosition = useCurrentPosition()
   const [toggle, setToggle] = useState()
   const [teams, setTeams] = useState(false)
-  const mixWikTeams = useMixWikTeamsCheckSubscription(user.mixWikTeams)
+
   const handleCheck = (name) => {
     if (name === 'csgo') {
       if (!mixWikTeams) {
@@ -72,7 +71,7 @@ const NewPublication = ({ user }) => {
         </li>
       </ul>
       <NoMorePublications setTeams={setTeams} noPremium={teams === 'noMixWikTeams'} currentUser={user} />
-      <CsgoPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} toggle={toggle} currentUser={user} />
+      <CsgoPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
     </section>
   )
 }

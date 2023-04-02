@@ -16,8 +16,8 @@ import MyPublications from '../../components/Dashboard/MyPublications'
 import NewPublication from '../../components/Dashboard/NewPublication'
 import Profile from '../../components/Dashboard/Profile'
 import Layout from '../../components/Layout'
-import { myLoader } from '../../components/myLoader'
 import NewUser from '../../components/NewUser'
+import { myLoader } from '../../components/myLoader'
 
 // Images
 import { AddPublication, Company, ContactUs, LogOutIcon, Publications } from '../../components/Svg'
@@ -25,8 +25,10 @@ import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
 import { useRouter } from 'next/router'
+import NewTeam from '../../components/Dashboard/NewTeam'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
+import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 
 export default function Dashboard () {
   const handleSignOut = useSignOut()
@@ -50,6 +52,7 @@ export default function Dashboard () {
 
   const user = useSession()
   const currentUser = useGetOneData('users', user.uid)
+  const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
   if (toggle === 'loading') return <div>Loading...</div>
   if (currentUser.length === 0) return <NewUser />
 
@@ -57,9 +60,10 @@ export default function Dashboard () {
     <Layout>
       <section data-open={isOpen} className={styles.dashboard}>
         {page === 'profile' && <Profile user={currentUser} />}
-        {page === 'newPublication' && <NewPublication user={currentUser} />}
+        {page === 'newPublication' && <NewPublication mixWikTeams={mixWikTeams} user={currentUser} />}
         {page === 'myPublications' && <MyPublications user={currentUser} />}
-        {page === 'mixWikTeams' && <MixWikTeams user={currentUser} />}
+        {page === 'mixWikTeams' && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}
+        {page === 'teams' && <NewTeam mixWikTeams={mixWikTeams} user={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -82,6 +86,11 @@ export default function Dashboard () {
               <AddPublication />
               Añadir publicación
             </li>
+            {
+              mixWikTeams
+                ? <li data-isActive={page === 'teams'} onClick={() => handleClick('teams')}><AddPublication />Añadir team</li>
+                : <li onClick={() => handleClick('mixWikTeams')}><AddPublication />Añadir Team</li>
+            }
             <li
               data-isActive={page === 'myPublications'}
               onClick={() => handleClick('myPublications')}
