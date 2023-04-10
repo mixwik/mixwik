@@ -1,0 +1,7 @@
+.city {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    h1 {
+        grid-column: 1/3;
+    }
+}

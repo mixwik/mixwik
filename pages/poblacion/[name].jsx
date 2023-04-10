@@ -1,11 +1,19 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Card from '../../components/Card'
 import CityMap from '../../components/CityMap'
+import Layout from '../../components/Layout'
+import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
+import { useCityFilterDistance } from '../../hooks/useCityFilterDistance'
+import styles from './Poblacion.module.scss'
 
 const City = () => {
   const [city, setCity] = useState()
   const router = useRouter()
   const { name } = router.query
+  const csgo = useGetData('csgo')
+  const users = useGetData('users')
+  const csgoFiltered = useCityFilterDistance(city, csgo, 100)
   const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(name)}&format=json&limit=1`
 
   useEffect(() => {
@@ -31,11 +39,35 @@ const City = () => {
   if (!city) return <div>Loading...</div>
 
   return (
-    <section>
-      <h1>{name}</h1>
-      {city}
-      <CityMap city={city} />
-    </section>
+    <Layout>
+      <section className={styles.city}>
+        <h1>{name}</h1>
+        <div className={styles.cardBox}>
+          {
+            csgoFiltered.length > 0 && (
+              csgoFiltered.map((res) => (
+                <Card key={res.id} user={users} csgo={res} equip link='csgo' />
+              ))
+            )
+          }
+          {
+            csgoFiltered.length > 0 && (
+              csgoFiltered.map((res) => (
+                <Card key={res.id} user={users} csgo={res} link='csgo' />
+              ))
+            )
+          }
+          {
+            csgoFiltered.length > 0 && (
+              csgoFiltered.map((res) => (
+                <Card key={res.id} user={users} csgo={res} teams link='csgo' />
+              ))
+            )
+          }
+        </div>
+        <CityMap city={city} />
+      </section>
+    </Layout>
   )
 }
 

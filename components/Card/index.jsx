@@ -4,14 +4,12 @@ import styles from './Card.module.scss'
 // Next Components
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { myLoader } from '../myLoader'
 
-const Card = ({ user, csgo, teams, equip }) => {
-  const router = useRouter()
+const Card = ({ user, csgo, teams, equip, link }) => {
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const images = []
   csgo.img.url !== '' && images.push({ url: csgo.img.url, name: csgo.img.name })
@@ -45,7 +43,7 @@ const Card = ({ user, csgo, teams, equip }) => {
   }
 
   return (
-    <Link target='_blanck' href={equip ? `${router.asPath}/team/${csgo.id}` : `${router.asPath}/usuario/${csgo.id}`}>
+    <Link target='_blanck' href={equip ? `/${link}/team/${csgo.id}` : `/${link}/usuario/${csgo.id}`}>
       <section className={styles.card} data-teams={mixWikTeams} data-equip={equip}>
         <Head />
         <div className={styles.imgBox}>
