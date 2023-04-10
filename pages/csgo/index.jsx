@@ -29,6 +29,7 @@ const Csgo = () => {
   const handleOpen = useHandleOpenContext()
   const users = useGetData('users')
   const csgo = useGetData('csgo')
+  const teams = useGetData('teams')
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)
@@ -47,6 +48,13 @@ const Csgo = () => {
             Global Ofensive
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
+            {
+              teams.length > 0 && (
+                teams.map((res) => (
+                  <Card key={res.id} user={users} csgo={res} equip />
+                ))
+              )
+            }
             {
               listUserCsgo.length > 0 && (
                 listUserCsgo.map((res) => (

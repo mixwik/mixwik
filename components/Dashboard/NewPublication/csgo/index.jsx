@@ -2,7 +2,6 @@ import styles from './Csgo.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { setCsgo } from '../../../../firebase/hooks/setMethod/setCsgo'
 import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
@@ -11,7 +10,6 @@ import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 
 const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
-  const router = useRouter()
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState()
   const [previewImage2, setPreviewImage2] = useState()
@@ -90,7 +88,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
   return (
     <section className={styles.csgo} data-open={toggle === 'csgo'}>
       <section className={styles.newPublication}>
-        <h2 className={styles.title}>Counter Strike Global Ofensive</h2>
+        <h2 className={styles.title}>CSGO</h2>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -103,8 +101,8 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
               updateUserNumberPublications(currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
-                router.push('/dashboard?page=myPublications')
-              }, 500)
+                location.reload()
+              }, 400)
             }}
           >
             {({ isSubmitting, values }) => (
@@ -499,7 +497,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                   >
                     Publicar
                   </button>
-                  <button type='button' onClick={() => setToggle(false)}>
+                  <button className={styles.cancel} type='button' onClick={() => setToggle(false)}>
                     Cancelar
                   </button>
                 </div>

@@ -28,10 +28,13 @@
     }
 
     .title {
-      text-align: center;
-      font-size: 1.3rem;
+      font-size: 1.3em;
       font-weight: bold;
-      padding: 1rem;
+      height: 5vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 1rem;
       background-color: $aero;
       color: $white;
     }
@@ -39,7 +42,7 @@
     .form {
       form {
         position: relative;
-        height: 73vh;
+        height: 85vh;
         overflow: scroll;
         scroll-snap-type: Y mandatory;
         background-color: $white;
@@ -59,7 +62,7 @@
         }
 
         @media screen and (min-width: 768px) {
-          height: 75vh;
+          height: 85vh;
         }
 
         .position,
@@ -75,7 +78,7 @@
           justify-content: center;
 
           h3 {
-            font-size: 1.2rem;
+            font-size: 1.2em;
             font-weight: bold;
             text-align: center;
             padding: 1rem;
@@ -174,7 +177,7 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
-            font-size: 1.2rem;
+            font-size: 1.2em;
             font-weight: bold;
           }
           .titlePublication {
@@ -182,7 +185,7 @@
               font-weight: 100;
               background-color: $white;
               color: $black;
-              font-size: 1rem;
+              font-size: 1em;
               text-align: left;
               width: 90%;
               height: 3rem;
@@ -336,33 +339,35 @@
 
         .buttons {
           position: fixed;
-          bottom: .4rem;
-          left: 0;
+          top: 0;
+          right: 0rem;
           z-index: 10;
           display: flex;
-          width: 100vw;
           justify-content: center;
-          background-color: white;
+          align-items: center;
+          height: 5vh;
           @media screen and (min-width: 768px) {
-            width: 60vw;
-            margin-left: 10vw;
+            right: 10vw;
           }
 
           button {
-            background-color: $aero;
-            color: $white;
-            border-radius: .5rem;
-            padding: .5rem 3rem;
-            margin: .5rem;
+            background: $gradient;
+            color: $black;
+            font-weight: bold;
+            height: 5vh;
+            padding: .2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             &:disabled {
               background-color: gray;
               cursor: not-allowed;
             }
-
-            @media screen and (min-width: 768px) {
-              padding: 1rem 5rem;
-            }
+          }
+          .cancel {
+            background-color: $pennBlue;
+            color: $white;
           }
         }
       }

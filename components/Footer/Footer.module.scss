@@ -1,7 +1,6 @@
 @import '../../styles/colors.scss';
 
 .footer {
-  height: 15vh;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -14,6 +13,8 @@
   gap: .5rem;
   
   @media screen and (min-width: 768px) {
+    background-color: $pennBlue--TRANSPARENT;
+    backdrop-filter: blur(3px);
     position: fixed;
     bottom: 0;
     height: 5vh;

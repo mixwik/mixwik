@@ -1,4 +1,6 @@
+import Link from 'next/link'
 import Layout from '../../components/Layout'
+import { EmailIcon, WhatsAppIcon } from '../../components/Svg'
 import styles from './Contact.module.scss'
 
 const Contact = () => {
@@ -6,25 +8,27 @@ const Contact = () => {
     <Layout>
       <section className={styles.contact}>
         <div className={styles.formBox}>
-          <h1 className={styles.title}>Contáctanos</h1>
-          <form className={styles.form}>
-            <div>
-              <input type='text' placeholder='Nombre:' />
-              <input type='text' placeholder='Correo electrónico:' />
+          <div className={styles.contactData}>
+            <iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.0247300426527!2d-3.5216166853983655!3d36.74597747845105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7190bde0bb84af%3A0x42164032e985e94c!2sPl.%20Javier%20de%20Burgos%2C%2018600%20Motril%2C%20Granada!5e0!3m2!1ses!2ses!4v1680923375238!5m2!1ses!2ses' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade' />
+            <div className={styles.contactButtons}>
+              <Link target='_black' href='https://wa.me/+34722615614'>
+                <WhatsAppIcon />
+                WhatsApp
+              </Link>
+              <Link href='mailto:infoMixwik@gmail.com'>
+                <EmailIcon />
+                Email
+              </Link>
             </div>
+          </div>
+          <form className={styles.form}>
+            <input type='text' placeholder='Nombre:' />
+            <input type='text' placeholder='Correo electrónico:' />
             <input type='text' placeholder='Asunto:' />
-            <textarea rows='10' placeholder='Mensaje:' />
+            <textarea rows='5' placeholder='Mensaje:' />
             <button>Enviar mensaje</button>
           </form>
-          <div className={styles.contactData}>
-            <span>Plaza Javier de Burgos. Motril Granada</span>
-            <span>infoMixwik@gmail.com</span>
-            <span>722-615-614</span>
-          </div>
         </div>
-        <video className={styles.video} autoPlay loop muted>
-          <source src={(require('../../public/fondo-contact.mp4'))} type='video/mp4' />
-        </video>
       </section>
     </Layout>
   )

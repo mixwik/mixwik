@@ -44,9 +44,7 @@ const ButtonGame = () => {
     games.map(({ image, title, alt, available, link }) => (
       <Link key={title} href={link}>
         <div className={styles.buttonGame}>
-          <div className={styles.image}>
-            <Image width={60} src={image} alt={alt} />
-          </div>
+          <Image width={60} src={image} alt={alt} />
           <span>{title}</span>
         </div>
       </Link>

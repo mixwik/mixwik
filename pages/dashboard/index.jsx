@@ -48,6 +48,7 @@ export default function Dashboard () {
       pathname: '/dashboard',
       query: { page: name }
     })
+    setIsOpen(false)
   }
 
   const user = useSession()
@@ -60,9 +61,9 @@ export default function Dashboard () {
     <Layout>
       <section data-open={isOpen} className={styles.dashboard}>
         {page === 'profile' && <Profile user={currentUser} />}
-        {page === 'newPublication' && <NewPublication mixWikTeams={mixWikTeams} user={currentUser} />}
+        {page === 'newPublication' && <NewPublication mixWikTeams={mixWikTeams} user={currentUser} setTeams={setToggle} teams={toggle} />}
         {page === 'myPublications' && <MyPublications user={currentUser} />}
-        {page === 'mixWikTeams' && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}
+        {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}
         {page === 'teams' && <NewTeam mixWikTeams={mixWikTeams} user={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
@@ -89,7 +90,7 @@ export default function Dashboard () {
             {
               mixWikTeams
                 ? <li data-isActive={page === 'teams'} onClick={() => handleClick('teams')}><AddPublication />Añadir team</li>
-                : <li onClick={() => handleClick('mixWikTeams')}><AddPublication />Añadir Team</li>
+                : <li data-isActive={page === 'noTeams'} onClick={() => handleClick('noTeams')}><AddPublication />Añadir Team</li>
             }
             <li
               data-isActive={page === 'myPublications'}

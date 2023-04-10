@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './NewPublication.module.scss'
+import NoMorePublications from './noMorePublications'
 
 // Images
 import Image from 'next/image'
@@ -9,9 +10,7 @@ import lol from '../../../public/logos/LOL3.png'
 import valorant from '../../../public/logos/VALORANT4.png'
 import csgo from '../../../public/logos/csgo.png'
 import fortnite from '../../../public/logos/fortnite.png'
-import { Arrow } from '../../Svg'
 import CsgoPublication from './csgo'
-import NoMorePublications from './noMorePublications'
 
 const NewPublication = ({ user, mixWikTeams }) => {
   const currentPosition = useCurrentPosition()
@@ -46,28 +45,31 @@ const NewPublication = ({ user, mixWikTeams }) => {
       <ul className={styles.listOfCategories}>
         <li onClick={() => handleCheck('csgo')}>
           <Image src={csgo} alt='csgo' />
-          CSGO
-          <Arrow />
+          Counter Strike Global Offensive
         </li>
         <li onClick={() => setToggle('fortnite')}>
           <Image src={fortnite} alt='Fortnite' />
           Fortnite
-          <Arrow />
+          <br />
+          (próximamente)
         </li>
         <li onClick={() => setToggle('lol')}>
           <Image src={lol} alt='LOL' />
           League of Legend
-          <Arrow />
+          <br />
+          (próximamente)
         </li>
         <li onClick={() => setToggle('valorant')}>
           <Image src={valorant} alt='Valorant' />
           Valorant
-          <Arrow />
+          <br />
+          (próximamente)
         </li>
         <li onClick={() => setToggle('cr')}>
           <Image src={clashRoyal} alt='Clash Royal' />
           Clash Royal
-          <Arrow />
+          <br />
+          (próximamente)
         </li>
       </ul>
       <NoMorePublications setTeams={setTeams} noPremium={teams === 'noMixWikTeams'} currentUser={user} />

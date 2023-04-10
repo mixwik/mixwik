@@ -31,8 +31,9 @@ import { EditIcon } from '../../../components/Svg'
 
 // styles
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import EditAge from '../../../components/EditPublication/EditAge'
 import EditTitle from '../../../components/EditPublication/EditTitle'
-import styles from './User.module.scss'
+import styles from './Team.module.scss'
 
 const User = () => {
   const [edit, setEdit] = useState(false)
@@ -40,7 +41,7 @@ const User = () => {
   const { id } = router.query
   const user = useSession()
   const currentPosition = useCurrentPosition()
-  const currentCsgo = useGetOnePublication('csgo', id)
+  const currentCsgo = useGetOnePublication('teams', id)
   const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
@@ -65,13 +66,9 @@ const User = () => {
     <Layout>
       <div className={styles.user}>
         <section className={styles.userBox}>
-          {
-            mixWikTeams && (
-              <div className={styles.mixWikTeam}>
-                Usuario Teams
-              </div>
-            )
-          }
+          <div className={styles.equip}>
+            Team
+          </div>
           <div className={styles.imgBox}>
             <Carousel
               className={styles.carousel}
@@ -87,7 +84,7 @@ const User = () => {
             {edit === 'images' && (
               <EditImages
                 id={id}
-                category='csgo'
+                category='teams'
                 currentUser={currentUser}
                 prevImg={currentCsgo.img}
                 prevImg2={currentCsgo.img2}
@@ -123,7 +120,7 @@ const User = () => {
             edit === 'description'
               ? (
                 <EditDescription
-                  category='csgo'
+                  category='teams'
                   id={id}
                   setEdit={setEdit}
                   description={currentCsgo.description}
@@ -143,7 +140,7 @@ const User = () => {
             {
             edit === 'typeOfGamer'
               ? (
-                <EditTypeOfGamer category='csgo' id={id} typeOfGamer={currentCsgo.typeOfGamer} setEdit={setEdit} />
+                <EditTypeOfGamer category='teams' id={id} typeOfGamer={currentCsgo.typeOfGamer} setEdit={setEdit} />
                 )
               : (
                 <>
@@ -170,17 +167,21 @@ const User = () => {
             {
               edit === 'level'
                 ? (
-                  <EditLevel category='csgo' id={id} level={currentCsgo.level} setEdit={setEdit} />
+                  <EditLevel category='teams' id={id} level={currentCsgo.level} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      Nivel:
+                      Buscamos jugadores de nivel:
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('level')}><EditIcon /></button>}
                     </h2>
-                    <div className={styles.levelBox}>
-                      {currentCsgo.level}
-                    </div>
+                    <ul>
+                      {
+                        currentCsgo.level.map((level, index) => (
+                          <li key={index}>{level}</li>
+                        ))
+                      }
+                    </ul>
                   </>
                   )
             }
@@ -189,12 +190,12 @@ const User = () => {
             {
               edit === 'position'
                 ? (
-                  <EditPosition category='csgo' id={id} position={currentCsgo.position} setEdit={setEdit} />
+                  <EditPosition category='teams' id={id} position={currentCsgo.position} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      {currentCsgo.position.length === 1 ? 'Posición:' : 'Posiciones:'}
+                      {currentCsgo.position.length === 1 ? 'Necesitamos cubrir la siguiente Posición:' : 'Necesitamos cubrir las siguientes Posiciones:'}
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('position')}><EditIcon /></button>}
                     </h2>
                     <ul>
@@ -212,15 +213,32 @@ const User = () => {
             {
               edit === 'hours'
                 ? (
-                  <EditHours category='csgo' id={id} hours={currentCsgo.hours} setEdit={setEdit} />
+                  <EditHours category='teams' id={id} hours={currentCsgo.hours} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      Horas Jugadas:
+                      Horas mínimas jugadas:
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('hours')}><EditIcon /></button>}
                     </h2>
                     {currentCsgo.hours}h
+                  </>
+                  )
+            }
+          </article>
+          <article className={styles.age}>
+            {
+              edit === 'age'
+                ? (
+                  <EditAge category='teams' id={id} age={currentCsgo.age} setEdit={setEdit} />
+                  )
+                : (
+                  <>
+                    <h2>
+                      Edad mínima:
+                      {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('age')}><EditIcon /></button>}
+                    </h2>
+                    {currentCsgo.age} años
                   </>
                   )
             }

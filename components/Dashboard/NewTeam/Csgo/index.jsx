@@ -9,7 +9,7 @@ import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 import styles from './Csgo.module.scss'
 
-const Csgo = ({ currentUser, mixWikTeams, setTeams }) => {
+const Csgo = ({ currentUser, setToggle, toggle }) => {
   const router = useRouter()
   const currentPosition = useCurrentPosition()
   const [imageError, setImageError] = useState()
@@ -89,392 +89,395 @@ const Csgo = ({ currentUser, mixWikTeams, setTeams }) => {
     age: 16
   }
   return (
-    <Formik
-      initialValues={initialValues}
-      validate={values => {
-        const errors = {}
-        return errors
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTeam(values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
-        setTimeout(() => {
-          setSubmitting(false)
-          router.push('/dashboard?page=myPublications')
-        }, 500)
-      }}
-    >
-      {({ isSubmitting, values }) => (
-        <Form className={styles.form}>
-          <div className={styles.titleAndDescription}>
-            <label className={styles.titlePublication}>
-              Nombre del team
-              <Field className={styles.title} type='text' name='title' />
-              <ErrorMessage name='title' component='span' />
-            </label>
-            <label className={styles.descriptionPublication}>
-              Describe el team
-              <Field
-                className={styles.description}
-                as='textarea' name='description'
-                rows='5'
-                cols='10'
-              />
-              <ErrorMessage name='description' component='span' />
-              <div>
-                {values.description.length > 0 ? values.description.length : 0}/350
-              </div>
-            </label>
-          </div>
-          <div className={styles.position}>
-            <div className={styles.title}>¿Que posiciones buscas?</div>
-            <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
-              <Field
-                type='checkbox'
-                value='Entry fragger'
-                name='position'
-                id='entry'
-              />
-              <label for='entry'>
-                Entry Fragger
+    <section className={styles.formBox} data-active={toggle === 'csgo'}>
+      <h2 className={styles.titleForm}>CSGO</h2>
+      <Formik
+        initialValues={initialValues}
+        validate={values => {
+          const errors = {}
+          return errors
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTeam('csgo', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+          setTimeout(() => {
+            setSubmitting(false)
+            router.push('/dashboard?page=myPublications')
+          }, 500)
+        }}
+      >
+        {({ isSubmitting, values }) => (
+          <Form className={styles.form}>
+            <div className={styles.titleAndDescription}>
+              <label className={styles.titlePublication}>
+                Nombre del team
+                <Field className={styles.title} type='text' name='title' />
+                <ErrorMessage name='title' component='span' />
               </label>
-              <Field
-                type='checkbox'
-                value='In-game leader'
-                name='position'
-                id='in-game'
-              />
-              <label for='in-game'>
-                In-game leader
-              </label>
-              <Field
-                type='checkbox'
-                value='AWPer'
-                name='position'
-                id='awper'
-              />
-              <label for='awper'>
-                AWPer
-              </label>
-              <Field
-                type='checkbox'
-                value='Lurker'
-                name='position'
-                id='lurker'
-              />
-              <label for='lurker'>
-                Lurker
-              </label>
-              <Field
-                type='checkbox'
-                value='Playmaker'
-                name='position'
-                id='playmaker'
-              />
-              <label for='playmaker'>
-                Playmaker
-              </label>
-              <Field
-                type='checkbox'
-                value='Support'
-                name='position'
-                id='support'
-              />
-              <label for='support'>
-                Support
-              </label>
-              <Field
-                type='checkbox'
-                value='Entrenador'
-                name='position'
-                id='entrenador'
-              />
-              <label for='entrenador'>
-                Entrenador
-              </label>
-              <Field
-                type='checkbox'
-                value='Secondary AWPer'
-                name='position'
-                id='secondary-awper'
-              />
-              <label for='secondary-awper'>
-                Secondary AWPer
+              <label className={styles.descriptionPublication}>
+                Describe el team
+                <Field
+                  className={styles.description}
+                  as='textarea' name='description'
+                  rows='5'
+                  cols='10'
+                />
+                <ErrorMessage name='description' component='span' />
+                <div>
+                  {values.description.length > 0 ? values.description.length : 0}/350
+                </div>
               </label>
             </div>
-            <ErrorMessage name='position' component='span' />
-          </div>
-          <div className={styles.level}>
-            <div className={styles.title}>¿Que niveles buscas?</div>
-            <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
-              <Field
-                type='checkbox'
-                value='Silver'
-                name='level'
-                id='silver'
-              />
-              <label for='silver'>
-                Silver
-              </label>
-              <Field
-                type='checkbox'
-                value='Nova'
-                name='level'
-                id='nova'
-              />
-              <label for='nova'>
-                Nova
-              </label>
-              <Field
-                type='checkbox'
-                value='Ak'
-                name='level'
-                id='ak'
-              />
-              <label for='ak'>
-                Ak
-              </label>
-              <Field
-                type='checkbox'
-                value='Ak laurel'
-                name='level'
-                id='ak-laurel'
-              />
-              <label for='ak-laurel'>
-                Ak Laurel
-              </label>
-              <Field
-                type='checkbox'
-                value='Doble ak'
-                name='level'
-                id='doble-ak'
-              />
-              <label for='doble-ak'>
-                Doble Ak
-              </label>
-              <Field
-                type='checkbox'
-                value='Chapa'
-                name='level'
-                id='chapa'
-              />
-              <label for='chapa'>
-                Chapa
-              </label>
-              <Field
-                type='checkbox'
-                value='Aguila'
-                name='level'
-                id='aguila'
-              />
-              <label for='aguila'>
-                Aguila
-              </label>
-              <Field
-                type='checkbox'
-                value='Aguila laurel'
-                name='level'
-                id='aguil-laurel'
-              />
-              <label for='aguil-laurel'>
-                Aguila Laurel
-              </label>
-              <Field
-                type='checkbox'
-                value='Supreme'
-                name='level'
-                id='supreme'
-              />
-              <label for='supreme'>
-                Supreme
-              </label>
-              <Field
-                type='checkbox'
-                value='Global elite'
-                name='level'
-                id='global-elite'
-              />
-              <label for='global-elite'>
-                Global Elite
-              </label>
-            </div>
-            <ErrorMessage name='level' component='span' />
-          </div>
-          <div className={styles.hoursTypeOfGamerAge}>
-            <label className={styles.hours}>
-              Horas de juego mínimas
-              <Field
-                type='range'
-                name='hours'
-                value={values.hours}
-                min='0'
-                max='10000'
-                step='50'
-              />
-              {values.hours}h
-              <ErrorMessage name='hours' component='span' />
-            </label>
-            <label className={styles.age}>
-              Edad mínima
-              <Field
-                type='range'
-                name='age'
-                value={values.age}
-                min='16'
-                max='90'
-                step='1'
-              />
-              {values.age} años
-              <ErrorMessage name='age' component='span' />
-            </label>
-            <div className={styles.typeOfGamer}>
-              <div className={styles.title}>¿Que tipo de jugador buscas?</div>
+            <div className={styles.position}>
+              <div className={styles.title}>¿Que posiciones buscas?</div>
               <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
-                  name='typeOfGamer'
-                  value='Competitivo'
-                  id='competitivo'
+                  value='Entry fragger'
+                  name='position'
+                  id='entry'
                 />
-                <label for='competitivo'>
-                  Competitivo
+                <label for='entry'>
+                  Entry Fragger
                 </label>
                 <Field
                   type='checkbox'
-                  name='typeOfGamer'
-                  value='Casual'
-                  id='casual'
+                  value='In-game leader'
+                  name='position'
+                  id='in-game'
                 />
-                <label for='casual'>
-                  Casual
+                <label for='in-game'>
+                  In-game leader
+                </label>
+                <Field
+                  type='checkbox'
+                  value='AWPer'
+                  name='position'
+                  id='awper'
+                />
+                <label for='awper'>
+                  AWPer
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Lurker'
+                  name='position'
+                  id='lurker'
+                />
+                <label for='lurker'>
+                  Lurker
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Playmaker'
+                  name='position'
+                  id='playmaker'
+                />
+                <label for='playmaker'>
+                  Playmaker
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Support'
+                  name='position'
+                  id='support'
+                />
+                <label for='support'>
+                  Support
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Entrenador'
+                  name='position'
+                  id='entrenador'
+                />
+                <label for='entrenador'>
+                  Entrenador
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Secondary AWPer'
+                  name='position'
+                  id='secondary-awper'
+                />
+                <label for='secondary-awper'>
+                  Secondary AWPer
                 </label>
               </div>
-              <ErrorMessage name='typeOfGamer' component='span' />
+              <ErrorMessage name='position' component='span' />
             </div>
-          </div>
-          <article className={styles.image}>
-            <div className={styles.title}>
-              Añade tus imágenes
+            <div className={styles.level}>
+              <div className={styles.title}>¿Que niveles buscas?</div>
+              <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+                <Field
+                  type='checkbox'
+                  value='Silver'
+                  name='level'
+                  id='silver'
+                />
+                <label for='silver'>
+                  Silver
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Nova'
+                  name='level'
+                  id='nova'
+                />
+                <label for='nova'>
+                  Nova
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Ak'
+                  name='level'
+                  id='ak'
+                />
+                <label for='ak'>
+                  Ak
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Ak laurel'
+                  name='level'
+                  id='ak-laurel'
+                />
+                <label for='ak-laurel'>
+                  Ak Laurel
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Doble ak'
+                  name='level'
+                  id='doble-ak'
+                />
+                <label for='doble-ak'>
+                  Doble Ak
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Chapa'
+                  name='level'
+                  id='chapa'
+                />
+                <label for='chapa'>
+                  Chapa
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Aguila'
+                  name='level'
+                  id='aguila'
+                />
+                <label for='aguila'>
+                  Aguila
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Aguila laurel'
+                  name='level'
+                  id='aguil-laurel'
+                />
+                <label for='aguil-laurel'>
+                  Aguila Laurel
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Supreme'
+                  name='level'
+                  id='supreme'
+                />
+                <label for='supreme'>
+                  Supreme
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Global elite'
+                  name='level'
+                  id='global-elite'
+                />
+                <label for='global-elite'>
+                  Global Elite
+                </label>
+              </div>
+              <ErrorMessage name='level' component='span' />
             </div>
-            {imageError}
-            <label className={styles.principalImage}>
-              <ImageIcon />
-              <input
-                onChange={(e) => handleSetImage(e, setImage, setImgURL, setPreviewImage)}
-                type='file'
-                placeholder='Minutos'
-              />
-              {previewImage && (
-                <div className={styles.previewImage}>
-                  <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
-                  <button onClick={(e) => handleRemoveImage(e, image, setPreviewImage, setImage)}>
-                    <DeleteIcon />
-                  </button>
+            <div className={styles.hoursTypeOfGamerAge}>
+              <label className={styles.hours}>
+                Horas de juego mínimas
+                <Field
+                  type='range'
+                  name='hours'
+                  value={values.hours}
+                  min='0'
+                  max='10000'
+                  step='50'
+                />
+                {values.hours}h
+                <ErrorMessage name='hours' component='span' />
+              </label>
+              <label className={styles.age}>
+                Edad mínima
+                <Field
+                  type='range'
+                  name='age'
+                  value={values.age}
+                  min='16'
+                  max='90'
+                  step='1'
+                />
+                {values.age} años
+                <ErrorMessage name='age' component='span' />
+              </label>
+              <div className={styles.typeOfGamer}>
+                <div className={styles.title}>¿Que tipo de jugador buscas?</div>
+                <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+                  <Field
+                    type='checkbox'
+                    name='typeOfGamer'
+                    value='Competitivo'
+                    id='competitivo'
+                  />
+                  <label for='competitivo'>
+                    Competitivo
+                  </label>
+                  <Field
+                    type='checkbox'
+                    name='typeOfGamer'
+                    value='Casual'
+                    id='casual'
+                  />
+                  <label for='casual'>
+                    Casual
+                  </label>
                 </div>
-              )}
-            </label>
-            <article className={styles.teams}>
+                <ErrorMessage name='typeOfGamer' component='span' />
+              </div>
+            </div>
+            <article className={styles.image}>
+              <div className={styles.title}>
+                Añade tus imágenes
+              </div>
+              {imageError}
               <label className={styles.principalImage}>
                 <ImageIcon />
                 <input
-                  onChange={(e) => handleSetImage(e, setImage2, setImgURL2, setPreviewImage2)}
+                  onChange={(e) => handleSetImage(e, setImage, setImgURL, setPreviewImage)}
                   type='file'
                   placeholder='Minutos'
                 />
-                {previewImage2 && (
+                {previewImage && (
                   <div className={styles.previewImage}>
-                    <Image width={0} height={0} loader={myLoader} src={previewImage2} alt='precarga' />
-                    <button onClick={(e) => handleRemoveImage(e, image2, setPreviewImage2, setImage2)}>
+                    <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
+                    <button onClick={(e) => handleRemoveImage(e, image, setPreviewImage, setImage)}>
                       <DeleteIcon />
                     </button>
                   </div>
                 )}
               </label>
-              <label className={styles.principalImage}>
-                <ImageIcon />
-                <input
-                  onChange={(e) => handleSetImage(e, setImage3, setImgURL3, setPreviewImage3)}
-                  type='file'
-                  placeholder='Minutos'
-                />
-                {previewImage3 && (
-                  <div className={styles.previewImage}>
-                    <Image width={0} height={0} loader={myLoader} src={previewImage3} alt='precarga' />
-                    <button onClick={(e) => handleRemoveImage(e, image3, setPreviewImage3, setImage3)}>
-                      <DeleteIcon />
-                    </button>
-                  </div>
-                )}
-              </label>
-              <label className={styles.principalImage}>
-                <ImageIcon />
-                <input
-                  onChange={(e) => handleSetImage(e, setImage4, setImgURL4, setPreviewImage4)}
-                  type='file'
-                  placeholder='Minutos'
-                />
-                {previewImage4 && (
-                  <div className={styles.previewImage}>
-                    <Image width={0} height={0} loader={myLoader} src={previewImage4} alt='precarga' />
-                    <button onClick={(e) => handleRemoveImage(e, image4, setPreviewImage4, setImage4)}>
-                      <DeleteIcon />
-                    </button>
-                  </div>
-                )}
-              </label>
-              <label className={styles.principalImage}>
-                <ImageIcon />
-                <input
-                  onChange={(e) => handleSetImage(e, setImage5, setImgURL5, setPreviewImage5)}
-                  type='file'
-                  placeholder='Minutos'
-                />
-                {previewImage5 && (
-                  <div className={styles.previewImage}>
-                    <Image width={0} height={0} loader={myLoader} src={previewImage5} alt='precarga' />
-                    <button onClick={(e) => handleRemoveImage(e, image5, setPreviewImage5, setImage5)}>
-                      <DeleteIcon />
-                    </button>
-                  </div>
-                )}
-              </label>
-              <label className={styles.principalImage}>
-                <ImageIcon />
-                <input
-                  onChange={(e) => handleSetImage(e, setImage6, setImgURL6, setPreviewImage6)}
-                  type='file'
-                  placeholder='Minutos'
-                />
-                {previewImage6 && (
-                  <div className={styles.previewImage}>
-                    <Image width={0} height={0} loader={myLoader} src={previewImage6} alt='precarga' />
-                    <button onClick={(e) => handleRemoveImage(e, image6, setPreviewImage6, setImage6)}>
-                      <DeleteIcon />
-                    </button>
-                  </div>
-                )}
-              </label>
-              <label className={styles.principalImage}>
-                <ImageIcon />
-                <input
-                  onChange={(e) => handleSetImage(e, setImage7, setImgURL7, setPreviewImage7)}
-                  type='file'
-                  placeholder='Minutos'
-                />
-                {previewImage7 && (
-                  <div className={styles.previewImage}>
-                    <Image width={0} height={0} loader={myLoader} src={previewImage7} alt='precarga' />
-                    <button onClick={(e) => handleRemoveImage(e, image7, setPreviewImage7, setImage7)}>
-                      <DeleteIcon />
-                    </button>
-                  </div>
-                )}
-              </label>
+              <article className={styles.teams}>
+                <label className={styles.principalImage}>
+                  <ImageIcon />
+                  <input
+                    onChange={(e) => handleSetImage(e, setImage2, setImgURL2, setPreviewImage2)}
+                    type='file'
+                    placeholder='Minutos'
+                  />
+                  {previewImage2 && (
+                    <div className={styles.previewImage}>
+                      <Image width={0} height={0} loader={myLoader} src={previewImage2} alt='precarga' />
+                      <button onClick={(e) => handleRemoveImage(e, image2, setPreviewImage2, setImage2)}>
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  )}
+                </label>
+                <label className={styles.principalImage}>
+                  <ImageIcon />
+                  <input
+                    onChange={(e) => handleSetImage(e, setImage3, setImgURL3, setPreviewImage3)}
+                    type='file'
+                    placeholder='Minutos'
+                  />
+                  {previewImage3 && (
+                    <div className={styles.previewImage}>
+                      <Image width={0} height={0} loader={myLoader} src={previewImage3} alt='precarga' />
+                      <button onClick={(e) => handleRemoveImage(e, image3, setPreviewImage3, setImage3)}>
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  )}
+                </label>
+                <label className={styles.principalImage}>
+                  <ImageIcon />
+                  <input
+                    onChange={(e) => handleSetImage(e, setImage4, setImgURL4, setPreviewImage4)}
+                    type='file'
+                    placeholder='Minutos'
+                  />
+                  {previewImage4 && (
+                    <div className={styles.previewImage}>
+                      <Image width={0} height={0} loader={myLoader} src={previewImage4} alt='precarga' />
+                      <button onClick={(e) => handleRemoveImage(e, image4, setPreviewImage4, setImage4)}>
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  )}
+                </label>
+                <label className={styles.principalImage}>
+                  <ImageIcon />
+                  <input
+                    onChange={(e) => handleSetImage(e, setImage5, setImgURL5, setPreviewImage5)}
+                    type='file'
+                    placeholder='Minutos'
+                  />
+                  {previewImage5 && (
+                    <div className={styles.previewImage}>
+                      <Image width={0} height={0} loader={myLoader} src={previewImage5} alt='precarga' />
+                      <button onClick={(e) => handleRemoveImage(e, image5, setPreviewImage5, setImage5)}>
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  )}
+                </label>
+                <label className={styles.principalImage}>
+                  <ImageIcon />
+                  <input
+                    onChange={(e) => handleSetImage(e, setImage6, setImgURL6, setPreviewImage6)}
+                    type='file'
+                    placeholder='Minutos'
+                  />
+                  {previewImage6 && (
+                    <div className={styles.previewImage}>
+                      <Image width={0} height={0} loader={myLoader} src={previewImage6} alt='precarga' />
+                      <button onClick={(e) => handleRemoveImage(e, image6, setPreviewImage6, setImage6)}>
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  )}
+                </label>
+                <label className={styles.principalImage}>
+                  <ImageIcon />
+                  <input
+                    onChange={(e) => handleSetImage(e, setImage7, setImgURL7, setPreviewImage7)}
+                    type='file'
+                    placeholder='Minutos'
+                  />
+                  {previewImage7 && (
+                    <div className={styles.previewImage}>
+                      <Image width={0} height={0} loader={myLoader} src={previewImage7} alt='precarga' />
+                      <button onClick={(e) => handleRemoveImage(e, image7, setPreviewImage7, setImage7)}>
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  )}
+                </label>
+              </article>
             </article>
-          </article>
-          <button
-            className={styles.submit}
-            type='submit'
-            disabled={
+            <div className={styles.buttons}>
+              <button
+                className={styles.submit}
+                type='submit'
+                disabled={
                       values.hours === 0 ||
                       values.title.length === 0 ||
                       values.description.length === 0 ||
@@ -484,12 +487,15 @@ const Csgo = ({ currentUser, mixWikTeams, setTeams }) => {
                       !progress ||
                       isSubmitting
                     }
-          >
-            Publicar
-          </button>
-        </Form>
-      )}
-    </Formik>
+              >
+                Publicar
+              </button>
+              <button className={styles.cancel} type='button' onClick={() => setToggle('nav')}>Cancelar</button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </section>
   )
 }
 

@@ -15,6 +15,8 @@ export const updateUserNumberPublications = async (id, number) => {
   const userRef = doc(db, 'users', id)
   await updateDoc(userRef, {
     csgoPublications: increment(number)
+  }).then(() => {
+    location.reload()
   })
 }
 
@@ -104,5 +106,11 @@ export const updatePublicationHours = async (category, id, hours) => {
   const userRef = doc(db, category, id)
   await updateDoc(userRef, {
     hours
+  })
+}
+export const updatePublicationAge = async (category, id, age) => {
+  const userRef = doc(db, category, id)
+  await updateDoc(userRef, {
+    age
   })
 }

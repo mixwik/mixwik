@@ -1,0 +1,19 @@
+@import '../../styles/colors.scss';
+
+.map {
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  background-color: $white;
+  z-index: 1;
+}
+
+.customIcon {
+  background-image: url('../../public/logos/csgo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: .5;
+  width: 3rem;
+  height: 3rem;
+
+}

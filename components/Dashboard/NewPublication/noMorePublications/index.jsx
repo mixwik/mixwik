@@ -36,11 +36,13 @@ const NoMorePublications = ({ noPremium, currentUser, setTeams }) => {
               <CheckIcon />
               Más enlaces hacia tus redes sociales
             </li>
+            <li>
+              <Link href={`https://buy.stripe.com/test_aEU2aN1Mb0vl2tO3cg?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Donar 5€</Link>
+            </li>
           </ul>
         </section>
         <Image src={logo} alt='logo de MixWik' />
       </div>
-      <Link href={`https://buy.stripe.com/test_aEU2aN1Mb0vl2tO3cg?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Donar 5€</Link>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import styles from './MyPublication.module.scss'
 
 const MyPublications = ({ user }) => {
   const publications = useGetMyPublications('csgo', user.uid)
+  const publicationsTeams = useGetMyPublications('teams', user.uid)
 
   if (!publications) return <div>Loading...</div>
   return (
@@ -12,8 +13,13 @@ const MyPublications = ({ user }) => {
       <div className={styles.cardBox}>
         <h3 className={styles.subtitle}>Publicaciones de CSGO</h3>
         {
+          publicationsTeams.map((res) => (
+            <CardPublications key={res.id} publication={res} user={user} category='teams' equip link='csgo' />
+          ))
+        }
+        {
           publications.map((res) => (
-            <CardPublications key={res.id} publication={res} user={user} category='csgo' />
+            <CardPublications key={res.id} publication={res} user={user} category='csgo' link='csgo' />
           ))
         }
       </div>

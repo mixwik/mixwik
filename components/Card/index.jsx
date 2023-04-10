@@ -10,7 +10,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { myLoader } from '../myLoader'
 
-const Card = ({ user, csgo, teams }) => {
+const Card = ({ user, csgo, teams, equip }) => {
   const router = useRouter()
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const images = []
@@ -26,16 +26,28 @@ const Card = ({ user, csgo, teams }) => {
   if (teams && mixWikTeams) return null
   if (!teams && !mixWikTeams) return null
 
-  return (
-    <Link target='_blanck' href={`${router.asPath}/usuario/${csgo.id}`}>
-      <section className={styles.card} data-teams={mixWikTeams}>
-        {
-        mixWikTeams && (
+  const Head = () => {
+    if (mixWikTeams) {
+      if (equip) {
+        return (
+          <div className={styles.equip}>
+            Team
+          </div>
+        )
+      } else {
+        return (
           <div className={styles.teams}>
-            Mixwik Teams
+            Usuario Teams
           </div>
         )
       }
+    }
+  }
+
+  return (
+    <Link target='_blanck' href={equip ? `${router.asPath}/team/${csgo.id}` : `${router.asPath}/usuario/${csgo.id}`}>
+      <section className={styles.card} data-teams={mixWikTeams} data-equip={equip}>
+        <Head />
         <div className={styles.imgBox}>
           <Carousel
             showStatus={false}

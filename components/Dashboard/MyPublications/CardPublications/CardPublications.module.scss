@@ -6,9 +6,12 @@
     justify-content: space-between;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 2px 2px $aero;
+    box-shadow: 0 2px 5px $aero;
     padding: .5rem;
     width: 80vw;
+    &[data-active=true] {
+        box-shadow: 0px 2px 5px $gradient;
+    }
     @media screen and (min-width: 768px) {
         justify-self: center;
         align-self: flex-start;
@@ -35,7 +38,7 @@
             }
 
             .description {
-                font-size: 1rem;
+                font-size: 1em;
                 margin-bottom: 10px;
             }
 

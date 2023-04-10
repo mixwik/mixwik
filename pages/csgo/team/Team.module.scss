@@ -15,12 +15,12 @@
       width: 40vw;
       margin-top: 1rem;
     }
-    .mixWikTeam {
+    .equip {
       position: absolute;
       top: 0;
       right: 0;
       width: 100%;
-      background-color: $aero;
+      background-color: $gradient;
       text-align: center;
       padding: .2rem;
       color: $white;
@@ -28,7 +28,6 @@
       font-weight: bold;
       z-index: 10;
     }
-
     .publicationTitle {
       font-size: 1.2em;
       text-align: left;
@@ -107,6 +106,7 @@
     .level,
     .typeOfGamer,
     .hours,
+    .age,
     .map {
       display: flex;
       flex-direction: column;
@@ -137,19 +137,12 @@
 
         li {
           text-align: center;
-          box-shadow: 0 0 2px $aero;
+          background-color: $gradient;
+          color: $white;
+          box-shadow: 0 0 2px $pennBlue;
           padding: .3rem;
           border-radius: .3rem;
         }
-      }
-    }
-
-    .level {
-      .levelBox {
-        text-align: center;
-        box-shadow: 0 0 2px $aero;
-        padding: 0.3rem 1rem;
-        border-radius: .3rem;
       }
     }
 
@@ -172,8 +165,8 @@
     }
 
     .typeOfGamer,
-    .level,
-    .hours {
+    .hours,
+    .age {
       flex-direction: row;
       align-items: center;
     }

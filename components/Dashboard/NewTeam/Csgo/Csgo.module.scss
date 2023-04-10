@@ -1,296 +1,329 @@
 @import '../../../../styles/colors.scss';
 
-.form {
-    background-color: white;
-    height: 80vh;
-    width: 100vw;
-    scroll-snap-type: Y mandatory;
-    overflow-y: scroll;
+.formBox {
+    position: fixed;
+    transform: translateY(100%);
+    z-index: 10;
+    transition: transform 1s;
 
-    &::-webkit-scrollbar {
-        width: .5rem;
-        height: 0px;
+    &[data-active=true] {
+        transform: translateY(0%);
     }
 
-    &::-webkit-scrollbar-track {
-        background: $pennBlue;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: $aero;
-        border-radius: 1rem;
-    }
-
-    @media screen and (min-width: 768px) {
-        width: 60vw;
-    }
-
-    .titleAndDescription {
+    .titleForm {
+        height: 5vh;
+        width: 100vw;
+        background-color: $aero;
+        color: $white;
+        font-size: 1.2em;
+        font-weight: bold;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: space-around;
-        height: 100%;
-        width: 100%;
-        scroll-snap-align: center;
+        padding-left: 1rem;
+        justify-content: flex-start;
 
-        label {
+        @media screen and (min-width: 768px) {
+            width: 60vw;
+        }
+    }
+
+    .form {
+        background-color: white;
+        height: 85vh;
+        width: 100vw;
+        scroll-snap-type: Y mandatory;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: .5rem;
+            height: 0px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: $pennBlue;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $aero;
+            border-radius: 1rem;
+        }
+
+        @media screen and (min-width: 768px) {
+            width: 60vw;
+        }
+
+        .titleAndDescription {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2rem;
+            justify-content: space-around;
+            height: 100%;
             width: 100%;
-            font-size: 1.2rem;
-            font-weight: bold;
-
-            .title,
-            .description {
-                border: 1px solid $aero;
-                resize: none;
-                width: 80%;
-                padding: 1rem;
-                border-radius: .5rem;
-
-                @media screen and (min-width: 768px) {
-                    width: 60%;
-                }
-            }
-        }
-    }
-
-    .position,
-    .level,
-    .hoursTypeOfGamerAge .typeOfGamer {
-        height: 100%;
-        scroll-snap-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-
-        .title {
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .inputBox {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            width: 90%;
-
-            @media screen and (min-width: 768px) {
-                width: 80%;
-                grid-template-columns: repeat(3, 1fr);
-                padding: 2rem;
-            }
+            scroll-snap-align: center;
 
             label {
-                border: 2px solid $aero;
-                padding: 1rem;
-                transition: background-color .5s, color .5s;
-                text-align: center;
-                font-weight: bold;
-                border-radius: .3rem;
-                width: 100%;
-                height: 100%;
                 display: flex;
-                justify-content: center;
+                flex-direction: column;
                 align-items: center;
-                cursor: pointer;
+                gap: 2rem;
+                width: 100%;
+                font-size: 1.2em;
+                font-weight: bold;
 
-                @media screen and (min-width: 768px) {
-                    padding: 1.5rem;
-                }
-            }
+                .title,
+                .description {
+                    border: 1px solid $aero;
+                    resize: none;
+                    width: 80%;
+                    padding: 1rem;
+                    border-radius: .5rem;
 
-            input {
-                appearance: none;
-                position: absolute;
-
-                &:checked+label {
-                    background-color: $pennBlue;
-                    color: $white;
+                    @media screen and (min-width: 768px) {
+                        width: 60%;
+                    }
                 }
             }
         }
-    }
 
-    .hoursTypeOfGamerAge {
-        height: 100%;
-        scroll-snap-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-
-        .hours,
-        .age {
-            width: 60%;
+        .position,
+        .level,
+        .hoursTypeOfGamerAge .typeOfGamer {
+            height: 100%;
+            scroll-snap-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
-            font-size: 1.2rem;
-            font-weight: bold;
 
-            input[type=range] {
-                appearance: none;
-                width: 80%;
-                height: .5rem;
-                background: $aero;
-                outline: none;
-                border-radius: 1rem;
-                margin: 1rem 0;
-
-                @media screen and (min-width: 768px) {
-                    width: 60%;
-                }
-
-                &::-webkit-slider-thumb {
-                    -webkit-appearance: none;
-                    appearance: none;
-                    width: 1rem;
-                    height: 1rem;
-                    background: $pennBlue;
-                    cursor: pointer;
-                    border-radius: 1rem;
-                }
+            .title {
+                font-weight: bold;
+                font-size: 1.2em;
             }
-        }
-
-        .typeOfGamer {
-            width: 80%;
-            height: auto;
-            scroll-snap-align: none;
 
             .inputBox {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 60%;
-            }
-        }
-    }
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                width: 90%;
 
-    .image {
-        height: 100%;
-        scroll-snap-align: center;
-        gap: 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        .title {
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        .principalImage {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 10rem;
-            height: 10rem;
-            position: relative;
-            border: 2px solid $aero;
-            border-radius: .5rem;
-            overflow: hidden;
-            cursor: pointer;
-
-            svg {
-                width: 3rem;
-                height: 3rem;
-            }
-
-            input {
-                display: none;
-            }
-
-            .previewImage {
-                position: absolute;
-                z-index: 1;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                img {
-                    width: 10rem;
-                    height: 10rem;
+                @media screen and (min-width: 768px) {
+                    width: 80%;
+                    grid-template-columns: repeat(3, 1fr);
+                    padding: 2rem;
                 }
 
-                button {
-                    position: absolute;
-                    background-color: transparent;
-                    box-shadow: 0px 0px 5px red;
-                    width: 3.5rem;
-                    height: 3.5rem;
-                    border-radius: 50%;
+                label {
+                    border: 2px solid $aero;
+                    padding: 1rem;
+                    transition: background-color .5s, color .5s;
+                    text-align: center;
+                    font-weight: bold;
+                    border-radius: .3rem;
+                    width: 100%;
+                    height: 100%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    transition: background-color 1s;
-                    overflow: hidden;
+                    cursor: pointer;
 
-                    &:hover {
-                        background-color: red;
+                    @media screen and (min-width: 768px) {
+                        padding: 1.5rem;
+                    }
+                }
+
+                input {
+                    appearance: none;
+                    position: absolute;
+
+                    &:checked+label {
+                        background-color: $pennBlue;
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        .hoursTypeOfGamerAge {
+            height: 100%;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+
+            .hours,
+            .age {
+                width: 60%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+                font-size: 1.2em;
+                font-weight: bold;
+
+                input[type=range] {
+                    appearance: none;
+                    width: 80%;
+                    height: .5rem;
+                    background: $aero;
+                    outline: none;
+                    border-radius: 1rem;
+                    margin: 1rem 0;
+
+                    @media screen and (min-width: 768px) {
+                        width: 60%;
+                    }
+
+                    &::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        width: 1rem;
+                        height: 1rem;
+                        background: $pennBlue;
+                        cursor: pointer;
+                        border-radius: 1rem;
+                    }
+                }
+            }
+
+            .typeOfGamer {
+                width: 80%;
+                height: auto;
+                scroll-snap-align: none;
+
+                .inputBox {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 60%;
+                }
+            }
+        }
+
+        .image {
+            height: 100%;
+            scroll-snap-align: center;
+            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+
+            .title {
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+
+            .principalImage {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 10rem;
+                height: 10rem;
+                position: relative;
+                border: 2px solid $aero;
+                border-radius: .5rem;
+                overflow: hidden;
+                cursor: pointer;
+
+                svg {
+                    width: 3rem;
+                    height: 3rem;
+                }
+
+                input {
+                    display: none;
+                }
+
+                .previewImage {
+                    position: absolute;
+                    z-index: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        width: 10rem;
+                        height: 10rem;
+                    }
+
+                    button {
+                        position: absolute;
+                        background-color: transparent;
+                        box-shadow: 0px 0px 5px red;
+                        width: 3.5rem;
+                        height: 3.5rem;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transition: background-color 1s;
+                        overflow: hidden;
+
+                        &:hover {
+                            background-color: red;
+
+                            svg {
+                                color: $white;
+                            }
+                        }
 
                         svg {
-                            color: $white;
+                            color: red;
+                            width: 3rem;
+                            height: 3rem;
+                            transition: color 1s;
                         }
                     }
+                }
+            }
 
-                    svg {
-                        color: red;
-                        width: 3rem;
-                        height: 3rem;
-                        transition: color 1s;
+            .teams {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin-bottom: 1rem;
+
+                @media screen and (min-width: 768px) {
+                    display: flex;
+                }
+
+                label {
+                    width: 5rem;
+                    height: 5rem;
+
+                    @media screen and (min-width: 768px) {
+                        width: 6rem;
+                        height: 6rem;
+
                     }
                 }
             }
         }
 
-        .teams {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1rem;
+        .buttons {
+            display: flex;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 5vh;
 
-            @media screen and (min-width: 768px) {
-                display: flex;
-            }
+            .submit,
+            .cancel {
+                z-index: 20;
+                padding: 0 .5rem;
+                background-color: $pennBlue;
+                color: $white;
+                border: none;
 
-            label {
-                width: 5rem;
-                height: 5rem;
-
-                @media screen and (min-width: 768px) {
-                    width: 6rem;
-                    height: 6rem;
-
+                &:disabled {
+                    background-color: gray;
+                    cursor: not-allowed;
                 }
             }
-        }
-    }
-
-    .submit {
-        position: absolute;
-        top: .5vh;
-        right: 1vw;
-        z-index: 20;
-        height: 4vh;
-        padding: 0 1rem;
-        background-color: $pennBlue;
-        color: $white;
-        border: none;
-        border-radius: .3rem;
-
-        @media screen and (min-width: 768px) {
-            right: 13vw;
-        }
-
-        &:disabled {
-            background-color: gray;
-            cursor: not-allowed;
+            .submit {
+                background-color: $gradient;
+            }
         }
     }
 }
