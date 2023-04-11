@@ -12,8 +12,10 @@ const City = () => {
   const router = useRouter()
   const { name } = router.query
   const csgo = useGetData('csgo')
+  const teams = useGetData('teams')
   const users = useGetData('users')
   const csgoFiltered = useCityFilterDistance(city, csgo, 100)
+  const teamsFiltered = useCityFilterDistance(city, teams, 100)
   const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(name)}&format=json&limit=1`
 
   useEffect(() => {
@@ -40,12 +42,12 @@ const City = () => {
 
   return (
     <Layout>
-      <section className={styles.city}>
-        <h1>{name}</h1>
-        <div className={styles.cardBox}>
+      <div className={styles.city}>
+        <section className={styles.cardBox}>
+          <h1 className={styles.title}>{name}</h1>
           {
-            csgoFiltered.length > 0 && (
-              csgoFiltered.map((res) => (
+            teamsFiltered.length > 0 && (
+              teamsFiltered.map((res) => (
                 <Card key={res.id} user={users} csgo={res} equip link='csgo' />
               ))
             )
@@ -64,9 +66,9 @@ const City = () => {
               ))
             )
           }
-        </div>
-        <CityMap city={city} />
-      </section>
+        </section>
+        <CityMap city={city} publication={csgoFiltered} users={users} />
+      </div>
     </Layout>
   )
 }

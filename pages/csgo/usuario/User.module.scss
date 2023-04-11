@@ -137,7 +137,8 @@
 
         li {
           text-align: center;
-          box-shadow: 0 0 2px $aero;
+          background-color: $aero;
+          color: $white;
           padding: .3rem;
           border-radius: .3rem;
         }
@@ -147,7 +148,8 @@
     .level {
       .levelBox {
         text-align: center;
-        box-shadow: 0 0 2px $aero;
+        background-color: $aero;
+        color: $white;
         padding: 0.3rem 1rem;
         border-radius: .3rem;
       }

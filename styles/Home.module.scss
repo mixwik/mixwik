@@ -8,9 +8,6 @@
   align-items: center;
   height: 90vh;
   width: 100%;
-  @media screen and (min-width: 768px) {
-    height: 85vh;
-  }
 
   h1 {
     font-size: 1.5em;
@@ -40,6 +37,59 @@
       justify-content: center;
       align-items: center;
       width: 100%;
+    }
+  }
+}
+
+.cities {
+  min-height: 100vh;
+  background-color: red;
+  background-image: url('../public/background/bgOrange.svg');
+
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    grid-column: 1/4;
+    padding: 2rem;
+    line-height: 2rem;
+  }
+
+  .citiesContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    place-items: center;
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+      
+    .madrid,
+    .barcelona,
+    .valencia,
+    .malaga {
+      width: 90%;
+      height: 35vh;
+      border-radius: .5rem;
+      cursor: pointer;
+      transition: transform .5s;
+      background-image: url('../public/cities/madrid.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+
+      &:hover {
+        transform: translateY(-10px);
+      }
+
+      div {
+        color: $white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+      }
     }
   }
 }

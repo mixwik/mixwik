@@ -35,7 +35,7 @@ import EditAge from '../../../components/EditPublication/EditAge'
 import EditTitle from '../../../components/EditPublication/EditTitle'
 import styles from './Team.module.scss'
 
-const User = () => {
+const Team = () => {
   const [edit, setEdit] = useState(false)
   const router = useRouter()
   const { id } = router.query
@@ -50,7 +50,7 @@ const User = () => {
   if (currentUser.length === 0) return <div>Loading...</div>
 
   const handleUpdatePosition = () => {
-    updatePublicationPosition('csgo', id, currentPosition)
+    updatePublicationPosition('teams', id, currentPosition)
   }
 
   const images = []
@@ -255,4 +255,4 @@ const User = () => {
   )
 }
 
-export default User
+export default Team
