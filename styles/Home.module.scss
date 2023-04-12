@@ -43,8 +43,8 @@
 
 .cities {
   min-height: 100vh;
-  background-color: red;
   background-image: url('../public/background/bgOrange.svg');
+  background-attachment: fixed;
 
   h2 {
     font-size: 2rem;
@@ -75,7 +75,7 @@
       transition: transform .5s;
       background-image: url('../public/cities/madrid.jpg');
       background-size: cover;
-      background-position: center;
+      background-position: bottom;
       position: relative;
 
       &:hover {
@@ -90,6 +90,15 @@
         text-align: center;
         padding: 1rem;
       }
+    }
+    .barcelona {
+      background-image: url('../public/cities/barcelona.jpg');
+    }
+    .valencia {
+      background-image: url('../public/cities/valencia.jpg');
+    }
+    .malaga {
+      background-image: url('../public/cities/malaga.jpg');
     }
   }
 }

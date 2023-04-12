@@ -11,6 +11,7 @@
         height: 90vh;
         overflow: scroll;
         background-image: url('../../public/background/bgDarkBlue.svg');
+        background-attachment: fixed;
         &::-webkit-scrollbar {
             display: none;
         }

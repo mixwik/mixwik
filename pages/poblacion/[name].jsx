@@ -14,8 +14,8 @@ const City = () => {
   const csgo = useGetData('csgo')
   const teams = useGetData('teams')
   const users = useGetData('users')
-  const csgoFiltered = useCityFilterDistance(city, csgo, 100)
-  const teamsFiltered = useCityFilterDistance(city, teams, 100)
+  const csgoFiltered = useCityFilterDistance(city, csgo, 30)
+  const teamsFiltered = useCityFilterDistance(city, teams, 30)
   const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(name)}&format=json&limit=1`
 
   useEffect(() => {
