@@ -65,7 +65,7 @@ const FormUserData = ({ method }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setNewUser(values, currentPosition, user)
+          setNewUser(values, currentPosition, user, imgURL || user.image)
           updateDataUser(values.name || user.name, imgURL || user.image)
           setTimeout(() => {
             setSubmitting(false)

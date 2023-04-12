@@ -29,6 +29,15 @@ export const updateUserMixWikTeams = async (payID, id, router) => {
   )
 }
 
+export const updateUserCobre = async (payID, id, router) => {
+  const userRef = doc(db, 'users', id)
+  await updateDoc(userRef, {
+    cobre: payID
+  }).then(
+    router.push('/')
+  )
+}
+
 export const updatePublicationPosition = async (name, id, currentPosition) => {
   console.log(currentPosition)
   const userRef = doc(db, name, id)

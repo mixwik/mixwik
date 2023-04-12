@@ -21,6 +21,7 @@ const Card = ({ user, csgo, teams, equip, link }) => {
   csgo.img7.url !== '' && images.push({ url: csgo.img7.url, name: csgo.img7.name })
 
   const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser.mixWikTeams)
+  const cobre = useMixWikTeamsCheckSubscription(csgoUser.cobre)
   if (teams && mixWikTeams) return null
   if (!teams && !mixWikTeams) return null
 
@@ -44,7 +45,7 @@ const Card = ({ user, csgo, teams, equip, link }) => {
 
   return (
     <Link target='_blanck' href={equip ? `/${link}/team/${csgo.id}` : `/${link}/usuario/${csgo.id}`}>
-      <section className={styles.card} data-teams={mixWikTeams} data-equip={equip}>
+      <section className={styles.card} data-teams={mixWikTeams} data-cobre={cobre} data-equip={equip}>
         <Head />
         <div className={styles.imgBox}>
           <Carousel

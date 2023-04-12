@@ -30,6 +30,7 @@ import { myLoader } from '../../../components/myLoader'
 import { EditIcon } from '../../../components/Svg'
 
 // styles
+import Link from 'next/link'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import EditTitle from '../../../components/EditPublication/EditTitle'
 import styles from './User.module.scss'
@@ -72,6 +73,12 @@ const User = () => {
               </div>
             )
           }
+          <div className={styles.profileUser} data-active={mixWikTeams}>
+            <Link target='_blanc' href={`/user/${currentUser.uid}`}>
+              <Image width={0} height={0} loader={myLoader} src={currentUser.profileImg} alt={`Imagen de perfil de ${currentUser.name}`} />
+              {currentUser.name}
+            </Link>
+          </div>
           <div className={styles.imgBox}>
             <Carousel
               className={styles.carousel}
@@ -231,6 +238,9 @@ const User = () => {
             }
             <UserMap user={currentUser} publication={currentCsgo} />
           </article>
+          {
+            limitedAdministrator && (<Link href={`https://buy.stripe.com/test_cN2g1DfD1di73xS149?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Cobre</Link>)
+          }
         </section>
       </div>
     </Layout>

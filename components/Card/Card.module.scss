@@ -17,6 +17,10 @@
     box-shadow: 0px 0px 5px $gradient;
   }
 
+  &[data-cobre=true] {
+    box-shadow: 0px 0px 5px purple;
+  }
+
   @media screen and (min-width: 768px) {
     width: 16vw;
   }
