@@ -1,3 +1,4 @@
+@import '../../styles/colors.scss';
 .user {
     display: flex;
     flex-direction: column;
@@ -5,4 +6,22 @@
     justify-content: flex-start;
     background-image: url('../../public/background/bg-gray.svg');
     min-height: 90vh;
+    .userData {
+        background-color: $white;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        gap: 1rem;
+        padding: 2rem;
+        border-radius: 0 0 .7rem .7rem;
+        @media screen and (min-width: 768px) {
+            width: 80vw;
+        }
+        img {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+        }
+    }
 }
