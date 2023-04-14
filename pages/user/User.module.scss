@@ -1,4 +1,5 @@
 @import '../../styles/colors.scss';
+
 .user {
     display: flex;
     flex-direction: column;
@@ -6,22 +7,77 @@
     justify-content: flex-start;
     background-image: url('../../public/background/bg-gray.svg');
     min-height: 90vh;
+
     .userData {
+        position: relative;
         background-color: $white;
         width: 100vw;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        font-weight: bold;
         gap: 1rem;
         padding: 2rem;
         border-radius: 0 0 .7rem .7rem;
+        
         @media screen and (min-width: 768px) {
+            align-items: flex-start;
             width: 80vw;
         }
-        img {
-            width: 5rem;
-            height: 5rem;
-            border-radius: 50%;
+        
+        .imageNameAge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: bold;
+
+            img {
+                width: 5rem;
+                height: 5rem;
+                border-radius: 50%;
+            }
+        }
+
+        .reportButton {
+            position: static;
+            right: 2rem;
+            top: 2rem;
+            background-color: red;
+            color: $white;
+            padding: .5rem;
+            border-radius: .5rem;
+
+            @media screen and (min-width: 768px) {
+                position: absolute;
+            }
+        }
+    }
+
+    .publications {
+        width: 100vw;
+        margin-bottom: 15vh;
+
+        @media screen and (min-width: 768px) {
+            margin-bottom: 5vh;
+            width: 80vw;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 2rem;
+        }
+
+        .publicationsBox {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            place-items: center;
+            width: 100%;
+            gap: 1rem 0;
+
+            @media screen and (min-width: 768px) {
+                grid-template-columns: repeat(6, 1fr);
+            }
         }
     }
 }

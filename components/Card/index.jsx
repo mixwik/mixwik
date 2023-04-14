@@ -4,12 +4,15 @@ import styles from './Card.module.scss'
 // Next Components
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
+import { CardLoader } from '../Loaders/CardLoader'
 import { myLoader } from '../myLoader'
 
 const Card = ({ user, csgo, teams, equip, link }) => {
+  const [loading, setLoadiang] = useState(true)
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const images = []
   csgo.img.url !== '' && images.push({ url: csgo.img.url, name: csgo.img.name })
@@ -22,8 +25,16 @@ const Card = ({ user, csgo, teams, equip, link }) => {
 
   const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser.mixWikTeams)
   const cobre = useMixWikTeamsCheckSubscription(csgoUser.cobre)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadiang(false)
+    }, 2000)
+  }, [])
+
   if (teams && mixWikTeams) return null
   if (!teams && !mixWikTeams) return null
+  if (loading) return <CardLoader />
 
   const Head = () => {
     if (mixWikTeams) {
