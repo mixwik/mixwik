@@ -8,7 +8,8 @@
     background-image: url('../../public/background/bg-gray.svg');
     min-height: 90vh;
 
-    .userData {
+    .userData,
+    .reportedUser {
         position: relative;
         background-color: $white;
         width: 100vw;
@@ -18,12 +19,13 @@
         gap: 1rem;
         padding: 2rem;
         border-radius: 0 0 .7rem .7rem;
-        
+
         @media screen and (min-width: 768px) {
             align-items: flex-start;
             width: 80vw;
+            height: 30vh;
         }
-        
+
         .imageNameAge {
             display: flex;
             align-items: center;
@@ -48,6 +50,20 @@
 
             @media screen and (min-width: 768px) {
                 position: absolute;
+            }
+        }
+    }
+
+    .reportedUser {
+        h1 {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        p {
+            span, 
+            a {
+                font-weight: bold;
             }
         }
     }

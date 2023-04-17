@@ -1,5 +1,7 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import Card from '../../components/Card'
 import Layout from '../../components/Layout'
 import { myLoader } from '../../components/myLoader'
@@ -8,6 +10,7 @@ import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import styles from './User.module.scss'
 
 const User = () => {
+  const [isOpen, setIsOpen] = useState(true)
   const router = useRouter()
   const { id } = router.query
   const user = useGetOneData('users', id)
@@ -17,17 +20,34 @@ const User = () => {
   return (
     <Layout>
       <div className={styles.user}>
-        <section className={styles.userData}>
-          <div className={styles.imageNameAge}>
-            <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
-            <div>
-              <h1>{user.name}</h1>
-              <p>{user.age} Años</p>
-            </div>
-          </div>
-          <p>{user.description}</p>
-          <button className={styles.reportButton}>Reportar Jugador</button>
-        </section>
+        {
+        isOpen
+          ? (
+            <section className={styles.userData}>
+              <div className={styles.imageNameAge}>
+                <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
+                <div>
+                  <h1>{user.name}</h1>
+                  <p>{user.age} Años</p>
+                </div>
+              </div>
+              <p>{user.description}</p>
+              <button onClick={() => setIsOpen(!isOpen)} className={styles.reportButton}>
+                Reportar Jugador
+              </button>
+            </section>
+            )
+          : (
+            <section className={styles.reportedUser}>
+              <h1>Reportar Jugador</h1>
+              <p>¿<span>{user.name}</span> ha cometido una infracción o actos reprobables?</p>
+              <p>Envía un email a <Link href='mailto:infomixwik@gmail.com'>infomixwik@gmail.com</Link> aportando las pruebas de su mala conducta y valoraremos la sanción pertinente</p>
+              <button onClick={() => setIsOpen(!isOpen)} className={styles.reportButton}>
+                Cancelar Reporte
+              </button>
+            </section>
+            )
+         }
         <section className={styles.publications}>
           <h2>Publicaciones</h2>
           <div className={styles.publicationsBox}>
