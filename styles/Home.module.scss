@@ -46,13 +46,14 @@
   background-image: url('../public/background/bg-orange.svg');
   background-attachment: fixed;
 
-  h2 {
+  .title {
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
     grid-column: 1/4;
     padding: 2rem;
     line-height: 2rem;
+    color: $white;
   }
 
   .citiesContainer {
@@ -67,7 +68,9 @@
     .madrid,
     .barcelona,
     .valencia,
-    .malaga {
+    .malaga,
+    .zaragoza,
+    .murcia {
       width: 90%;
       height: 35vh;
       border-radius: .5rem;
@@ -77,6 +80,7 @@
       background-size: cover;
       background-position: bottom;
       position: relative;
+      text-shadow: 0px 0px 5px $aero;
 
       &:hover {
         transform: translateY(-10px);
@@ -99,6 +103,35 @@
     }
     .malaga {
       background-image: url('../public/cities/malaga.jpg');
+    }
+    .zaragoza {
+      background-image: url('../public/cities/zaragoza.webp');
+    }
+    .murcia {
+      background-image: url('../public/cities/murcia.jpg');
+    }
+  }
+
+  .searchCity {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 2rem;
+    input {
+      padding: 1rem;
+      border: 1px solid $aero;
+    }
+    button {
+      padding: 1rem;
+      border: 1px solid $aero;
+      background-color: $aero;
+      color: $white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color .5s;
+      &:hover {
+        background-color: $pennBlue;
+      }
     }
   }
 }

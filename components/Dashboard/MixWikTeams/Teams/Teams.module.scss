@@ -17,9 +17,8 @@
         }
 
         li {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr 5fr;
             width: 100%;
             gap: 1rem;
 

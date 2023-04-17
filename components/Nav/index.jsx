@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 // Images
-import { Company, ContactUs, UserIcon, UserIconLogin } from '../../components/Svg'
+import { AddPublication, Company, ContactUs, UserIcon, UserIconLogin } from '../../components/Svg'
 import logo from '../../public/logos/mixwik-logo.png'
 import { myLoader } from '../myLoader'
 
@@ -39,6 +39,12 @@ const Nav = () => {
         </div>
         <div className={styles.logIn}>
           <ul className={styles.links}>
+            <li>
+              <Link href='/dashboard?page=newPublication'>
+                <AddPublication />
+                Añadir publicación
+              </Link>
+            </li>
             <li>
               <Link href='/sobre-nosotros'>
                 <Company />
