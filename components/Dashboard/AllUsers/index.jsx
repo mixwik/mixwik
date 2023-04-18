@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useGetData } from '../../../firebase/hooks/getMethod/useGetData'
 import styles from './Users.module.scss'
 
-const Users = () => {
+const AllUsers = () => {
   const [search, setSearch] = useState('')
   const users = useGetData('users')
 
@@ -37,4 +37,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default AllUsers

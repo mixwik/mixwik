@@ -25,8 +25,8 @@ import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
 import { useRouter } from 'next/router'
+import AllUsers from '../../components/Dashboard/AllUsers'
 import NewTeam from '../../components/Dashboard/NewTeam'
-import Users from '../../components/Dashboard/users'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
@@ -68,7 +68,7 @@ export default function Dashboard () {
         {page === 'myPublications' && <MyPublications user={currentUser} />}
         {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}
         {page === 'teams' && <NewTeam mixWikTeams={mixWikTeams} user={currentUser} />}
-        {page === 'users' && <Users mixWikTeams={mixWikTeams} />}
+        {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -125,8 +125,8 @@ export default function Dashboard () {
             {
               (user.uid === master1 || user.uid === master2) && (
                 <li
-                  data-isActive={page === 'users'}
-                  onClick={() => handleClick('users')}
+                  data-isActive={page === 'allUsers'}
+                  onClick={() => handleClick('allUsers')}
                 >
                   Usuarios
                 </li>
