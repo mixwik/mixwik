@@ -26,6 +26,7 @@ import iconMixWik from '../../public/logos/icon-logo.png'
 // hooks
 import { useRouter } from 'next/router'
 import NewTeam from '../../components/Dashboard/NewTeam'
+import Users from '../../components/Dashboard/users'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
@@ -54,6 +55,8 @@ export default function Dashboard () {
   const user = useSession()
   const currentUser = useGetOneData('users', user.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
+  const master1 = process.env.NEXT_PUBLIC_MASTER1
+  const master2 = process.env.NEXT_PUBLIC_MASTER2
   if (toggle === 'loading') return <div>Loading...</div>
   if (currentUser.length === 0) return <NewUser />
 
@@ -65,6 +68,7 @@ export default function Dashboard () {
         {page === 'myPublications' && <MyPublications user={currentUser} />}
         {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}
         {page === 'teams' && <NewTeam mixWikTeams={mixWikTeams} user={currentUser} />}
+        {page === 'users' && <Users mixWikTeams={mixWikTeams} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -118,6 +122,16 @@ export default function Dashboard () {
               <Image src={iconMixWik} alt='Icono del logo MixWik' />
               MixWik Teams
             </li>
+            {
+              (user.uid === master1 || user.uid === master2) && (
+                <li
+                  data-isActive={page === 'users'}
+                  onClick={() => handleClick('users')}
+                >
+                  Usuarios
+                </li>
+              )
+            }
             <li
               onClick={() => handleSignOut()}
             >

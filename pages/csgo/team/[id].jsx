@@ -35,6 +35,9 @@ import EditAge from '../../../components/EditPublication/EditAge'
 import EditTitle from '../../../components/EditPublication/EditTitle'
 import styles from './Team.module.scss'
 
+// Images
+import background from '../../../public/bg/bg_gray.jpg'
+
 const Team = () => {
   const [edit, setEdit] = useState(false)
   const router = useRouter()
@@ -65,6 +68,7 @@ const Team = () => {
   return (
     <Layout>
       <div className={styles.user}>
+        <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className={styles.background} />
         <section className={styles.userBox}>
           <div className={styles.equip}>
             Team

@@ -5,6 +5,13 @@
   justify-content: center;
   width: 100%;
   color: $black;
+  position: relative;
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .userBox {
     width: 100vw;
@@ -224,5 +231,14 @@
         border: 1px solid $aero;
       }
     }
+  }
+  .masterDelete {
+    position: fixed;
+    right: 2rem;
+    bottom: 6rem;
+    background-color: violet;
+    padding: 1rem;
+    z-index: 10;
+    font-weight: bold;
   }
 }

@@ -1,5 +1,6 @@
 // Next Components
 import Image from 'next/image'
+import Link from 'next/link'
 
 // Edit components
 import EditLevel from '../../../components/EditPublication/Csgo/EditLevel'
@@ -22,6 +23,7 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 
 // Components
 import { Carousel } from 'react-responsive-carousel'
+import EditTitle from '../../../components/EditPublication/EditTitle'
 import Layout from '../../../components/Layout'
 import UserMap from '../../../components/UserMap'
 import { myLoader } from '../../../components/myLoader'
@@ -30,10 +32,12 @@ import { myLoader } from '../../../components/myLoader'
 import { EditIcon } from '../../../components/Svg'
 
 // styles
-import Link from 'next/link'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import EditTitle from '../../../components/EditPublication/EditTitle'
 import styles from './User.module.scss'
+
+// Images
+import { deletePublication } from '../../../firebase/hooks/deleteMethod'
+import background from '../../../public/bg/bg_gray.jpg'
 
 const User = () => {
   const [edit, setEdit] = useState(false)
@@ -62,9 +66,19 @@ const User = () => {
   currentCsgo.img6.url !== '' && images.push(currentCsgo.img6.url)
   currentCsgo.img7.url !== '' && images.push(currentCsgo.img7.url)
 
+  const master1 = process.env.NEXT_PUBLIC_MASTER1
+  const master2 = process.env.NEXT_PUBLIC_MASTER2
+
+  const handleDelete = () => {
+    if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
+      deletePublication('csgo', id, currentUser.id)
+    }
+  }
+
   return (
     <Layout>
       <div className={styles.user}>
+        <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className={styles.background} />
         <section className={styles.userBox}>
           {
             mixWikTeams && (
@@ -242,6 +256,11 @@ const User = () => {
             limitedAdministrator && (<Link href={`https://buy.stripe.com/test_cN2g1DfD1di73xS149?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Cobre</Link>)
           }
         </section>
+        {
+          (master1 === user.uid || master2 === user.uid) && (
+            <button className={styles.masterDelete} onClick={handleDelete}>Eliminar</button>
+          )
+        }
       </div>
     </Layout>
   )
