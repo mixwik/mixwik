@@ -10,12 +10,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 // Images
-import { AddPublication, Company, ContactUs, UserIcon, UserIconLogin } from '../../components/Svg'
+import { Company, ContactUs, UserIcon, UserIconLogin } from '../../components/Svg'
 import logo from '../../public/logos/mixwik-logo.png'
 import { myLoader } from '../myLoader'
 
 // Log In
 import { useSession } from '../../firebase/auth/useSession'
+import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
 import LogIn from '../LogIn'
 
 const Nav = () => {
@@ -28,6 +29,20 @@ const Nav = () => {
   const [transparent, setTransparent] = useState(false)
 
   const user = useSession()
+  const users = useGetData('users')
+
+  users.forEach(userb => {
+    if (userb.ban) {
+      if (userb.uid === user.uid) {
+        router.push('/ban')
+      }
+    }
+    if (userb.admonition >= 3) {
+      if (userb.uid === user.uid) {
+        router.push('/ban')
+      }
+    }
+  })
 
   return (
     <>
@@ -39,12 +54,6 @@ const Nav = () => {
         </div>
         <div className={styles.logIn}>
           <ul className={styles.links}>
-            <li>
-              <Link href='/dashboard?page=newPublication'>
-                <AddPublication />
-                Añadir publicación
-              </Link>
-            </li>
             <li>
               <Link href='/sobre-nosotros'>
                 <Company />

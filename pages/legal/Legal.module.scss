@@ -1,9 +1,11 @@
 @import '../../styles/colors.scss';
 
 .politics {
-  width: 100vw;
+  width: 100%;
   color: $black;
   padding: 1rem;
+  background-image: url('../../public/bg/bg_gray.jpg');
+  background-size: contain;
 
   @media screen and (min-width: 768px) {
     padding: 1rem 20vw;

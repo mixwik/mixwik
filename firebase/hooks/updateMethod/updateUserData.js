@@ -20,6 +20,23 @@ export const updateUserNumberPublications = async (id, number) => {
   })
 }
 
+export const updateUserBan = async (id, bool) => {
+  const userRef = doc(db, 'users', id)
+  await updateDoc(userRef, {
+    ban: bool
+  }).then(() => {
+    location.reload()
+  })
+}
+export const updateUserAdmonition = async (id, number) => {
+  const userRef = doc(db, 'users', id)
+  await updateDoc(userRef, {
+    admonition: increment(number)
+  }).then(() => {
+    location.reload()
+  })
+}
+
 export const updateUserMixWikTeams = async (payID, id, router) => {
   const userRef = doc(db, 'users', id)
   await updateDoc(userRef, {

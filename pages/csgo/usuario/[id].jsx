@@ -16,7 +16,7 @@ import { useState } from 'react'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
-import { updatePublicationPosition } from '../../../firebase/hooks/updateMethod/updateUserData'
+import { updatePublicationPosition, updateUserAdmonition } from '../../../firebase/hooks/updateMethod/updateUserData'
 import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
@@ -72,6 +72,7 @@ const User = () => {
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
       deletePublication('csgo', id, currentUser.id)
+      updateUserAdmonition(currentUser.id, 1)
     }
   }
 

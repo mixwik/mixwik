@@ -11,6 +11,12 @@ export const setNewUser = async (value, geometry, user, profileImg) => {
     geometry,
     uid: user.uid,
     email: user.email,
-    profileImg
+    profileImg,
+    ban: false,
+    admonition: 0,
+    csgoPublications: 0,
+    fortnitePublications: 0,
+    valorantPublications: 0,
+    lolPublications: 0
   })
 }

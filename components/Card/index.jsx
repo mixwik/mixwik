@@ -34,6 +34,7 @@ const Card = ({ user, csgo, teams, equip, link }) => {
 
   if (teams && mixWikTeams) return null
   if (!teams && !mixWikTeams) return null
+  if (csgoUser.ban) return null
   if (loading) return <CardLoader />
 
   const Head = () => {

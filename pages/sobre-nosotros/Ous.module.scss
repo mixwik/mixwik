@@ -3,14 +3,16 @@
   flex-direction: column;
   min-height: 90vh;
   align-items: center;
-  gap: 2rem;
-  padding: 1rem 0;
+  gap: 1rem;
+  padding: 2rem 1rem;
   margin-bottom: 15vh;
+  background-image: url('../../public/bg/bg_gray.jpg');
+  background-size: cover;
 
   @media screen and (min-width: 768px) {
     gap: 0;
     padding: 0;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
 
   h1 {
@@ -22,7 +24,7 @@
     width: 90vw;
 
     @media screen and (min-width: 768px) {
-      width: 60vw
+      width: 50vw
     }
   }
 }

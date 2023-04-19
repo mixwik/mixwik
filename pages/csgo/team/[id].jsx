@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
-import { updatePublicationPosition } from '../../../firebase/hooks/updateMethod/updateUserData'
+import { updatePublicationPosition, updateUserAdmonition } from '../../../firebase/hooks/updateMethod/updateUserData'
 import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
@@ -36,6 +36,8 @@ import EditTitle from '../../../components/EditPublication/EditTitle'
 import styles from './Team.module.scss'
 
 // Images
+import Link from 'next/link'
+import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.jpg'
 
 const Team = () => {
@@ -65,6 +67,16 @@ const Team = () => {
   currentCsgo.img6.url !== '' && images.push(currentCsgo.img6.url)
   currentCsgo.img7.url !== '' && images.push(currentCsgo.img7.url)
 
+  const master1 = process.env.NEXT_PUBLIC_MASTER1
+  const master2 = process.env.NEXT_PUBLIC_MASTER2
+
+  const handleDelete = () => {
+    if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
+      deletePublication('teams', id, currentUser.id)
+      updateUserAdmonition(currentUser.id, 1)
+    }
+  }
+
   return (
     <Layout>
       <div className={styles.user}>
@@ -72,6 +84,12 @@ const Team = () => {
         <section className={styles.userBox}>
           <div className={styles.equip}>
             Team
+          </div>
+          <div className={styles.profileUser} data-active={mixWikTeams}>
+            <Link target='_blanc' href={`/user/${currentUser.uid}`}>
+              <Image width={0} height={0} loader={myLoader} src={currentUser.profileImg} alt={`Imagen de perfil de ${currentUser.name}`} />
+              {currentUser.name}
+            </Link>
           </div>
           <div className={styles.imgBox}>
             <Carousel
@@ -254,6 +272,11 @@ const Team = () => {
             <UserMap user={currentUser} publication={currentCsgo} />
           </article>
         </section>
+        {
+          (master1 === user.uid || master2 === user.uid) && (
+            <button className={styles.masterDelete} onClick={handleDelete}>Eliminar</button>
+          )
+        }
       </div>
     </Layout>
   )
