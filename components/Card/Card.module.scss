@@ -17,7 +17,7 @@
     box-shadow: 0px 0px 5px $gradient;
   }
 
-  &[data-cobre=true] {
+  &[data-promotion=true] {
     box-shadow: 0px 0px 5px purple;
   }
 
@@ -29,7 +29,7 @@
     width: 12vw;
   }
 
-  .teams, .equip {
+  .teams, .equip, .promotion {
     position: absolute;
     top: 0;
     left: 0;
@@ -43,6 +43,9 @@
   }
   .equip {
     background-color: $gradient;
+  }
+  .promotion {
+    background-color: purple;
   }
 
   .imgBox {

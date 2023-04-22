@@ -36,6 +36,7 @@ const Csgo = () => {
 
   // filter users list with different filters
   const listUserCsgo = useUserCsgoFilters(user, csgo, distance)
+  const listUserTeams = useUserCsgoFilters(user, teams, distance)
 
   return (
     <Layout>
@@ -49,8 +50,17 @@ const Csgo = () => {
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {
-              teams.length > 0 && (
-                teams.map((res) => (
+              csgo.length > 0 && (
+                csgo.map((res) => (
+                  res.promotion && (
+                    <Card key={res.id} user={users} csgo={res} link='csgo' promotions />
+                  )
+                ))
+              )
+            }
+            {
+              listUserTeams.length > 0 && (
+                listUserTeams.map((res) => (
                   <Card key={res.id} user={users} csgo={res} link='csgo' equip />
                 ))
               )

@@ -11,7 +11,7 @@ import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { CardLoader } from '../Loaders/CardLoader'
 import { myLoader } from '../myLoader'
 
-const Card = ({ user, csgo, teams, equip, link }) => {
+const Card = ({ user, csgo, teams, equip, promotions, link }) => {
   const [loading, setLoadiang] = useState(true)
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const images = []
@@ -24,7 +24,7 @@ const Card = ({ user, csgo, teams, equip, link }) => {
   csgo.img7.url !== '' && images.push({ url: csgo.img7.url, name: csgo.img7.name })
 
   const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser.mixWikTeams)
-  const cobre = useMixWikTeamsCheckSubscription(csgoUser.cobre)
+  const promotion = useMixWikTeamsCheckSubscription(csgo.promotion)
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,6 +35,8 @@ const Card = ({ user, csgo, teams, equip, link }) => {
   if (teams && mixWikTeams) return null
   if (!teams && !mixWikTeams) return null
   if (csgoUser.ban) return null
+  if (promotion && !promotions) return null
+  if (!promotion && promotions) return null
   if (loading) return <CardLoader />
 
   const Head = () => {
@@ -43,6 +45,12 @@ const Card = ({ user, csgo, teams, equip, link }) => {
         return (
           <div className={styles.equip}>
             Team
+          </div>
+        )
+      } else if (promotion) {
+        return (
+          <div className={styles.promotion}>
+            Promocionada
           </div>
         )
       } else {
@@ -57,7 +65,7 @@ const Card = ({ user, csgo, teams, equip, link }) => {
 
   return (
     <Link target='_blanck' href={equip ? `/${link}/team/${csgo.id}` : `/${link}/usuario/${csgo.id}`}>
-      <section className={styles.card} data-teams={mixWikTeams} data-cobre={cobre} data-equip={equip}>
+      <section className={styles.card} data-teams={mixWikTeams} data-promotion={promotion} data-equip={equip}>
         <Head />
         <div className={styles.imgBox}>
           <Carousel

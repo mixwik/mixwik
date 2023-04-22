@@ -50,6 +50,12 @@ export const updateUserCobre = async (payID, id, router) => {
   const userRef = doc(db, 'users', id)
   await updateDoc(userRef, {
     cobre: payID
+  })
+}
+export const updatePublicationCobre = async (name, payID, id, router) => {
+  const userRef = doc(db, name, id)
+  await updateDoc(userRef, {
+    promotion: payID
   }).then(
     router.push('/')
   )
