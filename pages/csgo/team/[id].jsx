@@ -38,7 +38,7 @@ import styles from './Team.module.scss'
 // Images
 import Link from 'next/link'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
-import background from '../../../public/bg/bg_gray.jpg'
+import background from '../../../public/bg/bg_gray.svg'
 
 const Team = () => {
   const [edit, setEdit] = useState(false)

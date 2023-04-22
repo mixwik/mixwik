@@ -1,6 +1,6 @@
+import { Analytics } from '@vercel/analytics/react'
 import DataProvider from '../context'
 import '../styles/globals.scss'
-
 const NoPrivate = ({ children }) => <>{children}</>
 
 function MyApp ({ Component, pageProps }) {
@@ -9,6 +9,7 @@ function MyApp ({ Component, pageProps }) {
     <DataProvider>
       <Auth>
         <Component {...pageProps} />
+        <Analytics />
       </Auth>
     </DataProvider>
   )
