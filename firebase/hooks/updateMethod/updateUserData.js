@@ -46,13 +46,28 @@ export const updateUserMixWikTeams = async (payID, id, router) => {
   )
 }
 
-export const updateUserCobre = async (payID, id, router) => {
+export const updateUserCopper = async (payID, id) => {
   const userRef = doc(db, 'users', id)
   await updateDoc(userRef, {
     cobre: payID
   })
 }
-export const updatePublicationCobre = async (name, payID, id, router) => {
+
+export const updateUserSilver = async (payID, id) => {
+  const userRef = doc(db, 'users', id)
+  await updateDoc(userRef, {
+    plata: payID
+  })
+}
+
+export const updateUserGold = async (payID, id) => {
+  const userRef = doc(db, 'users', id)
+  await updateDoc(userRef, {
+    oro: payID
+  })
+}
+
+export const updatePublicationPromotion = async (name, payID, id, router) => {
   const userRef = doc(db, name, id)
   await updateDoc(userRef, {
     promotion: payID

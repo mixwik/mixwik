@@ -61,7 +61,7 @@ export const useMixWikTeamsCheckSubscriptionFunction = () => {
   return checkSubscription
 }
 
-export const useCancelRenovationSubscription = () => {
+export const useCancelRenovationSubscription = (reload) => {
   const stripe = new Stripe('sk_test_51MhVdvEcw1KUgUdkaOYwTkXI17zpPW6BQixTZhI8yXSBIpGYkS6hF8QLpVrHTUvWB7DdX8rXva9geWEFumGEPqcJ00aXbUDaq2')
 
   const cancelSubscription = async (stripeId) => {
@@ -72,7 +72,7 @@ export const useCancelRenovationSubscription = () => {
     if (activeSubscription) {
       await stripe.subscriptions.update(activeSubscription.id, { cancel_at_period_end: true })
         .then(() => {
-          location.reload()
+          if (reload) location.reload()
         })
     }
   }

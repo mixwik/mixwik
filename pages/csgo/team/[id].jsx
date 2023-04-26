@@ -37,10 +37,12 @@ import styles from './Team.module.scss'
 
 // Images
 import Link from 'next/link'
+import PromotionMethods from '../../../components/PromotionMethods'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
 
 const Team = () => {
+  const [open , setOpen] = useState(false)
   const [edit, setEdit] = useState(false)
   const router = useRouter()
   const { id } = router.query
@@ -50,6 +52,7 @@ const Team = () => {
   const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
+  const promotion = useMixWikTeamsCheckSubscription(currentCsgo.mixWikTeams)
 
   if (currentCsgo.length === 0) return <div>Loading...</div>
   if (currentUser.length === 0) return <div>Loading...</div>
@@ -271,6 +274,11 @@ const Team = () => {
             }
             <UserMap user={currentUser} publication={currentCsgo} />
           </article>
+          <PromotionMethods 
+            limitedAdministrator={limitedAdministrator} 
+            promotion={promotion}
+            currentUser={currentUser}
+          />
         </section>
         {
           (master1 === user.uid || master2 === user.uid) && (

@@ -36,11 +36,13 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import styles from './User.module.scss'
 
 // Images
+import PromotionMethods from '../../../components/PromotionMethods'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
 
 const User = () => {
   const [edit, setEdit] = useState(false)
+  const [open, setOpen] = useState(false)
   const router = useRouter()
   const { id } = router.query
   const user = useSession()
@@ -49,6 +51,7 @@ const User = () => {
   const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
+  const promotion = useMixWikTeamsCheckSubscription(currentCsgo.promotion)
 
   if (currentCsgo.length === 0) return <div>Loading...</div>
   if (currentUser.length === 0) return <div>Loading...</div>
@@ -253,9 +256,11 @@ const User = () => {
             }
             <UserMap user={currentUser} publication={currentCsgo} />
           </article>
-          {
-            limitedAdministrator && (<Link href={`https://buy.stripe.com/test_cN2g1DfD1di73xS149?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Cobre</Link>)
-          }
+          <PromotionMethods 
+            limitedAdministrator={limitedAdministrator} 
+            promotion={promotion}
+            currentUser={currentUser}
+          />
         </section>
         {
           (master1 === user.uid || master2 === user.uid) && (

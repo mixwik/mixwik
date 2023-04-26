@@ -1,24 +1,40 @@
+// Styles
+import styles from './Cobre.module.scss'
+
+// React
+import { useEffect } from 'react'
+
+// NextJS Components
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { myLoader } from '../../components/myLoader'
+
+// Firebase
 import PrivateRoute from '../../firebase/auth/PrivateRoute'
 import { useSession } from '../../firebase/auth/useSession'
 import { useGetMyPublications } from '../../firebase/hooks/getMethod/useGetMyPublications'
+import { updatePublicationPromotion, updateUserCopper, updateUserGold, updateUserSilver } from '../../firebase/hooks/updateMethod/updateUserData'
+
+// Components
+import { myLoader } from '../../components/myLoader'
+
+// Hooks
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
-import { updatePublicationCobre, updateUserCobre } from '../../firebase/hooks/updateMethod/updateUserData'
 import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChecksStripe'
-import styles from './Cobre.module.scss'
-const Cobre = () => {
+
+const Promotion = () => {
   const router = useRouter()
-  const { id } = router.query
+  const { id, method } = router.query
   const currentUser = useSession()
   const user = useGetOneData('users', currentUser.uid)
   const stripeId = useCheckPay(id, currentUser.email)
   const csgo = useGetMyPublications('csgo', currentUser.uid)
   const teams = useGetMyPublications('teams', currentUser.uid)
-  if (stripeId && user.id) updateUserCobre(stripeId, user.id, router)
+  const cancelSubscription = useCancelRenovationSubscription()
+  
+  if (stripeId && user.id && method === '2m25S789gDS8') updateUserCopper(stripeId, user.id, router)
+  if (stripeId && user.id && method === '236dgER88954SE') updateUserSilver(stripeId, user.id, router)
+  if (stripeId && user.id && method === '89SD568ed45SDEj') updateUserGold(stripeId, user.id, router)
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -36,12 +52,11 @@ const Cobre = () => {
     }
   }, [])
 
-  const cancelSuscription = useCancelRenovationSubscription()
 
   const handleSetCobre = (name, payID, id) => {
     if (window.confirm('¿Estás seguro de aplicar la promoción a esta publicación?')) {
-      cancelSuscription(payID)
-      updatePublicationCobre(name, payID, id, router)
+      cancelSubscription(payID)
+      updatePublicationPromotion(name, payID, id, router)
     }
   }
 
@@ -103,6 +118,6 @@ const Cobre = () => {
   )
 }
 
-export default Cobre
+export default Promotion
 
-Cobre.Auth = PrivateRoute
+Promotion.Auth = PrivateRoute
