@@ -61,14 +61,14 @@ const Csgo = () => {
             {
               listUserTeams.length > 0 && (
                 listUserTeams.map((res) => (
-                  <Card key={res.id} user={users} csgo={res} link='csgo' equip />
+                  <Card key={res.id} user={users} csgo={res} link='csgo' equips />
                 ))
               )
             }
             {
               listUserCsgo.length > 0 && (
                 listUserCsgo.map((res) => (
-                  <Card key={res.id} user={users} csgo={res} link='csgo' />
+                  <Card key={res.id} user={users} csgo={res} link='csgo' teams />
                 ))
               )
             }
@@ -76,7 +76,7 @@ const Csgo = () => {
               listUserCsgo.length > 0
                 ? (
                     listUserCsgo.map((res) => (
-                      <Card key={res.id} user={users} csgo={res} link='csgo' teams />
+                      <Card key={res.id} user={users} csgo={res} link='csgo' basic />
                     ))
                   )
                 : (

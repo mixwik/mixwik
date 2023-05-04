@@ -11,7 +11,7 @@ import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { CardLoader } from '../Loaders/CardLoader'
 import { myLoader } from '../myLoader'
 
-const Card = ({ user, csgo, teams, equip, promotions, link }) => {
+const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
   const [loading, setLoadiang] = useState(true)
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const images = []
@@ -32,22 +32,21 @@ const Card = ({ user, csgo, teams, equip, promotions, link }) => {
     }, 2000)
   }, [])
 
-  if (teams && mixWikTeams) return null
-  if (!teams && !mixWikTeams) return null
-  if (csgoUser.ban) return null
-  if (promotion && !promotions) return null
-  if (!promotion && promotions) return null
+  if (equips && !mixWikTeams) return null
+  if (teams && !mixWikTeams) return null
+  if (promotions && !promotion) return null
+  if (basic && (mixWikTeams || promotion)) return null
   if (loading) return <CardLoader />
 
   const Head = () => {
     if (mixWikTeams) {
-      if (equip) {
+      if (equips) {
         return (
-          <div className={styles.equip}>
+          <div className={styles.equips}>
             Team
           </div>
         )
-      } else if (promotion) {
+      } else if (promotions) {
         return (
           <div className={styles.promotion}>
             Promocionada
@@ -60,12 +59,20 @@ const Card = ({ user, csgo, teams, equip, promotions, link }) => {
           </div>
         )
       }
+    } else {
+      if (promotions) {
+        return (
+          <div className={styles.promotion}>
+            Promocionada
+          </div>
+        )
+      }
     }
   }
 
   return (
-    <Link target='_blanck' href={equip ? `/${link}/team/${csgo.id}` : `/${link}/usuario/${csgo.id}`}>
-      <section className={styles.card} data-teams={mixWikTeams} data-promotion={promotion} data-equip={equip}>
+    <Link target='_blanck' href={equips ? `/${link}/team/${csgo.id}` : `/${link}/usuario/${csgo.id}`}>
+      <section className={styles.card} data-teams={mixWikTeams} data-promotion={promotion} data-equips={equips}>
         <Head />
         <div className={styles.imgBox}>
           <Carousel
