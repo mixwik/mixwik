@@ -7,7 +7,10 @@ export const updateUserData = async (id, data) => {
     name: data.name,
     age: data.age,
     gender: data.gender,
-    description: data.description
+    description: data.description,
+    social: {
+      twitter: data.twitter
+    }
   })
 }
 

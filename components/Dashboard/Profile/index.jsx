@@ -10,8 +10,8 @@ import { useState } from 'react'
 import { useUpdateDataUser } from '../../../firebase/auth/updateDataUser'
 import { useSession } from '../../../firebase/auth/useSession'
 import { removeImageDB, setImageDB } from '../../../firebase/storage'
-import { myLoader } from '../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../Svg'
+import { myLoader } from '../../myLoader'
 
 const Profile = ({ user }) => {
   const [previewImage, setPreviewImage] = useState()
@@ -41,7 +41,16 @@ const Profile = ({ user }) => {
     name: user.name,
     age: user.age,
     gender: user.gender,
-    description: user.description || ''
+    description: user.description || '',
+    social: {
+      discord: user.social?.discord || '',
+      twitter: user.social?.twitter || ''
+    }
+  }
+
+  const REGEX = {
+    discord: /^https?:\/\/discord\.gg\/[a-zA-Z0-9]+$/,
+    twitter: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)$/
   }
 
   return (
@@ -63,6 +72,12 @@ const Profile = ({ user }) => {
               if (typeof (values.age) !== 'number') errors.age = 'Sólo se admiten números'
               if (values.age < 16) errors.age = 'MixWix es solo para mayores de 16 años'
               if (values.age > 90) errors.age = 'La edad introducida no es válida'
+              if (values.discord) {
+                if (!REGEX.discord.test(values.discord)) errors.discord = 'El formato de discord no es válido'
+              }
+              if (values.twitter) {
+                if (!REGEX.twitter.test(values.discord)) errors.twitter = 'El formato de twitter no es válido'
+              }
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
@@ -152,6 +167,26 @@ const Profile = ({ user }) => {
                     <div className={styles.counter}>{values.description.length > 0 ? values.description.length : 0}/350</div>
                   </div>
                   <ErrorMessage className={styles.error} name='description' component='span' />
+                </div>
+                <div className={styles.group}>
+                  <div className={styles.socialBox}>
+                    <label className={styles.social}>
+                      Discord:
+                      <Field
+                        type='text'
+                        name='discord'
+                      />
+                    </label>
+                    <label className={styles.social}>
+                      Twitter:
+                      <Field
+                        type='text'
+                        name='twitter'
+                      />
+                    </label>
+                  </div>
+                  <ErrorMessage className={styles.error} name='twitter' component='span' />
+                  <ErrorMessage className={styles.error} name='discord' component='span' />
                 </div>
                 <p className={styles.paragraph}>Información Privada</p>
                 <div className={styles.genderBox}>

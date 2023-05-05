@@ -119,10 +119,12 @@
             }
           }
 
-          .descriptionBox {
+          .descriptionBox,
+          .socialBox {
             position: relative;
 
-            .description {
+            .description,
+            .social {
               display: grid;
               grid-template-columns: 1fr 2fr;
 
@@ -141,6 +143,12 @@
               right: .5rem;
               color: $aero;
             }
+          }
+
+          .socialBox {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
           }
 
           .error {

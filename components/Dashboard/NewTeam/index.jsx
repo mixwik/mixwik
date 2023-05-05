@@ -16,19 +16,19 @@ const NewTeam = ({ user, mixWikTeams }) => {
       <div className={styles.selectCategory} onChange={(e) => setToggle(e.target.value)}>
         <span onClick={() => setToggle('csgo')}>
           <Image src={csgo} alt='logo de csgo' />
-          Counter Strike Global Ofensive
+          Counter Strike Global Offensive
         </span>
         <span value=''>
           <Image src={fortnite} alt='logo de Fortnite' />
           Fortnite<br /> (Próximamente)
         </span>
         <span value=''>
-          <Image src={valorant} alt='logo de Valorant' />
-          Valorant<br /> (Próximamente)
-        </span>
-        <span value=''>
           <Image src={clashRoyal} alt='logo de Clash Royal' />
           Clash Royal<br /> (Próximamente)
+        </span>
+        <span value=''>
+          <Image src={valorant} alt='logo de Valorant' />
+          Valorant<br /> (Próximamente)
         </span>
         <span value=''>
           <Image src={lol} alt='logo de League Of Legends' />
