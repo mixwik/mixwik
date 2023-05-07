@@ -9,7 +9,8 @@ export const updateUserData = async (id, data) => {
     gender: data.gender,
     description: data.description,
     social: {
-      twitter: data.twitter
+      twitter: data.twitter,
+      discord: data.discord
     }
   })
 }

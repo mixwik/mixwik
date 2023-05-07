@@ -32,6 +32,11 @@ const User = () => {
                 </div>
               </div>
               <p>{user.description}</p>
+              <div className={styles.social}>
+                <a href={user.social.discord} target='_blank' rel='noreferrer'>
+                  Discord
+                </a>
+              </div>
               <button onClick={() => setIsOpen(!isOpen)} className={styles.reportButton}>
                 Reportar Jugador
               </button>
@@ -51,19 +56,24 @@ const User = () => {
         <section className={styles.publications}>
           <h2>Publicaciones</h2>
           <div className={styles.publicationsBox}>
-            {teams.length > 0 && (
-              teams.map((res) => (
-                <Card key={res.id} csgo={res} user={[user]} link='csgo' equip />
-              ))
-            )}
             {csgo.length > 0 && (
               csgo.map((res) => (
-                <Card key={res.id} csgo={res} user={[user]} link='csgo' />
+                <Card key={res.id} csgo={res} user={[user]} link='csgo' promotions />
+              ))
+            )}
+            {teams.length > 0 && (
+              teams.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link='csgo' equips />
               ))
             )}
             {csgo.length > 0 && (
               csgo.map((res) => (
                 <Card key={res.id} csgo={res} user={[user]} link='csgo' teams />
+              ))
+            )}
+            {csgo.length > 0 && (
+              csgo.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link='csgo' basic />
               ))
             )}
           </div>

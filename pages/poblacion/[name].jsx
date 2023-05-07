@@ -46,26 +46,39 @@ const City = () => {
         <section className={styles.cardBox}>
           <h1 className={styles.title}>{name}</h1>
           {
+              csgo.length > 0 && (
+                csgo.map((res) => (
+                  res.promotion && (
+                    <Card key={res.id} user={users} csgo={res} link='csgo' promotions />
+                  )
+                ))
+              )
+            }
+          {
             teamsFiltered.length > 0 && (
               teamsFiltered.map((res) => (
-                <Card key={res.id} user={users} csgo={res} equip link='csgo' />
+                <Card key={res.id} user={users} csgo={res} link='csgo' equips />
               ))
             )
-          }
+            }
           {
             csgoFiltered.length > 0 && (
               csgoFiltered.map((res) => (
-                <Card key={res.id} user={users} csgo={res} link='csgo' />
+                <Card key={res.id} user={users} csgo={res} link='csgo' teams />
               ))
             )
-          }
+            }
           {
-            csgoFiltered.length > 0 && (
-              csgoFiltered.map((res) => (
-                <Card key={res.id} user={users} csgo={res} teams link='csgo' />
-              ))
-            )
-          }
+            csgoFiltered.length > 0
+              ? (
+                  csgoFiltered.map((res) => (
+                    <Card key={res.id} user={users} csgo={res} link='csgo' basic />
+                  ))
+                )
+              : (
+                <div className={styles.gamersNoFound}>No hay jugadores de CSGO en este momento</div>
+                )
+            }
         </section>
         <CityMap city={city} publication={csgoFiltered} users={users} />
       </div>

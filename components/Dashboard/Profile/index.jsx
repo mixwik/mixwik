@@ -42,10 +42,9 @@ const Profile = ({ user }) => {
     age: user.age,
     gender: user.gender,
     description: user.description || '',
-    social: {
-      discord: user.social?.discord || '',
-      twitter: user.social?.twitter || ''
-    }
+    discord: user.social?.discord || '',
+    twitter: user.social?.twitter || ''
+
   }
 
   const REGEX = {
