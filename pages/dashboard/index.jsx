@@ -63,7 +63,7 @@ export default function Dashboard () {
   return (
     <Layout>
       <section data-open={isOpen} className={styles.dashboard}>
-        {page === 'profile' && <Profile user={currentUser} />}
+        {page === 'profile' && <Profile user={currentUser} mixWikTeams={mixWikTeams} />}
         {page === 'newPublication' && <NewPublication mixWikTeams={mixWikTeams} user={currentUser} setTeams={setToggle} teams={toggle} />}
         {page === 'myPublications' && <MyPublications user={currentUser} />}
         {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}

@@ -10,7 +10,11 @@ export const updateUserData = async (id, data) => {
     description: data.description,
     social: {
       twitter: data.twitter,
-      discord: data.discord
+      discord: data.discord,
+      twitch: data.twitch,
+      youtube: data.youtube,
+      instagram: data.instagram,
+      facebook: data.facebook
     }
   })
 }

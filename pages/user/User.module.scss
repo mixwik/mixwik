@@ -1,99 +1,138 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .user {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-image: url('../../public/bg/bg_gray.svg');
-    min-height: 90vh;
+    width: 100%;
 
-    .userData,
-    .reportedUser {
-        position: relative;
-        background-color: $white;
-        width: 100vw;
-        display: flex;
+    @media screen and (max-width: 768px) {
         flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        padding: 2rem;
-        border-radius: 0 0 .7rem .7rem;
+    }
 
-        @media screen and (min-width: 768px) {
-            align-items: flex-start;
-            width: 80vw;
-            height: 30vh;
+    .publications {
+        width: 50%;
+        height: 90vh;
+        overflow: scroll;
+        background-image: url('../../public/bg/bg_gray.svg');
+
+        @media screen and (max-width: 768px) {
+            height: auto;
+            overflow: visible;
+            width: 100%;
+            order: 2;
+        }
+
+        h2 {
+            padding: 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .publicationsBox {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            place-items: center;
+            gap: 1rem 0;
+            @media screen and (max-width: 1100px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            @media screen and (max-width: 768px) {
+                margin-bottom: 15vh;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        &::-webkit-scrollbar {
+            width: .5rem;
+            height: 0px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: $white;
+            border-radius: .5rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $pennBlue;
+            border-radius: .5rem;
+        }
+
+    }
+
+    .userData {
+        position: relative;
+        width: 50%;
+        height: 90vh;
+        background-color: $white;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+            order: 1;
         }
 
         .imageNameAge {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-weight: bold;
+            gap: 2rem;
+            padding: 1rem;
+            background-color: $aero;
+            color: $white;
 
             img {
                 width: 5rem;
                 height: 5rem;
                 border-radius: 50%;
             }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .description {
+            height: 20vh;
+            padding: 1rem;
+            border-bottom: 1px solid $pennBlue;
+        }
+
+        .social {
+            padding: 1rem;
+
+            h2 {
+                font-weight: bold;
+            }
+
+            .socialLinks {
+                display: grid;
+                place-items: center;
+                grid-template-columns: repeat(3, 1fr);
+                height: 20vh;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: .5rem;
+
+                    img {
+                        width: 2rem;
+                        height: 2rem;
+                        object-fit: contain;
+                    }
+                }
+            }
         }
 
         .reportButton {
-            position: static;
-            right: 2rem;
-            top: 2rem;
-            background-color: red;
+            position: absolute;
+            right: 1rem;
+            bottom: 1rem;
+            padding: 1rem;
             color: $white;
-            padding: .5rem;
-            border-radius: .5rem;
-
-            @media screen and (min-width: 768px) {
-                position: absolute;
-            }
-        }
-    }
-
-    .reportedUser {
-        h1 {
-            text-align: center;
-            font-size: 1.2rem;
+            background-color: $pennBlue;
             font-weight: bold;
-        }
-        p {
-            span, 
-            a {
-                font-weight: bold;
-            }
-        }
-    }
-
-    .publications {
-        width: 100vw;
-        margin-bottom: 15vh;
-
-        @media screen and (min-width: 768px) {
-            margin-bottom: 5vh;
-            width: 80vw;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            padding: 2rem;
-        }
-
-        .publicationsBox {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            place-items: center;
-            width: 100%;
-            gap: 1rem 0;
-
-            @media screen and (min-width: 768px) {
-                grid-template-columns: repeat(6, 1fr);
-            }
         }
     }
 }

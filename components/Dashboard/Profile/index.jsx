@@ -13,7 +13,7 @@ import { removeImageDB, setImageDB } from '../../../firebase/storage'
 import { DeleteIcon, ImageIcon } from '../../Svg'
 import { myLoader } from '../../myLoader'
 
-const Profile = ({ user }) => {
+const Profile = ({ user, mixWikTeams }) => {
   const [previewImage, setPreviewImage] = useState()
   const [imgURL, setImgURL] = useState()
   const [image, setImage] = useState()
@@ -43,13 +43,21 @@ const Profile = ({ user }) => {
     gender: user.gender,
     description: user.description || '',
     discord: user.social?.discord || '',
-    twitter: user.social?.twitter || ''
+    twitter: user.social?.twitter || '',
+    instagram: user.social?.instagram || '',
+    facebook: user.social?.facebook || '',
+    twitch: user.social?.twitch || '',
+    youtube: user.social?.youtube || ''
 
   }
 
   const REGEX = {
     discord: /^https?:\/\/discord\.gg\/[a-zA-Z0-9]+$/,
-    twitter: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)$/
+    twitter: /^https?:\/\/(www\.)?twitter\.com\/[a-zA-Z0-9_]+$/,
+    instagram: /^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_]+$/,
+    facebook: /^https?:\/\/(www\.)?facebook\.com\/[a-zA-Z0-9_]+$/,
+    twitch: /^https?:\/\/(www\.)?twitch\.tv\/[a-zA-Z0-9_]+$/,
+    youtube: /^https?:\/\/(www\.)?youtube\.com\/[a-zA-Z0-9_]+$/
   }
 
   return (
@@ -75,7 +83,19 @@ const Profile = ({ user }) => {
                 if (!REGEX.discord.test(values.discord)) errors.discord = 'El formato de discord no es válido'
               }
               if (values.twitter) {
-                if (!REGEX.twitter.test(values.discord)) errors.twitter = 'El formato de twitter no es válido'
+                if (!REGEX.twitter.test(values.twitter)) errors.twitter = 'El formato de twitter no es válido'
+              }
+              if (values.instagram) {
+                if (!REGEX.instagram.test(values.instagram)) errors.instagram = 'El formato de instagram no es válido'
+              }
+              if (values.facebook) {
+                if (!REGEX.facebook.test(values.facebook)) errors.facebook = 'El formato de facebook no es válido'
+              }
+              if (values.twitch) {
+                if (!REGEX.twitch.test(values.twitch)) errors.twitch = 'El formato de twitch no es válido'
+              }
+              if (values.youtube) {
+                if (!REGEX.youtube.test(values.youtube)) errors.youtube = 'El formato de youtube no es válido'
               }
               return errors
             }}
@@ -183,9 +203,47 @@ const Profile = ({ user }) => {
                         name='twitter'
                       />
                     </label>
+                    {
+                     mixWikTeams && (
+                       <>
+                         <label className={styles.social}>
+                           Youtube:
+                           <Field
+                             type='text'
+                             name='youtube'
+                           />
+                         </label>
+                         <label className={styles.social}>
+                           Twitch:
+                           <Field
+                             type='text'
+                             name='twitch'
+                           />
+                         </label>
+                         <label className={styles.social}>
+                           Instagram:
+                           <Field
+                             type='text'
+                             name='instagram'
+                           />
+                         </label>
+                         <label className={styles.social}>
+                           Facebook:
+                           <Field
+                             type='text'
+                             name='facebook'
+                           />
+                         </label>
+                       </>
+                     )
+                    }
                   </div>
                   <ErrorMessage className={styles.error} name='twitter' component='span' />
                   <ErrorMessage className={styles.error} name='discord' component='span' />
+                  <ErrorMessage className={styles.error} name='instagram' component='span' />
+                  <ErrorMessage className={styles.error} name='facebook' component='span' />
+                  <ErrorMessage className={styles.error} name='youtube' component='span' />
+                  <ErrorMessage className={styles.error} name='twitch' component='span' />
                 </div>
                 <p className={styles.paragraph}>Información Privada</p>
                 <div className={styles.genderBox}>
