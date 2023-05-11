@@ -42,7 +42,6 @@ import background from '../../../public/bg/bg_gray.svg'
 
 const User = () => {
   const [edit, setEdit] = useState(false)
-  const [open, setOpen] = useState(false)
   const router = useRouter()
   const { id } = router.query
   const user = useSession()
@@ -256,8 +255,8 @@ const User = () => {
             }
             <UserMap user={currentUser} publication={currentCsgo} />
           </article>
-          <PromotionMethods 
-            limitedAdministrator={limitedAdministrator} 
+          <PromotionMethods
+            limitedAdministrator={limitedAdministrator}
             promotion={promotion}
             currentUser={currentUser}
           />

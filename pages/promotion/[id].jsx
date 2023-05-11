@@ -31,7 +31,7 @@ const Promotion = () => {
   const csgo = useGetMyPublications('csgo', currentUser.uid)
   const teams = useGetMyPublications('teams', currentUser.uid)
   const cancelSubscription = useCancelRenovationSubscription()
-  
+
   if (stripeId && user.id && method === '2m25S789gDS8') updateUserCopper(stripeId, user.id, router)
   if (stripeId && user.id && method === '236dgER88954SE') updateUserSilver(stripeId, user.id, router)
   if (stripeId && user.id && method === '89SD568ed45SDEj') updateUserGold(stripeId, user.id, router)
@@ -51,7 +51,6 @@ const Promotion = () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
     }
   }, [])
-
 
   const handleSetCobre = (name, payID, id) => {
     if (window.confirm('¿Estás seguro de aplicar la promoción a esta publicación?')) {
