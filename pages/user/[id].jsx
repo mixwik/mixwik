@@ -4,15 +4,11 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Card from '../../components/Card'
 import Layout from '../../components/Layout'
+import SocialLinks from '../../components/SocialLinks'
 import { myLoader } from '../../components/myLoader'
 import { useGetMyPublications } from '../../firebase/hooks/getMethod/useGetMyPublications'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
-import discord from '../../public/logos/discord.png'
-import facebook from '../../public/logos/facebook.png'
-import instagram from '../../public/logos/instagram.png'
-import twitch from '../../public/logos/twitch.webp'
-import twitter from '../../public/logos/twitter.png'
-import youtube from '../../public/logos/youtube.png'
+import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import styles from './User.module.scss'
 
 const User = () => {
@@ -22,6 +18,7 @@ const User = () => {
   const user = useGetOneData('users', id)
   const csgo = useGetMyPublications('csgo', user.uid)
   const teams = useGetMyPublications('teams', user.uid)
+  const mixWikTeams = useMixWikTeamsCheckSubscription(user.mixWikTeams)
   if (user.length === 0) return <div>Loading...</div>
   return (
     <Layout>
@@ -65,26 +62,7 @@ const User = () => {
               <p className={styles.description}>{user.description}</p>
               <section className={styles.social}>
                 <h2>Redes Sociales</h2>
-                <div className={styles.socialLinks}>
-                  {user.social.discord && (
-                    <a href={user.social.discord} target='_blank' rel='noreferrer'><Image width={0} height={0} loader={myLoader} src={discord} alt='Logo de Discord' />Discord</a>
-                  )}
-                  {user.social.twitter && (
-                    <a href={user.social.twitter} target='_blank' rel='noreferrer'><Image width={0} height={0} loader={myLoader} src={twitter} alt='Logo de Twitter' />Twitter</a>
-                  )}
-                  {user.social.twitch && (
-                    <a href={user.social.twitch} target='_blank' rel='noreferrer'><Image width={0} height={0} loader={myLoader} src={twitch} alt='Logo de Twitch' />Twitch</a>
-                  )}
-                  {user.social.youtube && (
-                    <a href={user.social.youtube} target='_blank' rel='noreferrer'><Image width={0} height={0} loader={myLoader} src={youtube} alt='Logo de Youtube' />Youtube</a>
-                  )}
-                  {user.social.instagram && (
-                    <a href={user.social.instagram} target='_blank' rel='noreferrer'><Image width={0} height={0} loader={myLoader} src={instagram} alt='Logo de Instagram' />Instagram</a>
-                  )}
-                  {user.social.facebook && (
-                    <a href={user.social.facebook} target='_blank' rel='noreferrer'><Image width={0} height={0} loader={myLoader} src={facebook} alt='Logo de Facebook' />Facebook</a>
-                  )}
-                </div>
+                <SocialLinks mixWikTeams={mixWikTeams} user={user} />
               </section>
               <button onClick={() => setIsOpen(!isOpen)} className={styles.reportButton}>
                 Reportar Jugador

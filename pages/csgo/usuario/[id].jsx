@@ -27,6 +27,7 @@ import EditTitle from '../../../components/EditPublication/EditTitle'
 import Layout from '../../../components/Layout'
 import UserMap from '../../../components/UserMap'
 import { myLoader } from '../../../components/myLoader'
+import SocialLinks from '../../../components/SocialLinks'
 
 // Icons
 import { EditIcon } from '../../../components/Svg'
@@ -248,6 +249,13 @@ const User = () => {
                   </>
                   )
             }
+          </article>
+          <article className={styles.social}>
+            <h2>
+              Vías de contacto:
+              {limitedAdministrator && <Link href='/dashboard?page=profile' target='_blank' className={styles.editButtonImages}><EditIcon /></Link>}
+            </h2>
+            <SocialLinks mixWikTeams={mixWikTeams} user={currentUser} />
           </article>
           <article className={styles.map}>
             {
