@@ -33,6 +33,7 @@
             grid-template-columns: repeat(4, 1fr);
             place-items: center;
             gap: 1rem 0;
+
             @media screen and (max-width: 1100px) {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -135,4 +136,10 @@
             font-weight: bold;
         }
     }
+}
+
+.reportedUser {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
