@@ -103,26 +103,6 @@
             h2 {
                 font-weight: bold;
             }
-
-            .socialLinks {
-                display: grid;
-                place-items: center;
-                grid-template-columns: repeat(3, 1fr);
-                height: 20vh;
-
-                a {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: .5rem;
-
-                    img {
-                        width: 2rem;
-                        height: 2rem;
-                        object-fit: contain;
-                    }
-                }
-            }
         }
 
         .reportButton {
