@@ -18,6 +18,11 @@ const games = [{
   alt: 'Icono del videojuego csgo',
   link: 'csgo'
 }, {
+  image: lol,
+  title: 'League of Legends',
+  alt: 'Icono del videojuego League of Legends',
+  link: 'lol'
+}, {
   image: fortnite,
   title: 'Fortnite',
   alt: 'Icono del videojuego Fornite',
@@ -26,11 +31,6 @@ const games = [{
   image: clashRoyal,
   title: 'Clash Royal',
   alt: 'Icono del videojuego Clash Royal',
-  link: 'proximamente'
-}, {
-  image: lol,
-  title: 'League of Legends',
-  alt: 'Icono del videojuego League of Legends',
   link: 'proximamente'
 }, {
   image: valorant,
