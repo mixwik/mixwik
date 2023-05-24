@@ -4,6 +4,7 @@ import NoMorePublications from './noMorePublications'
 
 // Images
 import Image from 'next/image'
+import Link from 'next/link'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import clashRoyal from '../../../public/logos/Clash-Royal2.png'
 import lol from '../../../public/logos/LOL3.png'
@@ -38,7 +39,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
   }
   return (
     <section className={styles.newPublication}>
-      <h1 className={styles.title}>Selecciona categoría</h1>
+      <h1 className={styles.title}>Selecciona categoría <Link href='/dashboard?page=publications'>Volver atrás</Link></h1>
       {
         teams === 'maxPublications' && <p>Has llegado al límite de publicaciones</p>
       }
@@ -51,25 +52,25 @@ const NewPublication = ({ user, mixWikTeams }) => {
           <Image src={fortnite} alt='Fortnite' />
           Fortnite
           <br />
-          (próximamente)
+          (Próximamente)
         </li>
         <li onClick={() => setToggle('lol')}>
           <Image src={lol} alt='LOL' />
           League of Legend
           <br />
-          (próximamente)
+          (Próximamente)
         </li>
         <li onClick={() => setToggle('valorant')}>
           <Image src={valorant} alt='Valorant' />
           Valorant
           <br />
-          (próximamente)
+          (Próximamente)
         </li>
         <li onClick={() => setToggle('cr')}>
           <Image src={clashRoyal} alt='Clash Royal' />
           Clash Royal
           <br />
-          (próximamente)
+          (Próximamente)
         </li>
       </ul>
       <NoMorePublications setTeams={setTeams} noPremium={teams === 'noMixWikTeams'} currentUser={user} />

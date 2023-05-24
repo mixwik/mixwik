@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import clashRoyal from '../../../public/logos/Clash-Royal2.png'
 import lol from '../../../public/logos/LOL3.png'
@@ -12,7 +13,7 @@ const NewTeam = ({ user, mixWikTeams }) => {
   const [toggle, setToggle] = useState('nav')
   return (
     <section className={styles.newTeam}>
-      <h1 className={styles.title}>Añadir nuevo team</h1>
+      <h1 className={styles.title}>Selecciona categoría <Link href='/dashboard?page=publications'>Volver atrás</Link></h1>
       <div className={styles.selectCategory} onChange={(e) => setToggle(e.target.value)}>
         <span onClick={() => setToggle('csgo')}>
           <Image src={csgo} alt='logo de csgo' />

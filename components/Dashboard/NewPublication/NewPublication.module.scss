@@ -20,6 +20,7 @@
     height: 5vh;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     @media screen and (min-width: 768px) {
       width: 60vw;
     }
@@ -53,7 +54,7 @@
       text-align: center;
       gap: 1rem;
       align-items: center;
-      border: 2px solid $aero;
+      border: 1px solid $aero;
       padding: .5rem;
       border-radius: .5rem;
       font-weight: bold;

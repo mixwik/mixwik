@@ -15,12 +15,13 @@ import MixWikTeams from '../../components/Dashboard/MixWikTeams'
 import MyPublications from '../../components/Dashboard/MyPublications'
 import NewPublication from '../../components/Dashboard/NewPublication'
 import Profile from '../../components/Dashboard/Profile'
+import Publications from '../../components/Dashboard/Publications'
 import Layout from '../../components/Layout'
 import NewUser from '../../components/NewUser'
 import { myLoader } from '../../components/myLoader'
 
 // Images
-import { AddPublication, Company, ContactUs, LogOutIcon, Publications } from '../../components/Svg'
+import { AddPublication, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
 import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
@@ -69,6 +70,7 @@ export default function Dashboard () {
         {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}
         {page === 'teams' && <NewTeam mixWikTeams={mixWikTeams} user={currentUser} />}
         {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
+        {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -85,22 +87,17 @@ export default function Dashboard () {
               Perfil
             </li>
             <li
-              data-isActive={page === 'newPublication'}
-              onClick={() => handleClick('newPublication')}
+              data-isActive={page === 'publications' || page === 'newPublication' || page === 'teams'}
+              onClick={() => handleClick('publications')}
             >
               <AddPublication />
               Añadir publicación
             </li>
-            {
-              mixWikTeams
-                ? <li data-isActive={page === 'teams'} onClick={() => handleClick('teams')}><AddPublication />Añadir team</li>
-                : <li data-isActive={page === 'noTeams'} onClick={() => handleClick('noTeams')}><AddPublication />Añadir Team</li>
-            }
             <li
               data-isActive={page === 'myPublications'}
               onClick={() => handleClick('myPublications')}
             >
-              <Publications />
+              <PublicationsIcon />
               Mis publicaciones
             </li>
             <li className={styles.ours}>
