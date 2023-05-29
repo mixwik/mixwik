@@ -12,6 +12,7 @@ import valorant from '../../../public/logos/VALORANT4.png'
 import csgo from '../../../public/logos/csgo.png'
 import fortnite from '../../../public/logos/fortnite.png'
 import CsgoPublication from './csgo'
+import LolPublication from './lol'
 
 const NewPublication = ({ user, mixWikTeams }) => {
   const currentPosition = useCurrentPosition()
@@ -48,15 +49,13 @@ const NewPublication = ({ user, mixWikTeams }) => {
           <Image src={csgo} alt='csgo' />
           Counter Strike Global Offensive
         </li>
+        <li onClick={() => setToggle('lol')}>
+          <Image src={lol} alt='LOL' />
+          League of Legends
+        </li>
         <li onClick={() => setToggle('fortnite')}>
           <Image src={fortnite} alt='Fortnite' />
           Fortnite
-          <br />
-          (Próximamente)
-        </li>
-        <li onClick={() => setToggle('lol')}>
-          <Image src={lol} alt='LOL' />
-          League of Legend
           <br />
           (Próximamente)
         </li>
@@ -75,6 +74,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
       </ul>
       <NoMorePublications setTeams={setTeams} noPremium={teams === 'noMixWikTeams'} currentUser={user} />
       <CsgoPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
+      <LolPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
     </section>
   )
 }

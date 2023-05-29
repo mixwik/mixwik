@@ -1,4 +1,4 @@
-import styles from './Csgo.module.scss'
+import styles from './Lol.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
@@ -9,7 +9,7 @@ import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 
-const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
+const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState()
   const [previewImage2, setPreviewImage2] = useState()
@@ -86,9 +86,9 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
     age: ''
   }
   return (
-    <section className={styles.csgo} data-open={toggle === 'csgo'}>
+    <section className={styles.lol} data-open={toggle === 'lol'}>
       <section className={styles.newPublication}>
-        <h2 className={styles.title}>CSGO</h2>
+        <h2 className={styles.title}>LOL</h2>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -97,7 +97,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setPublication('csgo', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+              setPublication('lol', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserNumberPublications(currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
@@ -112,75 +112,48 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
-                      value='Entry fragger'
+                      value='Toplane'
                       name='position'
-                      id='entry'
+                      id='toplane'
                     />
-                    <label for='entry'>
-                      Entry Fragger
+                    <label for='toplane'>
+                      Toplane
                     </label>
                     <Field
                       type='checkbox'
-                      value='In-game leader'
+                      value='Midlane'
                       name='position'
-                      id='in-game'
+                      id='midlane'
                     />
-                    <label for='in-game'>
-                      In-game leader
+                    <label for='midlane'>
+                      Midlane
                     </label>
                     <Field
                       type='checkbox'
-                      value='AWPer'
+                      value='Jungla'
                       name='position'
-                      id='awper'
+                      id='jungla'
                     />
-                    <label for='awper'>
-                      AWPer
+                    <label for='jungla'>
+                      Jungla
                     </label>
                     <Field
                       type='checkbox'
-                      value='Lurker'
+                      value='ADC'
                       name='position'
-                      id='lurker'
+                      id='adc'
                     />
-                    <label for='lurker'>
-                      Lurker
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Playmaker'
-                      name='position'
-                      id='playmaker'
-                    />
-                    <label for='playmaker'>
-                      Playmaker
+                    <label for='adc'>
+                      ADC
                     </label>
                     <Field
                       type='checkbox'
                       value='Support'
                       name='position'
-                      id='support'
+                      id='supportLol'
                     />
-                    <label for='support'>
+                    <label for='supportLol'>
                       Support
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Entrenador'
-                      name='position'
-                      id='entrenador'
-                    />
-                    <label for='entrenador'>
-                      Entrenador
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Secondary AWPer'
-                      name='position'
-                      id='secondary-awper'
-                    />
-                    <label for='secondary-awper'>
-                      Secondary AWPer
                     </label>
                   </div>
                   <ErrorMessage name='position' component='span' />
@@ -190,93 +163,93 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='radio'
-                      value='Silver'
+                      value='Sin Nivel'
                       name='level'
-                      id='silver'
+                      id='sin nivel'
                     />
-                    <label for='silver'>
-                      Silver
+                    <label for='sin nivel'>
+                      Sin Nivel
                     </label>
                     <Field
                       type='radio'
-                      value='Nova'
+                      value='Hierro'
                       name='level'
-                      id='nova'
+                      id='hierro'
                     />
-                    <label for='nova'>
-                      Nova
+                    <label for='hierro'>
+                      Hierro
                     </label>
                     <Field
                       type='radio'
-                      value='Ak'
+                      value='Bronce'
                       name='level'
-                      id='ak'
+                      id='bronce'
                     />
-                    <label for='ak'>
-                      Ak
+                    <label for='bronce'>
+                      Bronce
                     </label>
                     <Field
                       type='radio'
-                      value='Ak laurel'
+                      value='Plata'
                       name='level'
-                      id='ak-laurel'
+                      id='plata'
                     />
-                    <label for='ak-laurel'>
-                      Ak Laurel
+                    <label for='plata'>
+                      Plata
                     </label>
                     <Field
                       type='radio'
-                      value='Doble ak'
+                      value='Oro'
                       name='level'
-                      id='doble-ak'
+                      id='oro'
                     />
-                    <label for='doble-ak'>
-                      Doble Ak
+                    <label for='oro'>
+                      Oro
                     </label>
                     <Field
                       type='radio'
-                      value='Chapa'
+                      value='Platino'
                       name='level'
-                      id='chapa'
+                      id='platino'
                     />
-                    <label for='chapa'>
-                      Chapa
+                    <label for='platino'>
+                      Platino
                     </label>
                     <Field
                       type='radio'
-                      value='Aguila'
+                      value='Diamante'
                       name='level'
-                      id='aguila'
+                      id='diamante'
                     />
-                    <label for='aguila'>
-                      Aguila
+                    <label for='diamante'>
+                      Diamante
                     </label>
                     <Field
                       type='radio'
-                      value='Aguila laurel'
+                      value='Maestro'
                       name='level'
-                      id='aguil-laurel'
+                      id='maestro'
                     />
-                    <label for='aguil-laurel'>
-                      Aguila Laurel
+                    <label for='maestro'>
+                      Maestro
                     </label>
                     <Field
                       type='radio'
-                      value='Supreme'
+                      value='Gran Maestro'
                       name='level'
-                      id='supreme'
+                      id='gran maestro'
                     />
-                    <label for='supreme'>
-                      Supreme
+                    <label for='gran maestro'>
+                      Gran Maestro
                     </label>
                     <Field
                       type='radio'
-                      value='Global elite'
+                      value='Retador'
                       name='level'
-                      id='global-elite'
+                      id='retador'
                     />
-                    <label for='global-elite'>
-                      Global Elite
+                    <label for='retador'>
+                      Retador
                     </label>
                   </div>
                   <ErrorMessage name='level' component='span' />
@@ -302,18 +275,18 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                         type='checkbox'
                         name='typeOfGamer'
                         value='Competitivo'
-                        id='competitivo'
+                        id='competitivoLol'
                       />
-                      <label for='competitivo'>
+                      <label for='competitivoLol'>
                         Competitivo
                       </label>
                       <Field
                         type='checkbox'
                         name='typeOfGamer'
                         value='Casual'
-                        id='casual'
+                        id='casualLol'
                       />
-                      <label for='casual'>
+                      <label for='casualLol'>
                         Casual
                       </label>
                     </div>
@@ -327,7 +300,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                     <ErrorMessage name='title' component='span' />
                   </label>
                   <label className={styles.descriptionPublication}>
-                    Describete como jugador de CSGO
+                    Describete como jugador de Lol
                     <Field
                       className={styles.description}
                       as='textarea' name='description'
@@ -356,7 +329,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                     />
                     {previewImage && (
                       <div className={styles.previewImage}>
-                        <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
+                        <Image width={0} height={0} loader={myLoader} src={previewImage} alt='pre-carga de imagen' />
                         <button onClick={(e) => handleRemoveImage(e, image, setPreviewImage, setImage)}>
                           <DeleteIcon />
                         </button>
@@ -510,4 +483,4 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
   )
 }
 
-export default CsgoPublication
+export default LolPublication

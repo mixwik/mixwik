@@ -19,6 +19,7 @@ import { useHandleOpenContext } from '../../context'
 
 import Image from 'next/image'
 import { useSession } from '../../firebase/auth/useSession'
+import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
 import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 import csgoImage from '../../public/logos/csgo-page.svg'
 
@@ -29,7 +30,7 @@ const Csgo = () => {
   const handleOpen = useHandleOpenContext()
   const users = useGetData('users')
   const csgo = useGetData('csgo')
-  const teams = useGetData('teams')
+  const teams = useGetTeams('teams', 'csgo')
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)

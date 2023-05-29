@@ -21,6 +21,7 @@ import Image from 'next/image'
 import { useSession } from '../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 import lolImage from '../../public/logos/LOL3.png'
+import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
 
 const Lol = () => {
   const [distance, setDistance] = useState(700)
@@ -28,14 +29,14 @@ const Lol = () => {
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const users = useGetData('users')
-  const csgo = useGetData('lol')
-  const teams = useGetData('teams')
+  const lol = useGetData('lol')
+  const teams = useGetTeams('teams', 'lol')
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)
 
   // filter users list with different filters
-  const listUserCsgo = useUserCsgoFilters(user, csgo, distance)
+  const listUserCsgo = useUserCsgoFilters(user, lol, distance)
   const listUserTeams = useUserCsgoFilters(user, teams, distance)
 
   return (
@@ -49,8 +50,8 @@ const Lol = () => {
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {
-              csgo.length > 0 && (
-                csgo.map((res) => (
+              lol.length > 0 && (
+                lol.map((res) => (
                   res.promotion && (
                     <Card
                       key={res.id}
