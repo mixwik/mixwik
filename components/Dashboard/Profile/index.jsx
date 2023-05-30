@@ -151,10 +151,7 @@ const Profile = ({ user, mixWikTeams }) => {
                 <div className={styles.group}>
                   <label>
                     Nombre:
-                    <Field
-                      type='text'
-                      name='name'
-                    />
+                    <div>{currentUser.name}</div>
                   </label>
                   <ErrorMessage name='name' component='span' />
                 </div>

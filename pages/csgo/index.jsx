@@ -116,6 +116,7 @@ const Csgo = () => {
           db={listUserCsgo}
           zoom={7}
           size={30}
+          category='csgo'
         />
       </div>
     </Layout>

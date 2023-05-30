@@ -6,7 +6,7 @@ import styles from '../../styles/Pages.module.scss'
 
 // Components
 import Card from '../../components/Card'
-import FilterCsgo from '../../components/Filters/Csgo'
+import FilterLol from '../../components/Filters/Lol'
 import Layout from '../../components/Layout'
 import Map from '../../components/Map'
 
@@ -43,7 +43,7 @@ const Lol = () => {
     <Layout>
       <div className={styles.pageBox}>
         <section className={styles.pages}>
-          <FilterCsgo users={listUserCsgo} distance={distance} setDistance={setDistance} />
+          <FilterLol users={listUserCsgo} distance={distance} setDistance={setDistance} />
           <h1 className={styles.title}>
             <Image src={lolImage} alt='Logotipo de League Of Legends' />
             League Of Legends
@@ -115,6 +115,7 @@ const Lol = () => {
           db={listUserCsgo}
           zoom={7}
           size={30}
+          category='lol'
         />
       </div>
     </Layout>

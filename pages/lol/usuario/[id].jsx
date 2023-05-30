@@ -25,9 +25,9 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 import { Carousel } from 'react-responsive-carousel'
 import EditTitle from '../../../components/EditPublication/EditTitle'
 import Layout from '../../../components/Layout'
+import SocialLinks from '../../../components/SocialLinks'
 import UserMap from '../../../components/UserMap'
 import { myLoader } from '../../../components/myLoader'
-import SocialLinks from '../../../components/SocialLinks'
 
 // Icons
 import { EditIcon } from '../../../components/Svg'
@@ -47,7 +47,7 @@ const User = () => {
   const { id } = router.query
   const user = useSession()
   const currentPosition = useCurrentPosition()
-  const currentCsgo = useGetOnePublication('csgo', id)
+  const currentCsgo = useGetOnePublication('lol', id)
   const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)

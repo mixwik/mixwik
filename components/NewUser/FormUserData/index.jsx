@@ -111,7 +111,7 @@ const FormUserData = ({ method }) => {
                 <Field type='text' name='name' />
               </label>
               <ErrorMessage name='name' component='span' />
-              <div>El nombre que indiques será el que se muestre al resto de usuarios, puedes poner tú nombre real o un nick si lo prefieres, pero no se permiten nombres ofensivos 🤨.</div>
+              <div>El nombre que indiques será el que se muestre al resto de usuarios, puedes poner tú nombre real o un nick si lo prefieres, pero no se permiten nombres ofensivos 🤨. <span>Este campo no se podrá cambiar</span></div>
             </div>
             <div className={styles.group}>
               <label>

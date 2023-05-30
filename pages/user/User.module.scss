@@ -121,5 +121,33 @@
 .reportedUser {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+    background-color: $white;
+    width: 50%;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        order: 1;
+    }
+    h1 {
+        padding: 1rem;
+        font-size: 1.5rem;
+        text-align: center;
+        font-weight: bold;
+    }
+    p {
+        padding: 0 3rem;
+        a {
+            color: $aero;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    }
+    button {
+        padding: 1rem;
+        background-color: $pennBlue;
+        color: $white;
+        font-weight: bold;
+        border-radius: .5rem;
+    }
 }
