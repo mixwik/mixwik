@@ -32,6 +32,7 @@ export default function Home () {
         <div className={styles.games}>
           <ButtonGame />
         </div>
+        <Link href='/todos-los-jugadores' className={styles.allGames}>Buscar a todos los jugadores</Link>
       </header>
       <section className={styles.cities}>
         <h2 className={styles.title}>Principales Ciudades</h2>

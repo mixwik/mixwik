@@ -3,13 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 // Edit components
-import EditLevel from '../../../components/EditPublication/Lol/EditLevel'
-import EditPosition from '../../../components/EditPublication/Lol/EditPosition'
+import EditLevel from '../../../components/EditPublication/Csgo/EditLevel'
+import EditPosition from '../../../components/EditPublication/Csgo/EditPosition'
 import EditDescription from '../../../components/EditPublication/EditDescription'
 import EditHours from '../../../components/EditPublication/EditHours'
 import { EditImages } from '../../../components/EditPublication/EditImages'
 import EditTypeOfGamer from '../../../components/EditPublication/EditTypeOfGamer'
-import EditTitle from '../../../components/EditPublication/EditTitle'
 
 // Hooks
 import { useRouter } from 'next/router'
@@ -24,10 +23,11 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 
 // Components
 import { Carousel } from 'react-responsive-carousel'
+import EditTitle from '../../../components/EditPublication/EditTitle'
 import Layout from '../../../components/Layout'
-import SocialLinks from '../../../components/SocialLinks'
 import UserMap from '../../../components/UserMap'
 import { myLoader } from '../../../components/myLoader'
+import SocialLinks from '../../../components/SocialLinks'
 
 // Icons
 import { EditIcon } from '../../../components/Svg'
@@ -47,27 +47,27 @@ const User = () => {
   const { id } = router.query
   const user = useSession()
   const currentPosition = useCurrentPosition()
-  const currentLol = useGetOnePublication('lol', id)
-  const currentUser = useGetOneData('users', currentLol.uid)
+  const currentCsgo = useGetOnePublication('csgo', id)
+  const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
-  const promotion = useMixWikTeamsCheckSubscription(currentLol.promotion)
+  const promotion = useMixWikTeamsCheckSubscription(currentCsgo.promotion)
 
-  if (currentLol.length === 0) return <div>Loading...</div>
+  if (currentCsgo.length === 0) return <div>Loading...</div>
   if (currentUser.length === 0) return <div>Loading...</div>
 
   const handleUpdatePosition = () => {
-    updatePublicationPosition('lol', id, currentPosition)
+    updatePublicationPosition('csgo', id, currentPosition)
   }
 
   const images = []
-  currentLol.img.url !== '' && images.push(currentLol.img.url)
-  currentLol.img2.url !== '' && images.push(currentLol.img2.url)
-  currentLol.img3.url !== '' && images.push(currentLol.img3.url)
-  currentLol.img4.url !== '' && images.push(currentLol.img4.url)
-  currentLol.img5.url !== '' && images.push(currentLol.img5.url)
-  currentLol.img6.url !== '' && images.push(currentLol.img6.url)
-  currentLol.img7.url !== '' && images.push(currentLol.img7.url)
+  currentCsgo.img.url !== '' && images.push(currentCsgo.img.url)
+  currentCsgo.img2.url !== '' && images.push(currentCsgo.img2.url)
+  currentCsgo.img3.url !== '' && images.push(currentCsgo.img3.url)
+  currentCsgo.img4.url !== '' && images.push(currentCsgo.img4.url)
+  currentCsgo.img5.url !== '' && images.push(currentCsgo.img5.url)
+  currentCsgo.img6.url !== '' && images.push(currentCsgo.img6.url)
+  currentCsgo.img7.url !== '' && images.push(currentCsgo.img7.url)
 
   const master1 = process.env.NEXT_PUBLIC_MASTER1
   const master2 = process.env.NEXT_PUBLIC_MASTER2
@@ -112,15 +112,15 @@ const User = () => {
             {edit === 'images' && (
               <EditImages
                 id={id}
-                category='lol'
+                category='csgo'
                 currentUser={currentUser}
-                prevImg={currentLol.img}
-                prevImg2={currentLol.img2}
-                prevImg3={currentLol.img3}
-                prevImg4={currentLol.img4}
-                prevImg5={currentLol.img5}
-                prevImg6={currentLol.img6}
-                prevImg7={currentLol.img7}
+                prevImg={currentCsgo.img}
+                prevImg2={currentCsgo.img2}
+                prevImg3={currentCsgo.img3}
+                prevImg4={currentCsgo.img4}
+                prevImg5={currentCsgo.img5}
+                prevImg6={currentCsgo.img6}
+                prevImg7={currentCsgo.img7}
                 setEdit={setEdit}
                 mixWikTeams={mixWikTeams}
               />)}
@@ -129,11 +129,11 @@ const User = () => {
             {
               edit === 'title'
                 ? (
-                  <EditTitle category='lol' id={id} title={currentLol.title} setEdit={setEdit} />
+                  <EditTitle category='csgo' id={id} title={currentCsgo.title} setEdit={setEdit} />
                   )
                 : (
                   <h1>
-                    {currentLol.title}
+                    {currentCsgo.title}
                     {limitedAdministrator &&
                       <button onClick={() => setEdit('title')}>
                         <EditIcon />
@@ -148,14 +148,14 @@ const User = () => {
             edit === 'description'
               ? (
                 <EditDescription
-                  category='lol'
+                  category='csgo'
                   id={id}
                   setEdit={setEdit}
-                  description={currentLol.description}
+                  description={currentCsgo.description}
                 />
                 )
               : (
-                <p>{currentLol.description}
+                <p>{currentCsgo.description}
                   {limitedAdministrator &&
                     <button onClick={() => setEdit('description')}>
                       <EditIcon />
@@ -168,7 +168,7 @@ const User = () => {
             {
             edit === 'typeOfGamer'
               ? (
-                <EditTypeOfGamer category='lol' id={id} typeOfGamer={currentLol.typeOfGamer} setEdit={setEdit} />
+                <EditTypeOfGamer category='csgo' id={id} typeOfGamer={currentCsgo.typeOfGamer} setEdit={setEdit} />
                 )
               : (
                 <>
@@ -182,7 +182,7 @@ const User = () => {
                   </h2>
                   <ul>
                     {
-                      currentLol.typeOfGamer.map((type, index) => (
+                      currentCsgo.typeOfGamer.map((type, index) => (
                         <li key={index}>{type}</li>
                       ))
                     }
@@ -195,7 +195,7 @@ const User = () => {
             {
               edit === 'level'
                 ? (
-                  <EditLevel category='lol' id={id} level={currentLol.level} setEdit={setEdit} />
+                  <EditLevel category='csgo' id={id} level={currentCsgo.level} setEdit={setEdit} />
                   )
                 : (
                   <>
@@ -204,7 +204,7 @@ const User = () => {
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('level')}><EditIcon /></button>}
                     </h2>
                     <div className={styles.levelBox}>
-                      {currentLol.level}
+                      {currentCsgo.level}
                     </div>
                   </>
                   )
@@ -214,17 +214,17 @@ const User = () => {
             {
               edit === 'position'
                 ? (
-                  <EditPosition category='lol' id={id} position={currentLol.position} setEdit={setEdit} />
+                  <EditPosition category='csgo' id={id} position={currentCsgo.position} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      {currentLol.position.length === 1 ? 'Posición:' : 'Posiciones:'}
+                      {currentCsgo.position.length === 1 ? 'Posición:' : 'Posiciones:'}
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('position')}><EditIcon /></button>}
                     </h2>
                     <ul>
                       {
-                        currentLol.position.map((pos, index) => (
+                        currentCsgo.position.map((pos, index) => (
                           <li key={index}>{pos}</li>
                         ))
                       }
@@ -237,7 +237,7 @@ const User = () => {
             {
               edit === 'hours'
                 ? (
-                  <EditHours category='lol' id={id} hours={currentLol.hours} setEdit={setEdit} />
+                  <EditHours category='csgo' id={id} hours={currentCsgo.hours} setEdit={setEdit} />
                   )
                 : (
                   <>
@@ -245,7 +245,7 @@ const User = () => {
                       Horas Jugadas:
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('hours')}><EditIcon /></button>}
                     </h2>
-                    {currentLol.hours}h
+                    {currentCsgo.hours}h
                   </>
                   )
             }
@@ -261,7 +261,7 @@ const User = () => {
             {
               limitedAdministrator && <button onClick={handleUpdatePosition}>Cambiar a posición actual</button>
             }
-            <UserMap user={currentUser} publication={currentLol} />
+            <UserMap user={currentUser} publication={currentCsgo} />
           </article>
           <PromotionMethods
             limitedAdministrator={limitedAdministrator}

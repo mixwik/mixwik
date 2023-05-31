@@ -1,25 +1,41 @@
 import { useGetMyPublications } from '../../../firebase/hooks/getMethod/useGetMyPublications'
+import { useGetTeams } from '../../../firebase/hooks/getMethod/useGetTeams'
 import CardPublications from './CardPublications'
 import styles from './MyPublication.module.scss'
 
 const MyPublications = ({ user }) => {
-  const publications = useGetMyPublications('csgo', user.uid)
-  const publicationsTeams = useGetMyPublications('teams', user.uid)
+  const publicationsCSGO = useGetMyPublications('csgo', user.uid)
+  const publicationsLOL = useGetMyPublications('lol', user.uid)
+  const publicationsCsgoTeams = useGetTeams('teams', 'csgo')
+  const publicationsLolTeams = useGetTeams('teams', 'lol')
 
-  if (!publications) return <div>Loading...</div>
+  if (!publicationsCSGO) return <div>Loading...</div>
   return (
     <section className={styles.myPublications}>
       <h2 className={styles.title}>Mis publicaciones</h2>
       <div className={styles.cardBox}>
         <h3 className={styles.subtitle}>Publicaciones de CSGO</h3>
         {
-          publicationsTeams.map((res) => (
-            <CardPublications key={res.id} publication={res} user={user} category='teams' equip link='csgo' />
+          publicationsCsgoTeams.map((res) => (
+            <CardPublications key={res.id} publication={res} user={user} category='teams' teamsCategory='csgo' equip link='csgo' />
           ))
         }
         {
-          publications.map((res) => (
+          publicationsCSGO.map((res) => (
             <CardPublications key={res.id} publication={res} user={user} category='csgo' link='csgo' />
+          ))
+        }
+      </div>
+      <div className={styles.cardBox}>
+        <h3 className={styles.subtitle}>Publicaciones de Lol</h3>
+        {
+          publicationsLolTeams.map((res) => (
+            <CardPublications key={res.id} publication={res} user={user} category='teams' teamsCategory='lol' equip link='lol' />
+          ))
+        }
+        {
+          publicationsLOL.map((res) => (
+            <CardPublications key={res.id} publication={res} user={user} category='lol' link='lol' />
           ))
         }
       </div>

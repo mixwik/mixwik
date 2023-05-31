@@ -5,10 +5,11 @@ import { DeleteIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 import styles from './CardPublications.module.scss'
 
-const CardPublications = ({ publication, user, category, equip, link, promotion }) => {
+const CardPublications = ({ publication, user, category, teamsCategory, equip, link, promotion }) => {
   const handleDelete = (category, id) => {
     deletePublication(category, id, user.id)
   }
+
   return (
     <div className={styles.CardPublications} data-active={equip} data-promotion={promotion}>
       <Link className={styles.link} target='_blanck' href={equip ? `/${link}/team/${publication.id}` : `/${link}/usuario/${publication.id}`}>

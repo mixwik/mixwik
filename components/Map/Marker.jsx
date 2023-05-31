@@ -1,6 +1,8 @@
 import L from 'leaflet'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Marker, Popup } from 'react-leaflet'
+import { myLoader } from '../myLoader'
 import styles from './Map.module.scss'
 
 const Markers = ({ position, users, currentPosition, category }) => {
@@ -27,8 +29,17 @@ const Markers = ({ position, users, currentPosition, category }) => {
           <Marker position={position.geometry} icon={csgoIcon}>
             <Popup>
               <div className={styles.cardMap}>
-                {user.name}
-                <Link target='_blanck' href={`/csgo/usuario/${position.id}`}>Ir a publicación</Link>
+                <div className={styles.profile}>
+                  <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
+                  {user.name}
+                </div>
+                <Link target='_blanck' href={`/csgo/usuario/${position.id}`}>
+                  <div className={styles.publication}>
+                    <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
+                    <h3>{position.title}</h3>
+                    <p>{position.description.slice(0, 100)}...</p>
+                  </div>
+                </Link>
               </div>
             </Popup>
           </Marker>
@@ -39,8 +50,17 @@ const Markers = ({ position, users, currentPosition, category }) => {
           <Marker position={position.geometry} icon={lolIcon}>
             <Popup>
               <div className={styles.cardMap}>
-                {user.name}
-                <Link target='_blanck' href={`/csgo/usuario/${position.id}`}>Ir a publicación</Link>
+                <div className={styles.profile}>
+                  <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
+                  {user.name}
+                </div>
+                <Link target='_blanck' href={`/csgo/usuario/${position.id}`}>
+                  <div className={styles.publication}>
+                    <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
+                    <h3>{position.title}</h3>
+                    <p>{position.description.slice(0, 100)}...</p>
+                  </div>
+                </Link>
               </div>
             </Popup>
           </Marker>

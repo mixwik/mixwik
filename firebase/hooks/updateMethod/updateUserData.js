@@ -90,6 +90,7 @@ export const updatePublicationPosition = async (name, id, currentPosition) => {
   await updateDoc(userRef, {
     geometry: currentPosition
   }).then(
+    location.reload()
   )
 }
 

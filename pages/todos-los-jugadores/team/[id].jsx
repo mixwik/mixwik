@@ -1,15 +1,13 @@
 // Next Components
 import Image from 'next/image'
-import Link from 'next/link'
 
 // Edit components
-import EditLevel from '../../../components/EditPublication/Lol/EditLevel'
-import EditPosition from '../../../components/EditPublication/Lol/EditPosition'
+import EditLevel from '../../../components/EditPublication/Csgo/EditLevel'
+import EditPosition from '../../../components/EditPublication/Csgo/EditPosition'
 import EditDescription from '../../../components/EditPublication/EditDescription'
 import EditHours from '../../../components/EditPublication/EditHours'
 import { EditImages } from '../../../components/EditPublication/EditImages'
 import EditTypeOfGamer from '../../../components/EditPublication/EditTypeOfGamer'
-import EditTitle from '../../../components/EditPublication/EditTitle'
 
 // Hooks
 import { useRouter } from 'next/router'
@@ -25,7 +23,6 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 // Components
 import { Carousel } from 'react-responsive-carousel'
 import Layout from '../../../components/Layout'
-import SocialLinks from '../../../components/SocialLinks'
 import UserMap from '../../../components/UserMap'
 import { myLoader } from '../../../components/myLoader'
 
@@ -34,47 +31,50 @@ import { EditIcon } from '../../../components/Svg'
 
 // styles
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import styles from './User.module.scss'
+import EditAge from '../../../components/EditPublication/EditAge'
+import EditTitle from '../../../components/EditPublication/EditTitle'
+import styles from './Team.module.scss'
 
 // Images
+import Link from 'next/link'
 import PromotionMethods from '../../../components/PromotionMethods'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
 
-const User = () => {
+const Team = () => {
   const [edit, setEdit] = useState(false)
   const router = useRouter()
   const { id } = router.query
   const user = useSession()
   const currentPosition = useCurrentPosition()
-  const currentLol = useGetOnePublication('lol', id)
-  const currentUser = useGetOneData('users', currentLol.uid)
+  const currentCsgo = useGetOnePublication('teams', id)
+  const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
-  const promotion = useMixWikTeamsCheckSubscription(currentLol.promotion)
+  const promotion = useMixWikTeamsCheckSubscription(currentCsgo.mixWikTeams)
 
-  if (currentLol.length === 0) return <div>Loading...</div>
+  if (currentCsgo.length === 0) return <div>Loading...</div>
   if (currentUser.length === 0) return <div>Loading...</div>
 
   const handleUpdatePosition = () => {
-    updatePublicationPosition('lol', id, currentPosition)
+    updatePublicationPosition('teams', id, currentPosition)
   }
 
   const images = []
-  currentLol.img.url !== '' && images.push(currentLol.img.url)
-  currentLol.img2.url !== '' && images.push(currentLol.img2.url)
-  currentLol.img3.url !== '' && images.push(currentLol.img3.url)
-  currentLol.img4.url !== '' && images.push(currentLol.img4.url)
-  currentLol.img5.url !== '' && images.push(currentLol.img5.url)
-  currentLol.img6.url !== '' && images.push(currentLol.img6.url)
-  currentLol.img7.url !== '' && images.push(currentLol.img7.url)
+  currentCsgo.img.url !== '' && images.push(currentCsgo.img.url)
+  currentCsgo.img2.url !== '' && images.push(currentCsgo.img2.url)
+  currentCsgo.img3.url !== '' && images.push(currentCsgo.img3.url)
+  currentCsgo.img4.url !== '' && images.push(currentCsgo.img4.url)
+  currentCsgo.img5.url !== '' && images.push(currentCsgo.img5.url)
+  currentCsgo.img6.url !== '' && images.push(currentCsgo.img6.url)
+  currentCsgo.img7.url !== '' && images.push(currentCsgo.img7.url)
 
   const master1 = process.env.NEXT_PUBLIC_MASTER1
   const master2 = process.env.NEXT_PUBLIC_MASTER2
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
-      deletePublication('csgo', id, currentUser.id)
+      deletePublication('teams', id, currentUser.id)
       updateUserAdmonition(currentUser.id, 1)
     }
   }
@@ -84,13 +84,9 @@ const User = () => {
       <div className={styles.user}>
         <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className={styles.background} />
         <section className={styles.userBox}>
-          {
-            mixWikTeams && (
-              <div className={styles.mixWikTeam}>
-                Usuario Teams
-              </div>
-            )
-          }
+          <div className={styles.equip}>
+            Team
+          </div>
           <div className={styles.profileUser} data-active={mixWikTeams}>
             <Link target='_blanc' href={`/user/${currentUser.uid}`}>
               <Image width={0} height={0} loader={myLoader} src={currentUser.profileImg} alt={`Imagen de perfil de ${currentUser.name}`} />
@@ -112,15 +108,15 @@ const User = () => {
             {edit === 'images' && (
               <EditImages
                 id={id}
-                category='lol'
+                category='teams'
                 currentUser={currentUser}
-                prevImg={currentLol.img}
-                prevImg2={currentLol.img2}
-                prevImg3={currentLol.img3}
-                prevImg4={currentLol.img4}
-                prevImg5={currentLol.img5}
-                prevImg6={currentLol.img6}
-                prevImg7={currentLol.img7}
+                prevImg={currentCsgo.img}
+                prevImg2={currentCsgo.img2}
+                prevImg3={currentCsgo.img3}
+                prevImg4={currentCsgo.img4}
+                prevImg5={currentCsgo.img5}
+                prevImg6={currentCsgo.img6}
+                prevImg7={currentCsgo.img7}
                 setEdit={setEdit}
                 mixWikTeams={mixWikTeams}
               />)}
@@ -129,11 +125,11 @@ const User = () => {
             {
               edit === 'title'
                 ? (
-                  <EditTitle category='lol' id={id} title={currentLol.title} setEdit={setEdit} />
+                  <EditTitle category='csgo' id={id} title={currentCsgo.title} setEdit={setEdit} />
                   )
                 : (
                   <h1>
-                    {currentLol.title}
+                    {currentCsgo.title}
                     {limitedAdministrator &&
                       <button onClick={() => setEdit('title')}>
                         <EditIcon />
@@ -148,14 +144,14 @@ const User = () => {
             edit === 'description'
               ? (
                 <EditDescription
-                  category='lol'
+                  category='teams'
                   id={id}
                   setEdit={setEdit}
-                  description={currentLol.description}
+                  description={currentCsgo.description}
                 />
                 )
               : (
-                <p>{currentLol.description}
+                <p>{currentCsgo.description}
                   {limitedAdministrator &&
                     <button onClick={() => setEdit('description')}>
                       <EditIcon />
@@ -168,7 +164,7 @@ const User = () => {
             {
             edit === 'typeOfGamer'
               ? (
-                <EditTypeOfGamer category='lol' id={id} typeOfGamer={currentLol.typeOfGamer} setEdit={setEdit} />
+                <EditTypeOfGamer category='teams' id={id} typeOfGamer={currentCsgo.typeOfGamer} setEdit={setEdit} />
                 )
               : (
                 <>
@@ -182,7 +178,7 @@ const User = () => {
                   </h2>
                   <ul>
                     {
-                      currentLol.typeOfGamer.map((type, index) => (
+                      currentCsgo.typeOfGamer.map((type, index) => (
                         <li key={index}>{type}</li>
                       ))
                     }
@@ -195,17 +191,21 @@ const User = () => {
             {
               edit === 'level'
                 ? (
-                  <EditLevel category='lol' id={id} level={currentLol.level} setEdit={setEdit} />
+                  <EditLevel category='teams' id={id} level={currentCsgo.level} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      Nivel:
+                      Buscamos jugadores de nivel:
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('level')}><EditIcon /></button>}
                     </h2>
-                    <div className={styles.levelBox}>
-                      {currentLol.level}
-                    </div>
+                    <ul>
+                      {
+                        currentCsgo.level.map((level, index) => (
+                          <li key={index}>{level}</li>
+                        ))
+                      }
+                    </ul>
                   </>
                   )
             }
@@ -214,17 +214,17 @@ const User = () => {
             {
               edit === 'position'
                 ? (
-                  <EditPosition category='lol' id={id} position={currentLol.position} setEdit={setEdit} />
+                  <EditPosition category='teams' id={id} position={currentCsgo.position} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      {currentLol.position.length === 1 ? 'Posición:' : 'Posiciones:'}
+                      {currentCsgo.position.length === 1 ? 'Necesitamos cubrir la siguiente Posición:' : 'Necesitamos cubrir las siguientes Posiciones:'}
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('position')}><EditIcon /></button>}
                     </h2>
                     <ul>
                       {
-                        currentLol.position.map((pos, index) => (
+                        currentCsgo.position.map((pos, index) => (
                           <li key={index}>{pos}</li>
                         ))
                       }
@@ -237,31 +237,41 @@ const User = () => {
             {
               edit === 'hours'
                 ? (
-                  <EditHours category='lol' id={id} hours={currentLol.hours} setEdit={setEdit} />
+                  <EditHours category='teams' id={id} hours={currentCsgo.hours} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      Horas Jugadas:
+                      Horas mínimas jugadas:
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('hours')}><EditIcon /></button>}
                     </h2>
-                    {currentLol.hours}h
+                    {currentCsgo.hours}h
                   </>
                   )
             }
           </article>
-          <article className={styles.social}>
-            <h2>
-              Vías de contacto:
-              {limitedAdministrator && <Link href='/dashboard?page=profile' target='_blank' className={styles.editButtonImages}><EditIcon /></Link>}
-            </h2>
-            <SocialLinks mixWikTeams={mixWikTeams} user={currentUser} />
+          <article className={styles.age}>
+            {
+              edit === 'age'
+                ? (
+                  <EditAge category='teams' id={id} age={currentCsgo.age} setEdit={setEdit} />
+                  )
+                : (
+                  <>
+                    <h2>
+                      Edad mínima:
+                      {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('age')}><EditIcon /></button>}
+                    </h2>
+                    {currentCsgo.age} años
+                  </>
+                  )
+            }
           </article>
           <article className={styles.map}>
             {
               limitedAdministrator && <button onClick={handleUpdatePosition}>Cambiar a posición actual</button>
             }
-            <UserMap user={currentUser} publication={currentLol} />
+            <UserMap user={currentUser} publication={currentCsgo} />
           </article>
           <PromotionMethods
             limitedAdministrator={limitedAdministrator}
@@ -279,4 +289,4 @@ const User = () => {
   )
 }
 
-export default User
+export default Team
