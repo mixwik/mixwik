@@ -73,7 +73,7 @@ const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
   }
 
   return (
-    <Link target='_blanck' href={equips ? `/${link}/team/${csgo.id}` : `/${link}/usuario/${csgo.id}`}>
+    <Link target='_blanck' href={equips ? `/publicaciones/teams/${csgo.id}?category=${link}` : `/publicaciones/${link}/${csgo.id}`}>
       <section
         className={styles.card}
         data-teams={mixWikTeams}

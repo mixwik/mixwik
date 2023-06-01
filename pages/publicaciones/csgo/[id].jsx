@@ -1,5 +1,6 @@
 // Next Components
 import Image from 'next/image'
+import Link from 'next/link'
 
 // Edit components
 import EditLevel from '../../../components/EditPublication/Csgo/EditLevel'
@@ -22,7 +23,9 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 
 // Components
 import { Carousel } from 'react-responsive-carousel'
+import EditTitle from '../../../components/EditPublication/EditTitle'
 import Layout from '../../../components/Layout'
+import SocialLinks from '../../../components/SocialLinks'
 import UserMap from '../../../components/UserMap'
 import { myLoader } from '../../../components/myLoader'
 
@@ -31,33 +34,30 @@ import { EditIcon } from '../../../components/Svg'
 
 // styles
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import EditAge from '../../../components/EditPublication/EditAge'
-import EditTitle from '../../../components/EditPublication/EditTitle'
-import styles from './Team.module.scss'
+import styles from '../Publications.module.scss'
 
 // Images
-import Link from 'next/link'
 import PromotionMethods from '../../../components/PromotionMethods'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
 
-const Team = () => {
+const User = () => {
   const [edit, setEdit] = useState(false)
   const router = useRouter()
   const { id } = router.query
   const user = useSession()
   const currentPosition = useCurrentPosition()
-  const currentCsgo = useGetOnePublication('teams', id)
+  const currentCsgo = useGetOnePublication('csgo', id)
   const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
-  const promotion = useMixWikTeamsCheckSubscription(currentCsgo.mixWikTeams)
+  const promotion = useMixWikTeamsCheckSubscription(currentCsgo.promotion)
 
   if (currentCsgo.length === 0) return <div>Loading...</div>
   if (currentUser.length === 0) return <div>Loading...</div>
 
   const handleUpdatePosition = () => {
-    updatePublicationPosition('teams', id, currentPosition)
+    updatePublicationPosition('csgo', id, currentPosition)
   }
 
   const images = []
@@ -74,7 +74,7 @@ const Team = () => {
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
-      deletePublication('teams', id, currentUser.id)
+      deletePublication('csgo', id, currentUser.id)
       updateUserAdmonition(currentUser.id, 1)
     }
   }
@@ -84,9 +84,13 @@ const Team = () => {
       <div className={styles.user}>
         <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className={styles.background} />
         <section className={styles.userBox}>
-          <div className={styles.equip}>
-            Team
-          </div>
+          {
+            mixWikTeams && (
+              <div className={styles.mixWikTeam}>
+                Usuario Teams
+              </div>
+            )
+          }
           <div className={styles.profileUser} data-active={mixWikTeams}>
             <Link target='_blanc' href={`/user/${currentUser.uid}`}>
               <Image width={0} height={0} loader={myLoader} src={currentUser.profileImg} alt={`Imagen de perfil de ${currentUser.name}`} />
@@ -108,7 +112,7 @@ const Team = () => {
             {edit === 'images' && (
               <EditImages
                 id={id}
-                category='teams'
+                category='csgo'
                 currentUser={currentUser}
                 prevImg={currentCsgo.img}
                 prevImg2={currentCsgo.img2}
@@ -144,7 +148,7 @@ const Team = () => {
             edit === 'description'
               ? (
                 <EditDescription
-                  category='teams'
+                  category='csgo'
                   id={id}
                   setEdit={setEdit}
                   description={currentCsgo.description}
@@ -164,7 +168,7 @@ const Team = () => {
             {
             edit === 'typeOfGamer'
               ? (
-                <EditTypeOfGamer category='teams' id={id} typeOfGamer={currentCsgo.typeOfGamer} setEdit={setEdit} />
+                <EditTypeOfGamer category='csgo' id={id} typeOfGamer={currentCsgo.typeOfGamer} setEdit={setEdit} />
                 )
               : (
                 <>
@@ -191,21 +195,17 @@ const Team = () => {
             {
               edit === 'level'
                 ? (
-                  <EditLevel category='teams' id={id} level={currentCsgo.level} setEdit={setEdit} />
+                  <EditLevel category='csgo' id={id} level={currentCsgo.level} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      Buscamos jugadores de nivel:
+                      Nivel:
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('level')}><EditIcon /></button>}
                     </h2>
-                    <ul>
-                      {
-                        currentCsgo.level.map((level, index) => (
-                          <li key={index}>{level}</li>
-                        ))
-                      }
-                    </ul>
+                    <div className={styles.levelBox}>
+                      {currentCsgo.level}
+                    </div>
                   </>
                   )
             }
@@ -214,12 +214,12 @@ const Team = () => {
             {
               edit === 'position'
                 ? (
-                  <EditPosition category='teams' id={id} position={currentCsgo.position} setEdit={setEdit} />
+                  <EditPosition category='csgo' id={id} position={currentCsgo.position} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      {currentCsgo.position.length === 1 ? 'Necesitamos cubrir la siguiente Posición:' : 'Necesitamos cubrir las siguientes Posiciones:'}
+                      {currentCsgo.position.length === 1 ? 'Posición:' : 'Posiciones:'}
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('position')}><EditIcon /></button>}
                     </h2>
                     <ul>
@@ -237,12 +237,12 @@ const Team = () => {
             {
               edit === 'hours'
                 ? (
-                  <EditHours category='teams' id={id} hours={currentCsgo.hours} setEdit={setEdit} />
+                  <EditHours category='csgo' id={id} hours={currentCsgo.hours} setEdit={setEdit} />
                   )
                 : (
                   <>
                     <h2>
-                      Horas mínimas jugadas:
+                      Horas Jugadas:
                       {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('hours')}><EditIcon /></button>}
                     </h2>
                     {currentCsgo.hours}h
@@ -250,22 +250,12 @@ const Team = () => {
                   )
             }
           </article>
-          <article className={styles.age}>
-            {
-              edit === 'age'
-                ? (
-                  <EditAge category='teams' id={id} age={currentCsgo.age} setEdit={setEdit} />
-                  )
-                : (
-                  <>
-                    <h2>
-                      Edad mínima:
-                      {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('age')}><EditIcon /></button>}
-                    </h2>
-                    {currentCsgo.age} años
-                  </>
-                  )
-            }
+          <article className={styles.social}>
+            <h2>
+              Vías de contacto:
+              {limitedAdministrator && <Link href='/dashboard?page=profile' target='_blank' className={styles.editButtonImages}><EditIcon /></Link>}
+            </h2>
+            <SocialLinks mixWikTeams={mixWikTeams} user={currentUser} />
           </article>
           <article className={styles.map}>
             {
@@ -289,4 +279,4 @@ const Team = () => {
   )
 }
 
-export default Team
+export default User

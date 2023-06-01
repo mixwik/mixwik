@@ -1,4 +1,4 @@
-@import '../../../styles/colors.scss';
+@import '../../styles/colors.scss';
 
 .user {
   display: flex;
@@ -22,6 +22,20 @@
     @media screen and (min-width: 768px) {
       width: 40vw;
       margin-top: 1rem;
+    }
+
+    .mixWikTeam {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      background-color: $aero;
+      text-align: center;
+      padding: .2rem;
+      color: $white;
+      font-size: 1.2em;
+      font-weight: bold;
+      z-index: 10;
     }
 
     .profileUser {
@@ -48,20 +62,6 @@
           border-radius: 50%;
         }
       }
-    }
-
-    .equip {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      background-color: $gradient;
-      text-align: center;
-      padding: .2rem;
-      color: $white;
-      font-size: 1.2em;
-      font-weight: bold;
-      z-index: 10;
     }
 
     .publicationTitle {
@@ -142,7 +142,7 @@
     .level,
     .typeOfGamer,
     .hours,
-    .age,
+    .social,
     .map {
       display: flex;
       flex-direction: column;
@@ -155,7 +155,7 @@
         display: flex;
         gap: .5rem;
 
-        button {
+        button, a {
           background-color: transparent;
 
           svg {
@@ -173,12 +173,21 @@
 
         li {
           text-align: center;
-          background-color: $gradient;
+          background-color: $aero;
           color: $white;
-          box-shadow: 0 0 2px $pennBlue;
           padding: .3rem;
           border-radius: .3rem;
         }
+      }
+    }
+
+    .level {
+      .levelBox {
+        text-align: center;
+        background-color: $aero;
+        color: $white;
+        padding: 0.3rem 1rem;
+        border-radius: .3rem;
       }
     }
 
@@ -200,9 +209,7 @@
       }
     }
 
-    .typeOfGamer,
-    .hours,
-    .age {
+    .hours {
       flex-direction: row;
       align-items: center;
     }
@@ -214,7 +221,7 @@
 
     button {
       padding: .5rem;
-      background-color: $aero;
+      background-color: $pennBlue;
       color: $white;
       border-radius: .3rem;
       border: 1px solid $aero;
@@ -227,6 +234,7 @@
       }
     }
   }
+
   .masterDelete {
     position: fixed;
     right: 2rem;
