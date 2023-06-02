@@ -58,7 +58,7 @@ const Csgo = () => {
                       key={res.id}
                       user={users}
                       csgo={res}
-                      link='csgo'
+                      link={res.category}
                       promotions
                     />
                   )
@@ -72,7 +72,7 @@ const Csgo = () => {
                     key={res.id}
                     user={users}
                     csgo={res}
-                    link='csgo'
+                    link={res.category}
                     equips
                   />
                 ))
@@ -85,7 +85,7 @@ const Csgo = () => {
                     key={res.id}
                     user={users}
                     csgo={res}
-                    link='csgo'
+                    link={res.category}
                     teams
                   />
                 ))
@@ -98,7 +98,7 @@ const Csgo = () => {
                       <Card
                         key={res.id}
                         user={users} csgo={res}
-                        link='csgo'
+                        link={res.category}
                         basic
                       />
                     ))

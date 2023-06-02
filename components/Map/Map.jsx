@@ -10,7 +10,7 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 // Components
 import Markers from './Marker'
 
-const Map = ({ location, users, db, zoom, currentPosition, category }) => {
+const Map = ({ location, users, db, zoom, currentPosition }) => {
   if (currentPosition.length === 0) return <div>Loading...</div>
   return (
     <MapContainer
@@ -31,7 +31,7 @@ const Map = ({ location, users, db, zoom, currentPosition, category }) => {
             position={position}
             currentPosition={currentPosition}
             users={users}
-            category={category}
+            category={position.category}
           />
         ))
       }

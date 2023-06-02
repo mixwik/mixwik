@@ -46,6 +46,12 @@
       }
     }
 
+    .titleAllGames {
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding-top: 1rem;
+    }
+
     .gamersBox {
       display: grid;
       grid-template-columns: repeat(2, 1fr);

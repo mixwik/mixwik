@@ -6,7 +6,6 @@ import styles from '../../styles/Pages.module.scss'
 
 // Components
 import Card from '../../components/Card'
-import FilterCsgo from '../../components/Filters/Csgo'
 import Layout from '../../components/Layout'
 import Map from '../../components/Map'
 
@@ -17,13 +16,14 @@ import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
 // Context
 import { useHandleOpenContext } from '../../context'
 
+import FilterAllGames from '../../components/Filters/AllGames'
 import { useSession } from '../../firebase/auth/useSession'
 import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
 import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 
-const Csgo = () => {
+const AllGames = () => {
   const [distance, setDistance] = useState(700)
-  const [allGames, setAllGames] = useState(700)
+  const [allGames, setAllGames] = useState([])
   const session = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
@@ -40,15 +40,15 @@ const Csgo = () => {
   const user = users.find(res => res.uid === session.uid)
 
   // filter users list with different filters
-  const listUserCsgo = useUserCsgoFilters(user, csgo, distance)
+  const listUserAllGames = useUserCsgoFilters(user, allGames, distance)
   const listUserTeams = useUserCsgoFilters(user, teams, distance)
 
   return (
     <Layout>
       <div className={styles.pageBox}>
         <section className={styles.pages}>
-          <FilterCsgo users={listUserCsgo} distance={distance} setDistance={setDistance} />
-          <h1 className={styles.title}>
+          <FilterAllGames users={listUserAllGames} distance={distance} setDistance={setDistance} />
+          <h1 className={styles.titleAllGames}>
             Todos los jugadores
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
@@ -59,20 +59,20 @@ const Csgo = () => {
                     key={res.id}
                     user={users}
                     csgo={res}
-                    link='csgo'
+                    link={res.category}
                     equips
                   />
                 ))
               )
             }
             {
-              allGames.length > 0 && (
-                allGames.map((res) => (
+              listUserAllGames.length > 0 && (
+                listUserAllGames.map(res => (
                   <Card
                     key={res.id}
                     user={users}
                     csgo={res}
-                    link='csgo'
+                    link={res.category}
                     teams
                   />
                 ))
@@ -84,14 +84,14 @@ const Csgo = () => {
           location={user}
           users={users}
           currentPosition={currentPosition}
-          db={listUserCsgo}
+          db={allGames}
           zoom={7}
           size={30}
-          category='csgo'
+          category={allGames}
         />
       </div>
     </Layout>
   )
 }
 
-export default Csgo
+export default AllGames

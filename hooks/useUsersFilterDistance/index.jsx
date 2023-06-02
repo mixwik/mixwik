@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useCurrentPosition } from '../useCurrentPosition'
 
 export const useUserFilterDistance = (locationUser, csgo, distance) => {

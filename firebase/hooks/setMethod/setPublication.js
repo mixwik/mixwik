@@ -12,6 +12,7 @@ export const setPublication = async (category, value, geometry, userData, img, n
     description: value.description,
     uid: userData.uid,
     geometry,
+    category,
     age: userData.age,
     img: {
       url: img,

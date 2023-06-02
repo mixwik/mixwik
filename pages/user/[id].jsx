@@ -25,28 +25,29 @@ const User = () => {
       <div className={styles.user}>
         <section className={styles.publications}>
           <h2>Publicaciones</h2>
-          <div className={styles.publicationsBox}>
+          <article className={styles.publicationsBox}>
+            <h3>Counter Strike Global Ofensive</h3>
             {csgo.length > 0 && (
               csgo.map((res) => (
-                <Card key={res.id} csgo={res} user={[user]} link='csgo' promotions />
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} promotions />
               ))
             )}
             {teams.length > 0 && (
               teams.map((res) => (
-                <Card key={res.id} csgo={res} user={[user]} link='csgo' equips />
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} equips />
               ))
             )}
             {csgo.length > 0 && (
               csgo.map((res) => (
-                <Card key={res.id} csgo={res} user={[user]} link='csgo' teams />
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} teams />
               ))
             )}
             {csgo.length > 0 && (
               csgo.map((res) => (
-                <Card key={res.id} csgo={res} user={[user]} link='csgo' basic />
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} basic />
               ))
             )}
-          </div>
+          </article>
         </section>
         {
         isOpen
