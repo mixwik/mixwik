@@ -1,0 +1,58 @@
+@import "../../styles/colors.scss";
+
+.bugs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .5);
+    
+    .bugsSection {
+        background-color: $white;
+        padding: 1rem;
+        width: 100vw;
+        height: 100vh;
+        @media screen and (min-width: 768px) {
+            border-radius: .5rem;
+            width: 50vw;
+            height: 50vh;
+        }
+            
+        h2 {
+            font-weight: bold;
+        }
+        p {
+            padding: 1rem 0;
+        }
+
+        form {
+            textarea {
+                width: 100%;
+                height: 10rem;
+                resize: none;
+                border: 1px solid $aero;
+                border-radius: 5px;
+                padding: .5rem;
+                margin-bottom: 1rem;
+            }
+            .buttons {
+                display: flex;
+                gap: 1rem;
+                button {
+                    background-color: $aero;
+                    padding: .5rem 1rem ;
+                    color: $white;
+                }
+                .cancel {
+                    background-color: $pennBlue;
+                }
+            }
+        }
+    }
+}

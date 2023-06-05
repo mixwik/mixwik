@@ -24,24 +24,28 @@ import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 const AllGames = () => {
   const [distance, setDistance] = useState(700)
   const [allGames, setAllGames] = useState([])
+  const [allTeams, setAllTeams] = useState([])
   const session = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const users = useGetData('users')
   const csgo = useGetData('csgo')
   const lol = useGetData('lol')
-  const teams = useGetTeams('teams', 'csgo')
+  const teamsCsgo = useGetTeams('teams', 'csgo')
+  const teamsLol = useGetTeams('teams', 'lol')
   useEffect(() => {
     const allGamesArray = [...csgo, ...lol]
+    const allTeamsArray = [...teamsCsgo, ...teamsLol]
     setAllGames(allGamesArray)
-  }, [csgo, lol])
+    setAllTeams(allTeamsArray)
+  }, [csgo, lol, teamsCsgo, teamsLol])
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)
 
   // filter users list with different filters
   const listUserAllGames = useUserCsgoFilters(user, allGames, distance)
-  const listUserTeams = useUserCsgoFilters(user, teams, distance)
+  const listUserTeams = useUserCsgoFilters(user, allTeams, distance)
 
   return (
     <Layout>

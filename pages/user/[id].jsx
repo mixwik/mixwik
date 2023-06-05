@@ -8,6 +8,7 @@ import SocialLinks from '../../components/SocialLinks'
 import { myLoader } from '../../components/myLoader'
 import { useGetMyPublications } from '../../firebase/hooks/getMethod/useGetMyPublications'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
+import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import styles from './User.module.scss'
 
@@ -17,7 +18,9 @@ const User = () => {
   const { id } = router.query
   const user = useGetOneData('users', id)
   const csgo = useGetMyPublications('csgo', user.uid)
-  const teams = useGetMyPublications('teams', user.uid)
+  const lol = useGetMyPublications('lol', user.uid)
+  const teamsCsgo = useGetTeams('teams', 'csgo')
+  const teamsLol = useGetTeams('teams', 'lol')
   const mixWikTeams = useMixWikTeamsCheckSubscription(user.mixWikTeams)
   if (user.length === 0) return <div>Loading...</div>
   return (
@@ -25,15 +28,15 @@ const User = () => {
       <div className={styles.user}>
         <section className={styles.publications}>
           <h2>Publicaciones</h2>
-          <article className={styles.publicationsBox}>
-            <h3>Counter Strike Global Ofensive</h3>
+          <article className={styles.publicationsUser}>
+            <h3 className={styles.publicationUserTitle}>Counter Strike Global Ofensive</h3>
             {csgo.length > 0 && (
               csgo.map((res) => (
                 <Card key={res.id} csgo={res} user={[user]} link={res.category} promotions />
               ))
             )}
-            {teams.length > 0 && (
-              teams.map((res) => (
+            {teamsCsgo.length > 0 && (
+              teamsCsgo.map((res) => (
                 <Card key={res.id} csgo={res} user={[user]} link={res.category} equips />
               ))
             )}
@@ -44,6 +47,29 @@ const User = () => {
             )}
             {csgo.length > 0 && (
               csgo.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} basic />
+              ))
+            )}
+          </article>
+          <article className={styles.publicationsUser}>
+            <h3 className={styles.publicationUserTitle}>League Of Legends</h3>
+            {lol.length > 0 && (
+              lol.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} promotions />
+              ))
+            )}
+            {teamsLol.length > 0 && (
+              teamsLol.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} equips />
+              ))
+            )}
+            {lol.length > 0 && (
+              lol.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} teams />
+              ))
+            )}
+            {lol.length > 0 && (
+              lol.map((res) => (
                 <Card key={res.id} csgo={res} user={[user]} link={res.category} basic />
               ))
             )}

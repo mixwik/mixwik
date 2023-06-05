@@ -13,12 +13,14 @@
         height: 90vh;
         overflow: scroll;
         background-image: url('../../public/bg/bg_gray.svg');
-
+        padding-bottom: 5vh;
+        
         @media screen and (max-width: 768px) {
             height: auto;
             overflow: visible;
             width: 100%;
             order: 2;
+            padding-bottom: 15vh;
         }
 
         h2 {
@@ -28,21 +30,34 @@
             font-weight: bold;
         }
 
-        .publicationsBox {
+        .publicationsUser {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             place-items: center;
             gap: 1rem 0;
-
-            @media screen and (max-width: 1100px) {
+            
+            @media screen and (min-width: 768px) {
                 grid-template-columns: repeat(3, 1fr);
             }
 
-            @media screen and (max-width: 768px) {
-                margin-bottom: 15vh;
-                grid-template-columns: repeat(2, 1fr);
+            @media screen and (min-width: 1100px) {
+                grid-template-columns: repeat(4, 1fr);
             }
 
+
+            .publicationUserTitle {
+                grid-column: 1/3;
+                font-weight: bold;
+                padding: 2rem;
+
+                @media screen and (min-width: 768px) {
+                    grid-column: 1/4;
+                }
+
+                @media screen and (min-width: 1100px) {
+                    grid-column: 1/5;
+                }
+            }
         }
 
         &::-webkit-scrollbar {
@@ -125,24 +140,29 @@
     align-items: center;
     background-color: $white;
     width: 50%;
+
     @media screen and (max-width: 768px) {
         width: 100%;
         order: 1;
     }
+
     h1 {
         padding: 1rem;
         font-size: 1.5rem;
         text-align: center;
         font-weight: bold;
     }
+
     p {
         padding: 0 3rem;
+
         a {
             color: $aero;
             text-decoration: underline;
             font-weight: bold;
         }
     }
+
     button {
         padding: 1rem;
         background-color: $pennBlue;

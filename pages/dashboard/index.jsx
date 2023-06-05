@@ -21,11 +21,12 @@ import NewUser from '../../components/NewUser'
 import { myLoader } from '../../components/myLoader'
 
 // Images
-import { AddPublication, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
+import { AddPublication, BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
 import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
 import { useRouter } from 'next/router'
+import Bugs from '../../components/Bugs'
 import AllUsers from '../../components/Dashboard/AllUsers'
 import NewTeam from '../../components/Dashboard/NewTeam'
 import { useSignOut } from '../../firebase/auth/SignOut'
@@ -38,6 +39,7 @@ export default function Dashboard () {
   const { page } = router.query
   const [isOpen, setIsOpen] = useState(false)
   const [toggle, setToggle] = useState(false)
+  const [bugs, setBugs] = useState(false)
   useEffect(() => {
     setToggle('loading')
     setTimeout(() => {
@@ -101,6 +103,12 @@ export default function Dashboard () {
               Mis publicaciones
             </li>
             <li className={styles.ours}>
+              <button onClick={() => setBugs(!bugs)}>
+                <BugsIcon />
+                Reportar Bug
+              </button>
+            </li>
+            <li className={styles.ours}>
               <Link href='/sobre-nosotros'>
                 <Company />
                 Sobre Nosotros
@@ -147,6 +155,7 @@ export default function Dashboard () {
           <div className={styles.grid4} />
         </button>
       </section>
+      {bugs && <Bugs setBug={setBugs} user={user} />}
     </Layout>
   )
 }

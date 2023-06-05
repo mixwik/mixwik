@@ -10,13 +10,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 // Images
-import { Company, ContactUs, UserIcon, UserIconLogin } from '../../components/Svg'
+import { BugsIcon, Company, ContactUs, UserIcon, UserIconLogin } from '../../components/Svg'
 import logo from '../../public/logos/mixwik-logo.png'
 import { myLoader } from '../myLoader'
 
 // Log In
 import { useSession } from '../../firebase/auth/useSession'
 import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
+import Bugs from '../Bugs'
 import LogIn from '../LogIn'
 
 const Nav = () => {
@@ -26,6 +27,7 @@ const Nav = () => {
     else setTransparent(false)
   }, [router.asPath])
   const [isOpen, setIsOpen] = useState(false)
+  const [bugs, setBugs] = useState(false)
   const [transparent, setTransparent] = useState(false)
 
   const user = useSession()
@@ -54,6 +56,12 @@ const Nav = () => {
         </div>
         <div className={styles.logIn}>
           <ul className={styles.links}>
+            <li>
+              <button onClick={() => setBugs(!bugs)}>
+                <BugsIcon />
+                Reportar Bugs/Sugerencias
+              </button>
+            </li>
             <li>
               <Link href='/sobre-nosotros'>
                 <Company />
@@ -92,6 +100,7 @@ const Nav = () => {
         </div>
       </nav>
       <LogIn setIsOpen={setIsOpen} isOpen={isOpen} />
+      {bugs && <Bugs setBug={setBugs} user={user} />}
       <div className={styles.placeHolder} />
     </>
   )

@@ -2,23 +2,33 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Card from '../../components/Card'
 import CityMap from '../../components/CityMap'
+import FilterCityGames from '../../components/Filters/CityGames'
 import Layout from '../../components/Layout'
 import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
-import { useCityFilterDistance } from '../../hooks/useCityFilterDistance'
-import styles from './Poblacion.module.scss'
+import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
+import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
+import styles from '../../styles/Pages.module.scss'
 
 const City = () => {
   const [city, setCity] = useState()
+  const [allGames, setAllGames] = useState([])
+  const [allTeams, setAllTeams] = useState([])
   const router = useRouter()
   const { name } = router.query
-  const csgo = useGetData('csgo')
-  const teams = useGetData('teams')
   const users = useGetData('users')
-  const csgoFiltered = useCityFilterDistance(city, csgo, 30)
-  const teamsFiltered = useCityFilterDistance(city, teams, 30)
+  const csgo = useGetData('csgo')
+  const lol = useGetData('lol')
+  const teamsCsgo = useGetTeams('teams', 'csgo')
+  const teamsLol = useGetTeams('teams', 'lol')
+  const listUserAllGames = useUserCsgoFilters(city, allGames, 30)
+  const listUserTeams = useUserCsgoFilters(city, allTeams, 30)
   const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(name)}&format=json&limit=1`
 
   useEffect(() => {
+    const allGamesArray = [...csgo, ...lol]
+    const allTeamsArray = [...teamsCsgo, ...teamsLol]
+    setAllGames(allGamesArray)
+    setAllTeams(allTeamsArray);
     (async () => {
       try {
         const response = await fetch(url)
@@ -36,51 +46,48 @@ const City = () => {
         return null
       }
     })()
-  }, [url])
+  }, [url, csgo, lol, teamsCsgo, teamsLol])
 
   if (!city) return <div>Loading...</div>
 
   return (
     <Layout>
-      <div className={styles.city}>
-        <section className={styles.cardBox}>
-          <h1 className={styles.title}>{name}</h1>
-          {
-              csgo.length > 0 && (
-                csgo.map((res) => (
-                  res.promotion && (
-                    <Card key={res.id} user={users} csgo={res} link='csgo' promotions />
-                  )
+      <div className={styles.pageBox}>
+        <section className={styles.pages}>
+          <FilterCityGames />
+          <h1 className={styles.titleAllGames}>
+            Todos los jugadores
+          </h1>
+          <div className={styles.gamersBox}>
+            {
+              listUserTeams.length > 0 && (
+                listUserTeams.map((res) => (
+                  <Card
+                    key={res.id}
+                    user={users}
+                    csgo={res}
+                    link={res.category}
+                    equips
+                  />
                 ))
               )
             }
-          {
-            teamsFiltered.length > 0 && (
-              teamsFiltered.map((res) => (
-                <Card key={res.id} user={users} csgo={res} link='csgo' equips />
-              ))
-            )
+            {
+              listUserAllGames.length > 0 && (
+                listUserAllGames.map(res => (
+                  <Card
+                    key={res.id}
+                    user={users}
+                    csgo={res}
+                    link={res.category}
+                    teams
+                  />
+                ))
+              )
             }
-          {
-            csgoFiltered.length > 0 && (
-              csgoFiltered.map((res) => (
-                <Card key={res.id} user={users} csgo={res} link='csgo' teams />
-              ))
-            )
-            }
-          {
-            csgoFiltered.length > 0
-              ? (
-                  csgoFiltered.map((res) => (
-                    <Card key={res.id} user={users} csgo={res} link='csgo' basic />
-                  ))
-                )
-              : (
-                <div className={styles.gamersNoFound}>No hay jugadores de CSGO en este momento</div>
-                )
-            }
+          </div>
         </section>
-        <CityMap city={city} publication={csgoFiltered} users={users} />
+        <CityMap city={city} publication={listUserAllGames} users={users} />
       </div>
     </Layout>
   )

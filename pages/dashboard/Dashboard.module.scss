@@ -70,11 +70,12 @@
           border-radius: 0;
         }
 
-        a {
+        a, button {
           display: flex;
           justify-content: flex-start;
           gap: 0.5rem;
           width: 100%;
+          background-color: transparent;
 
           svg {
             background-color: transparent;
