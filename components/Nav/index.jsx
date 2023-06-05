@@ -59,7 +59,7 @@ const Nav = () => {
             <li>
               <button onClick={() => setBugs(!bugs)}>
                 <BugsIcon />
-                Reportar Bugs/Sugerencias
+                Reportar Bugs
               </button>
             </li>
             <li>

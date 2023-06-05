@@ -4,7 +4,7 @@ export const useCityFilterDistance = (city, publication, distance) => {
   const [filteredUsersDistance, setFilteredUsersDistance] = useState([])
   const radius = distance
   useEffect(() => {
-    const positionUser = city
+    const positionUser = city.geometry
     if (positionUser) {
       const filtered = publication.filter(user => {
         const distance = getDistance(positionUser, user.geometry)
