@@ -25,7 +25,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
           <h2>Nivel:</h2>
           <div className={styles.level}>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Sin Nivel'
               name='level'
               id='sin nivel'
@@ -34,7 +34,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Sin Nivel
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Hierro'
               name='level'
               id='hierro'
@@ -43,7 +43,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Hierro
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Bronce'
               name='level'
               id='bronce'
@@ -52,7 +52,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Bronce
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Plata'
               name='level'
               id='plata'
@@ -61,7 +61,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Plata
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Oro'
               name='level'
               id='oro'
@@ -70,7 +70,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Oro
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Platino'
               name='level'
               id='platino'
@@ -79,7 +79,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Platino
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Diamante'
               name='level'
               id='diamante'
@@ -88,7 +88,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Diamante
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Maestro'
               name='level'
               id='maestro'
@@ -97,7 +97,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Maestro
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Gran Maestro'
               name='level'
               id='gran maestro'
@@ -106,7 +106,7 @@ const EditLevel = ({ category, id, level, setEdit }) => {
               Gran Maestro
             </label>
             <Field
-              type='radio'
+              type={category === 'teams' ? 'checkbox' : 'radio'}
               value='Retador'
               name='level'
               id='retador'

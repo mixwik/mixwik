@@ -7,6 +7,7 @@ import valorant from '../../../public/logos/VALORANT4.png'
 import csgo from '../../../public/logos/csgo.png'
 import fortnite from '../../../public/logos/fortnite.png'
 import Csgo from './Csgo'
+import Lol from './Lol'
 import styles from './NewTeam.module.scss'
 
 const NewTeam = ({ user, mixWikTeams }) => {
@@ -18,6 +19,10 @@ const NewTeam = ({ user, mixWikTeams }) => {
         <span onClick={() => setToggle('csgo')}>
           <Image src={csgo} alt='logo de csgo' />
           Counter Strike Global Offensive
+        </span>
+        <span onClick={() => setToggle('lol')}>
+          <Image src={lol} alt='logo de League Of Legends' />
+          League Of Legends<br />
         </span>
         <span value=''>
           <Image src={fortnite} alt='logo de Fortnite' />
@@ -31,12 +36,9 @@ const NewTeam = ({ user, mixWikTeams }) => {
           <Image src={valorant} alt='logo de Valorant' />
           Valorant<br /> (Próximamente)
         </span>
-        <span value=''>
-          <Image src={lol} alt='logo de League Of Legends' />
-          League Of Legends<br /> (Próximamente)
-        </span>
       </div>
       <Csgo setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
+      <Lol setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
     </section>
   )
 }

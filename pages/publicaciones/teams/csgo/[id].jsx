@@ -2,44 +2,44 @@
 import Image from 'next/image'
 
 // Edit components
-import EditLevel from '../../../components/EditPublication/Csgo/EditLevel'
-import EditPosition from '../../../components/EditPublication/Csgo/EditPosition'
-import EditDescription from '../../../components/EditPublication/EditDescription'
-import EditHours from '../../../components/EditPublication/EditHours'
-import { EditImages } from '../../../components/EditPublication/EditImages'
-import EditTypeOfGamer from '../../../components/EditPublication/EditTypeOfGamer'
+import EditLevel from '../../../../components/EditPublication/Csgo/EditLevel'
+import EditPosition from '../../../../components/EditPublication/Csgo/EditPosition'
+import EditDescription from '../../../../components/EditPublication/EditDescription'
+import EditHours from '../../../../components/EditPublication/EditHours'
+import { EditImages } from '../../../../components/EditPublication/EditImages'
+import EditTypeOfGamer from '../../../../components/EditPublication/EditTypeOfGamer'
 
 // Hooks
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { useSession } from '../../../firebase/auth/useSession'
-import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
-import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
-import { updatePublicationPosition, updateUserAdmonition } from '../../../firebase/hooks/updateMethod/updateUserData'
-import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
-import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
-import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
+import { useSession } from '../../../../firebase/auth/useSession'
+import { useGetOneData } from '../../../../firebase/hooks/getMethod/useGetOneData'
+import { useGetOnePublication } from '../../../../firebase/hooks/getMethod/useGetOnePublication'
+import { updatePublicationPosition, updateUserAdmonition } from '../../../../firebase/hooks/updateMethod/updateUserData'
+import { useMixWikTeamsCheckSubscription } from '../../../../hooks/useChecksStripe'
+import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
+import { useLimitedAdministrator } from '../../../../hooks/useLimitedAdministrator'
 
 // Components
 import { Carousel } from 'react-responsive-carousel'
-import Layout from '../../../components/Layout'
-import UserMap from '../../../components/UserMap'
-import { myLoader } from '../../../components/myLoader'
+import Layout from '../../../../components/Layout'
+import UserMap from '../../../../components/UserMap'
+import { myLoader } from '../../../../components/myLoader'
 
 // Icons
-import { EditIcon } from '../../../components/Svg'
+import { EditIcon } from '../../../../components/Svg'
 
 // styles
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import EditAge from '../../../components/EditPublication/EditAge'
-import EditTitle from '../../../components/EditPublication/EditTitle'
-import styles from './Team.module.scss'
+import EditAge from '../../../../components/EditPublication/EditAge'
+import EditTitle from '../../../../components/EditPublication/EditTitle'
+import styles from '../Team.module.scss'
 
 // Images
 import Link from 'next/link'
-import PromotionMethods from '../../../components/PromotionMethods'
-import { deletePublication } from '../../../firebase/hooks/deleteMethod'
-import background from '../../../public/bg/bg_gray.svg'
+import PromotionMethods from '../../../../components/PromotionMethods'
+import { deletePublication } from '../../../../firebase/hooks/deleteMethod'
+import background from '../../../../public/bg/bg_gray.svg'
 
 const Team = () => {
   const [edit, setEdit] = useState(false)
@@ -125,7 +125,7 @@ const Team = () => {
             {
               edit === 'title'
                 ? (
-                  <EditTitle category='csgo' id={id} title={currentTeams.title} setEdit={setEdit} />
+                  <EditTitle category='teams' id={id} title={currentTeams.title} setEdit={setEdit} />
                   )
                 : (
                   <h1>
