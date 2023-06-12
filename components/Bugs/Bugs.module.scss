@@ -31,7 +31,8 @@
             padding: 1rem 0;
         }
 
-        form {
+        .bugsForm {
+            position: relative;
             textarea {
                 width: 100%;
                 height: 10rem;
@@ -48,11 +49,22 @@
                     background-color: $aero;
                     padding: .5rem 1rem ;
                     color: $white;
+                    &:disabled {
+                        background-color: gray;
+                    }
                 }
                 .cancel {
                     background-color: $pennBlue;
                 }
             }
+            .count {
+                position: absolute;
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+        .alert {
+            color: red;
         }
     }
 }

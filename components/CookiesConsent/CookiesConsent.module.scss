@@ -1,0 +1,44 @@
+@import '../../styles/colors.scss';
+
+.cookieConsent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: $pennBlue;
+    color: $white;
+    gap: .5rem;
+    z-index: 50;
+    @media screen and (min-width: 768px) {
+        height: 7vh;
+        flex-direction: row;
+    }
+    a {
+        color: $aero;
+        text-decoration: underline;
+    }
+    .buttonsCookies {
+        display: flex;
+        gap: 1rem;
+        button {
+            padding: .2rem .5rem;
+            border: 1px solid $aero;
+            background-color: $aero;
+            color: $white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color .5s;
+            border-radius:.2rem;
+            &:hover {
+                background-color: $white;
+                color: $aero;
+            }
+        }
+    }
+}

@@ -44,6 +44,14 @@ export const updateUserAdmonition = async (id, number) => {
     location.reload()
   })
 }
+export const updateBugsSolution = async (id, bool) => {
+  const userRef = doc(db, 'bugs', id)
+  await updateDoc(userRef, {
+    resolved: bool
+  }).then(() => {
+    location.reload()
+  })
+}
 
 export const updateUserMixWikTeams = async (payID, id, router) => {
   const userRef = doc(db, 'users', id)

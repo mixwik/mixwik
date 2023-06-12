@@ -6,7 +6,8 @@ export const setBugs = async (name, email, message, setBug) => {
   await addDoc(collection(db, 'bugs'), {
     name,
     email,
-    message
+    message,
+    resolved: false
   }).then(() => {
     setBug(false)
   })

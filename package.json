@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@vercel/analytics": "1.0.0",
+    "cookies": "^0.8.0",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "firebase": "9.16.0",
     "formik": "2.2.9",
+    "js-cookie": "3.0.5",
     "leaflet": "1.9.2",
     "leaflet-defaulticon-compatibility": "0.1.1",
     "next": "13.0.3",

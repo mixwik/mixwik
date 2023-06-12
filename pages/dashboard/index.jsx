@@ -19,6 +19,7 @@ import Publications from '../../components/Dashboard/Publications'
 import Layout from '../../components/Layout'
 import NewUser from '../../components/NewUser'
 import { myLoader } from '../../components/myLoader'
+import BugsReports from '../../components/Dashboard/BugsReports'
 
 // Images
 import { AddPublication, BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
@@ -73,6 +74,7 @@ export default function Dashboard () {
         {page === 'teams' && <NewTeam mixWikTeams={mixWikTeams} user={currentUser} />}
         {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
         {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
+        {page === 'bugsReports' && <BugsReports />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -134,6 +136,16 @@ export default function Dashboard () {
                   onClick={() => handleClick('allUsers')}
                 >
                   Usuarios
+                </li>
+              )
+            }
+            {
+              (user.uid === master1 || user.uid === master2) && (
+                <li
+                  data-isActive={page === 'bugsReports'}
+                  onClick={() => handleClick('bugsReports')}
+                >
+                  Reporte de Bug
                 </li>
               )
             }
