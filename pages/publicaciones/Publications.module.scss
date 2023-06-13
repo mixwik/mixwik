@@ -140,6 +140,7 @@
     .position,
     .description,
     .level,
+    .preferenceTeam,
     .typeOfGamer,
     .hours,
     .social,
@@ -181,7 +182,8 @@
       }
     }
 
-    .level {
+    .level, 
+    .preferenceTeam {
       .levelBox {
         text-align: center;
         background-color: $aero;

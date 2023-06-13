@@ -10,7 +10,7 @@ export const useUserFortniteFilters = (user, DB, distance) => {
   const listUsersPosition = filter.position.length
     ? listUsers.filter(fil => {
       return filter.position.some((fil2) => {
-        return fil.fortnite.position.includes(fil2)
+        return fil.position.includes(fil2)
       })
     })
     : listUsers
@@ -18,7 +18,7 @@ export const useUserFortniteFilters = (user, DB, distance) => {
   const listUsersTypeOfGamer = filter.typeOfGamer.length
     ? listUsersPosition.filter(fil => {
       return filter.typeOfGamer.some((fil2) => {
-        return fil.fortnite.typeOfGamer.includes(fil2)
+        return fil.typeOfGamer.includes(fil2)
       })
     })
     : listUsersPosition
@@ -26,7 +26,7 @@ export const useUserFortniteFilters = (user, DB, distance) => {
   const listUsersPreferenceTeam = filter.preferenceTeam.length
     ? listUsersTypeOfGamer.filter(fil => {
       return filter.preferenceTeam.some((fil2) => {
-        return fil.fortnite.preferenceTeam.includes(fil2)
+        return fil.preferenceTeam.includes(fil2)
       })
     })
     : listUsersTypeOfGamer

@@ -5,48 +5,118 @@ import { useState } from 'react'
 import styles from '../../styles/Pages.module.scss'
 
 // Components
-import Map from '../../components/Map'
+import Card from '../../components/Card'
 import Layout from '../../components/Layout'
-import FilterFortnite from '../../components/Filters/Fortnite'
-import db from '../../db/localization.json'
+import Map from '../../components/Map'
 
 // Customs Hooks
-import { useUserFortniteFilters } from '../../hooks/useUserFortniteFilters'
+import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
 
-// DB
-import Card from '../../components/Card'
+// Context
+import { useHandleOpenContext } from '../../context'
 
-// Images
-import fortniteImage from '../../public/logos/fortnite.png'
 import Image from 'next/image'
+import FilterFortnite from '../../components/Filters/Fortnite'
+import { useSession } from '../../firebase/auth/useSession'
+import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
+import { useCurrentPosition } from '../../hooks/useCurrentPosition'
+import { useUserFortniteFilters } from '../../hooks/useUserFortniteFilters'
+import fortniteImage from '../../public/logos/fortnite.png'
 
 const Fortnite = () => {
-  const [isOpen, setIsOpen] = useState(false)
   const [distance, setDistance] = useState(700)
+  const session = useSession()
+  const currentPosition = useCurrentPosition()
+  const handleOpen = useHandleOpenContext()
+  const users = useGetData('users')
+  const fortnite = useGetData('fortnite')
+  const teams = useGetTeams('teams', 'fortnite')
 
-  const DB = { ...db }
-  const user = DB.venues.find(res => res.name === 'Maruan Vicente')
+  // filter current user of the list of users
+  const user = users.find(res => res.uid === session.uid)
 
-  const listUsersFiltered = useUserFortniteFilters(user, DB.venues, distance)
+  // filter users list with different filters
+  const listUserFortnite = useUserFortniteFilters(user, fortnite, distance)
+  const listUserTeams = useUserFortniteFilters(user, teams, distance)
 
   return (
     <Layout>
       <div className={styles.pageBox}>
         <section className={styles.pages}>
-          <FilterFortnite isOpen={isOpen} setIsOpen={setIsOpen} users={listUsersFiltered} distance={distance} setDistance={setDistance} />
+          <FilterFortnite users={listUserFortnite} distance={distance} setDistance={setDistance} />
           <h1 className={styles.title}>
-            <Image src={fortniteImage} alt='Logotipo de Fortnite' />
+            <Image src={fortniteImage} alt='Fortnite' />
             Fortnite
           </h1>
-          <section className={styles.gamersBox}>
+          <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {
-          listUsersFiltered.map((res, index) => (
-            <Card key={index} general={res} specific={res.fortnite} />
-          ))
-        }
-          </section>
+              fortnite.length > 0 && (
+                fortnite.map((res) => (
+                  res.promotion && (
+                    <Card
+                      key={res.id}
+                      user={users}
+                      csgo={res}
+                      link={res.category}
+                      promotions
+                    />
+                  )
+                ))
+              )
+            }
+            {
+              listUserTeams.length > 0 && (
+                listUserTeams.map((res) => (
+                  <Card
+                    key={res.id}
+                    user={users}
+                    csgo={res}
+                    link={res.category}
+                    equips
+                  />
+                ))
+              )
+            }
+            {
+              listUserFortnite.length > 0 && (
+                listUserFortnite.map((res) => (
+                  <Card
+                    key={res.id}
+                    user={users}
+                    csgo={res}
+                    link={res.category}
+                    teams
+                  />
+                ))
+              )
+            }
+            {
+              listUserFortnite.length > 0
+                ? (
+                    listUserFortnite.map((res) => (
+                      <Card
+                        key={res.id}
+                        user={users} csgo={res}
+                        link={res.category}
+                        basic
+                      />
+                    ))
+                  )
+                : (
+                  <div className={styles.gamersNoFound}>No hay jugadores de Fortnite en este momento</div>
+                  )
+            }
+          </div>
         </section>
-        <Map location={user.geometry} db={listUsersFiltered} zoom={7} size={30} />
+        <Map
+          location={user}
+          users={users}
+          currentPosition={currentPosition}
+          db={listUserFortnite}
+          zoom={7}
+          size={30}
+          category='fortnite'
+        />
       </div>
     </Layout>
   )

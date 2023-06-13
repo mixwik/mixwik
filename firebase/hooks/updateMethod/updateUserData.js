@@ -160,6 +160,12 @@ export const updatePublicationCsgoLevel = async (category, id, level) => {
     level
   })
 }
+export const updatePublicationFortnitePreferenceTeam = async (category, id, preferenceTeam) => {
+  const userRef = doc(db, category, id)
+  await updateDoc(userRef, {
+    preferenceTeam
+  })
+}
 export const updatePublicationCsgoPosition = async (category, id, position) => {
   const userRef = doc(db, category, id)
   await updateDoc(userRef, {
