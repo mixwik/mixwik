@@ -7,9 +7,10 @@ import valorant from '../../../public/logos/VALORANT4.png'
 import csgo from '../../../public/logos/csgo.png'
 import fortnite from '../../../public/logos/fortnite.png'
 import Csgo from './Csgo'
+import Fortnite from './Fortnite'
 import Lol from './Lol'
 import styles from './NewTeam.module.scss'
-import Fortnite from './Fortnite'
+import Valorant from './Valorant'
 
 const NewTeam = ({ user, mixWikTeams }) => {
   const [toggle, setToggle] = useState('nav')
@@ -29,18 +30,19 @@ const NewTeam = ({ user, mixWikTeams }) => {
           <Image src={fortnite} alt='logo de Fortnite' />
           Fortnite<br />
         </span>
+        <span onClick={() => setToggle('valorant')}>
+          <Image src={valorant} alt='logo de Valorant' />
+          Valorant<br />
+        </span>
         <span value=''>
           <Image src={clashRoyal} alt='logo de Clash Royal' />
           Clash Royal<br /> (Próximamente)
-        </span>
-        <span value=''>
-          <Image src={valorant} alt='logo de Valorant' />
-          Valorant<br /> (Próximamente)
         </span>
       </div>
       <Csgo setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
       <Lol setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
       <Fortnite setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
+      <Valorant setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
     </section>
   )
 }

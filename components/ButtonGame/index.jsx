@@ -28,14 +28,14 @@ const games = [{
   alt: 'Icono del videojuego Fornite',
   link: 'fortnite'
 }, {
-  image: clashRoyal,
-  title: 'Clash Royal',
-  alt: 'Icono del videojuego Clash Royal',
-  link: 'proximamente'
-}, {
   image: valorant,
   title: 'Valorant',
   alt: 'Icono del videojuego Valorant',
+  link: 'valorant'
+}, {
+  image: clashRoyal,
+  title: 'Clash Royal',
+  alt: 'Icono del videojuego Clash Royal',
   link: 'proximamente'
 }]
 

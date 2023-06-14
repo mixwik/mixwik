@@ -12,8 +12,9 @@ import valorant from '../../../public/logos/VALORANT4.png'
 import csgo from '../../../public/logos/csgo.png'
 import fortnite from '../../../public/logos/fortnite.png'
 import CsgoPublication from './csgo'
-import LolPublication from './lol'
 import FortnitePublication from './fortnite'
+import LolPublication from './lol'
+import ValorantPublication from './valorant'
 
 const NewPublication = ({ user, mixWikTeams }) => {
   const currentPosition = useCurrentPosition()
@@ -63,7 +64,6 @@ const NewPublication = ({ user, mixWikTeams }) => {
           <Image src={valorant} alt='Valorant' />
           Valorant
           <br />
-          (Próximamente)
         </li>
         <li onClick={() => setToggle('cr')}>
           <Image src={clashRoyal} alt='Clash Royal' />
@@ -76,6 +76,8 @@ const NewPublication = ({ user, mixWikTeams }) => {
       <CsgoPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
       <LolPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
       <FortnitePublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
+      <ValorantPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
+
     </section>
   )
 }
