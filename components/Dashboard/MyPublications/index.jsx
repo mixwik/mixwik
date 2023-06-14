@@ -7,15 +7,17 @@ const MyPublications = ({ user }) => {
   const publicationsCSGO = useGetMyPublications('csgo', user.uid)
   const publicationsLOL = useGetMyPublications('lol', user.uid)
   const publicationsFortnite = useGetMyPublications('fortnite', user.uid)
+  const publicationsValorant = useGetMyPublications('valorant', user.uid)
   const publicationsCsgoTeams = useGetTeams('teams', 'csgo')
   const publicationsLolTeams = useGetTeams('teams', 'lol')
   const publicationsFortniteTeams = useGetTeams('teams', 'fortnite')
+  const publicationsValorantTeams = useGetTeams('teams', 'valorant')
 
   if (!publicationsCSGO) return <div>Loading...</div>
   return (
     <section className={styles.myPublications}>
       <h2 className={styles.title}>Mis publicaciones</h2>
-      <div className={styles.cardBox}>
+      <article className={styles.cardBox}>
         <h3 className={styles.subtitle}>Publicaciones de CSGO</h3>
         {
           publicationsCsgoTeams.map((res) => (
@@ -27,8 +29,8 @@ const MyPublications = ({ user }) => {
             <CardPublications key={res.id} publication={res} user={user} category='csgo' link='csgo' />
           ))
         }
-      </div>
-      <div className={styles.cardBox}>
+      </article>
+      <article className={styles.cardBox}>
         <h3 className={styles.subtitle}>Publicaciones de Lol</h3>
         {
           publicationsLolTeams.map((res) => (
@@ -40,8 +42,8 @@ const MyPublications = ({ user }) => {
             <CardPublications key={res.id} publication={res} user={user} category='lol' link='lol' />
           ))
         }
-      </div>
-      <div className={styles.cardBox}>
+      </article>
+      <article className={styles.cardBox}>
         <h3 className={styles.subtitle}>Publicaciones de Fortnite</h3>
         {
           publicationsFortniteTeams.map((res) => (
@@ -53,7 +55,20 @@ const MyPublications = ({ user }) => {
             <CardPublications key={res.id} publication={res} user={user} category='fortnite' link='fortnite' />
           ))
         }
-      </div>
+      </article>
+      <article className={styles.cardBox}>
+        <h3 className={styles.subtitle}>Publicaciones de Valorant</h3>
+        {
+          publicationsValorantTeams.map((res) => (
+            <CardPublications key={res.id} publication={res} user={user} category='teams' teamsCategory='valorant' equip link='valorant' />
+          ))
+        }
+        {
+          publicationsValorant.map((res) => (
+            <CardPublications key={res.id} publication={res} user={user} category='valorant' link='valorant' />
+          ))
+        }
+      </article>
     </section>
   )
 }
