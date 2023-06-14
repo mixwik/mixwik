@@ -6,8 +6,10 @@ import styles from './MyPublication.module.scss'
 const MyPublications = ({ user }) => {
   const publicationsCSGO = useGetMyPublications('csgo', user.uid)
   const publicationsLOL = useGetMyPublications('lol', user.uid)
+  const publicationsFortnite = useGetMyPublications('fortnite', user.uid)
   const publicationsCsgoTeams = useGetTeams('teams', 'csgo')
   const publicationsLolTeams = useGetTeams('teams', 'lol')
+  const publicationsFortniteTeams = useGetTeams('teams', 'fortnite')
 
   if (!publicationsCSGO) return <div>Loading...</div>
   return (
@@ -36,6 +38,19 @@ const MyPublications = ({ user }) => {
         {
           publicationsLOL.map((res) => (
             <CardPublications key={res.id} publication={res} user={user} category='lol' link='lol' />
+          ))
+        }
+      </div>
+      <div className={styles.cardBox}>
+        <h3 className={styles.subtitle}>Publicaciones de Fortnite</h3>
+        {
+          publicationsFortniteTeams.map((res) => (
+            <CardPublications key={res.id} publication={res} user={user} category='teams' teamsCategory='fortnite' equip link='fortnite' />
+          ))
+        }
+        {
+          publicationsFortnite.map((res) => (
+            <CardPublications key={res.id} publication={res} user={user} category='fortnite' link='fortnite' />
           ))
         }
       </div>
