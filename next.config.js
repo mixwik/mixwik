@@ -8,7 +8,7 @@ const nextConfig = {
   webpack (config, { isServer }) {
     const prefix = config.assetPrefix ?? config.basePath ?? ''
     config.module.rules.push({
-      test: /\.mp4$/,
+      test: /\.webm$/,
       use: [{
         loader: 'file-loader',
         options: {
