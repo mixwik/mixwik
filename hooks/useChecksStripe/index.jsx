@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import Stripe from 'stripe'
+const key = process.env.NEXT_PUBLIC_STRIPE_KEY
 
 export const useCheckPay = (id) => {
   const [success, setSuccess] = useState(false)
-  const stripe = new Stripe('sk_test_51MhVdvEcw1KUgUdkaOYwTkXI17zpPW6BQixTZhI8yXSBIpGYkS6hF8QLpVrHTUvWB7DdX8rXva9geWEFumGEPqcJ00aXbUDaq2')
+  const stripe = new Stripe(key)
 
   const check = async (id, email) => {
     const session = await stripe.checkout.sessions.retrieve(id)
@@ -23,7 +24,7 @@ export const useCheckPay = (id) => {
 
 export const useMixWikTeamsCheckSubscription = (stripeId) => {
   const [success, setSuccess] = useState(false)
-  const stripe = new Stripe('sk_test_51MhVdvEcw1KUgUdkaOYwTkXI17zpPW6BQixTZhI8yXSBIpGYkS6hF8QLpVrHTUvWB7DdX8rXva9geWEFumGEPqcJ00aXbUDaq2')
+  const stripe = new Stripe(key)
 
   useEffect(() => {
     const checkSubscription = async (stripeId) => {
@@ -44,7 +45,7 @@ export const useMixWikTeamsCheckSubscription = (stripeId) => {
 }
 
 export const useMixWikTeamsCheckSubscriptionFunction = () => {
-  const stripe = new Stripe('sk_test_51MhVdvEcw1KUgUdkaOYwTkXI17zpPW6BQixTZhI8yXSBIpGYkS6hF8QLpVrHTUvWB7DdX8rXva9geWEFumGEPqcJ00aXbUDaq2')
+  const stripe = new Stripe(key)
 
   const checkSubscription = async (stripeId) => {
     const subscriptions = await stripe.subscriptions.list({ customer: stripeId })
@@ -62,7 +63,7 @@ export const useMixWikTeamsCheckSubscriptionFunction = () => {
 }
 
 export const useCancelRenovationSubscription = (reload) => {
-  const stripe = new Stripe('sk_test_51MhVdvEcw1KUgUdkaOYwTkXI17zpPW6BQixTZhI8yXSBIpGYkS6hF8QLpVrHTUvWB7DdX8rXva9geWEFumGEPqcJ00aXbUDaq2')
+  const stripe = new Stripe(key)
 
   const cancelSubscription = async (stripeId) => {
     const subscriptions = await stripe.subscriptions.list({ customer: stripeId })
@@ -83,7 +84,7 @@ export const useCancelRenovationSubscription = (reload) => {
 export const useComproveRenovationSubscription = (stipeId, mixWikTeams) => {
   const [date, setDate] = useState('')
   const [isCancel, setIsCancel] = useState(false)
-  const stripe = new Stripe('sk_test_51MhVdvEcw1KUgUdkaOYwTkXI17zpPW6BQixTZhI8yXSBIpGYkS6hF8QLpVrHTUvWB7DdX8rXva9geWEFumGEPqcJ00aXbUDaq2')
+  const stripe = new Stripe(key)
 
   useEffect(() => {
     const checkSubscription = async (stripeId) => {

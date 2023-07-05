@@ -36,7 +36,7 @@ const NoTeams = ({ currentUser }) => {
         </section>
         <Image src={logo} alt='logo de MixWik' />
       </div>
-      <Link href={`https://buy.stripe.com/test_aEU2aN1Mb0vl2tO3cg?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Donar 5€</Link>
+      <Link href={`https://buy.stripe.com/bIY9BEdGg7KA66QdQQ?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Subscribirse</Link>
     </div>
   )
 }
