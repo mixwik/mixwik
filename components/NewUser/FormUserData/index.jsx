@@ -10,8 +10,8 @@ import { useSession } from '../../../firebase/auth/useSession'
 import { setNewUser } from '../../../firebase/hooks/setMethod/setNewUser'
 import { removeImageDB, setImageDB } from '../../../firebase/storage'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
-import { myLoader } from '../../myLoader'
 import { DeleteIcon, ImageIcon } from '../../Svg'
+import { myLoader } from '../../myLoader'
 
 const FormUserData = ({ method }) => {
   const router = useRouter()
@@ -41,7 +41,7 @@ const FormUserData = ({ method }) => {
   }
 
   const initialValues = {
-    name: '',
+    name: user.name || '',
     age: '',
     gender: '',
     description: '',
@@ -73,7 +73,7 @@ const FormUserData = ({ method }) => {
           }, 400)
         }}
       >
-        {({ isSubmitting, values }) => (
+        {({ isSubmitting, values, errors }) => (
           <Form>
             <article className={styles.image}>
               <h3>Cambia tu foto de perfil</h3>
@@ -107,11 +107,13 @@ const FormUserData = ({ method }) => {
             </article>
             <div className={styles.group}>
               <label>
-                Nombre:
+                <div>
+                  Nombre:
+                </div>
                 <Field type='text' name='name' />
               </label>
               <ErrorMessage name='name' component='span' />
-              <div>El nombre que indiques será el que se muestre al resto de usuarios, puedes poner tú nombre real o un nick si lo prefieres, pero no se permiten nombres ofensivos 🤨. <span>Este campo no se podrá cambiar</span></div>
+              <div className={styles.description}>El nombre que indiques será el que se muestre al resto de usuarios, puedes poner tú nombre real o un nick si lo prefieres, pero no se permiten nombres ofensivos 🤨. <span>Este campo no se podrá cambiar</span></div>
             </div>
             <div className={styles.group}>
               <label>
@@ -119,10 +121,12 @@ const FormUserData = ({ method }) => {
                 <Field type='number' name='age' />
               </label>
               <ErrorMessage name='age' component='span' />
-              <div>Solicitamos tú edad para que puedas encontrar otros usuarios con edad parecida a la tuya, en caso de que así lo desees.</div>
+              <div className={styles.description}>Solicitamos tú edad para que puedas encontrar otros usuarios con edad parecida a la tuya, en caso de que así lo desees.</div>
             </div>
             <div className={styles.group}>
-              Genero:
+              <div className={styles.genderTitle}>
+                Genero:
+              </div>
               <div class={styles.gender} role='group' aria-labelledby='my-radio-group'>
                 <Field
                   type='radio'
@@ -153,7 +157,7 @@ const FormUserData = ({ method }) => {
                 </label>
               </div>
               <ErrorMessage name='gender' component='span' />
-              <div>Para MixWik la igualdad es lo primero, así que por lo tanto nunca se mostrará tú genero a otras personas y nadie podrá filtrar usuarios por este campo.</div>
+              <div className={styles.description}>Para MixWik la igualdad es lo primero, así que por lo tanto nunca se mostrará tú genero a otras personas y nadie podrá filtrar usuarios por este campo.</div>
             </div>
             <div className={styles.group}>
               <label>
@@ -166,7 +170,7 @@ const FormUserData = ({ method }) => {
             </div>
             <button
               type='submit'
-              disabled={!progress || isSubmitting}
+              disabled={!progress || isSubmitting || errors.age || errors.name || errors.gender}
             >
               Guardar
             </button>
