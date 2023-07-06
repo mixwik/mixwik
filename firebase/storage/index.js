@@ -12,16 +12,7 @@ export const setImageDB = async (userUid, img, setImgURL, setProgress) => {
 
   uploadTask.on('state_changed',
     (snapshot) => {
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      setProgress(progress)
-      // switch (snapshot.state) {
-      //   case 'paused':
-      //     console.log('Upload is paused')
-      //     break
-      //   case 'running':
-      //     console.log('Upload is running')
-      //     break
-      // }
+      setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
     },
     (error) => {
       console.log(error)

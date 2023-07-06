@@ -18,11 +18,11 @@ const FormUserData = ({ method }) => {
   const [previewImage, setPreviewImage] = useState()
   const [imgURL, setImgURL] = useState()
   const [image, setImage] = useState()
-  const [progress, setProgress] = useState()
+  const [progress, setProgress] = useState(true)
   const currentPosition = useCurrentPosition()
   const [error, updateDataUser] = useUpdateDataUser()
   const user = useSession()
-  console.log(error)
+  console.log(error, progress)
 
   const handleSetImage = async (e) => {
     const reader = new FileReader()
@@ -170,7 +170,7 @@ const FormUserData = ({ method }) => {
             </div>
             <button
               type='submit'
-              disabled={!progress || isSubmitting || errors.age || errors.name || errors.gender}
+              disabled={isSubmitting || errors.age || errors.name || errors.gender}
             >
               Guardar
             </button>
