@@ -31,14 +31,16 @@ const AllGames = () => {
   const users = useGetData('users')
   const csgo = useGetData('csgo')
   const lol = useGetData('lol')
+  const fortnite = useGetData('fortnite')
   const teamsCsgo = useGetTeams('teams', 'csgo')
   const teamsLol = useGetTeams('teams', 'lol')
+  const teamsFortnite = useGetTeams('teams', 'fortnite')
   useEffect(() => {
-    const allGamesArray = [...csgo, ...lol]
-    const allTeamsArray = [...teamsCsgo, ...teamsLol]
+    const allGamesArray = [...csgo, ...lol, ...fortnite]
+    const allTeamsArray = [...teamsCsgo, ...teamsLol, ...teamsFortnite]
     setAllGames(allGamesArray)
     setAllTeams(allTeamsArray)
-  }, [csgo, lol, teamsCsgo, teamsLol])
+  }, [csgo, lol, fortnite, teamsCsgo, teamsLol, teamsFortnite])
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)
@@ -77,7 +79,6 @@ const AllGames = () => {
                     user={users}
                     csgo={res}
                     link={res.category}
-                    teams
                   />
                 ))
               )
@@ -88,10 +89,9 @@ const AllGames = () => {
           location={user}
           users={users}
           currentPosition={currentPosition}
-          db={allGames}
+          games={allGames}
           zoom={7}
           size={30}
-          category={allGames}
         />
       </div>
     </Layout>

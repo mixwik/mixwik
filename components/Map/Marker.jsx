@@ -5,7 +5,7 @@ import { Marker, Popup } from 'react-leaflet'
 import { myLoader } from '../myLoader'
 import styles from './Map.module.scss'
 
-const Markers = ({ position, users, currentPosition, category }) => {
+const Markers = ({ position, users, currentPosition, gamesCategory }) => {
   const user = users.find(find => find.uid === position.uid)
 
   if (!position || !currentPosition) return <div>Loading...</div>
@@ -21,11 +21,16 @@ const Markers = ({ position, users, currentPosition, category }) => {
     iconSize: [40, 40],
     crossOrigin: true
   })
+  const fortniteIcon = L.divIcon({
+    className: styles.fortniteIcon,
+    iconSize: [40, 40],
+    crossOrigin: true
+  })
 
   return (
     <>
       {
-        category === 'csgo' && (
+        gamesCategory === 'csgo' && (
           <Marker position={position.geometry} icon={csgoIcon}>
             <Popup>
               <div className={styles.cardMap}>
@@ -33,7 +38,7 @@ const Markers = ({ position, users, currentPosition, category }) => {
                   <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
                   {user.name}
                 </div>
-                <Link target='_blanck' href={`/csgo/usuario/${position.id}`}>
+                <Link target='_blank' href={`/publicaciones/csgo/${position.id}`} rel='noreferrer'>
                   <div className={styles.publication}>
                     <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
                     <h3>{position.title}</h3>
@@ -46,7 +51,7 @@ const Markers = ({ position, users, currentPosition, category }) => {
         )
       }
       {
-        category === 'lol' && (
+        gamesCategory === 'lol' && (
           <Marker position={position.geometry} icon={lolIcon}>
             <Popup>
               <div className={styles.cardMap}>
@@ -54,7 +59,28 @@ const Markers = ({ position, users, currentPosition, category }) => {
                   <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
                   {user.name}
                 </div>
-                <Link target='_blanck' href={`/csgo/usuario/${position.id}`}>
+                <Link target='_blank' href={`/publicaciones/lol/${position.id}`} rel='noreferrer'>
+                  <div className={styles.publication}>
+                    <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
+                    <h3>{position.title}</h3>
+                    <p>{position.description.slice(0, 100)}...</p>
+                  </div>
+                </Link>
+              </div>
+            </Popup>
+          </Marker>
+        )
+      }
+      {
+        gamesCategory === 'fortnite' && (
+          <Marker position={position.geometry} icon={fortniteIcon}>
+            <Popup>
+              <div className={styles.cardMap}>
+                <div className={styles.profile}>
+                  <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
+                  {user.name}
+                </div>
+                <Link target='_blank' href={`/publicaciones/fortnite/${position.id}`} rel='noreferrer'>
                   <div className={styles.publication}>
                     <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
                     <h3>{position.title}</h3>

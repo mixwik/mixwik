@@ -16,7 +16,8 @@
 }
 
 .csgoIcon,
-.lolIcon {
+.lolIcon,
+.fortniteIcon {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
@@ -27,6 +28,9 @@
 
 .lolIcon {
   background-image: url('../../public/logos/LOL3.png');
+}
+.fortniteIcon {
+  background-image: url('../../public/logos/fortnite.png');
 }
 
 // .actualPosition {

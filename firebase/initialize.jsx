@@ -1,15 +1,15 @@
 import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
-import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = initializeApp({
-  apiKey: 'AIzaSyAuTBLsyAmmvyJa2WRYAPskWyyJTSefJEw',
-  authDomain: 'mix-wik.firebaseapp.com',
-  projectId: 'mix-wik',
-  storageBucket: 'mix-wik.appspot.com',
-  messagingSenderId: '781666779937',
-  appId: '1:781666779937:web:80d8392a10344786bfb460'
+  apiKey: 'AIzaSyC4SgOyVnojqGt24Ausj0L2Weq4S8LzqG0',
+  authDomain: 'mixwik-d7666.firebaseapp.com',
+  projectId: 'mixwik-d7666',
+  storageBucket: 'mixwik-d7666.appspot.com',
+  messagingSenderId: '284257926546',
+  appId: '1:284257926546:web:4f69641c3147b1ea46954b'
 })
 
 export const db = getFirestore(firebaseConfig)

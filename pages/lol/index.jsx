@@ -19,9 +19,9 @@ import { useHandleOpenContext } from '../../context'
 
 import Image from 'next/image'
 import { useSession } from '../../firebase/auth/useSession'
+import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
 import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 import lolImage from '../../public/logos/LOL3.png'
-import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
 
 const Lol = () => {
   const [distance, setDistance] = useState(700)
@@ -112,10 +112,9 @@ const Lol = () => {
           location={user}
           users={users}
           currentPosition={currentPosition}
-          db={listUserCsgo}
+          games={listUserCsgo}
           zoom={7}
           size={30}
-          category='lol'
         />
       </div>
     </Layout>

@@ -112,10 +112,9 @@ const Fortnite = () => {
           location={user}
           users={users}
           currentPosition={currentPosition}
-          db={listUserFortnite}
+          games={listUserFortnite}
           zoom={7}
           size={30}
-          category='fortnite'
         />
       </div>
     </Layout>

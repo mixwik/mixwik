@@ -113,10 +113,9 @@ const Csgo = () => {
           location={user}
           users={users}
           currentPosition={currentPosition}
-          db={listUserCsgo}
+          games={listUserCsgo}
           zoom={7}
           size={30}
-          category='csgo'
         />
       </div>
     </Layout>
