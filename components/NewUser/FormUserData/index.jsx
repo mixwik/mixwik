@@ -22,7 +22,7 @@ const FormUserData = ({ method }) => {
   const currentPosition = useCurrentPosition()
   const [error, updateDataUser] = useUpdateDataUser()
   const user = useSession()
-  console.log(error, progress)
+  console.log(error, progress, user)
 
   const handleSetImage = async (e) => {
     const reader = new FileReader()
@@ -41,7 +41,7 @@ const FormUserData = ({ method }) => {
   }
 
   const initialValues = {
-    name: user.name || '',
+    name: '',
     age: '',
     gender: '',
     description: '',
@@ -96,7 +96,9 @@ const FormUserData = ({ method }) => {
                       )
                     : (
                       <div className={styles.previewImage}>
-                        <Image width={0} height={0} loader={myLoader} src={user.image} alt='precarga' />
+                        {
+                        user.image && (<Image width={0} height={0} loader={myLoader} src={user.image} alt='precarga' />)
+                        }
                         <div className={styles.updateImage}>
                           <ImageIcon />
                         </div>
