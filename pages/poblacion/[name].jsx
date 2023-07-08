@@ -46,8 +46,8 @@ const City = () => {
     })()
   }, [url, csgo, lol, teamsCsgo, teamsLol])
 
-  const gamesFiltered = useCityFilterDistance(city, allGames, 30)
-  const teamsFiltered = useCityFilterDistance(city, allTeams, 30)
+  const listUserAllGames = useCityFilterDistance(city, allGames, 30)
+  const listUserTeams = useCityFilterDistance(city, allTeams, 30)
 
   if (!city) return <div>Loading...</div>
 
@@ -61,8 +61,21 @@ const City = () => {
           </h1>
           <div className={styles.gamersBox}>
             {
-              teamsFiltered.length > 0 && (
-                teamsFiltered.map((res) => (
+              listUserAllGames.length > 0 && (
+                listUserAllGames.map(res => (
+                  <Card
+                    key={res.id}
+                    user={users}
+                    csgo={res}
+                    link={res.category}
+                    promotions
+                  />
+                ))
+              )
+            }
+            {
+              listUserTeams.length > 0 && (
+                listUserTeams.map((res) => (
                   <Card
                     key={res.id}
                     user={users}
@@ -74,8 +87,8 @@ const City = () => {
               )
             }
             {
-              gamesFiltered.length > 0 && (
-                gamesFiltered.map(res => (
+              listUserAllGames.length > 0 && (
+                listUserAllGames.map(res => (
                   <Card
                     key={res.id}
                     user={users}
@@ -86,13 +99,27 @@ const City = () => {
                 ))
               )
             }
+            {
+              listUserAllGames.length > 0 && (
+                listUserAllGames.map(res => (
+                  <Card
+                    key={res.id}
+                    user={users}
+                    csgo={res}
+                    link={res.category}
+                    basic
+                  />
+                ))
+              )
+            }
           </div>
         </section>
         <Map
           location={city.geometry}
           users={users}
           currentPosition={city.geometry}
-          db={gamesFiltered}
+          games={listUserAllGames}
+          teams={listUserTeams}
           zoom={14}
           size={30}
           category={allGames}

@@ -46,9 +46,15 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            background-color: $white;
             transition: transform .5s;
-            font-size: 1.2rem;
+            font-size: 2rem;
+            background-image: url('../../../public/bg/buttonOnly.jpg');
+            background-size: cover;
+            color: $white;
+            @media  screen and (min-width: 768px) {    
+                font-size: 2.5rem;
+            }
+
             &:hover {
                 transform: scale(0.95);
             }
@@ -61,6 +67,7 @@
         }
 
         .buttonTeam {
+            background-image: url('../../../public/bg/buttonTeam.jpg');
             border: 1px solid $pennBlue;
         }
     }

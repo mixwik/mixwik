@@ -59,6 +59,19 @@ const AllGames = () => {
           </h1>
           <div className={styles.gamersBox} onClick={() => handleOpen('')}>
             {
+              listUserAllGames.length > 0 && (
+                listUserAllGames.map(res => (
+                  <Card
+                    key={res.id}
+                    user={users}
+                    csgo={res}
+                    link={res.category}
+                    promotions
+                  />
+                ))
+              )
+            }
+            {
               listUserTeams.length > 0 && (
                 listUserTeams.map((res) => (
                   <Card
@@ -79,6 +92,20 @@ const AllGames = () => {
                     user={users}
                     csgo={res}
                     link={res.category}
+                    teams
+                  />
+                ))
+              )
+            }
+            {
+              listUserAllGames.length > 0 && (
+                listUserAllGames.map(res => (
+                  <Card
+                    key={res.id}
+                    user={users}
+                    csgo={res}
+                    link={res.category}
+                    basic
                   />
                 ))
               )
@@ -89,7 +116,8 @@ const AllGames = () => {
           location={user}
           users={users}
           currentPosition={currentPosition}
-          games={allGames}
+          games={listUserAllGames}
+          teams={listUserTeams}
           zoom={7}
           size={30}
         />

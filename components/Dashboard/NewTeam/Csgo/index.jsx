@@ -98,7 +98,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTeam('csgo', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+          setTeam('cs2', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
           setTimeout(() => {
             setSubmitting(false)
             router.push('/dashboard?page=myPublications')

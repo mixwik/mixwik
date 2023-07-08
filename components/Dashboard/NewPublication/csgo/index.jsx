@@ -88,7 +88,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
   return (
     <section className={styles.csgo} data-open={toggle === 'csgo'}>
       <section className={styles.newPublication}>
-        <h2 className={styles.title}>CSGO</h2>
+        <h2 className={styles.title}>CS2</h2>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -97,7 +97,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setPublication('csgo', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+              setPublication('cs2', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserNumberPublications(currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)

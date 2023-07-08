@@ -7,9 +7,9 @@ import valorant from '../../../public/logos/VALORANT4.png'
 import csgo from '../../../public/logos/csgo.png'
 import fortnite from '../../../public/logos/fortnite.png'
 import Csgo from './Csgo'
+import Fortnite from './Fortnite'
 import Lol from './Lol'
 import styles from './NewTeam.module.scss'
-import Fortnite from './Fortnite'
 
 const NewTeam = ({ user, mixWikTeams }) => {
   const [toggle, setToggle] = useState('nav')
@@ -19,7 +19,7 @@ const NewTeam = ({ user, mixWikTeams }) => {
       <div className={styles.selectCategory} onChange={(e) => setToggle(e.target.value)}>
         <span onClick={() => setToggle('csgo')}>
           <Image src={csgo} alt='logo de csgo' />
-          Counter Strike Global Offensive
+          Counter Strike 2
         </span>
         <span onClick={() => setToggle('lol')}>
           <Image src={lol} alt='logo de League Of Legends' />

@@ -5,7 +5,7 @@ import { Marker, Popup } from 'react-leaflet'
 import { myLoader } from '../myLoader'
 import styles from './Map.module.scss'
 
-const Markers = ({ position, users, currentPosition, gamesCategory }) => {
+const Markers = ({ position, users, currentPosition, gamesCategory, teamsCategory }) => {
   const user = users.find(find => find.uid === position.uid)
 
   if (!position || !currentPosition) return <div>Loading...</div>
@@ -30,7 +30,7 @@ const Markers = ({ position, users, currentPosition, gamesCategory }) => {
   return (
     <>
       {
-        gamesCategory === 'csgo' && (
+        gamesCategory === 'cs2' && (
           <Marker position={position.geometry} icon={csgoIcon}>
             <Popup>
               <div className={styles.cardMap}>
@@ -38,7 +38,7 @@ const Markers = ({ position, users, currentPosition, gamesCategory }) => {
                   <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
                   {user.name}
                 </div>
-                <Link target='_blank' href={`/publicaciones/csgo/${position.id}`} rel='noreferrer'>
+                <Link target='_blank' href={`/publicaciones/cs2/${position.id}`} rel='noreferrer'>
                   <div className={styles.publication}>
                     <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
                     <h3>{position.title}</h3>
@@ -92,16 +92,69 @@ const Markers = ({ position, users, currentPosition, gamesCategory }) => {
           </Marker>
         )
       }
-
-      {/* {
-        currentPosition && (
-          <Marker position={currentPosition} icon={actualPosition}>
+      {
+        teamsCategory === 'cs2' && (
+          <Marker position={position.geometry} icon={csgoIcon}>
             <Popup>
-              Mi posición actual
+              <div className={styles.cardMap}>
+                <div className={styles.profileTeams}>
+                  <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
+                  {user.name}
+                </div>
+                <Link target='_blank' href={`/publicaciones/teams/cs2/${position.id}`} rel='noreferrer'>
+                  <div className={styles.publication}>
+                    <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
+                    <h3>{position.title}</h3>
+                    <p>{position.description.slice(0, 100)}...</p>
+                  </div>
+                </Link>
+              </div>
             </Popup>
           </Marker>
         )
-      } */}
+      }
+      {
+        teamsCategory === 'lol' && (
+          <Marker position={position.geometry} icon={lolIcon}>
+            <Popup>
+              <div className={styles.cardMap}>
+                <div className={styles.profileTeams}>
+                  <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
+                  {user.name}
+                </div>
+                <Link target='_blank' href={`/publicaciones/teams/csgo/${position.id}`} rel='noreferrer'>
+                  <div className={styles.publication}>
+                    <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
+                    <h3>{position.title}</h3>
+                    <p>{position.description.slice(0, 100)}...</p>
+                  </div>
+                </Link>
+              </div>
+            </Popup>
+          </Marker>
+        )
+      }
+      {
+        teamsCategory === 'fortnite' && (
+          <Marker position={position.geometry} icon={fortniteIcon}>
+            <Popup>
+              <div className={styles.cardMap}>
+                <div className={styles.profileTeams}>
+                  <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
+                  {user.name}
+                </div>
+                <Link target='_blank' href={`/publicaciones/teams/csgo/${position.id}`} rel='noreferrer'>
+                  <div className={styles.publication}>
+                    <Image width={0} height={0} loader={myLoader} src={position.img.url} alt={position.title} />
+                    <h3>{position.title}</h3>
+                    <p>{position.description.slice(0, 100)}...</p>
+                  </div>
+                </Link>
+              </div>
+            </Popup>
+          </Marker>
+        )
+      }
     </>
 
   )

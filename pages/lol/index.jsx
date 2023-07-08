@@ -113,6 +113,7 @@ const Lol = () => {
           users={users}
           currentPosition={currentPosition}
           games={listUserCsgo}
+          teams={listUserTeams}
           zoom={7}
           size={30}
         />

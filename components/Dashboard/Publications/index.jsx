@@ -9,6 +9,10 @@ const Publications = ({ mixWikTeams }) => {
     <section className={styles.publications}>
       <h1>Crea una nueva publicación</h1>
       <div className={styles.buttons}>
+        <Link href='/dashboard?page=newPublication' className={styles.buttonOnly}>
+          <Image src={onlyIcon} alt='Icono de jugador' />
+          Jugador
+        </Link>
         {
          mixWikTeams
            ? (
@@ -18,7 +22,6 @@ const Publications = ({ mixWikTeams }) => {
              <Link className={styles.buttonTeam} href='/dashboard?page=mixWikTeams'><Image src={teamIcon} alt='Icono de team' />Team/Equipo</Link>
              )
         }
-        <Link href='/dashboard?page=newPublication' className={styles.buttonOnly}><Image src={onlyIcon} alt='Icono de jugador' />Jugador</Link>
       </div>
     </section>
   )

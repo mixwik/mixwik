@@ -13,7 +13,7 @@ import L from 'leaflet'
 const Map = ({ user, publication }) => {
   const icon = L.divIcon({
     className: styles.customIcon,
-    iconSize: [40, 40],
+    iconSize: [100, 100],
     crossOrigin: true
   })
 
@@ -23,8 +23,10 @@ const Map = ({ user, publication }) => {
       center={publication.geometry}
       zoomAnimation
       doubleClickZoom={false}
-      zoom={13}
-      maxZoom={14}
+      zoomControl={false}
+      scrollWheelZoom={false}
+      dragging={false}
+      zoom={14.5}
     >
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

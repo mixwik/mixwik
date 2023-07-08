@@ -33,15 +33,6 @@
   background-image: url('../../public/logos/fortnite.png');
 }
 
-// .actualPosition {
-//   background-image: none;
-//   width: 2rem;
-//   height: 2rem;
-//   background-color: $aero;
-//   border-radius: 50%;
-//   z-index: 1;
-// }
-
 .cardMap {
   background-color: $white;
   border-radius: 5px;
@@ -52,15 +43,23 @@
   position: relative;
   z-index: 2;
   width: 14rem;
+  @media screen and (max-width: 768px) {
+    width: 8rem;
+  }
 
-  .profile {
+  .profile,
+  .profileTeams {
     display: flex;
     align-items: center;
     gap: .5rem;
     background-color: $aero;
     padding: .2rem;
+    padding-left: .5rem;
     color: $white;
-    width: 100%;
+    width: 14rem;
+    @media screen and (max-width: 768px) {
+      width: 8rem;
+    }
     img {
       width: 1.5rem;
       height: 1.5rem;
@@ -68,12 +67,20 @@
     }
   }
 
+  .profileTeams {
+    background-color: $gradient;
+  }
+
   .publication {
     color: $black;
     img {
       object-fit: cover;
-      width: 100%;
+      width: 14rem;
       height: 10rem;
+      @media screen and (max-width: 768px) {
+        width: 8rem;
+        height: 6rem;
+      }
     }
     h3 {
       font-weight: bold;

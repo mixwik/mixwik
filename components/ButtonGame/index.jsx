@@ -14,9 +14,9 @@ import valorant from '../../public/logos/VALORANT4.png'
 
 const games = [{
   image: csgo,
-  title: 'CSGO',
+  title: 'Counter Strike 2',
   alt: 'Icono del videojuego csgo',
-  link: 'csgo'
+  link: 'cs2'
 }, {
   image: lol,
   title: 'League of Legends',

@@ -48,7 +48,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
       <ul className={styles.listOfCategories}>
         <li onClick={() => handleCheck('csgo')}>
           <Image src={csgo} alt='csgo' />
-          Counter Strike Global Offensive
+          Counter Strike 2
         </li>
         <li onClick={() => setToggle('lol')}>
           <Image src={lol} alt='LOL' />

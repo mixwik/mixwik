@@ -250,13 +250,23 @@ const User = () => {
                   )
             }
           </article>
-          <article className={styles.social}>
-            <h2>
-              Vías de contacto:
-              {limitedAdministrator && <Link href='/dashboard?page=profile' target='_blank' className={styles.editButtonImages}><EditIcon /></Link>}
-            </h2>
-            <SocialLinks mixWikTeams={mixWikTeams} user={currentUser} />
-          </article>
+          {
+            (currentUser.social?.discord === '' ||
+            currentUser.social?.instagram === '' ||
+            currentUser.social?.twitter === '' ||
+            currentUser.social?.youtube === '' ||
+            currentUser.social?.facebook === '' ||
+            currentUser.social?.twitch === '') &&
+            (
+              <article className={styles.social}>
+                <h2>
+                  Vías de contacto:
+                  {limitedAdministrator && <Link href='/dashboard?page=profile' target='_blank' className={styles.editButtonImages}><EditIcon /></Link>}
+                </h2>
+                <SocialLinks mixWikTeams={mixWikTeams} user={currentUser} />
+              </article>
+            )
+          }
           <article className={styles.map}>
             {
               limitedAdministrator && <button onClick={handleUpdatePosition}>Cambiar a posición actual</button>

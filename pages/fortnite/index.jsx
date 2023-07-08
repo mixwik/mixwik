@@ -113,6 +113,7 @@ const Fortnite = () => {
           users={users}
           currentPosition={currentPosition}
           games={listUserFortnite}
+          teams={listUserTeams}
           zoom={7}
           size={30}
         />

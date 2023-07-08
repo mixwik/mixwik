@@ -30,7 +30,7 @@ const Csgo = () => {
   const handleOpen = useHandleOpenContext()
   const users = useGetData('users')
   const csgo = useGetData('csgo')
-  const teams = useGetTeams('teams', 'csgo')
+  const teams = useGetTeams('teams', 'cs2')
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)
@@ -114,6 +114,7 @@ const Csgo = () => {
           users={users}
           currentPosition={currentPosition}
           games={listUserCsgo}
+          teams={listUserTeams}
           zoom={7}
           size={30}
         />
