@@ -1,6 +1,10 @@
 @charset "UTF-8";
 @import './colors.scss';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /*
   Con este reset vamos a resolver:
     👉 Unificar el uso de Custom Properties

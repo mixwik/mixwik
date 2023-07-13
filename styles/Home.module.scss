@@ -118,29 +118,4 @@
       background-image: url('../public/cities/murcia.jpg');
     }
   }
-
-  .searchCity {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    padding: 2rem;
-    input {
-      padding: 1rem;
-      border: 1px solid $aero;
-      border-radius: .5rem 0 0 .5rem;
-    }
-    button {
-      padding: 1rem;
-      border: 1px solid $aero;
-      background-color: $aero;
-      color: $white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color .5s;
-      border-radius: 0 .5rem .5rem 0;
-      &:hover {
-        background-color: $pennBlue;
-      }
-    }
-  }
 }

@@ -32,7 +32,7 @@ const AllGames = () => {
   const csgo = useGetData('csgo')
   const lol = useGetData('lol')
   const fortnite = useGetData('fortnite')
-  const teamsCsgo = useGetTeams('teams', 'csgo')
+  const teamsCsgo = useGetTeams('teams', 'cs2')
   const teamsLol = useGetTeams('teams', 'lol')
   const teamsFortnite = useGetTeams('teams', 'fortnite')
   useEffect(() => {
