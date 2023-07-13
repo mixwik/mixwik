@@ -5,7 +5,7 @@ import { DeleteIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 import styles from './CardPublications.module.scss'
 
-const CardPublications = ({ publication, user, category, teamsCategory, equip, link, promotion }) => {
+const CardPublications = ({ publication, user, category, equip, link, promotion }) => {
   const handleDelete = (category, id) => {
     deletePublication(category, id, user.id)
   }

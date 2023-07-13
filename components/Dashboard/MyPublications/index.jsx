@@ -19,12 +19,12 @@ const MyPublications = ({ user }) => {
         <h3 className={styles.subtitle}>Publicaciones de CSGO</h3>
         {
           publicationsCsgoTeams.map((res) => (
-            <CardPublications key={res.id} publication={res} user={user} category='teams' teamsCategory='csgo' equip link='csgo' />
+            <CardPublications key={res.id} publication={res} user={user} category='teams' equip link='cs2' />
           ))
         }
         {
           publicationsCSGO.map((res) => (
-            <CardPublications key={res.id} publication={res} user={user} category='csgo' link='csgo' />
+            <CardPublications key={res.id} publication={res} user={user} category='cs2' link='cs2' />
           ))
         }
       </div>
@@ -32,7 +32,7 @@ const MyPublications = ({ user }) => {
         <h3 className={styles.subtitle}>Publicaciones de Lol</h3>
         {
           publicationsLolTeams.map((res) => (
-            <CardPublications key={res.id} publication={res} user={user} category='teams' teamsCategory='lol' equip link='lol' />
+            <CardPublications key={res.id} publication={res} user={user} category='teams' equip link='lol' />
           ))
         }
         {
@@ -45,7 +45,7 @@ const MyPublications = ({ user }) => {
         <h3 className={styles.subtitle}>Publicaciones de Fortnite</h3>
         {
           publicationsFortniteTeams.map((res) => (
-            <CardPublications key={res.id} publication={res} user={user} category='teams' teamsCategory='fortnite' equip link='fortnite' />
+            <CardPublications key={res.id} publication={res} user={user} category='teams' equip link='fortnite' />
           ))
         }
         {
