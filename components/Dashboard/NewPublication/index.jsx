@@ -2,15 +2,10 @@ import { useState } from 'react'
 import styles from './NewPublication.module.scss'
 import NoMorePublications from './noMorePublications'
 
-// Images
 import Image from 'next/image'
 import Link from 'next/link'
+import { LOGOS } from '../../../assets/images'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
-import clashRoyal from '../../../public/logos/Clash-Royal2.png'
-import lol from '../../../public/logos/LOL3.png'
-import valorant from '../../../public/logos/VALORANT4.png'
-import csgo from '../../../public/logos/csgo.png'
-import fortnite from '../../../public/logos/fortnite.png'
 import CsgoPublication from './csgo'
 import FortnitePublication from './fortnite'
 import LolPublication from './lol'
@@ -48,26 +43,32 @@ const NewPublication = ({ user, mixWikTeams }) => {
       }
       <ul className={styles.listOfCategories}>
         <li onClick={() => handleCheck('csgo')}>
-          <Image src={csgo} alt='csgo' />
+          <Image src={LOGOS.cs2} alt='csgo' />
           Counter Strike 2
         </li>
         <li onClick={() => setToggle('lol')}>
-          <Image src={lol} alt='LOL' />
+          <Image src={LOGOS.lol} alt='LOL' />
           League of Legends
         </li>
         <li onClick={() => setToggle('fortnite')}>
-          <Image src={fortnite} alt='Fortnite' />
+          <Image src={LOGOS.fortnite} alt='Fortnite' />
           Fortnite
           <br />
         </li>
         <li onClick={() => setToggle('valorant')}>
-          <Image src={valorant} alt='Valorant' />
+          <Image src={LOGOS.valorant} alt='Valorant' />
           Valorant
           <br />
         </li>
-        <li onClick={() => setToggle('cr')}>
-          <Image src={clashRoyal} alt='Clash Royal' />
-          Clash Royal
+        <li onClick={() => setToggle('rl')}>
+          <Image src={LOGOS.rocketLeague} alt='Rocket League' />
+          Rocket League
+          <br />
+          (Próximamente)
+        </li>
+        <li onClick={() => setToggle('dota2')}>
+          <Image src={LOGOS.dota2} alt='Dota 2' />
+          Dota 2
           <br />
           (Próximamente)
         </li>
