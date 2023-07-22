@@ -20,9 +20,11 @@ const User = () => {
   const csgo = useGetMyPublications('csgo', user.uid)
   const lol = useGetMyPublications('lol', user.uid)
   const fortnite = useGetMyPublications('fortnite', user.uid)
-  const teamsCsgo = useGetTeams('teams', 'csgo')
+  const valorant = useGetMyPublications('valorant', user.uid)
+  const teamsCsgo = useGetTeams('teams', 'cs2')
   const teamsLol = useGetTeams('teams', 'lol')
   const teamsFortnite = useGetTeams('teams', 'fortnite')
+  const teamsValorant = useGetTeams('teams', 'valorant')
   const mixWikTeams = useMixWikTeamsCheckSubscription(user.mixWikTeams)
   if (user.length === 0) return <div>Loading...</div>
   return (
@@ -31,7 +33,7 @@ const User = () => {
         <section className={styles.publications}>
           <h2>Publicaciones</h2>
           <article className={styles.publicationsUser}>
-            <h3 className={styles.publicationUserTitle}>Counter Strike Global Ofensive</h3>
+            <h3 className={styles.publicationUserTitle}>Counter Strike 2</h3>
             {csgo.length > 0 && (
               csgo.map((res) => (
                 <Card key={res.id} csgo={res} user={[user]} link={res.category} promotions />
@@ -72,6 +74,29 @@ const User = () => {
             )}
             {lol.length > 0 && (
               lol.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} basic />
+              ))
+            )}
+          </article>
+          <article className={styles.publicationsUser}>
+            <h3 className={styles.publicationUserTitle}>Valorant</h3>
+            {valorant.length > 0 && (
+              valorant.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} promotions />
+              ))
+            )}
+            {teamsValorant.length > 0 && (
+              teamsValorant.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} equips />
+              ))
+            )}
+            {valorant.length > 0 && (
+              valorant.map((res) => (
+                <Card key={res.id} csgo={res} user={[user]} link={res.category} teams />
+              ))
+            )}
+            {valorant.length > 0 && (
+              valorant.map((res) => (
                 <Card key={res.id} csgo={res} user={[user]} link={res.category} basic />
               ))
             )}

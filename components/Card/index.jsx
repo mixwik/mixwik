@@ -14,7 +14,7 @@ import { myLoader } from '../myLoader'
 const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
   const [loading, setLoadiang] = useState(true)
   const csgoUser = user.find(find => find.uid === csgo.uid)
-  const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser.mixWikTeams)
+  const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser?.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(csgo.promotion)
 
   const images = []
