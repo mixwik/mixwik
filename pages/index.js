@@ -29,10 +29,10 @@ export default function Home () {
       <header className={styles.header}>
         <Video />
         <h1>Encuentra jugadores y equipos cerca de ti</h1>
-        <div className={styles.games}>
+        <div className='grid grid-cols-2 gap-y-1 gap-x-5 md:gap-5 md:grid-cols-6 md:m-20'>
           <ButtonGame />
         </div>
-        <Link href='/todos-los-jugadores' className={styles.allGames}>Buscar a todos los jugadores/teams</Link>
+        <Link href='/todos-los-jugadores' className='p-2 text-xl text-white transition-transform duration-500 rounded-md bg-aero hover:scale-95'>Buscar a todos los jugadores/teams</Link>
       </header>
       <section className={styles.cities}>
         <h2 className={styles.title}>Principales Ciudades</h2>
@@ -58,7 +58,7 @@ export default function Home () {
         </div>
         <form className='flex justify-center py-5' onSubmit={handleSubmit}>
           <input className='p-3 rounded-l-md md:w-80' type='text' placeholder='Busca tú ciudad' onChange={(e) => setCity(e.target.value)} />
-          <button type='submit' className='bg-aero p-3 rounded-r-md text-white font-semibold md:w-32 hover:bg-pennBlue transition-colors duration-500'>Buscar</button>
+          <button type='submit' className='p-3 font-semibold text-white transition-colors duration-500 bg-aero rounded-r-md md:w-32 hover:bg-pennBlue'>Buscar</button>
         </form>
       </section>
       <Footer />
