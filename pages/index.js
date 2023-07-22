@@ -29,7 +29,7 @@ export default function Home () {
       <header className={styles.header}>
         <Video />
         <h1>Encuentra jugadores y equipos cerca de ti</h1>
-        <div className='grid grid-cols-2 gap-y-1 gap-x-5 md:gap-5 md:grid-cols-6 md:m-20'>
+        <div className='grid grid-cols-2 gap-5 m-10 md:grid-cols-6 md:m-20'>
           <ButtonGame />
         </div>
         <Link href='/todos-los-jugadores' className='p-2 text-xl text-white transition-colors duration-500 rounded-md bg-aero hover:bg-pennBlue'>Buscar a todos los jugadores/teams</Link>

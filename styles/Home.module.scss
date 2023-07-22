@@ -96,21 +96,27 @@
       }
     }
     .madrid {
-      grid-row: 1/3;
-      height: 100%;
+      @media screen and (min-width: 768px) {  
+        grid-row: 1/3;
+        height: 100%;
+      }
     }
     .barcelona {
-      grid-column: 2/4;
       background-image: url('../public/cities/barcelona.jpg');
-      width: 95%;
+      @media screen and (min-width: 768px) {  
+        grid-column: 2/4;
+        width: 95%;
+      }
     }
     .valencia {
       background-image: url('../public/cities/valencia.jpg');
     }
     .malaga {
       background-image: url('../public/cities/malaga.jpg');
-      grid-row: 2/4;
-      height: 100%;
+      @media screen and (min-width: 768px) {  
+        grid-row: 2/4;
+        height: 100%;
+      }
     }
     .zaragoza {
       background-image: url('../public/cities/zaragoza.webp');
