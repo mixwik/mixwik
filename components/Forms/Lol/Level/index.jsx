@@ -21,16 +21,6 @@ const FormLevel = () => {
         isOpen === 'level' && (
           <div className={styles.inputsBox}>
             <label name='level'>
-              Silver
-              <input
-                type='checkbox'
-                value='Silver'
-                name='level'
-                checked={filter.level.includes('Silver')}
-                onClick={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
               Sin Nivel
               <input
                 type='checkbox'

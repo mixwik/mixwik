@@ -4,22 +4,22 @@ export const games = [{
   image: LOGOS.cs2,
   title: 'Counter Strike 2',
   alt: 'Icono del videojuego csgo',
-  link: 'cs2'
+  link: 'juegos/cs2'
 }, {
   image: LOGOS.lol,
   title: 'League of Legends',
   alt: 'Icono del videojuego League of Legends',
-  link: 'lol'
+  link: 'juegos/lol'
 }, {
   image: LOGOS.fortnite,
   title: 'Fortnite',
   alt: 'Icono del videojuego Fornite',
-  link: 'fortnite'
+  link: 'juegos/fortnite'
 }, {
   image: LOGOS.valorant,
   title: 'Valorant',
   alt: 'Icono del videojuego Valorant',
-  link: 'valorant'
+  link: 'juegos/valorant'
 }, {
   image: LOGOS.rocketLeague,
   title: 'Rocket League',
