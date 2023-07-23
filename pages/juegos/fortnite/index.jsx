@@ -3,7 +3,7 @@ import { TITLES_LOGOS } from '../../../assets/images'
 import FilterCsgo from '../../../components/Filters/Csgo'
 import Layout from '../../../components/Layout'
 import PageContent from '../components/PageContent'
-import TitlePage from '../components/Title'
+import TitlePage from '../components/TitlePage'
 
 const Fortnite = () => {
   const [distance, setDistance] = useState(700)

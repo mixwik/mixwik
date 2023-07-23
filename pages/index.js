@@ -49,12 +49,6 @@ export default function Home () {
           <Link href='/poblacion/malaga' className={styles.malaga}>
             <div>Málaga</div>
           </Link>
-          <Link href='/poblacion/zaragoza' className={styles.zaragoza}>
-            <div>Zaragoza</div>
-          </Link>
-          <Link href='/poblacion/murcia' className={styles.murcia}>
-            <div>Murcia</div>
-          </Link>
         </div>
         <form className='flex justify-center py-5' onSubmit={handleSubmit}>
           <input className='px-3 py-2 rounded-l-md md:w-80' type='text' placeholder='Busca tú ciudad' onChange={(e) => setCity(e.target.value)} />

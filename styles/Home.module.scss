@@ -61,6 +61,7 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
     place-items: center;
+    padding: 0 2rem;
     @media screen and (min-width: 768px) {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -68,10 +69,8 @@
     .madrid,
     .barcelona,
     .valencia,
-    .malaga,
-    .zaragoza,
-    .murcia {
-      width: 90%;
+    .malaga {
+      width: 100%;
       height: 35vh;
       border-radius: .5rem;
       cursor: pointer;
@@ -83,7 +82,7 @@
       text-shadow: 0px 0px 5px $aero;
 
       &:hover {
-        transform: translateY(-10px);
+        transform: scale(0.9);
       }
 
       div {
@@ -97,15 +96,15 @@
     }
     .madrid {
       @media screen and (min-width: 768px) {  
-        grid-row: 1/3;
-        height: 100%;
+        grid-column: 1/3;
       }
     }
     .barcelona {
       background-image: url('../public/cities/barcelona.jpg');
       @media screen and (min-width: 768px) {  
-        grid-column: 2/4;
-        width: 95%;
+        grid-column: 3/4;
+        grid-row: 1/3;
+        height: 100%;
       }
     }
     .valencia {
@@ -114,15 +113,8 @@
     .malaga {
       background-image: url('../public/cities/malaga.jpg');
       @media screen and (min-width: 768px) {  
-        grid-row: 2/4;
-        height: 100%;
+        grid-row: 2/3;
       }
-    }
-    .zaragoza {
-      background-image: url('../public/cities/zaragoza.webp');
-    }
-    .murcia {
-      background-image: url('../public/cities/murcia.jpg');
     }
   }
 }
