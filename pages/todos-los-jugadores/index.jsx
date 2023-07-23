@@ -29,7 +29,7 @@ const AllGames = () => {
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const users = useGetData('users')
-  const csgo = useGetData('csgo')
+  const csgo = useGetData('cs2')
   const lol = useGetData('lol')
   const fortnite = useGetData('fortnite')
   const teamsCsgo = useGetTeams('teams', 'cs2')

@@ -17,7 +17,7 @@ const User = () => {
   const router = useRouter()
   const { id } = router.query
   const user = useGetOneData('users', id)
-  const csgo = useGetMyPublications('csgo', user.uid)
+  const csgo = useGetMyPublications('cs2', user.uid)
   const lol = useGetMyPublications('lol', user.uid)
   const fortnite = useGetMyPublications('fortnite', user.uid)
   const valorant = useGetMyPublications('valorant', user.uid)

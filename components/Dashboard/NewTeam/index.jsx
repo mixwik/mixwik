@@ -2,11 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { LOGOS } from '../../../assets/images'
-import Csgo from './Csgo'
-import Fortnite from './Fortnite'
-import Lol from './Lol'
 import styles from './NewTeam.module.scss'
-import Valorant from './Valorant'
+import Csgo from './TeamsForms/Cs2'
+import Fortnite from './TeamsForms/Fortnite'
+import Lol from './TeamsForms/Lol'
+import Valorant from './TeamsForms/Valorant'
 
 const NewTeam = ({ user, mixWikTeams }) => {
   const [toggle, setToggle] = useState('nav')

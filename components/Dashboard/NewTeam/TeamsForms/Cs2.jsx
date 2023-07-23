@@ -2,14 +2,14 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { setFortniteTeam } from '../../../../firebase/hooks/setMethod/setFortniteTeam'
+import { setTeam } from '../../../../firebase/hooks/setMethod/setTeam'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
-import styles from './Fortnite.module.scss'
+import styles from './NewTeamForm.module.scss'
 
-const Fortnite = ({ currentUser, setToggle, toggle }) => {
+const Csgo = ({ currentUser, setToggle, toggle }) => {
   const router = useRouter()
   const currentPosition = useCurrentPosition()
   const [imageError, setImageError] = useState()
@@ -79,7 +79,7 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
   }
   const initialValues = {
     position: [],
-    preferenceTeam: [],
+    level: [],
     typeOfGamer: [],
     hours: 0,
     title: '',
@@ -89,8 +89,8 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
     age: 16
   }
   return (
-    <section className={styles.formBox} data-active={toggle === 'fortnite'}>
-      <h2 className={styles.titleForm}>Fortnite</h2>
+    <section className={styles.formBox} data-active={toggle === 'csgo'}>
+      <h2 className={styles.titleForm}>CSGO</h2>
       <Formik
         initialValues={initialValues}
         validate={values => {
@@ -98,7 +98,7 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setFortniteTeam('fortnite', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+          setTeam('cs2', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
           setTimeout(() => {
             setSubmitting(false)
             router.push('/dashboard?page=myPublications')
@@ -134,64 +134,172 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
                   type='checkbox'
                   value='Entry fragger'
                   name='position'
-                  id='entryF'
+                  id='entry'
                 />
-                <label for='entryF'>
+                <label for='entry'>
                   Entry Fragger
                 </label>
                 <Field
                   type='checkbox'
                   value='In-game leader'
                   name='position'
-                  id='in-gameF'
+                  id='in-game'
                 />
-                <label for='in-gameF'>
+                <label for='in-game'>
                   In-game leader
+                </label>
+                <Field
+                  type='checkbox'
+                  value='AWPer'
+                  name='position'
+                  id='awper'
+                />
+                <label for='awper'>
+                  AWPer
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Lurker'
+                  name='position'
+                  id='lurker'
+                />
+                <label for='lurker'>
+                  Lurker
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Playmaker'
+                  name='position'
+                  id='playmaker'
+                />
+                <label for='playmaker'>
+                  Playmaker
                 </label>
                 <Field
                   type='checkbox'
                   value='Support'
                   name='position'
-                  id='supportF'
+                  id='support'
                 />
-                <label for='supportF'>
+                <label for='support'>
                   Support
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Entrenador'
+                  name='position'
+                  id='entrenador'
+                />
+                <label for='entrenador'>
+                  Entrenador
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Secondary AWPer'
+                  name='position'
+                  id='secondary-awper'
+                />
+                <label for='secondary-awper'>
+                  Secondary AWPer
                 </label>
               </div>
               <ErrorMessage name='position' component='span' />
             </div>
-            <div className={styles.preferenceTeam}>
-              <div className={styles.title}>¿Que modalidades de team buscas?</div>
+            <div className={styles.level}>
+              <div className={styles.title}>¿Que niveles buscas?</div>
               <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
-                  value='2 vs 2'
-                  name='preferenceTeam'
-                  id='2vs2'
+                  value='Silver'
+                  name='level'
+                  id='silver'
                 />
-                <label for='2vs2'>
-                  2 vs 2
+                <label for='silver'>
+                  Silver
                 </label>
                 <Field
                   type='checkbox'
-                  value='3 vs 3'
-                  name='preferenceTeam'
-                  id='3vs3'
+                  value='Nova'
+                  name='level'
+                  id='nova'
                 />
-                <label for='3vs3'>
-                  3 vs 3
+                <label for='nova'>
+                  Nova
                 </label>
                 <Field
                   type='checkbox'
-                  value='4 vs 4'
-                  name='preferenceTeam'
-                  id='4vs4'
+                  value='Ak'
+                  name='level'
+                  id='ak'
                 />
-                <label for='4vs4'>
-                  4 vs 4
+                <label for='ak'>
+                  Ak
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Ak laurel'
+                  name='level'
+                  id='ak-laurel'
+                />
+                <label for='ak-laurel'>
+                  Ak Laurel
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Doble ak'
+                  name='level'
+                  id='doble-ak'
+                />
+                <label for='doble-ak'>
+                  Doble Ak
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Chapa'
+                  name='level'
+                  id='chapa'
+                />
+                <label for='chapa'>
+                  Chapa
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Aguila'
+                  name='level'
+                  id='aguila'
+                />
+                <label for='aguila'>
+                  Aguila
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Aguila laurel'
+                  name='level'
+                  id='aguil-laurel'
+                />
+                <label for='aguil-laurel'>
+                  Aguila Laurel
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Supreme'
+                  name='level'
+                  id='supreme'
+                />
+                <label for='supreme'>
+                  Supreme
+                </label>
+                <Field
+                  type='checkbox'
+                  value='Global elite'
+                  name='level'
+                  id='global-elite'
+                />
+                <label for='global-elite'>
+                  Global Elite
                 </label>
               </div>
-              <ErrorMessage name='preferenceTeam' component='span' />
+              <ErrorMessage name='level' component='span' />
             </div>
             <div className={styles.hoursTypeOfGamerAge}>
               <label className={styles.hours}>
@@ -227,18 +335,18 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
                     type='checkbox'
                     name='typeOfGamer'
                     value='Competitivo'
-                    id='competitivoF'
+                    id='competitivo'
                   />
-                  <label for='competitivoF'>
+                  <label for='competitivo'>
                     Competitivo
                   </label>
                   <Field
                     type='checkbox'
                     name='typeOfGamer'
                     value='Casual'
-                    id='casualF'
+                    id='casual'
                   />
-                  <label for='casualF'>
+                  <label for='casual'>
                     Casual
                   </label>
                 </div>
@@ -373,7 +481,7 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
                       values.hours === 0 ||
                       values.title.length === 0 ||
                       values.description.length === 0 ||
-                      values.preferenceTeam.length === 0 ||
+                      values.level.length === 0 ||
                       values.position.length === 0 ||
                       values.typeOfGamer.length === 0 ||
                       !progress ||
@@ -391,4 +499,4 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
   )
 }
 
-export default Fortnite
+export default Csgo

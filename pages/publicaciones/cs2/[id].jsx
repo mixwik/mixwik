@@ -47,7 +47,7 @@ const User = () => {
   const { id } = router.query
   const user = useSession()
   const currentPosition = useCurrentPosition()
-  const currentCsgo = useGetOnePublication('csgo', id)
+  const currentCsgo = useGetOnePublication('cs2', id)
   const currentUser = useGetOneData('users', currentCsgo.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, currentUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)

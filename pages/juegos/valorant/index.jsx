@@ -10,8 +10,7 @@ const Valorant = () => {
   return (
     <Layout>
       <PageContent
-        gameCategory='valorant'
-        teamCategory='valorant'
+        category='valorant'
         distance={distance}
       >
         <FilterCsgo distance={distance} setDistance={setDistance} />

@@ -10,8 +10,7 @@ const Fortnite = () => {
   return (
     <Layout>
       <PageContent
-        gameCategory='fortnite'
-        teamCategory='fortnite'
+        category='fortnite'
         distance={distance}
       >
         <FilterCsgo distance={distance} setDistance={setDistance} />

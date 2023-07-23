@@ -5,6 +5,20 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: .5rem;
+  height: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background: $pennBlue;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $aero;
+  border-radius: 1rem;
+}
+
 /*
   Con este reset vamos a resolver:
     👉 Unificar el uso de Custom Properties

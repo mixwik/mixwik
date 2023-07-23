@@ -1,4 +1,4 @@
-import styles from './Csgo.module.scss'
+import styles from './GamesForms.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
@@ -9,7 +9,7 @@ import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 
-const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
+const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState()
   const [previewImage2, setPreviewImage2] = useState()
@@ -86,9 +86,9 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
     age: ''
   }
   return (
-    <section className={styles.csgo} data-open={toggle === 'valorant'}>
+    <section className={styles.gamesForms} data-open={toggle === 'csgo'}>
       <section className={styles.newPublication}>
-        <h2 className={styles.title}>CSGO</h2>
+        <h2 className={styles.title}>CS2</h2>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -97,7 +97,7 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setPublication('valorant', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+              setPublication('cs2', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserNumberPublications(currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
@@ -112,39 +112,75 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
-                      value='Iniciador'
+                      value='Entry fragger'
                       name='position'
-                      id='iniciador'
+                      id='entry'
                     />
-                    <label for='iniciador'>
-                      Iniciador
+                    <label for='entry'>
+                      Entry Fragger
                     </label>
                     <Field
                       type='checkbox'
-                      value='Duelista'
+                      value='In-game leader'
                       name='position'
-                      id='duelista'
+                      id='in-game'
                     />
-                    <label for='duelista'>
-                      Duelista
+                    <label for='in-game'>
+                      In-game leader
                     </label>
                     <Field
                       type='checkbox'
-                      value='Centinelas'
+                      value='AWPer'
                       name='position'
-                      id='centinelas'
+                      id='awper'
                     />
-                    <label for='centinelas'>
-                      Centinelas
+                    <label for='awper'>
+                      AWPer
                     </label>
                     <Field
                       type='checkbox'
-                      value='Controlador'
+                      value='Lurker'
                       name='position'
-                      id='controlador'
+                      id='lurker'
                     />
-                    <label for='controlador'>
-                      Controlador
+                    <label for='lurker'>
+                      Lurker
+                    </label>
+                    <Field
+                      type='checkbox'
+                      value='Playmaker'
+                      name='position'
+                      id='playmaker'
+                    />
+                    <label for='playmaker'>
+                      Playmaker
+                    </label>
+                    <Field
+                      type='checkbox'
+                      value='Support'
+                      name='position'
+                      id='support'
+                    />
+                    <label for='support'>
+                      Support
+                    </label>
+                    <Field
+                      type='checkbox'
+                      value='Entrenador'
+                      name='position'
+                      id='entrenador'
+                    />
+                    <label for='entrenador'>
+                      Entrenador
+                    </label>
+                    <Field
+                      type='checkbox'
+                      value='Secondary AWPer'
+                      name='position'
+                      id='secondary-awper'
+                    />
+                    <label for='secondary-awper'>
+                      Secondary AWPer
                     </label>
                   </div>
                   <ErrorMessage name='position' component='span' />
@@ -154,75 +190,93 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='radio'
-                      value='Hierro'
+                      value='Silver'
                       name='level'
-                      id='hierroV'
+                      id='silver'
                     />
-                    <label for='hierroV'>
-                      Hierro
+                    <label for='silver'>
+                      Silver
                     </label>
                     <Field
                       type='radio'
-                      value='Bronce'
+                      value='Nova'
                       name='level'
-                      id='bronceV'
+                      id='nova'
                     />
-                    <label for='bronceV'>
-                      Bronce
+                    <label for='nova'>
+                      Nova
                     </label>
                     <Field
                       type='radio'
-                      value='Plata'
+                      value='Ak'
                       name='level'
-                      id='plataV'
+                      id='ak'
                     />
-                    <label for='plataV'>
-                      Plata
+                    <label for='ak'>
+                      Ak
                     </label>
                     <Field
                       type='radio'
-                      value='Oro'
+                      value='Ak laurel'
                       name='level'
-                      id='oroV'
+                      id='ak-laurel'
                     />
-                    <label for='oroV'>
-                      Oro
+                    <label for='ak-laurel'>
+                      Ak Laurel
                     </label>
                     <Field
                       type='radio'
-                      value='Platino'
+                      value='Doble ak'
                       name='level'
-                      id='platinoV'
+                      id='doble-ak'
                     />
-                    <label for='platinoV'>
-                      Platino
+                    <label for='doble-ak'>
+                      Doble Ak
                     </label>
                     <Field
                       type='radio'
-                      value='Diamante'
+                      value='Chapa'
                       name='level'
-                      id='diamanteV'
+                      id='chapa'
                     />
-                    <label for='diamanteV'>
-                      Diamante
+                    <label for='chapa'>
+                      Chapa
                     </label>
                     <Field
                       type='radio'
-                      value='Immortal'
+                      value='Aguila'
                       name='level'
-                      id='immortalV'
+                      id='aguila'
                     />
-                    <label for='immortalV'>
-                      Immortal
+                    <label for='aguila'>
+                      Aguila
                     </label>
                     <Field
                       type='radio'
-                      value='Valorant'
+                      value='Aguila laurel'
                       name='level'
-                      id='valorantV'
+                      id='aguil-laurel'
                     />
-                    <label for='valorantV'>
-                      Valorant
+                    <label for='aguil-laurel'>
+                      Aguila Laurel
+                    </label>
+                    <Field
+                      type='radio'
+                      value='Supreme'
+                      name='level'
+                      id='supreme'
+                    />
+                    <label for='supreme'>
+                      Supreme
+                    </label>
+                    <Field
+                      type='radio'
+                      value='Global elite'
+                      name='level'
+                      id='global-elite'
+                    />
+                    <label for='global-elite'>
+                      Global Elite
                     </label>
                   </div>
                   <ErrorMessage name='level' component='span' />
@@ -248,18 +302,18 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                         type='checkbox'
                         name='typeOfGamer'
                         value='Competitivo'
-                        id='competitivoV'
+                        id='competitivo'
                       />
-                      <label for='competitivoV'>
+                      <label for='competitivo'>
                         Competitivo
                       </label>
                       <Field
                         type='checkbox'
                         name='typeOfGamer'
                         value='Casual'
-                        id='casualV'
+                        id='casual'
                       />
-                      <label for='casualV'>
+                      <label for='casual'>
                         Casual
                       </label>
                     </div>
@@ -273,7 +327,7 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                     <ErrorMessage name='title' component='span' />
                   </label>
                   <label className={styles.descriptionPublication}>
-                    Describete como jugador de Valorant
+                    Describete como jugador de CSGO
                     <Field
                       className={styles.description}
                       as='textarea' name='description'
@@ -456,4 +510,4 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
   )
 }
 
-export default ValorantPublication
+export default CsgoPublication

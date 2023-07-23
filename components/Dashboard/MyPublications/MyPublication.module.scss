@@ -6,9 +6,10 @@
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    height: 90vh;
+    height: 95vh;
     padding-bottom: 5vh;
     @media screen and (min-width: 768px) {
+        height: 90vh;
         justify-content: center;
         padding-bottom: 0;
     }
@@ -23,29 +24,15 @@
         display: flex;
         align-items: center;
         @media screen and (min-width: 768px) {
-            width: 60vw;
+            width: 85vw;
         }
     }
-    .cardBox {
-        background-color: $white;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
+    div {
         width: 100%;
-        padding: 1rem;
-        @media screen  and (min-width: 768px){
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: min-content;
-            width: 60vw;
-        }
-        .subtitle {
-            padding: 1rem;
-            font-weight: bold;
-            text-align: center;
-            grid-column: 1/4;
+        height: 90vh;
+        @media screen and (min-width: 768px) {
+            width: 85vw;
+            height: 85vh;            
         }
     }
 }

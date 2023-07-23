@@ -18,13 +18,13 @@ import { useSession } from '../../../firebase/auth/useSession'
 import { useGetTeams } from '../../../firebase/hooks/getMethod/useGetTeams'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 
-const PageContent = ({ gameCategory, teamCategory, children, distance }) => {
+const PageContent = ({ category, children, distance }) => {
   const session = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const users = useGetData('users')
-  const csgo = useGetData(gameCategory)
-  const teams = useGetTeams('teams', teamCategory)
+  const csgo = useGetData(category)
+  const teams = useGetTeams('teams', category)
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === session.uid)

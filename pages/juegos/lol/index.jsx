@@ -10,8 +10,7 @@ const Lol = () => {
   return (
     <Layout>
       <PageContent
-        gameCategory='lol'
-        teamCategory='lol'
+        category='lol'
         distance={distance}
       >
         <FilterCsgo distance={distance} setDistance={setDistance} />

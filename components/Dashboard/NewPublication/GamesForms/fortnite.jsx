@@ -1,15 +1,15 @@
-import styles from './Lol.module.scss'
+import styles from './GamesForms.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useState } from 'react'
-import { setPublication } from '../../../../firebase/hooks/setMethod/setPublication'
+import { setFortnitePublication } from '../../../../firebase/hooks/setMethod/setFortnitePublication'
 import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 
-const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
+const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState()
   const [previewImage2, setPreviewImage2] = useState()
@@ -76,7 +76,7 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
   }
   const initialValues = {
     position: [],
-    level: [],
+    preferenceTeam: [],
     typeOfGamer: [],
     hours: 0,
     title: '',
@@ -86,9 +86,9 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
     age: ''
   }
   return (
-    <section className={styles.lol} data-open={toggle === 'lol'}>
+    <section className={styles.gamesForms} data-open={toggle === 'fortnite'}>
       <section className={styles.newPublication}>
-        <h2 className={styles.title}>LOL</h2>
+        <h2 className={styles.title}>Fortnite</h2>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -97,7 +97,7 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setPublication('lol', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+              setFortnitePublication('fortnite', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserNumberPublications(currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
@@ -112,147 +112,66 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
-                      value='Toplane'
+                      value='In-game leader'
                       name='position'
-                      id='toplane'
+                      id='in-gameFortnite'
                     />
-                    <label for='toplane'>
-                      Toplane
+                    <label for='in-gameFortnite'>
+                      In-game leader
                     </label>
                     <Field
                       type='checkbox'
-                      value='Midlane'
+                      value='Entry fragger'
                       name='position'
-                      id='midlane'
+                      id='entryFortnite'
                     />
-                    <label for='midlane'>
-                      Midlane
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Jungla'
-                      name='position'
-                      id='jungla'
-                    />
-                    <label for='jungla'>
-                      Jungla
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='ADC'
-                      name='position'
-                      id='adc'
-                    />
-                    <label for='adc'>
-                      ADC
+                    <label for='entryFortnite'>
+                      Entry Fragger
                     </label>
                     <Field
                       type='checkbox'
                       value='Support'
                       name='position'
-                      id='supportLol'
+                      id='supportFortnite'
                     />
-                    <label for='supportLol'>
+                    <label for='supportFortnite'>
                       Support
                     </label>
                   </div>
                   <ErrorMessage name='position' component='span' />
                 </article>
-                <article className={styles.level}>
-                  <h3>¿Cuál es tu nivel?</h3>
+                <article className={styles.preferenceTeam}>
+                  <h3>¿Cómo te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='radio'
-                      value='Sin Nivel'
-                      name='level'
-                      id='sin nivel'
+                      value='2 vs 2'
+                      name='preferenceTeam'
+                      id='2vs2'
                     />
-                    <label for='sin nivel'>
-                      Sin Nivel
+                    <label for='2vs2'>
+                      2 vs 2
                     </label>
                     <Field
                       type='radio'
-                      value='Hierro'
-                      name='level'
-                      id='hierro'
+                      value='3 vs 3'
+                      name='preferenceTeam'
+                      id='3vs3'
                     />
-                    <label for='hierro'>
-                      Hierro
+                    <label for='3vs3'>
+                      3 vs 3
                     </label>
                     <Field
                       type='radio'
-                      value='Bronce'
-                      name='level'
-                      id='bronce'
+                      value='4 vs 4'
+                      name='preferenceTeam'
+                      id='4vs4'
                     />
-                    <label for='bronce'>
-                      Bronce
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Plata'
-                      name='level'
-                      id='plata'
-                    />
-                    <label for='plata'>
-                      Plata
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Oro'
-                      name='level'
-                      id='oro'
-                    />
-                    <label for='oro'>
-                      Oro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Platino'
-                      name='level'
-                      id='platino'
-                    />
-                    <label for='platino'>
-                      Platino
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Diamante'
-                      name='level'
-                      id='diamante'
-                    />
-                    <label for='diamante'>
-                      Diamante
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Maestro'
-                      name='level'
-                      id='maestro'
-                    />
-                    <label for='maestro'>
-                      Maestro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Gran Maestro'
-                      name='level'
-                      id='gran maestro'
-                    />
-                    <label for='gran maestro'>
-                      Gran Maestro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Retador'
-                      name='level'
-                      id='retador'
-                    />
-                    <label for='retador'>
-                      Retador
+                    <label for='4vs4'>
+                      4 vs 4
                     </label>
                   </div>
-                  <ErrorMessage name='level' component='span' />
+                  <ErrorMessage name='preferenceTeam' component='span' />
                 </article>
                 <article className={styles.hoursAndType}>
                   <article className={styles.hours}>
@@ -275,18 +194,18 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
                         type='checkbox'
                         name='typeOfGamer'
                         value='Competitivo'
-                        id='competitivoLol'
+                        id='competitivoFortnite'
                       />
-                      <label for='competitivoLol'>
+                      <label for='competitivoFortnite'>
                         Competitivo
                       </label>
                       <Field
                         type='checkbox'
                         name='typeOfGamer'
                         value='Casual'
-                        id='casualLol'
+                        id='casualFortnite'
                       />
-                      <label for='casualLol'>
+                      <label for='casualFortnite'>
                         Casual
                       </label>
                     </div>
@@ -300,7 +219,7 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
                     <ErrorMessage name='title' component='span' />
                   </label>
                   <label className={styles.descriptionPublication}>
-                    Describete como jugador de Lol
+                    Describete como jugador de CSGO
                     <Field
                       className={styles.description}
                       as='textarea' name='description'
@@ -329,7 +248,7 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
                     />
                     {previewImage && (
                       <div className={styles.previewImage}>
-                        <Image width={0} height={0} loader={myLoader} src={previewImage} alt='pre-carga de imagen' />
+                        <Image width={0} height={0} loader={myLoader} src={previewImage} alt='precarga' />
                         <button onClick={(e) => handleRemoveImage(e, image, setPreviewImage, setImage)}>
                           <DeleteIcon />
                         </button>
@@ -461,7 +380,7 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
                       values.hours === 0 ||
                       values.title.length === 0 ||
                       values.description.length === 0 ||
-                      values.level.length === 0 ||
+                      values.preferenceTeam.length === 0 ||
                       values.position.length === 0 ||
                       values.typeOfGamer.length === 0 ||
                       !progress ||
@@ -483,4 +402,4 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
   )
 }
 
-export default LolPublication
+export default FortnitePublication

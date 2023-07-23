@@ -16,15 +16,19 @@ const City = () => {
   const router = useRouter()
   const { name } = router.query
   const users = useGetData('users')
-  const csgo = useGetData('csgo')
+  const csgo = useGetData('cs2')
   const lol = useGetData('lol')
-  const teamsCsgo = useGetTeams('teams', 'csgo')
+  const fortnite = useGetData('fortnite')
+  const valorant = useGetData('valorant')
+  const teamsCsgo = useGetTeams('teams', 'cs2')
   const teamsLol = useGetTeams('teams', 'lol')
+  const teamsFortnite = useGetTeams('teams', 'fortnite')
+  const teamsValorant = useGetTeams('teams', 'valorant')
   const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(name)}&format=json&limit=1`
 
   useEffect(() => {
-    const allGamesArray = [...csgo, ...lol]
-    const allTeamsArray = [...teamsCsgo, ...teamsLol]
+    const allGamesArray = [...csgo, ...lol, ...fortnite, ...valorant]
+    const allTeamsArray = [...teamsCsgo, ...teamsLol, ...teamsFortnite, ...teamsValorant]
     setAllGames(allGamesArray)
     setAllTeams(allTeamsArray);
     (async () => {
@@ -44,7 +48,7 @@ const City = () => {
         return null
       }
     })()
-  }, [url, csgo, lol, teamsCsgo, teamsLol])
+  }, [url, csgo, lol, teamsCsgo, teamsLol, teamsFortnite, teamsValorant, fortnite, valorant])
 
   const listUserAllGames = useCityFilterDistance(city, allGames, 30)
   const listUserTeams = useCityFilterDistance(city, allTeams, 30)

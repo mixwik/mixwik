@@ -6,10 +6,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { LOGOS } from '../../../assets/images'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
-import CsgoPublication from './csgo'
-import FortnitePublication from './fortnite'
-import LolPublication from './lol'
-import ValorantPublication from './valorant'
+import CsgoPublication from './GamesForms/cs2'
+import FortnitePublication from './GamesForms/fortnite'
+import LolPublication from './GamesForms/lol'
+import ValorantPublication from './GamesForms/valorant'
 
 const NewPublication = ({ user, mixWikTeams }) => {
   const currentPosition = useCurrentPosition()

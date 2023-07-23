@@ -7,9 +7,9 @@ import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
-import styles from './Lol.module.scss'
+import styles from './NewTeamForm.module.scss'
 
-const Lol = ({ currentUser, setToggle, toggle }) => {
+const Valorant = ({ currentUser, setToggle, toggle }) => {
   const router = useRouter()
   const currentPosition = useCurrentPosition()
   const [imageError, setImageError] = useState()
@@ -89,8 +89,8 @@ const Lol = ({ currentUser, setToggle, toggle }) => {
     age: 16
   }
   return (
-    <section className={styles.formBox} data-active={toggle === 'lol'}>
-      <h2 className={styles.titleForm}>Lol</h2>
+    <section className={styles.formBox} data-active={toggle === 'valorant'}>
+      <h2 className={styles.titleForm}>Valorant</h2>
       <Formik
         initialValues={initialValues}
         validate={values => {
@@ -98,7 +98,7 @@ const Lol = ({ currentUser, setToggle, toggle }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTeam('lol', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+          setTeam('valorant', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
           setTimeout(() => {
             setSubmitting(false)
             router.push('/dashboard?page=myPublications')
@@ -132,48 +132,39 @@ const Lol = ({ currentUser, setToggle, toggle }) => {
               <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
-                  value='Toplane'
+                  value='Iniciador'
                   name='position'
-                  id='toplane'
+                  id='iniciador'
                 />
-                <label for='toplane'>
-                  Toplane
+                <label for='iniciador'>
+                  Iniciador
                 </label>
                 <Field
                   type='checkbox'
-                  value='Midlane'
+                  value='Duelista'
                   name='position'
-                  id='midlane'
+                  id='duelista'
                 />
-                <label for='midlane'>
-                  Midlane
+                <label for='duelista'>
+                  Duelista
                 </label>
                 <Field
                   type='checkbox'
-                  value='Jungla'
+                  value='Centinelas'
                   name='position'
-                  id='jungla'
+                  id='centinelas'
                 />
-                <label for='jungla'>
-                  Jungla
+                <label for='centinelas'>
+                  Centinelas
                 </label>
                 <Field
                   type='checkbox'
-                  value='ADC'
+                  value='Controlador'
                   name='position'
-                  id='adc'
+                  id='controlador'
                 />
-                <label for='adc'>
-                  ADC
-                </label>
-                <Field
-                  type='checkbox'
-                  value='Support'
-                  name='position'
-                  id='supportLol'
-                />
-                <label for='supportLol'>
-                  Support
+                <label for='controlador'>
+                  Controlador
                 </label>
               </div>
               <ErrorMessage name='position' component='span' />
@@ -183,93 +174,75 @@ const Lol = ({ currentUser, setToggle, toggle }) => {
               <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
-                  value='Sin Nivel'
-                  name='level'
-                  id='sin nivel'
-                />
-                <label for='sin nivel'>
-                  Sin Nivel
-                </label>
-                <Field
-                  type='checkbox'
                   value='Hierro'
                   name='level'
-                  id='hierro'
+                  id='hierroV'
                 />
-                <label for='hierro'>
+                <label for='hierroV'>
                   Hierro
                 </label>
                 <Field
                   type='checkbox'
                   value='Bronce'
                   name='level'
-                  id='bronce'
+                  id='bronceV'
                 />
-                <label for='bronce'>
+                <label for='bronceV'>
                   Bronce
                 </label>
                 <Field
                   type='checkbox'
                   value='Plata'
                   name='level'
-                  id='plata'
+                  id='plataV'
                 />
-                <label for='plata'>
+                <label for='plataV'>
                   Plata
                 </label>
                 <Field
                   type='checkbox'
                   value='Oro'
                   name='level'
-                  id='oro'
+                  id='oroV'
                 />
-                <label for='oro'>
+                <label for='oroV'>
                   Oro
                 </label>
                 <Field
                   type='checkbox'
                   value='Platino'
                   name='level'
-                  id='platino'
+                  id='platinoV'
                 />
-                <label for='platino'>
+                <label for='platinoV'>
                   Platino
                 </label>
                 <Field
                   type='checkbox'
                   value='Diamante'
                   name='level'
-                  id='diamante'
+                  id='diamanteV'
                 />
-                <label for='diamante'>
+                <label for='diamanteV'>
                   Diamante
                 </label>
                 <Field
                   type='checkbox'
-                  value='Maestro'
+                  value='Immortal'
                   name='level'
-                  id='maestro'
+                  id='immortalV'
                 />
-                <label for='maestro'>
-                  Maestro
+                <label for='immortalV'>
+                  Immortal
                 </label>
                 <Field
                   type='checkbox'
-                  value='Gran Maestro'
+                  value='Valorant'
                   name='level'
-                  id='gran maestro'
+                  id='valorantV'
                 />
-                <label for='gran maestro'>
-                  Gran Maestro
-                </label>
-                <Field
-                  type='checkbox'
-                  value='Retador'
-                  name='level'
-                  id='retador'
-                />
-                <label for='retador'>
-                  Retador
+                <label for='valorantV'>
+                  Valorant
                 </label>
               </div>
               <ErrorMessage name='level' component='span' />
@@ -308,18 +281,18 @@ const Lol = ({ currentUser, setToggle, toggle }) => {
                     type='checkbox'
                     name='typeOfGamer'
                     value='Competitivo'
-                    id='competitivoLol'
+                    id='competitivoV'
                   />
-                  <label for='competitivoLol'>
+                  <label for='competitivoV'>
                     Competitivo
                   </label>
                   <Field
                     type='checkbox'
                     name='typeOfGamer'
                     value='Casual'
-                    id='casualLol'
+                    id='casualV'
                   />
-                  <label for='casualLol'>
+                  <label for='casualV'>
                     Casual
                   </label>
                 </div>
@@ -472,4 +445,4 @@ const Lol = ({ currentUser, setToggle, toggle }) => {
   )
 }
 
-export default Lol
+export default Valorant

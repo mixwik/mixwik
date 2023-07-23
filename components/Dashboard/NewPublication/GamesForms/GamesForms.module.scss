@@ -1,6 +1,6 @@
 @import '../../../../styles/colors.scss';
 
-.csgo {
+.gamesForms {
   position: absolute;
   width: 100vw;
   height: 91vh;
@@ -24,7 +24,7 @@
     width: 100vw;
 
     @media screen and (min-width: 768px) {
-      width: 60vw;
+      width: 85vw;
     }
 
     .title {
@@ -339,15 +339,17 @@
 
         .buttons {
           position: fixed;
-          top: 0;
-          right: 0rem;
+          bottom: .5rem;
+          left: 0;
           z-index: 10;
           display: flex;
           justify-content: center;
           align-items: center;
           height: 5vh;
           @media screen and (min-width: 768px) {
-            right: 10vw;
+            left: auto;
+            right: .5rem;
+            bottom: 1rem;
           }
 
           button {

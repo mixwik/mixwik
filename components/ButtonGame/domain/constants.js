@@ -3,7 +3,7 @@ import { LOGOS } from '../../../assets/images'
 export const games = [{
   image: LOGOS.cs2,
   title: 'Counter Strike 2',
-  alt: 'Icono del videojuego csgo',
+  alt: 'Icono del videojuego cs2',
   link: 'juegos/cs2'
 }, {
   image: LOGOS.lol,

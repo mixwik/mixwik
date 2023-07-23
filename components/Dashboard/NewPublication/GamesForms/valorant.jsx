@@ -1,15 +1,15 @@
-import styles from './Fortnite.module.scss'
+import styles from './GamesForms.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useState } from 'react'
-import { setFortnitePublication } from '../../../../firebase/hooks/setMethod/setFortnitePublication'
+import { setPublication } from '../../../../firebase/hooks/setMethod/setPublication'
 import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 
-const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
+const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
   const [imageError, setImageError] = useState()
   const [previewImage, setPreviewImage] = useState()
   const [previewImage2, setPreviewImage2] = useState()
@@ -76,7 +76,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
   }
   const initialValues = {
     position: [],
-    preferenceTeam: [],
+    level: [],
     typeOfGamer: [],
     hours: 0,
     title: '',
@@ -86,9 +86,9 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
     age: ''
   }
   return (
-    <section className={styles.fortnite} data-open={toggle === 'fortnite'}>
+    <section className={styles.gamesForms} data-open={toggle === 'valorant'}>
       <section className={styles.newPublication}>
-        <h2 className={styles.title}>Fortnite</h2>
+        <h2 className={styles.title}>CSGO</h2>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -97,7 +97,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setFortnitePublication('fortnite', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+              setPublication('valorant', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserNumberPublications(currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
@@ -112,66 +112,120 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='checkbox'
-                      value='In-game leader'
+                      value='Iniciador'
                       name='position'
-                      id='in-gameFortnite'
+                      id='iniciador'
                     />
-                    <label for='in-gameFortnite'>
-                      In-game leader
+                    <label for='iniciador'>
+                      Iniciador
                     </label>
                     <Field
                       type='checkbox'
-                      value='Entry fragger'
+                      value='Duelista'
                       name='position'
-                      id='entryFortnite'
+                      id='duelista'
                     />
-                    <label for='entryFortnite'>
-                      Entry Fragger
+                    <label for='duelista'>
+                      Duelista
                     </label>
                     <Field
                       type='checkbox'
-                      value='Support'
+                      value='Centinelas'
                       name='position'
-                      id='supportFortnite'
+                      id='centinelas'
                     />
-                    <label for='supportFortnite'>
-                      Support
+                    <label for='centinelas'>
+                      Centinelas
+                    </label>
+                    <Field
+                      type='checkbox'
+                      value='Controlador'
+                      name='position'
+                      id='controlador'
+                    />
+                    <label for='controlador'>
+                      Controlador
                     </label>
                   </div>
                   <ErrorMessage name='position' component='span' />
                 </article>
-                <article className={styles.preferenceTeam}>
-                  <h3>¿Cómo te gusta jugar?</h3>
+                <article className={styles.level}>
+                  <h3>¿Cuál es tu nivel?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='radio'
-                      value='2 vs 2'
-                      name='preferenceTeam'
-                      id='2vs2'
+                      value='Hierro'
+                      name='level'
+                      id='hierroV'
                     />
-                    <label for='2vs2'>
-                      2 vs 2
+                    <label for='hierroV'>
+                      Hierro
                     </label>
                     <Field
                       type='radio'
-                      value='3 vs 3'
-                      name='preferenceTeam'
-                      id='3vs3'
+                      value='Bronce'
+                      name='level'
+                      id='bronceV'
                     />
-                    <label for='3vs3'>
-                      3 vs 3
+                    <label for='bronceV'>
+                      Bronce
                     </label>
                     <Field
                       type='radio'
-                      value='4 vs 4'
-                      name='preferenceTeam'
-                      id='4vs4'
+                      value='Plata'
+                      name='level'
+                      id='plataV'
                     />
-                    <label for='4vs4'>
-                      4 vs 4
+                    <label for='plataV'>
+                      Plata
+                    </label>
+                    <Field
+                      type='radio'
+                      value='Oro'
+                      name='level'
+                      id='oroV'
+                    />
+                    <label for='oroV'>
+                      Oro
+                    </label>
+                    <Field
+                      type='radio'
+                      value='Platino'
+                      name='level'
+                      id='platinoV'
+                    />
+                    <label for='platinoV'>
+                      Platino
+                    </label>
+                    <Field
+                      type='radio'
+                      value='Diamante'
+                      name='level'
+                      id='diamanteV'
+                    />
+                    <label for='diamanteV'>
+                      Diamante
+                    </label>
+                    <Field
+                      type='radio'
+                      value='Immortal'
+                      name='level'
+                      id='immortalV'
+                    />
+                    <label for='immortalV'>
+                      Immortal
+                    </label>
+                    <Field
+                      type='radio'
+                      value='Valorant'
+                      name='level'
+                      id='valorantV'
+                    />
+                    <label for='valorantV'>
+                      Valorant
                     </label>
                   </div>
-                  <ErrorMessage name='preferenceTeam' component='span' />
+                  <ErrorMessage name='level' component='span' />
                 </article>
                 <article className={styles.hoursAndType}>
                   <article className={styles.hours}>
@@ -194,18 +248,18 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                         type='checkbox'
                         name='typeOfGamer'
                         value='Competitivo'
-                        id='competitivoFortnite'
+                        id='competitivoV'
                       />
-                      <label for='competitivoFortnite'>
+                      <label for='competitivoV'>
                         Competitivo
                       </label>
                       <Field
                         type='checkbox'
                         name='typeOfGamer'
                         value='Casual'
-                        id='casualFortnite'
+                        id='casualV'
                       />
-                      <label for='casualFortnite'>
+                      <label for='casualV'>
                         Casual
                       </label>
                     </div>
@@ -219,7 +273,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                     <ErrorMessage name='title' component='span' />
                   </label>
                   <label className={styles.descriptionPublication}>
-                    Describete como jugador de CSGO
+                    Describete como jugador de Valorant
                     <Field
                       className={styles.description}
                       as='textarea' name='description'
@@ -380,7 +434,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                       values.hours === 0 ||
                       values.title.length === 0 ||
                       values.description.length === 0 ||
-                      values.preferenceTeam.length === 0 ||
+                      values.level.length === 0 ||
                       values.position.length === 0 ||
                       values.typeOfGamer.length === 0 ||
                       !progress ||
@@ -402,4 +456,4 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
   )
 }
 
-export default FortnitePublication
+export default ValorantPublication
