@@ -21,13 +21,13 @@ const NewPublication = ({ user, mixWikTeams }) => {
       if (!mixWikTeams) {
         if (!user.csgoPublications) {
           setToggle(name)
-        } else if (user.CsgoPublication <= 1) {
+        } else if (user.CsgoPublication < 1) {
           setToggle(name)
         } else {
           setTeams('noMixWikTeams')
         }
       } else if (mixWikTeams) {
-        if (user.csgoPublications <= 5) {
+        if (user.csgoPublications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')
@@ -38,13 +38,13 @@ const NewPublication = ({ user, mixWikTeams }) => {
       if (!mixWikTeams) {
         if (!user.lolPublications) {
           setToggle(name)
-        } else if (user.lolPublications <= 1) {
+        } else if (user.lolPublications < 1) {
           setToggle(name)
         } else {
           setTeams('noMixWikTeams')
         }
       } else if (mixWikTeams) {
-        if (user.lolPublications <= 5) {
+        if (user.lolPublications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')
@@ -55,13 +55,13 @@ const NewPublication = ({ user, mixWikTeams }) => {
       if (!mixWikTeams) {
         if (!user.fortnitePublications) {
           setToggle(name)
-        } else if (user.fortnitePublications <= 1) {
+        } else if (user.fortnitePublications < 1) {
           setToggle(name)
         } else {
           setTeams('noMixWikTeams')
         }
       } else if (mixWikTeams) {
-        if (user.fortnitePublications <= 5) {
+        if (user.fortnitePublications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')
@@ -72,13 +72,13 @@ const NewPublication = ({ user, mixWikTeams }) => {
       if (!mixWikTeams) {
         if (!user.valorantPublications) {
           setToggle(name)
-        } else if (user.valorantPublications <= 1) {
+        } else if (user.valorantPublications < 1) {
           setToggle(name)
         } else {
           setTeams('noMixWikTeams')
         }
       } else if (mixWikTeams) {
-        if (user.valorantPublications <= 5) {
+        if (user.valorantPublications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')

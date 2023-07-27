@@ -14,7 +14,7 @@ const NewTeam = ({ user, mixWikTeams }) => {
   const handleCheck = (name) => {
     if (name === 'cs2') {
       if (mixWikTeams) {
-        if (user.csgoPublications <= 5) {
+        if (user.csgoPublications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')
@@ -23,7 +23,7 @@ const NewTeam = ({ user, mixWikTeams }) => {
     }
     if (name === 'lol') {
       if (mixWikTeams) {
-        if (user.lolPublications <= 5) {
+        if (user.lolPublications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')
@@ -32,7 +32,7 @@ const NewTeam = ({ user, mixWikTeams }) => {
     }
     if (name === 'fortnite') {
       if (mixWikTeams) {
-        if (user.fortnitePublications <= 5) {
+        if (user.fortnitePublications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')
@@ -41,7 +41,7 @@ const NewTeam = ({ user, mixWikTeams }) => {
     }
     if (name === 'valorant') {
       if (mixWikTeams) {
-        if (user.valorantPublications <= 5) {
+        if (user.valorantPublications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')
