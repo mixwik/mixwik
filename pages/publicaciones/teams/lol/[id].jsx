@@ -57,7 +57,7 @@ const Team = () => {
   if (currentUser.length === 0) return <div>Loading...</div>
 
   const handleUpdatePosition = () => {
-    updatePublicationPosition('teams', id, currentPosition)
+    updatePublicationPosition('teams', id, currentPosition, 'lol')
   }
 
   const images = []

@@ -23,12 +23,27 @@ const MyPublications = ({ user }) => {
           <BoxCards title='Publicaciones de Counter Strike 2'>
             {
               publicationsCsgoTeams.map((res) => (
-                <CardPublications key={res.id} publication={res} user={user} category='teams' equip link='cs2' />
+                <CardPublications
+                  key={res.id}
+                  publication={res}
+                  user={user}
+                  category='teams'
+                  deleteCategory='cs2'
+                  equip
+                  link='cs2'
+                />
               ))
             }
             {
               publicationsCSGO.map((res) => (
-                <CardPublications key={res.id} publication={res} user={user} category='cs2' link='cs2' />
+                <CardPublications
+                  key={res.id}
+                  publication={res}
+                  user={user}
+                  category='cs2'
+                  link='cs2'
+                  deleteCategory='cs2'
+                />
               ))
             }
           </BoxCards>
@@ -39,12 +54,26 @@ const MyPublications = ({ user }) => {
           <BoxCards title='Publicaciones de League Of Legends'>
             {
               publicationsLolTeams.map((res) => (
-                <CardPublications key={res.id} publication={res} user={user} category='teams' equip link='lol' />
+                <CardPublications
+                  key={res.id}
+                  publication={res}
+                  user={user}
+                  category='teams'
+                  equip link='lol'
+                  deleteCategory='lol'
+                />
               ))
             }
             {
               publicationsLOL.map((res) => (
-                <CardPublications key={res.id} publication={res} user={user} category='lol' link='lol' />
+                <CardPublications
+                  key={res.id}
+                  publication={res}
+                  user={user}
+                  category='lol'
+                  link='lol'
+                  deleteCategory='lol'
+                />
               ))
             }
           </BoxCards>
@@ -56,12 +85,26 @@ const MyPublications = ({ user }) => {
 
             {
               publicationsFortniteTeams.map((res) => (
-                <CardPublications key={res.id} publication={res} user={user} category='teams' equip link='fortnite' />
+                <CardPublications
+                  key={res.id}
+                  publication={res}
+                  user={user}
+                  category='teams' equip
+                  link='fortnite'
+                  deleteCategory='fortnite'
+                />
               ))
             }
             {
               publicationsFortnite.map((res) => (
-                <CardPublications key={res.id} publication={res} user={user} category='fortnite' link='fortnite' />
+                <CardPublications
+                  key={res.id}
+                  publication={res}
+                  user={user}
+                  category='fortnite'
+                  link='fortnite'
+                  deleteCategory='fortnite'
+                />
               ))
             }
           </BoxCards>
@@ -72,12 +115,28 @@ const MyPublications = ({ user }) => {
           <BoxCards title='Publicaciones de Valorant'>
             {
               publicationsValorantTeams.map((res) => (
-                <CardPublications key={res.id} publication={res} user={user} category='teams' teamsCategory='valorant' equip link='valorant' />
+                <CardPublications
+                  key={res.id}
+                  publication={res}
+                  user={user}
+                  category='teams'
+                  teamsCategory='valorant'
+                  equip
+                  link='valorant'
+                  deleteCategory='valorant'
+                />
               ))
             }
             {
               publicationsValorant.map((res) => (
-                <CardPublications key={res.id} publication={res} user={user} category='valorant' link='valorant' />
+                <CardPublications
+                  key={res.id}
+                  publication={res}
+                  user={user}
+                  category='valorant'
+                  link='valorant'
+                  deleteCategory='valorant'
+                />
               ))
             }
           </BoxCards>

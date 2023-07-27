@@ -74,7 +74,7 @@ const User = () => {
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
-      deletePublication('fortnite', id, currentUser.id)
+      deletePublication('fortnite', id, currentUser.id, 'fortnite')
       updateUserAdmonition(currentUser.id, 1)
     }
   }

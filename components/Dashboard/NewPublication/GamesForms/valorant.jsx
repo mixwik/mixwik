@@ -98,7 +98,7 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
             }}
             onSubmit={(values, { setSubmitting }) => {
               setPublication('valorant', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
-              updateUserNumberPublications(currentUser.id, 1)
+              updateUserNumberPublications('valorant', currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
                 location.reload()

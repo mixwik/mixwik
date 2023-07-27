@@ -74,7 +74,7 @@ const User = () => {
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
-      deletePublication('csgo', id, currentUser.id)
+      deletePublication('lol', id, currentUser.id, 'lol')
       updateUserAdmonition(currentUser.id, 1)
     }
   }

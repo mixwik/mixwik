@@ -19,13 +19,33 @@ export const updateUserData = async (id, data) => {
   })
 }
 
-export const updateUserNumberPublications = async (id, number) => {
+export const updateUserNumberPublications = async (category, id, number) => {
   const userRef = doc(db, 'users', id)
-  await updateDoc(userRef, {
-    csgoPublications: increment(number)
-  }).then(() => {
-    location.reload()
-  })
+  if (category === 'cs2') {
+    await updateDoc(userRef, {
+      csgoPublications: increment(number)
+    }).then(() => {
+      location.reload()
+    })
+  } else if (category === 'fortnite') {
+    await updateDoc(userRef, {
+      fortnitePublications: increment(number)
+    }).then(() => {
+      location.reload()
+    })
+  } else if (category === 'lol') {
+    await updateDoc(userRef, {
+      lolPublications: increment(number)
+    }).then(() => {
+      location.reload()
+    })
+  } else if (category === 'valorant') {
+    await updateDoc(userRef, {
+      valorantPublications: increment(number)
+    }).then(() => {
+      location.reload()
+    })
+  }
 }
 
 export const updateUserBan = async (id, bool) => {

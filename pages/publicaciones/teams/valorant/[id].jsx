@@ -2,12 +2,12 @@
 import Image from 'next/image'
 
 // Edit components
-import EditLevel from '../../../../components/EditPublication/Valorant/EditLevel'
-import EditPosition from '../../../../components/EditPublication/Valorant/EditPosition'
 import EditDescription from '../../../../components/EditPublication/EditDescription'
 import EditHours from '../../../../components/EditPublication/EditHours'
 import { EditImages } from '../../../../components/EditPublication/EditImages'
 import EditTypeOfGamer from '../../../../components/EditPublication/EditTypeOfGamer'
+import EditLevel from '../../../../components/EditPublication/Valorant/EditLevel'
+import EditPosition from '../../../../components/EditPublication/Valorant/EditPosition'
 
 // Hooks
 import { useRouter } from 'next/router'
@@ -74,7 +74,7 @@ const Team = () => {
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
-      deletePublication('teams', id, currentUser.id)
+      deletePublication('teams', id, currentUser.id, 'valorant')
       updateUserAdmonition(currentUser.id, 1)
     }
   }

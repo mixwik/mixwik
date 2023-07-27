@@ -57,7 +57,7 @@ const User = () => {
   if (currentUser.length === 0) return <div>Loading...</div>
 
   const handleUpdatePosition = () => {
-    updatePublicationPosition('csgo', id, currentPosition)
+    updatePublicationPosition('cs2', id, currentPosition)
   }
 
   const images = []
@@ -74,7 +74,7 @@ const User = () => {
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
-      deletePublication('csgo', id, currentUser.id)
+      deletePublication('cs2', id, currentUser.id, 'cs2')
       updateUserAdmonition(currentUser.id, 1)
     }
   }

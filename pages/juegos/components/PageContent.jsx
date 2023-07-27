@@ -92,7 +92,7 @@ const PageContent = ({ category, children, distance }) => {
                     ))
                   )
                 : (
-                  <div className={styles.gamersNoFound}>No hay jugadores de CSGO en este momento</div>
+                  <div className={styles.gamersNoFound}>No hay jugadores en este momento</div>
                   )
             }
           </div>

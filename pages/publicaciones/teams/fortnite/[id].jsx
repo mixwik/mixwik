@@ -74,7 +74,7 @@ const Team = () => {
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${currentUser.name}?`)) {
-      deletePublication('teams', id, currentUser.id)
+      deletePublication('teams', id, currentUser.id, 'fortnite')
       updateUserAdmonition(currentUser.id, 1)
     }
   }

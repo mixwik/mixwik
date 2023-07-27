@@ -50,7 +50,7 @@ export default function Home () {
             <div>Málaga</div>
           </Link>
         </div>
-        <form className='flex justify-center py-5' onSubmit={handleSubmit}>
+        <form className='flex justify-center py-14' onSubmit={handleSubmit}>
           <input className='px-3 py-2 rounded-l-md md:w-80' type='text' placeholder='Busca tú ciudad' onChange={(e) => setCity(e.target.value)} />
           <button type='submit' className='px-3 font-semibold text-white transition-colors duration-500 bg-aero rounded-r-md md:w-32 hover:bg-pennBlue'>Buscar</button>
         </form>

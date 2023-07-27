@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { setTeam } from '../../../../firebase/hooks/setMethod/setTeam'
+import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
@@ -89,7 +90,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
     age: 16
   }
   return (
-    <section className={styles.formBox} data-active={toggle === 'csgo'}>
+    <section className={styles.formBox} data-active={toggle === 'cs2'}>
       <h2 className={styles.titleForm}>CSGO</h2>
       <Formik
         initialValues={initialValues}
@@ -99,6 +100,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTeam('cs2', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+          updateUserNumberPublications('cs2', currentUser.id, 1)
           setTimeout(() => {
             setSubmitting(false)
             router.push('/dashboard?page=myPublications')

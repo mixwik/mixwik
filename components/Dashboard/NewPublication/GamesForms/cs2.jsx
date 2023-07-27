@@ -86,7 +86,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
     age: ''
   }
   return (
-    <section className={styles.gamesForms} data-open={toggle === 'csgo'}>
+    <section className={styles.gamesForms} data-open={toggle === 'cs2'}>
       <section className={styles.newPublication}>
         <h2 className={styles.title}>CS2</h2>
         <div className={styles.form}>
@@ -98,7 +98,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
             }}
             onSubmit={(values, { setSubmitting }) => {
               setPublication('cs2', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
-              updateUserNumberPublications(currentUser.id, 1)
+              updateUserNumberPublications('cs2', currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
                 location.reload()

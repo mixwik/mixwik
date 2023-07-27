@@ -8,6 +8,7 @@ import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 import styles from './NewTeamForm.module.scss'
+import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 
 const Valorant = ({ currentUser, setToggle, toggle }) => {
   const router = useRouter()
@@ -99,6 +100,7 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTeam('valorant', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+          updateUserNumberPublications('valorant', currentUser.id, 1)
           setTimeout(() => {
             setSubmitting(false)
             router.push('/dashboard?page=myPublications')

@@ -17,7 +17,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
   const [teams, setTeams] = useState(false)
 
   const handleCheck = (name) => {
-    if (name === 'csgo') {
+    if (name === 'cs2') {
       if (!mixWikTeams) {
         if (!user.csgoPublications) {
           setToggle(name)
@@ -34,6 +34,57 @@ const NewPublication = ({ user, mixWikTeams }) => {
         }
       }
     }
+    if (name === 'lol') {
+      if (!mixWikTeams) {
+        if (!user.lolPublications) {
+          setToggle(name)
+        } else if (user.lolPublications <= 1) {
+          setToggle(name)
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.lolPublications <= 5) {
+          setToggle(name)
+        } else {
+          setTeams('maxPublications')
+        }
+      }
+    }
+    if (name === 'fortnite') {
+      if (!mixWikTeams) {
+        if (!user.fortnitePublications) {
+          setToggle(name)
+        } else if (user.fortnitePublications <= 1) {
+          setToggle(name)
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.fortnitePublications <= 5) {
+          setToggle(name)
+        } else {
+          setTeams('maxPublications')
+        }
+      }
+    }
+    if (name === 'valorant') {
+      if (!mixWikTeams) {
+        if (!user.valorantPublications) {
+          setToggle(name)
+        } else if (user.valorantPublications <= 1) {
+          setToggle(name)
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.valorantPublications <= 5) {
+          setToggle(name)
+        } else {
+          setTeams('maxPublications')
+        }
+      }
+    }
   }
   return (
     <section className={styles.newPublication}>
@@ -42,31 +93,31 @@ const NewPublication = ({ user, mixWikTeams }) => {
         teams === 'maxPublications' && <p>Has llegado al límite de publicaciones</p>
       }
       <ul className={styles.listOfCategories}>
-        <li onClick={() => handleCheck('csgo')}>
-          <Image src={LOGOS.cs2} alt='csgo' />
+        <li onClick={() => handleCheck('cs2')}>
+          <Image src={LOGOS.cs2} alt='counter strike 2' />
           Counter Strike 2
         </li>
-        <li onClick={() => setToggle('lol')}>
+        <li onClick={() => handleCheck('lol')}>
           <Image src={LOGOS.lol} alt='LOL' />
           League of Legends
         </li>
-        <li onClick={() => setToggle('fortnite')}>
+        <li onClick={() => handleCheck('fortnite')}>
           <Image src={LOGOS.fortnite} alt='Fortnite' />
           Fortnite
           <br />
         </li>
-        <li onClick={() => setToggle('valorant')}>
+        <li onClick={() => handleCheck('valorant')}>
           <Image src={LOGOS.valorant} alt='Valorant' />
           Valorant
           <br />
         </li>
-        <li onClick={() => setToggle('rl')}>
+        <li onClick={() => handleCheck('rl')}>
           <Image src={LOGOS.rocketLeague} alt='Rocket League' />
           Rocket League
           <br />
           (Próximamente)
         </li>
-        <li onClick={() => setToggle('dota2')}>
+        <li onClick={() => handleCheck('dota2')}>
           <Image src={LOGOS.dota2} alt='Dota 2' />
           Dota 2
           <br />
