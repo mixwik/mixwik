@@ -44,6 +44,7 @@
 .cities {
   min-height: 100vh;
   background-image: url('../public/bg/bg_dark_blue.svg');
+  background-repeat: no-repeat;
   background-attachment: fixed;
 
   .title {
