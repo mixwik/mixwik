@@ -40,6 +40,7 @@ import styles from '../Publications.module.scss'
 import PromotionMethods from '../../../components/PromotionMethods'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
+import ProfileUser from '../components/ProfileUser'
 
 const User = () => {
   const [edit, setEdit] = useState(false)
@@ -91,12 +92,11 @@ const User = () => {
               </div>
             )
           }
-          <div className={styles.profileUser} data-active={mixWikTeams}>
-            <Link target='_blanc' href={`/user/${currentUser.uid}`}>
-              <Image width={0} height={0} loader={myLoader} src={currentUser.profileImg} alt={`Imagen de perfil de ${currentUser.name}`} />
-              {currentUser.name}
-            </Link>
-          </div>
+          <ProfileUser
+            mixWikTeams={mixWikTeams}
+            currentUser={currentUser}
+            user={user}
+          />
           <div className={styles.imgBox}>
             <Carousel
               className={styles.carousel}

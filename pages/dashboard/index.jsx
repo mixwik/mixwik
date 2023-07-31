@@ -33,6 +33,7 @@ import NewTeam from '../../components/Dashboard/NewTeam'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
+import Favorites from './components/Favorites'
 
 export default function Dashboard () {
   const handleSignOut = useSignOut()
@@ -75,6 +76,7 @@ export default function Dashboard () {
         {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
         {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
+        {page === 'favorites' && <Favorites />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li
@@ -103,6 +105,13 @@ export default function Dashboard () {
             >
               <PublicationsIcon />
               Mis publicaciones
+            </li>
+            <li
+              data-isActive={page === 'favorites'}
+              onClick={() => handleClick('favorites')}
+            >
+              <PublicationsIcon />
+              Mis Favoritos
             </li>
             <li className={styles.ours}>
               <button onClick={() => setBugs(!bugs)}>

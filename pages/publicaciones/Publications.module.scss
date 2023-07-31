@@ -38,32 +38,6 @@
       z-index: 10;
     }
 
-    .profileUser {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      width: 100%;
-      background-color: $pennBlue;
-      color: $white;
-
-      &[data-active=true] {
-        padding-top: 2.7rem;
-      }
-
-      a {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        font-weight: bold;
-
-        img {
-          width: 2rem;
-          height: 2rem;
-          border-radius: 50%;
-        }
-      }
-    }
-
     .publicationTitle {
       font-size: 1.2em;
       text-align: left;

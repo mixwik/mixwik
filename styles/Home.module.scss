@@ -75,15 +75,16 @@
       height: 35vh;
       border-radius: .5rem;
       cursor: pointer;
-      transition: transform .5s;
+      transition: all 1s;
       background-image: url('../public/cities/madrid.jpg');
       background-size: cover;
       background-position: bottom;
+      background-repeat: no-repeat;
       position: relative;
       text-shadow: 0px 0px 5px $aero;
 
       &:hover {
-        transform: scale(0.9);
+        background-position: center;
       }
 
       div {
@@ -106,6 +107,7 @@
         grid-column: 3/4;
         grid-row: 1/3;
         height: 100%;
+        background-size: 200%;
       }
     }
     .valencia {

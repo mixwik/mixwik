@@ -32,7 +32,7 @@ export default function Home () {
         <div className='grid grid-cols-2 gap-5 m-10 md:grid-cols-6 md:m-20'>
           <ButtonGame />
         </div>
-        <Link href='/todos-los-jugadores' className='p-2 text-xl text-white transition-colors duration-500 rounded-md bg-aero hover:bg-pennBlue'>Buscar a todos los jugadores/teams</Link>
+        <Link href='/todos-los-jugadores' className='p-2 text-xl text-white transition-colors duration-500 border-2 border-solid rounded-md bg-pennBlue hover:bg-aero border-aero'>Buscar a todos los jugadores/teams</Link>
       </header>
       <section className={styles.cities}>
         <h2 className={styles.title}>Principales Ciudades</h2>
