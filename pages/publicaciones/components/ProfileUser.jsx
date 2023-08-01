@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { myLoader } from '../../../components/myLoader'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
-import { useUserFavorites } from '../application/useUserFavorites'
+import { useUserFavorites } from '../lib/application/useUserFavorites'
 
 const ProfileUser = ({ mixWikTeams, currentUser, idPublication, user }) => {
   const visitorUser = useGetOneData('users', user.uid)
