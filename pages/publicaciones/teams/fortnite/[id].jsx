@@ -36,10 +36,11 @@ import EditTitle from '../../../../components/EditPublication/EditTitle'
 import styles from '../Team.module.scss'
 
 // Images
-import Link from 'next/link'
 import PromotionMethods from '../../../../components/PromotionMethods'
 import { deletePublication } from '../../../../firebase/hooks/deleteMethod'
 import background from '../../../../public/bg/bg_gray.svg'
+import ProfileUser from '../../components/ProfileUser'
+import PageLoader from '../../../../components/Loaders/PageLoader'
 
 const Team = () => {
   const [edit, setEdit] = useState(false)
@@ -53,8 +54,8 @@ const Team = () => {
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(currentTeams.mixWikTeams)
 
-  if (currentTeams.length === 0) return <div>Loading...</div>
-  if (currentUser.length === 0) return <div>Loading...</div>
+  if (currentTeams.length === 0) return <PageLoader />
+  if (currentUser.length === 0) return <PageLoader />
 
   const handleUpdatePosition = () => {
     updatePublicationPosition('teams', id, currentPosition)
@@ -87,12 +88,12 @@ const Team = () => {
           <div className={styles.equip}>
             Team
           </div>
-          <div className={styles.profileUser} data-active={mixWikTeams}>
-            <Link target='_blanc' href={`/user/${currentUser.uid}`}>
-              <Image width={0} height={0} loader={myLoader} src={currentUser.profileImg} alt={`Imagen de perfil de ${currentUser.name}`} />
-              {currentUser.name}
-            </Link>
-          </div>
+          <ProfileUser
+            mixWikTeams={mixWikTeams}
+            currentUser={currentUser}
+            idPublication={id}
+            user={user}
+          />
           <div className={styles.imgBox}>
             <Carousel
               className={styles.carousel}

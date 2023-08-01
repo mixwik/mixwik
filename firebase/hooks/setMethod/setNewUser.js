@@ -14,7 +14,7 @@ export const setNewUser = async (value, geometry, user, profileImg) => {
     profileImg,
     ban: false,
     admonition: 0,
-    csgoPublications: 0,
+    cs2Publications: 0,
     fortnitePublications: 0,
     valorantPublications: 0,
     lolPublications: 0

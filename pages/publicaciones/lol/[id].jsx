@@ -37,9 +37,11 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import styles from '../Publications.module.scss'
 
 // Images
+import PageLoader from '../../../components/Loaders/PageLoader'
 import PromotionMethods from '../../../components/PromotionMethods'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
+import ProfileUser from '../components/ProfileUser'
 
 const User = () => {
   const [edit, setEdit] = useState(false)
@@ -53,8 +55,8 @@ const User = () => {
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(currentLol.promotion)
 
-  if (currentLol.length === 0) return <div>Loading...</div>
-  if (currentUser.length === 0) return <div>Loading...</div>
+  if (currentLol.length === 0) return <PageLoader />
+  if (currentUser.length === 0) return <PageLoader />
 
   const handleUpdatePosition = () => {
     updatePublicationPosition('lol', id, currentPosition)
@@ -82,7 +84,7 @@ const User = () => {
   return (
     <Layout>
       <div className={styles.user}>
-        <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className={styles.background} />
+        <Image width={0} height={0} loader={myLoader} src={background} alt='logo' className='absolute top-0 left-0 object-cover w-full h-full' />
         <section className={styles.userBox}>
           {
             mixWikTeams && (
@@ -91,12 +93,12 @@ const User = () => {
               </div>
             )
           }
-          <div className={styles.profileUser} data-active={mixWikTeams}>
-            <Link target='_blanc' href={`/user/${currentUser.uid}`}>
-              <Image width={0} height={0} loader={myLoader} src={currentUser.profileImg} alt={`Imagen de perfil de ${currentUser.name}`} />
-              {currentUser.name}
-            </Link>
-          </div>
+          <ProfileUser
+            mixWikTeams={mixWikTeams}
+            currentUser={currentUser}
+            idPublication={id}
+            user={user}
+          />
           <div className={styles.imgBox}>
             <Carousel
               className={styles.carousel}

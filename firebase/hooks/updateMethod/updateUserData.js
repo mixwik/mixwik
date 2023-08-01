@@ -23,7 +23,7 @@ export const updateUserNumberPublications = async (category, id, number) => {
   const userRef = doc(db, 'users', id)
   if (category === 'cs2') {
     await updateDoc(userRef, {
-      csgoPublications: increment(number)
+      cs2Publications: increment(number)
     }).then(() => {
       location.reload()
     })

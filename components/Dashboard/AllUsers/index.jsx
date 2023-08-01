@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import { useGetData } from '../../../firebase/hooks/getMethod/useGetData'
+import { useGetUsers } from '../../../application/useGetUsers'
 import { updateUserBan } from '../../../firebase/hooks/updateMethod/updateUserData'
 import styles from './Users.module.scss'
 
 const AllUsers = () => {
   const [search, setSearch] = useState('')
-  const users = useGetData('users')
+  const { users } = useGetUsers('users')
 
   const filterUsersSearch = search !== ''
     ? users.filter(user => user.name.toLowerCase().includes(search.toLowerCase()) || user.email.toLowerCase().includes(search.toLowerCase()))

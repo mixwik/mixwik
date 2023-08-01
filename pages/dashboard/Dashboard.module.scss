@@ -22,16 +22,16 @@
     transform: translateX(-100%);
     transition: transform 1s;
     z-index: 20;
-    border-right: 2px solid $pennBlue;
-
+    
     &[data-open=true] {
       transform: translateX(0);
     }
-
+    
     @media screen and (min-width: 768px) {
       width: 15vw;
       top: 10vh;
       transform: translateX(-15vw);
+      border-right: 2px solid $pennBlue;
     }
 
     ul {

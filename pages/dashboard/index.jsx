@@ -20,6 +20,7 @@ import Layout from '../../components/Layout'
 import NewUser from '../../components/NewUser'
 import { myLoader } from '../../components/myLoader'
 import BugsReports from '../../components/Dashboard/BugsReports'
+import PageLoader from '../../components/Loaders/PageLoader'
 
 // Images
 import { AddPublication, BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
@@ -62,7 +63,7 @@ export default function Dashboard () {
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
   const master1 = process.env.NEXT_PUBLIC_MASTER1
   const master2 = process.env.NEXT_PUBLIC_MASTER2
-  if (toggle === 'loading') return <div>Loading...</div>
+  if (toggle === 'loading') return <PageLoader />
   if (currentUser.length === 0) return <NewUser />
 
   return (
@@ -76,7 +77,7 @@ export default function Dashboard () {
         {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
         {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
-        {page === 'favorites' && <Favorites />}
+        {page === 'favorites' && <Favorites currentUser={currentUser} />}
         <nav data-open={isOpen} className={styles.nav}>
           <ul>
             <li

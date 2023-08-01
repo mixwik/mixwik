@@ -37,6 +37,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import styles from '../Publications.module.scss'
 
 // Images
+import PageLoader from '../../../components/Loaders/PageLoader'
 import PromotionMethods from '../../../components/PromotionMethods'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
@@ -54,8 +55,8 @@ const User = () => {
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(currentCsgo.promotion)
 
-  if (currentCsgo.length === 0) return <div>Loading...</div>
-  if (currentUser.length === 0) return <div>Loading...</div>
+  if (currentCsgo.length === 0) return <PageLoader />
+  if (currentUser.length === 0) return <PageLoader />
 
   const handleUpdatePosition = () => {
     updatePublicationPosition('cs2', id, currentPosition)
@@ -95,6 +96,7 @@ const User = () => {
           <ProfileUser
             mixWikTeams={mixWikTeams}
             currentUser={currentUser}
+            idPublication={id}
             user={user}
           />
           <div className={styles.imgBox}>

@@ -15,8 +15,8 @@ import logo from '../../public/logos/mixwik-logo.png'
 import { myLoader } from '../myLoader'
 
 // Log In
+import { useGetUsers } from '../../application/useGetUsers'
 import { useSession } from '../../firebase/auth/useSession'
-import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
 import Bugs from '../Bugs'
 import LogIn from '../LogIn'
 
@@ -31,7 +31,7 @@ const Nav = () => {
   const [transparent, setTransparent] = useState(false)
 
   const user = useSession()
-  const users = useGetData('users')
+  const { users } = useGetUsers()
 
   users.forEach(userb => {
     if (userb.ban) {

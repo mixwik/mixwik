@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react'
 import { setAddFavorites } from '../infrastructure/setAddFavorites'
 import { setRemoveFavorites } from '../infrastructure/setRemoveFavorites'
 
-export const useUserFavorites = ({ currentUser, visitorUser }) => {
+export const useUserFavorites = ({ idPublication, visitorUser }) => {
   const [errorFavorite, setErrorFavorite] = useState(false)
   const [like, setLike] = useState(false)
 
   useEffect(() => {
-    if (visitorUser.likes?.includes(currentUser.uid)) {
+    if (visitorUser.likes?.includes(idPublication)) {
       setLike(true)
     } else {
       setLike(false)
     }
-  }, [currentUser, visitorUser])
+  }, [idPublication, visitorUser])
 
   const handleFavorites = (id, data) => {
     if (like) {

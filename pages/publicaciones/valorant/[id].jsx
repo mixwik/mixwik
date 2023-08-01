@@ -3,12 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 // Edit components
-import EditLevel from '../../../components/EditPublication/Valorant/EditLevel'
-import EditPosition from '../../../components/EditPublication/Valorant/EditPosition'
 import EditDescription from '../../../components/EditPublication/EditDescription'
 import EditHours from '../../../components/EditPublication/EditHours'
 import { EditImages } from '../../../components/EditPublication/EditImages'
 import EditTypeOfGamer from '../../../components/EditPublication/EditTypeOfGamer'
+import EditLevel from '../../../components/EditPublication/Valorant/EditLevel'
+import EditPosition from '../../../components/EditPublication/Valorant/EditPosition'
 
 // Hooks
 import { useRouter } from 'next/router'
@@ -40,6 +40,8 @@ import styles from '../Publications.module.scss'
 import PromotionMethods from '../../../components/PromotionMethods'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
+import ProfileUser from '../components/ProfileUser'
+import PageLoader from '../../../components/Loaders/PageLoader'
 
 const User = () => {
   const [edit, setEdit] = useState(false)
@@ -53,8 +55,8 @@ const User = () => {
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(currentValorant.promotion)
 
-  if (currentValorant.length === 0) return <div>Loading...</div>
-  if (currentUser.length === 0) return <div>Loading...</div>
+  if (currentValorant.length === 0) return <PageLoader />
+  if (currentUser.length === 0) return <PageLoader />
 
   const handleUpdatePosition = () => {
     updatePublicationPosition('valorant', id, currentPosition)
@@ -91,12 +93,12 @@ const User = () => {
               </div>
             )
           }
-          <div className={styles.profileUser} data-active={mixWikTeams}>
-            <Link target='_blanc' href={`/user/${currentUser.uid}`}>
-              <Image width={0} height={0} loader={myLoader} src={currentUser.profileImg} alt={`Imagen de perfil de ${currentUser.name}`} />
-              {currentUser.name}
-            </Link>
-          </div>
+          <ProfileUser
+            mixWikTeams={mixWikTeams}
+            currentUser={currentUser}
+            idPublication={id}
+            user={user}
+          />
           <div className={styles.imgBox}>
             <Carousel
               className={styles.carousel}

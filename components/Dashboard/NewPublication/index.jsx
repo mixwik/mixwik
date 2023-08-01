@@ -19,15 +19,15 @@ const NewPublication = ({ user, mixWikTeams }) => {
   const handleCheck = (name) => {
     if (name === 'cs2') {
       if (!mixWikTeams) {
-        if (!user.csgoPublications) {
+        if (!user.cs2Publications) {
           setToggle(name)
-        } else if (user.CsgoPublication < 1) {
+        } else if (user.cs2Publications < 1) {
           setToggle(name)
         } else {
           setTeams('noMixWikTeams')
         }
       } else if (mixWikTeams) {
-        if (user.csgoPublications < 5) {
+        if (user.cs2Publications < 5) {
           setToggle(name)
         } else {
           setTeams('maxPublications')
