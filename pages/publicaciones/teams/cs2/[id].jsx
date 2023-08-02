@@ -90,7 +90,7 @@ const Team = () => {
           </div>
           <ProfileUser
             mixWikTeams={mixWikTeams}
-            currentUser={currentUser}
+            publicationUser={currentUser}
             idPublication={id}
             user={user}
           />
