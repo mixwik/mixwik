@@ -13,7 +13,7 @@ const FormPreferenceTeam = () => {
         onClick={() => handleOpen('preferenceTeam')}
         data-active={filter.preferenceTeam.length > 0}
       >
-        Preferencia team
+        Preferencia de team
       </h3>
       {
         isOpen === 'preferenceTeam' && (

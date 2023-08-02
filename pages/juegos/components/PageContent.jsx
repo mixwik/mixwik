@@ -9,7 +9,7 @@ import Map from '../../../components/Map'
 
 // Customs Hooks
 import { useGetData } from '../../../firebase/hooks/getMethod/useGetData'
-import { useUserCsgoFilters } from '../../../hooks/useUserCsgoFilters'
+import { useUserFortniteFilters } from '../../../hooks/useUserFortniteFilters'
 
 // Context
 import { useHandleOpenContext } from '../../../context'
@@ -30,8 +30,8 @@ const PageContent = ({ category, children, distance }) => {
   const user = users.find(res => res.uid === session.uid)
 
   // filter users list with different filters
-  const listUserCsgo = useUserCsgoFilters(user, csgo, distance)
-  const listUserTeams = useUserCsgoFilters(user, teams, distance)
+  const listUserCsgo = useUserFortniteFilters(user, csgo, distance)
+  const listUserTeams = useUserFortniteFilters(user, teams, distance)
   return (
     <div>
       <div className={styles.pageBox}>
