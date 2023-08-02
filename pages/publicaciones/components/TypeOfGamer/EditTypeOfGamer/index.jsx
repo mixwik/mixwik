@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { updatePublicationTypeOfGamer } from '../../../firebase/hooks/updateMethod/updateUserData'
+import { updatePublicationTypeOfGamer } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import styles from './EditTypeOfGamer.module.scss'
 
 const EditTypeOfGamer = ({ category, id, typeOfGamer, setEdit }) => {

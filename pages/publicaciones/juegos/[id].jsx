@@ -33,12 +33,12 @@ import ImagesCarousel from '../components/Carousel'
 import Description from '../components/Description'
 import Hours from '../components/Hours'
 import Level from '../components/Level'
+import Position from '../components/Position'
+import PreferenceTeam from '../components/PreferenceTeam'
 import ProfileUser from '../components/ProfileUser'
 import Social from '../components/Social'
 import Title from '../components/Title'
 import TypeOfGamer from '../components/TypeOfGamer'
-import Position from '../components/position'
-import PreferenceTeam from '../components/prefenteTeam'
 
 const User = () => {
   const router = useRouter()
