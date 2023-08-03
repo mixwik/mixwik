@@ -22,13 +22,14 @@ import { myLoader } from '../../../components/myLoader'
 
 // styles
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import styles from '../Publications.module.scss'
 
 // Images
 import PageLoader from '../../../components/Loaders/PageLoader'
 import PromotionMethods from '../../../components/PromotionMethods'
+import { COLLECTIONS } from '../../../domain/constants'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import background from '../../../public/bg/bg_gray.svg'
+import Age from '../components/Age'
 import ImagesCarousel from '../components/Carousel'
 import Description from '../components/Description'
 import Hours from '../components/Hours'
@@ -46,7 +47,7 @@ const User = () => {
   const user = useSession()
   const currentPosition = useCurrentPosition()
   const publication = useGetOnePublication(page, id)
-  const publicationUser = useGetOneData('users', publication.uid)
+  const publicationUser = useGetOneData(COLLECTIONS.users, publication.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, publicationUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(publicationUser.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(publication.promotion)
@@ -72,20 +73,23 @@ const User = () => {
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${publicationUser.name}?`)) {
-      deletePublication(page, id, publicationUser.id, page)
+      deletePublication(page, id, publicationUser.id, page === COLLECTIONS.teams ? publication.category : page)
       updateUserAdmonition(publicationUser.id, 1)
     }
   }
+  const isNewPosition = JSON.stringify(publication.geometry) !== JSON.stringify(currentPosition)
 
   return (
     <Layout>
-      <div className={styles.user}>
-        <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className={styles.background} />
-        <section className={styles.userBox}>
+      <div className='relative flex flex-col w-[100vw] items-center justify-center'>
+        <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className='absolute top-0 left-0 w-full h-full' />
+        <section className='w-[40vw] bg-white relative'>
           {
             mixWikTeams && (
-              <div className={styles.mixWikTeam}>
-                Usuario Teams
+              <div className={`text-xl font-bold text-center text-white bg-aero ${page === COLLECTIONS.teams && 'bg-orange text-black'}`}>
+                {
+                  page === 'teams' ? 'Equipo' : 'Jugador'
+                }
               </div>
             )
           }
@@ -146,14 +150,26 @@ const User = () => {
             publication={publication}
             limitedAdministrator={limitedAdministrator}
           />
+          <Age
+            id={id}
+            page={page}
+            publication={publication}
+            limitedAdministrator={limitedAdministrator}
+          />
           <Social
             publicationUser={publicationUser}
             mixWikTeams={mixWikTeams}
             limitedAdministrator={limitedAdministrator}
           />
-          <article className={styles.map}>
+          <article className='relative px-5'>
             {
-              limitedAdministrator && <button onClick={handleUpdatePosition}>Cambiar a posición actual</button>
+              (limitedAdministrator && isNewPosition) && (
+
+                <div className='flex flex-col items-center p-2 mb-5 bg-yellow-100'>
+                  <p className='font-bold text-center'>Hemos detectado que has cambiado de localización ¿Deseas cambiar la posición de la publicación a tu posición actual?</p>
+                  <button className='z-10 p-2 font-bold rounded-md right-8 top-3 bg-orange' onClick={handleUpdatePosition}>Cambiar a mi posición actual</button>
+                </div>
+              )
             }
             <UserMap user={publicationUser} publication={publication} />
           </article>
@@ -165,7 +181,7 @@ const User = () => {
         </section>
         {
           (master1 === user.uid || master2 === user.uid) && (
-            <button className={styles.masterDelete} onClick={handleDelete}>Eliminar</button>
+            <button className='' onClick={handleDelete}>Eliminar</button>
           )
         }
       </div>

@@ -7,12 +7,13 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { COLLECTIONS } from '../../domain/constants'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { CardLoader } from '../Loaders/CardLoader'
 import { myLoader } from '../myLoader'
 
 const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
-  const [loading, setLoadiang] = useState(true)
+  const [loading, setLoading] = useState(true)
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser?.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(csgo.promotion)
@@ -28,7 +29,7 @@ const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setLoadiang(false)
+      setLoading(false)
     }, 2000)
   }, [])
 
@@ -45,7 +46,7 @@ const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
       if (equips) {
         return (
           <div className={styles.equip}>
-            Team
+            Equipo
           </div>
         )
       } else if (promotions) {
@@ -57,7 +58,7 @@ const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
       } else {
         return (
           <div className={styles.teams}>
-            Usuario Teams
+            Jugador
           </div>
         )
       }
@@ -73,7 +74,7 @@ const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
   }
 
   return (
-    <Link target='_blank' href={equips ? `/publicaciones/teams/${link}/${csgo.id}` : `/publicaciones/juegos/${csgo.id}?page=${csgo.category}`} rel='noreferrer'>
+    <Link target='_blank' href={equips ? `/publicaciones/juegos/${csgo.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${csgo.id}?page=${csgo.category}`} rel='noreferrer'>
       <section
         className={styles.card}
         data-teams={mixWikTeams}

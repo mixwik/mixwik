@@ -5,17 +5,35 @@ import 'leaflet/dist/leaflet.css'
 import styles from './Map.module.scss'
 
 // Leaflet
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 
 // Components
 import L from 'leaflet'
+import { COLLECTIONS } from '../../domain/constants'
 
-const Map = ({ user, publication }) => {
-  const icon = L.divIcon({
-    className: styles.customIcon,
+const Map = ({ publication }) => {
+  const cs2Icon = L.divIcon({
+    className: styles.cs2Icon,
     iconSize: [100, 100],
     crossOrigin: true
   })
+  const lolIcon = L.divIcon({
+    className: styles.lolIcon,
+    iconSize: [100, 100],
+    crossOrigin: true
+  })
+  const fortniteIcon = L.divIcon({
+    className: styles.fortniteIcon,
+    iconSize: [100, 100],
+    crossOrigin: true
+  })
+  const valorantIcon = L.divIcon({
+    className: styles.valorantIcon,
+    iconSize: [100, 100],
+    crossOrigin: true
+  })
+
+  console.log(publication)
 
   return (
     <MapContainer
@@ -31,11 +49,10 @@ const Map = ({ user, publication }) => {
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      <Marker position={publication.geometry} icon={icon}>
-        <Popup>
-          {user.name}
-        </Popup>
-      </Marker>
+      {publication.category === COLLECTIONS.cs2 && <Marker position={publication.geometry} icon={cs2Icon} />}
+      {publication.category === COLLECTIONS.lol && <Marker position={publication.geometry} icon={lolIcon} />}
+      {publication.category === COLLECTIONS.valorant && <Marker position={publication.geometry} icon={valorantIcon} />}
+      {publication.category === COLLECTIONS.fortnite && <Marker position={publication.geometry} icon={fortniteIcon} />}
 
     </MapContainer>
 

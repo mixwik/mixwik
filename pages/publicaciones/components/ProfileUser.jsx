@@ -9,7 +9,7 @@ const ProfileUser = ({ mixWikTeams, publicationUser, idPublication, user }) => {
   const { handleFavorites, errorFavorite, like } = useUserFavorites({ idPublication, visitorUser })
 
   return (
-    <div className={`sticky top-0 md:top-[6vh] bg-transparent z-20 flex justify-between w-full md:w-[40vw] text-white bg-blue-300 ${mixWikTeams && 'md:pt-[1.8rem]'}`} target='_blanc'>
+    <div className='sticky top-0 md:top-[10vh] bg-transparent z-20 flex justify-between w-full md:w-[40vw] text-white bg-blue-300' target='_blanc'>
       <Link className='flex items-center w-full gap-1 font-semibold bg-pennBlue' href={`/user/${publicationUser.uid}`}>
         <Image width={0} height={0} className='w-16 h-16 p-2 rounded-full' loader={myLoader} src={publicationUser.profileImg} alt={`Imagen de perfil de ${publicationUser.name}`} />
         {publicationUser.name}

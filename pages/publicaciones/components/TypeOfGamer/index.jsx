@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import EditTypeOfGamer from '../../../../components/EditPublication/EditTypeOfGamer'
 import { EditIcon } from '../../../../components/Svg'
+import EditTypeOfGamer from './EditTypeOfGamer'
 import styles from './TypeOfGamer.module.scss'
 
 const TypeOfGamer = ({ id, page, publication, limitedAdministrator }) => {

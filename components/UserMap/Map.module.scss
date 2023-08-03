@@ -8,12 +8,24 @@
   z-index: 1;
 }
 
-.customIcon {
+.cs2Icon,
+.lolIcon,
+.fortniteIcon,
+.valorantIcon {
   background-image: url('../../public/logos/CS2.png');
   background-repeat: no-repeat;
   background-size: cover;
   opacity: .5;
   width: 3rem;
   height: 3rem;
+}
 
+.lolIcon {
+  background-image: url('../../public/logos/LOL3.png');
+}
+.fortniteIcon {
+  background-image: url('../../public/logos/fortnite.png');
+}
+.valorantIcon {
+  background-image: url('../../public/logos/VALORANT.png');
 }

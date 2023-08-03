@@ -23,7 +23,7 @@ const EditCs2Position = ({ category, id, position, setEdit }) => {
     >
       {({ values, errors }) => (
         <Form className={styles.editPosition}>
-          <h2>Posiciónes:</h2>
+          <h2>Posiciones:</h2>
           <div className={styles.position}>
             <Field
               type='checkbox'

@@ -1,12 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { EditIcon } from '../../../../components/Svg'
+import { COLLECTIONS } from '../../../../domain/constants'
 import EditPreferenceTeam from './EditPreferenceTeam'
 import styles from './PreferenceTeam.module.scss'
 
 const PreferenceTeam = ({ id, page, publication, limitedAdministrator }) => {
   const [edit, setEdit] = useState(false)
-  if (page !== 'fortnite') return null
+  const [preferenceTeam, setPreferenceTeam] = useState()
 
+  useEffect(() => {
+    if (typeof publication.preferenceTeam === 'string') {
+      setPreferenceTeam([publication.preferenceTeam])
+    } else {
+      setPreferenceTeam(publication.preferenceTeam)
+    }
+  }, [publication.preferenceTeam])
+
+  if ((page === COLLECTIONS.teams && publication.category !== COLLECTIONS.fortnite) && page !== COLLECTIONS.fortnite) return null
   return (
     <article className={styles.preferenceTeam}>
       {
@@ -20,9 +30,11 @@ const PreferenceTeam = ({ id, page, publication, limitedAdministrator }) => {
                   Preferencia de equipo:
                   {limitedAdministrator && <button className={styles.editButtonImages} onClick={() => setEdit('preferenceTeam')}><EditIcon /></button>}
                 </h2>
-                <div className={styles.levelBox}>
-                  {publication.preferenceTeam}
-                </div>
+                <ul className={styles.levelBox}>
+                  {preferenceTeam?.map((preferenceTeam, index) => (
+                    <li key={index}>{preferenceTeam}</li>
+                  ))}
+                </ul>
               </>
               )
         }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { EditIcon } from '../../../../components/Svg'
+import { COLLECTIONS } from '../../../../domain/constants'
 import EditCs2Position from './EditPosition/EditCs2Position'
 import EditFortnitePosition from './EditPosition/EditFortnitePosition'
 import EditLolPosition from './EditPosition/EditLolPosition'
@@ -14,10 +15,10 @@ const Position = ({ id, page, publication, limitedAdministrator }) => {
               edit === 'position'
                 ? (
                   <>
-                    {page === 'cs2' && <EditCs2Position category={page} id={id} position={publication.position} setEdit={setEdit} />}
-                    {page === 'fortnite' && <EditFortnitePosition category={page} id={id} position={publication.position} setEdit={setEdit} />}
-                    {page === 'lol' && <EditLolPosition category={page} id={id} position={publication.position} setEdit={setEdit} />}
-                    {page === 'valorant' && <EditValorantPosition category={page} id={id} position={publication.position} setEdit={setEdit} />}
+                    {(page === COLLECTIONS.cs2 || (page === COLLECTIONS.teams && publication.category === COLLECTIONS.cs2)) && <EditCs2Position category={page} id={id} position={publication.position} setEdit={setEdit} />}
+                    {(page === COLLECTIONS.fortnite || (page === COLLECTIONS.teams && publication.category === COLLECTIONS.fortnite)) && <EditFortnitePosition category={page} id={id} position={publication.position} setEdit={setEdit} />}
+                    {(page === COLLECTIONS.lol || (page === COLLECTIONS.teams && publication.category === COLLECTIONS.lol)) && <EditLolPosition category={page} id={id} position={publication.position} setEdit={setEdit} />}
+                    {(page === COLLECTIONS.valorant || (page === COLLECTIONS.teams && publication.category === COLLECTIONS.valorant)) && <EditValorantPosition category={page} id={id} position={publication.position} setEdit={setEdit} />}
                   </>
                   )
                 : (

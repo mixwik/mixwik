@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { updatePublicationAge } from '../../../firebase/hooks/updateMethod/updateUserData'
+import { updatePublicationAge } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import styles from './EditAge.module.scss'
 
 const EditAge = ({ category, id, age, setEdit }) => {
@@ -22,7 +22,7 @@ const EditAge = ({ category, id, age, setEdit }) => {
     >
       {({ values, errors }) => (
         <Form className={styles.editAge}>
-          <h2>Edad:</h2>
+          <h2>Edad mínima:</h2>
           <div className={styles.age}>
             <Field
               type='range'

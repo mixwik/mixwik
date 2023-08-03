@@ -17,7 +17,8 @@
 
 .csgoIcon,
 .lolIcon,
-.fortniteIcon {
+.fortniteIcon,
+.valorantIcon {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
@@ -31,6 +32,9 @@
 }
 .fortniteIcon {
   background-image: url('../../public/logos/fortnite.png');
+}
+.valorantIcon {
+  background-image: url('../../public/logos/VALORANT.png');
 }
 
 .cardMap {

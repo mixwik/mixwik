@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { COLLECTIONS } from '../../../../domain/constants'
 import { deletePublication } from '../../../../firebase/hooks/deleteMethod'
 import { DeleteIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
@@ -12,7 +13,7 @@ const CardPublications = ({ publication, user, category, equip, link, promotion,
 
   return (
     <div className={styles.CardPublications} data-active={equip} data-promotion={promotion}>
-      <Link className={styles.link} target='_blanck' href={equip ? `/publicaciones/teams/${link}/${publication.id}` : `/publicaciones/${link}/${publication.id}`}>
+      <Link className={styles.link} target='_blank' href={equip ? `/publicaciones/juegos/${publication.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${publication.id}?page=${publication.category}`} rel='noreferrer'>
         <Image loader={myLoader} width={0} height={0} src={publication.img.url} alt={user.name} />
         <div className={styles.content}>
           <h2 className={styles.subtitle}>{publication.title.slice(0, 8)}...</h2>

@@ -1,13 +1,6 @@
 @import '../../../../styles/colors.scss';
 
-.position,
-.description,
-.level,
-.preferenceTeam,
-.typeOfGamer,
-.hours,
-.social,
-.map {
+.preferenceTeam {
   display: flex;
   flex-direction: column;
   gap: .5rem;
@@ -42,16 +35,5 @@
       padding: .3rem;
       border-radius: .3rem;
     }
-  }
-}
-
-.level, 
-.preferenceTeam {
-  .levelBox {
-    text-align: center;
-    background-color: $aero;
-    color: $white;
-    padding: 0.3rem 1rem;
-    border-radius: .3rem;
   }
 }
