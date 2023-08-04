@@ -16,7 +16,7 @@ const PreferenceTeam = ({ id, page, publication, limitedAdministrator }) => {
     }
   }, [publication.preferenceTeam])
 
-  if ((page === COLLECTIONS.teams && publication.category !== COLLECTIONS.fortnite) && page !== COLLECTIONS.fortnite) return null
+  if ((page === COLLECTIONS.teams && publication.category !== COLLECTIONS.fortnite) || page !== COLLECTIONS.fortnite) return null
   return (
     <article className={styles.preferenceTeam}>
       {
