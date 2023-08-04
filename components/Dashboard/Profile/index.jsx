@@ -100,7 +100,7 @@ const Profile = ({ user, mixWikTeams }) => {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              updateUserData(user.id, values)
+              updateUserData(user.id, values, imgURL || user.image)
               updateDataUser(values.name, imgURL || user.image)
               if (!error) {
                 setTimeout(() => {

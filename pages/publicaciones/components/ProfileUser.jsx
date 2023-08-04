@@ -4,10 +4,10 @@ import { myLoader } from '../../../components/myLoader'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useUserFavorites } from './application/useUserFavorites'
 
-const ProfileUser = ({ mixWikTeams, publicationUser, idPublication, user }) => {
+const ProfileUser = ({ publicationUser, idPublication, user }) => {
   const visitorUser = useGetOneData('users', user.uid)
   const { handleFavorites, errorFavorite, like } = useUserFavorites({ idPublication, visitorUser })
-
+  console.log(publicationUser.profileImg)
   return (
     <div className='sticky top-0 md:top-[10vh] bg-transparent z-20 flex justify-between w-full md:w-[40vw] text-white bg-blue-300' target='_blanc'>
       <Link className='flex items-center w-full gap-1 font-semibold bg-pennBlue' href={`/user/${publicationUser.uid}`}>

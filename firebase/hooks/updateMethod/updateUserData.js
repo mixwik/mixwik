@@ -1,13 +1,14 @@
 import { doc, increment, updateDoc } from 'firebase/firestore'
 import { db } from '../../initialize.jsx'
 
-export const updateUserData = async (id, data) => {
+export const updateUserData = async (id, data, img) => {
   const userRef = doc(db, 'users', id)
   await updateDoc(userRef, {
     name: data.name,
     age: data.age,
     gender: data.gender,
     description: data.description,
+    profileImg: img,
     social: {
       twitter: data.twitter,
       discord: data.discord,
