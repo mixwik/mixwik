@@ -83,7 +83,7 @@ const User = () => {
     <Layout>
       <div className='relative flex flex-col w-[100vw] items-center justify-center'>
         <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className='absolute top-0 left-0 w-full h-full' />
-        <section className='md:w-[40vw] w-full bg-white relative'>
+        <section className='md:w-[40vw] w-full h-full bg-white relative'>
           {
             mixWikTeams && (
               <div className={`text-xl font-bold text-center text-white bg-aero ${page === COLLECTIONS.teams && 'bg-orange text-black'}`}>
@@ -161,7 +161,7 @@ const User = () => {
             mixWikTeams={mixWikTeams}
             limitedAdministrator={limitedAdministrator}
           />
-          <article className='relative px-5'>
+          <article className='relative px-5 pb-5'>
             {
               (limitedAdministrator && isNewPosition) && (
 
