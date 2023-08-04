@@ -77,7 +77,7 @@ const User = () => {
       updateUserAdmonition(publicationUser.id, 1)
     }
   }
-  const isNewPosition = JSON.stringify(publication.geometry) !== JSON.stringify(currentPosition)
+  const isNewPosition = JSON.stringify(publication.geometry) === JSON.stringify(currentPosition)
 
   return (
     <Layout>
