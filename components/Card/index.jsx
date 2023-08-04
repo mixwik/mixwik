@@ -12,7 +12,7 @@ import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { CardLoader } from '../Loaders/CardLoader'
 import { myLoader } from '../myLoader'
 
-const Card = ({ user, csgo, basic, teams, equips, promotions, link }) => {
+const Card = ({ user, csgo, basic, teams, equips, promotions }) => {
   const [loading, setLoading] = useState(true)
   const csgoUser = user.find(find => find.uid === csgo.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser?.mixWikTeams)
