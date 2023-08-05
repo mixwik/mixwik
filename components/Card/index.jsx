@@ -74,7 +74,7 @@ const Card = ({ user, csgo, basic, teams, equips, promotions }) => {
   }
 
   return (
-    <Link target='_blank' href={equips ? `/publicaciones/juegos/${csgo.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${csgo.id}?page=${csgo.category}`} rel='noreferrer'>
+    <Link href={equips ? `/publicaciones/juegos/${csgo.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${csgo.id}?page=${csgo.category}`}>
       <section
         className={styles.card}
         data-teams={mixWikTeams}
