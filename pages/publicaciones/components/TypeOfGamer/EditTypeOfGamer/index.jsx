@@ -24,24 +24,26 @@ const EditTypeOfGamer = ({ category, id, typeOfGamer, setEdit }) => {
         <Form className={styles.editTypeOfGamer}>
           <div className={styles.typeOfGamer}>
             <h2>Tipo de jugador:</h2>
-            <Field
-              type='checkbox'
-              name='typeOfGamer'
-              value='Competitivo'
-              id='competitivo'
-            />
-            <label for='competitivo'>
-              Competitivo
-            </label>
-            <Field
-              type='checkbox'
-              name='typeOfGamer'
-              value='Casual'
-              id='casual'
-            />
-            <label for='casual'>
-              Casual
-            </label>
+            <div className='flex gap-4'>
+              <Field
+                type='checkbox'
+                name='typeOfGamer'
+                value='Competitivo'
+                id='competitivo'
+              />
+              <label for='competitivo'>
+                Competitivo
+              </label>
+              <Field
+                type='checkbox'
+                name='typeOfGamer'
+                value='Casual'
+                id='casual'
+              />
+              <label for='casual'>
+                Casual
+              </label>
+            </div>
           </div>
           <ErrorMessage name='typeOfGamer' component='span' />
           <div className={styles.buttons}>

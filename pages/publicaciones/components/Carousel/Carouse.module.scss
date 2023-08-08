@@ -5,7 +5,7 @@
     position: relative;
 
     @media screen and (min-width: 768px) {
-      min-height: 35rem;
+      min-height: 20rem;
     }
 
     .carousel {
@@ -15,7 +15,9 @@
       padding: 1rem 1rem 0 1rem;
 
       @media screen and (min-width: 768px) {
-        height: 35rem;
+        padding: 0;
+        height: 20rem;
+        border-radius: 0;
       }
 
       img {
@@ -24,7 +26,8 @@
         border-radius: 1rem;
 
         @media screen and (min-width: 768px) {
-          height: 35rem;
+          height: 20rem;
+          border-radius: 0;
         }
       }
     }

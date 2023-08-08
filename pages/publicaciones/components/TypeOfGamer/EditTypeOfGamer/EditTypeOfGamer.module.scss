@@ -10,7 +10,8 @@
 
     .typeOfGamer {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
+        flex-direction: column;
         gap: .5rem;
         width: 100%;
         h2 {
@@ -23,15 +24,12 @@
             text-align: center;
             font-weight: bold;
             border-radius: .3rem;
-            width: 30%;
+            width: 50%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            @media screen and (min-width: 768px) {
-                width: 20%;
-            }
         }
 
         input {

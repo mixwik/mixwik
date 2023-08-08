@@ -1,5 +1,4 @@
 // Next Components
-import Image from 'next/image'
 
 // Edit components
 
@@ -16,7 +15,6 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 // Components
 import Layout from '../../../components/Layout'
 import UserMap from '../../../components/UserMap'
-import { myLoader } from '../../../components/myLoader'
 
 // Icons
 
@@ -28,7 +26,6 @@ import PageLoader from '../../../components/Loaders/PageLoader'
 import PromotionMethods from '../../../components/PromotionMethods'
 import { COLLECTIONS } from '../../../domain/constants'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
-import background from '../../../public/bg/bg_gray.svg'
 import Age from '../components/Age'
 import ImagesCarousel from '../components/Carousel'
 import Description from '../components/Description'
@@ -55,7 +52,8 @@ const User = () => {
   if (publication.length === 0) return <PageLoader />
   if (publicationUser.length === 0) return <PageLoader />
 
-  const handleUpdatePosition = () => {
+  const handleUpdatePosition = (e) => {
+    e.preventDefault()
     updatePublicationPosition(page, id, currentPosition)
   }
 
@@ -77,14 +75,15 @@ const User = () => {
       updateUserAdmonition(publicationUser.id, 1)
     }
   }
-  const isNewPosition = JSON.stringify(publication.geometry) === JSON.stringify(currentPosition)
+  const isNewPosition = JSON.stringify(publication.geometry) !== JSON.stringify(currentPosition)
 
   return (
     <Layout>
-      <div className='relative flex flex-col w-[100vw] items-center justify-center'>
-        <Image width={0} height={0} loader={myLoader} src={background} alt='Fondo' className='absolute top-0 left-0 w-full h-full' />
-        <section className='md:w-[40vw] w-full h-full bg-white relative'>
-          {
+      <div className='relative flex flex-col w-[100vw] items-center justify-center md:h-[90vh]'>
+        <section className='relative w-full h-full bg-white md:flex'>
+          <div className='md:w-[40vw]'>
+
+            {
             mixWikTeams && (
               <div className={`text-xl font-bold text-center text-white bg-aero ${page === COLLECTIONS.teams && 'bg-orange text-black'}`}>
                 {
@@ -93,76 +92,78 @@ const User = () => {
               </div>
             )
           }
-          <ProfileUser
-            mixWikTeams={mixWikTeams}
-            publicationUser={publicationUser}
-            idPublication={id}
-            user={user}
-          />
-          <ImagesCarousel
-            images={images}
-            limitedAdministrator={limitedAdministrator}
-            publication={publication}
-            publicationUser={publicationUser}
-            mixWikTeams={mixWikTeams}
-            id={id}
-            page={page}
-          />
-          <Title
-            id={id}
-            page={page}
-            publication={publication}
-            limitedAdministrator={limitedAdministrator}
-          />
-          <Description
-            id={id}
-            page={page}
-            limitedAdministrator={limitedAdministrator}
-            publication={publication}
-          />
-          <TypeOfGamer
-            id={id}
-            page={page}
-            publication={publication}
-            limitedAdministrator={limitedAdministrator}
-          />
-          <Level
-            id={id}
-            page={page}
-            publication={publication}
-            limitedAdministrator={limitedAdministrator}
-          />
-          <Position
-            id={id}
-            page={page}
-            publication={publication}
-            limitedAdministrator={limitedAdministrator}
-          />
-          <PreferenceTeam
-            id={id}
-            page={page}
-            publication={publication}
-            limitedAdministrator={limitedAdministrator}
-          />
-          <Hours
-            id={id}
-            page={page}
-            publication={publication}
-            limitedAdministrator={limitedAdministrator}
-          />
-          <Age
-            id={id}
-            page={page}
-            publication={publication}
-            limitedAdministrator={limitedAdministrator}
-          />
-          <Social
-            publicationUser={publicationUser}
-            mixWikTeams={mixWikTeams}
-            limitedAdministrator={limitedAdministrator}
-          />
-          <article className='relative px-5 pb-5'>
-            {
+            <ProfileUser
+              mixWikTeams={mixWikTeams}
+              publicationUser={publicationUser}
+              idPublication={id}
+              user={user}
+            />
+            <ImagesCarousel
+              images={images}
+              limitedAdministrator={limitedAdministrator}
+              publication={publication}
+              publicationUser={publicationUser}
+              mixWikTeams={mixWikTeams}
+              id={id}
+              page={page}
+            />
+            <Title
+              id={id}
+              page={page}
+              publication={publication}
+              limitedAdministrator={limitedAdministrator}
+            />
+            <Description
+              id={id}
+              page={page}
+              limitedAdministrator={limitedAdministrator}
+              publication={publication}
+            />
+          </div>
+          <div className='w-full overflow-y-scroll md:px-10'>
+            <TypeOfGamer
+              id={id}
+              page={page}
+              publication={publication}
+              limitedAdministrator={limitedAdministrator}
+            />
+            <Level
+              id={id}
+              page={page}
+              publication={publication}
+              limitedAdministrator={limitedAdministrator}
+            />
+            <Position
+              id={id}
+              page={page}
+              publication={publication}
+              limitedAdministrator={limitedAdministrator}
+            />
+            <PreferenceTeam
+              id={id}
+              page={page}
+              publication={publication}
+              limitedAdministrator={limitedAdministrator}
+            />
+            <Hours
+              id={id}
+              page={page}
+              publication={publication}
+              limitedAdministrator={limitedAdministrator}
+            />
+            <Age
+              id={id}
+              page={page}
+              publication={publication}
+              limitedAdministrator={limitedAdministrator}
+            />
+            <Social
+              publicationUser={publicationUser}
+              mixWikTeams={mixWikTeams}
+              limitedAdministrator={limitedAdministrator}
+            />
+            <article className='relative px-5 pb-5'>
+              {
               (limitedAdministrator && isNewPosition) && (
 
                 <div className='flex flex-col items-center p-2 mb-5 bg-yellow-100'>
@@ -171,8 +172,9 @@ const User = () => {
                 </div>
               )
             }
-            <UserMap user={publicationUser} publication={publication} />
-          </article>
+              <UserMap user={publicationUser} publication={publication} />
+            </article>
+          </div>
           <PromotionMethods
             limitedAdministrator={limitedAdministrator}
             promotion={promotion}
@@ -181,10 +183,16 @@ const User = () => {
         </section>
         {
           (master1 === user.uid || master2 === user.uid) && (
-            <button className='' onClick={handleDelete}>Eliminar</button>
+            <button className='fixed right-0 z-20 p-5 font-bold text-white md:bottom-10 bottom-28 bg-pennBlue' onClick={handleDelete}>Eliminar</button>
           )
         }
       </div>
+      <button onClick={() => router.back()} className='fixed top-[48vh] left-5 bg-aero text-white w-14 h-14 rounded-full hidden md:flex flex-col items-center justify-center font-bold text-sm'>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-6 h-6'>
+          <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75' />
+        </svg>
+        Volver
+      </button>
     </Layout>
   )
 }

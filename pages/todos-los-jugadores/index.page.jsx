@@ -51,7 +51,6 @@ const AllGames = () => {
   // filter users list with different filters
   const listUserAllGames = useUserCsgoFilters(user, allGames, distance)
   const listUserTeams = useUserCsgoFilters(user, allTeams, distance)
-
   return (
     <Layout>
       <div className={styles.pageBox}>

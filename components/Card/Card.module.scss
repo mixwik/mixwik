@@ -3,7 +3,7 @@
 .card {
   position: relative;
   justify-self: center;
-  width: 48vw;
+  width: 10rem;
   color: $black;
   border-radius: .5rem;
   background-color: $white;
@@ -22,14 +22,6 @@
     box-shadow: 0px 0px 5px $gradient;
   }
   
-  @media screen and (min-width: 768px) {
-    width: 16vw;
-  }
-
-  @media screen and (min-width: 1100px) {
-    width: 12vw;
-  }
-
   .teams, .equip, .promotion {
     position: absolute;
     top: 0;

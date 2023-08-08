@@ -9,10 +9,11 @@ const PromotionMethods = ({ promotion, limitedAdministrator, currentUser }) => {
       {
             (limitedAdministrator && !promotion) && (
               <button onClick={() => setOpen(!open)} className={styles.promotionButton}>
-                {
-                open ? 'Cancelar' : 'Promocionar Publicación'
-              }
-
+                <div className='bg-orange'>
+                  {
+                  open ? 'Cancelar' : 'Promocionar Publicación'
+                  }
+                </div>
               </button>
             )
           }

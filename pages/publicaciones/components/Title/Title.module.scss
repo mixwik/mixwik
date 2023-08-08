@@ -5,10 +5,12 @@
     text-align: left;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 2rem;
+    padding: 2rem 1rem;
     display: flex;
     gap: 1rem;
-
+    @media screen and (min-width: 768px) {
+      padding: 1rem;  
+    }
     h1 {
       display: flex;
       gap: .5rem;

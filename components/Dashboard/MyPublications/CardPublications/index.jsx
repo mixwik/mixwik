@@ -13,7 +13,7 @@ const CardPublications = ({ publication, user, category, equip, link, promotion,
 
   return (
     <div className={styles.CardPublications} data-active={equip} data-promotion={promotion}>
-      <Link className={styles.link} target='_blank' href={equip ? `/publicaciones/juegos/${publication.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${publication.id}?page=${publication.category}`} rel='noreferrer'>
+      <Link className={styles.link} href={equip ? `/publicaciones/juegos/${publication.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${publication.id}?page=${publication.category}`}>
         <Image loader={myLoader} width={0} height={0} src={publication.img.url} alt={user.name} />
         <div className={styles.content}>
           <h2 className={styles.subtitle}>{publication.title.slice(0, 8)}...</h2>
