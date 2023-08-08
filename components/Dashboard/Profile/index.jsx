@@ -59,6 +59,7 @@ const Profile = ({ user, mixWikTeams }) => {
     twitch: /^https?:\/\/(www\.)?twitch\.tv\/[a-zA-Z0-9_]+$/,
     youtube: /^https?:\/\/(www\.)?youtube\.com\/[a-zA-Z0-9_]+$/
   }
+  console.log(user)
 
   return (
     <section className={styles.profile}>
@@ -100,8 +101,8 @@ const Profile = ({ user, mixWikTeams }) => {
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              updateUserData(user.id, values, imgURL || user.image)
-              updateDataUser(values.name, imgURL || user.image)
+              updateUserData(user.id, values, imgURL || user.profileImg)
+              updateDataUser(values.name, imgURL || user.profileImg)
               if (!error) {
                 setTimeout(() => {
                   setSubmitting(false)
@@ -113,9 +114,9 @@ const Profile = ({ user, mixWikTeams }) => {
             {({ isSubmitting, values }) => (
               <Form>
                 <div className={styles.image}>
-                  <spna className={styles.title}>
+                  <span className={styles.title}>
                     Cambiar foto:
-                  </spna>
+                  </span>
                   {
                     error && <div>Ha ocurrido un error</div>
                   }

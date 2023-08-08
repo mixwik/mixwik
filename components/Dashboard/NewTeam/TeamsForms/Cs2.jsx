@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { COLLECTIONS } from '../../../../domain/constants'
 import { setTeam } from '../../../../firebase/hooks/setMethod/setTeam'
-import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
+import { updateDiscord, updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
@@ -88,7 +88,8 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
     description: '',
     uid: '',
     geometry: [],
-    age: 16
+    age: 16,
+    discord: ''
   }
   return (
     <section className={styles.formBox} data-active={toggle === COLLECTIONS.cs2}>
@@ -100,12 +101,13 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTeam('cs2', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+          setTeam(COLLECTIONS.cs2, values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
           updateUserNumberPublications(COLLECTIONS.cs2, currentUser.id, 1)
+          updateDiscord(currentUser.id, values.discord)
           setTimeout(() => {
             setSubmitting(false)
             router.push('/dashboard?page=myPublications')
-          }, 500)
+          }, 1000)
         }}
       >
         {({ isSubmitting, values }) => (
@@ -128,6 +130,10 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
                 <div>
                   {values.description.length > 0 ? values.description.length : 0}/350
                 </div>
+              </label>
+              <label className={styles.socialPublication}>
+                Añade tu discord
+                <Field className={styles.social} type='text' name='discord' placeholder='Discord...' />
               </label>
             </div>
             <div className={styles.position}>

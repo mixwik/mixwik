@@ -1,8 +1,9 @@
 import { doc, increment, updateDoc } from 'firebase/firestore'
+import { COLLECTIONS } from '../../../domain/constants.js'
 import { db } from '../../initialize.jsx'
 
 export const updateUserData = async (id, data, img) => {
-  const userRef = doc(db, 'users', id)
+  const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     name: data.name,
     age: data.age,
@@ -20,27 +21,36 @@ export const updateUserData = async (id, data, img) => {
   })
 }
 
+export const updateDiscord = async (id, discord) => {
+  const userRef = doc(db, COLLECTIONS.users, id)
+  await updateDoc(userRef, {
+    social: {
+      discord
+    }
+  })
+}
+
 export const updateUserNumberPublications = async (category, id, number) => {
-  const userRef = doc(db, 'users', id)
-  if (category === 'cs2') {
+  const userRef = doc(db, COLLECTIONS.users, id)
+  if (category === COLLECTIONS.cs2) {
     await updateDoc(userRef, {
       cs2Publications: increment(number)
     }).then(() => {
       location.reload()
     })
-  } else if (category === 'fortnite') {
+  } else if (category === COLLECTIONS.fortnite) {
     await updateDoc(userRef, {
       fortnitePublications: increment(number)
     }).then(() => {
       location.reload()
     })
-  } else if (category === 'lol') {
+  } else if (category === COLLECTIONS.lol) {
     await updateDoc(userRef, {
       lolPublications: increment(number)
     }).then(() => {
       location.reload()
     })
-  } else if (category === 'valorant') {
+  } else if (category === COLLECTIONS.valorant) {
     await updateDoc(userRef, {
       valorantPublications: increment(number)
     }).then(() => {
@@ -50,7 +60,7 @@ export const updateUserNumberPublications = async (category, id, number) => {
 }
 
 export const updateUserBan = async (id, bool) => {
-  const userRef = doc(db, 'users', id)
+  const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     ban: bool
   }).then(() => {
@@ -58,7 +68,7 @@ export const updateUserBan = async (id, bool) => {
   })
 }
 export const updateUserAdmonition = async (id, number) => {
-  const userRef = doc(db, 'users', id)
+  const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     admonition: increment(number)
   }).then(() => {
@@ -66,7 +76,7 @@ export const updateUserAdmonition = async (id, number) => {
   })
 }
 export const updateBugsSolution = async (id, bool) => {
-  const userRef = doc(db, 'bugs', id)
+  const userRef = doc(db, COLLECTIONS.bugs, id)
   await updateDoc(userRef, {
     resolved: bool
   }).then(() => {
@@ -75,7 +85,7 @@ export const updateBugsSolution = async (id, bool) => {
 }
 
 export const updateUserMixWikTeams = async (payID, id, router) => {
-  const userRef = doc(db, 'users', id)
+  const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     mixWikTeams: payID
   }).then(
@@ -84,21 +94,21 @@ export const updateUserMixWikTeams = async (payID, id, router) => {
 }
 
 export const updateUserCopper = async (payID, id) => {
-  const userRef = doc(db, 'users', id)
+  const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     cobre: payID
   })
 }
 
 export const updateUserSilver = async (payID, id) => {
-  const userRef = doc(db, 'users', id)
+  const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     plata: payID
   })
 }
 
 export const updateUserGold = async (payID, id) => {
-  const userRef = doc(db, 'users', id)
+  const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     oro: payID
   })

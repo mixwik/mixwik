@@ -1,9 +1,10 @@
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../initialize'
+import { COLLECTIONS } from '../../../domain/constants'
 
 export const setTeam = async (category, value, geometry, userData, img, name, img2, name2, img3, name3, img4, name4, img5, name5, img6, name6, img7, name7) => {
   // Add a new document with a generated id.
-  await addDoc(collection(db, 'teams'), {
+  await addDoc(collection(db, COLLECTIONS.teams), {
     category,
     position: value.position,
     level: value.level,

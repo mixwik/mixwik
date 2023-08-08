@@ -2,8 +2,9 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { COLLECTIONS } from '../../../../domain/constants'
 import { setTeam } from '../../../../firebase/hooks/setMethod/setTeam'
-import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
+import { updateDiscord, updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
@@ -87,10 +88,11 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
     description: '',
     uid: '',
     geometry: [],
-    age: 16
+    age: 16,
+    discord: ''
   }
   return (
-    <section className={styles.formBox} data-active={toggle === 'valorant'}>
+    <section className={styles.formBox} data-active={toggle === COLLECTIONS.valorant}>
       <h2 className={styles.titleForm}>Valorant</h2>
       <Formik
         initialValues={initialValues}
@@ -99,8 +101,9 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTeam('valorant', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
-          updateUserNumberPublications('valorant', currentUser.id, 1)
+          setTeam(COLLECTIONS.valorant, values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+          updateUserNumberPublications(COLLECTIONS.valorant, currentUser.id, 1)
+          updateDiscord(currentUser.id, values.discord)
           setTimeout(() => {
             setSubmitting(false)
             router.push('/dashboard?page=myPublications')
@@ -127,6 +130,10 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
                 <div>
                   {values.description.length > 0 ? values.description.length : 0}/350
                 </div>
+              </label>
+              <label className={styles.socialPublication}>
+                Añade tu discord
+                <Field className={styles.social} type='text' name='discord' placeholder='Discord...' />
               </label>
             </div>
             <div className={styles.position}>
@@ -432,6 +439,7 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
                       values.level.length === 0 ||
                       values.position.length === 0 ||
                       values.typeOfGamer.length === 0 ||
+                      values.discord.length === 0 ||
                       !progress ||
                       isSubmitting
                     }

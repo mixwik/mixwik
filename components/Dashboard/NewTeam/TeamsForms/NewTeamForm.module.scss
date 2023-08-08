@@ -60,7 +60,9 @@
             height: 100%;
             width: 100%;
             scroll-snap-align: center;
-
+            .socialPublication {
+                margin-top: 2rem;
+            }
             label {
                 display: flex;
                 flex-direction: column;
@@ -75,9 +77,13 @@
                 .description {
                     border-radius: 0 0 .5rem .5rem;
                 }
-
+                .social {
+                    border-radius: .5rem;
+                }
+            
                 .title,
-                .description {
+                .description,
+                .social {
                     border: 1px solid $aero;
                     resize: none;
                     width: 90%;
