@@ -1,58 +1,25 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useGetUsers } from '../../application/useGetUsers'
 import Card from '../../components/Card'
 import FilterCityGames from '../../components/Filters/CityGames'
 import Layout from '../../components/Layout'
 import Map from '../../components/Map'
-import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
-import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
+import { useAllGames } from '../../hooks/useAllGames'
+import { useAllTeams } from '../../hooks/useAllTeams'
 import { useCityFilterDistance } from '../../hooks/useCityFilterDistance'
 import styles from '../../styles/Pages.module.scss'
+import { useLocation } from './hooks/useLocation'
 
 const City = () => {
-  const [city, setCity] = useState({ geometry: [] })
-  const [allGames, setAllGames] = useState([])
-  const [allTeams, setAllTeams] = useState([])
   const router = useRouter()
   const { name } = router.query
-  const users = useGetData('users')
-  const csgo = useGetData('cs2')
-  const lol = useGetData('lol')
-  const fortnite = useGetData('fortnite')
-  const valorant = useGetData('valorant')
-  const teamsCsgo = useGetTeams('teams', 'cs2')
-  const teamsLol = useGetTeams('teams', 'lol')
-  const teamsFortnite = useGetTeams('teams', 'fortnite')
-  const teamsValorant = useGetTeams('teams', 'valorant')
-  const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(name)}&format=json&limit=1`
-
-  useEffect(() => {
-    const allGamesArray = [...csgo, ...lol, ...fortnite, ...valorant]
-    const allTeamsArray = [...teamsCsgo, ...teamsLol, ...teamsFortnite, ...teamsValorant]
-    setAllGames(allGamesArray)
-    setAllTeams(allTeamsArray);
-    (async () => {
-      try {
-        const response = await fetch(url)
-        const data = await response.json()
-
-        if (data && data.length > 0) {
-          const latitud = parseFloat(data[0].lat)
-          const longitud = parseFloat(data[0].lon)
-          setCity({ geometry: [latitud, longitud] })
-        } else {
-          throw new Error('Ciudad no encontrada')
-        }
-      } catch (error) {
-        console.error(`Error al obtener coordenadas: ${error.message}`)
-        return null
-      }
-    })()
-  }, [url, csgo, lol, teamsCsgo, teamsLol, teamsFortnite, teamsValorant, fortnite, valorant])
+  const { users } = useGetUsers()
+  const { allGames } = useAllGames()
+  const { allTeams } = useAllTeams()
+  const { city } = useLocation(name)
 
   const listUserAllGames = useCityFilterDistance(city, allGames, 30)
   const listUserTeams = useCityFilterDistance(city, allTeams, 30)
-
   if (!city) return <div>Loading...</div>
 
   return (

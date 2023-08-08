@@ -3,12 +3,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { setTeam } from '../../../../firebase/hooks/setMethod/setTeam'
+import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
 import styles from './NewTeamForm.module.scss'
-import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 
 const Lol = ({ currentUser, setToggle, toggle }) => {
   const router = useRouter()
@@ -111,17 +111,17 @@ const Lol = ({ currentUser, setToggle, toggle }) => {
           <Form className={styles.form}>
             <div className={styles.titleAndDescription}>
               <label className={styles.titlePublication}>
-                Nombre del team
-                <Field className={styles.title} type='text' name='title' />
+                <Field className={styles.title} type='text' name='title' placeholder='Título...' />
                 <ErrorMessage name='title' component='span' />
               </label>
               <label className={styles.descriptionPublication}>
-                Describe el team
                 <Field
                   className={styles.description}
-                  as='textarea' name='description'
-                  rows='5'
-                  cols='10'
+                  as='textarea'
+                  name='description'
+                  placeholder='Descripción...'
+                  rows='10'
+                  cols='20'
                 />
                 <ErrorMessage name='description' component='span' />
                 <div>

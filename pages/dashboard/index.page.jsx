@@ -11,16 +11,16 @@ import { useSession } from '../../firebase/auth/useSession'
 // Componentes
 import Image from 'next/image'
 import Link from 'next/link'
+import BugsReports from '../../components/Dashboard/BugsReports'
 import MixWikTeams from '../../components/Dashboard/MixWikTeams'
 import MyPublications from '../../components/Dashboard/MyPublications'
 import NewPublication from '../../components/Dashboard/NewPublication'
 import Profile from '../../components/Dashboard/Profile'
 import Publications from '../../components/Dashboard/Publications'
 import Layout from '../../components/Layout'
+import PageLoader from '../../components/Loaders/PageLoader'
 import NewUser from '../../components/NewUser'
 import { myLoader } from '../../components/myLoader'
-import BugsReports from '../../components/Dashboard/BugsReports'
-import PageLoader from '../../components/Loaders/PageLoader'
 
 // Images
 import { AddPublication, BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
@@ -31,16 +31,18 @@ import { useRouter } from 'next/router'
 import Bugs from '../../components/Bugs'
 import AllUsers from '../../components/Dashboard/AllUsers'
 import NewTeam from '../../components/Dashboard/NewTeam'
+import { useHandleOpenContext, useOpenContext } from '../../context'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import Favorites from './components/Favorites'
 
 export default function Dashboard () {
+  const handleOpen = useHandleOpenContext()
+  const isOpen = useOpenContext()
   const handleSignOut = useSignOut()
   const router = useRouter()
   const { page } = router.query
-  const [isOpen, setIsOpen] = useState(false)
   const [toggle, setToggle] = useState(false)
   const [bugs, setBugs] = useState(false)
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function Dashboard () {
       pathname: '/dashboard',
       query: { page: name }
     })
-    setIsOpen(false)
+    handleOpen('')
   }
 
   const user = useSession()
@@ -68,7 +70,7 @@ export default function Dashboard () {
 
   return (
     <Layout>
-      <section data-open={isOpen} className={styles.dashboard}>
+      <section data-open={isOpen === 'dashboardNav'} className={styles.dashboard}>
         {page === 'profile' && <Profile user={currentUser} mixWikTeams={mixWikTeams} />}
         {page === 'newPublication' && <NewPublication mixWikTeams={mixWikTeams} user={currentUser} setTeams={setToggle} teams={toggle} />}
         {page === 'myPublications' && <MyPublications user={currentUser} />}
@@ -78,7 +80,7 @@ export default function Dashboard () {
         {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
         {page === 'favorites' && <Favorites currentUser={currentUser} />}
-        <nav data-open={isOpen} className={styles.nav}>
+        <nav data-open={isOpen === 'dashboardNav'} className={styles.nav}>
           <ul>
             <li
               data-isActive={page === 'profile'}
@@ -111,7 +113,9 @@ export default function Dashboard () {
               data-isActive={page === 'favorites'}
               onClick={() => handleClick('favorites')}
             >
-              <PublicationsIcon />
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-10 h-10'>
+                <path fillRule='evenodd' d='M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z' clipRule='evenodd' />
+              </svg>
               Mis Favoritos
             </li>
             <li className={styles.ours}>
@@ -167,15 +171,6 @@ export default function Dashboard () {
             </li>
           </ul>
         </nav>
-        <button
-          className={styles.burguerButton} onClick={() => setIsOpen(!isOpen)}
-          data-open={isOpen}
-        >
-          <div className={styles.grid1} />
-          <div className={styles.grid2} />
-          <div className={styles.grid3} />
-          <div className={styles.grid4} />
-        </button>
       </section>
       {bugs && <Bugs setBug={setBugs} user={user} />}
     </Layout>

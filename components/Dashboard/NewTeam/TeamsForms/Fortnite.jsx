@@ -111,17 +111,17 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
           <Form className={styles.form}>
             <div className={styles.titleAndDescription}>
               <label className={styles.titlePublication}>
-                Nombre del team
-                <Field className={styles.title} type='text' name='title' />
+                <Field className={styles.title} type='text' name='title' placeholder='Título...' />
                 <ErrorMessage name='title' component='span' />
               </label>
               <label className={styles.descriptionPublication}>
-                Describe el team
                 <Field
                   className={styles.description}
-                  as='textarea' name='description'
-                  rows='5'
-                  cols='10'
+                  as='textarea'
+                  name='description'
+                  placeholder='Descripción...'
+                  rows='10'
+                  cols='20'
                 />
                 <ErrorMessage name='description' component='span' />
                 <div>

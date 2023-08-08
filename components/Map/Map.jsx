@@ -8,10 +8,11 @@ import styles from './Map.module.scss'
 import { MapContainer, TileLayer } from 'react-leaflet'
 
 // Components
+import MapLoader from '../Loaders/MapLoader'
 import Markers from './Markers'
 
 const Map = ({ location, users, games, teams, zoom, currentPosition }) => {
-  if (currentPosition.length === 0) return <div>Loading...</div>
+  if (currentPosition.length === 0) return <MapLoader />
   return (
     <MapContainer
       className={styles.map}

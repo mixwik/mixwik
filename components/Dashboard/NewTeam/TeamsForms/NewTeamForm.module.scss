@@ -56,7 +56,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
+            justify-content: center;
             height: 100%;
             width: 100%;
             scroll-snap-align: center;
@@ -65,18 +65,23 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 2rem;
+                gap: 1rem;
                 width: 100%;
                 font-size: 1.2em;
                 font-weight: bold;
+                .title {
+                    border-radius: .5rem .5rem 0 0;
+                }
+                .description {
+                    border-radius: 0 0 .5rem .5rem;
+                }
 
                 .title,
                 .description {
                     border: 1px solid $aero;
                     resize: none;
-                    width: 80%;
+                    width: 90%;
                     padding: 1rem;
-                    border-radius: .5rem;
 
                     @media screen and (min-width: 768px) {
                         width: 60%;
@@ -94,7 +99,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: center;
+            gap: 1rem;
 
             .title {
                 font-weight: bold;
@@ -154,11 +160,13 @@
 
             .hours,
             .age {
-                width: 60%;
+                width: 90%;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: space-evenly;
+                justify-content: center;
+                text-align: center;
+                gap: 1rem;
                 font-size: 1.2em;
                 font-weight: bold;
 
@@ -208,7 +216,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: center;
 
             .title {
                 font-weight: bold;

@@ -1,8 +1,7 @@
-import { useGetUsers } from '../../../../application/useGetUsers'
 
 const Favorites = ({ currentUser }) => {
-  const { users } = useGetUsers()
-  console.log(users)
+  console.log(currentUser)
+
   return (
     <div>
       <div className='bg-aero h-[5vh] font-bold text-xl text-white flex items-center pl-5'>Favoritos</div>

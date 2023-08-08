@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { COLLECTIONS } from '../../../../domain/constants'
 import { setTeam } from '../../../../firebase/hooks/setMethod/setTeam'
 import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
@@ -90,8 +91,8 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
     age: 16
   }
   return (
-    <section className={styles.formBox} data-active={toggle === 'cs2'}>
-      <h2 className={styles.titleForm}>CSGO</h2>
+    <section className={styles.formBox} data-active={toggle === COLLECTIONS.cs2}>
+      <h2 className={styles.titleForm}>Counter Strike 2</h2>
       <Formik
         initialValues={initialValues}
         validate={values => {
@@ -100,7 +101,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTeam('cs2', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
-          updateUserNumberPublications('cs2', currentUser.id, 1)
+          updateUserNumberPublications(COLLECTIONS.cs2, currentUser.id, 1)
           setTimeout(() => {
             setSubmitting(false)
             router.push('/dashboard?page=myPublications')
@@ -111,17 +112,17 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
           <Form className={styles.form}>
             <div className={styles.titleAndDescription}>
               <label className={styles.titlePublication}>
-                Nombre del team
-                <Field className={styles.title} type='text' name='title' />
+                <Field className={styles.title} type='text' name='title' placeholder='Título...' />
                 <ErrorMessage name='title' component='span' />
               </label>
               <label className={styles.descriptionPublication}>
-                Describe el team
                 <Field
                   className={styles.description}
-                  as='textarea' name='description'
-                  rows='5'
-                  cols='10'
+                  as='textarea'
+                  name='description'
+                  placeholder='Descripción...'
+                  rows='10'
+                  cols='20'
                 />
                 <ErrorMessage name='description' component='span' />
                 <div>

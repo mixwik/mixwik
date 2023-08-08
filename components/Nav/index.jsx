@@ -19,8 +19,10 @@ import { useGetUsers } from '../../application/useGetUsers'
 import { useSession } from '../../firebase/auth/useSession'
 import Bugs from '../Bugs'
 import LogIn from '../LogIn'
+import { useHandleOpenContext } from '../../context'
 
 const Nav = () => {
+  const handleOpen = useHandleOpenContext()
   const router = useRouter()
   useEffect(() => {
     if (router.asPath === '/') setTransparent(true)
@@ -45,6 +47,10 @@ const Nav = () => {
       }
     }
   })
+  const handleOpenButton = () => {
+    handleOpen('dashboardNav')
+    router.push('/dashboard?page=profile')
+  }
 
   return (
     <>
@@ -97,6 +103,11 @@ const Nav = () => {
                   </button>
                   )
             }
+          <button onClick={handleOpenButton} className='md:hidden'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-10 h-10 font-bold'>
+              <path strokeLinecap='round' strokeLinejoin='round' d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5' />
+            </svg>
+          </button>
         </div>
       </nav>
       <LogIn setIsOpen={setIsOpen} isOpen={isOpen} />

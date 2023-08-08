@@ -3,6 +3,7 @@ import styles from './GamesForms.module.scss'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useState } from 'react'
+import { COLLECTIONS } from '../../../../domain/constants'
 import { setPublication } from '../../../../firebase/hooks/setMethod/setPublication'
 import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
@@ -86,9 +87,9 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
     age: ''
   }
   return (
-    <section className={styles.gamesForms} data-open={toggle === 'lol'}>
+    <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.lol}>
       <section className={styles.newPublication}>
-        <h2 className={styles.title}>LOL</h2>
+        <h2 className={styles.title}>League Of Legends</h2>
         <div className={styles.form}>
           <Formik
             initialValues={initialValues}
@@ -97,8 +98,8 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setPublication('lol', values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
-              updateUserNumberPublications('lol', currentUser.id, 1)
+              setPublication(COLLECTIONS.lol, values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
+              updateUserNumberPublications(COLLECTIONS.lol, currentUser.id, 1)
               setTimeout(() => {
                 setSubmitting(false)
                 location.reload()
@@ -107,6 +108,25 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
           >
             {({ isSubmitting, values }) => (
               <Form>
+                <article className={styles.descriptionBox}>
+                  <label className={styles.titlePublication}>
+                    <Field className={styles.title} type='text' name='title' placeholder='Título...' />
+                    <ErrorMessage name='title' component='span' />
+                  </label>
+                  <label className={styles.descriptionPublication}>
+                    <Field
+                      className={styles.description}
+                      as='textarea' name='description'
+                      rows='5'
+                      cols='10'
+                      placeholder='Descripción...'
+                    />
+                    <ErrorMessage name='description' component='span' />
+                    <div>
+                      {values.description.length > 0 ? values.description.length : 0}/350
+                    </div>
+                  </label>
+                </article>
                 <article className={styles.position}>
                   <h3>¿En que posición te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
@@ -293,26 +313,6 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
                     <ErrorMessage name='typeOfGamer' component='span' />
                   </article>
                 </article>
-                <div className={styles.descriptionBox}>
-                  <label className={styles.titlePublication}>
-                    Pon tu nombre de jugador
-                    <Field className={styles.title} type='text' name='title' />
-                    <ErrorMessage name='title' component='span' />
-                  </label>
-                  <label className={styles.descriptionPublication}>
-                    Describete como jugador de Lol
-                    <Field
-                      className={styles.description}
-                      as='textarea' name='description'
-                      rows='5'
-                      cols='10'
-                    />
-                    <ErrorMessage name='description' component='span' />
-                    <div>
-                      {values.description.length > 0 ? values.description.length : 0}/350
-                    </div>
-                  </label>
-                </div>
                 <article className={styles.image}>
                   <h3>
                     {

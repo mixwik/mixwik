@@ -1,5 +1,6 @@
 import L from 'leaflet'
 import { COLLECTIONS } from '../../domain/constants'
+import MapLoader from '../Loaders/MapLoader'
 import GameMarker from './GameMarker'
 import styles from './Map.module.scss'
 import TeamMarker from './TeamMarker'
@@ -7,7 +8,7 @@ import TeamMarker from './TeamMarker'
 const Markers = ({ position, users, currentPosition, gamesCategory, teamsCategory }) => {
   const user = users.find(find => find.uid === position.uid)
 
-  if (!position || !currentPosition) return <div>Loading...</div>
+  if (!position || !currentPosition) return <MapLoader />
 
   const csgoIcon = L.divIcon({
     className: styles.csgoIcon,

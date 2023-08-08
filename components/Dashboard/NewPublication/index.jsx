@@ -5,6 +5,7 @@ import NoMorePublications from './noMorePublications'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LOGOS } from '../../../assets/images'
+import { COLLECTIONS } from '../../../domain/constants'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import CsgoPublication from './GamesForms/cs2'
 import FortnitePublication from './GamesForms/fortnite'
@@ -17,7 +18,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
   const [teams, setTeams] = useState(false)
 
   const handleCheck = (name) => {
-    if (name === 'cs2') {
+    if (name === COLLECTIONS.cs2) {
       if (!mixWikTeams) {
         if (!user.cs2Publications) {
           setToggle(name)
@@ -34,7 +35,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
         }
       }
     }
-    if (name === 'lol') {
+    if (name === COLLECTIONS.lol) {
       if (!mixWikTeams) {
         if (!user.lolPublications) {
           setToggle(name)
@@ -51,7 +52,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
         }
       }
     }
-    if (name === 'fortnite') {
+    if (name === COLLECTIONS.fortnite) {
       if (!mixWikTeams) {
         if (!user.fortnitePublications) {
           setToggle(name)
@@ -68,7 +69,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
         }
       }
     }
-    if (name === 'valorant') {
+    if (name === COLLECTIONS.valorant) {
       if (!mixWikTeams) {
         if (!user.valorantPublications) {
           setToggle(name)
@@ -88,36 +89,43 @@ const NewPublication = ({ user, mixWikTeams }) => {
   }
   return (
     <section className={styles.newPublication}>
-      <h1 className={styles.title}>Selecciona categoría <Link href='/dashboard?page=publications'>Volver atrás</Link></h1>
+      <h1 className={styles.title}>
+        <Link href='/dashboard?page=publications'>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-10 h-10 font-bold'>
+            <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75' />
+          </svg>
+        </Link>
+        Selecciona categoría
+      </h1>
       {
         teams === 'maxPublications' && <p>Has llegado al límite de publicaciones</p>
       }
       <ul className={styles.listOfCategories}>
-        <li onClick={() => handleCheck('cs2')}>
+        <li onClick={() => handleCheck(COLLECTIONS.cs2)}>
           <Image src={LOGOS.cs2} alt='counter strike 2' />
           Counter Strike 2
         </li>
-        <li onClick={() => handleCheck('lol')}>
+        <li onClick={() => handleCheck(COLLECTIONS.lol)}>
           <Image src={LOGOS.lol} alt='LOL' />
           League of Legends
         </li>
-        <li onClick={() => handleCheck('fortnite')}>
+        <li onClick={() => handleCheck(COLLECTIONS.fortnite)}>
           <Image src={LOGOS.fortnite} alt='Fortnite' />
           Fortnite
           <br />
         </li>
-        <li onClick={() => handleCheck('valorant')}>
+        <li onClick={() => handleCheck(COLLECTIONS.valorant)}>
           <Image src={LOGOS.valorant} alt='Valorant' />
           Valorant
           <br />
         </li>
-        <li onClick={() => handleCheck('rl')}>
+        <li onClick={() => handleCheck(COLLECTIONS.rocketLeague)}>
           <Image src={LOGOS.rocketLeague} alt='Rocket League' />
           Rocket League
           <br />
           (Próximamente)
         </li>
-        <li onClick={() => handleCheck('dota2')}>
+        <li onClick={() => handleCheck(COLLECTIONS.dota2)}>
           <Image src={LOGOS.dota2} alt='Dota 2' />
           Dota 2
           <br />

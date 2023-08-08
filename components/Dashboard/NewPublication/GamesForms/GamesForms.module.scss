@@ -169,7 +169,6 @@
         }
 
         .descriptionBox {
-          gap: 1rem;
           .titlePublication,
           .descriptionPublication {
             width: 100%;
@@ -190,28 +189,27 @@
               text-align: left;
               width: 90%;
               height: 3rem;
-              border-radius: .5rem;
+              border-radius: .5rem .5rem 0 0;
               padding: 1rem;
               border: 1px solid $aero;
 
               @media screen and (min-width: 768px) {
-                width: 50%;
+                width: 60%;
               }
             }
           }
 
           .descriptionPublication {
-
             .description {
               width: 90%;
               height: 15rem;
-              border-radius: .5rem;
+              border-radius: 0 0 .5rem .5rem;
               padding: 1rem;
               border: 1px solid $aero;
               resize: none;
 
               @media screen and (min-width: 768px) {
-                width: 50%;
+                width: 60%;
               }
             }
           }
