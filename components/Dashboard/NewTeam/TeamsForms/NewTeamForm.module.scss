@@ -313,11 +313,10 @@
         .buttons {
             display: flex;
             position: fixed;
-            bottom: 0;
-            left: 0;
+            bottom: 2rem;
+            right: 1rem;
             height: 5vh;
             @media screen and (min-width: 768px) {
-                left: auto;
                 right: 1rem;
                 bottom: 1rem;
             }
