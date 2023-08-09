@@ -13,7 +13,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import BugsReports from '../../components/Dashboard/BugsReports'
 import MixWikTeams from '../../components/Dashboard/MixWikTeams'
-import MyPublications from '../../components/Dashboard/MyPublications'
 import NewPublication from '../../components/Dashboard/NewPublication'
 import Profile from '../../components/Dashboard/Profile'
 import Publications from '../../components/Dashboard/Publications'
@@ -36,6 +35,7 @@ import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import Favorites from './components/Favorites'
+import MyPublications from './components/MyPublications'
 
 export default function Dashboard () {
   const handleOpen = useHandleOpenContext()

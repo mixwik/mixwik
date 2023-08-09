@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { COLLECTIONS } from '../../../../domain/constants'
-import { deletePublication } from '../../../../firebase/hooks/deleteMethod'
-import { DeleteIcon } from '../../../Svg'
-import { myLoader } from '../../../myLoader'
 import styles from './CardPublications.module.scss'
+import { COLLECTIONS } from '../../../../../domain/constants'
+import { myLoader } from '../../../../../components/myLoader'
+import { DeleteIcon } from '../../../../../components/Svg'
+import { deletePublication } from '../../../../../firebase/hooks/deleteMethod'
 
 const CardPublications = ({ publication, user, category, equip, link, promotion, deleteCategory }) => {
   const handleDelete = (category, id) => {

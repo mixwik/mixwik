@@ -1,9 +1,12 @@
-import { useGetMyPublications } from '../../../firebase/hooks/getMethod/useGetMyPublications'
-import { useGetMyTeams } from '../../../firebase/hooks/getMethod/useGetMyTeam'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useGetMyPublications } from '../../../../firebase/hooks/getMethod/useGetMyPublications'
+import { useGetMyTeams } from '../../../../firebase/hooks/getMethod/useGetMyTeam'
 import BoxCards from './BoxCards'
 import CardPublications from './CardPublications'
 
 const MyPublications = ({ user }) => {
+  const [publications, setPublications] = useState([])
   const publicationsCSGO = useGetMyPublications('cs2', user.uid)
   const publicationsLOL = useGetMyPublications('lol', user.uid)
   const publicationsFortnite = useGetMyPublications('fortnite', user.uid)
@@ -13,7 +16,19 @@ const MyPublications = ({ user }) => {
   const publicationsFortniteTeams = useGetMyTeams('teams', 'fortnite', user.uid)
   const publicationsValorantTeams = useGetMyTeams('teams', 'valorant', user.uid)
 
-  if (!publicationsCSGO) return <div>Loading...</div>
+  useEffect(() => {
+    setPublications([
+      ...publicationsCSGO,
+      ...publicationsLOL,
+      ...publicationsFortnite,
+      ...publicationsValorant,
+      ...publicationsCsgoTeams,
+      ...publicationsLolTeams,
+      ...publicationsFortniteTeams,
+      ...publicationsValorantTeams
+    ])
+  }, [publicationsCSGO, publicationsLOL, publicationsFortnite, publicationsValorant, publicationsCsgoTeams, publicationsLolTeams, publicationsFortniteTeams, publicationsValorantTeams])
+
   return (
     <section className='h-[95vh] md:h-[90vh]'>
       <h2 className='w-full bg-aero h-[5vh] flex items-center text-white font-bold pl-5 text-2xl'>Mis publicaciones</h2>
@@ -140,6 +155,16 @@ const MyPublications = ({ user }) => {
               ))
             }
           </BoxCards>
+        )
+      }
+        {
+        publications.length === 0 && (
+          <div className='flex flex-col items-center justify-center w-full h-full gap-5 text-center'>
+            <h2 className='text-2xl font-bold text-gray-400'>No tienes publicaciones en este momento</h2>
+            <Link className='text-2xl font-bold text-blue-500' href='/dashboard?page=publications'>
+              Crea una publicación
+            </Link>
+          </div>
         )
       }
       </div>
