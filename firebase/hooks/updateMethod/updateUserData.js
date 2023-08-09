@@ -21,19 +21,29 @@ export const updateUserData = async (id, data, img) => {
   })
 }
 
-export const updateDiscord = async (id, discord) => {
+export const updateDiscord = async (id, discord, socials) => {
   const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     social: {
-      discord
+      discord,
+      twitter: socials.twitter || '',
+      twitch: socials.twitch || '',
+      youtube: socials.youtube || '',
+      instagram: socials.instagram || '',
+      facebook: socials.facebook || ''
     }
   })
 }
-export const updateTwitter = async (id, twitter) => {
+export const updateTwitter = async (id, twitter, socials) => {
   const userRef = doc(db, COLLECTIONS.users, id)
   await updateDoc(userRef, {
     social: {
-      twitter
+      twitter,
+      discord: socials.discord || '',
+      twitch: socials.twitch || '',
+      youtube: socials.youtube || '',
+      instagram: socials.instagram || '',
+      facebook: socials.facebook || ''
     }
   })
 }

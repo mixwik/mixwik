@@ -128,7 +128,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
             onSubmit={(values, { setSubmitting }) => {
               setFortnitePublication(COLLECTIONS.fortnite, values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserNumberPublications(COLLECTIONS.fortnite, currentUser.id, 1)
-              updateTwitter(currentUser.id, values.twitter)
+              updateTwitter(currentUser.id, values.twitter, currentUser.social)
               setTimeout(() => {
                 setSubmitting(false)
                 location.reload()
