@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { COLLECTIONS } from '../../../../domain/constants'
 import { setFortnitePublication } from '../../../../firebase/hooks/setMethod/setFortnitePublication'
-import { updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
+import { updateTwitter, updateUserNumberPublications } from '../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 import { DeleteIcon, ImageIcon } from '../../../Svg'
 import { myLoader } from '../../../myLoader'
@@ -84,7 +84,8 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
     description: '',
     uid: '',
     geometry: [],
-    age: ''
+    age: '',
+    twitter: ''
   }
   return (
     <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.fortnite}>
@@ -95,23 +96,50 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
             initialValues={initialValues}
             validate={values => {
               const errors = {}
+              if (!values.title) {
+                errors.title = 'El Título es obligatorio'
+              } else if (values.title.length > 50) {
+                errors.title = 'El título debe tener menos de 50 caracteres'
+              }
+              if (!values.description) {
+                errors.description = 'La descripción es obligatoria'
+              } else if (values.description.length > 350) {
+                errors.description = 'La descripción debe tener menos de 350 caracteres'
+              }
+              if (!values.position.length) {
+                errors.position = 'La posición es obligatoria'
+              }
+              if (!values.preferenceTeam.length) {
+                errors.preferenceTeam = 'La preferencia de equipo es obligatorio'
+              }
+              if (!values.typeOfGamer.length) {
+                errors.typeOfGamer = 'El tipo de jugador es obligatorio'
+              }
+              if (!values.twitter) {
+                errors.twitter = 'El Twitter es obligatorio'
+              } else if (!/^https?:\/\/(www\.)?twitter\.com\/[a-zA-Z0-9_]+$/.test(values.twitter)) {
+                errors.twitter = 'El formato de la url no es válido'
+              }
+              if (!values.hours) {
+                errors.hours = 'La cantidad de horas es obligatoria'
+              }
               return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
               setFortnitePublication(COLLECTIONS.fortnite, values, currentPosition, currentUser, imgURL, image.name, imgURL2, image2.name, imgURL3, image3.name, imgURL4, image4.name, imgURL5, image5.name, imgURL6, image6.name, imgURL7, image7.name)
               updateUserNumberPublications(COLLECTIONS.fortnite, currentUser.id, 1)
+              updateTwitter(currentUser.id, values.twitter)
               setTimeout(() => {
                 setSubmitting(false)
                 location.reload()
               }, 400)
             }}
           >
-            {({ isSubmitting, values }) => (
+            {({ isSubmitting, values, errors }) => (
               <Form>
                 <article className={styles.descriptionBox}>
                   <label className={styles.titlePublication}>
                     <Field className={styles.title} type='text' name='title' placeholder='Título...' />
-                    <ErrorMessage name='title' component='span' />
                   </label>
                   <label className={styles.descriptionPublication}>
                     <Field
@@ -121,10 +149,13 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                       cols='10'
                       placeholder='Descripción...'
                     />
-                    <ErrorMessage name='description' component='span' />
                     <div>
                       {values.description.length > 0 ? values.description.length : 0}/350
                     </div>
+                  </label>
+                  <label className={styles.socialPublication}>
+                    Añade tu Twitter (X)
+                    <Field className={styles.social} type='text' name='twitter' placeholder='Twitter (X)...' />
                   </label>
                 </article>
                 <article className={styles.position}>
@@ -158,7 +189,6 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                       Support
                     </label>
                   </div>
-                  <ErrorMessage name='position' component='span' />
                 </article>
                 <article className={styles.preferenceTeam}>
                   <h3>¿Cómo te gusta jugar?</h3>
@@ -191,7 +221,6 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                       4 vs 4
                     </label>
                   </div>
-                  <ErrorMessage name='preferenceTeam' component='span' />
                 </article>
                 <article className={styles.hoursAndType}>
                   <article className={styles.hours}>
@@ -205,7 +234,6 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                       step='50'
                     />
                     {values.hours}h
-                    <ErrorMessage name='hours' component='span' />
                   </article>
                   <article className={styles.typeOfGamer}>
                     <h3>¿Que tipo de jugador te consideras?</h3>
@@ -229,7 +257,6 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                         Casual
                       </label>
                     </div>
-                    <ErrorMessage name='typeOfGamer' component='span' />
                   </article>
                 </article>
                 <article className={styles.image}>
@@ -383,6 +410,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                       values.preferenceTeam.length === 0 ||
                       values.position.length === 0 ||
                       values.typeOfGamer.length === 0 ||
+                      values.twitter.length === 0 ||
                       !progress ||
                       isSubmitting
                     }
@@ -392,6 +420,15 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                   <button className={styles.cancel} type='button' onClick={() => setToggle(false)}>
                     Cancelar
                   </button>
+                </div>
+                <div className={`flex flex-col gap-2 p-2 fixed top-[5vh] right-[-2rem] w-80 bg-red-500 text-white font-bold translate-x-full transition-transform duration-500 ease-in-out ${(errors.title || errors.age || errors.description || errors.hours || errors.preferenceTeam || errors.position || errors.typeOfGamer || errors.twitter) && 'translate-x-0'}`}>
+                  <ErrorMessage name='title' component='p' />
+                  <ErrorMessage name='description' component='p' />
+                  <ErrorMessage name='twitter' component='p' />
+                  <ErrorMessage name='position' component='p' />
+                  <ErrorMessage name='preferenceTeam' component='p' />
+                  <ErrorMessage name='hours' component='p' />
+                  <ErrorMessage name='typeOfGamer' component='p' />
                 </div>
               </Form>
             )}

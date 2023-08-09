@@ -170,7 +170,8 @@
 
         .descriptionBox {
           .titlePublication,
-          .descriptionPublication {
+          .descriptionPublication,
+          .socialPublication {
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -180,8 +181,10 @@
             font-size: 1.2em;
             font-weight: bold;
           }
-          .titlePublication {
-            .title {
+          .titlePublication,
+          .socialPublication {
+            .title,
+            .social {
               font-weight: 100;
               background-color: $white;
               color: $black;
@@ -196,6 +199,12 @@
               @media screen and (min-width: 768px) {
                 width: 60%;
               }
+            }
+          }
+          .socialPublication {
+            margin-top: 2rem;
+            .social {
+              border-radius: .5rem;
             }
           }
 

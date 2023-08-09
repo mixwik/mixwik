@@ -29,6 +29,14 @@ export const updateDiscord = async (id, discord) => {
     }
   })
 }
+export const updateTwitter = async (id, twitter) => {
+  const userRef = doc(db, COLLECTIONS.users, id)
+  await updateDoc(userRef, {
+    social: {
+      twitter
+    }
+  })
+}
 
 export const updateUserNumberPublications = async (category, id, number) => {
   const userRef = doc(db, COLLECTIONS.users, id)
