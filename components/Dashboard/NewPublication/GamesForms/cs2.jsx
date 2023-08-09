@@ -85,7 +85,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
     uid: '',
     geometry: [],
     age: '',
-    twitter: ''
+    twitter: currentUser.social.twitter || ''
   }
   return (
     <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.cs2}>

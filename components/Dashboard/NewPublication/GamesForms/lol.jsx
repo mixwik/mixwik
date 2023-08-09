@@ -85,7 +85,7 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
     uid: '',
     geometry: [],
     age: '',
-    twitter: ''
+    twitter: currentUser.social.twitter || ''
   }
   return (
     <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.lol}>

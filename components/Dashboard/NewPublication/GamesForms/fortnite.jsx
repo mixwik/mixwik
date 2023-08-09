@@ -85,7 +85,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
     uid: '',
     geometry: [],
     age: '',
-    twitter: ''
+    twitter: currentUser.social.twitter || ''
   }
   return (
     <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.fortnite}>

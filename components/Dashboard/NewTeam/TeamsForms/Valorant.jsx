@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { Field, Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -89,7 +89,7 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
     uid: '',
     geometry: [],
     age: 16,
-    discord: ''
+    discord: currentUser.social.discord
   }
   return (
     <section className={styles.formBox} data-active={toggle === COLLECTIONS.valorant}>
@@ -98,6 +98,36 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
         initialValues={initialValues}
         validate={values => {
           const errors = {}
+          if (!values.title) {
+            errors.title = 'Requerido'
+          } else if (values.title.length > 50) {
+            errors.title = 'El título debe tener menos de 50 caracteres'
+          }
+          if (!values.description) {
+            errors.description = 'Requerido'
+          } else if (values.description.length > 350) {
+            errors.description = 'La descripción debe tener menos de 350 caracteres'
+          }
+          if (values.position.length === 0) {
+            errors.position = 'Requerido'
+          }
+          if (values.level.length === 0) {
+            errors.level = 'Requerido'
+          }
+          if (values.typeOfGamer.length === 0) {
+            errors.typeOfGamer = 'Requerido'
+          }
+          if (values.hours === 0) {
+            errors.hours = 'Requerido'
+          }
+          if (values.age < 16) {
+            errors.age = 'Debes ser mayor de 16 años'
+          }
+          if (!/^https?:\/\/discord\.gg\/[a-zA-Z0-9]+$/.test(values.discord)) {
+            errors.discord = 'El formato del discord no es válido'
+          } else if (!values.discord) {
+            errors.discord = 'Requerido'
+          }
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
@@ -115,7 +145,6 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
             <div className={styles.titleAndDescription}>
               <label className={styles.titlePublication}>
                 <Field className={styles.title} type='text' name='title' placeholder='Título...' />
-                <ErrorMessage name='title' component='span' />
               </label>
               <label className={styles.descriptionPublication}>
                 <Field
@@ -126,7 +155,6 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
                   rows='10'
                   cols='20'
                 />
-                <ErrorMessage name='description' component='span' />
                 <div>
                   {values.description.length > 0 ? values.description.length : 0}/350
                 </div>
@@ -176,7 +204,6 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
                   Controlador
                 </label>
               </div>
-              <ErrorMessage name='position' component='span' />
             </div>
             <div className={styles.level}>
               <div className={styles.title}>¿Que niveles buscas?</div>
@@ -254,7 +281,6 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
                   Valorant
                 </label>
               </div>
-              <ErrorMessage name='level' component='span' />
             </div>
             <div className={styles.hoursTypeOfGamerAge}>
               <label className={styles.hours}>
@@ -268,7 +294,6 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
                   step='50'
                 />
                 {values.hours}h
-                <ErrorMessage name='hours' component='span' />
               </label>
               <label className={styles.age}>
                 Edad mínima
@@ -281,7 +306,6 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
                   step='1'
                 />
                 {values.age} años
-                <ErrorMessage name='age' component='span' />
               </label>
               <div className={styles.typeOfGamer}>
                 <div className={styles.title}>¿Que tipo de jugador buscas?</div>
@@ -305,7 +329,6 @@ const Valorant = ({ currentUser, setToggle, toggle }) => {
                     Casual
                   </label>
                 </div>
-                <ErrorMessage name='typeOfGamer' component='span' />
               </div>
             </div>
             <article className={styles.image}>
