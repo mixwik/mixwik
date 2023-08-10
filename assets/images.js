@@ -1,6 +1,10 @@
 import backgroundBlue from '../public/bg/bg_dark_blue.svg'
 import backgroundGray from '../public/bg/bg_gray.svg'
 import backgroundOrange from '../public/bg/bg_orange.svg'
+import barcelona from '../public/cities/barcelona.jpg'
+import madrid from '../public/cities/madrid.jpg'
+import malaga from '../public/cities/malaga.jpg'
+import valencia from '../public/cities/valencia.jpg'
 import cs2 from '../public/logos/CS2.png'
 import lol from '../public/logos/LOL3.png'
 import valorant from '../public/logos/VALORANT.png'
@@ -37,4 +41,11 @@ export const TITLES_LOGOS = {
   titleFortnite,
   titleCs2,
   titleLol
+}
+
+export const CITIES_IMAGES = {
+  madrid,
+  barcelona,
+  valencia,
+  malaga
 }
