@@ -12,7 +12,7 @@ const Favorites = ({ currentUser }) => {
     <div>
       <div className='bg-aero h-[5vh] font-bold text-xl text-white flex items-center pl-5'>Favoritos</div>
       <section className='bg-white h-[85vh] p-5'>
-        <div className='grid grid-cols-[repeat(auto-fit,_minmax(15rem,1fr))] place-items-center'>
+        <div className='grid grid-cols-[repeat(auto-fit,_minmax(15rem,1fr))] place-items-center gap-5'>
           {
            favoritesTeams.map((fav) => (
              <CardPublications
