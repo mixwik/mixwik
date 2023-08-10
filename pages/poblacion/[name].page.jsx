@@ -30,8 +30,14 @@ const City = () => {
           <h1 className={styles.titleAllGames}>
             Todos los jugadores en {name}
           </h1>
+<<<<<<< Updated upstream
           <div className={styles.gamersBox}>
             {
+=======
+          <div className='z-10 h-[74vh] md:overflow-y-scroll md:w-[50vw] w-screen overflow-y-auto'>
+            <div className='grid grid-cols-[repeat(auto-fit,_minmax(10rem,1fr))] place-items-center gap-y-5'>
+              {
+>>>>>>> Stashed changes
               listUserAllGames.length > 0 && (
                 listUserAllGames.map(res => (
                   <Card

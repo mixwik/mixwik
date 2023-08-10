@@ -10,13 +10,13 @@ import Distance from '../../Forms/Distance'
 
 const FilterCsgo = ({ distance, setDistance }) => {
   return (
-    <form className={styles.filter}>
+    <div className={styles.filter}>
       <Distance distance={distance} setDistance={setDistance} />
       <FormAge />
       <FormPosition />
       <FormLevel />
       <TypeOfGamer />
-    </form>
+    </div>
   )
 }
 

@@ -33,12 +33,14 @@ const PageContent = ({ category, children, distance }) => {
   const listUserCsgo = useUserFortniteFilters(user, csgo, distance)
   const listUserTeams = useUserFortniteFilters(user, teams, distance)
   return (
-    <div>
-      <div className={styles.pageBox}>
-        <section className={styles.pages}>
-          {children}
-          <div className={styles.gamersBox} onClick={() => handleOpen('')}>
-            {
+    <div className='flex flex-col md:flex-row'>
+      <section className='md:w-[50vw]'>
+        {children}
+        <section
+          className='grid grid-cols-[repeat(auto-fit,_minmax(10rem,1fr))] place-items-center overflow-y-scroll h-[73vh] md:w-[50vw] w-screen md:overflow-y-auto py-5 gap-y-5'
+          onClick={() => handleOpen('')}
+        >
+          {
               csgo.length > 0 && (
                 csgo.map((res) => (
                   res.promotion && (
@@ -53,7 +55,7 @@ const PageContent = ({ category, children, distance }) => {
                 ))
               )
             }
-            {
+          {
               listUserTeams.length > 0 && (
                 listUserTeams.map((res) => (
                   <Card
@@ -66,7 +68,7 @@ const PageContent = ({ category, children, distance }) => {
                 ))
               )
             }
-            {
+          {
               listUserCsgo.length > 0 && (
                 listUserCsgo.map((res) => (
                   <Card
@@ -79,7 +81,7 @@ const PageContent = ({ category, children, distance }) => {
                 ))
               )
             }
-            {
+          {
               listUserCsgo.length > 0
                 ? (
                     listUserCsgo.map((res) => (
@@ -95,18 +97,17 @@ const PageContent = ({ category, children, distance }) => {
                   <div className={styles.gamersNoFound}>No hay jugadores en este momento</div>
                   )
             }
-          </div>
         </section>
-        <Map
-          location={user}
-          users={users}
-          currentPosition={currentPosition}
-          games={listUserCsgo}
-          teams={listUserTeams}
-          zoom={7}
-          size={30}
-        />
-      </div>
+      </section>
+      <Map
+        location={user}
+        users={users}
+        currentPosition={currentPosition}
+        games={listUserCsgo}
+        teams={listUserTeams}
+        zoom={7}
+        size={30}
+      />
     </div>
   )
 }

@@ -44,6 +44,7 @@
     align-items: center;
     background-color: $white;
     padding: 2rem 0;
+    z-index: 20;
 
     @media screen and (min-width: 768px) {
       top: 16vh;
