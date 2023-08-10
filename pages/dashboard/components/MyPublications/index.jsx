@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useGetMyPublications } from '../../../../firebase/hooks/getMethod/useGetMyPublications'
 import { useGetMyTeams } from '../../../../firebase/hooks/getMethod/useGetMyTeam'
+import CardPublications from '../CardPublications'
 import BoxCards from './BoxCards'
-import CardPublications from './CardPublications'
 
 const MyPublications = ({ user }) => {
   const [publications, setPublications] = useState([])
@@ -35,17 +35,15 @@ const MyPublications = ({ user }) => {
       <div className='h-[85vh] bg-white overflow-scroll overflow-x-visible'>
         {
         (publicationsCSGO.length !== 0 || publicationsCsgoTeams.length !== 0) && (
-          <BoxCards title='Publicaciones de Counter Strike 2'>
+          <BoxCards title='Counter Strike 2'>
             {
               publicationsCsgoTeams.map((res) => (
                 <CardPublications
                   key={res.id}
                   publication={res}
                   user={user}
-                  category='teams'
-                  deleteCategory='cs2'
+                  remove
                   equip
-                  link='cs2'
                 />
               ))
             }
@@ -55,8 +53,7 @@ const MyPublications = ({ user }) => {
                   key={res.id}
                   publication={res}
                   user={user}
-                  category='cs2'
-                  link='cs2'
+                  remove
                   deleteCategory='cs2'
                 />
               ))
@@ -66,16 +63,15 @@ const MyPublications = ({ user }) => {
       }
         {
         (publicationsLOL.length !== 0 || publicationsLolTeams.length !== 0) && (
-          <BoxCards title='Publicaciones de League Of Legends'>
+          <BoxCards title='League Of Legends'>
             {
               publicationsLolTeams.map((res) => (
                 <CardPublications
                   key={res.id}
                   publication={res}
                   user={user}
-                  category='teams'
-                  equip link='lol'
-                  deleteCategory='lol'
+                  remove
+                  equip
                 />
               ))
             }
@@ -85,9 +81,7 @@ const MyPublications = ({ user }) => {
                   key={res.id}
                   publication={res}
                   user={user}
-                  category='lol'
-                  link='lol'
-                  deleteCategory='lol'
+                  remove
                 />
               ))
             }
@@ -96,7 +90,7 @@ const MyPublications = ({ user }) => {
       }
         {
         (publicationsFortnite.length !== 0 || publicationsFortniteTeams.length !== 0) && (
-          <BoxCards title='Publicaciones de Fortnite'>
+          <BoxCards title='Fortnite'>
 
             {
               publicationsFortniteTeams.map((res) => (
@@ -104,9 +98,8 @@ const MyPublications = ({ user }) => {
                   key={res.id}
                   publication={res}
                   user={user}
-                  category='teams' equip
-                  link='fortnite'
-                  deleteCategory='fortnite'
+                  remove
+                  equip
                 />
               ))
             }
@@ -116,9 +109,7 @@ const MyPublications = ({ user }) => {
                   key={res.id}
                   publication={res}
                   user={user}
-                  category='fortnite'
-                  link='fortnite'
-                  deleteCategory='fortnite'
+                  remove
                 />
               ))
             }
@@ -127,18 +118,15 @@ const MyPublications = ({ user }) => {
       }
         {
         (publicationsValorant.length !== 0 || publicationsValorantTeams.length !== 0) && (
-          <BoxCards title='Publicaciones de Valorant'>
+          <BoxCards title='Valorant'>
             {
               publicationsValorantTeams.map((res) => (
                 <CardPublications
                   key={res.id}
                   publication={res}
                   user={user}
-                  category='teams'
-                  teamsCategory='valorant'
+                  remove
                   equip
-                  link='valorant'
-                  deleteCategory='valorant'
                 />
               ))
             }
@@ -148,9 +136,7 @@ const MyPublications = ({ user }) => {
                   key={res.id}
                   publication={res}
                   user={user}
-                  category='valorant'
-                  link='valorant'
-                  deleteCategory='valorant'
+                  remove
                 />
               ))
             }

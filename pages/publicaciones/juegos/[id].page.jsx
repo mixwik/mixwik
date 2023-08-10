@@ -1,7 +1,3 @@
-// Next Components
-
-// Edit components
-
 // Hooks
 import { useRouter } from 'next/router'
 import { useSession } from '../../../firebase/auth/useSession'
@@ -15,17 +11,6 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 // Components
 import Layout from '../../../components/Layout'
 import UserMap from '../../../components/UserMap'
-
-// Icons
-
-// styles
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
-
-// Images
-import PageLoader from '../../../components/Loaders/PageLoader'
-import PromotionMethods from '../../../components/PromotionMethods'
-import { COLLECTIONS } from '../../../domain/constants'
-import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import Age from '../components/Age'
 import ImagesCarousel from '../components/Carousel'
 import Description from '../components/Description'
@@ -37,6 +22,17 @@ import ProfileUser from '../components/ProfileUser'
 import Social from '../components/Social'
 import Title from '../components/Title'
 import TypeOfGamer from '../components/TypeOfGamer'
+import PageLoader from '../../../components/Loaders/PageLoader'
+import PromotionMethods from '../../../components/PromotionMethods'
+
+// Icons
+
+// styles
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+
+// Images
+import { COLLECTIONS } from '../../../domain/constants'
+import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 
 const User = () => {
   const router = useRouter()
@@ -71,7 +67,7 @@ const User = () => {
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${publicationUser.name}?`)) {
-      deletePublication(page, id, publicationUser.id, page === COLLECTIONS.teams ? publication.category : page)
+      deletePublication(page, id, publicationUser.id, publication.category)
       updateUserAdmonition(publicationUser.id, 1)
     }
   }
