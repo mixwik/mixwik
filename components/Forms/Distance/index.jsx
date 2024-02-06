@@ -1,10 +1,14 @@
 import { useHandleOpenContext, useOpenContext } from '../../../context'
+import { useMaster } from '../../../hooks/useMaster'
 import { PositionMap } from '../../Svg'
 import styles from '../Forms.module.scss'
 
 const Distance = ({ distance, setDistance }) => {
   const isOpen = useOpenContext()
   const handleOpen = useHandleOpenContext()
+  const { master } = useMaster()
+  console.log(master)
+
   return (
     <section className={styles.formFilter}>
       <h3
@@ -23,7 +27,7 @@ const Distance = ({ distance, setDistance }) => {
               <input
                 type='range'
                 min={1}
-                max={700}
+                max={master ? 20000 : 700}
                 value={distance}
                 onChange={(e) => setDistance(e.target.value)}
               />
