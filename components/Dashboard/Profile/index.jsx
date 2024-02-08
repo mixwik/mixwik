@@ -59,7 +59,6 @@ const Profile = ({ user, mixWikTeams }) => {
     twitch: /^https?:\/\/(www\.)?twitch\.tv\/[a-zA-Z0-9_]+$/,
     youtube: /^https?:\/\/(www\.)?youtube\.com\/[a-zA-Z0-9_]+$/
   }
-  console.log(user)
 
   return (
     <section className={styles.profile}>
