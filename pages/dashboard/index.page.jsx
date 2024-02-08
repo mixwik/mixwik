@@ -34,10 +34,12 @@ import { useHandleOpenContext, useOpenContext } from '../../context'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
+import { useMaster } from '../../hooks/useMaster'
 import Favorites from './components/Favorites'
 import MyPublications from './components/MyPublications'
 
 export default function Dashboard () {
+  const { master } = useMaster()
   const handleOpen = useHandleOpenContext()
   const isOpen = useOpenContext()
   const handleSignOut = useSignOut()
@@ -63,8 +65,6 @@ export default function Dashboard () {
   const user = useSession()
   const currentUser = useGetOneData('users', user.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
-  const master1 = process.env.NEXT_PUBLIC_MASTER1
-  const master2 = process.env.NEXT_PUBLIC_MASTER2
   if (toggle === 'loading') return <PageLoader />
   if (currentUser.length === 0) return <NewUser />
 
@@ -144,7 +144,7 @@ export default function Dashboard () {
               MixWik Teams
             </li>
             {
-              (user.uid === master1 || user.uid === master2) && (
+              master && (
                 <li
                   data-isActive={page === 'allUsers'}
                   onClick={() => handleClick('allUsers')}
@@ -154,7 +154,7 @@ export default function Dashboard () {
               )
             }
             {
-              (user.uid === master1 || user.uid === master2) && (
+              master && (
                 <li
                   data-isActive={page === 'bugsReports'}
                   onClick={() => handleClick('bugsReports')}

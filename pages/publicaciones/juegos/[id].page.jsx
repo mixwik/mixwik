@@ -10,6 +10,8 @@ import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 
 // Components
 import Layout from '../../../components/Layout'
+import PageLoader from '../../../components/Loaders/PageLoader'
+import PromotionMethods from '../../../components/PromotionMethods'
 import UserMap from '../../../components/UserMap'
 import Age from '../components/Age'
 import ImagesCarousel from '../components/Carousel'
@@ -22,8 +24,6 @@ import ProfileUser from '../components/ProfileUser'
 import Social from '../components/Social'
 import Title from '../components/Title'
 import TypeOfGamer from '../components/TypeOfGamer'
-import PageLoader from '../../../components/Loaders/PageLoader'
-import PromotionMethods from '../../../components/PromotionMethods'
 
 // Icons
 
@@ -33,8 +33,10 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 // Images
 import { COLLECTIONS } from '../../../domain/constants'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
+import { useMaster } from '../../../hooks/useMaster'
 
 const User = () => {
+  const { master } = useMaster()
   const router = useRouter()
   const { id, page } = router.query
   const user = useSession()
@@ -61,9 +63,6 @@ const User = () => {
   publication.img5.url !== '' && images.push(publication.img5.url)
   publication.img6.url !== '' && images.push(publication.img6.url)
   publication.img7.url !== '' && images.push(publication.img7.url)
-
-  const master1 = process.env.NEXT_PUBLIC_MASTER1
-  const master2 = process.env.NEXT_PUBLIC_MASTER2
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${publicationUser.name}?`)) {
@@ -178,7 +177,7 @@ const User = () => {
           />
         </section>
         {
-          (master1 === user.uid || master2 === user.uid) && (
+          master && (
             <button className='fixed right-0 z-20 p-5 font-bold text-white md:bottom-10 bottom-28 bg-pennBlue' onClick={handleDelete}>Eliminar</button>
           )
         }
