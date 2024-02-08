@@ -11,15 +11,20 @@ import { useSession } from '../../firebase/auth/useSession'
 // Componentes
 import Image from 'next/image'
 import Link from 'next/link'
+import Bugs from '../../components/Bugs'
+import AllUsers from './components/AllUsers'
 import BugsReports from '../../components/Dashboard/BugsReports'
 import MixWikTeams from '../../components/Dashboard/MixWikTeams'
 import NewPublication from '../../components/Dashboard/NewPublication'
+import NewTeam from '../../components/Dashboard/NewTeam'
 import Profile from '../../components/Dashboard/Profile'
 import Publications from '../../components/Dashboard/Publications'
 import Layout from '../../components/Layout'
 import PageLoader from '../../components/Loaders/PageLoader'
 import NewUser from '../../components/NewUser'
 import { myLoader } from '../../components/myLoader'
+import Favorites from './components/Favorites'
+import MyPublications from './components/MyPublications'
 
 // Images
 import { AddPublication, BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
@@ -27,16 +32,11 @@ import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
 import { useRouter } from 'next/router'
-import Bugs from '../../components/Bugs'
-import AllUsers from '../../components/Dashboard/AllUsers'
-import NewTeam from '../../components/Dashboard/NewTeam'
 import { useHandleOpenContext, useOpenContext } from '../../context'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { useMaster } from '../../hooks/useMaster'
-import Favorites from './components/Favorites'
-import MyPublications from './components/MyPublications'
 
 export default function Dashboard () {
   const { master } = useMaster()
