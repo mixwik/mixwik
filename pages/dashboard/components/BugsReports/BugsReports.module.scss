@@ -1,0 +1,56 @@
+@import '../../../../styles/colors.scss';
+
+.bugsReports {
+    min-height: 90vh;
+    width: 100%;
+    h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-align: center;
+        padding: 1rem;
+    }
+    .filterButtons {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        button {
+            background-color: $aero;
+            color: $white;
+            padding: .5rem 1rem;
+            &[data-active=true] {
+                background-color: $pennBlue;
+            }
+        }
+    }
+    .box {
+        display: grid;
+        padding: 2rem;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2rem;
+        place-items: center;
+        @media screen and (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .report {
+            width: 100%;
+            height: 100%;
+            background-color: $white;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+            border-radius: .5rem;
+            &[data-resolved=true] {
+                background-color: $aero;
+                color: $white;
+            }
+            button {
+                background-color: $pennBlue;
+                color: $white;
+                padding: .5rem 1rem;
+            }
+        }   
+    }
+}
