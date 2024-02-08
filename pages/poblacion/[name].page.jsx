@@ -34,20 +34,9 @@ const City = () => {
           <h1 className='z-10 p-5 text-xl font-bold md:text-2xl'>
             Todos los jugadores en {name}
           </h1>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-          <div className={styles.gamersBox}>
-            {
-=======
           <div className='z-10 h-[74vh] md:overflow-y-scroll md:w-[50vw] w-screen overflow-y-auto'>
             <div className='grid grid-cols-[repeat(auto-fit,_minmax(10rem,1fr))] place-items-center gap-y-5'>
               {
->>>>>>> Stashed changes
-=======
-          <div className='z-10 h-[74vh] md:overflow-y-scroll md:w-[50vw] w-screen overflow-y-auto'>
-            <div className='grid grid-cols-[repeat(auto-fit,_minmax(10rem,1fr))] place-items-center'>
-              {
->>>>>>> 8617af7ba5054f3d3d02d3cdfe6148fb1b428520
               listUserAllGames.length > 0 && (
                 listUserAllGames.map(res => (
                   <Card
