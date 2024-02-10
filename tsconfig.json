@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/dashboard/index.page.jsx", "pages/dashboard/components/NewTeam/TeamsForms/Cs2.jsx"  ],
+, "pages/dashboard/index.page.jsx", "pages/dashboard/components/NewTeam/TeamsForms/Cs2.jsx", "hooks/useMaster.jsx"  ],
   "exclude": [
     "node_modules"
   ]

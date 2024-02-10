@@ -6,10 +6,6 @@ export const useMaster = () => {
   const user = useSession()
   const master1 = process.env.NEXT_PUBLIC_MASTER1
   const master2 = process.env.NEXT_PUBLIC_MASTER2
-  console.log(master)
-  console.log(master1)
-  console.log(master2)
-  console.log(user)
 
   useEffect(() => {
     if (user.uid === master1 || user.uid === master2) {
