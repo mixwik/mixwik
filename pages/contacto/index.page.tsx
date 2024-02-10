@@ -1,10 +1,28 @@
-import React from 'react'
+import emailjs from '@emailjs/browser'
 import Link from 'next/link'
+import { useRef } from 'react'
 import Layout from '../../components/Layout'
 import { EmailIcon, WhatsAppIcon } from '../../components/Svg'
 import styles from './Contact.module.scss'
 
 const Contact = () => {
+  const formRef = useRef(null)
+
+  const sendEmail = (e) => {
+    e.preventDefault()
+    emailjs.sendForm('service_2j6pfo8', 'template_uy6v29o', formRef.current, {
+      publicKey: 'Nd1_dBZIwAuFeukZf'
+    })
+      .then(
+        () => {
+          alert('Mensaje enviado correctamente')
+        },
+        (error) => {
+          alert(`Error al enviar el mensaje ${error}`)
+        }
+      )
+  }
+
   return (
     <Layout title='Email'>
       <section className={styles.contact}>
@@ -22,12 +40,12 @@ const Contact = () => {
               </Link>
             </div>
           </div>
-          <form className={styles.form}>
+          <form className={styles.form} ref={formRef} onSubmit={sendEmail}>
             <span className={styles.formTitle}>Contacto</span>
-            <input type='text' placeholder='Nombre:' />
-            <input type='text' placeholder='Correo electrónico:' />
-            <input type='text' placeholder='Asunto:' />
-            <textarea className='resize-none' rows={5} placeholder='Mensaje:' />
+            <input type='text' name='name' placeholder='Nombre:' />
+            <input type='text' name='email' placeholder='Correo electrónico:' />
+            <input type='text' name='subject' placeholder='Asunto:' />
+            <textarea className='resize-none' name='message' rows={5} placeholder='Mensaje:' />
             <button>Enviar mensaje</button>
           </form>
         </div>
