@@ -12,10 +12,6 @@ import dota2 from '../public/logos/dota2.png'
 import fortnite from '../public/logos/fortnite.png'
 import mixWik from '../public/logos/mixwik-logo.png'
 import rocketLeague from '../public/logos/rocket.png'
-import titleCs2 from '../public/titles-logos/CS2.png'
-import titleFortnite from '../public/titles-logos/Fortnite.png'
-import titleLol from '../public/titles-logos/LOL.png'
-import titleValoran from '../public/titles-logos/valorant.png'
 
 export const BACKGROUNDS_IMAGES = {
   backgroundGray,
@@ -34,13 +30,6 @@ export const LOGOS = {
   lol,
   rocketLeague,
   dota2
-}
-
-export const TITLES_LOGOS = {
-  titleValoran,
-  titleFortnite,
-  titleCs2,
-  titleLol
 }
 
 export const CITIES_IMAGES = {

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { TITLES_LOGOS } from '../../../assets/images'
 import FilterFortnite from '../../../components/Filters/Fortnite'
 import Layout from '../../../components/Layout'
 import PageContent from '../components/PageContent'
@@ -14,7 +13,7 @@ const Fortnite = () => {
         distance={distance}
       >
         <FilterFortnite distance={distance} setDistance={setDistance} />
-        <TitlePage title='Fortnite' alt='Logo de Fortnite' image={TITLES_LOGOS.titleFortnite} />
+        <TitlePage title='Fortnite' alt='Logo de Fortnite' image='/titles-logos/fortnite.webp' />
       </PageContent>
     </Layout>
   )

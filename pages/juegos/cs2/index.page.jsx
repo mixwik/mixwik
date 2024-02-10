@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { TITLES_LOGOS } from '../../../assets/images'
 import FilterCsgo from '../../../components/Filters/Csgo'
 import Layout from '../../../components/Layout'
 import PageContent from '../components/PageContent'
@@ -14,7 +13,7 @@ const Csgo = () => {
         distance={distance}
       >
         <FilterCsgo distance={distance} setDistance={setDistance} />
-        <TitlePage title='Counter Strike 2' alt='Logo de Counter Strike 2' image={TITLES_LOGOS.titleCs2} />
+        <TitlePage title='Counter Strike 2' alt='Logo de Counter Strike 2' image='/titles-logos/cs2.webp' />
       </PageContent>
     </Layout>
   )
