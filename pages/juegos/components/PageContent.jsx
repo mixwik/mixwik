@@ -1,7 +1,6 @@
 // Hooks
 
 // Styles
-import styles from '../../../styles/Pages.module.scss'
 
 // Components
 import Card from '../../../components/Card'
@@ -14,6 +13,7 @@ import { useUserFortniteFilters } from '../../../hooks/useUserFortniteFilters'
 // Context
 import { useHandleOpenContext } from '../../../context'
 
+import Link from 'next/link'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetTeams } from '../../../firebase/hooks/getMethod/useGetTeams'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
@@ -94,7 +94,12 @@ const PageContent = ({ category, children, distance }) => {
                     ))
                   )
                 : (
-                  <div className={styles.gamersNoFound}>No hay jugadores en este mome</div>
+                  <div className='flex flex-col items-center justify-center w-full h-full gap-5 text-center'>
+                    <h2 className='text-2xl font-bold text-gray-400'>No hay jugadores en este momento, modifica los filtros</h2>
+                    <Link className='font-bold text-blue-500' href='/'>
+                      Volver a la página principal
+                    </Link>
+                  </div>
                   )
             }
         </section>
