@@ -10,6 +10,8 @@ const Contact = () => {
   const [success, setSuccess] = useState(false)
   const formRef = useRef(null)
 
+  console.log(formRef.current)
+
   const sendEmail = (e) => {
     e.preventDefault()
     setLoading(true)
@@ -45,7 +47,7 @@ const Contact = () => {
               </Link>
             </div>
           </div>
-          <form ref={formRef} onSubmit={sendEmail} className='flex flex-col w-full gap-5 p-5 mb-10 md:w-1/2'>
+          <form ref={formRef} onSubmit={sendEmail} className='relative flex flex-col w-full h-full gap-5 p-5 mb-10 md:w-1/2'>
             <h1 className='text-3xl font-bold text-center text-white'>Contacto</h1>
             <div className='relative'>
               <div className='absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none'>
@@ -66,22 +68,12 @@ const Contact = () => {
             </div>
             <input className='rounded-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 min-w-0 w-full text-sm border-gray-300 p-2.5' type='text' name='subject' placeholder='Asunto:' />
             <textarea className='rounded-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 min-w-0 w-full text-sm border-gray-300 p-2.5 resize-none' name='message' rows={5} placeholder='Mensaje:' />
-            <button className='py-3 font-bold text-white rounded-lg bg-aero'>Enviar mensaje</button>
+            <button className={`py-3 font-bold text-white rounded-lg ${loading ? 'bg-orange' : success ? 'bg-green-500' : error ? 'bg-red-500' : 'bg-aero'}`}>
+              {loading ? 'Enviando mensaje..' : success ? 'Mensaje enviado' : error ? 'Error al enviar el mensaje' : 'Enviar mensaje'}
+            </button>
           </form>
         </div>
       </section>
-      {loading &&
-        <div className='absolute top-0 left-0 z-10 flex items-center justify-center w-screen h-screen'>
-          <span className='px-5 py-2 text-xl text-white bg-orange'>Enviando mensaje...</span>
-        </div>}
-      {error &&
-        <div className='absolute top-0 left-0 z-10 flex items-center justify-center w-screen h-screen'>
-          <span className='px-5 py-2 text-xl text-white bg-red-500'>Error al enviar mensaje</span>
-        </div>}
-      {success &&
-        <div className='absolute top-0 left-0 z-10 flex items-center justify-center w-screen h-screen'>
-          <span className='px-5 py-2 text-xl text-white bg-green-500'>Mensaje enviado correctamente</span>
-        </div>}
     </Layout>
   )
 }
