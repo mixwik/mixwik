@@ -6,9 +6,12 @@ import { GoogleAuthProvider } from 'firebase/auth'
 import { useLogInEmail, useLogInProvider } from '../../firebase/auth/useLogIn'
 
 // Icons
+import { useLogInOpenContext } from '../../context'
 import { useRegister } from '../../firebase/auth/register'
 
-const LogIn = ({ setIsOpen, isOpen }) => {
+export const LogIn = () => {
+  const { logInOpen, setLogInOpen } = useLogInOpenContext()
+  console.log(logInOpen)
   const emailRef = useRef()
   const passwordRef = useRef()
   const checkPasswordRef = useRef()
@@ -31,8 +34,8 @@ const LogIn = ({ setIsOpen, isOpen }) => {
   }
 
   return (
-    <div className={`fixed md:bottom-0 md:top-auto top-0 z-50 w-screen font-sans ${isOpen ? 'translate-y-0' : 'translate-y-[100vh]'} transition-all duration-500`}>
-      <button onClick={() => setIsOpen(false)} type='button' className='absolute z-10 inline-flex items-center justify-center p-2 text-gray-400 rounded-full bg-pennBlue hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-aero md:right-96 md:top-10 right-2 top-2'>
+    <div className={`fixed md:bottom-0 md:top-auto top-0 z-50 w-screen font-sans ${logInOpen ? 'translate-y-0' : 'translate-y-[100vh]'} transition-all duration-500`}>
+      <button onClick={() => setLogInOpen(false)} type='button' className='absolute z-10 inline-flex items-center justify-center p-2 text-gray-400 rounded-full bg-pennBlue hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-aero md:right-96 md:top-10 right-2 top-2'>
         <span className='sr-only'>Close menu</span>
         <svg className='w-6 h-6 text-aero' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'>
           <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' />
@@ -100,5 +103,3 @@ const LogIn = ({ setIsOpen, isOpen }) => {
 
   )
 }
-
-export default LogIn

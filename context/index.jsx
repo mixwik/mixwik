@@ -1,17 +1,20 @@
-import { useState, createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 const filterContext = createContext()
 const setFilterContext = createContext()
 const openContext = createContext()
-const handleOpenContex = createContext()
+const handleOpenContext = createContext()
+const logInOpenContext = createContext()
 
 export const useFilterContext = () => useContext(filterContext)
 export const useSetFilterContext = () => useContext(setFilterContext)
 export const useOpenContext = () => useContext(openContext)
-export const useHandleOpenContext = () => useContext(handleOpenContex)
+export const useHandleOpenContext = () => useContext(handleOpenContext)
+export const useLogInOpenContext = () => useContext(logInOpenContext)
 
 const DataProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState('')
+  const [logInOpen, setLogInOpen] = useState(false)
   const [filter, setFilter] = useState({
     age: {
       min: 16,
@@ -63,16 +66,19 @@ const DataProvider = ({ children }) => {
     if (name === isOpen) setIsOpen('')
     else setIsOpen(name)
   }
+
   return (
-    <filterContext.Provider value={filter}>
-      <setFilterContext.Provider value={handleSetFilter}>
-        <openContext.Provider value={isOpen}>
-          <handleOpenContex.Provider value={handleOpen}>
-            {children}
-          </handleOpenContex.Provider>
-        </openContext.Provider>
-      </setFilterContext.Provider>
-    </filterContext.Provider>
+    <logInOpenContext.Provider value={{ logInOpen, setLogInOpen }}>
+      <filterContext.Provider value={filter}>
+        <setFilterContext.Provider value={handleSetFilter}>
+          <openContext.Provider value={isOpen}>
+            <handleOpenContext.Provider value={handleOpen}>
+              {children}
+            </handleOpenContext.Provider>
+          </openContext.Provider>
+        </setFilterContext.Provider>
+      </filterContext.Provider>
+    </logInOpenContext.Provider>
   )
 }
 

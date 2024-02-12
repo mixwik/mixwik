@@ -1,6 +1,7 @@
 import styles from './Layout.module.scss'
 
 import Head from 'next/head'
+import { LogIn } from '../LogIn'
 import Nav from '../Nav'
 
 const Layout = ({ children, title }) => {
@@ -13,6 +14,7 @@ const Layout = ({ children, title }) => {
       <main className={styles.main}>
         {children}
       </main>
+      <LogIn />
     </>
   )
 }

@@ -16,19 +16,18 @@ import { myLoader } from '../myLoader'
 
 // Log In
 import { useGetUsers } from '../../application/useGetUsers'
+import { useHandleOpenContext, useLogInOpenContext } from '../../context'
 import { useSession } from '../../firebase/auth/useSession'
 import Bugs from '../Bugs'
-import LogIn from '../LogIn'
-import { useHandleOpenContext } from '../../context'
 
 const Nav = () => {
+  const { setLogInOpen } = useLogInOpenContext()
   const handleOpen = useHandleOpenContext()
   const router = useRouter()
   useEffect(() => {
     if (router.asPath === '/') setTransparent(true)
     else setTransparent(false)
   }, [router.asPath])
-  const [isOpen, setIsOpen] = useState(false)
   const [bugs, setBugs] = useState(false)
   const [transparent, setTransparent] = useState(false)
 
@@ -98,7 +97,7 @@ const Nav = () => {
                   </Link>
                   )
                 : (
-                  <button className={styles.logInButton} onClick={() => setIsOpen(!isOpen)}>
+                  <button className={styles.logInButton} onClick={() => setLogInOpen(true)}>
                     <UserIcon />
                   </button>
                   )
@@ -110,7 +109,6 @@ const Nav = () => {
           </button>
         </div>
       </nav>
-      <LogIn setIsOpen={setIsOpen} isOpen={isOpen} />
       {bugs && <Bugs setBug={setBugs} user={user} />}
       <div className={styles.placeHolder} />
     </>
