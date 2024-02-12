@@ -11,7 +11,6 @@ import { useRegister } from '../../firebase/auth/register'
 
 export const LogIn = () => {
   const { logInOpen, setLogInOpen } = useLogInOpenContext()
-  console.log(logInOpen)
   const emailRef = useRef()
   const passwordRef = useRef()
   const checkPasswordRef = useRef()
@@ -41,7 +40,7 @@ export const LogIn = () => {
           <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12' />
         </svg>
       </button>
-      <div className='relative h-[90vh] flex flex-col justify-center items-center bg-gray-100 md:mx-0 mx-5'>
+      <div className='relative h-[90vh] flex flex-col justify-center items-center bg-gray-100 md:px-0 px-5'>
         <div className='relative w-full sm:max-w-sm'>
           <div className='absolute w-full h-full transform shadow-lg card bg-aero rounded-3xl -rotate-6' />
           <div className='absolute w-full h-full transform shadow-lg card bg-pennBlue rounded-3xl rotate-6' />
