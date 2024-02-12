@@ -34,6 +34,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { COLLECTIONS } from '../../../domain/constants'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import { useMaster } from '../../../hooks/useMaster'
+import Unauthorized from '../components/unauthorized'
 
 const User = () => {
   const { master } = useMaster()
@@ -71,6 +72,8 @@ const User = () => {
     }
   }
   const isNewPosition = JSON.stringify(publication.geometry) !== JSON.stringify(currentPosition)
+
+  if (!user.uid) return <Unauthorized />
 
   return (
     <Layout>
