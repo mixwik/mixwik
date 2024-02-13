@@ -11,7 +11,7 @@ import Map from '../../components/Map'
 
 // Customs Hooks
 import { useGetData } from '../../firebase/hooks/getMethod/useGetData'
-import { useUserCsgoFilters } from '../../hooks/useUserCsgoFilters'
+import { useGamesFilters } from '../../hooks/useGamesFilters'
 
 // Context
 import { useHandleOpenContext } from '../../context'
@@ -49,8 +49,8 @@ const AllGames = () => {
   const user = users.find(res => res.uid === session.uid)
 
   // filter users list with different filters
-  const listUserAllGames = useUserCsgoFilters(user, allGames, distance)
-  const listUserTeams = useUserCsgoFilters(user, allTeams, distance)
+  const listUserAllGames = useGamesFilters(user, allGames, distance)
+  const listUserTeams = useGamesFilters(user, allTeams, distance)
   return (
     <Layout>
       <div className={styles.pageBox}>
