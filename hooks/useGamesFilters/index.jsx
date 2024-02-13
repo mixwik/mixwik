@@ -1,8 +1,7 @@
 import { useFilterContext } from '../../context'
-import { useUserGeneralFilters } from '../useUserGeneralFilters'
 import { useUserFilterDistance } from '../useUsersFilterDistance'
 
-export const useUserFortniteFilters = (user, DB, distance) => {
+export const useGamesFilters = (user, DB, distance) => {
   const filter = useFilterContext()
 
   const listUsers = useUserFilterDistance(user, DB, distance)
@@ -23,15 +22,25 @@ export const useUserFortniteFilters = (user, DB, distance) => {
     })
     : listUsersPosition
 
-  const listUsersPreferenceTeam = filter.preferenceTeam.length
+  const listUsersLevel = filter.level.length
     ? listUsersTypeOfGamer.filter(fil => {
-      return filter.preferenceTeam.some((fil2) => {
-        return fil.preferenceTeam.includes(fil2)
+      return filter.level.some((fil2) => {
+        return fil.level.includes(fil2)
       })
     })
     : listUsersTypeOfGamer
 
-  const usersFiltered = useUserGeneralFilters(listUsersPreferenceTeam)
+  const listUsersPreferenceTeam = filter.preferenceTeam.length
+    ? listUsersLevel.filter(fil => {
+      return filter.preferenceTeam.some((fil2) => {
+        return fil.preferenceTeam.includes(fil2)
+      })
+    })
+    : listUsersLevel
+
+  const listUsersAge = listUsersPreferenceTeam.filter(fil => fil.age >= filter.age.min && fil.age <= filter.age.max)
+
+  const usersFiltered = listUsersAge
 
   return usersFiltered
 }
