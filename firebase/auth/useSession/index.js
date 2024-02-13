@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
+import { useEffect, useState } from 'react'
 import { auth } from '../../initialize'
 
 export const useSession = () => {
@@ -7,7 +7,6 @@ export const useSession = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user)
         setUser({
           name: user.displayName,
           email: user.email,

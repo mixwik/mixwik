@@ -142,9 +142,6 @@ export const updatePublicationPromotion = async (name, payID, id, router) => {
 }
 
 export const updatePublicationPosition = async (name, id, currentPosition) => {
-  console.log(currentPosition)
-  console.log(name)
-  console.log(id)
   const userRef = doc(db, name, id)
   await updateDoc(userRef, {
     geometry: currentPosition

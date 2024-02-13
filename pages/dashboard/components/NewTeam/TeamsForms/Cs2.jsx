@@ -37,7 +37,6 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
   const [image6, setImage6] = useState('')
   const [image7, setImage7] = useState('')
   const [progress, setProgress] = useState()
-  console.log(progress)
 
   const handleSetImage = async (e, setImages, setImgsURL, setPreviewImages) => {
     const reader = new FileReader()
@@ -91,7 +90,6 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
     age: 16,
     discord: currentUser.social.discord || ''
   }
-  console.log(currentUser.social.discord)
   return (
     <section className={styles.formBox} data-active={toggle === COLLECTIONS.cs2}>
       <h2 className={styles.titleForm}>Counter Strike 2</h2>

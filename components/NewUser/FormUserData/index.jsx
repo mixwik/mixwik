@@ -22,7 +22,7 @@ const FormUserData = ({ method }) => {
   const currentPosition = useCurrentPosition()
   const [error, updateDataUser] = useUpdateDataUser()
   const user = useSession()
-  console.log(error, progress, user)
+  console.log(error, progress)
 
   const handleSetImage = async (e) => {
     const reader = new FileReader()

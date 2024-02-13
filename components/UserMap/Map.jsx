@@ -33,8 +33,6 @@ const Map = ({ publication }) => {
     crossOrigin: true
   })
 
-  console.log(publication)
-
   return (
     <MapContainer
       className={styles.map}

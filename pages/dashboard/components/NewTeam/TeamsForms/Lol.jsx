@@ -37,7 +37,6 @@ const Lol = ({ currentUser, setToggle, toggle }) => {
   const [image6, setImage6] = useState('')
   const [image7, setImage7] = useState('')
   const [progress, setProgress] = useState()
-  console.log(progress)
 
   const handleSetImage = async (e, setImages, setImgsURL, setPreviewImages) => {
     const reader = new FileReader()

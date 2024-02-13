@@ -1,6 +1,6 @@
-import styles from '../../Forms.module.scss'
-import { useSetFilterContext, useFilterContext, useOpenContext, useHandleOpenContext } from '../../../../context'
+import { useFilterContext, useHandleOpenContext, useOpenContext, useSetFilterContext } from '../../../../context'
 import { GameLevel } from '../../../Svg'
+import styles from '../../Forms.module.scss'
 
 const FormLevel = () => {
   const handleSetFilter = useSetFilterContext()

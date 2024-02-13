@@ -15,7 +15,6 @@ const CookieConsent = () => {
       setShowConsent(true)
     }
   }, [])
-  console.log(consentAccepted)
   const handleAccept = () => {
     Cookie.set('cookieConsent', 'true', { expires: 365 })
     setConsentAccepted(true)

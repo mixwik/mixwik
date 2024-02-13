@@ -7,7 +7,6 @@ const Distance = ({ distance, setDistance }) => {
   const isOpen = useOpenContext()
   const handleOpen = useHandleOpenContext()
   const { master } = useMaster()
-  console.log(master)
 
   return (
     <section className={styles.formFilter}>

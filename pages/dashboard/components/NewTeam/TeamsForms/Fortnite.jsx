@@ -5,10 +5,10 @@ import { useState } from 'react'
 import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
 import { myLoader } from '../../../../../components/myLoader'
 import { COLLECTIONS } from '../../../../../domain/constants'
+import { setFortniteTeam } from '../../../../../firebase/hooks/setMethod/setFortniteTeam'
 import { updateDiscord, updateUserNumberPublications } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../../firebase/storage'
 import { useCurrentPosition } from '../../../../../hooks/useCurrentPosition'
-import { setFortniteTeam } from '../../../../../firebase/hooks/setMethod/setFortniteTeam'
 import styles from './NewTeamForm.module.scss'
 
 const Fortnite = ({ currentUser, setToggle, toggle }) => {
@@ -37,7 +37,6 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
   const [image6, setImage6] = useState('')
   const [image7, setImage7] = useState('')
   const [progress, setProgress] = useState()
-  console.log(progress)
 
   const handleSetImage = async (e, setImages, setImgsURL, setPreviewImages) => {
     const reader = new FileReader()
