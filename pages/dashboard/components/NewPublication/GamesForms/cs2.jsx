@@ -2,10 +2,10 @@ import styles from './GamesForms.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
 import { myLoader } from '../../../../../components/myLoader'
-import { COLLECTIONS } from '../../../../../domain/constants'
+import { COLLECTIONS, CS2_LEVELS, CS2_POSITIONS, TYPE_OF_GAME } from '../../../../../domain/constants'
 import { setPublication } from '../../../../../firebase/hooks/setMethod/setPublication'
 import { updateTwitter, updateUserNumberPublications } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../../firebase/storage'
@@ -88,7 +88,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
     twitter: currentUser.social.twitter || ''
   }
   return (
-    <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.cs2}>
+    <section className={styles.gamesForms}>
       <section className={styles.newPublication}>
         <h2 className={styles.title}>Counter Strike 2</h2>
         <div className={styles.form}>
@@ -135,7 +135,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
               }, 400)
             }}
           >
-            {({ isSubmitting, values, errors, isValidating }) => (
+            {({ isSubmitting, values, errors }) => (
               <Form>
                 <article className={styles.descriptionBox}>
                   <label className={styles.titlePublication}>
@@ -161,173 +161,37 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                 <article className={styles.position}>
                   <h3>¿En que posición te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='checkbox'
-                      value='Entry fragger'
-                      name='position'
-                      id='entry'
-                    />
-                    <label for='entry'>
-                      Entry Fragger
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='In-game leader'
-                      name='position'
-                      id='in-game'
-                    />
-                    <label for='in-game'>
-                      In-game leader
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='AWPer'
-                      name='position'
-                      id='awper'
-                    />
-                    <label for='awper'>
-                      AWPer
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Lurker'
-                      name='position'
-                      id='lurker'
-                    />
-                    <label for='lurker'>
-                      Lurker
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Playmaker'
-                      name='position'
-                      id='playmaker'
-                    />
-                    <label for='playmaker'>
-                      Playmaker
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Support'
-                      name='position'
-                      id='support'
-                    />
-                    <label for='support'>
-                      Support
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Entrenador'
-                      name='position'
-                      id='entrenador'
-                    />
-                    <label for='entrenador'>
-                      Entrenador
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Secondary AWPer'
-                      name='position'
-                      id='secondary-awper'
-                    />
-                    <label for='secondary-awper'>
-                      Secondary AWPer
-                    </label>
+                    {CS2_POSITIONS.map((position, index) => (
+                      <React.Fragment key={position}>
+                        <Field
+                          type='checkbox'
+                          value={position}
+                          name='position'
+                          id={`position-${index}`}
+                        />
+                        <label htmlFor={`position-${index}`}>
+                          {position}
+                        </label>
+                      </React.Fragment>
+                    ))}
                   </div>
                 </article>
                 <article className={styles.level}>
                   <h3>¿Cuál es tu nivel?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='radio'
-                      value='Silver'
-                      name='level'
-                      id='silver'
-                    />
-                    <label for='silver'>
-                      Silver
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Nova'
-                      name='level'
-                      id='nova'
-                    />
-                    <label for='nova'>
-                      Nova
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Ak'
-                      name='level'
-                      id='ak'
-                    />
-                    <label for='ak'>
-                      Ak
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Ak laurel'
-                      name='level'
-                      id='ak-laurel'
-                    />
-                    <label for='ak-laurel'>
-                      Ak Laurel
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Doble ak'
-                      name='level'
-                      id='doble-ak'
-                    />
-                    <label for='doble-ak'>
-                      Doble Ak
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Chapa'
-                      name='level'
-                      id='chapa'
-                    />
-                    <label for='chapa'>
-                      Chapa
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Aguila'
-                      name='level'
-                      id='aguila'
-                    />
-                    <label for='aguila'>
-                      Aguila
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Aguila laurel'
-                      name='level'
-                      id='aguil-laurel'
-                    />
-                    <label for='aguil-laurel'>
-                      Aguila Laurel
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Supreme'
-                      name='level'
-                      id='supreme'
-                    />
-                    <label for='supreme'>
-                      Supreme
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Global elite'
-                      name='level'
-                      id='global-elite'
-                    />
-                    <label for='global-elite'>
-                      Global Elite
-                    </label>
+                    {CS2_LEVELS.map((level, index) => (
+                      <React.Fragment key={level}>
+                        <Field
+                          type='radio'
+                          value={level}
+                          name='level'
+                          id={`level-${index}`}
+                        />
+                        <label for={`level-${index}`}>
+                          {level}
+                        </label>
+                      </React.Fragment>
+                    ))}
                   </div>
                 </article>
                 <article className={styles.hoursAndType}>
@@ -346,24 +210,21 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                   <article className={styles.typeOfGamer}>
                     <h3>¿Que tipo de jugador te consideras?</h3>
                     <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                      <Field
-                        type='checkbox'
-                        name='typeOfGamer'
-                        value='Competitivo'
-                        id='competitivo'
-                      />
-                      <label for='competitivo'>
-                        Competitivo
-                      </label>
-                      <Field
-                        type='checkbox'
-                        name='typeOfGamer'
-                        value='Casual'
-                        id='casual'
-                      />
-                      <label for='casual'>
-                        Casual
-                      </label>
+                      {
+                        TYPE_OF_GAME.map((type) => (
+                          <React.Fragment key={type}>
+                            <Field
+                              type='checkbox'
+                              name='typeOfGamer'
+                              value={type}
+                              id={type}
+                            />
+                            <label for={type}>
+                              {type}
+                            </label>
+                          </React.Fragment>
+                        ))
+                      }
                     </div>
                   </article>
                 </article>

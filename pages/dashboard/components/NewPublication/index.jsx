@@ -133,11 +133,18 @@ const NewPublication = ({ user, mixWikTeams }) => {
         </li>
       </ul>
       <NoMorePublications setTeams={setTeams} noPremium={teams === 'noMixWikTeams'} currentUser={user} />
-      <CsgoPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
-      <LolPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
-      <FortnitePublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
-      <ValorantPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
-
+      {
+        toggle === COLLECTIONS.cs2 && <CsgoPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
+      }
+      {
+        toggle === COLLECTIONS.lol && <LolPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
+      }
+      {
+        toggle === COLLECTIONS.fortnite && <FortnitePublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
+      }
+      {
+        toggle === COLLECTIONS.valorant && <ValorantPublication currentPosition={currentPosition} setTeams={setTeams} teams={mixWikTeams} setToggle={setToggle} toggle={toggle} currentUser={user} />
+      }
     </section>
   )
 }

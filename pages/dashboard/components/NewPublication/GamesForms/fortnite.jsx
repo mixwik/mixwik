@@ -2,13 +2,13 @@ import styles from './GamesForms.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
-import { useState } from 'react'
-import { COLLECTIONS } from '../../../../../domain/constants'
+import React, { useState } from 'react'
+import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
+import { myLoader } from '../../../../../components/myLoader'
+import { COLLECTIONS, FORTNITE_POSITIONS, FORTNITE_PREFERENCE_TEAM, TYPE_OF_GAME } from '../../../../../domain/constants'
 import { setFortnitePublication } from '../../../../../firebase/hooks/setMethod/setFortnitePublication'
 import { updateTwitter, updateUserNumberPublications } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../../firebase/storage'
-import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
-import { myLoader } from '../../../../../components/myLoader'
 
 const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
   const [imageError, setImageError] = useState()
@@ -88,7 +88,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
     twitter: currentUser.social.twitter || ''
   }
   return (
-    <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.fortnite}>
+    <section className={styles.gamesForms}>
       <section className={styles.newPublication}>
         <h2 className={styles.title}>Fortnite</h2>
         <div className={styles.form}>
@@ -161,65 +161,41 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                 <article className={styles.position}>
                   <h3>¿En que posición te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='checkbox'
-                      value='In-game leader'
-                      name='position'
-                      id='in-gameFortnite'
-                    />
-                    <label for='in-gameFortnite'>
-                      In-game leader
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Entry fragger'
-                      name='position'
-                      id='entryFortnite'
-                    />
-                    <label for='entryFortnite'>
-                      Entry Fragger
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Support'
-                      name='position'
-                      id='supportFortnite'
-                    />
-                    <label for='supportFortnite'>
-                      Support
-                    </label>
+                    {
+                      FORTNITE_POSITIONS.map(position => (
+                        <React.Fragment key={position}>
+                          <Field
+                            type='checkbox'
+                            value={position}
+                            name='position'
+                            id={position}
+                          />
+                          <label for={position}>
+                            {position}
+                          </label>
+                        </React.Fragment>
+                      ))
+                    }
                   </div>
                 </article>
                 <article className={styles.preferenceTeam}>
                   <h3>¿Cómo te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='radio'
-                      value='2 vs 2'
-                      name='preferenceTeam'
-                      id='2vs2'
-                    />
-                    <label for='2vs2'>
-                      2 vs 2
-                    </label>
-                    <Field
-                      type='radio'
-                      value='3 vs 3'
-                      name='preferenceTeam'
-                      id='3vs3'
-                    />
-                    <label for='3vs3'>
-                      3 vs 3
-                    </label>
-                    <Field
-                      type='radio'
-                      value='4 vs 4'
-                      name='preferenceTeam'
-                      id='4vs4'
-                    />
-                    <label for='4vs4'>
-                      4 vs 4
-                    </label>
+                    {
+                      FORTNITE_PREFERENCE_TEAM.map(preference => (
+                        <React.Fragment key={preference}>
+                          <Field
+                            type='checkbox'
+                            value={preference}
+                            name='preferenceTeam'
+                            id={preference}
+                          />
+                          <label for={preference}>
+                            {preference}
+                          </label>
+                        </React.Fragment>
+                      ))
+                    }
                   </div>
                 </article>
                 <article className={styles.hoursAndType}>
@@ -238,24 +214,21 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                   <article className={styles.typeOfGamer}>
                     <h3>¿Que tipo de jugador te consideras?</h3>
                     <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                      <Field
-                        type='checkbox'
-                        name='typeOfGamer'
-                        value='Competitivo'
-                        id='competitivoFortnite'
-                      />
-                      <label for='competitivoFortnite'>
-                        Competitivo
-                      </label>
-                      <Field
-                        type='checkbox'
-                        name='typeOfGamer'
-                        value='Casual'
-                        id='casualFortnite'
-                      />
-                      <label for='casualFortnite'>
-                        Casual
-                      </label>
+                      {
+                        TYPE_OF_GAME.map((type) => (
+                          <React.Fragment key={type}>
+                            <Field
+                              type='checkbox'
+                              name='typeOfGamer'
+                              value={type}
+                              id={type}
+                            />
+                            <label htmlFor={type}>
+                              {type}
+                            </label>
+                          </React.Fragment>
+                        ))
+                      }
                     </div>
                   </article>
                 </article>

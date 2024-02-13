@@ -2,13 +2,13 @@ import styles from './GamesForms.module.scss'
 
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
-import { useState } from 'react'
-import { COLLECTIONS } from '../../../../../domain/constants'
+import React, { useState } from 'react'
+import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
+import { myLoader } from '../../../../../components/myLoader'
+import { COLLECTIONS, LOL_LEVELS, LOL_POSITIONS, TYPE_OF_GAME } from '../../../../../domain/constants'
 import { setPublication } from '../../../../../firebase/hooks/setMethod/setPublication'
 import { updateTwitter, updateUserNumberPublications } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../../firebase/storage'
-import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
-import { myLoader } from '../../../../../components/myLoader'
 
 const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, currentPosition }) => {
   const [imageError, setImageError] = useState()
@@ -88,7 +88,7 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
     twitter: currentUser.social.twitter || ''
   }
   return (
-    <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.lol}>
+    <section className={styles.gamesForms}>
       <section className={styles.newPublication}>
         <h2 className={styles.title}>League Of Legends</h2>
         <div className={styles.form}>
@@ -161,146 +161,41 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
                 <article className={styles.position}>
                   <h3>¿En que posición te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='checkbox'
-                      value='Toplane'
-                      name='position'
-                      id='toplane'
-                    />
-                    <label for='toplane'>
-                      Toplane
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Midlane'
-                      name='position'
-                      id='midlane'
-                    />
-                    <label for='midlane'>
-                      Midlane
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Jungla'
-                      name='position'
-                      id='jungla'
-                    />
-                    <label for='jungla'>
-                      Jungla
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='ADC'
-                      name='position'
-                      id='adc'
-                    />
-                    <label for='adc'>
-                      ADC
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Support'
-                      name='position'
-                      id='supportLol'
-                    />
-                    <label for='supportLol'>
-                      Support
-                    </label>
+                    {
+                      LOL_POSITIONS.map((position, index) => (
+                        <React.Fragment key={index}>
+                          <Field
+                            type='checkbox'
+                            value={position}
+                            name='position'
+                            id={position}
+                          />
+                          <label for={position}>
+                            {position}
+                          </label>
+                        </React.Fragment>
+                      ))
+                    }
                   </div>
                 </article>
                 <article className={styles.level}>
                   <h3>¿Cuál es tu nivel?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='radio'
-                      value='Sin Nivel'
-                      name='level'
-                      id='sin nivel'
-                    />
-                    <label for='sin nivel'>
-                      Sin Nivel
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Hierro'
-                      name='level'
-                      id='hierro'
-                    />
-                    <label for='hierro'>
-                      Hierro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Bronce'
-                      name='level'
-                      id='bronce'
-                    />
-                    <label for='bronce'>
-                      Bronce
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Plata'
-                      name='level'
-                      id='plata'
-                    />
-                    <label for='plata'>
-                      Plata
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Oro'
-                      name='level'
-                      id='oro'
-                    />
-                    <label for='oro'>
-                      Oro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Platino'
-                      name='level'
-                      id='platino'
-                    />
-                    <label for='platino'>
-                      Platino
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Diamante'
-                      name='level'
-                      id='diamante'
-                    />
-                    <label for='diamante'>
-                      Diamante
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Maestro'
-                      name='level'
-                      id='maestro'
-                    />
-                    <label for='maestro'>
-                      Maestro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Gran Maestro'
-                      name='level'
-                      id='gran maestro'
-                    />
-                    <label for='gran maestro'>
-                      Gran Maestro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Retador'
-                      name='level'
-                      id='retador'
-                    />
-                    <label for='retador'>
-                      Retador
-                    </label>
+                    {
+                    LOL_LEVELS.map((level) => (
+                      <React.Fragment key={level}>
+                        <Field
+                          type='radio'
+                          value={level}
+                          name='level'
+                          id={level}
+                        />
+                        <label for={level}>
+                          {level}
+                        </label>
+                      </React.Fragment>
+                    ))
+                  }
                   </div>
                 </article>
                 <article className={styles.hoursAndType}>
@@ -319,24 +214,21 @@ const LolPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curre
                   <article className={styles.typeOfGamer}>
                     <h3>¿Que tipo de jugador te consideras?</h3>
                     <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                      <Field
-                        type='checkbox'
-                        name='typeOfGamer'
-                        value='Competitivo'
-                        id='competitivoLol'
-                      />
-                      <label for='competitivoLol'>
-                        Competitivo
-                      </label>
-                      <Field
-                        type='checkbox'
-                        name='typeOfGamer'
-                        value='Casual'
-                        id='casualLol'
-                      />
-                      <label for='casualLol'>
-                        Casual
-                      </label>
+                      {
+                      TYPE_OF_GAME.map((typeOfGamer) => (
+                        <React.Fragment key={typeOfGamer}>
+                          <Field
+                            type='checkbox'
+                            name='typeOfGamer'
+                            value={typeOfGamer}
+                            id={typeOfGamer}
+                          />
+                          <label for={typeOfGamer}>
+                            {typeOfGamer}
+                          </label>
+                        </React.Fragment>
+                      ))
+                    }
                     </div>
                   </article>
                 </article>

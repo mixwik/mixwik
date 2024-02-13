@@ -1,9 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from 'next/image'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
 import { myLoader } from '../../../../../components/myLoader'
-import { COLLECTIONS } from '../../../../../domain/constants'
+import { COLLECTIONS, TYPE_OF_GAME, VALORANT_LEVELS, VALORANT_POSITION } from '../../../../../domain/constants'
 import { setPublication } from '../../../../../firebase/hooks/setMethod/setPublication'
 import { updateTwitter, updateUserNumberPublications } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../../firebase/storage'
@@ -87,7 +87,7 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
     twitter: currentUser.social.twitter || ''
   }
   return (
-    <section className={styles.gamesForms} data-open={toggle === COLLECTIONS.valorant}>
+    <section className={styles.gamesForms}>
       <section className={styles.newPublication}>
         <h2 className={styles.title}>Valorant</h2>
         <div className={styles.form}>
@@ -160,119 +160,41 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                 <article className={styles.position}>
                   <h3>¿En que posición te gusta jugar?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='checkbox'
-                      value='Iniciador'
-                      name='position'
-                      id='iniciador'
-                    />
-                    <label for='iniciador'>
-                      Iniciador
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Duelista'
-                      name='position'
-                      id='duelista'
-                    />
-                    <label for='duelista'>
-                      Duelista
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Centinelas'
-                      name='position'
-                      id='centinelas'
-                    />
-                    <label for='centinelas'>
-                      Centinelas
-                    </label>
-                    <Field
-                      type='checkbox'
-                      value='Controlador'
-                      name='position'
-                      id='controlador'
-                    />
-                    <label for='controlador'>
-                      Controlador
-                    </label>
+                    {
+                      VALORANT_POSITION.map((position) => (
+                        <React.Fragment key={position}>
+                          <Field
+                            type='checkbox'
+                            value={position}
+                            name='position'
+                            id={position}
+                          />
+                          <label htmlFor={position}>
+                            {position}
+                          </label>
+                        </React.Fragment>
+                      ))
+                    }
                   </div>
                 </article>
                 <article className={styles.level}>
                   <h3>¿Cuál es tu nivel?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                    <Field
-                      type='radio'
-                      value='Hierro'
-                      name='level'
-                      id='hierroV'
-                    />
-                    <label for='hierroV'>
-                      Hierro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Bronce'
-                      name='level'
-                      id='bronceV'
-                    />
-                    <label for='bronceV'>
-                      Bronce
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Plata'
-                      name='level'
-                      id='plataV'
-                    />
-                    <label for='plataV'>
-                      Plata
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Oro'
-                      name='level'
-                      id='oroV'
-                    />
-                    <label for='oroV'>
-                      Oro
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Platino'
-                      name='level'
-                      id='platinoV'
-                    />
-                    <label for='platinoV'>
-                      Platino
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Diamante'
-                      name='level'
-                      id='diamanteV'
-                    />
-                    <label for='diamanteV'>
-                      Diamante
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Immortal'
-                      name='level'
-                      id='immortalV'
-                    />
-                    <label for='immortalV'>
-                      Immortal
-                    </label>
-                    <Field
-                      type='radio'
-                      value='Valorant'
-                      name='level'
-                      id='valorantV'
-                    />
-                    <label for='valorantV'>
-                      Valorant
-                    </label>
+                    {
+                      VALORANT_LEVELS.map((level) => (
+                        <React.Fragment key={level}>
+                          <Field
+                            type='radio'
+                            value={level}
+                            name='level'
+                            id={level}
+                          />
+                          <label for={level}>
+                            {level}
+                          </label>
+                        </React.Fragment>
+                      ))
+                    }
                   </div>
                 </article>
                 <article className={styles.hoursAndType}>
@@ -291,24 +213,21 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                   <article className={styles.typeOfGamer}>
                     <h3>¿Que tipo de jugador te consideras?</h3>
                     <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
-                      <Field
-                        type='checkbox'
-                        name='typeOfGamer'
-                        value='Competitivo'
-                        id='competitivoV'
-                      />
-                      <label for='competitivoV'>
-                        Competitivo
-                      </label>
-                      <Field
-                        type='checkbox'
-                        name='typeOfGamer'
-                        value='Casual'
-                        id='casualV'
-                      />
-                      <label for='casualV'>
-                        Casual
-                      </label>
+                      {
+                      TYPE_OF_GAME.map((typeOfGamer) => (
+                        <React.Fragment key={typeOfGamer}>
+                          <Field
+                            type='checkbox'
+                            name='typeOfGamer'
+                            value={typeOfGamer}
+                            id={typeOfGamer}
+                          />
+                          <label for={typeOfGamer}>
+                            {typeOfGamer}
+                          </label>
+                        </React.Fragment>
+                      ))
+                    }
                     </div>
                   </article>
                 </article>
