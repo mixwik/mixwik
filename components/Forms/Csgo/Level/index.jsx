@@ -1,4 +1,5 @@
 import { useFilterContext, useHandleOpenContext, useOpenContext, useSetFilterContext } from '../../../../context'
+import { CS2_LEVELS } from '../../../../domain/constants'
 import { GameLevel } from '../../../Svg'
 import styles from '../../Forms.module.scss'
 
@@ -20,106 +21,20 @@ const FormLevel = () => {
       {
         isOpen === 'level' && (
           <div className={styles.inputsBox}>
-            <label name='level'>
-              Silver
-              <input
-                type='checkbox'
-                value='Silver'
-                name='level'
-                checked={filter.level.includes('Silver')}
-                onClick={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Nova
-              <input
-                type='checkbox'
-                value='Nova'
-                name='level'
-                checked={filter.level.includes('Nova')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Ak
-              <input
-                type='checkbox'
-                value='Ak'
-                name='level'
-                checked={filter.level.includes('Ak')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Ak Laurel
-              <input
-                type='checkbox'
-                value='Ak laurel'
-                name='level'
-                checked={filter.level.includes('Ak laurel')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Doble Ak
-              <input
-                type='checkbox'
-                value='Doble ak'
-                name='level'
-                checked={filter.level.includes('Doble ak')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Chapa
-              <input
-                type='checkbox'
-                value='Chapa'
-                name='level'
-                checked={filter.level.includes('Chapa')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Aguila
-              <input
-                type='checkbox'
-                value='Aguila'
-                name='level'
-                checked={filter.level.includes('Aguila')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Aguila Laurel
-              <input
-                type='checkbox'
-                value='Aguila laurel'
-                name='level'
-                checked={filter.level.includes('Aguila laurel')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Supreme
-              <input
-                type='checkbox'
-                value='Supreme'
-                name='level'
-                checked={filter.level.includes('Supreme')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
-            <label name='level'>
-              Global Elite
-              <input
-                type='checkbox'
-                value='Global elite'
-                name='level'
-                checked={filter.level.includes('Global elite')}
-                onChange={(e) => handleSetFilter(e.target)}
-              />
-            </label>
+            {
+              CS2_LEVELS.map(level => (
+                <label key={level} name='level'>
+                  {level}
+                  <input
+                    type='checkbox'
+                    value={level}
+                    name='level'
+                    checked={filter.level.includes(level)}
+                    onClick={(e) => handleSetFilter(e.target)}
+                  />
+                </label>
+              ))
+            }
           </div>
         )
       }
