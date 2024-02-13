@@ -6,6 +6,7 @@ export const setPublication = async (category, value, geometry, userData, img, n
   await addDoc(collection(db, category), {
     position: value.position,
     level: value.level,
+    premier: value.premier,
     typeOfGamer: value.typeOfGamer,
     hours: value.hours,
     title: value.title,

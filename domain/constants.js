@@ -10,6 +10,14 @@ export const COLLECTIONS = {
   bugs: 'bugs'
 }
 
+export const FILTER_KEYS = [
+  'position',
+  'typeOfGamer',
+  'level',
+  'premier',
+  'preferenceTeam'
+]
+
 export const CS2_LEVELS = [
   'Silver',
   'Nova',
@@ -21,6 +29,15 @@ export const CS2_LEVELS = [
   'Aguila laurel',
   'Supreme',
   'Global elite'
+]
+
+export const CS2_PREMIER = [
+  '0 - 5000',
+  '5000 - 10000',
+  '10000 - 15000',
+  '15000 - 20000',
+  '20000 - 25000',
+  '25000 - 30000'
 ]
 
 export const CS2_POSITIONS = [

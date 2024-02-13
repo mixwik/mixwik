@@ -1,10 +1,10 @@
 import { Field, Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
 import { myLoader } from '../../../../../components/myLoader'
-import { COLLECTIONS } from '../../../../../domain/constants'
+import { COLLECTIONS, CS2_PREMIER } from '../../../../../domain/constants'
 import { setTeam } from '../../../../../firebase/hooks/setMethod/setTeam'
 import { updateDiscord, updateUserNumberPublications } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../../firebase/storage'
@@ -81,6 +81,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
   const initialValues = {
     position: [],
     level: [],
+    premier: [],
     typeOfGamer: [],
     hours: 0,
     title: '',
@@ -241,7 +242,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
               </div>
             </div>
             <div className={styles.level}>
-              <div className={styles.title}>¿Que niveles buscas?</div>
+              <div className={styles.title}>¿Que niveles de competitivo buscas?</div>
               <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
@@ -335,6 +336,24 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
                 </label>
               </div>
             </div>
+            <article className={styles.premier}>
+              <h3>¿Qué niveles de premier buscas?</h3>
+              <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+                {CS2_PREMIER.map((premier, index) => (
+                  <React.Fragment key={premier}>
+                    <Field
+                      type='checkbox'
+                      value={premier}
+                      name='premier'
+                      id={`premier-${index}`}
+                    />
+                    <label for={`premier-${index}`}>
+                      {premier}
+                    </label>
+                  </React.Fragment>
+                ))}
+              </div>
+            </article>
             <div className={styles.hoursTypeOfGamerAge}>
               <label className={styles.hours}>
                 Horas de juego mínimas

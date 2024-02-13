@@ -1,4 +1,5 @@
 import { useFilterContext } from '../../context'
+import { FILTER_KEYS } from '../../domain/constants'
 import { useUserFilterDistance } from '../useUsersFilterDistance'
 import { useCallback } from 'react'
 
@@ -13,9 +14,7 @@ export const useGamesFilters = (user, DB, distance) => {
     return users
   }, [])
 
-  const filterKeys = ['position', 'typeOfGamer', 'level', 'preferenceTeam']
-
-  filterKeys.forEach(key => {
+  FILTER_KEYS.forEach(key => {
     users = filterUsers(users, filter, key)
   })
 

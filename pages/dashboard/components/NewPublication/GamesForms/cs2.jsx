@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { DeleteIcon, ImageIcon } from '../../../../../components/Svg'
 import { myLoader } from '../../../../../components/myLoader'
-import { COLLECTIONS, CS2_LEVELS, CS2_POSITIONS, TYPE_OF_GAME } from '../../../../../domain/constants'
+import { COLLECTIONS, CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../../../domain/constants'
 import { setPublication } from '../../../../../firebase/hooks/setMethod/setPublication'
 import { updateTwitter, updateUserNumberPublications } from '../../../../../firebase/hooks/updateMethod/updateUserData'
 import { removeImageDB, setImageDB } from '../../../../../firebase/storage'
@@ -78,6 +78,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
   const initialValues = {
     position: [],
     level: [],
+    premier: [],
     typeOfGamer: [],
     hours: 0,
     title: '',
@@ -177,7 +178,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                   </div>
                 </article>
                 <article className={styles.level}>
-                  <h3>¿Cuál es tu nivel?</h3>
+                  <h3>¿Cuál es tu nivel en competitivo?</h3>
                   <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     {CS2_LEVELS.map((level, index) => (
                       <React.Fragment key={level}>
@@ -189,6 +190,24 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                         />
                         <label for={`level-${index}`}>
                           {level}
+                        </label>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </article>
+                <article className={styles.premier}>
+                  <h3>¿Cuál es tu nivel en premier?</h3>
+                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                    {CS2_PREMIER.map((premier, index) => (
+                      <React.Fragment key={premier}>
+                        <Field
+                          type='radio'
+                          value={premier}
+                          name='premier'
+                          id={`premier-${index}`}
+                        />
+                        <label for={`premier-${index}`}>
+                          {premier}
                         </label>
                       </React.Fragment>
                     ))}

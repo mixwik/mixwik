@@ -23,6 +23,7 @@ const DataProvider = ({ children }) => {
     typeOfGamer: [],
     position: [],
     level: [],
+    premier: [],
     preferenceTeam: []
   })
 
@@ -51,6 +52,13 @@ const DataProvider = ({ children }) => {
         setFilter({ ...filter, level: newState })
       } else {
         setFilter({ ...filter, level: filter.level.concat(e.value) })
+      }
+    } else if (e.name === 'premier') {
+      if (filter.premier.includes(e.value)) {
+        const newState = filter.premier.filter(item => item !== e.value)
+        setFilter({ ...filter, premier: newState })
+      } else {
+        setFilter({ ...filter, premier: filter.premier.concat(e.value) })
       }
     } else if (e.name === 'preferenceTeam') {
       if (filter.preferenceTeam.includes(e.value)) {

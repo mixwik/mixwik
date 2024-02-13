@@ -8,6 +8,7 @@ export const setTeam = async (category, value, geometry, userData, img, name, im
     category,
     position: value.position,
     level: value.level,
+    premier: value.premier,
     typeOfGamer: value.typeOfGamer,
     hours: value.hours,
     title: value.title,
