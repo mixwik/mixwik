@@ -1,11 +1,12 @@
 import Cookie from 'js-cookie'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import styles from './CookiesConsent.module.scss'
-import Link from 'next/link'
 
 const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState(false)
   const [consentAccepted, setConsentAccepted] = useState(false)
+  console.log(consentAccepted)
 
   useEffect(() => {
     const hasConsent = Cookie.get('cookieConsent')
