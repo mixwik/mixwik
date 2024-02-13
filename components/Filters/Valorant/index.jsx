@@ -8,7 +8,7 @@ import TypeOfGamer from '../../Forms/TypeOfGamer'
 import FormLevel from '../../Forms/valorant/Level'
 import FormPosition from '../../Forms/valorant/Position'
 
-const FilterValorant = ({ distance, setDistance }) => {
+export const FilterValorant = ({ distance, setDistance }) => {
   return (
     <form className={styles.filter}>
       <Distance distance={distance} setDistance={setDistance} />
@@ -19,5 +19,3 @@ const FilterValorant = ({ distance, setDistance }) => {
     </form>
   )
 }
-
-export default FilterValorant
