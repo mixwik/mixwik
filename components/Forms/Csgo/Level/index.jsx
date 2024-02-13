@@ -15,7 +15,7 @@ const FormLevel = () => {
         data-active={filter.level.length > 0}
       >
         <GameLevel />
-        Nivel
+        Competitivo
       </h3>
       {
         isOpen === 'level' && (

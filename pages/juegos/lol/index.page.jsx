@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import FilterCsgo from '../../../components/Filters/Csgo'
+import FilterLol from '../../../components/Filters/Lol'
 import Layout from '../../../components/Layout'
 import PageContent from '../components/PageContent'
 import TitlePage from '../components/TitlePage'
@@ -12,7 +12,7 @@ const Lol = () => {
         category='lol'
         distance={distance}
       >
-        <FilterCsgo distance={distance} setDistance={setDistance} />
+        <FilterLol distance={distance} setDistance={setDistance} />
         <TitlePage title='League of Legend' alt='Logo de League of Legend' image='/titles-logos/lol.webp' />
       </PageContent>
     </Layout>
