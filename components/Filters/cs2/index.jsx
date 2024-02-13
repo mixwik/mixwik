@@ -8,7 +8,7 @@ import FormPosition from '../../Forms/Csgo/Position'
 import FormLevel from '../../Forms/Csgo/Level'
 import Distance from '../../Forms/Distance'
 
-const FilterCsgo = ({ distance, setDistance }) => {
+export const FilterCs2 = ({ distance, setDistance }) => {
   return (
     <div className={styles.filter}>
       <Distance distance={distance} setDistance={setDistance} />
@@ -19,5 +19,3 @@ const FilterCsgo = ({ distance, setDistance }) => {
     </div>
   )
 }
-
-export default FilterCsgo
