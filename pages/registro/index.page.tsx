@@ -1,10 +1,10 @@
 // styles
 import Image from 'next/image'
+import Layout from '../../components/Layout'
+import { myLoader } from '../../components/myLoader'
 import { useSession } from '../../firebase/auth/useSession'
-import Layout from '../Layout'
-import { myLoader } from '../myLoader'
 
-const NewUser = () => {
+const Register = () => {
   const user = useSession()
   console.log(user)
 
@@ -13,7 +13,7 @@ const NewUser = () => {
   }
 
   return (
-    <Layout>
+    <Layout title='Registro'>
       <section className='flex items-center justify-center h-[90vh]'>
         <div className='fixed inset-0 -z-10 h-full w-full bg-slate-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]' />
         <div className='flex flex-col justify-around w-full h-full p-5 bg-white md:h-4/5 md:w-1/2'>
@@ -51,4 +51,4 @@ const NewUser = () => {
   )
 }
 
-export default NewUser
+export default Register

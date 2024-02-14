@@ -12,11 +12,8 @@ import { useSession } from '../../firebase/auth/useSession'
 import Image from 'next/image'
 import Link from 'next/link'
 import Bugs from '../../components/Bugs'
-import Profile from './components/Profile'
-import Publications from './components/Publications'
 import Layout from '../../components/Layout'
 import PageLoader from '../../components/Loaders/PageLoader'
-import NewUser from '../../components/NewUser'
 import { myLoader } from '../../components/myLoader'
 import AllUsers from './components/AllUsers'
 import BugsReports from './components/BugsReports'
@@ -25,6 +22,8 @@ import MixWikTeams from './components/MixWikTeams'
 import MyPublications from './components/MyPublications'
 import NewPublication from './components/NewPublication'
 import NewTeam from './components/NewTeam'
+import Profile from './components/Profile'
+import Publications from './components/Publications'
 
 // Images
 import { AddPublication, BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
@@ -47,12 +46,6 @@ export default function Dashboard () {
   const { page } = router.query
   const [toggle, setToggle] = useState(false)
   const [bugs, setBugs] = useState(false)
-  useEffect(() => {
-    setToggle('loading')
-    setTimeout(() => {
-      setToggle('profile')
-    }, 500)
-  }, [])
 
   function handleClick (name) {
     router.push({
@@ -65,8 +58,19 @@ export default function Dashboard () {
   const user = useSession()
   const currentUser = useGetOneData('users', user.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
+
+  useEffect(() => {
+    setToggle('loading')
+    setTimeout(() => {
+      setToggle('profile')
+    }, 500)
+    if (currentUser.length === 0) router.push('/registro')
+    return () => {
+      setToggle(false)
+    }
+  }, [currentUser, router])
+
   if (toggle === 'loading') return <PageLoader />
-  if (currentUser.length === 0) return <NewUser />
 
   return (
     <Layout>
