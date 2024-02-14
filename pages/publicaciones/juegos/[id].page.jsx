@@ -31,6 +31,7 @@ import TypeOfGamer from '../components/TypeOfGamer'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 // Images
+import { useEffect } from 'react'
 import { COLLECTIONS } from '../../../domain/constants'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import { useMaster } from '../../../hooks/useMaster'
@@ -44,26 +45,15 @@ const User = () => {
   const currentPosition = useCurrentPosition()
   const publication = useGetOnePublication(page, id)
   const publicationUser = useGetOneData(COLLECTIONS.users, publication.uid)
+  const currentUser = useGetOneData(COLLECTIONS.users, user.uid)
   const limitedAdministrator = useLimitedAdministrator(user.uid, publicationUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(publicationUser.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(publication.promotion)
-
-  if (publication.length === 0) return <PageLoader />
-  if (publicationUser.length === 0) return <PageLoader />
 
   const handleUpdatePosition = (e) => {
     e.preventDefault()
     updatePublicationPosition(page, id, currentPosition)
   }
-
-  const images = []
-  publication.img.url !== '' && images.push(publication.img.url)
-  publication.img2.url !== '' && images.push(publication.img2.url)
-  publication.img3.url !== '' && images.push(publication.img3.url)
-  publication.img4.url !== '' && images.push(publication.img4.url)
-  publication.img5.url !== '' && images.push(publication.img5.url)
-  publication.img6.url !== '' && images.push(publication.img6.url)
-  publication.img7.url !== '' && images.push(publication.img7.url)
 
   const handleDelete = () => {
     if (window.confirm(`¿Eliminar la publicación de ${publicationUser.name}?`)) {
@@ -73,7 +63,22 @@ const User = () => {
   }
   const isNewPosition = JSON.stringify(publication.geometry) !== JSON.stringify(currentPosition)
 
+  useEffect(() => {
+    if (currentUser.length === 0) router.push('/registro')
+  }, [currentUser, router, user.uid])
+
   if (!user.uid) return <Unauthorized />
+  if (publication.length === 0) return <PageLoader />
+  if (publicationUser.length === 0) return <PageLoader />
+
+  const images = []
+  publication.img.url !== '' && images.push(publication.img.url)
+  publication.img2.url !== '' && images.push(publication.img2.url)
+  publication.img3.url !== '' && images.push(publication.img3.url)
+  publication.img4.url !== '' && images.push(publication.img4.url)
+  publication.img5.url !== '' && images.push(publication.img5.url)
+  publication.img6.url !== '' && images.push(publication.img6.url)
+  publication.img7.url !== '' && images.push(publication.img7.url)
 
   return (
     <Layout>

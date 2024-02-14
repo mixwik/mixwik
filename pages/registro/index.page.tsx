@@ -45,6 +45,7 @@ const Register = () => {
             </li>
           </ol>
           <button onClick={createUser} className='w-full py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105'>Comenzar</button>
+          <button>No continuar</button>
         </div>
       </section>
     </Layout>
