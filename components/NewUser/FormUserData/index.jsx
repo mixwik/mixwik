@@ -47,8 +47,7 @@ const FormUserData = ({ method }) => {
     description: '',
     geometry: [],
     uid: '',
-    profileImg: '',
-    email: ''
+    profileImg: ''
   }
   return (
     <div className={styles.form}>
