@@ -1,22 +1,27 @@
+import { sendSignInLinkToEmail } from 'firebase/auth'
 import { useState } from 'react'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { useRouter } from 'next/router'
 import { auth } from '../../initialize'
 
 export const useRegister = () => {
   const [errorRegister, setErrorRegister] = useState(false)
-  const router = useRouter()
-  const register = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
+  const [successRegister, setSuccessRegister] = useState(false)
+  const actionCodeSettings = {
+    url: 'http://localhost:3000/finalizarRegistro',
+    handleCodeInApp: true
+  }
+
+  const register = (email) => {
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
       .then(() => {
-        router.push('/dashboard')
+        window.localStorage.setItem('emailForSignIn', email)
+        setSuccessRegister(true)
       })
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
         setErrorRegister(errorCode, errorMessage)
+        console.error(errorCode, errorMessage)
       })
   }
-
-  return [errorRegister, register]
+  return { errorRegister, successRegister, register }
 }

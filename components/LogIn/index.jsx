@@ -8,14 +8,14 @@ import { useLogInEmail, useLogInProvider } from '../../firebase/auth/useLogIn'
 // Icons
 import { useLogInOpenContext } from '../../context'
 import { useRegister } from '../../firebase/auth/register'
+import { FinishRegistration } from './components/finish-registration'
 
 export const LogIn = () => {
   const { logInOpen, setLogInOpen } = useLogInOpenContext()
   const emailRef = useRef()
   const passwordRef = useRef()
-  const checkPasswordRef = useRef()
 
-  const [errorRegister, register] = useRegister()
+  const { register, successRegister, errorRegister } = useRegister()
   const [errorProvider, logInProvider] = useLogInProvider()
   const [errorEmail, logInEmail] = useLogInEmail()
   const google = new GoogleAuthProvider()
@@ -25,7 +25,7 @@ export const LogIn = () => {
   }
   const handleRegister = (e) => {
     e.preventDefault()
-    register(emailRef.current.value, passwordRef.current.value)
+    register(emailRef.current.value)
   }
   const handleLogInEmail = (e) => {
     e.preventDefault()
@@ -34,6 +34,11 @@ export const LogIn = () => {
 
   return (
     <div className={`fixed md:bottom-0 md:top-auto top-0 z-50 w-screen font-sans ${logInOpen ? 'translate-y-0' : 'translate-y-[100vh]'} transition-all duration-500`}>
+      {
+        successRegister && (
+          <FinishRegistration />
+        )
+      }
       <button onClick={() => setLogInOpen(false)} type='button' className='absolute z-10 inline-flex items-center justify-center p-2 text-gray-400 rounded-full bg-pennBlue hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-aero md:right-96 md:top-10 right-2 top-2'>
         <span className='sr-only'>Close menu</span>
         <svg className='w-6 h-6 text-aero' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'>
@@ -52,14 +57,6 @@ export const LogIn = () => {
 
               <div className='mt-7'>
                 <input type='email' ref={emailRef} placeholder='Correo electronico' className='block w-full mt-1 bg-gray-100 border-none shadow-lg h-11 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
-              </div>
-
-              <div className='mt-7'>
-                <input type='password' ref={passwordRef} placeholder='Contraseña' className='block w-full mt-1 bg-gray-100 border-none shadow-lg h-11 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
-              </div>
-
-              <div className='mt-7'>
-                <input type='password' ref={checkPasswordRef} placeholder='Confirmar contraseña' className='block w-full mt-1 bg-gray-100 border-none shadow-lg h-11 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
               </div>
 
               <div className='flex gap-5 mt-7'>
