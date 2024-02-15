@@ -2,9 +2,11 @@
 import Image from 'next/image'
 import Layout from '../../components/Layout'
 import { myLoader } from '../../components/myLoader'
+import { useSignOut } from '../../firebase/auth/SignOut'
 import { useSession } from '../../firebase/auth/useSession'
 
 const Register = () => {
+  const handleSignOut = useSignOut()
   const user = useSession()
   console.log(user)
 
@@ -44,8 +46,10 @@ const Register = () => {
               <p className='font-normal text-gray-500 text-pretty '>Pero antes de poder comenzar a publicar anuncios necesitamos saber de tí, por favor rellena los siguientes datos:</p>
             </li>
           </ol>
-          <button onClick={createUser} className='w-full py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105'>Comenzar</button>
-          <button>No continuar</button>
+          <div className='flex justify-center w-full gap-5'>
+            <button onClick={() => handleSignOut()}>No continuar</button>
+            <button onClick={createUser} className='px-5 py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105'>Comenzar</button>
+          </div>
         </div>
       </section>
     </Layout>

@@ -64,7 +64,7 @@ const User = () => {
   const isNewPosition = JSON.stringify(publication.geometry) !== JSON.stringify(currentPosition)
 
   useEffect(() => {
-    if (currentUser.length === 0) router.push('/registro')
+    if (user.uid && currentUser.length === 0) router.push('/registro')
   }, [currentUser, router, user.uid])
 
   if (!user.uid) return <Unauthorized />
