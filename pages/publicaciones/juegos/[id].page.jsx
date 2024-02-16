@@ -5,6 +5,7 @@ import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useGetOnePublication } from '../../../firebase/hooks/getMethod/useGetOnePublication'
 import { updatePublicationPosition, updateUserAdmonition } from '../../../firebase/hooks/updateMethod/updateUserData'
 import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
+import { useConfirmUserRegister } from '../../../hooks/useConfirmUserRegister'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 import { useLimitedAdministrator } from '../../../hooks/useLimitedAdministrator'
 
@@ -31,22 +32,20 @@ import TypeOfGamer from '../components/TypeOfGamer'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 // Images
-import { useEffect } from 'react'
 import { COLLECTIONS } from '../../../domain/constants'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import { useMaster } from '../../../hooks/useMaster'
-import Unauthorized from '../components/unauthorized'
 
 const User = () => {
+  useConfirmUserRegister()
+  const { userProvider } = useSession()
   const { master } = useMaster()
   const router = useRouter()
   const { id, page } = router.query
-  const user = useSession()
   const currentPosition = useCurrentPosition()
   const publication = useGetOnePublication(page, id)
   const publicationUser = useGetOneData(COLLECTIONS.users, publication.uid)
-  const currentUser = useGetOneData(COLLECTIONS.users, user.uid)
-  const limitedAdministrator = useLimitedAdministrator(user.uid, publicationUser.uid)
+  const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, publicationUser.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(publicationUser.mixWikTeams)
   const promotion = useMixWikTeamsCheckSubscription(publication.promotion)
 
@@ -63,11 +62,6 @@ const User = () => {
   }
   const isNewPosition = JSON.stringify(publication.geometry) !== JSON.stringify(currentPosition)
 
-  useEffect(() => {
-    if (user.uid && currentUser.length === 0) router.push('/registro')
-  }, [currentUser, router, user.uid])
-
-  if (!user.uid) return <Unauthorized />
   if (publication.length === 0) return <PageLoader />
   if (publicationUser.length === 0) return <PageLoader />
 
@@ -99,7 +93,7 @@ const User = () => {
               mixWikTeams={mixWikTeams}
               publicationUser={publicationUser}
               idPublication={id}
-              user={user}
+              userProvider={userProvider}
             />
             <ImagesCarousel
               images={images}

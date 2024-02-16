@@ -31,17 +31,17 @@ const Nav = () => {
   const [bugs, setBugs] = useState(false)
   const [transparent, setTransparent] = useState(false)
 
-  const user = useSession()
+  const { userProvider } = useSession()
   const { users } = useGetUsers()
 
   users.forEach(userb => {
     if (userb.ban) {
-      if (userb.uid === user.uid) {
+      if (userb.uid === userProvider?.uid) {
         router.push('/ban')
       }
     }
     if (userb.admonition >= 3) {
-      if (userb.uid === user.uid) {
+      if (userb.uid === userProvider?.uid) {
         router.push('/ban')
       }
     }
@@ -81,14 +81,14 @@ const Nav = () => {
             </li>
           </ul>
           {
-              user.uid
+              userProvider?.uid
                 ? (
                   <Link href='/dashboard?page=profile'>
                     {
-                    user.image
+                    userProvider?.image
                       ? (
 
-                        <Image width={0} height={0} src={user.image} alt={user.name} loader={myLoader} quality={1} />
+                        <Image width={0} height={0} src={userProvider?.image} alt={userProvider?.name} loader={myLoader} quality={1} />
                         )
                       : (
                         <UserIconLogin />
@@ -109,7 +109,7 @@ const Nav = () => {
           </button>
         </div>
       </nav>
-      {bugs && <Bugs setBug={setBugs} user={user} />}
+      {bugs && <Bugs setBug={setBugs} user={userProvider} />}
       <div className={styles.placeHolder} />
     </>
   )

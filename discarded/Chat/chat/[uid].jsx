@@ -1,30 +1,30 @@
 import styles from './Chat.module.scss'
 
 // Components
+import { Field, Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
 import Layout from '../../../components/Layout'
-import { Formik, Field, Form } from 'formik'
 
 // firebase
-import { useGetData } from '../../../firebase/hooks/getMethod/useGetData'
 import PrivateRoute from '../../../firebase/auth/PrivateRoute'
 import { useSession } from '../../../firebase/auth/useSession'
-import { setNewChat } from '../../setChats'
-import { useGetChats } from '../../getChats'
-import { updateChat } from '../../updateChat'
+import { useGetData } from '../../../firebase/hooks/getMethod/useGetData'
 import { updateChatUid } from '../../../firebase/hooks/updateMethod/updateUserData'
+import { useGetChats } from '../../getChats'
+import { setNewChat } from '../../setChats'
+import { updateChat } from '../../updateChat'
 
 export default function Chat () {
   const router = useRouter()
   const { uid } = router.query
 
   const users = useGetData('users')
-  const currentUser = useSession()
+  const { userProvider } = useSession()
 
   // El owner es el dueño del chat, al cuál nosotros hablamos
   // El myself somos nosotros que iniciamos la conversación
   const owner = users.find(find => find.uid === uid)
-  const myself = users.find(find => find.uid === currentUser.uid)
+  const myself = users.find(find => find.uid === userProvider?.uid)
   const chats = useGetChats()
 
   // Con esta función buscamos el uid propio y el de la otra persona dentro de los datos del chat para tener la seguridad de que accedemos al chat correcto

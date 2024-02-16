@@ -19,7 +19,7 @@ import { useGetTeams } from '../../../firebase/hooks/getMethod/useGetTeams'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 
 const PageContent = ({ category, children, distance }) => {
-  const session = useSession()
+  const { userProvider } = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const users = useGetData('users')
@@ -27,7 +27,7 @@ const PageContent = ({ category, children, distance }) => {
   const teams = useGetTeams('teams', category)
 
   // filter current user of the list of users
-  const user = users.find(res => res.uid === session.uid)
+  const user = users.find(res => res.uid === userProvider?.uid)
 
   // filter users list with different filters
   const listUserCsgo = useGamesFilters(user, csgo, distance)

@@ -35,9 +35,11 @@ import { useHandleOpenContext, useOpenContext } from '../../context'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
+import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
 import { useMaster } from '../../hooks/useMaster'
 
 export default function Dashboard () {
+  useConfirmUserRegister()
   const { master } = useMaster()
   const handleOpen = useHandleOpenContext()
   const isOpen = useOpenContext()
@@ -55,8 +57,8 @@ export default function Dashboard () {
     handleOpen('')
   }
 
-  const user = useSession()
-  const currentUser = useGetOneData('users', user.uid)
+  const { userProvider } = useSession()
+  const currentUser = useGetOneData('users', userProvider?.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
 
   useEffect(() => {
@@ -64,7 +66,6 @@ export default function Dashboard () {
     setTimeout(() => {
       setToggle('profile')
     }, 500)
-    if (currentUser.length === 0) router.push('/registro')
     return () => {
       setToggle(false)
     }
@@ -94,8 +95,8 @@ export default function Dashboard () {
                 width={0}
                 height={0}
                 loader={myLoader}
-                src={user.image}
-                alt={user.name}
+                src={userProvider?.image}
+                alt={userProvider?.name}
               />
               Perfil
             </li>
@@ -176,7 +177,7 @@ export default function Dashboard () {
           </ul>
         </nav>
       </section>
-      {bugs && <Bugs setBug={setBugs} user={user} />}
+      {bugs && <Bugs setBug={setBugs} user={userProvider} />}
     </Layout>
   )
 }

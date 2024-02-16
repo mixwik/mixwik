@@ -26,7 +26,7 @@ const AllGames = () => {
   const [distance, setDistance] = useState(700)
   const [allGames, setAllGames] = useState([])
   const [allTeams, setAllTeams] = useState([])
-  const session = useSession()
+  const { userProvider } = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const users = useGetData(COLLECTIONS.users)
@@ -46,7 +46,7 @@ const AllGames = () => {
   }, [csgo, lol, fortnite, valorant, teamsCsgo, teamsLol, teamsFortnite, teamsValorant])
 
   // filter current user of the list of users
-  const user = users.find(res => res.uid === session.uid)
+  const user = users.find(res => res.uid === userProvider?.uid)
 
   // filter users list with different filters
   const listUserAllGames = useGamesFilters(user, allGames, distance)

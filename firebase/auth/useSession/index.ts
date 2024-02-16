@@ -1,22 +1,21 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
+import { UserProvider } from '../../../domain/types'
 import { auth } from '../../initialize'
 
 export const useSession = () => {
-  const [user, setUser] = useState({})
+  const [userProvider, setUserProvider] = useState<UserProvider>()
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser({
+        setUserProvider({
           name: user.displayName,
           email: user.email,
           image: user.photoURL,
           uid: user.uid
         })
-      } else {
-        setUser(false)
       }
     })
   }, [])
-  return user
+  return { userProvider }
 }

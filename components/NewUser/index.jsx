@@ -5,8 +5,8 @@ import Layout from '../Layout'
 import { myLoader } from '../myLoader'
 
 const NewUser = () => {
-  const user = useSession()
-  console.log(user)
+  const { userProvider } = useSession()
+  console.log(userProvider)
 
   const createUser = async () => {
 

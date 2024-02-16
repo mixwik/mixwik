@@ -25,11 +25,11 @@ import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChe
 const Promotion = () => {
   const router = useRouter()
   const { id, method } = router.query
-  const currentUser = useSession()
-  const user = useGetOneData('users', currentUser.uid)
-  const stripeId = useCheckPay(id, currentUser.email)
-  const csgo = useGetMyPublications('csgo', currentUser.uid)
-  const teams = useGetMyPublications('teams', currentUser.uid)
+  const { userProvider } = useSession()
+  const user = useGetOneData('users', userProvider?.uid)
+  const stripeId = useCheckPay(id, userProvider?.email)
+  const csgo = useGetMyPublications('csgo', userProvider?.uid)
+  const teams = useGetMyPublications('teams', userProvider?.uid)
   const cancelSubscription = useCancelRenovationSubscription()
 
   if (stripeId && user.id && method === '2m25S789gDS8') updateUserCopper(stripeId, user.id, router)

@@ -1,29 +1,31 @@
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth'
-import React, { useEffect, useState } from 'react'
-import { auth } from '../../firebase/initialize'
 import { useRouter } from 'next/router'
+import React, { useCallback, useEffect, useState } from 'react'
+import { auth } from '../../firebase/initialize'
 
 const FinishRegistrationPage = () => {
   const [existEmail, setExistEmail] = useState(false)
   const [confirmationEmail, setConfirmationEmail] = useState('')
-  const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
   const router = useRouter()
 
-  const confirmRegistration = (email) => {
+  const confirmRegistration = useCallback((email) => {
     if (isSignInWithEmailLink(auth, window.location.href)) {
       signInWithEmailLink(auth, email, window.location.href)
         .then((result) => {
           window.localStorage.removeItem('emailForSignIn')
-          setError('correcto')
-          router.push('/dashboard')
+          setMessage('Se ha iniciado sesión correctamente')
+          setTimeout(() => {
+            router.push('/dashboard')
+          }, 1000)
         })
         .catch(() => {
-          setError('Ups, algo salió mal')
+          setMessage('Ups, algo salió mal')
         })
     } else {
-      setError('El enlace no es válido')
+      setMessage('El enlace no es válido')
     }
-  }
+  }, [router])
 
   useEffect(() => {
     const email = window.localStorage.getItem('emailForSignIn')
@@ -32,7 +34,7 @@ const FinishRegistrationPage = () => {
     } else {
       confirmRegistration(email)
     }
-  }, [])
+  }, [confirmRegistration])
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-white'>
@@ -56,9 +58,12 @@ const FinishRegistrationPage = () => {
               </>
               )
             : (
-              <p className='py-10'>Verificando, por favor espera...</p>
+              <div className='py-10'>
+                {message
+                  ? <p>{message}</p>
+                  : <p>Verificando, por favor espere...</p>}
+              </div>
               )}
-          {error && <p>{error}</p>}
         </div>
       </div>
     </div>

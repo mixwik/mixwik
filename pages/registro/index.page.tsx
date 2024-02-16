@@ -7,8 +7,8 @@ import { useSession } from '../../firebase/auth/useSession'
 
 const Register = () => {
   const handleSignOut = useSignOut()
-  const user = useSession()
-  console.log(user)
+  const { userProvider } = useSession()
+  console.log(userProvider)
 
   const createUser = async () => {
 

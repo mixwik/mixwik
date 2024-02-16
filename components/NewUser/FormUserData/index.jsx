@@ -21,7 +21,7 @@ const FormUserData = () => {
   const [progress, setProgress] = useState(true)
   const currentPosition = useCurrentPosition()
   const [error, updateDataUser] = useUpdateDataUser()
-  const user = useSession()
+  const { userProvider } = useSession()
   console.log(error, progress)
 
   const handleSetImage = async (e) => {
@@ -63,8 +63,8 @@ const FormUserData = () => {
         return errors
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setNewUser(values, currentPosition, user, imgURL || user.image)
-        updateDataUser(values.name || user.name, imgURL || user.image)
+        setNewUser(values, currentPosition, userProvider, imgURL || userProvider?.image)
+        updateDataUser(values.name || userProvider?.name, imgURL || userProvider?.image)
         setTimeout(() => {
           setSubmitting(false)
           router.push('/')
@@ -98,7 +98,7 @@ const FormUserData = () => {
                     : (
                       <div>
                         {
-                        user.image && (<Image width={0} height={0} loader={myLoader} src={user.image} alt='Carga de imagen' />)
+                        userProvider?.image && (<Image width={0} height={0} loader={myLoader} src={userProvider?.image} alt='Carga de imagen' />)
                         }
                         <div>
                           <ImageIcon className='w-12 h-12' />

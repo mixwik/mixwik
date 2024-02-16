@@ -4,8 +4,8 @@ import { myLoader } from '../../../components/myLoader'
 import { useGetOneData } from '../../../firebase/hooks/getMethod/useGetOneData'
 import { useUserFavorites } from './application/useUserFavorites'
 
-const ProfileUser = ({ publicationUser, idPublication, user }) => {
-  const visitorUser = useGetOneData('users', user.uid)
+const ProfileUser = ({ publicationUser, idPublication, userProvider }) => {
+  const visitorUser = useGetOneData('users', userProvider?.uid)
   const { handleFavorites, errorFavorite, like } = useUserFavorites({ idPublication, visitorUser })
   return (
     <div className='sticky top-0 md:top-[10vh] bg-transparent z-20 flex justify-between w-full md:w-[40vw] text-white bg-blue-300'>

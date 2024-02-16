@@ -1,5 +1,5 @@
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { collection, getDocs, where, query } from 'firebase/firestore'
 import { db } from '../../initialize.jsx'
 
 export const useGetOneData = (name, uid) => {

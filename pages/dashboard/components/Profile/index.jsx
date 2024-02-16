@@ -7,11 +7,11 @@ import { updateUserData } from '../../../../firebase/hooks/updateMethod/updateUs
 // Session
 import Image from 'next/image'
 import { useState } from 'react'
+import { DeleteIcon, ImageIcon } from '../../../../components/Svg'
+import { myLoader } from '../../../../components/myLoader'
 import { useUpdateDataUser } from '../../../../firebase/auth/updateDataUser'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
-import { DeleteIcon, ImageIcon } from '../../../../components/Svg'
-import { myLoader } from '../../../../components/myLoader'
 
 const Profile = ({ user, mixWikTeams }) => {
   const [previewImage, setPreviewImage] = useState()
@@ -19,7 +19,7 @@ const Profile = ({ user, mixWikTeams }) => {
   const [image, setImage] = useState()
   const [progress, setProgress] = useState()
   const [error, updateDataUser] = useUpdateDataUser()
-  const currentUser = useSession()
+  const { userProvider } = useSession()
 
   const handleSetImage = async (e) => {
     const reader = new FileReader()
@@ -138,7 +138,7 @@ const Profile = ({ user, mixWikTeams }) => {
                       )
                     : (
                       <div className={styles.previewImage}>
-                        <Image width={0} height={0} loader={myLoader} src={currentUser.image} alt='precarga' />
+                        <Image width={0} height={0} loader={myLoader} src={userProvider?.image} alt='precarga' />
                         <div className={styles.updateImage}>
                           <ImageIcon />
                         </div>
@@ -151,7 +151,7 @@ const Profile = ({ user, mixWikTeams }) => {
                 <div className={styles.group}>
                   <label>
                     Nombre:
-                    <div>{currentUser.name}</div>
+                    <div>{userProvider?.name}</div>
                   </label>
                   <ErrorMessage name='name' component='span' />
                 </div>

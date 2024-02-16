@@ -8,10 +8,10 @@ import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChe
 const Pay = () => {
   const router = useRouter()
   const { id } = router.query
-  const currentUser = useSession()
+  const { userProvider } = useSession()
   const cancelSubscription = useCancelRenovationSubscription()
-  const user = useGetOneData('users', currentUser.uid)
-  const stripeId = useCheckPay(id, currentUser.email)
+  const user = useGetOneData('users', userProvider?.uid)
+  const stripeId = useCheckPay(id, userProvider?.email)
   if (stripeId && user.id) {
     cancelSubscription(stripeId)
     updateUserMixWikTeams(stripeId, user.id, router)

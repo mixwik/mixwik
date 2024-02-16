@@ -3,7 +3,7 @@ import { useRef } from 'react'
 
 // LogIn
 import { GoogleAuthProvider } from 'firebase/auth'
-import { useLogInEmail, useLogInProvider } from '../../firebase/auth/useLogIn'
+import { useLogInProvider } from '../../firebase/auth/useLogIn'
 
 // Icons
 import { useLogInOpenContext } from '../../context'
@@ -13,11 +13,9 @@ import { FinishRegistration } from './components/finish-registration'
 export const LogIn = () => {
   const { logInOpen, setLogInOpen } = useLogInOpenContext()
   const emailRef = useRef()
-  const passwordRef = useRef()
 
   const { register, successRegister, errorRegister } = useRegister()
   const [errorProvider, logInProvider] = useLogInProvider()
-  const [errorEmail, logInEmail] = useLogInEmail()
   const google = new GoogleAuthProvider()
 
   const handleLoginProvider = (provider) => {
@@ -26,10 +24,6 @@ export const LogIn = () => {
   const handleRegister = (e) => {
     e.preventDefault()
     register(emailRef.current.value)
-  }
-  const handleLogInEmail = (e) => {
-    e.preventDefault()
-    logInEmail(emailRef.current.value, passwordRef.current.value)
   }
 
   return (
@@ -51,27 +45,22 @@ export const LogIn = () => {
           <div className='absolute w-full h-full transform shadow-lg card bg-pennBlue rounded-3xl rotate-6' />
           <div className='relative w-full px-6 py-4 bg-gray-100 shadow-md rounded-3xl'>
             <label className='block mt-3 text-xl font-semibold text-center text-gray-700'>
-              Regístrate
+              Registro sin contraseña
             </label>
             <form method='#' action='#' className='mt-10'>
 
-              <div className='mt-7'>
-                <input type='email' ref={emailRef} placeholder='Correo electronico' className='block w-full mt-1 bg-gray-100 border-none shadow-lg h-11 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
-              </div>
+              <div className='flex flex-col gap-5 mt-7'>
+                <input type='email' ref={emailRef} placeholder='ejemplo@email.com' className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-11 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
 
-              <div className='flex gap-5 mt-7'>
                 <button onClick={handleRegister} className='w-full py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105'>
-                  Registrar
-                </button>
-                <button onClick={handleLogInEmail} className='w-full py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-aero rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105'>
-                  Iniciar Sesión
+                  Registrar / Iniciar sesión
                 </button>
               </div>
 
               <div className='flex items-center text-center mt-7'>
                 <hr className='w-1/2 border-gray-300 rounded-md border-1' />
                 <label className='block w-full text-sm font-medium text-gray-600'>
-                  Para mayor rapidez puedes inicia sesión con:
+                  También puedes iniciar sesión con
                 </label>
                 <hr className='w-1/2 border-gray-300 rounded-md border-1' />
               </div>
@@ -88,7 +77,6 @@ export const LogIn = () => {
               </div>
               <div className='flex items-center justify-center text-center mt-7'>
                 {errorProvider && <div className='font-bold text-center text-red-500'>Ha ocurrido un error al iniciar sesión</div>}
-                {errorEmail && <div className='font-bold text-center text-red-500'>El email no es válido</div>}
                 {errorRegister && <div className='font-bold text-center text-red-500'>Ha ocurrido un error durante el registro</div>}
               </div>
             </form>
