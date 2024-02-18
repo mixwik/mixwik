@@ -4,17 +4,17 @@ import { useSession } from '../firebase/auth/useSession'
 import { useGetOneUser } from '../firebase/hooks/getMethod/useGetOneUser'
 
 export const useConfirmUserRegister = () => {
-  const { userProvider } = useSession()
-  const { user } = useGetOneUser(userProvider?.uid)
+  const { userProvider, isSession } = useSession()
+  const { isData } = useGetOneUser(userProvider?.uid)
   const route = useRouter()
 
   useEffect(() => {
-    if (userProvider?.uid) {
-      if (!user) {
+    if (isSession !== 'no-session') {
+      if (isData === 'no-data') {
         route.push('/registro')
       }
     } else {
       route.push('/desautorizado')
     }
-  }, [userProvider, user, route])
+  }, [isSession, isData, route])
 }

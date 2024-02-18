@@ -5,6 +5,7 @@ import { auth } from '../../initialize'
 
 export const useSession = () => {
   const [userProvider, setUserProvider] = useState<UserProvider>()
+  const [isSession, setIsSession] = useState('')
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -14,8 +15,10 @@ export const useSession = () => {
           image: user.photoURL,
           uid: user.uid
         })
+      } else {
+        setIsSession('no-session')
       }
     })
   }, [])
-  return { userProvider }
+  return { userProvider, isSession }
 }

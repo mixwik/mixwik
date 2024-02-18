@@ -39,7 +39,6 @@ import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
 import { useMaster } from '../../hooks/useMaster'
 
 export default function Dashboard () {
-  useConfirmUserRegister()
   const { master } = useMaster()
   const handleOpen = useHandleOpenContext()
   const isOpen = useOpenContext()
@@ -71,6 +70,7 @@ export default function Dashboard () {
     }
   }, [currentUser, router])
 
+  useConfirmUserRegister()
   if (toggle === 'loading') return <PageLoader />
 
   return (

@@ -6,7 +6,7 @@ export const useRegister = () => {
   const [errorRegister, setErrorRegister] = useState(false)
   const [successRegister, setSuccessRegister] = useState(false)
   const actionCodeSettings = {
-    url: 'https://mixwik.com/finalizarRegistro',
+    url: 'http://localhost:3000/finalizarRegistro',
     handleCodeInApp: true
   }
 

@@ -37,7 +37,6 @@ import { deletePublication } from '../../../firebase/hooks/deleteMethod'
 import { useMaster } from '../../../hooks/useMaster'
 
 const User = () => {
-  useConfirmUserRegister()
   const { userProvider } = useSession()
   const { master } = useMaster()
   const router = useRouter()
@@ -62,6 +61,7 @@ const User = () => {
   }
   const isNewPosition = JSON.stringify(publication.geometry) !== JSON.stringify(currentPosition)
 
+  useConfirmUserRegister()
   if (publication.length === 0) return <PageLoader />
   if (publicationUser.length === 0) return <PageLoader />
 

@@ -1,19 +1,9 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { useLogInOpenContext } from '../../context'
-import { useSession } from '../../firebase/auth/useSession'
 
 const Unauthorized = () => {
   const { setLogInOpen } = useLogInOpenContext()
-  const { userProvider } = useSession()
-  const router = useRouter()
-  useEffect(() => {
-    if (userProvider?.uid) {
-      router.push('/registro')
-    }
-  }, [userProvider, router])
   return (
     <Layout title='No tienes autorización'>
       <section className='flex items-center justify-center bg-white'>
