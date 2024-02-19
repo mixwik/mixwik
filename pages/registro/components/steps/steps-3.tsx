@@ -1,96 +1,192 @@
 import React, { useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
-import { UserProvider } from '../../../../domain/types'
+import { ToastError } from '../toastError'
 
 export const Steps3 = (
-  { userProvider, setSteps }:
-  {userProvider: UserProvider, setSteps: React.Dispatch<React.SetStateAction<string>>}
+  { setSteps }:
+  { setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
-  const [description, setDescription] = useState('')
-  const [error, setError] = useState(false)
+  const [error, setError] = useState({
+    name: 'error',
+    age: 'error',
+    gender: 'error',
+    description: 'error',
+    send: 'error'
+  })
+  const [data, setData] = useState({
+    name: '',
+    age: 0,
+    gender: '',
+    description: ''
+  })
 
-  const saveData = () => {
-    if (description) {
-      localStorage.setItem('description', description)
-      localStorage.setItem('step', 'step-3')
+  const [description, setDescription] = useState('')
+
+  const validateDescription = (value) => {
+    if (value.length > 350) {
+      return 'La descripción no puede tener más de 350 caracteres'
+    } else if (value.length === 0) {
+      return 'La descripción no puede estar vacía'
+    } else if (value.length < 100) {
+      return 'La descripción debe tener al menos 100 caracteres'
+    } else {
+      setData(prevState => ({ ...prevState, description: value }))
+      return ''
+    }
+  }
+
+  const validateAge = (value) => {
+    const age = new Date().getFullYear() - new Date(value).getFullYear()
+    if (age < 16) {
+      return 'Debes ser mayor de 16 años para usar MixWik'
+    } else if (age > 100) {
+      return 'Edad no válida'
+    } else if (age === 0) {
+      return 'Fecha no válida'
+    } else {
+      setData(prevState => ({ ...prevState, age }))
+      return ''
+    }
+  }
+
+  const validateName = (value) => {
+    if (value.length < 3) {
+      return 'El nombre debe tener al menos 3 caracteres'
+    } else {
+      setData(prevState => ({ ...prevState, name: value }))
+      return ''
+    }
+  }
+
+  const validateGender = (value) => {
+    if (!value) {
+      return 'Debes seleccionar un genero'
+    } else {
+      setData(prevState => ({ ...prevState, gender: value }))
+    }
+  }
+
+  const validators = {
+    description: validateDescription,
+    age: validateAge,
+    name: validateName,
+    gender: validateGender
+  }
+
+  const validateData = (e) => {
+    const { name, value } = e.target
+    const validator = validators[name]
+    if (validator) {
+      const errorMessage = validator(value)
+      setError(prevState => ({ ...prevState, [name]: errorMessage }))
+    }
+    if (!error.age && !error.name && !error.description && !error.gender) {
+      setError(prevState => ({ ...prevState, send: '' }))
+    }
+  }
+
+  const saveData = (e) => {
+    e.preventDefault()
+    if (data.name && data.age && data.description && data.gender) {
+      localStorage.setItem('step', 'step-4')
+      localStorage.setItem('name', data.name)
+      localStorage.setItem('age', data.age.toString())
+      localStorage.setItem('description', data.description)
+      localStorage.setItem('gender', data.gender)
       setSteps('step-4')
     } else {
-      setError(true)
+      setError({ send: 'Debes completar todos los campos', ...error })
     }
   }
 
   return (
     <section className='flex flex-col items-center justify-around w-full h-full gap-5 p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
-      <article className='w-full'>
-        <label className='flex items-center justify-center gap-5'>
-          <span className=''>
-            Nombre:
+      <form
+        onChange={(e) => validateData(e)}
+        onSubmit={(e) => saveData(e)}
+        className='flex flex-col items-center justify-around w-full h-full gap-5 bg-white rounded-lg'
+      >
+        <div
+          className='grid w-full gap-5 md:grid-cols-2'
+        >
+          <div className='w-full'>
+            <label className='flex flex-col gap-2'>
+              <span className='font-semibold text-slate-900'>
+                Nombre:
+              </span>
+              <input type='text' name='name' className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
+            </label>
+          </div>
+          <div>
+            <label className='flex flex-col gap-2'>
+              <span className='font-semibold text-slate-900'>
+                Fecha de nacimiento:
+              </span>
+              <input type='date' name='age' className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
+            </label>
+          </div>
+        </div>
+        <div className='flex flex-col w-full gap-2'>
+          <span className='font-semibold text-slate-900'>
+            Genero:
           </span>
-          <input type='text' name='name' className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
-        </label>
-      </article>
-      <article>
-        <label className='flex items-center justify-center gap-5'>
-          Edad:
-          <input type='number' name='age' className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0' />
-        </label>
-        <div>Solicitamos tú edad para que puedas encontrar otros usuarios con edad parecida a la tuya, en caso de que así lo desees.</div>
-      </article>
-      <article>
-        <div>
-          Genero:
+          <ul className='grid w-full gap-2 md:grid-cols-3'>
+            <li>
+              <input type='radio' id='m' name='gender' value='M' className='hidden peer' required />
+              <label htmlFor='m' className='inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border-2 border-solid rounded-lg cursor-pointer border-aero peer-checked:border-pennBlue peer-checked:text-pennBlue hover:text-gray-600 hover:bg-gray-100'>
+                <div className='w-full text-lg font-semibold text-center'>Masculino</div>
+              </label>
+            </li>
+            <li>
+              <input type='radio' id='f' name='gender' value='f' className='hidden peer' required />
+              <label htmlFor='f' className='inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border-2 border-solid rounded-lg cursor-pointer border-aero peer-checked:border-pennBlue peer-checked:text-pennBlue hover:text-gray-600 hover:bg-gray-100'>
+                <div className='w-full text-lg font-semibold text-center'>Femenino</div>
+              </label>
+            </li>
+            <li>
+              <input type='radio' id='n' name='gender' value='n' className='hidden peer' required />
+              <label htmlFor='n' className='inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border-2 border-solid rounded-lg cursor-pointer border-aero peer-checked:border-pennBlue peer-checked:text-pennBlue hover:text-gray-600 hover:bg-gray-100'>
+                <div className='w-full text-lg font-semibold text-center'>No binario</div>
+              </label>
+            </li>
+          </ul>
         </div>
-        <div className='flex' role='group' aria-labelledby='my-radio-group'>
-          <input
-            type='radio'
-            name='gender'
-            value='M'
-            id='M'
-          />
-          <label htmlFor='M'>
-            Masculino
+        <div className='relative w-full'>
+          <label className='flex flex-col w-full gap-2'>
+            <span className='font-semibold text-slate-900'>
+              Describete:
+            </span>
+            <textarea
+              className='w-full p-5 mt-1 bg-gray-100 border-none shadow-lg resize-none rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+              placeholder='Máximo 350 caracteres'
+              rows={3}
+              name='description'
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </label>
-          <input
-            type='radio'
-            name='gender'
-            value='F'
-            id='F'
-          />
-          <label htmlFor='F'>
-            Femenino
-          </label>
-          <input
-            type='radio'
-            name='gender'
-            value='O'
-            id='O'
-          />
-          <label htmlFor='O'>
-            Otro
-          </label>
+          <span className='absolute z-10 bottom-2 right-2'>{description.length > 0 ? description.length : 0}/350</span>
         </div>
-        <p>Para MixWik la igualdad es lo primero, así que por lo tanto nunca se mostrará tú genero a otras personas y nadie podrá filtrar usuarios por este campo.</p>
-      </article>
-      <article>
-        <label>
-          Describete:
-          <textarea placeholder='Máximo 350 caracteres' rows={4} name='description' />
-        </label>
-        <div>{description.length > 0 ? description.length : 0}/350</div>
-      </article>
-      <div className='flex justify-center w-full gap-10'>
-        <button className='flex items-center gap-1' onClick={() => setSteps('step-2')}>
-          <ArrowBack className='w-6 h-6 text-white' />
-          Volver
-        </button>
-        <button
-          disabled={!description}
-          onClick={saveData}
-          className='px-5 py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
-        >Guardar y continuar
-        </button>
-      </div>
-      {error && <p className='font-bold text-red-500'>{error}</p>}
+        <div className='flex justify-center w-full gap-10'>
+          <button
+            type='button'
+            className='flex items-center gap-1 text-sm md:text-base'
+            onClick={() => setSteps('step-2')}
+          >
+            <ArrowBack className='w-6 h-6 text-white' />
+            Volver
+          </button>
+          <button
+            disabled={error.send !== ''}
+            onClick={saveData}
+            className='px-5 py-3 text-sm text-white transition duration-500 ease-in-out transform shadow-xl md:text-base bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
+            type='submit'
+          >Guardar y continuar
+          </button>
+        </div>
+        {error.name && error.name !== 'error' && (
+          <ToastError error={error.name} />
+        )}
+      </form>
     </section>
   )
 }

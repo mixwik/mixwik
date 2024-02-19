@@ -1,10 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { myLoader } from '../../../../components/myLoader'
 import { UserProvider } from '../../../../domain/types'
 import { useSignOut } from '../../../../firebase/auth/SignOut'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
-import Link from 'next/link'
 
 export const Step1 = (
   { accept, setAccept, userProvider, setSteps }:
@@ -23,7 +23,7 @@ export const Step1 = (
   return (
     <div className='flex flex-col justify-around w-full h-full p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
       <h1 className='flex flex-col items-center justify-center gap-3 text-4xl font-bold'>Bienvenido a <span className='sr-only'>MixWik</span> <Image className='w-auto h-12' alt='Logo de Mixwik' src='/logos/mixwik-logo.png' width={100} height={50} loader={myLoader} /></h1>
-      <ol className='relative m-5 border-gray-200 border-s'>
+      <ol className='relative m-3 border-gray-200 md:m-5 border-s'>
         <li className='mb-10 ms-6'>
           <span className='absolute flex items-center justify-center w-6 h-6 rounded-full bg-aero -start-3 ring-8 ring-white'>
             <svg className='w-2.5 h-2.5 text-pennBlue' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 20 20'>
@@ -50,8 +50,15 @@ export const Step1 = (
         </li>
       </ol>
       <label htmlFor='accept' className='flex justify-center gap-3'>
-        <input onChange={() => setAccept(prev => !prev)} id='accept' type='checkbox' name='accept' />
-        Aceptos las condiciones de uso y la<Link className='font-bold text-aero' target='_blank' href='/legal/politica-de-privacidad'>política de privacidad</Link>
+        <input
+          onChange={() => setAccept(prev => !prev)}
+          id='accept'
+          type='checkbox'
+          name='accept'
+        />
+        <span className='gap-1 md:flex'>
+          Aceptos las condiciones de uso y la<Link className='font-bold text-aero' target='_blank' href='/legal/politica-de-privacidad'> política de privacidad</Link>
+        </span>
       </label>
       <div className='flex justify-center w-full gap-5'>
         <button onClick={() => handleSignOut()}>No continuar</button>
