@@ -5,6 +5,7 @@ import { Stepper } from './components/stepper'
 import { Step1 } from './components/steps/step-1'
 import { Steps2 } from './components/steps/steps-2'
 import { Steps3 } from './components/steps/steps-3'
+import { Steps4 } from './components/steps/steps-4'
 
 const Register = () => {
   const [accept, setAccept] = useState(false)
@@ -39,6 +40,11 @@ const Register = () => {
         )}
         {steps === 'step-3' && (
           <Steps3
+            setSteps={setSteps}
+          />
+        )}
+        {steps === 'step-4' && (
+          <Steps4
             setSteps={setSteps}
           />
         )}

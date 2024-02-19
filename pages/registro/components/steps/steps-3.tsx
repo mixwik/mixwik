@@ -73,6 +73,9 @@ export const Steps3 = (
     if (value.length < 3) {
       setData(prevState => ({ ...prevState, name: value }))
       return 'El nombre debe tener al menos 3 caracteres'
+    } else if (value.length > 50) {
+      setData(prevState => ({ ...prevState, name: value }))
+      return 'El nombre no puede tener más de 50 caracteres'
     } else {
       setData(prevState => ({ ...prevState, name: value }))
       return ''

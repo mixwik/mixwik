@@ -1,3 +1,5 @@
+import { LOGOS } from '../assets/images'
+
 export const COLLECTIONS = {
   users: 'users',
   cs2: 'cs2',
@@ -9,6 +11,41 @@ export const COLLECTIONS = {
   teams: 'teams',
   bugs: 'bugs'
 }
+
+export const GAMES = [
+  {
+    collection: COLLECTIONS.cs2,
+    logo: LOGOS.cs2,
+    name: 'Counter Strike 2'
+  },
+  {
+    collection: COLLECTIONS.lol,
+    logo: LOGOS.lol,
+    name: 'League of Legends'
+  },
+  {
+    collection: COLLECTIONS.fortnite,
+    logo: LOGOS.fortnite,
+    name: 'Fortnite'
+  },
+  {
+    collection: COLLECTIONS.valorant,
+    logo: LOGOS.valorant,
+    name: 'Valorant'
+  },
+  {
+    collection: COLLECTIONS.rocketLeague,
+    logo: LOGOS.rocketLeague,
+    name: 'Rocket League',
+    comingSoon: true
+  },
+  {
+    collection: COLLECTIONS.dota2,
+    logo: LOGOS.dota2,
+    name: 'Dota 2',
+    comingSoon: true
+  }
+]
 
 export const FILTER_KEYS = [
   'position',
