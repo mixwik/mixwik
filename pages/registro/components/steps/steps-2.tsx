@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowBack, DeleteIcon, ImageIcon } from '../../../../components/Svg'
 import { myLoader } from '../../../../components/myLoader'
 import { UserProvider } from '../../../../domain/types'
@@ -14,6 +14,14 @@ export const Steps2 = (
   const [error, setError] = useState(false)
   const [image, setImage] = useState<File>()
   const [progress, setProgress] = useState()
+
+  useEffect(() => {
+    const image = localStorage.getItem('image')
+    if (image) {
+      setImgURL(image)
+      setPreviewImage(image)
+    }
+  }, [imgURL])
 
   const handleSetImage = async (e) => {
     const reader = new FileReader()
