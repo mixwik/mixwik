@@ -5,7 +5,7 @@ import { myLoader } from '../../../../components/myLoader'
 import { UserProvider } from '../../../../domain/types'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
 
-export const Steps2 = (
+export const Step2 = (
   { userProvider, setSteps }:
   {userProvider: UserProvider, setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {

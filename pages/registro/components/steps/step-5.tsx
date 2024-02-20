@@ -3,7 +3,7 @@ import React from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { GAMES } from '../../../../domain/constants'
 
-export const Steps4 = (
+export const Step5 = (
   { setSteps }:
   { setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
@@ -16,12 +16,22 @@ export const Steps4 = (
 
   return (
     <section className='flex flex-col items-center justify-around w-full h-full gap-5 p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
-      <ul className='grid w-full grid-cols-3'>
+      <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea tu jugador</h2>
+      <ul
+        className='flex flex-wrap justify-center w-full gap-5 md:gap-10 md:w-4/5'
+      >
         {GAMES.map(game => (
-          <li key={game.collection} onClick={() => handleCheck(game.collection)}>
+          <li
+            key={game.collection}
+            onClick={() => handleCheck(game.collection)}
+            className='flex flex-col items-center justify-center w-32 h-32 p-2 text-xs text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-pennBlue md:w-36 md:h-36 hover:shadow-xl hover:-translate-y hover:scale-105'
+          >
             <Image className='object-cover w-10 h-10' src={game.logo} alt={game.name} />
-            {game.name}
-            {game.comingSoon && <span>Proximamente</span>}
+            <h4 className='text-center'>
+              {game.name}
+              <br />
+              {game.comingSoon && <span>(Proximamente)</span>}
+            </h4>
           </li>
         ))}
       </ul>
@@ -29,7 +39,7 @@ export const Steps4 = (
         <button
           type='button'
           className='flex items-center gap-1 text-sm md:text-base'
-          onClick={() => setSteps('step-3')}
+          onClick={() => setSteps('step-4')}
         >
           <ArrowBack className='w-6 h-6 text-white' />
           Volver

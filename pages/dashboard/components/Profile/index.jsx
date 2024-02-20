@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { DeleteIcon, ImageIcon } from '../../../../components/Svg'
 import { myLoader } from '../../../../components/myLoader'
+import { REGEX } from '../../../../domain/regex'
 import { useUpdateDataUser } from '../../../../firebase/auth/updateDataUser'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
@@ -49,15 +50,6 @@ const Profile = ({ user, mixWikTeams }) => {
     twitch: user.social?.twitch || '',
     youtube: user.social?.youtube || ''
 
-  }
-
-  const REGEX = {
-    discord: /^https?:\/\/discord\.gg\/[a-zA-Z0-9]+$/,
-    twitter: /^https?:\/\/(www\.)?twitter\.com\/[a-zA-Z0-9_]+$/,
-    instagram: /^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_]+$/,
-    facebook: /^https?:\/\/(www\.)?facebook\.com\/[a-zA-Z0-9_]+$/,
-    twitch: /^https?:\/\/(www\.)?twitch\.tv\/[a-zA-Z0-9_]+$/,
-    youtube: /^https?:\/\/(www\.)?youtube\.com\/[a-zA-Z0-9_]+$/
   }
 
   return (

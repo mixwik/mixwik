@@ -3,9 +3,10 @@ import Layout from '../../components/Layout'
 import { useSession } from '../../firebase/auth/useSession'
 import { Stepper } from './components/stepper'
 import { Step1 } from './components/steps/step-1'
-import { Steps2 } from './components/steps/steps-2'
-import { Steps3 } from './components/steps/steps-3'
-import { Steps4 } from './components/steps/steps-4'
+import { Step2 } from './components/steps/step-2'
+import { Step3 } from './components/steps/step-3'
+import { Step5 } from './components/steps/step-5'
+import { Step4 } from './components/steps/step-4'
 
 const Register = () => {
   const [accept, setAccept] = useState(false)
@@ -33,18 +34,23 @@ const Register = () => {
           />
         )}
         {steps === 'step-2' && (
-          <Steps2
+          <Step2
             userProvider={userProvider}
             setSteps={setSteps}
           />
         )}
         {steps === 'step-3' && (
-          <Steps3
+          <Step3
             setSteps={setSteps}
           />
         )}
         {steps === 'step-4' && (
-          <Steps4
+          <Step4
+            setSteps={setSteps}
+          />
+        )}
+        {steps === 'step-5' && (
+          <Step5
             setSteps={setSteps}
           />
         )}

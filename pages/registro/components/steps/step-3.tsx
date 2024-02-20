@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { ToastError } from '../toastError'
 
-export const Steps3 = (
+export const Step3 = (
   { setSteps }:
   { setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
