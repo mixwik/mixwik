@@ -39,7 +39,7 @@ export const Step2 = (
   }
 
   const saveImage = () => {
-    if (imgURL) {
+    if ((imgURL && progress) || userProvider.image) {
       localStorage.setItem('image', imgURL)
       localStorage.setItem('step', 'step-3')
       setSteps('step-3')
@@ -71,13 +71,25 @@ export const Step2 = (
             </div>
             )
           : (
-            <div>
+            <div className='w-full h-full'>
               {
-            userProvider?.image && (<Image width={0} height={0} loader={myLoader} src={userProvider?.image} alt='Carga de imagen' />)
+            userProvider?.image
+              ? (
+                <div className='relative flex items-center justify-center'>
+                  <Image
+                    className='object-cover w-full h-full rounded-full'
+                    width={0}
+                    height={0}
+                    loader={myLoader}
+                    src={userProvider?.image} alt='Carga de imagen'
+                  />
+                  <ImageIcon className='absolute w-12 h-12 p-1 fill-white' />
+                </div>
+                )
+              : (
+
+                <ImageIcon className='w-12 h-12' />)
             }
-              <div>
-                <ImageIcon className='w-12 h-12' />
-              </div>
             </div>
             )}
       </label>
@@ -87,7 +99,6 @@ export const Step2 = (
           Volver
         </button>
         <button
-          disabled={!imgURL && !progress}
           onClick={saveImage}
           className='px-5 py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
         >Guardar y continuar

@@ -17,13 +17,23 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/dashboard/index.page.jsx", "pages/dashboard/components/NewTeam/TeamsForms/Cs2.jsx", "hooks/useMaster.jsx"  ],
+    "**/*.tsx",
+    "pages/dashboard/index.page.jsx",
+    "pages/dashboard/components/NewTeam/TeamsForms/Cs2.jsx",
+    "hooks/useMaster.jsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

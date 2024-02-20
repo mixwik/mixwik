@@ -33,7 +33,7 @@ export const Step3 = (
       description: yup
         .string()
         .required('El campo descripción es obligatorio')
-        .min(10, 'El campo descripción debe tener al menos 10 caracteres')
+        .min(100, 'El campo descripción debe tener al menos 100 caracteres')
         .max(350, 'El campo descripción debe tener como máximo 350 caracteres'),
       gender: yup
         .string()
