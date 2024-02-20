@@ -159,7 +159,7 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                 </article>
                 <article className={styles.position}>
                   <h3>¿En que posición te gusta jugar?</h3>
-                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                  <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     {
                       VALORANT_POSITION.map((position) => (
                         <React.Fragment key={position}>
@@ -179,7 +179,7 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                 </article>
                 <article className={styles.level}>
                   <h3>¿Cuál es tu nivel?</h3>
-                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                  <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     {
                       VALORANT_LEVELS.map((level) => (
                         <React.Fragment key={level}>
@@ -212,7 +212,7 @@ const ValorantPublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                   </article>
                   <article className={styles.typeOfGamer}>
                     <h3>¿Que tipo de jugador te consideras?</h3>
-                    <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                    <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                       {
                       TYPE_OF_GAME.map((typeOfGamer) => (
                         <React.Fragment key={typeOfGamer}>

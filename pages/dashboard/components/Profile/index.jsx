@@ -237,7 +237,7 @@ const Profile = ({ user, mixWikTeams }) => {
                 <p className={styles.paragraph}>Información Privada</p>
                 <div className={styles.genderBox}>
                   Genero:
-                  <div class={styles.gender} role='group' aria-labelledby='my-radio-group'>
+                  <div className={styles.gender} role='group' aria-labelledby='my-radio-group'>
                     <Field
                       type='radio'
                       name='gender'

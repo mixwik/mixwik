@@ -166,7 +166,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
             </div>
             <div className={styles.position}>
               <div className={styles.title}>¿Que posiciones buscas?</div>
-              <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+              <div className={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
                   value='Entry fragger'
@@ -243,7 +243,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
             </div>
             <div className={styles.level}>
               <div className={styles.title}>¿Que niveles de competitivo buscas?</div>
-              <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+              <div className={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
                   value='Silver'
@@ -338,7 +338,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
             </div>
             <article className={styles.premier}>
               <h3>¿Qué niveles de premier buscas?</h3>
-              <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+              <div className={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 {CS2_PREMIER.map((premier, index) => (
                   <React.Fragment key={premier}>
                     <Field
@@ -381,7 +381,7 @@ const Csgo = ({ currentUser, setToggle, toggle }) => {
               </label>
               <div className={styles.typeOfGamer}>
                 <div className={styles.title}>¿Que tipo de jugador buscas?</div>
-                <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+                <div className={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                   <Field
                     type='checkbox'
                     name='typeOfGamer'

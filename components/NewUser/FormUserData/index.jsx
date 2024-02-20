@@ -130,7 +130,7 @@ const FormUserData = () => {
             <div className={styles.genderTitle}>
               Genero:
             </div>
-            <div class={styles.gender} role='group' aria-labelledby='my-radio-group'>
+            <div className={styles.gender} role='group' aria-labelledby='my-radio-group'>
               <Field
                 type='radio'
                 name='gender'

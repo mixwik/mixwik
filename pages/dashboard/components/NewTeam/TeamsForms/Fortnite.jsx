@@ -166,7 +166,7 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
             </div>
             <div className={styles.position}>
               <div className={styles.title}>¿Que posiciones buscas?</div>
-              <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+              <div className={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
                   value='Entry fragger'
@@ -198,7 +198,7 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
             </div>
             <div className={styles.preferenceTeam}>
               <div className={styles.title}>¿Que modalidades de team buscas?</div>
-              <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+              <div className={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                 <Field
                   type='checkbox'
                   value='2 vs 2'
@@ -255,7 +255,7 @@ const Fortnite = ({ currentUser, setToggle, toggle }) => {
               </label>
               <div className={styles.typeOfGamer}>
                 <div className={styles.title}>¿Que tipo de jugador buscas?</div>
-                <div class={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
+                <div className={styles.inputBox} role='group' aria-labelledby='my-checkbox-group'>
                   <Field
                     type='checkbox'
                     name='typeOfGamer'

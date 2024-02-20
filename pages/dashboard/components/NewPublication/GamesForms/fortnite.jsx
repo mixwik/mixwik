@@ -160,7 +160,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                 </article>
                 <article className={styles.position}>
                   <h3>¿En que posición te gusta jugar?</h3>
-                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                  <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     {
                       FORTNITE_POSITIONS.map(position => (
                         <React.Fragment key={position}>
@@ -180,7 +180,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                 </article>
                 <article className={styles.preferenceTeam}>
                   <h3>¿Cómo te gusta jugar?</h3>
-                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                  <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     {
                       FORTNITE_PREFERENCE_TEAM.map(preference => (
                         <React.Fragment key={preference}>
@@ -213,7 +213,7 @@ const FortnitePublication = ({ setToggle, toggle, currentUser, teams, setTeams, 
                   </article>
                   <article className={styles.typeOfGamer}>
                     <h3>¿Que tipo de jugador te consideras?</h3>
-                    <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                    <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                       {
                         TYPE_OF_GAME.map((type) => (
                           <React.Fragment key={type}>

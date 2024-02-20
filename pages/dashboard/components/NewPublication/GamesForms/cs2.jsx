@@ -161,7 +161,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                 </article>
                 <article className={styles.position}>
                   <h3>¿En que posición te gusta jugar?</h3>
-                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                  <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     {CS2_POSITIONS.map((position, index) => (
                       <React.Fragment key={position}>
                         <Field
@@ -179,7 +179,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                 </article>
                 <article className={styles.level}>
                   <h3>¿Cuál es tu nivel en competitivo?</h3>
-                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                  <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     {CS2_LEVELS.map((level, index) => (
                       <React.Fragment key={level}>
                         <Field
@@ -197,7 +197,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                 </article>
                 <article className={styles.premier}>
                   <h3>¿Cuál es tu nivel en premier?</h3>
-                  <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                  <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                     {CS2_PREMIER.map((premier, index) => (
                       <React.Fragment key={premier}>
                         <Field
@@ -228,7 +228,7 @@ const CsgoPublication = ({ setToggle, toggle, currentUser, teams, setTeams, curr
                   </article>
                   <article className={styles.typeOfGamer}>
                     <h3>¿Que tipo de jugador te consideras?</h3>
-                    <div class={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
+                    <div className={styles.inputBox} role='group' aria-labelledby='my-radio-group'>
                       {
                         TYPE_OF_GAME.map((type) => (
                           <React.Fragment key={type}>
