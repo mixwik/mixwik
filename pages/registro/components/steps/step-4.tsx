@@ -75,10 +75,12 @@ export const Step4 = (
             <ArrowBack className='w-6 h-6 text-white' />
             Volver
           </button>
-          <input
+          <button
             className='px-5 py-3 text-sm text-white transition duration-500 ease-in-out transform shadow-xl md:text-base bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
             type='submit'
-          />
+          >
+            Guardar y continuar
+          </button>
         </div>
         {errors.twitter && <ToastError error={errors.twitter.message} />}
         {errors.discord && <ToastError error={errors.discord.message} />}

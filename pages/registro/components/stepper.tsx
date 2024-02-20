@@ -25,10 +25,18 @@ export const Stepper = ({ steps }: {steps: string}) => {
           <div className='flex w-full bg-gray-200 h-0.5' />
         </div>
       </li>
-      <li className=''>
+      <li className='w-full'>
         <div className='flex items-center'>
           <div className={`z-10 flex items-center justify-center w-6 h-6 bg-aero ${steps === 'step-4' && 'bg-pennBlue text-white'} rounded-full ring-0 ring-white sm:ring-8 shrink-0`}>
             4
+          </div>
+          <div className='flex w-full bg-gray-200 h-0.5' />
+        </div>
+      </li>
+      <li className=''>
+        <div className='flex items-center'>
+          <div className={`z-10 flex items-center justify-center w-6 h-6 bg-aero ${steps === 'step-5' && 'bg-pennBlue text-white'} rounded-full ring-0 ring-white sm:ring-8 shrink-0`}>
+            5
           </div>
         </div>
       </li>
