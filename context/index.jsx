@@ -5,16 +5,19 @@ const setFilterContext = createContext()
 const openContext = createContext()
 const handleOpenContext = createContext()
 const logInOpenContext = createContext()
+const openGameContext = createContext()
 
 export const useFilterContext = () => useContext(filterContext)
 export const useSetFilterContext = () => useContext(setFilterContext)
 export const useOpenContext = () => useContext(openContext)
 export const useHandleOpenContext = () => useContext(handleOpenContext)
 export const useLogInOpenContext = () => useContext(logInOpenContext)
+export const useOpenGameContext = () => useContext(openGameContext)
 
 const DataProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState('')
   const [logInOpen, setLogInOpen] = useState(false)
+  const [openGame, setOpenGame] = useState('')
   const [filter, setFilter] = useState({
     age: {
       min: 16,
@@ -74,19 +77,25 @@ const DataProvider = ({ children }) => {
     if (name === isOpen) setIsOpen('')
     else setIsOpen(name)
   }
+  const handleOpenGame = (name) => {
+    if (name === openGame) setIsOpen('')
+    else setOpenGame(name)
+  }
 
   return (
-    <logInOpenContext.Provider value={{ logInOpen, setLogInOpen }}>
-      <filterContext.Provider value={filter}>
-        <setFilterContext.Provider value={handleSetFilter}>
-          <openContext.Provider value={isOpen}>
-            <handleOpenContext.Provider value={handleOpen}>
-              {children}
-            </handleOpenContext.Provider>
-          </openContext.Provider>
-        </setFilterContext.Provider>
-      </filterContext.Provider>
-    </logInOpenContext.Provider>
+    <openGameContext.Provider value={{ openGame, handleOpenGame }}>
+      <logInOpenContext.Provider value={{ logInOpen, setLogInOpen }}>
+        <filterContext.Provider value={filter}>
+          <setFilterContext.Provider value={handleSetFilter}>
+            <openContext.Provider value={isOpen}>
+              <handleOpenContext.Provider value={handleOpen}>
+                {children}
+              </handleOpenContext.Provider>
+            </openContext.Provider>
+          </setFilterContext.Provider>
+        </filterContext.Provider>
+      </logInOpenContext.Provider>
+    </openGameContext.Provider>
   )
 }
 

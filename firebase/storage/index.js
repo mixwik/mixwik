@@ -25,9 +25,9 @@ export const setImageDB = async (userUid, img, setImgURL, setProgress) => {
   )
 }
 
-export const removeImageDB = async (categori, img) => {
+export const removeImageDB = async (category, img) => {
   const storage = getStorage()
-  const desertRef = ref(storage, `${categori}/${img}`)
+  const desertRef = ref(storage, `${category}/${img}`)
   deleteObject(desertRef)
     .then(() => {})
     .catch((error) => {

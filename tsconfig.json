@@ -33,7 +33,7 @@
     "pages/dashboard/components/NewTeam/TeamsForms/Cs2.jsx",
     "hooks/useMaster.jsx",
     ".next/types/**/*.ts"
-, "pages/dashboard/components/BugsReports/index.jsx", "pages/dashboard/components/AllUsers/index.jsx"  ],
+, "pages/dashboard/components/BugsReports/index.jsx", "pages/dashboard/components/AllUsers/index.jsx", "domain/constants.js"  ],
   "exclude": [
     "node_modules"
   ]

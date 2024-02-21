@@ -1,17 +1,20 @@
 import Image from 'next/image'
 import React from 'react'
 import { ArrowBack } from '../../../../components/Svg'
-import { GAMES } from '../../../../domain/constants'
+import { GameForm } from '../../../../components/gameForm'
+import { useOpenGameContext } from '../../../../context'
+import { COLLECTIONS, GAMES } from '../../../../domain/constants'
 
 export const Step5 = (
   { setSteps }:
   { setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
+  const { openGame, handleOpenGame } = useOpenGameContext()
   const handleClick = () => {
 
   }
   const handleCheck = (collection: string) => {
-
+    handleOpenGame(collection)
   }
 
   return (
@@ -52,6 +55,10 @@ export const Step5 = (
         >Guardar y continuar
         </button>
       </div>
+      {openGame === COLLECTIONS.cs2 && <GameForm />}
+      {openGame === COLLECTIONS.valorant && <GameForm />}
+      {openGame === COLLECTIONS.lol && <GameForm />}
+      {openGame === COLLECTIONS.fortnite && <GameForm />}
     </section>
   )
 }
