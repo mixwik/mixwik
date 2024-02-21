@@ -18,11 +18,10 @@ const FormUserData = () => {
   const [previewImage, setPreviewImage] = useState()
   const [imgURL, setImgURL] = useState()
   const [image, setImage] = useState()
-  const [progress, setProgress] = useState(true)
+  const [, setProgress] = useState(true)
   const currentPosition = useCurrentPosition()
-  const [error, updateDataUser] = useUpdateDataUser()
+  const [, updateDataUser] = useUpdateDataUser()
   const { userProvider } = useSession()
-  console.log(error, progress)
 
   const handleSetImage = async (e) => {
     const reader = new FileReader()

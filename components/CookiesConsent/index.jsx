@@ -5,8 +5,7 @@ import styles from './CookiesConsent.module.scss'
 
 const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState(false)
-  const [consentAccepted, setConsentAccepted] = useState(false)
-  console.log(consentAccepted)
+  const [, setConsentAccepted] = useState(false)
 
   useEffect(() => {
     const hasConsent = Cookie.get('cookieConsent')

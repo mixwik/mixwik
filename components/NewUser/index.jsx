@@ -1,11 +1,10 @@
 // styles
 import Image from 'next/image'
-import { useSession } from '../../firebase/auth/useSession'
+// import { useSession } from '../../firebase/auth/useSession'
 import Layout from '../Layout'
 
 const NewUser = () => {
-  const { userProvider } = useSession()
-  console.log(userProvider)
+  // const { userProvider } = useSession()
 
   const createUser = async () => {
 
