@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { myLoader } from '../../../../components/myLoader'
 import { UserProvider } from '../../../../domain/types'
 import { useSignOut } from '../../../../firebase/auth/SignOut'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
@@ -22,7 +21,7 @@ export const Step1 = (
   }
   return (
     <div className='flex flex-col justify-around w-full h-full p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
-      <h1 className='flex flex-col items-center justify-center gap-3 text-4xl font-bold'>Bienvenido a <span className='sr-only'>MixWik</span> <Image className='w-auto h-12' alt='Logo de Mixwik' src='/logos/mixwik-logo.png' width={100} height={50} loader={myLoader} /></h1>
+      <h1 className='flex flex-col items-center justify-center gap-3 text-4xl font-bold'>Bienvenido a <span className='sr-only'>MixWik</span> <Image className='w-auto h-12' alt='Logo de Mixwik' src='/logos/mixwik-logo.png' width={100} height={50} /></h1>
       <ol className='relative m-3 border-gray-200 md:m-5 border-s'>
         <li className='mb-10 ms-6'>
           <span className='absolute flex items-center justify-center w-6 h-6 rounded-full bg-aero -start-3 ring-8 ring-white'>
