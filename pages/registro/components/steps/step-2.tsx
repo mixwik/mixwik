@@ -4,6 +4,7 @@ import { ArrowBack, DeleteIcon, ImageIcon } from '../../../../components/Svg'
 import { myLoader } from '../../../../components/myLoader'
 import { UserProvider } from '../../../../domain/types'
 import { removeImageDB, setImageDB } from '../../../../firebase/storage'
+import { Error } from '../Error'
 
 export const Step2 = (
   { userProvider, setSteps }:
@@ -13,7 +14,7 @@ export const Step2 = (
   const [imgURL, setImgURL] = useState('')
   const [error, setError] = useState(false)
   const [image, setImage] = useState<File>()
-  const [progress, setProgress] = useState()
+  const [, setProgress] = useState()
 
   useEffect(() => {
     const image = localStorage.getItem('image')
@@ -34,14 +35,21 @@ export const Step2 = (
   }
   const handleRemoveImage = async (e) => {
     e.preventDefault()
-    if (image && image.name) removeImageDB('profile', image.name)
+    const imageName = localStorage.getItem('imageName')
+    removeImageDB('profile', image?.name || imageName)
+    localStorage.removeItem('image')
+    localStorage.removeItem('imageName')
+    setImgURL('')
     setPreviewImage('')
   }
 
   const saveImage = () => {
-    if ((imgURL && progress) || userProvider.image) {
-      localStorage.setItem('image', imgURL)
-      localStorage.setItem('step', 'step-3')
+    if (imgURL || userProvider.image) {
+      if (imgURL && image) {
+        localStorage.setItem('image', imgURL)
+        localStorage.setItem('imageName', image.name)
+        localStorage.setItem('step', 'step-3')
+      }
       setSteps('step-3')
     } else {
       setError(true)
@@ -71,40 +79,41 @@ export const Step2 = (
             </div>
             )
           : (
-            <div className='w-full h-full'>
+            <div className='relative flex items-center justify-center w-full h-full'>
               {
-            userProvider?.image
-              ? (
-                <div className='relative flex items-center justify-center'>
-                  <Image
-                    className='object-cover w-full h-full rounded-full'
-                    width={0}
-                    height={0}
-                    loader={myLoader}
-                    src={userProvider?.image} alt='Carga de imagen'
-                  />
-                  <ImageIcon className='absolute w-12 h-12 p-1 fill-white' />
-                </div>
-                )
-              : (
-
-                <ImageIcon className='w-12 h-12' />)
-            }
+                userProvider?.image
+                  ? (
+                    <div className='relative flex items-center justify-center'>
+                      <Image
+                        className='object-cover w-full h-full rounded-full'
+                        width={0}
+                        height={0}
+                        loader={myLoader}
+                        src={userProvider?.image} alt='Carga de imagen'
+                      />
+                      <ImageIcon className='absolute w-12 h-12 p-1 fill-white' />
+                    </div>
+                    )
+                  : (
+                    <ImageIcon className='absolute w-12 h-12' />
+                    )
+              }
             </div>
             )}
       </label>
-      <div className='flex justify-center w-full gap-10'>
+      <div className='relative flex justify-center w-full gap-10'>
+        {error && <Error error='Debes seleccionar una imagen' />}
         <button className='flex items-center gap-1' onClick={() => setSteps('step-1')}>
           <ArrowBack className='w-6 h-6 text-white' />
           Volver
         </button>
         <button
+          disabled={!imgURL ?? !userProvider.image}
           onClick={saveImage}
           className='px-5 py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
         >Guardar y continuar
         </button>
       </div>
-      {error && <p className='font-bold text-red-500'>Debes seleccionar una imagen</p>}
     </section>
   )
 }

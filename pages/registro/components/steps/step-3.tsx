@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ArrowBack } from '../../../../components/Svg'
-import { ToastError } from '../toastError'
+import { Error } from '../Error'
 
 export const Step3 = (
   { setSteps }:
@@ -56,6 +56,7 @@ export const Step3 = (
     localStorage.setItem('age', data.age)
     localStorage.setItem('description', data.description)
     localStorage.setItem('gender', data.gender)
+    localStorage.setItem('step', 'step-4')
     setSteps('step-4')
   }
 
@@ -68,31 +69,29 @@ export const Step3 = (
         <div
           className='grid w-full gap-5 md:grid-cols-2'
         >
-          <div className='w-full'>
-            <label className='flex flex-col gap-2'>
-              <span className='font-semibold text-slate-900'>
-                Nombre:
-              </span>
-              <input
-                {...register('name')}
-                className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
-              />
-            </label>
-          </div>
-          <div>
-            <label className='flex flex-col gap-2'>
-              <span className='font-semibold text-slate-900'>
-                Fecha de nacimiento:
-              </span>
-              <input
-                {...register('age')}
-                type='date'
-                className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
-              />
-            </label>
-          </div>
+          <label className='relative flex flex-col gap-2'>
+            <span className='font-semibold text-slate-900'>
+              Nombre:
+            </span>
+            <input
+              {...register('name')}
+              className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+            />
+            {errors.name && <Error error={errors.name.message} />}
+          </label>
+          <label className='relative flex flex-col gap-2'>
+            <span className='font-semibold text-slate-900'>
+              Fecha de nacimiento:
+            </span>
+            <input
+              {...register('age')}
+              type='date'
+              className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+            />
+            {errors.age && <Error error={errors.age.message} />}
+          </label>
         </div>
-        <div className='flex flex-col w-full gap-2'>
+        <div className='relative flex flex-col w-full gap-2'>
           <span className='font-semibold text-slate-900'>
             Genero:
           </span>
@@ -134,6 +133,7 @@ export const Step3 = (
               </label>
             </li>
           </ul>
+          {errors.gender && <Error error={errors.gender.message} />}
         </div>
         <div className='relative w-full'>
           <label className='flex flex-col w-full gap-2'>
@@ -148,6 +148,7 @@ export const Step3 = (
             />
           </label>
           <span className='absolute z-10 bottom-2 right-2'>{watch('description').length > 0 ? watch('description').length : 0}/350</span>
+          {errors.description && <Error error={errors.description.message} />}
         </div>
         <div className='flex justify-center w-full gap-10'>
           <button
@@ -164,10 +165,6 @@ export const Step3 = (
           >Guardar y continuar
           </button>
         </div>
-        {errors.name && <ToastError error={errors.name.message} />}
-        {errors.age && <ToastError error={errors.age.message} />}
-        {errors.gender && <ToastError error={errors.gender.message} />}
-        {errors.description && <ToastError error={errors.description.message} />}
       </form>
     </section>
   )

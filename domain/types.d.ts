@@ -1,11 +1,11 @@
-export interface UserProvider {
+export type UserProvider = {
     name?: string
     email: string
     image?: string
     uid: string
 }
 
-export interface User {
+export type User = {
     admonition: boolean
     age: number
     ban: boolean

@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ArrowBack, DiscordIcon, TwitterIcon } from '../../../../components/Svg'
 import { REGEX } from '../../../../domain/regex'
-import { ToastError } from '../toastError'
 
 export const Step4 = (
   { setSteps }:
@@ -15,16 +14,28 @@ export const Step4 = (
     discord: localStorage.getItem('discord') || ''
   })
   const schema = yup
-    .object({
+    .object()
+    .shape({
       twitter: yup
         .string()
-        .required('El campo Twitter es obligatorio')
-        .matches(REGEX.twitter, 'El campo twitter no es valido'),
+        .notRequired()
+        .when('twitter', {
+          is: (value: string) => value?.length,
+          then: (rule) => rule.matches(REGEX.twitter, 'La URL de twitter no es valida')
+        }),
       discord: yup
         .string()
-        .required('El campo Discord es obligatorio')
-        .matches(REGEX.discord, 'El campo discord no es valido')
-    })
+        .notRequired()
+        .when('discord', {
+          is: (value: string) => value?.length,
+          then: (rule) => rule.matches(REGEX.discord, 'La URL de twitter no es valida')
+        })
+    }, [['twitter', 'twitter'], ['discord', 'discord']])
+    .test(
+      'at-least-one-input',
+      'Al menos uno de los dos campos debe estar lleno',
+      obj => !!obj.twitter || !!obj.discord
+    )
     .required()
 
   const {
@@ -36,35 +47,37 @@ export const Step4 = (
   const onSubmit = (data) => {
     localStorage.setItem('twitter', data.twitter)
     localStorage.setItem('discord', data.discord)
+    localStorage.setItem('step', 'step-5')
     setSteps('step-5')
   }
 
   return (
     <section className='flex flex-col items-center justify-around w-full h-full gap-5 p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
       <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Añade tus Redes sociales</h2>
+      <p className='text-sm text-gray-400 md:text-base'>Añade tus redes sociales para que otros usuarios puedan contactarte. <br /> <span className='font-bold'>Es obligatorio poner al menos una de estas dos</span></p>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-around w-full h-full gap-5 bg-white rounded-lg'
       >
         <label className='relative flex items-center w-full gap-2 md:w-1/2'>
           <TwitterIcon className='absolute w-6 h-6 right-2' />
-          <span className='font-semibold text-slate-900'>
-            Twitter:
-          </span>
           <input
             {...register('twitter')}
             className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
           />
+          {errors.twitter && (
+            <div className='absolute text-red-300 -bottom-7'>{errors.twitter.message}</div>
+          )}
         </label>
         <label className='relative flex items-center w-full gap-2 md:w-1/2'>
           <DiscordIcon className='absolute w-6 h-6 right-2' />
-          <span className='font-semibold text-slate-900'>
-            Discord:
-          </span>
           <input
             {...register('discord', { pattern: REGEX.discord, required: 'El campo discord es obligatorio' })}
             className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
           />
+          {errors.discord && (
+            <div className='absolute text-red-300 -bottom-7'>{errors.discord.message}</div>
+          )}
         </label>
         <div className='flex justify-center w-full gap-10'>
           <button
@@ -82,8 +95,6 @@ export const Step4 = (
             Guardar y continuar
           </button>
         </div>
-        {errors.twitter && <ToastError error={errors.twitter.message} />}
-        {errors.discord && <ToastError error={errors.discord.message} />}
       </form>
     </section>
   )
