@@ -5,8 +5,8 @@ import { Stepper } from './components/stepper'
 import { Step1 } from './components/steps/step-1'
 import { Step2 } from './components/steps/step-2'
 import { Step3 } from './components/steps/step-3'
-import { Step5 } from './components/steps/step-5'
 import { Step4 } from './components/steps/step-4'
+import { Step5 } from './components/steps/step-5'
 
 const Register = () => {
   const [accept, setAccept] = useState(false)
