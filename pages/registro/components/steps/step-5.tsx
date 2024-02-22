@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { GameForm } from '../../../../components/gameForm'
 import { useOpenGameContext } from '../../../../context'
@@ -10,22 +10,11 @@ export const Step5 = (
   { setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
   const { openGame, handleOpenGame } = useOpenGameContext()
-  const [disabled, setDisabled] = useState(false)
-  useEffect(() => {
-    const titleCs2 = localStorage.getItem('titleCs2')
-    const titleValorant = localStorage.getItem('titleValorant')
-    const titleLol = localStorage.getItem('titleLol')
-    const titleFortnite = localStorage.getItem('titleFortnite')
-    if (titleCs2 || titleValorant || titleLol || titleFortnite) {
-      setDisabled(true)
-    }
-  }, [])
 
   const handleClick = () => {
 
   }
   const handleCheck = (collection: string) => {
-    if (disabled) return
     handleOpenGame(collection)
   }
 

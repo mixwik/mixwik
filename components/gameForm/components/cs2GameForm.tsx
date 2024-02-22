@@ -4,15 +4,21 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useOpenGameContext } from '../../../context'
 import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../domain/constants'
+import { useSession } from '../../../firebase/auth/useSession'
 import { Error } from '../../../pages/registro/components/Error'
 import { ArrowBack } from '../../Svg'
 import { BoxField } from './box-field'
 import { FieldImage } from './image'
 
 export const Cs2GameFrom = () => {
+  const [loading, setLoading] = useState(true)
+  const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
-  const [imgUrl, setImgUrl] = useState('')
-  const [error, setError] = useState(false)
+  const [image, setImage] = useState<File>()
+  const [imgUrl, setImgUrl] = useState(
+    localStorage.getItem('imageCs2') || ''
+  )
+  const [error, setError] = useState('')
   const [initialValues] = useState({
     category: openGame as string,
     title: localStorage.getItem('titleCs2') || '',
@@ -67,22 +73,40 @@ export const Cs2GameFrom = () => {
     defaultValues: initialValues
   })
 
-  const onSubmit = (data) => {
-    if (Object.keys(data).length > 0 && imgUrl) {
-      localStorage.setItem('titleCs2', data.title)
-      localStorage.setItem('descriptionCs2', data.description)
-      localStorage.setItem('hoursCs2', data.hours.toString())
-      localStorage.setItem('levelCs2', data.level)
-      localStorage.setItem('premierCs2', data.premier)
-      localStorage.setItem('positionCs2', JSON.stringify(data.position))
-      localStorage.setItem('typeOfGamerCs2', JSON.stringify(data.typeOfGamer))
+  const onSubmit = async (data) => {
+    const geometry = JSON.parse(localStorage.getItem('geometry') ?? '[]')
+    if (Object.keys(data).length > 0 && imgUrl && image) {
+      setLoading(true)
+      const res = await fetch('/api/create-game', {
+        method: 'POST',
+        body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry })
+      })
+      const response = await res.json()
+      if (response.message === 'Game created') {
+        setTimeout(() => {
+          setLoading(false)
+          handleOpenGame('')
+        }, 2000)
+      } else {
+        setError(response)
+      }
     } else {
-      setError(true)
+      setError('Ha ocurrido un error')
     }
   }
 
   return (
     <section className='p-5 bg-white rounded-lg size-full md:h-4/5 md:w-1/2 md:px-0 '>
+      {
+        loading && (
+          <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50'>
+            <div className='flex flex-col items-center gap-5 p-5 bg-white rounded-lg'>
+              <h2 className='text-2xl font-semibold text-pennBlue'>Creando Juego</h2>
+              <p className='text-sm text-slate-900'>Por favor espera un momento...</p>
+            </div>
+          </div>
+        )
+      }
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-center gap-10 bg-white rounded-lg size-full'
@@ -90,7 +114,12 @@ export const Cs2GameFrom = () => {
         <h2 className='text-2xl font-semibold text-pennBlue'>
           Counter Strike 2
         </h2>
-        <FieldImage setImgURL={setImgUrl} />
+        <FieldImage
+          setImgURL={setImgUrl}
+          imgURL={imgUrl}
+          setImage={setImage}
+          image={image}
+        />
         <label className='relative flex flex-col w-full gap-2'>
           <span className='font-semibold text-slate-900'>
             Nombre de Jugador:
@@ -185,7 +214,7 @@ export const Cs2GameFrom = () => {
             type='submit'
           >Guardar y continuar
           </button>
-          {error && <Error error='Ha ocurrido un error' />}
+          {error && <Error error={error} />}
         </div>
       </form>
     </section>
