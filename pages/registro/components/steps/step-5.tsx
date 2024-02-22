@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { GameForm } from '../../../../components/gameForm'
 import { useOpenGameContext } from '../../../../context'
@@ -10,16 +10,28 @@ export const Step5 = (
   { setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
   const { openGame, handleOpenGame } = useOpenGameContext()
+  const [disabled, setDisabled] = useState(false)
+  useEffect(() => {
+    const titleCs2 = localStorage.getItem('titleCs2')
+    const titleValorant = localStorage.getItem('titleValorant')
+    const titleLol = localStorage.getItem('titleLol')
+    const titleFortnite = localStorage.getItem('titleFortnite')
+    if (titleCs2 || titleValorant || titleLol || titleFortnite) {
+      setDisabled(true)
+    }
+  }, [])
+
   const handleClick = () => {
 
   }
   const handleCheck = (collection: string) => {
+    if (disabled) return
     handleOpenGame(collection)
   }
 
   return (
     <section className='flex flex-col items-center justify-around w-full h-full gap-5 p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
-      <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea tu jugador</h2>
+      <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea un jugador</h2>
       <ul
         className='flex flex-wrap justify-center w-full gap-5 md:gap-10 md:w-4/5'
       >

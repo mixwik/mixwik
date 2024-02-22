@@ -12,8 +12,9 @@ import { FieldImage } from './image'
 export const Cs2GameFrom = () => {
   const { openGame, handleOpenGame } = useOpenGameContext()
   const [imgUrl, setImgUrl] = useState('')
+  const [error, setError] = useState(false)
   const [initialValues] = useState({
-    category: openGame,
+    category: openGame as string,
     title: localStorage.getItem('titleCs2') || '',
     description: localStorage.getItem('descriptionCs2') || '',
     hours: Number(localStorage.getItem('hoursCs2')) || 0,
@@ -67,23 +68,16 @@ export const Cs2GameFrom = () => {
   })
 
   const onSubmit = (data) => {
-    if (imgUrl) {
-      console.log(data, imgUrl)
-      localStorage.removeItem('titleCs2')
-      localStorage.removeItem('descriptionCs2')
-      localStorage.removeItem('levelCs2')
-      localStorage.removeItem('positionCs2')
-      localStorage.removeItem('premierCs2')
-      localStorage.removeItem('typeOfGamerCs2')
-      localStorage.removeItem('hoursCs2')
-    } else {
+    if (Object.keys(data).length > 0 && imgUrl) {
       localStorage.setItem('titleCs2', data.title)
       localStorage.setItem('descriptionCs2', data.description)
-      localStorage.setItem('levelCs2', data.level)
-      localStorage.setItem('positionCs2', JSON.stringify(data.position))
-      localStorage.setItem('premierCs2', data.premier)
-      localStorage.setItem('typeOfGamerCs2', JSON.stringify(data.typeOfGamer))
       localStorage.setItem('hoursCs2', data.hours.toString())
+      localStorage.setItem('levelCs2', data.level)
+      localStorage.setItem('premierCs2', data.premier)
+      localStorage.setItem('positionCs2', JSON.stringify(data.position))
+      localStorage.setItem('typeOfGamerCs2', JSON.stringify(data.typeOfGamer))
+    } else {
+      setError(true)
     }
   }
 
@@ -191,6 +185,7 @@ export const Cs2GameFrom = () => {
             type='submit'
           >Guardar y continuar
           </button>
+          {error && <Error error='Ha ocurrido un error' />}
         </div>
       </form>
     </section>
