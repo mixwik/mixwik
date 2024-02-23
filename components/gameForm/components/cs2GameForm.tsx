@@ -7,28 +7,32 @@ import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../d
 import { useSession } from '../../../firebase/auth/useSession'
 import { Error } from '../../../pages/registro/components/Error'
 import { ArrowBack } from '../../Svg'
+import { BackgroundDots } from '../../background-dots'
+import { PopUpMessage } from '../../pop-up-message'
 import { BoxField } from './box-field'
-import { FieldImage } from './image'
+import { Description } from './description'
+import { FieldImage } from './field-image'
+import { HoursField } from './hours-field'
+import { Title } from './title'
 
 export const Cs2GameFrom = () => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
   const [image, setImage] = useState<File>()
-  const [imgUrl, setImgUrl] = useState(
-    localStorage.getItem('imageCs2') || ''
-  )
+  const [imgUrl, setImgUrl] = useState('')
+
   const [error, setError] = useState('')
   const [initialValues] = useState({
     category: openGame as string,
-    title: localStorage.getItem('titleCs2') || '',
-    description: localStorage.getItem('descriptionCs2') || '',
-    hours: Number(localStorage.getItem('hoursCs2')) || 0,
-    age: localStorage.getItem('age') || '',
-    level: localStorage.getItem('levelCs2') || '',
-    position: JSON.parse(localStorage.getItem('positionCs2') ?? '[]') as string[] || [],
-    premier: localStorage.getItem('premierCs2') || '',
-    typeOfGamer: JSON.parse(localStorage.getItem('typeOfGamerCs2') ?? '[]') as string[] || []
+    title: '',
+    description: '',
+    hours: 0,
+    age: '',
+    level: '',
+    position: [] as string[],
+    premier: '',
+    typeOfGamer: [] as string[]
   })
 
   const schema = yup
@@ -75,41 +79,44 @@ export const Cs2GameFrom = () => {
 
   const onSubmit = async (data) => {
     const geometry = JSON.parse(localStorage.getItem('geometry') ?? '[]')
+    const date = localStorage.getItem('age') ?? '01-01-2000'
+    const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
-      setLoading(true)
+      setLoading('creating')
       const res = await fetch('/api/create-game', {
         method: 'POST',
-        body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry })
+        body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry, age })
       })
       const response = await res.json()
       if (response.message === 'Game created') {
         setTimeout(() => {
-          setLoading(false)
+          setLoading('complete')
+          localStorage.setItem('cs2Publications', '1')
           handleOpenGame('')
         }, 2000)
       } else {
         setError(response)
+        setLoading('')
       }
     } else {
       setError('Ha ocurrido un error')
+      setLoading('')
     }
   }
 
   return (
-    <section className='p-5 bg-white rounded-lg size-full md:h-4/5 md:w-1/2 md:px-0 '>
-      {
-        loading && (
-          <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50'>
-            <div className='flex flex-col items-center gap-5 p-5 bg-white rounded-lg'>
-              <h2 className='text-2xl font-semibold text-pennBlue'>Creando Juego</h2>
-              <p className='text-sm text-slate-900'>Por favor espera un momento...</p>
-            </div>
-          </div>
-        )
-      }
+    <section className='size-full md:w-1/2 md:py-5'>
+      <BackgroundDots />
+      <PopUpMessage
+        title1='Creando...'
+        title2='Jugador creado'
+        subtitle1='Estamos creando tu jugador, por favor espera...'
+        subtitle2='Tu jugador ha sido creado con éxito'
+        loading={loading}
+      />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-center gap-10 bg-white rounded-lg size-full'
+        className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
       >
         <h2 className='text-2xl font-semibold text-pennBlue'>
           Counter Strike 2
@@ -120,36 +127,24 @@ export const Cs2GameFrom = () => {
           setImage={setImage}
           image={image}
         />
-        <label className='relative flex flex-col w-full gap-2'>
-          <span className='font-semibold text-slate-900'>
-            Nombre de Jugador:
-          </span>
-          <input
-            {...register('title')}
-            className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
-          />
-          {errors.title && <Error error={errors.title.message} />}
-        </label>
-        <div className='relative w-full'>
-          <label className='flex flex-col w-full gap-2'>
-            <span className='font-semibold text-slate-900'>
-              Describete:
-            </span>
-            <textarea
-              className='w-full p-5 mt-1 bg-gray-100 border-none shadow-lg resize-none rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
-              placeholder='Máximo 350 caracteres'
-              rows={3}
-              {...register('description')}
-            />
-          </label>
-          <span className='absolute z-10 bottom-2 right-2'>{watch('description').length > 0 ? watch('description').length : 0}/350</span>
-          {errors.description && <Error error={errors.description.message} />}
-        </div>
+        <Title
+          register={register}
+          errors={errors.title}
+          title='Nombre de jugador'
+          registerName='title'
+        />
+        <Description
+          register={register}
+          watch={watch}
+          errors={errors.description}
+          title='Describete como jugador'
+          registerName='description'
+        />
 
         <BoxField
           register={register}
           registerName='level'
-          errors={errors}
+          errors={errors.level}
           game={CS2_LEVELS}
           type='radio'
           title='¿Cuál es tu nivel en Competitivo?'
@@ -157,7 +152,7 @@ export const Cs2GameFrom = () => {
         <BoxField
           register={register}
           registerName='premier'
-          errors={errors}
+          errors={errors.premier}
           game={CS2_PREMIER}
           type='radio'
           title='¿Cuál es tu nivel en Premier?'
@@ -166,7 +161,7 @@ export const Cs2GameFrom = () => {
         <BoxField
           register={register}
           registerName='position'
-          errors={errors}
+          errors={errors.position}
           game={CS2_POSITIONS}
           type='checkbox'
           title='¿En qué posiciones juegas?'
@@ -175,29 +170,19 @@ export const Cs2GameFrom = () => {
         <BoxField
           register={register}
           registerName='typeOfGamer'
-          errors={errors}
+          errors={errors.typeOfGamer}
           game={TYPE_OF_GAME}
           type='checkbox'
           title='¿Qué tipo de jugador eres?'
         />
-        <div className='relative w-full'>
-          <label htmlFor='steps-range' className='flex flex-col w-full gap-2'>
-            <span className='font-semibold text-slate-900'>
-              Horas Jugadas:
-            </span>
-            <input
-              {...register('hours')}
-              id='steps-range'
-              type='range'
-              min='0'
-              max='5000'
-              step='50'
-              className='w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:bg-aero [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-lg'
-            />
-          </label>
-          <span className='absolute z-10 bottom-4 right-2'>{watch('hours') > 0 ? watch('hours') : 0}</span>
-          {errors.hours && <Error error={errors.hours.message} />}
-        </div>
+        <HoursField
+          register={register}
+          watch={watch}
+          errors={errors.hours}
+          title='¿Cuántas horas juegas al día?'
+          type='range'
+          registerName='hours'
+        />
 
         <div className='flex justify-center w-full gap-10'>
           <button

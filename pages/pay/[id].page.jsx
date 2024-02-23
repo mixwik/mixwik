@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { COLLECTIONS } from '../../domain/constants'
 import PrivateRoute from '../../firebase/auth/PrivateRoute'
 import { useSession } from '../../firebase/auth/useSession'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
@@ -10,7 +11,7 @@ const Pay = () => {
   const { id } = router.query
   const { userProvider } = useSession()
   const cancelSubscription = useCancelRenovationSubscription()
-  const user = useGetOneData('users', userProvider?.uid)
+  const user = useGetOneData(COLLECTIONS.users, userProvider?.uid)
   const stripeId = useCheckPay(id, userProvider?.email)
   if (stripeId && user.id) {
     cancelSubscription(stripeId)

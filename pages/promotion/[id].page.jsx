@@ -19,6 +19,7 @@ import { updatePublicationPromotion, updateUserCopper, updateUserGold, updateUse
 import { myLoader } from '../../components/myLoader'
 
 // Hooks
+import { COLLECTIONS } from '../../domain/constants'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChecksStripe'
 
@@ -26,10 +27,10 @@ const Promotion = () => {
   const router = useRouter()
   const { id, method } = router.query
   const { userProvider } = useSession()
-  const user = useGetOneData('users', userProvider?.uid)
+  const user = useGetOneData(COLLECTIONS.users, userProvider?.uid)
   const stripeId = useCheckPay(id, userProvider?.email)
-  const csgo = useGetMyPublications('csgo', userProvider?.uid)
-  const teams = useGetMyPublications('teams', userProvider?.uid)
+  const csgo = useGetMyPublications(COLLECTIONS.cs2, userProvider?.uid)
+  const teams = useGetMyPublications(COLLECTIONS.teams, userProvider?.uid)
   const cancelSubscription = useCancelRenovationSubscription()
 
   if (stripeId && user.id && method === '2m25S789gDS8') updateUserCopper(stripeId, user.id, router)
@@ -97,7 +98,7 @@ const Promotion = () => {
             <h2>CSGO</h2>
             {
               csgo.map(publication => (
-                <button className={styles.box} key={publication.id} onClick={() => handleSetCobre('csgo', stripeId, publication.id)}>
+                <button className={styles.box} key={publication.id} onClick={() => handleSetCobre(COLLECTIONS.cs2, stripeId, publication.id)}>
                   <h1 className={styles.title}>{publication.title}</h1>
                   <div className={styles.filter} />
                   <Image

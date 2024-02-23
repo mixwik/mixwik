@@ -34,43 +34,42 @@ export const FieldImage = (
   }
 
   return (
-    <label className='flex flex-col items-center justify-center w-48 h-48 overflow-hidden bg-white border-2 border-solid rounded-full border-aero'>
+    <label className='flex items-center justify-center bg-gray-100 border-2 border-solid rounded-full shadow-lg size-48 shadow-gray-300 border-aero'>
       <input
         className='hidden'
         onChange={handleSetImage}
         type='file'
-        placeholder='Minutos'
       />
       {previewImage
         ? (
-          <div className='flex items-center justify-center w-full h-full'>
-            <Image className='object-cover w-full h-full rounded-full' width={0} height={0} loader={myLoader} src={previewImage} alt='Carga de imagen' />
+          <div className='relative flex items-center justify-center size-full'>
+            <Image className='object-cover rounded-full size-full' width={0} height={0} loader={myLoader} src={previewImage} alt='Carga de imagen' />
             <button
               className='absolute z-20 rounded-full'
               onClick={handleRemoveImage}
             >
-              <DeleteIcon className='w-12 h-12 text-red-500' />
+              <DeleteIcon className='text-red-500 size-12' />
             </button>
           </div>
           )
         : (
-          <div className='relative flex items-center justify-center w-full h-full'>
+          <div className='flex items-center justify-center size-full'>
             {
                 imgURL
                   ? (
-                    <div className='relative flex items-center justify-center'>
+                    <div className='relative flex items-center justify-center size-full'>
                       <Image
-                        className='object-cover w-full h-full rounded-full'
+                        className='object-cover rounded-full size-full'
                         width={0}
                         height={0}
                         loader={myLoader}
                         src={imgURL} alt='Carga de imagen'
                       />
-                      <ImageIcon className='absolute w-12 h-12 p-1 fill-white' />
+                      <ImageIcon className='absolute p-1 size-12 fill-white' />
                     </div>
                     )
                   : (
-                    <ImageIcon className='absolute w-12 h-12' />
+                    <ImageIcon className='size-12' />
                     )
               }
           </div>

@@ -1,7 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { COLLECTIONS } from '../../../domain/constants'
-import { db } from '../../../firebase/initialize'
+import { COLLECTIONS } from '../../../../domain/constants'
+import { db } from '../../../../firebase/initialize'
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {

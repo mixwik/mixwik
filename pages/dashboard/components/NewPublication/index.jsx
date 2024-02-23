@@ -106,7 +106,7 @@ const NewPublication = ({ user, mixWikTeams }) => {
           Counter Strike 2
         </li>
         <li onClick={() => handleCheck(COLLECTIONS.lol)}>
-          <Image src={LOGOS.lol} alt='LOL' />
+          <Image src={LOGOS.lol} alt='League of Legends' />
           League of Legends
         </li>
         <li onClick={() => handleCheck(COLLECTIONS.fortnite)}>

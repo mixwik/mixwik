@@ -2,6 +2,7 @@ import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
 import { auth } from '../../firebase/initialize'
+import { BackgroundDots } from '../../components/background-dots'
 
 const FinishRegistrationPage = () => {
   const [existEmail, setExistEmail] = useState(false)
@@ -38,7 +39,7 @@ const FinishRegistrationPage = () => {
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-white'>
-      <div className='fixed inset-0 -z-10 h-full w-full bg-slate-50 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]' />
+      <BackgroundDots />
       <div className='relative w-full mx-3 sm:mx-0 sm:max-w-sm'>
         <div className='absolute w-full h-full transform shadow-lg card bg-aero rounded-3xl -rotate-6' />
         <div className='absolute w-full h-full transform shadow-lg card bg-pennBlue rounded-3xl rotate-6' />

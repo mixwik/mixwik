@@ -37,6 +37,7 @@ import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
 import { useMaster } from '../../hooks/useMaster'
+import { COLLECTIONS } from '../../domain/constants'
 
 export default function Dashboard () {
   const { master } = useMaster()
@@ -57,7 +58,7 @@ export default function Dashboard () {
   }
 
   const { userProvider } = useSession()
-  const currentUser = useGetOneData('users', userProvider?.uid)
+  const currentUser = useGetOneData(COLLECTIONS.users, userProvider?.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
+import { BackgroundDots } from '../../components/background-dots'
 import { useSession } from '../../firebase/auth/useSession'
 import { Stepper } from './components/stepper'
 import { Step1 } from './components/steps/step-1'
@@ -23,8 +24,8 @@ const Register = () => {
   return (
     <Layout title='Registro'>
       <section className='flex flex-col items-center justify-center h-[90vh]'>
+        <BackgroundDots />
         <Stepper steps={steps} />
-        <div className='fixed inset-0 -z-10 h-full w-full bg-slate-100 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]' />
         {steps === 'step-1' && (
           <Step1
             accept={accept}

@@ -1,9 +1,10 @@
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../initialize'
+import { COLLECTIONS } from '../../../domain/constants'
 
 export const setNewUser = async (value, geometry, user, profileImg) => {
   // Add a new document with a generated id.
-  await addDoc(collection(db, 'users'), {
+  await addDoc(collection(db, COLLECTIONS.users), {
     name: value.name,
     age: value.age,
     gender: value.gender,

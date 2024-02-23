@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { COLLECTIONS } from '../../../../domain/constants'
 import { useGetMyPublications } from '../../../../firebase/hooks/getMethod/useGetMyPublications'
 import { useGetMyTeams } from '../../../../firebase/hooks/getMethod/useGetMyTeam'
 import CardPublications from '../CardPublications'
@@ -7,14 +8,14 @@ import BoxCards from './BoxCards'
 
 const MyPublications = ({ user }) => {
   const [publications, setPublications] = useState([])
-  const publicationsCSGO = useGetMyPublications('cs2', user.uid)
-  const publicationsLOL = useGetMyPublications('lol', user.uid)
-  const publicationsFortnite = useGetMyPublications('fortnite', user.uid)
-  const publicationsValorant = useGetMyPublications('valorant', user.uid)
-  const publicationsCsgoTeams = useGetMyTeams('teams', 'cs2', user.uid)
-  const publicationsLolTeams = useGetMyTeams('teams', 'lol', user.uid)
-  const publicationsFortniteTeams = useGetMyTeams('teams', 'fortnite', user.uid)
-  const publicationsValorantTeams = useGetMyTeams('teams', 'valorant', user.uid)
+  const publicationsCSGO = useGetMyPublications(COLLECTIONS.cs2, user.uid)
+  const publicationsLOL = useGetMyPublications(COLLECTIONS.lol, user.uid)
+  const publicationsFortnite = useGetMyPublications(COLLECTIONS.fortnite, user.uid)
+  const publicationsValorant = useGetMyPublications(COLLECTIONS.valorant, user.uid)
+  const publicationsCsgoTeams = useGetMyTeams(COLLECTIONS.teams, COLLECTIONS.cs2, user.uid)
+  const publicationsLolTeams = useGetMyTeams(COLLECTIONS.teams, COLLECTIONS.lol, user.uid)
+  const publicationsFortniteTeams = useGetMyTeams(COLLECTIONS.teams, COLLECTIONS.fortnite, user.uid)
+  const publicationsValorantTeams = useGetMyTeams(COLLECTIONS.teams, COLLECTIONS.valorant, user.uid)
 
   useEffect(() => {
     setPublications([
@@ -54,7 +55,7 @@ const MyPublications = ({ user }) => {
                   publication={res}
                   user={user}
                   remove
-                  deleteCategory='cs2'
+                  deleteCategory={COLLECTIONS.cs2}
                 />
               ))
             }

@@ -31,6 +31,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       return res.status(400).json({ message: 'El usuario no es válido' })
     } else if (data.geometry === '' || data.geometry === undefined || data.geometry === null) {
       return res.status(400).json({ message: 'La ubicación no es válida' })
+    } else if (data.age === '' || data.age === undefined || data.age === null || data.age < 16 || data.age > 100) {
+      return res.status(400).json({ message: 'La edad no es válida' })
     } else {
       await addDoc(collection(db, data.category), {
         date: new Date(),

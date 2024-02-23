@@ -14,6 +14,7 @@ import { useGamesFilters } from '../../../hooks/useGamesFilters'
 import { useHandleOpenContext } from '../../../context'
 
 import Link from 'next/link'
+import { COLLECTIONS } from '../../../domain/constants'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetTeams } from '../../../firebase/hooks/getMethod/useGetTeams'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
@@ -22,9 +23,9 @@ const PageContent = ({ category, children, distance }) => {
   const { userProvider } = useSession()
   const currentPosition = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
-  const users = useGetData('users')
+  const users = useGetData(COLLECTIONS.users)
   const csgo = useGetData(category)
-  const teams = useGetTeams('teams', category)
+  const teams = useGetTeams(COLLECTIONS.teams, category)
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === userProvider?.uid)

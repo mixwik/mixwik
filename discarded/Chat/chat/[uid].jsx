@@ -13,12 +13,13 @@ import { updateChatUid } from '../../../firebase/hooks/updateMethod/updateUserDa
 import { useGetChats } from '../../getChats'
 import { setNewChat } from '../../setChats'
 import { updateChat } from '../../updateChat'
+import { COLLECTIONS } from '../../../domain/constants'
 
 export default function Chat () {
   const router = useRouter()
   const { uid } = router.query
 
-  const users = useGetData('users')
+  const users = useGetData(COLLECTIONS.users)
   const { userProvider } = useSession()
 
   // El owner es el dueño del chat, al cuál nosotros hablamos
