@@ -8,7 +8,7 @@ export const useSignOut = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        router.replace('/')
+        router.push('/')
       })
       .catch(() => {
 

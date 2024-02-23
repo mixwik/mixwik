@@ -10,8 +10,8 @@ const GameMarker = ({ icon, position, gamesCategory, user }) => {
       <Popup>
         <div className={styles.cardMap}>
           <div className={styles.profile}>
-            <Image width={0} height={0} loader={myLoader} src={user.profileImg} alt={user.name} />
-            {user.name}
+            <Image width={0} height={0} loader={myLoader} src={user?.profileImg} alt={user?.name} />
+            {user?.name}
           </div>
           <Link target='_blank' href={`/publicaciones/juegos/${position.id}?page=${gamesCategory}`} rel='noreferrer'>
             <div className={styles.publication}>
