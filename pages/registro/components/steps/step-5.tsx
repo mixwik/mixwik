@@ -1,20 +1,79 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { GameForm } from '../../../../components/gameForm'
 import { useOpenGameContext } from '../../../../context'
 import { COLLECTIONS, GAMES } from '../../../../domain/constants'
+import { useSession } from '../../../../firebase/auth/useSession'
 
 export const Step5 = (
   { setSteps }:
   { setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
+  const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
+  const [playerCreate, setPlayerCreate] = useState(false)
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    if (!playerCreate) return
+    const geometry = JSON.parse(localStorage.getItem('geometry') ?? '[0,0]')
+    const email = localStorage.getItem('email')
+    if (userProvider.email !== email) return
+    const age = localStorage.getItem('age')
+    const name = localStorage.getItem('name')
+    const description = localStorage.getItem('description')
+    const gender = localStorage.getItem('gender')
+    const twitter = localStorage.getItem('twitter')
+    const discord = localStorage.getItem('discord')
+    const cs2Publications = Number(localStorage.getItem('cs2Publications')) ?? 0
+    const fortnitePublications = Number(localStorage.getItem('fortnitePublication')) ?? 0
+    const valorantPublications = Number(localStorage.getItem('valorantPublication')) ?? 0
+    const lolPublications = Number(localStorage.getItem('lolPublication')) ?? 0
+    const RocketLeaguePublication = Number(localStorage.getItem('RocketLeaguePublication')) ?? 0
+    const Dota2Publication = Number(localStorage.getItem('Dota2Publication')) ?? 0
 
+    const response = await fetch('/api/create-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uid: userProvider.uid,
+        email,
+        geometry,
+        age,
+        name,
+        description,
+        gender,
+        twitter,
+        discord,
+        cs2Publications,
+        fortnitePublications,
+        valorantPublications,
+        lolPublications,
+        RocketLeaguePublication,
+        Dota2Publication
+      })
+    })
+    const data = await response.json()
+    console.log(data)
   }
   const handleCheck = (collection: string) => {
+    const cs2Publications = localStorage.getItem('cs2Publications')
+    const fortnitePublications = localStorage.getItem('fortnitePublications')
+    const valorantPublications = localStorage.getItem('valorantPublications')
+    const lolPublications = localStorage.getItem('lolPublications')
+
+    if (
+      cs2Publications ||
+      fortnitePublications ||
+      valorantPublications ||
+      lolPublications
+    ) {
+      setPlayerCreate(true)
+      return
+    }
+
     handleOpenGame(collection)
   }
 
@@ -49,7 +108,7 @@ export const Step5 = (
           Volver
         </button>
         <button
-          disabled
+          disabled={!playerCreate}
           onClick={handleClick}
           className='px-5 py-3 text-sm text-white transition duration-500 ease-in-out transform shadow-xl md:text-base bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
           type='submit'
