@@ -40,12 +40,12 @@ export const Step1 = (
       <h1 className='flex flex-col items-center justify-center gap-3 text-4xl font-bold'>Bienvenido a <span className='sr-only'>MixWik</span> <Image className='w-auto h-12' alt='Logo de Mixwik' src='/logos/mixwik-logo.png' width={100} height={50} /></h1>
       <ol className='flex flex-col gap-3 border-gray-200 md:m-5 border-s'>
         <li>
-          <p className='mb-4 font-normal text-gray-500 text-pretty'>Estamos muy felices de tenerte en nuestra comunidad, en MixWik podrás encontrar jugadores cerca de tí y formar equipo para lograr la victoria 🏆</p>
+          <p className='font-normal text-gray-500 text-pretty'>Estamos muy felices de tenerte en nuestra comunidad, en MixWik podrás encontrar jugadores cerca de tí y formar equipo para lograr la victoria 🏆</p>
         </li>
         <li>
           <p className='font-normal text-gray-500 text-pretty'>Además podrás publicar anuncios para encontrar jugadores para tú equipo o para unirte a otros equipos que busquen jugadores como tú.</p>
         </li>
-        <li className='flex flex-col items-center'>
+        <li className='flex flex-col items-center gap-3'>
           <p className='font-normal text-gray-500 text-pretty '>Pero antes de poder comenzar en MixWik necesitamos que nos des permisos para obtener tu localización, esta se usa para mostrarte jugadores cercanos y que podáis contactar</p>
           <button onClick={handlePosition} className='px-5 py-2 text-white rounded-lg bg-aero'>Permitir localización</button>
         </li>

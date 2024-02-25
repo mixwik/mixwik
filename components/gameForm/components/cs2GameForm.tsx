@@ -179,7 +179,7 @@ export const Cs2GameFrom = () => {
           register={register}
           watch={watch}
           errors={errors.hours}
-          title='¿Cuántas horas juegas al día?'
+          title='¿Cuántas horas has jugado?'
           type='range'
           registerName='hours'
         />

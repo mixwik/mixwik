@@ -1,7 +1,8 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { GameForm } from '../../../../components/gameForm'
+import { PopUpError } from '../../../../components/pop-up-error'
 import { useOpenGameContext } from '../../../../context'
 import { COLLECTIONS, GAMES } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
@@ -13,6 +14,23 @@ export const Step5 = (
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
   const [playerCreate, setPlayerCreate] = useState(false)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    const cs2Publications = localStorage.getItem('cs2Publications')
+    const fortnitePublications = localStorage.getItem('fortnitePublications')
+    const valorantPublications = localStorage.getItem('valorantPublications')
+    const lolPublications = localStorage.getItem('lolPublications')
+
+    if (
+      cs2Publications ||
+      fortnitePublications ||
+      valorantPublications ||
+      lolPublications
+    ) {
+      setPlayerCreate(true)
+    }
+  }, [setPlayerCreate])
 
   const handleClick = async () => {
     if (!playerCreate) return
@@ -56,29 +74,58 @@ export const Step5 = (
       })
     })
     const data = await response.json()
-    console.log(data)
+    if (data === 'User created') {
+      const listOfRemove = [
+        'geometry',
+        'age',
+        'name',
+        'description',
+        'gender',
+        'twitter',
+        'discord',
+        'email',
+        'cs2Publications',
+        'fortnitePublications',
+        'valorantPublications',
+        'lolPublications',
+        'RocketLeaguePublication',
+        'Dota2Publication',
+        'image',
+        'imageName',
+        'step'
+      ]
+      listOfRemove.forEach(item => localStorage.removeItem(item))
+    } else {
+      if (data === 'gender') {
+        setError('El campo genero es obligatorio')
+        setTimeout(() => {
+          setError('')
+          setSteps('step-3')
+        }
+        , 2000)
+      } else if (data === 'age') {
+        setError('La fecha de nacimiento es incorrecta')
+        setTimeout(() => {
+          setError('')
+          setSteps('step-3')
+        }
+        , 2000)
+      }
+    }
   }
-  const handleCheck = (collection: string) => {
-    const cs2Publications = localStorage.getItem('cs2Publications')
-    const fortnitePublications = localStorage.getItem('fortnitePublications')
-    const valorantPublications = localStorage.getItem('valorantPublications')
-    const lolPublications = localStorage.getItem('lolPublications')
 
-    if (
-      cs2Publications ||
-      fortnitePublications ||
-      valorantPublications ||
-      lolPublications
-    ) {
-      setPlayerCreate(true)
+  const handleCheck = (collection: string) => {
+    if (playerCreate) {
+      setError('Ya has creado un jugador')
+      setTimeout(() => setError(''), 2000)
       return
     }
-
     handleOpenGame(collection)
   }
 
   return (
     <section className='flex flex-col items-center justify-around w-full h-full gap-5 p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
+      <PopUpError error={error} />
       <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea un jugador</h2>
       <ul
         className='flex flex-wrap justify-center w-full gap-5 md:gap-10 md:w-4/5'
@@ -112,7 +159,7 @@ export const Step5 = (
           onClick={handleClick}
           className='px-5 py-3 text-sm text-white transition duration-500 ease-in-out transform shadow-xl md:text-base bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
           type='submit'
-        >Guardar y continuar
+        >Crear Usuario
         </button>
       </div>
       {openGame === COLLECTIONS.cs2 && <GameForm />}

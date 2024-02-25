@@ -38,6 +38,7 @@ export const Step3 = (
       gender: yup
         .string()
         .required('El campo genero es obligatorio')
+        .oneOf(['M', 'F', 'O'], 'Selecciona un genero')
     })
     .required()
 
@@ -124,12 +125,12 @@ export const Step3 = (
               <input
                 {...register('gender')}
                 type='radio'
-                value='N'
-                id='n'
+                value='O'
+                id='o'
                 className='hidden peer'
               />
-              <label htmlFor='n' className='inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border-2 border-solid rounded-lg cursor-pointer border-aero peer-checked:border-pennBlue peer-checked:text-pennBlue hover:text-gray-600 hover:bg-gray-100'>
-                <div className='w-full text-lg font-semibold text-center'>No binario</div>
+              <label htmlFor='o' className='inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border-2 border-solid rounded-lg cursor-pointer border-aero peer-checked:border-pennBlue peer-checked:text-pennBlue hover:text-gray-600 hover:bg-gray-100'>
+                <div className='w-full text-lg font-semibold text-center'>Otro</div>
               </label>
             </li>
           </ul>
