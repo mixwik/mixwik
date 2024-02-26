@@ -122,12 +122,9 @@ export const Step5 = (
     }
   }
 
-  const handleCheck = (collection: string) => {
-    if (playerCreate) {
-      setError('Ya has creado un jugador')
-      setTimeout(() => setError(''), 2000)
-      return
-    }
+  const handleCheck = async (collection: string) => {
+    const check = await checkPublication()
+    if (!check) return
     handleOpenGame(collection)
   }
 
