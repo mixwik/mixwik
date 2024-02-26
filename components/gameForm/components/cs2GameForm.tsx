@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { useOpenGameContext } from '../../../context'
+import { useOpenGameContext, usePlayerCreateContext } from '../../../context'
 import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../domain/constants'
 import { useSession } from '../../../firebase/auth/useSession'
 import { Error } from '../../../pages/registro/components/Error'
@@ -19,6 +19,7 @@ export const Cs2GameFrom = () => {
   const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
+  const { setPlayerCreate } = usePlayerCreateContext()
   const [image, setImage] = useState<File>()
   const [imgUrl, setImgUrl] = useState('')
 
@@ -92,6 +93,7 @@ export const Cs2GameFrom = () => {
         setTimeout(() => {
           setLoading('complete')
           localStorage.setItem('cs2Publications', '1')
+          setPlayerCreate(true)
           handleOpenGame('')
         }, 2000)
       } else {
