@@ -1,11 +1,12 @@
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { GameForm } from '../../../../components/gameForm'
 import { PopUpError } from '../../../../components/pop-up-error'
-import { useOpenGameContext } from '../../../../context'
+import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
 import { COLLECTIONS, GAMES } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
+import { useCheckPublications } from '../../hooks/use-check-publication'
 
 export const Step5 = (
   { setSteps }:
@@ -13,26 +14,11 @@ export const Step5 = (
 ) => {
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
-  const [playerCreate, setPlayerCreate] = useState(false)
+  const { playerCreate } = usePlayerCreateContext()
   const [error, setError] = useState('')
+  const { cs2Publications, fortnitePublications, rocketLeaguePublications, dota2Publications, lolPublications, valorantPublications, checkPublication } = useCheckPublications({ setError })
 
-  useEffect(() => {
-    const cs2Publications = localStorage.getItem('cs2Publications')
-    const fortnitePublications = localStorage.getItem('fortnitePublications')
-    const valorantPublications = localStorage.getItem('valorantPublications')
-    const lolPublications = localStorage.getItem('lolPublications')
-
-    if (
-      cs2Publications ||
-      fortnitePublications ||
-      valorantPublications ||
-      lolPublications
-    ) {
-      setPlayerCreate(true)
-    }
-  }, [setPlayerCreate])
-
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     if (!playerCreate) return
     const geometry = JSON.parse(localStorage.getItem('geometry') ?? '[0,0]')
     const email = localStorage.getItem('email')
@@ -43,12 +29,9 @@ export const Step5 = (
     const gender = localStorage.getItem('gender')
     const twitter = localStorage.getItem('twitter')
     const discord = localStorage.getItem('discord')
-    const cs2Publications = Number(localStorage.getItem('cs2Publications')) ?? 0
-    const fortnitePublications = Number(localStorage.getItem('fortnitePublication')) ?? 0
-    const valorantPublications = Number(localStorage.getItem('valorantPublication')) ?? 0
-    const lolPublications = Number(localStorage.getItem('lolPublication')) ?? 0
-    const RocketLeaguePublication = Number(localStorage.getItem('RocketLeaguePublication')) ?? 0
-    const Dota2Publication = Number(localStorage.getItem('Dota2Publication')) ?? 0
+
+    const check = await checkPublication()
+    if (check) return
 
     const response = await fetch('/api/create-user', {
       method: 'POST',
@@ -69,10 +52,11 @@ export const Step5 = (
         fortnitePublications,
         valorantPublications,
         lolPublications,
-        RocketLeaguePublication,
-        Dota2Publication
+        rocketLeaguePublications,
+        dota2Publications
       })
     })
+
     const data = await response.json()
     if (data === 'User created') {
       const listOfRemove = [
@@ -88,8 +72,8 @@ export const Step5 = (
         'fortnitePublications',
         'valorantPublications',
         'lolPublications',
-        'RocketLeaguePublication',
-        'Dota2Publication',
+        'rocketLeaguePublications',
+        'dota2Publications',
         'image',
         'imageName',
         'step'
@@ -108,6 +92,27 @@ export const Step5 = (
         setTimeout(() => {
           setError('')
           setSteps('step-3')
+        }
+        , 2000)
+      } else if (data === 'name') {
+        setError('El campo nombre es incorrecto')
+        setTimeout(() => {
+          setError('')
+          setSteps('step-3')
+        }
+        , 2000)
+      } else if (data === 'description') {
+        setError('El campo descripción es incorrecto')
+        setTimeout(() => {
+          setError('')
+          setSteps('step-3')
+        }
+        , 2000)
+      } else if (data === 'geometry') {
+        setError('La ubicación es incorrecta')
+        setTimeout(() => {
+          setError('')
+          setSteps('step-1')
         }
         , 2000)
       }
@@ -156,7 +161,7 @@ export const Step5 = (
         </button>
         <button
           disabled={!playerCreate}
-          onClick={handleClick}
+          onClick={handleSubmit}
           className='px-5 py-3 text-sm text-white transition duration-500 ease-in-out transform shadow-xl md:text-base bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
           type='submit'
         >Crear Usuario
