@@ -7,15 +7,15 @@ import { differenceInYears, parseISO } from 'date-fns'
 const schema = yup.object().shape({
   uid: yup.string().required('Ha ocurrido un error'),
   email: yup.string().email('email').required('email'),
-  geometry: yup.array().of(yup.number()).required('No se ha podido obtener la ubicación'),
+  geometry: yup.array().of(yup.number()).required('geometry'),
   age: yup
     .string()
     .required('age')
     .test('is-over-16', 'age', function (value) {
       return differenceInYears(new Date(), parseISO(value)) >= 16
     }),
-  name: yup.string().required('No se ha podido obtener el nombre').min(3, 'El nombre es muy corto').max(30, 'El nombre es muy largo'),
-  description: yup.string().required('No se ha podido obtener la descripción').min(100, 'La descripción es muy corta').max(350, 'La descripción es muy larga'),
+  name: yup.string().required('name').min(3, 'name').max(30, 'name'),
+  description: yup.string().required('description').min(100, 'description').max(350, 'description'),
   gender: yup.string().oneOf(['M', 'F', 'O'], 'gender').required('gender'),
   twitter: yup.string(),
   discord: yup.string(),
@@ -23,8 +23,8 @@ const schema = yup.object().shape({
   fortnitePublications: yup.number(),
   valorantPublications: yup.number(),
   lolPublications: yup.number(),
-  RocketLeaguePublication: yup.number(),
-  Dota2Publication: yup.number()
+  rocketLeaguePublications: yup.number(),
+  dota2Publications: yup.number()
 })
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
@@ -43,8 +43,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       fortnitePublications,
       valorantPublications,
       lolPublications,
-      RocketLeaguePublication,
-      Dota2Publication
+      rocketLeaguePublications,
+      dota2Publications
     } = req.body
 
     if (req.method === 'POST') {
@@ -75,8 +75,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
             fortnitePublications,
             valorantPublications,
             lolPublications,
-            RocketLeaguePublication,
-            Dota2Publication
+            rocketLeaguePublications,
+            dota2Publications
           }
         })
         res.status(200).json('User created')
