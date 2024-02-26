@@ -5,6 +5,7 @@
 // Components
 import Card from '../../../components/Card'
 import Map from '../../../components/Map'
+import { BackgroundDots } from '../../../components/background-dots.tsx'
 
 // Customs Hooks
 import { useGetData } from '../../../firebase/hooks/getMethod/useGetData'
@@ -36,6 +37,7 @@ const PageContent = ({ category, children, distance }) => {
   return (
     <div className='flex flex-col md:flex-row'>
       <section className='md:w-[50vw]'>
+        <BackgroundDots />
         {children}
         <section
           className='grid grid-cols-[repeat(auto-fit,_minmax(10rem,1fr))] place-items-center overflow-y-scroll h-[73vh] md:w-[50vw] w-screen md:overflow-y-auto py-5 gap-y-5'
