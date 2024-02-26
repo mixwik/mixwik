@@ -1,3 +1,4 @@
+import React from 'react'
 import { useOpenGameContext } from '../../context'
 import { COLLECTIONS } from '../../domain/constants'
 import { Cs2GameFrom } from './components/cs2GameForm'
