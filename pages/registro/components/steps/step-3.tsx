@@ -22,19 +22,19 @@ export const Step3 = (
       name: yup
         .string()
         .required('El campo nombre es obligatorio')
-        .min(3, 'El campo nombre debe tener al menos 3 caracteres')
-        .max(30, 'El campo nombre debe tener como máximo 30 caracteres'),
+        .min(3, 'El nombre debe tener al menos 3 caracteres')
+        .max(30, 'El nombre debe tener como máximo 30 caracteres'),
       age: yup
         .string()
-        .required('El campo fecha de nacimiento es obligatorio')
+        .required('La fecha de nacimiento es obligatorio')
         .test('is-over-16', 'Debes ser mayor de 16 años.', function (value) {
           return differenceInYears(new Date(), parseISO(value)) >= 16
         }),
       description: yup
         .string()
         .required('El campo descripción es obligatorio')
-        .min(100, 'El campo descripción debe tener al menos 100 caracteres')
-        .max(350, 'El campo descripción debe tener como máximo 350 caracteres'),
+        .min(100, 'La descripción debe tener al menos 100 caracteres')
+        .max(350, 'La descripción debe tener máximo 350 caracteres'),
       gender: yup
         .string()
         .required('El campo genero es obligatorio')
