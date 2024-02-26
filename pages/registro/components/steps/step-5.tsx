@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { GameForm } from '../../../../components/gameForm'
@@ -13,6 +14,7 @@ export const Step5 = (
   { setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
   const { userProvider } = useSession()
+  const router = useRouter()
   const { openGame, handleOpenGame } = useOpenGameContext()
   const { playerCreate } = usePlayerCreateContext()
   const [error, setError] = useState('')
@@ -79,6 +81,7 @@ export const Step5 = (
         'step'
       ]
       listOfRemove.forEach(item => localStorage.removeItem(item))
+      router.push('/dashboard')
     } else {
       if (data === 'gender') {
         setError('El campo genero es obligatorio')
