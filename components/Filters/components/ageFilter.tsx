@@ -4,7 +4,7 @@ export const AgeFilter = () => {
   const handleSetFilter = useSetFilterContext()
   const filter = useFilterContext()
   return (
-    <label className=''>
+    <label className='flex flex-col gap-3'>
       Rango de edad
       <div className='flex items-center'>
         {filter.age.min}
