@@ -18,16 +18,9 @@ export const FilterCs2 = ({ distance, setDistance }) => {
           className={`flex items-center gap-1 ${openFilters && 'text-aero'}`}
           onClick={() => setOpenFilters(prev => !prev)}
         >
-          {
-          openFilters
-            ? (
-              <FilterCancelIcon className='w-5 h-5 fill-none' />
-              )
-            : (
-
-              <FilterIcon className='w-5 h-5 fill-none' />
-              )
-        }
+          {openFilters
+            ? <FilterCancelIcon className='w-5 h-5 fill-none' />
+            : <FilterIcon className='w-5 h-5 fill-none' />}
           Filtros
         </button>
       </div>
