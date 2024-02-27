@@ -4,9 +4,10 @@ import styles from '../Filters.module.scss'
 // Components
 import FormAge from '../../Forms/Age'
 import Distance from '../../Forms/Distance'
-import FormLevel from '../../Forms/Lol/Level'
 import FormPosition from '../../Forms/Lol/Position'
 import TypeOfGamer from '../../Forms/TypeOfGamer'
+import { LevelFilter } from '../components/LevelFilter'
+import { LOL_LEVELS } from '../../../domain/constants'
 
 const FilterLol = ({ distance, setDistance }) => {
   return (
@@ -14,7 +15,7 @@ const FilterLol = ({ distance, setDistance }) => {
       <Distance distance={distance} setDistance={setDistance} />
       <FormAge />
       <FormPosition />
-      <FormLevel />
+      <LevelFilter filterForm={LOL_LEVELS} />
       <TypeOfGamer />
     </form>
   )

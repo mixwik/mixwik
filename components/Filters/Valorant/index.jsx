@@ -2,11 +2,12 @@
 import styles from '../Filters.module.scss'
 
 // Components
+import { VALORANT_LEVELS } from '../../../domain/constants'
 import FormAge from '../../Forms/Age'
 import Distance from '../../Forms/Distance'
 import TypeOfGamer from '../../Forms/TypeOfGamer'
-import FormLevel from '../../Forms/valorant/Level'
 import FormPosition from '../../Forms/valorant/Position'
+import { LevelFilter } from '../components/LevelFilter'
 
 export const FilterValorant = ({ distance, setDistance }) => {
   return (
@@ -14,7 +15,7 @@ export const FilterValorant = ({ distance, setDistance }) => {
       <Distance distance={distance} setDistance={setDistance} />
       <FormAge />
       <FormPosition />
-      <FormLevel />
+      <LevelFilter filterForm={VALORANT_LEVELS} />
       <TypeOfGamer />
     </form>
   )
