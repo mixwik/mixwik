@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FilterCs2 } from '../../../components/Filters/cs2'
+import { Cs2Filter } from '../../../components/Filters/cs2Filter'
 import Layout from '../../../components/Layout'
 import PageContent from '../components/PageContent'
 import TitlePage from '../components/TitlePage'
@@ -13,7 +13,7 @@ const Csgo = () => {
         category={COLLECTIONS.cs2}
         distance={distance}
       >
-        <FilterCs2 distance={distance} setDistance={setDistance} />
+        <Cs2Filter distance={distance} setDistance={setDistance} />
         <TitlePage title='Counter Strike 2' alt='Logo de Counter Strike 2' image='/titles-logos/cs2.webp' />
       </PageContent>
     </Layout>

@@ -6,7 +6,6 @@ export const DistanceFilter = ({ distance, setDistance }) => {
       </label>
       <input
         id='steps-range'
-        step='5'
         type='range'
         min='1'
         max='700'
