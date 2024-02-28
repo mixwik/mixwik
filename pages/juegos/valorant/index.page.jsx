@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FilterValorant } from '../../../components/Filters/Valorant'
+import { ValorantFilter } from '../../../components/Filters/valorant-filter'
 import Layout from '../../../components/Layout'
 import PageContent from '../components/PageContent'
 import TitlePage from '../components/TitlePage'
@@ -12,7 +12,7 @@ const Valorant = () => {
         category='valorant'
         distance={distance}
       >
-        <FilterValorant distance={distance} setDistance={setDistance} />
+        <ValorantFilter distance={distance} setDistance={setDistance} />
         <TitlePage title='Valorant' alt='Logo de Valorant' image='/titles-logos/valorant.webp' />
       </PageContent>
     </Layout>

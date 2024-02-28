@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useFilterContext, useSetFilterContext } from '../../context'
 import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../domain/constants'
-import { FilterCancelIcon, FilterIcon } from '../Svg'
+import { FilterCancelIcon, FilterIcon, GameLevel, GamePosition, GamerType } from '../Svg'
 import { CheckFilter } from './components/CheckFilter'
 import { AgeFilter } from './components/ageFilter'
 import { DistanceFilter } from './components/distanceFilter'
@@ -40,6 +40,7 @@ export const Cs2Filter = ({ distance, setDistance }) => {
           handleSetFilter={handleSetFilter}
           name='position'
           title='Posición'
+          icon={<GamePosition className='w-auto' />}
         />
         <CheckFilter
           filterForm={CS2_PREMIER}
@@ -47,6 +48,7 @@ export const Cs2Filter = ({ distance, setDistance }) => {
           handleSetFilter={handleSetFilter}
           name='premier'
           title='Nivel premier'
+          icon={<GameLevel className='w-auto' />}
         />
         <CheckFilter
           filterForm={CS2_LEVELS}
@@ -54,6 +56,7 @@ export const Cs2Filter = ({ distance, setDistance }) => {
           handleSetFilter={handleSetFilter}
           name='level'
           title='Nivel competitivo'
+          icon={<GameLevel className='w-auto' />}
         />
         <CheckFilter
           filterForm={TYPE_OF_GAME}
@@ -61,6 +64,7 @@ export const Cs2Filter = ({ distance, setDistance }) => {
           handleSetFilter={handleSetFilter}
           name='typeOfGamer'
           title='Tipo de jugador'
+          icon={<GamerType className='w-auto' />}
         />
       </div>
     </section>

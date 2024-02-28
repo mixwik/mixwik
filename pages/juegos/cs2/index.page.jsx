@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Cs2Filter } from '../../../components/Filters/cs2Filter'
+import { Cs2Filter } from '../../../components/Filters/cs2-filter'
 import Layout from '../../../components/Layout'
 import PageContent from '../components/PageContent'
 import TitlePage from '../components/TitlePage'
