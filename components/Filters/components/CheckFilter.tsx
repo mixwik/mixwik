@@ -10,23 +10,23 @@ export const CheckFilter = ({ filterForm, filter, handleSetFilter, name, title, 
       </h3>
       <ul className='grid grid-cols-2 gap-3 md:grid-cols-4'>
         {
-              filterForm.map(filter => (
-                <li key={filter}>
+              filterForm.map(item => (
+                <li key={item}>
                   <input
-                    id={filter}
+                    id={item}
                     type='checkbox'
-                    value={filter}
+                    value={item}
                     name={name}
-                    checked={filter.includes(filter)}
+                    checked={filter.includes(item)}
                     onClick={(e) => handleSetFilter(e.target)}
                     className='hidden peer'
                   />
                   <label
-                    key={filter}
-                    htmlFor={filter}
+                    key={item}
+                    htmlFor={item}
                     className='inline-flex items-center justify-center w-full h-full p-2 text-sm text-gray-500 bg-white border-2 border-solid rounded-lg cursor-pointer border-aero peer-checked:border-pennBlue peer-checked:shadow-sm peer-checked:shadow-black peer-checked:text-pennBlue hover:text-gray-600 hover:bg-gray-100'
                   >
-                    {filter}
+                    {item}
                   </label>
                 </li>
               ))
