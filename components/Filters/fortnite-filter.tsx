@@ -26,7 +26,7 @@ export const FortniteFilter = ({ distance, setDistance }) => {
       </div>
       <div
         className={`
-          fixed flex flex-col gap-10 bottom-[10vh] md:bottom-0 h-[85vh] md:w-1/2 w-full bg-white z-20 overflow-scroll transition-transform duration-300 py-5 px-10 md:px-20
+          fixed flex flex-col gap-10 bottom-[10vh] md:bottom-0 h-[85vh] md:w-1/2 w-full bg-white z-20 overflow-scroll transition-transform duration-300 py-10 px-10 md:px-20
           ${openFilters
             ? 'translate-x-0'
             : '-translate-x-[100%]'
