@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePlayerCreateContext } from '../../../context'
+import { COLLECTIONS } from '../../../domain/constants'
 import { useSession } from '../../../firebase/auth/useSession'
 
 export const useCheckPublications = (
@@ -8,24 +9,21 @@ export const useCheckPublications = (
 ) => {
   const { userProvider } = useSession()
   const { setPlayerCreate } = usePlayerCreateContext()
-  const [cs2Publications] = useState(
-    Number(localStorage.getItem('cs2Publications')) ?? 0
-  )
-  const [fortnitePublications] = useState(
-    Number(localStorage.getItem('fortnitePublications')) ?? 0
-  )
-  const [valorantPublications] = useState(
-    Number(localStorage.getItem('valorantPublications')) ?? 0
-  )
-  const [lolPublications] = useState(
-    Number(localStorage.getItem('lolPublications')) ?? 0
-  )
-  const [rocketLeaguePublications] = useState(
-    Number(localStorage.getItem('rocketLeaguePublications')) ?? 0
-  )
-  const [dota2Publications] = useState(
-    Number(localStorage.getItem('dota2Publications')) ?? 0
-  )
+  const [cs2Publications, setCs2Publications] = useState(0)
+  const [fortnitePublications, setFortnitePublications] = useState(0)
+  const [valorantPublications, setValorantPublications] = useState(0)
+  const [lolPublications, setLolPublications] = useState(0)
+  const [rocketLeaguePublications, setRocketLeaguePublications] = useState(0)
+  const [dota2Publications, setDota2Publications] = useState(0)
+
+  useEffect(() => {
+    setCs2Publications(Number(localStorage.getItem('cs2Publications')) ?? 0)
+    setFortnitePublications(Number(localStorage.getItem('fortnitePublications')) ?? 0)
+    setValorantPublications(Number(localStorage.getItem('valorantPublications')) ?? 0)
+    setLolPublications(Number(localStorage.getItem('lolPublications')) ?? 0)
+    setRocketLeaguePublications(Number(localStorage.getItem('rocketLeaguePublications')) ?? 0)
+    setDota2Publications(Number(localStorage.getItem('dota2Publications')) ?? 0)
+  }, [])
 
   const checkPublication = async () => {
     const checkResponse = await fetch('/api/check-publication', {
@@ -34,18 +32,11 @@ export const useCheckPublications = (
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        uid: userProvider.uid,
-        cs2Publications,
-        fortnitePublications,
-        valorantPublications,
-        lolPublications,
-        rocketLeaguePublications,
-        dota2Publications
+        uid: userProvider.uid
       })
     })
     const checkData = await checkResponse.json()
     if (!checkData.check) {
-      setError('No has creado un jugador')
       localStorage.removeItem('cs2Publications')
       localStorage.removeItem('fortnitePublications')
       localStorage.removeItem('valorantPublications')
@@ -53,21 +44,26 @@ export const useCheckPublications = (
       localStorage.removeItem('rocketLeaguePublications')
       localStorage.removeItem('dota2Publications')
       setPlayerCreate(false)
-      setTimeout(() => setError(''), 2000)
       return false
     } else {
-      if (checkData.cs2Publications) {
-        localStorage.setItem('cs2Publications', JSON.stringify(checkData.cs2Publications))
-      } else if (checkData.fortnitePublications) {
-        localStorage.setItem('fortnitePublications', JSON.stringify(checkData.fortnitePublications))
-      } else if (checkData.valorantPublications) {
-        localStorage.setItem('valorantPublications', JSON.stringify(checkData.valorantPublications))
-      } else if (checkData.lolPublications) {
-        localStorage.setItem('lolPublications', JSON.stringify(checkData.lolPublications))
-      } else if (checkData.rocketLeaguePublications) {
-        localStorage.setItem('RocketLeaguePublications', JSON.stringify(checkData.rocketLeaguePublications))
-      } else if (checkData.dota2Publications) {
-        localStorage.setItem('dota2Publications', JSON.stringify(checkData.dota2Publications))
+      if (checkData.publication === COLLECTIONS.cs2) {
+        localStorage.setItem('cs2Publications', '1')
+        setCs2Publications(1)
+      } else if (checkData.publication === COLLECTIONS.fortnite) {
+        localStorage.setItem('fortnitePublications', '1')
+        setFortnitePublications(1)
+      } else if (checkData.publication === COLLECTIONS.valorant) {
+        localStorage.setItem('valorantPublications', '1')
+        setValorantPublications(1)
+      } else if (checkData.publication === COLLECTIONS.lol) {
+        localStorage.setItem('lolPublications', '1')
+        setLolPublications(1)
+      } else if (checkData.publication === COLLECTIONS.rocketLeague) {
+        localStorage.setItem('RocketLeaguePublications', '1')
+        setRocketLeaguePublications(1)
+      } else if (checkData.publication === COLLECTIONS.dota2) {
+        localStorage.setItem('dota2Publications', '1')
+        setDota2Publications(1)
       }
       setPlayerCreate(true)
       return true

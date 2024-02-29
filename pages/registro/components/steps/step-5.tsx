@@ -18,7 +18,15 @@ export const Step5 = (
   const { openGame, handleOpenGame } = useOpenGameContext()
   const { playerCreate } = usePlayerCreateContext()
   const [error, setError] = useState('')
-  const { cs2Publications, fortnitePublications, rocketLeaguePublications, dota2Publications, lolPublications, valorantPublications, checkPublication } = useCheckPublications({ setError })
+  const {
+    cs2Publications,
+    fortnitePublications,
+    rocketLeaguePublications,
+    dota2Publications,
+    lolPublications,
+    valorantPublications,
+    checkPublication
+  } = useCheckPublications({ setError })
 
   const handleSubmit = async () => {
     if (!playerCreate) return
@@ -33,7 +41,7 @@ export const Step5 = (
     const discord = localStorage.getItem('discord')
 
     const check = await checkPublication()
-    if (check) return
+    if (!check) return
 
     const response = await fetch('/api/create-user', {
       method: 'POST',
@@ -124,8 +132,15 @@ export const Step5 = (
 
   const handleCheck = async (collection: string) => {
     const check = await checkPublication()
-    if (!check) return
-    handleOpenGame(collection)
+    if (check) {
+      setError('Ya tienes una publicación, por ahora es suficiente, ¡Ya puedes crear tu usuario!')
+      setTimeout(() => {
+        setError('')
+      }
+      , 2000)
+    } else {
+      handleOpenGame(collection)
+    }
   }
 
   return (
