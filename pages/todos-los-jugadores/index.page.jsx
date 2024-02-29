@@ -16,7 +16,7 @@ import { useGamesFilters } from '../../hooks/useGamesFilters'
 // Context
 import { useHandleOpenContext } from '../../context'
 
-import FilterAllGames from '../../components/Filters/AllGames'
+import { AllGamesFilter } from '../../components/Filters/all-games'
 import { COLLECTIONS } from '../../domain/constants'
 import { useSession } from '../../firebase/auth/useSession'
 import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
@@ -55,7 +55,7 @@ const AllGames = () => {
     <Layout>
       <div className={styles.pageBox}>
         <section className={styles.pages}>
-          <FilterAllGames users={listUserAllGames} distance={distance} setDistance={setDistance} />
+          <AllGamesFilter distance={distance} setDistance={setDistance} />
           <h1 className={styles.titleAllGames}>
             Todos los jugadores
           </h1>
