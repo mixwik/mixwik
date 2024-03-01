@@ -9,12 +9,12 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     if (uid) {
       const querySnapshot = await getDocs(query(collection(db, COLLECTIONS.users), where('uid', '==', uid)))
       if (querySnapshot.empty) {
-        res.status(200).json('No-data')
+        res.status(200).json({ user: false })
       } else {
         querySnapshot.forEach((doc) => {
           res.status(200).json({
-            ...doc.data(),
-            id: doc.id
+            user: true,
+            userServer: { ...doc.data(), id: doc.id }
           })
         })
       }
