@@ -1,13 +1,12 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useGetUsers } from '../../application/useGetUsers'
-import { BACKGROUNDS_IMAGES } from '../../assets/images'
 import Card from '../../components/Card'
-import FilterCityGames from '../../components/Filters/CityGames'
+import { CityGamesFilter } from '../../components/Filters/city-games'
 import Layout from '../../components/Layout'
 import PageLoader from '../../components/Loaders/PageLoader'
 import Map from '../../components/Map'
+import { BackgroundDots } from '../../components/background-dots'
 import { useAllGames } from '../../hooks/useAllGames'
 import { useAllTeams } from '../../hooks/useAllTeams'
 import { useCityFilterDistance } from '../../hooks/useCityFilterDistance'
@@ -28,10 +27,10 @@ const City = () => {
   return (
     <Layout>
       <div className='relative flex flex-col md:flex-row'>
-        <Image className='absolute top-0 left-0 z-0 h-full' src={BACKGROUNDS_IMAGES.backgroundGray} alt='Background' />
-        <section className='md:w-[50vw] flex flex-col items-center'>
-          <FilterCityGames />
-          <h1 className='z-10 p-5 text-xl font-bold md:text-2xl'>
+        <BackgroundDots />
+        <section className='md:w-[50vw]'>
+          <CityGamesFilter />
+          <h1 className='flex justify-center items-center z-10 text-xl font-bold h-[10vh] md:text-3xl'>
             Todos los jugadores en {name}
           </h1>
           <div className='z-10 h-[74vh] md:overflow-y-scroll md:w-[50vw] w-screen overflow-y-auto'>
