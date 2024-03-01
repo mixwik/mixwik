@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 
 // Styles
-import styles from '../../styles/Pages.module.scss'
 
 // Components
 import Card from '../../components/Card'
@@ -17,6 +16,7 @@ import { useGamesFilters } from '../../hooks/useGamesFilters'
 import { useHandleOpenContext } from '../../context'
 
 import { AllGamesFilter } from '../../components/Filters/all-games'
+import { BackgroundDots } from '../../components/background-dots'
 import { COLLECTIONS } from '../../domain/constants'
 import { useSession } from '../../firebase/auth/useSession'
 import { useGetTeams } from '../../firebase/hooks/getMethod/useGetTeams'
@@ -53,13 +53,17 @@ const AllGames = () => {
   const listUserTeams = useGamesFilters(user, allTeams, distance)
   return (
     <Layout>
-      <div className={styles.pageBox}>
-        <section className={styles.pages}>
+      <div className='flex flex-col md:flex-row'>
+        <BackgroundDots />
+        <section className='md:w-[50vw]'>
           <AllGamesFilter distance={distance} setDistance={setDistance} />
-          <h1 className={styles.titleAllGames}>
+          <h1 className='flex items-center justify-center h-10 p-1 text-3xl font-bold md:p-2'>
             Todos los jugadores
           </h1>
-          <div className={styles.gamersBox} onClick={() => handleOpen('')}>
+          <div
+            className='grid grid-cols-[repeat(auto-fit,_minmax(10rem,1fr))] place-items-center overflow-y-scroll h-[79vh] md:w-[50vw] w-screen md:overflow-y-auto py-5 gap-y-5'
+            onClick={() => handleOpen('')}
+          >
             {
               listUserAllGames.length > 0 && (
                 listUserAllGames.map(res => (
