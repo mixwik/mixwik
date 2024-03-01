@@ -12,8 +12,6 @@ export const useConfirmUserRegister = () => {
     if (isSession !== 'no-session') {
       if (isData === 'no-data') {
         route.push('/registro')
-      } else if (isData === 'data') {
-        route.push('/dashboard')
       }
     } else if (isSession === 'no-session') {
       route.push('/desautorizado')
