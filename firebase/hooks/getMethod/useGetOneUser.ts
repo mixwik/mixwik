@@ -10,13 +10,17 @@ export const useGetOneUser = (uid) => {
   useEffect(() => {
     const getData = async () => {
       const querySnapshot = await getDocs(query(collection(db, COLLECTIONS.users), where('uid', '==', uid)))
-      if (querySnapshot.empty) setIsData('no-data')
-      querySnapshot.forEach((doc) => {
-        setUser({
-          ...doc.data(),
-          id: doc.id
-        } as User)
-      })
+      if (querySnapshot.empty) {
+        setIsData('no-data')
+      } else {
+        setIsData('data')
+        querySnapshot.forEach((doc) => {
+          setUser({
+            ...doc.data(),
+            id: doc.id
+          } as User)
+        })
+      }
     }
     if (uid) getData()
   }, [uid])

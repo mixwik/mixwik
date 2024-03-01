@@ -12,11 +12,11 @@ export const useConfirmUserRegister = () => {
     if (isSession !== 'no-session') {
       if (isData === 'no-data') {
         route.push('/registro')
-      } else {
+      } else if (isData === 'data') {
         route.push('/dashboard')
       }
-    } else {
+    } else if (isSession === 'no-session') {
       route.push('/desautorizado')
     }
-  }, [])
+  }, [isData, isSession, route])
 }
