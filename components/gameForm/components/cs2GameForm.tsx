@@ -91,7 +91,7 @@ export const Cs2GameFrom = () => {
       const response = await res.json()
       if (response.message === 'Game created') {
         setTimeout(() => {
-          setLoading('complete')
+          setLoading('created')
           localStorage.setItem('cs2Publications', '1')
           setPlayerCreate(true)
           handleOpenGame('')

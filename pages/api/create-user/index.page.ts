@@ -77,7 +77,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
             lolPublications,
             rocketLeaguePublications,
             dota2Publications
-          }
+          },
+          likes: []
         })
         res.status(200).json('User created')
       } catch (error) {

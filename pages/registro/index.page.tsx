@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import { BackgroundDots } from '../../components/background-dots'
 import { useSession } from '../../firebase/auth/useSession'
+import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
 import { Stepper } from './components/stepper'
 import { Step1 } from './components/steps/step-1'
 import { Step2 } from './components/steps/step-2'
@@ -21,6 +22,7 @@ const Register = () => {
     }
   }, [])
 
+  useConfirmUserRegister()
   return (
     <Layout title='Registro'>
       <section className='flex flex-col items-center justify-center h-[90vh]'>
