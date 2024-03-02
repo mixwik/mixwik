@@ -94,9 +94,9 @@ export const Step5 = (
       listOfRemove.forEach(item => localStorage.removeItem(item))
       setTimeout(() => {
         setLoading('created')
-      }, 2000)
+      }, 1000)
       setLoading('')
-      router.push('/dashboard')
+      router.push('/')
     } else {
       if (data === 'gender') {
         setError('El campo genero es obligatorio')

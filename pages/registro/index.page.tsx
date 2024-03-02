@@ -22,7 +22,7 @@ const Register = () => {
     }
   }, [])
 
-  useConfirmUserRegister()
+  useConfirmUserRegister('register')
   return (
     <Layout title='Registro'>
       <section className='flex flex-col items-center justify-center h-[90vh]'>

@@ -26,7 +26,7 @@ export const useLogInEmail = () => {
   const logInEmail = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        router.push('/dashboard')
+        router.push('/dashboard?page=profile')
       })
       .catch((error) => {
         const errorCode = error.code

@@ -17,7 +17,7 @@ const FinishRegistrationPage = () => {
           window.localStorage.removeItem('emailForSignIn')
           setMessage('Se ha iniciado sesión correctamente')
           setTimeout(() => {
-            router.push('/dashboard')
+            router.push('/dashboard?page=profile')
           }, 1000)
         })
         .catch(() => {
