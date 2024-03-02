@@ -9,21 +9,23 @@ export const Step1 = (
   { accept: boolean, setAccept: React.Dispatch<React.SetStateAction<boolean>>, userProvider: UserProvider, setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
   const handleSignOut = useSignOut()
-  const createUser = async () => {
+
+  const createUser = () => {
     if (!userProvider) return
-    localStorage.setItem('step', 'step-2')
-    localStorage.setItem('email', userProvider?.email)
-    setSteps('step-2')
-  }
-  const handlePosition = () => {
     if ('geolocation' in navigator) {
       const onUbicacionConcedida = (ubicacion: any) => {
         const position: number[] = []
         position.push(ubicacion.coords.latitude, ubicacion.coords.longitude)
         localStorage.setItem('geometry', JSON.stringify(position))
+        localStorage.setItem('step', 'step-2')
+        localStorage.setItem('email', userProvider?.email)
+        setSteps('step-2')
       }
       const onErrorDeUbicacion = () => {
         localStorage.setItem('geometry', JSON.stringify([40.414971037098056, -3.7072115929025924]))
+        localStorage.setItem('step', 'step-2')
+        localStorage.setItem('email', userProvider?.email)
+        setSteps('step-2')
       }
       const opcionesDeSolicitud = {
         enableHighAccuracy: true, // Alta precisión
@@ -47,7 +49,6 @@ export const Step1 = (
         </li>
         <li className='flex flex-col items-center gap-3'>
           <p className='font-normal text-gray-500 text-pretty '>Pero antes de poder comenzar en MixWik necesitamos que nos des permisos para obtener tu localización, esta se usa para mostrarte jugadores cercanos y que podáis contactar</p>
-          <button onClick={handlePosition} className='px-5 py-2 text-white rounded-lg bg-aero'>Permitir localización</button>
         </li>
       </ol>
       <label htmlFor='accept' className='flex justify-center gap-3'>
