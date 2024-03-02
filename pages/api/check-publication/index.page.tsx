@@ -28,10 +28,10 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         const result = await check(value)
         if (!result) {
           res.status(200).json({ publication: value, check: true })
-          return
+          break
         }
-        res.status(200).json({ check: false })
       }
+      res.status(200).json({ check: false })
     }
   } else {
     res.status(405).json({ error: 'No game publication' })

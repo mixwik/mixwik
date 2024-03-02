@@ -19,7 +19,6 @@ export const LolGameForm = () => {
   const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
-  console.log('openGame')
   const { setPlayerCreate } = usePlayerCreateContext()
   const [image, setImage] = useState<File>()
   const [imgUrl, setImgUrl] = useState('')
@@ -141,7 +140,6 @@ export const LolGameForm = () => {
           title='Describete como jugador'
           registerName='description'
         />
-
         <BoxField
           register={register}
           registerName='level'
@@ -174,7 +172,6 @@ export const LolGameForm = () => {
           type='range'
           registerName='hours'
         />
-
         <div className='flex justify-center w-full gap-10'>
           <button
             type='button'
