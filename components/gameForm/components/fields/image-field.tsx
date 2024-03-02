@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { useSession } from '../../../firebase/auth/useSession'
-import { removeImageDB, setImageDB } from '../../../firebase/storage'
-import { DeleteIcon, ImageIcon } from '../../Svg'
-import { myLoader } from '../../myLoader'
+import { useSession } from '../../../../firebase/auth/useSession'
+import { removeImageDB, setImageDB } from '../../../../firebase/storage'
+import { DeleteIcon, ImageIcon } from '../../../Svg'
+import { myLoader } from '../../../myLoader'
 
 export const FieldImage = (
   { setImgURL, imgURL, setImage, image }:

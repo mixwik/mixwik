@@ -1,4 +1,4 @@
-import { Error } from '../../../pages/registro/components/Error'
+import { Error } from '../../../../pages/registro/components/Error'
 
 export const HoursField = (
   { register, errors, watch, title, type, registerName }:

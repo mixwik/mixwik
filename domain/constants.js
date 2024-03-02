@@ -12,6 +12,15 @@ export const COLLECTIONS = {
   bugs: 'bugs'
 }
 
+export const GAME_PUBLICATIONS = {
+  cs2: 'cs2Publications',
+  fortnite: 'fortnitePublications',
+  lol: 'lolPublications',
+  valorant: 'valorantPublications',
+  rocketLeague: 'rocketLeaguePublications',
+  dota2: 'dota2Publications'
+}
+
 export const GAMES = [
   {
     collection: COLLECTIONS.cs2,

@@ -3,22 +3,23 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useOpenGameContext, usePlayerCreateContext } from '../../../context'
-import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../domain/constants'
+import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, GAME_PUBLICATIONS, TYPE_OF_GAME } from '../../../domain/constants'
 import { useSession } from '../../../firebase/auth/useSession'
 import { Error } from '../../../pages/registro/components/Error'
 import { ArrowBack } from '../../Svg'
 import { BackgroundDots } from '../../background-dots'
 import { PopUpMessage } from '../../pop-up-message'
-import { BoxField } from './box-field'
-import { Description } from './description'
-import { FieldImage } from './field-image'
-import { HoursField } from './hours-field'
-import { Title } from './title'
+import { BoxField } from './fields/box-field'
+import { Description } from './fields/description-field'
+import { HoursField } from './fields/hours-field'
+import { FieldImage } from './fields/image-field'
+import { Title } from './fields/title-field'
 
 export const Cs2GameFrom = () => {
   const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
+  console.log('openGame', openGame)
   const { setPlayerCreate } = usePlayerCreateContext()
   const [image, setImage] = useState<File>()
   const [imgUrl, setImgUrl] = useState('')
@@ -31,6 +32,7 @@ export const Cs2GameFrom = () => {
     hours: 0,
     age: '',
     level: '',
+    preferenceTeam: [] as string[],
     position: [] as string[],
     premier: '',
     typeOfGamer: [] as string[]
@@ -92,7 +94,7 @@ export const Cs2GameFrom = () => {
       if (response.message === 'Game created') {
         setTimeout(() => {
           setLoading('created')
-          localStorage.setItem('cs2Publications', '1')
+          localStorage.setItem(GAME_PUBLICATIONS.cs2, '1')
           setPlayerCreate(true)
           handleOpenGame('')
         }, 2000)
