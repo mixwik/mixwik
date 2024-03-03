@@ -1,9 +1,6 @@
 // React hooks
 import { useEffect, useState } from 'react'
 
-// styles
-import styles from './Dashboard.module.scss'
-
 // db
 import PrivateRoute from '../../firebase/auth/PrivateRoute'
 import { useSession } from '../../firebase/auth/useSession'
@@ -31,18 +28,16 @@ import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
 import { useRouter } from 'next/router'
-import { useHandleOpenContext, useOpenContext } from '../../context'
+import { BackgroundDots } from '../../components/background-dots'
+import { useHandleOpenContext } from '../../context'
 import { COLLECTIONS } from '../../domain/constants'
 import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
-import { useMaster } from '../../hooks/useMaster'
 
 export default function Dashboard () {
-  const { master } = useMaster()
   const handleOpen = useHandleOpenContext()
-  const isOpen = useOpenContext()
   const handleSignOut = useSignOut()
   const router = useRouter()
   const { page } = router.query
@@ -76,7 +71,8 @@ export default function Dashboard () {
 
   return (
     <Layout>
-      <section data-open={isOpen === 'dashboardNav'} className={styles.dashboard}>
+      <section>
+        <BackgroundDots />
         {page === 'profile' && <Profile user={currentUser} mixWikTeams={mixWikTeams} />}
         {page === 'newPublication' && <NewPublication mixWikTeams={mixWikTeams} user={currentUser} setTeams={setToggle} teams={toggle} />}
         {page === 'myPublications' && <MyPublications user={currentUser} />}
@@ -86,16 +82,17 @@ export default function Dashboard () {
         {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
         {page === 'favorites' && <Favorites currentUser={currentUser} />}
-        <nav data-open={isOpen === 'dashboardNav'} className={styles.nav}>
-          <ul>
+        <nav className='flex items-center justify-center h-[90vh]'>
+          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 md:w-1/2'>
             <li
-              data-isActive={page === 'profile'}
+              className='col-span-4 row-span-2 p-1 bg-white rounded-lg shadow-sm cursor-pointer md:col-span-3 shadow-pennBlue '
               onClick={() => handleClick('profile')}
             >
               {
               userProvider?.image
                 ? (
                   <Image
+                    className='w-10 h-10 rounded-full'
                     width={0}
                     height={0}
                     loader={myLoader}
@@ -116,21 +113,14 @@ export default function Dashboard () {
               Perfil
             </li>
             <li
-              data-isActive={page === 'publications' || page === 'newPublication' || page === 'teams'}
+              className='col-span-4 p-1 bg-white rounded-lg cursor-pointer md:row-span-3 md:col-span-1'
               onClick={() => handleClick('publications')}
             >
               <AddPublication />
               Añadir publicación
             </li>
             <li
-              data-isActive={page === 'myPublications'}
-              onClick={() => handleClick('myPublications')}
-            >
-              <PublicationsIcon />
-              Mis publicaciones
-            </li>
-            <li
-              data-isActive={page === 'favorites'}
+              className='p-1 bg-white rounded-lg cursor-pointer'
               onClick={() => handleClick('favorites')}
             >
               <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-10 h-10'>
@@ -138,52 +128,40 @@ export default function Dashboard () {
               </svg>
               Mis Favoritos
             </li>
-            <li className={styles.ours}>
+            <li
+              className='col-span-3 p-1 bg-white rounded-lg cursor-pointer md:col-span-2'
+              onClick={() => handleClick('myPublications')}
+            >
+              <PublicationsIcon />
+              Mis publicaciones
+            </li>
+            <li
+              className='p-1 text-white rounded-lg shadow-sm cursor-pointer md:col-span-3 col-span-full shadow-aero bg-pennBlue'
+              onClick={() => handleClick('mixWikTeams')}
+            >
+              <Image className='w-10 h-10' src={iconMixWik} alt='Icono del logo MixWik' />
+              MixWik Teams
+            </li>
+            <li className='col-span-2 p-1 bg-white rounded-lg shadow-sm md:col-span-1 shadow-pennBlue'>
               <button onClick={() => setBugs(!bugs)}>
                 <BugsIcon />
                 Reportar Bug
               </button>
             </li>
-            <li className={styles.ours}>
+            <li className='col-span-2 p-1 bg-white rounded-lg shadow-sm md:col-span-1 shadow-pennBlue'>
               <Link href='/sobre-nosotros'>
                 <Company />
                 Sobre Nosotros
               </Link>
             </li>
-            <li className={styles.contact}>
+            <li className='col-span-2 p-1 bg-white rounded-lg shadow-sm md:col-span-1 shadow-pennBlue'>
               <Link href='/contacto'>
                 <ContactUs />
                 Contáctanos
               </Link>
             </li>
             <li
-              data-isActive={page === 'mixWikTeams'}
-              onClick={() => handleClick('mixWikTeams')}
-            >
-              <Image src={iconMixWik} alt='Icono del logo MixWik' />
-              MixWik Teams
-            </li>
-            {
-              master && (
-                <li
-                  data-isActive={page === 'allUsers'}
-                  onClick={() => handleClick('allUsers')}
-                >
-                  Usuarios
-                </li>
-              )
-            }
-            {
-              master && (
-                <li
-                  data-isActive={page === 'bugsReports'}
-                  onClick={() => handleClick('bugsReports')}
-                >
-                  Reporte de Bug
-                </li>
-              )
-            }
-            <li
+              className='col-span-2 p-1 bg-red-400 rounded-lg shadow-sm cursor-pointer shadow-pennBlue'
               onClick={() => handleSignOut()}
             >
               <LogOutIcon />
