@@ -11,7 +11,6 @@ import Link from 'next/link'
 import Bugs from '../../components/Bugs'
 import Layout from '../../components/Layout'
 import PageLoader from '../../components/Loaders/PageLoader'
-import { myLoader } from '../../components/myLoader'
 import AllUsers from './components/AllUsers'
 import BugsReports from './components/BugsReports'
 import Favorites from './components/Favorites'
@@ -35,6 +34,7 @@ import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
+import { ProfileImage } from './components/profile-image'
 
 export default function Dashboard () {
   const handleOpen = useHandleOpenContext()
@@ -83,44 +83,29 @@ export default function Dashboard () {
         {page === 'bugsReports' && <BugsReports />}
         {page === 'favorites' && <Favorites currentUser={currentUser} />}
         <nav className='flex items-center justify-center h-[90vh]'>
-          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 md:w-1/2'>
+          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 md:w-[1px]/2'>
             <li
-              className='col-span-4 row-span-2 p-1 bg-white rounded-lg shadow-sm cursor-pointer md:col-span-3 shadow-pennBlue '
-              onClick={() => handleClick('profile')}
+              className='relative flex flex-col items-center col-span-4 row-span-2 gap-1 p-3 overflow-hidden bg-white rounded-lg shadow-lg md:p-5 md:col-span-3'
             >
-              {
-              userProvider?.image
-                ? (
-                  <Image
-                    className='w-10 h-10 rounded-full'
-                    width={0}
-                    height={0}
-                    loader={myLoader}
-                    src={userProvider?.image}
-                    alt={userProvider?.name}
-                  />
-                  )
-                : (
-                    currentUser?.profileImg
-                      ? <Image src={currentUser?.profileImg} alt={currentUser?.name} width={0} height={0} loader={myLoader} />
-                      : (
-                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-10 h-10'>
-                          <path fillRule='evenodd' d='M12 2a3 3 0 100 6 3 3 0 000-6zm-5 3a5 5 0 019.858 1.716c.03.1.142.284.142.284a.75.75 0 01-.142.284A5 5 0 017 5H4a1 1 0 00-1 1v12a1 1 0 001 1h3a5 5 0 010-10zm10 10a5 5 0 110-10 5 5 0 010 10z' clipRule='evenodd' />
-                        </svg>
-                        )
-                  )
-            }
-              Perfil
+              <div className='absolute top-0 left-0 w-full overflow-hidden rounded-t-lg h-1/3'>
+                <ProfileImage user={currentUser} userProvider={userProvider} />
+              </div>
+              <div className='z-10 overflow-hidden border-4 border-white border-solid rounded-full size-24 md:size-28'>
+                <ProfileImage user={currentUser} userProvider={userProvider} />
+              </div>
+              <h1 className='text-lg font-bold'>{currentUser?.name}</h1>
+              <span className='text-xs text-gray-500'>{currentUser?.email}</span>
+              <button className='px-5 py-2 text-xs text-white transition-transform duration-300 rounded-full bg-pennBlue hover:scale-105' onClick={() => handleClick('profile')}>Editar perfil</button>
             </li>
             <li
-              className='col-span-4 p-1 bg-white rounded-lg cursor-pointer md:row-span-3 md:col-span-1'
+              className='col-span-4 p-1 overflow-hidden bg-white rounded-lg shadow-lg cursor-pointer md:row-span-3 md:col-span-1'
               onClick={() => handleClick('publications')}
             >
               <AddPublication />
               Añadir publicación
             </li>
             <li
-              className='p-1 bg-white rounded-lg cursor-pointer'
+              className='p-1 bg-white rounded-lg shadow-lg cursor-pointer'
               onClick={() => handleClick('favorites')}
             >
               <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-10 h-10'>
@@ -129,39 +114,39 @@ export default function Dashboard () {
               Mis Favoritos
             </li>
             <li
-              className='col-span-3 p-1 bg-white rounded-lg cursor-pointer md:col-span-2'
+              className='col-span-3 p-1 bg-white rounded-lg shadow-lg cursor-pointer md:col-span-2'
               onClick={() => handleClick('myPublications')}
             >
               <PublicationsIcon />
               Mis publicaciones
             </li>
             <li
-              className='p-1 text-white rounded-lg shadow-sm cursor-pointer md:col-span-3 col-span-full shadow-aero bg-pennBlue'
+              className='p-1 text-white rounded-lg shadow-lg cursor-pointer md:col-span-3 col-span-full bg-pennBlue'
               onClick={() => handleClick('mixWikTeams')}
             >
               <Image className='w-10 h-10' src={iconMixWik} alt='Icono del logo MixWik' />
               MixWik Teams
             </li>
-            <li className='col-span-2 p-1 bg-white rounded-lg shadow-sm md:col-span-1 shadow-pennBlue'>
+            <li className='col-span-2 p-1 bg-white rounded-lg shadow-lg md:col-span-1'>
               <button onClick={() => setBugs(!bugs)}>
                 <BugsIcon />
                 Reportar Bug
               </button>
             </li>
-            <li className='col-span-2 p-1 bg-white rounded-lg shadow-sm md:col-span-1 shadow-pennBlue'>
+            <li className='col-span-2 p-1 bg-white rounded-lg shadow-lg md:col-span-1'>
               <Link href='/sobre-nosotros'>
                 <Company />
                 Sobre Nosotros
               </Link>
             </li>
-            <li className='col-span-2 p-1 bg-white rounded-lg shadow-sm md:col-span-1 shadow-pennBlue'>
+            <li className='col-span-2 p-1 bg-white rounded-lg shadow-lg md:col-span-1'>
               <Link href='/contacto'>
                 <ContactUs />
                 Contáctanos
               </Link>
             </li>
             <li
-              className='col-span-2 p-1 bg-red-400 rounded-lg shadow-sm cursor-pointer shadow-pennBlue'
+              className='col-span-2 p-1 bg-red-400 rounded-lg shadow-lg cursor-pointer'
               onClick={() => handleSignOut()}
             >
               <LogOutIcon />
