@@ -22,12 +22,13 @@ import Profile from './components/Profile'
 import Publications from './components/Publications'
 
 // Images
-import { AddPublication, BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
+import { BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
 import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
 import { useRouter } from 'next/router'
 import { BackgroundDots } from '../../components/background-dots'
+import { myLoader } from '../../components/myLoader'
 import { useHandleOpenContext } from '../../context'
 import { COLLECTIONS } from '../../domain/constants'
 import { useSignOut } from '../../firebase/auth/SignOut'
@@ -88,21 +89,40 @@ export default function Dashboard () {
               className='relative flex flex-col items-center col-span-4 row-span-2 gap-1 p-3 overflow-hidden bg-white rounded-lg shadow-lg md:p-5 md:col-span-3'
             >
               <div className='absolute top-0 left-0 w-full overflow-hidden rounded-t-lg h-1/3'>
-                <ProfileImage user={currentUser} userProvider={userProvider} />
+                <ProfileImage currentUser={currentUser} userProvider={userProvider} />
               </div>
               <div className='z-10 overflow-hidden border-4 border-white border-solid rounded-full size-24 md:size-28'>
-                <ProfileImage user={currentUser} userProvider={userProvider} />
+                <ProfileImage currentUser={currentUser} userProvider={userProvider} />
               </div>
               <h1 className='text-lg font-bold'>{currentUser?.name}</h1>
               <span className='text-xs text-gray-500'>{currentUser?.email}</span>
-              <button className='px-5 py-2 text-xs text-white transition-transform duration-300 rounded-full bg-pennBlue hover:scale-105' onClick={() => handleClick('profile')}>Editar perfil</button>
+              <button
+                onClick={() => handleClick('profile')}
+                className='relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded text-pennBlue hover:pl-10 hover:pr-6 bg-gray-50 group'
+              >
+                <span className='absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-pennBlue group-hover:h-full' />
+                <span className='absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12'>
+                  <svg className='w-5 h-5 text-aero' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M14 5l7 7m0 0l-7 7m7-7H3' /></svg>
+                </span>
+                <span className='absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200'>
+                  <svg className='w-5 h-5 text-aero' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M14 5l7 7m0 0l-7 7m7-7H3' /></svg>
+                </span>
+                <span className='relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white'>Editar Perfil</span>
+              </button>
             </li>
             <li
-              className='col-span-4 p-1 overflow-hidden bg-white rounded-lg shadow-lg cursor-pointer md:row-span-3 md:col-span-1'
+              className='flex items-center justify-around col-span-4 gap-2 p-2 overflow-hidden bg-white rounded-lg shadow-lg cursor-pointer md:gap-5 md:p-5 md:row-span-3 md:col-span-1 md:flex-col'
               onClick={() => handleClick('publications')}
             >
-              <AddPublication />
-              Añadir publicación
+              <button className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-aero bg-aero/5 hover:b'>
+                <Image className='size-10 md:size-20' src='/logos/only-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
+                Jugador
+              </button>
+              <span className='text-xs text-center'>Crear publicación</span>
+              <button className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-pennBlue'>
+                <Image className='size-10 md:size-20' src='/logos/team-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
+                Team
+              </button>
             </li>
             <li
               className='p-1 bg-white rounded-lg shadow-lg cursor-pointer'

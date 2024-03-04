@@ -1,7 +1,11 @@
 import Image from 'next/image'
 import { myLoader } from '../../../components/myLoader'
+import { User, UserProvider } from '../../../domain/types'
 
-export const ProfileImage = ({ userProvider, currentUser }) => {
+export const ProfileImage = (
+  { userProvider, currentUser }:
+    { userProvider: UserProvider, currentUser: User }
+) => {
   return (
     <>
       {
@@ -13,7 +17,7 @@ export const ProfileImage = ({ userProvider, currentUser }) => {
               height={96}
               loader={myLoader}
               src={userProvider?.image}
-              alt={userProvider?.name}
+              alt={userProvider?.name ?? 'user'}
             />
             )
           : (
