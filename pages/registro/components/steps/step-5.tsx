@@ -8,6 +8,7 @@ import { PopUpMessage } from '../../../../components/pop-up-message'
 import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
 import { COLLECTIONS, GAMES } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
+import { listOfRemove } from '../../domain/consts'
 import { useCheckPublications } from '../../hooks/use-check-publication'
 
 export const Step5 = (
@@ -72,25 +73,6 @@ export const Step5 = (
 
     const data = await response.json()
     if (data === 'User created') {
-      const listOfRemove = [
-        'geometry',
-        'age',
-        'name',
-        'description',
-        'gender',
-        'twitter',
-        'discord',
-        'email',
-        'cs2Publications',
-        'fortnitePublications',
-        'valorantPublications',
-        'lolPublications',
-        'rocketLeaguePublications',
-        'dota2Publications',
-        'image',
-        'imageName',
-        'step'
-      ]
       listOfRemove.forEach(item => localStorage.removeItem(item))
       setTimeout(() => {
         setLoading('created')

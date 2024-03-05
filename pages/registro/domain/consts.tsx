@@ -1,0 +1,19 @@
+export const listOfRemove = [
+  'geometry',
+  'age',
+  'name',
+  'description',
+  'gender',
+  'twitter',
+  'discord',
+  'email',
+  'cs2Publications',
+  'fortnitePublications',
+  'valorantPublications',
+  'lolPublications',
+  'rocketLeaguePublications',
+  'dota2Publications',
+  'image',
+  'imageName',
+  'step'
+]

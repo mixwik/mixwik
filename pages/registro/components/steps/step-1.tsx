@@ -4,12 +4,17 @@ import React from 'react'
 import { myLoader } from '../../../../components/myLoader'
 import { UserProvider } from '../../../../domain/types'
 import { useSignOut } from '../../../../firebase/auth/SignOut'
+import { listOfRemove } from '../../domain/consts'
 
 export const Step1 = (
   { accept, setAccept, userProvider, setSteps }:
   { accept: boolean, setAccept: React.Dispatch<React.SetStateAction<boolean>>, userProvider: UserProvider, setSteps: React.Dispatch<React.SetStateAction<string>>}
 ) => {
   const handleSignOut = useSignOut()
+  const handleCancel = () => {
+    listOfRemove.forEach(item => localStorage.removeItem(item))
+    handleSignOut()
+  }
 
   const createUser = () => {
     if (!userProvider) return
@@ -64,7 +69,7 @@ export const Step1 = (
         </span>
       </label>
       <div className='flex justify-center w-full gap-5'>
-        <button onClick={() => handleSignOut()}>No continuar</button>
+        <button onClick={handleCancel}>No continuar</button>
         <button
           disabled={!accept}
           onClick={createUser}
