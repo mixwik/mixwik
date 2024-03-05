@@ -160,11 +160,21 @@ export default function Dashboard () {
               </span>
             </li>
             <li
-              className='p-1 text-white rounded-lg shadow-lg cursor-pointer md:col-span-3 col-span-full bg-pennBlue'
+              className='flex gap-5 text-white duration-300 rounded-lg shadow-lg cursor-pointer md:col-span-3 col-span-full bg-pennBlue hover:bg-aero'
               onClick={() => handleClick('mixWikTeams')}
             >
-              <Image className='w-10 h-10' src={iconMixWik} alt='Icono del logo MixWik' />
-              MixWik Teams
+              <Image className='relative w-auto h-full p-2 rounded-l-lg bg-aero' src={iconMixWik} alt='Icono del logo MixWik' loader={myLoader} />
+              {
+                mixWikTeams
+                  ? (
+                    <span>MixWik Teams</span>
+                    )
+                  : (
+                    <div>
+                      <h2>Hazte ya de MixWik Teams</h2>
+                    </div>
+                    )
+              }
             </li>
             <li className='col-span-2 p-1 bg-white rounded-lg shadow-lg md:col-span-1'>
               <button onClick={() => setBugs(!bugs)}>
