@@ -22,7 +22,7 @@ import Profile from './components/Profile'
 import Publications from './components/Publications'
 
 // Images
-import { BugsIcon, Company, ContactUs, LogOutIcon, PublicationsIcon } from '../../components/Svg'
+import { BugsIcon, Company, ContactUs, FavSelectedIcon, LogOutIcon } from '../../components/Svg'
 import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
@@ -35,6 +35,7 @@ import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
+import { MiniCard } from './components/mini-card'
 import { ProfileImage } from './components/profile-image'
 
 export default function Dashboard () {
@@ -84,7 +85,7 @@ export default function Dashboard () {
         {page === 'bugsReports' && <BugsReports />}
         {page === 'favorites' && <Favorites currentUser={currentUser} />}
         <nav className='flex items-center justify-center h-[90vh]'>
-          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 md:w-1/2'>
+          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 md:w-3/5'>
             <li
               className='relative flex flex-col items-center col-span-4 row-span-2 gap-1 p-3 overflow-hidden bg-white rounded-lg shadow-lg md:p-5 md:col-span-3'
             >
@@ -111,34 +112,52 @@ export default function Dashboard () {
               </button>
             </li>
             <li
-              className='flex items-center justify-around col-span-4 gap-2 p-2 overflow-hidden bg-white rounded-lg shadow-lg cursor-pointer md:gap-5 md:p-5 md:row-span-3 md:col-span-1 md:flex-col'
-              onClick={() => handleClick('publications')}
+              className='flex items-center justify-around col-span-4 gap-2 p-2 overflow-hidden bg-white rounded-lg shadow-lg md:gap-5 md:p-5 md:row-span-3 md:col-span-1 md:flex-col'
             >
-              <button className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-aero bg-aero/5 hover:bg-aero/10'>
+              <button
+                className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-aero bg-aero/5 hover:bg-aero/10'
+                onClick={() => handleClick('newPublication')}
+              >
                 <Image className='size-10 md:size-20' src='/logos/only-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
                 Jugador
               </button>
               <span className='text-xs text-center'>Crear publicación</span>
-              <button className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-pennBlue bg-pennBlue/10 hover:bg-pennBlue/15'>
+              <button
+                className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-pennBlue bg-pennBlue/10 hover:bg-pennBlue/15'
+                onClick={() => handleClick(mixWikTeams ? 'teams' : 'noTeams')}
+              >
                 <Image className='size-10 md:size-20' src='/logos/team-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
                 Team
               </button>
             </li>
             <li
-              className='p-1 bg-white rounded-lg shadow-lg cursor-pointer'
-              onClick={() => handleClick('favorites')}
+              className='p-1 overflow-hidden bg-white rounded-lg shadow-lg cursor-pointer group md:p-5'
             >
-              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-10 h-10'>
-                <path fillRule='evenodd' d='M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z' clipRule='evenodd' />
-              </svg>
-              Mis Favoritos
+              <button
+                className='flex flex-col items-center justify-center size-full'
+                onClick={() => handleClick('favorites')}
+              >
+                <div className='relative flex items-center justify-center size-16 md:size-32'>
+                  <FavSelectedIcon className='absolute fill-current text-pennBlue size-full' />
+                  <FavSelectedIcon className='absolute text-red-500 duration-300 scale-0 fill-current size-full group-hover:scale-110' />
+                </div>
+                <span className='text-sm font-bold text-red-500 md:text-base'>
+                  Favoritos
+                </span>
+              </button>
             </li>
             <li
-              className='col-span-3 p-1 bg-white rounded-lg shadow-lg cursor-pointer md:col-span-2'
+              className='relative flex justify-between col-span-3 p-2 duration-300 bg-white rounded-lg shadow-lg cursor-pointer lg:justify-around md:p-3 md:col-span-2 hover:bg-slate-100'
               onClick={() => handleClick('myPublications')}
             >
-              <PublicationsIcon />
-              Mis publicaciones
+              <div className='relative'>
+                <MiniCard borderColor='border-aero' bg='bg-aero' />
+                <MiniCard borderColor='border-pennBlue' bg='bg-pennBlue' position='left-6 top-1' />
+                <MiniCard borderColor='border-orange' bg='bg-orange' position='left-12 top-2' />
+              </div>
+              <span className='self-center font-bold'>
+                Mis <br /> publicaciones
+              </span>
             </li>
             <li
               className='p-1 text-white rounded-lg shadow-lg cursor-pointer md:col-span-3 col-span-full bg-pennBlue'
