@@ -48,7 +48,7 @@ const Nav = () => {
   })
   const handleOpenButton = () => {
     handleOpen('dashboardNav')
-    router.push('/dashboard?page=profile')
+    router.push('/dashboard')
   }
 
   return (
@@ -83,7 +83,7 @@ const Nav = () => {
           {
               userProvider?.uid
                 ? (
-                  <Link href='/dashboard?page=profile'>
+                  <Link href='/dashboard'>
                     {
                     userProvider?.image
                       ? (

@@ -96,7 +96,7 @@ export const Step5 = (
         setLoading('created')
       }, 1000)
       setLoading('')
-      router.push('/dashboard?page=profile')
+      router.push('/dashboard')
     } else {
       if (data === 'gender') {
         setError('El campo genero es obligatorio')

@@ -13,7 +13,7 @@ export const useConfirmUserRegister = (register?: string) => {
       if (isData === 'no-data') {
         route.push('/registro')
       } else if (isData === 'data' && register === 'register') {
-        route.push('/dashboard?page=profile')
+        route.push('/dashboard')
       }
     } else if (isSession === 'no-session') {
       route.push('/desautorizado')

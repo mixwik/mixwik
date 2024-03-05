@@ -84,7 +84,7 @@ export default function Dashboard () {
         {page === 'bugsReports' && <BugsReports />}
         {page === 'favorites' && <Favorites currentUser={currentUser} />}
         <nav className='flex items-center justify-center h-[90vh]'>
-          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 md:w-[1px]/2'>
+          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 md:w-1/2'>
             <li
               className='relative flex flex-col items-center col-span-4 row-span-2 gap-1 p-3 overflow-hidden bg-white rounded-lg shadow-lg md:p-5 md:col-span-3'
             >
@@ -114,12 +114,12 @@ export default function Dashboard () {
               className='flex items-center justify-around col-span-4 gap-2 p-2 overflow-hidden bg-white rounded-lg shadow-lg cursor-pointer md:gap-5 md:p-5 md:row-span-3 md:col-span-1 md:flex-col'
               onClick={() => handleClick('publications')}
             >
-              <button className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-aero bg-aero/5 hover:b'>
+              <button className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-aero bg-aero/5 hover:bg-aero/10'>
                 <Image className='size-10 md:size-20' src='/logos/only-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
                 Jugador
               </button>
               <span className='text-xs text-center'>Crear publicación</span>
-              <button className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-pennBlue'>
+              <button className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-pennBlue bg-pennBlue/10 hover:bg-pennBlue/15'>
                 <Image className='size-10 md:size-20' src='/logos/team-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
                 Team
               </button>

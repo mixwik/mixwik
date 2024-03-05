@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { myLoader } from '../../../../components/myLoader'
 import { UserProvider } from '../../../../domain/types'
 import { useSignOut } from '../../../../firebase/auth/SignOut'
 
@@ -39,7 +40,7 @@ export const Step1 = (
   }
   return (
     <div className='flex flex-col justify-around w-full h-full p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
-      <h1 className='flex flex-col items-center justify-center gap-3 text-4xl font-bold'>Bienvenido a <span className='sr-only'>MixWik</span> <Image className='w-auto h-12' alt='Logo de Mixwik' src='/logos/mixwik-logo.png' width={100} height={50} /></h1>
+      <h1 className='flex flex-col items-center justify-center gap-3 text-4xl font-bold'>Bienvenido a <span className='sr-only'>MixWik</span> <Image className='w-auto h-12' alt='Logo de Mixwik' src='/logos/mixwik-logo.png' width={100} height={50} loader={myLoader} /></h1>
       <ol className='flex flex-col gap-3 border-gray-200 md:m-5 border-s'>
         <li>
           <p className='font-normal text-gray-500 text-pretty'>Estamos muy felices de tenerte en nuestra comunidad, en MixWik podrás encontrar jugadores cerca de tí y formar equipo para lograr la victoria 🏆</p>

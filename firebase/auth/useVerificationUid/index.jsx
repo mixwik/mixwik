@@ -4,7 +4,7 @@ export const useVerificationUid = () => {
   const router = useRouter()
 
   const verification = (myself) => {
-    if (!myself) router.push('/dashboard?page=profile')
+    if (!myself) router.push('/dashboard')
   }
 
   return verification

@@ -11,7 +11,7 @@ export const useLogInProvider = () => {
   const logInProvider = (provider) => {
     signInWithPopup(auth, provider)
       .then(() => {
-        router.push('/dashboard?page=profile')
+        router.push('/dashboard')
         setLogInOpen(false)
       }).catch((error) => {
         setError(error)
@@ -26,7 +26,7 @@ export const useLogInEmail = () => {
   const logInEmail = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        router.push('/dashboard?page=profile')
+        router.push('/dashboard')
       })
       .catch((error) => {
         const errorCode = error.code

@@ -15,7 +15,7 @@ const Social = ({ publicationUser, mixWikTeams, limitedAdministrator }) => {
               <article className={styles.social}>
                 <h2>
                   Vías de contacto:
-                  {limitedAdministrator && <Link href='/dashboard?page=profile' target='_blank' className={styles.editButtonImages}><EditIcon /></Link>}
+                  {limitedAdministrator && <Link href='/dashboard' target='_blank' className={styles.editButtonImages}><EditIcon /></Link>}
                 </h2>
                 <SocialLinks mixWikTeams={mixWikTeams} user={publicationUser} />
               </article>
