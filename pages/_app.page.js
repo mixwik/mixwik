@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/react'
 import CookieConsent from '../components/CookiesConsent'
 import DataProvider from '../context'
+import '@fontsource-variable/onest';
 import '../styles/globals.scss'
 const NoPrivate = ({ children }) => <>{children}</>
 

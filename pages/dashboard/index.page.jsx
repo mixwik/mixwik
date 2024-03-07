@@ -23,7 +23,6 @@ import Publications from './components/Publications'
 
 // Images
 import { BugsIcon, Company, ContactUs, FavSelectedIcon, LogOutIcon } from '../../components/Svg'
-import iconMixWik from '../../public/logos/icon-logo.png'
 
 // hooks
 import { useRouter } from 'next/router'
@@ -85,7 +84,7 @@ export default function Dashboard () {
         {page === 'bugsReports' && <BugsReports />}
         {page === 'favorites' && <Favorites currentUser={currentUser} />}
         <nav className='flex items-center justify-center h-[90vh]'>
-          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 md:w-3/5'>
+          <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 lg:w-1/2 md:3/5'>
             <li
               className='relative flex flex-col items-center col-span-4 row-span-2 gap-1 p-3 overflow-hidden bg-white rounded-lg shadow-lg md:p-5 md:col-span-3'
             >
@@ -115,7 +114,7 @@ export default function Dashboard () {
               className='flex items-center justify-around col-span-4 gap-2 p-2 overflow-hidden bg-white rounded-lg shadow-lg md:gap-5 md:p-5 md:row-span-3 md:col-span-1 md:flex-col'
             >
               <button
-                className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-aero bg-aero/5 hover:bg-aero/10'
+                className='flex flex-col items-center justify-center gap-1 duration-300 border border-solid rounded-lg md:gap-3 size-full border-aero bg-aero/5 hover:bg-aero/10'
                 onClick={() => handleClick('newPublication')}
               >
                 <Image className='size-10 md:size-20' src='/logos/only-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
@@ -123,7 +122,7 @@ export default function Dashboard () {
               </button>
               <span className='text-xs text-center'>Crear publicación</span>
               <button
-                className='flex flex-col items-center justify-center gap-1 border border-solid rounded-lg md:gap-3 size-full border-pennBlue bg-pennBlue/10 hover:bg-pennBlue/15'
+                className='flex flex-col items-center justify-center gap-1 duration-300 border border-solid rounded-lg md:gap-3 size-full border-pennBlue bg-pennBlue/10 hover:bg-pennBlue/15'
                 onClick={() => handleClick(mixWikTeams ? 'teams' : 'noTeams')}
               >
                 <Image className='size-10 md:size-20' src='/logos/team-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
@@ -156,28 +155,33 @@ export default function Dashboard () {
                 <MiniCard borderColor='border-orange' bg='bg-orange' position='left-12 top-2' />
               </div>
               <span className='self-center font-bold'>
-                Mis <br /> publicaciones
+                Publicaciones
               </span>
             </li>
             <li
-              className='flex gap-5 text-white duration-300 rounded-lg shadow-lg cursor-pointer md:col-span-3 col-span-full bg-pennBlue hover:bg-aero'
+              className='flex text-white duration-300 rounded-lg shadow-lg cursor-pointer md:col-span-3 col-span-full bg-pennBlue hover:bg-aero'
               onClick={() => handleClick('mixWikTeams')}
             >
-              <Image className='relative w-auto h-full p-2 rounded-l-lg bg-aero' src={iconMixWik} alt='Icono del logo MixWik' loader={myLoader} />
+              <Image className='w-auto h-full p-2 rounded-l-lg bg-aero' width={10} height={10} src='/logos/icon-logo.png' alt='Icono del logo MixWik' loader={myLoader} />
               {
                 mixWikTeams
                   ? (
-                    <span>MixWik Teams</span>
+                    <div className='flex items-center justify-center w-full'>MixWik Teams</div>
                     )
                   : (
-                    <div>
-                      <h2>Hazte ya de MixWik Teams</h2>
+                    <div className='relative flex items-center justify-center w-full group'>
+                      <h2 className='absolute text-xl md:text-2xl top-1 left-3 opacity-90'>¡Hazte ya!</h2>
+                      <Image className='absolute w-auto duration-300 rounded-l-lg opacity-40 set md:h-2/5 h-1/3 group-hover:opacity-100' width={10} height={10} src='/logos/text-logo.png' alt='Icono del logo MixWik' loader={myLoader} />
+                      <p className='absolute text-xl md:text-2xl bottom-1 right-3'>Teams</p>
                     </div>
                     )
               }
             </li>
-            <li className='col-span-2 p-1 bg-white rounded-lg shadow-lg md:col-span-1'>
-              <button onClick={() => setBugs(!bugs)}>
+            <li className='col-span-2 bg-white rounded-lg shadow-lg md:col-span-1'>
+              <button
+                className='flex flex-col items-center justify-between w-full h-full duration-300 bg-white rounded-lg cursor-pointer hover:bg-slate-100'
+                onClick={() => setBugs(!bugs)}
+              >
                 <BugsIcon />
                 Reportar Bug
               </button>
