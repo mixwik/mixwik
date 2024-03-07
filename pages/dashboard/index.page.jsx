@@ -146,13 +146,14 @@ export default function Dashboard () {
               </button>
             </li>
             <li
-              className='relative flex justify-between col-span-3 p-2 duration-300 bg-white rounded-lg shadow-lg cursor-pointer lg:justify-around md:p-3 md:col-span-2 hover:bg-slate-100'
+              className='relative flex flex-col justify-between col-span-3 p-2 duration-300 bg-white rounded-lg shadow-lg cursor-pointer lg:justify-around md:p-3 md:col-span-2 hover:bg-slate-100'
               onClick={() => handleClick('myPublications')}
             >
-              <div className='relative'>
+              <div className='flex justify-between'>
                 <MiniCard borderColor='border-aero' bg='bg-aero' />
                 <MiniCard borderColor='border-pennBlue' bg='bg-pennBlue' position='left-6 top-1' />
                 <MiniCard borderColor='border-orange' bg='bg-orange' position='left-12 top-2' />
+                <MiniCard borderColor='border-purple-500' bg='bg-purple-500' position='left-20 top-3' />
               </div>
               <span className='self-center font-bold'>
                 Publicaciones
