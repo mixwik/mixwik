@@ -155,7 +155,7 @@ export default function Dashboard () {
                 <MiniCard borderColor='border-orange' bg='bg-orange' position='left-12 top-2' />
                 <MiniCard borderColor='border-purple-500' bg='bg-purple-500' position='left-20 top-3' />
               </div>
-              <span className='self-center font-bold'>
+              <span className='self-center mt-2 font-bold'>
                 Publicaciones
               </span>
             </li>
