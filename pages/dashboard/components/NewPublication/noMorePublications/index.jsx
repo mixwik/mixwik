@@ -6,6 +6,7 @@ import logo from '../../../../../public/logos/mixwik-logo.png'
 import styles from './NoMorePublications.module.scss'
 
 const NoMorePublications = ({ noPremium, currentUser, setTeams }) => {
+  if (!noPremium) return null
   return (
     <div className={styles.noMorePublications} data-open={noPremium}>
       <button className={styles.close} onClick={() => setTeams(false)}>

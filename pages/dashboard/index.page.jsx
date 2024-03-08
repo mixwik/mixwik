@@ -75,7 +75,7 @@ export default function Dashboard () {
       <section>
         <BackgroundDots />
         {page === 'profile' && <Profile user={currentUser} mixWikTeams={mixWikTeams} />}
-        {page === 'newPublication' && <NewPublication mixWikTeams={mixWikTeams} user={currentUser} setTeams={setToggle} teams={toggle} />}
+        <NewPublication page={page} mixWikTeams={mixWikTeams} user={currentUser} setTeams={setToggle} teams={toggle} />
         {page === 'myPublications' && <MyPublications user={currentUser} />}
         {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}
         {page === 'teams' && <NewTeam mixWikTeams={mixWikTeams} user={currentUser} />}

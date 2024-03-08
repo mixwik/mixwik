@@ -1,12 +1,12 @@
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
 import { GameForm } from '../../../../components/gameForm'
 import { PopUpError } from '../../../../components/pop-up-error'
 import { PopUpMessage } from '../../../../components/pop-up-message'
+import { SelectGame } from '../../../../components/select-game'
 import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
-import { COLLECTIONS, GAMES } from '../../../../domain/constants'
+import { COLLECTIONS } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { listOfRemove } from '../../domain/consts'
 import { useCheckPublications } from '../../hooks/use-check-publication'
@@ -143,24 +143,7 @@ export const Step5 = (
         loading={loading}
       />
       <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea un jugador</h2>
-      <ul
-        className='flex flex-wrap justify-center w-full gap-5 md:gap-10 md:w-4/5'
-      >
-        {GAMES.map(game => (
-          <li
-            key={game.collection}
-            onClick={() => handleCheck(game.collection)}
-            className='flex flex-col items-center justify-center w-32 h-32 p-2 text-xs text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-pennBlue md:w-36 md:h-36 hover:shadow-xl hover:-translate-y hover:scale-105'
-          >
-            <Image className='object-cover w-10 h-10' src={game.logo} alt={game.name} />
-            <h4 className='text-center'>
-              {game.name}
-              <br />
-              {game.comingSoon && <span>(Proximamente)</span>}
-            </h4>
-          </li>
-        ))}
-      </ul>
+      <SelectGame handleCheck={handleCheck} />
       <div className='flex justify-center w-full gap-10'>
         <button
           type='button'
