@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { GAMES } from '../domain/constants'
+import { GAMES } from '../../domain/constants'
 
 export const SelectGame = ({ handleCheck }) => {
   return (

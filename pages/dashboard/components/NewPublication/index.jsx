@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import Link from 'next/link'
 import { BackgroundDots } from '../../../../components/background-dots'
-import { GameForm } from '../../../../components/create-publication/gameForm'
-import { SelectGame } from '../../../../components/select-game'
+import { GameForm } from '../../../../components/create-publication/game-form'
+import { SelectGame } from '../../../../components/create-publication/select-game'
 import { useOpenGameContext } from '../../../../context'
 import { COLLECTIONS } from '../../../../domain/constants'
 
