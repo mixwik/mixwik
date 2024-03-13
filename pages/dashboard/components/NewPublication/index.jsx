@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import NoMorePublications from './noMorePublications'
 
 import Link from 'next/link'
 import { BackgroundDots } from '../../../../components/background-dots'
@@ -18,8 +17,10 @@ const NewPublication = ({ user, mixWikTeams, page }) => {
       if (!mixWikTeams) {
         if (!user.publications.cs2Publications) {
           handleOpenGame(name)
+          setTeams('')
         } else if (user.publications.cs2Publications < 1) {
           handleOpenGame(name)
+          setTeams('')
         } else {
           setTeams('noMixWikTeams')
         }
@@ -35,8 +36,10 @@ const NewPublication = ({ user, mixWikTeams, page }) => {
       if (!mixWikTeams) {
         if (!user.publications.lolPublications) {
           handleOpenGame(name)
+          setTeams('')
         } else if (user.publications.lolPublications < 1) {
           handleOpenGame(name)
+          setTeams('')
         } else {
           setTeams('noMixWikTeams')
         }
@@ -52,8 +55,10 @@ const NewPublication = ({ user, mixWikTeams, page }) => {
       if (!mixWikTeams) {
         if (!user.publications.fortnitePublications) {
           handleOpenGame(name)
+          setTeams('')
         } else if (user.publications.fortnitePublications < 1) {
           handleOpenGame(name)
+          setTeams('')
         } else {
           setTeams('noMixWikTeams')
         }
@@ -69,8 +74,10 @@ const NewPublication = ({ user, mixWikTeams, page }) => {
       if (!mixWikTeams) {
         if (!user.publications.valorantPublications) {
           handleOpenGame(name)
+          setTeams('')
         } else if (user.publications.valorantPublications < 1) {
           handleOpenGame(name)
+          setTeams('')
         } else {
           setTeams('noMixWikTeams')
         }
@@ -87,22 +94,21 @@ const NewPublication = ({ user, mixWikTeams, page }) => {
   return (
     <>
       <GameForm />
-      <section className='absolute md:top-[10vh] h-[90vh] z-20'>
+      <section className='absolute md:top-[10vh] z-20 w-full h-[90vh] flex justify-center items-center'>
         <BackgroundDots />
-        <div className='h-full'>
-          <h1>
-            <Link href='/dashboard?page=publications'>
-              <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-10 h-10 font-bold'>
-                <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75' />
-              </svg>
-            </Link>
+        <div className='flex flex-col items-center md:h-[80vh] h-full justify-between py-5 bg-white w-full md:w-1/2 mx-auto rounded-md'>
+          <h1 className='text-2xl font-bold'>
             Selecciona categoría
           </h1>
-
-          {teams === 'maxPublications' && <p>Has llegado al límite de publicaciones</p>}
-
+          {teams === 'maxPublications' && <p className='px-10 text-center text-red-400'>Has llegado al límite de publicaciones en este juego</p>}
+          {teams === 'noMixWikTeams' && <p className='px-10 font-bold text-center text-pennBlue'>Hazte de mixWikTeams para poder hacer más publicaciones en cada juego</p>}
           <SelectGame handleCheck={handleCheck} />
-          <NoMorePublications setTeams={setTeams} noPremium={teams === 'noMixWikTeams'} currentUser={user} />
+          <Link href='/dashboard' className='flex items-center gap-3 px-10 py-3 text-white duration-300 rounded-md bg-aero hover:bg-pennBlue'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='font-bold size-6'>
+              <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75' />
+            </svg>
+            Volver
+          </Link>
         </div>
       </section>
     </>

@@ -10,7 +10,7 @@ export const SelectGame = ({ handleCheck }) => {
         <li
           key={game.collection}
           onClick={() => handleCheck(game.collection)}
-          className='flex flex-col items-center justify-center w-32 h-32 p-2 text-xs text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-pennBlue md:w-36 md:h-36 hover:shadow-xl hover:-translate-y hover:scale-105'
+          className='flex flex-col items-center justify-between w-32 h-32 p-2 py-8 text-xs text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl cursor-pointer bg-pennBlue md:w-36 md:h-36 hover:-translate-y hover:scale-105'
         >
           <Image className='object-cover w-10 h-10' src={game.logo} alt={game.name} />
           <h4 className='text-center'>

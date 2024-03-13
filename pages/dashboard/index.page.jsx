@@ -146,7 +146,7 @@ export default function Dashboard () {
               </button>
             </li>
             <li
-              className='relative flex flex-col justify-between col-span-3 p-2 duration-300 bg-white rounded-lg shadow-lg cursor-pointer lg:justify-around md:p-3 md:col-span-2 hover:bg-slate-100'
+              className='relative flex flex-col justify-between col-span-3 p-1 duration-300 bg-white rounded-lg shadow-lg cursor-pointer lg:justify-around md:p-3 md:col-span-2 hover:bg-slate-100'
               onClick={() => handleClick('myPublications')}
             >
               <div className='flex justify-between'>
@@ -180,31 +180,31 @@ export default function Dashboard () {
             </li>
             <li className='col-span-2 bg-white rounded-lg shadow-lg md:col-span-1'>
               <button
-                className='flex flex-col items-center justify-between w-full h-full duration-300 bg-white rounded-lg cursor-pointer hover:bg-slate-100'
+                className='flex flex-col items-center justify-center w-full h-full gap-5 font-bold duration-300 bg-white rounded-lg cursor-pointer hover:bg-slate-100'
                 onClick={() => setBugs(!bugs)}
               >
-                <BugsIcon />
+                <BugsIcon className='size-9 text-pennBlue' />
                 Reportar Bug
               </button>
             </li>
-            <li className='col-span-2 p-1 bg-white rounded-lg shadow-lg md:col-span-1'>
-              <Link href='/sobre-nosotros'>
-                <Company />
+            <li className='flex flex-col items-center justify-center col-span-2 p-1 duration-300 bg-white rounded-lg shadow-lg cursor-pointer md:col-span-1 hover:bg-slate-100'>
+              <Link href='/sobre-nosotros' className='flex flex-col items-center gap-5 font-bold'>
+                <Company className='size-9 text-pennBlue' />
                 Sobre Nosotros
               </Link>
             </li>
-            <li className='col-span-2 p-1 bg-white rounded-lg shadow-lg md:col-span-1'>
-              <Link href='/contacto'>
-                <ContactUs />
+            <li className='flex items-center justify-center col-span-2 p-1 duration-300 bg-white rounded-lg shadow-lg cursor-pointer md:col-span-1 hover:bg-slate-100'>
+              <Link href='/contacto' className='flex flex-col items-center gap-5 font-bold'>
+                <ContactUs className='size-9 text-pennBlue' />
                 Contáctanos
               </Link>
             </li>
             <li
-              className='col-span-2 p-1 bg-red-400 rounded-lg shadow-lg cursor-pointer'
+              className='flex items-center justify-center col-span-2 gap-2 p-1 font-bold text-white duration-300 bg-red-400 rounded-lg shadow-lg cursor-pointer md:gap-5 cursor-pointe hover:bg-red-500'
               onClick={() => handleSignOut()}
             >
-              <LogOutIcon />
               Cerrar sesión
+              <LogOutIcon className='text-white size-9' />
             </li>
           </ul>
         </nav>
