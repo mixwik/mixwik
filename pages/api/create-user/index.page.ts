@@ -1,9 +1,9 @@
-import { addDoc, collection } from 'firebase/firestore'
+import { differenceInYears, parseISO } from 'date-fns'
+import { doc, setDoc } from 'firebase/firestore'
 import { NextApiRequest, NextApiResponse } from 'next'
 import * as yup from 'yup'
 import { COLLECTIONS } from '../../../domain/constants'
 import { db } from '../../../firebase/initialize'
-import { differenceInYears, parseISO } from 'date-fns'
 const schema = yup.object().shape({
   uid: yup.string().required('Ha ocurrido un error'),
   email: yup.string().email('email').required('email'),
@@ -50,7 +50,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     if (req.method === 'POST') {
       try {
         await schema.validate(req.body)
-        await addDoc(collection(db, COLLECTIONS.users), {
+        await setDoc(doc(db, COLLECTIONS.users, uid), {
           geometry,
           uid,
           email,

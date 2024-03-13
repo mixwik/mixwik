@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import Link from 'next/link'
 import { BackgroundDots } from '../../../../components/background-dots'
-import { GameForm } from '../../../../components/gameForm'
+import { GameForm } from '../../../../components/create-publication/gameForm'
 import { SelectGame } from '../../../../components/select-game'
 import { useOpenGameContext } from '../../../../context'
 import { COLLECTIONS } from '../../../../domain/constants'
@@ -93,7 +93,7 @@ const NewPublication = ({ user, mixWikTeams, page }) => {
   if (page !== 'newPublication') return null
   return (
     <>
-      <GameForm />
+      <GameForm dashboard />
       <section className='absolute md:top-[10vh] z-20 w-full h-[90vh] flex justify-center items-center'>
         <BackgroundDots />
         <div className='flex flex-col items-center md:h-[80vh] h-full justify-between py-5 bg-white w-full md:w-1/2 mx-auto rounded-md'>

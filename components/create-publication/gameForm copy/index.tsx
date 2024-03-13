@@ -1,5 +1,5 @@
-import { useOpenGameContext } from '../../context'
-import { COLLECTIONS } from '../../domain/constants'
+import { useOpenGameContext } from '../../../context'
+import { COLLECTIONS } from '../../../domain/constants'
 import { Cs2GameFrom } from './components/cs2-game-form'
 import { FortniteGameForm } from './components/fortnite-game-form'
 import { LolGameForm } from './components/lol-game-form'

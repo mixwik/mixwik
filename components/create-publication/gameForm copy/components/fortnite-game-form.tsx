@@ -2,20 +2,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { useOpenGameContext, usePlayerCreateContext } from '../../../context'
-import { GAME_PUBLICATIONS, TYPE_OF_GAME, VALORANT_LEVELS, VALORANT_POSITION } from '../../../domain/constants'
-import { useSession } from '../../../firebase/auth/useSession'
-import { Error } from '../../../pages/registro/components/Error'
-import { ArrowBack } from '../../Svg'
-import { BackgroundDots } from '../../background-dots'
-import { PopUpMessage } from '../../pop-up-message'
-import { BoxField } from './fields/box-field'
-import { Description } from './fields/description-field'
-import { HoursField } from './fields/hours-field'
-import { FieldImage } from './fields/image-field'
-import { Title } from './fields/title-field'
+import { FORTNITE_POSITIONS, FORTNITE_PREFERENCE_TEAM, GAME_PUBLICATIONS, TYPE_OF_GAME } from '../../../../domain/constants'
+import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
+import { useSession } from '../../../../firebase/auth/useSession'
+import { Error } from '../../../../pages/registro/components/Error'
+import { ArrowBack } from '../../../Svg'
+import { BackgroundDots } from '../../../background-dots'
+import { PopUpMessage } from '../../../pop-up-message'
+import { BoxField } from '../../components/fields/box-field'
+import { Description } from '../../components/fields/description-field'
+import { HoursField } from '../../components/fields/hours-field'
+import { FieldImage } from '../../components/fields/image-field'
+import { Title } from '../../components/fields/title-field'
 
-export const ValorantGameFrom = () => {
+export const FortniteGameForm = () => {
   const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
@@ -49,8 +49,8 @@ export const ValorantGameFrom = () => {
         .required('El campo descripción es obligatorio')
         .min(100, 'Mínimo 100 caracteres')
         .max(350, 'Máximo 350 caracteres'),
-      level: yup
-        .string()
+      preferenceTeam: yup
+        .array()
         .required('El campo nivel es obligatorio'),
       position: yup
         .array()
@@ -90,7 +90,7 @@ export const ValorantGameFrom = () => {
       if (response.message === 'Game created') {
         setTimeout(() => {
           setLoading('created')
-          localStorage.setItem(GAME_PUBLICATIONS.valorant, '1')
+          localStorage.setItem(GAME_PUBLICATIONS.fortnite, '1')
           setPlayerCreate(true)
           handleOpenGame('')
         }, 2000)
@@ -119,7 +119,7 @@ export const ValorantGameFrom = () => {
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
       >
         <h2 className='text-2xl font-semibold text-pennBlue'>
-          Valorant
+          Fortnite
         </h2>
         <FieldImage
           setImgURL={setImgUrl}
@@ -143,17 +143,17 @@ export const ValorantGameFrom = () => {
 
         <BoxField
           register={register}
-          registerName='level'
-          errors={errors.level}
-          game={VALORANT_LEVELS}
-          type='radio'
-          title='¿Cuál es tu nivel en Competitivo?'
+          registerName='preferenceTeam'
+          errors={errors.preferenceTeam}
+          game={FORTNITE_PREFERENCE_TEAM}
+          type='checkbox'
+          title='¿Cómo sueles jugar?'
         />
         <BoxField
           register={register}
           registerName='position'
           errors={errors.position}
-          game={VALORANT_POSITION}
+          game={FORTNITE_POSITIONS}
           type='checkbox'
           title='¿En qué posiciones juegas?'
         />

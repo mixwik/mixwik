@@ -2,26 +2,28 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { useOpenGameContext, usePlayerCreateContext } from '../../../context'
-import { FORTNITE_POSITIONS, FORTNITE_PREFERENCE_TEAM, GAME_PUBLICATIONS, TYPE_OF_GAME } from '../../../domain/constants'
-import { useSession } from '../../../firebase/auth/useSession'
-import { Error } from '../../../pages/registro/components/Error'
-import { ArrowBack } from '../../Svg'
-import { BackgroundDots } from '../../background-dots'
-import { PopUpMessage } from '../../pop-up-message'
-import { BoxField } from './fields/box-field'
-import { Description } from './fields/description-field'
-import { HoursField } from './fields/hours-field'
-import { FieldImage } from './fields/image-field'
-import { Title } from './fields/title-field'
+import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
+import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../../domain/constants'
+import { useSession } from '../../../../firebase/auth/useSession'
+import { Error } from '../../../../pages/registro/components/Error'
+import { ArrowBack } from '../../../Svg'
+import { BackgroundDots } from '../../../background-dots'
+import { PopUpMessage } from '../../../pop-up-message'
+import { BoxField } from '../../components/fields/box-field'
+import { Description } from '../../components/fields/description-field'
+import { HoursField } from '../../components/fields/hours-field'
+import { FieldImage } from '../../components/fields/image-field'
+import { Title } from '../../components/fields/title-field'
+import { useUpdateCountPublications } from '../hooks/use-update-count-publications'
 
-export const FortniteGameForm = () => {
+export const Cs2GameFrom = ({ dashboard }) => {
   const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
   const { setPlayerCreate } = usePlayerCreateContext()
   const [image, setImage] = useState<File>()
   const [imgUrl, setImgUrl] = useState('')
+  const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
 
   const [error, setError] = useState('')
   const [initialValues] = useState({
@@ -49,9 +51,12 @@ export const FortniteGameForm = () => {
         .required('El campo descripción es obligatorio')
         .min(100, 'Mínimo 100 caracteres')
         .max(350, 'Máximo 350 caracteres'),
-      preferenceTeam: yup
-        .array()
+      level: yup
+        .string()
         .required('El campo nivel es obligatorio'),
+      premier: yup
+        .string()
+        .required('El campo premier es obligatorio'),
       position: yup
         .array()
         .min(1, 'Selecciona al menos una posición'),
@@ -88,9 +93,9 @@ export const FortniteGameForm = () => {
       })
       const response = await res.json()
       if (response.message === 'Game created') {
+        if (dashboard) handleUpdate()
         setTimeout(() => {
           setLoading('created')
-          localStorage.setItem(GAME_PUBLICATIONS.fortnite, '1')
           setPlayerCreate(true)
           handleOpenGame('')
         }, 2000)
@@ -119,7 +124,7 @@ export const FortniteGameForm = () => {
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
       >
         <h2 className='text-2xl font-semibold text-pennBlue'>
-          Fortnite
+          Counter Strike 2
         </h2>
         <FieldImage
           setImgURL={setImgUrl}
@@ -143,20 +148,30 @@ export const FortniteGameForm = () => {
 
         <BoxField
           register={register}
-          registerName='preferenceTeam'
-          errors={errors.preferenceTeam}
-          game={FORTNITE_PREFERENCE_TEAM}
-          type='checkbox'
-          title='¿Cómo sueles jugar?'
+          registerName='level'
+          errors={errors.level}
+          game={CS2_LEVELS}
+          type='radio'
+          title='¿Cuál es tu nivel en Competitivo?'
         />
+        <BoxField
+          register={register}
+          registerName='premier'
+          errors={errors.premier}
+          game={CS2_PREMIER}
+          type='radio'
+          title='¿Cuál es tu nivel en Premier?'
+        />
+
         <BoxField
           register={register}
           registerName='position'
           errors={errors.position}
-          game={FORTNITE_POSITIONS}
+          game={CS2_POSITIONS}
           type='checkbox'
           title='¿En qué posiciones juegas?'
         />
+
         <BoxField
           register={register}
           registerName='typeOfGamer'

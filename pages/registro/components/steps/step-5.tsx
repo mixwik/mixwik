@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { ArrowBack } from '../../../../components/Svg'
-import { GameForm } from '../../../../components/gameForm'
+import { GameForm } from '../../../../components/create-publication/gameForm'
 import { PopUpError } from '../../../../components/pop-up-error'
 import { PopUpMessage } from '../../../../components/pop-up-message'
 import { SelectGame } from '../../../../components/select-game'
 import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
-import { COLLECTIONS } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { listOfRemove } from '../../domain/consts'
 import { useCheckPublications } from '../../hooks/use-check-publication'
@@ -17,23 +16,21 @@ export const Step5 = (
 ) => {
   const { userProvider } = useSession()
   const router = useRouter()
-  const { openGame, handleOpenGame } = useOpenGameContext()
+  const { handleOpenGame } = useOpenGameContext()
   const { playerCreate } = usePlayerCreateContext()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState('')
-  const {
-    cs2Publications,
-    fortnitePublications,
-    rocketLeaguePublications,
-    dota2Publications,
-    lolPublications,
-    valorantPublications,
-    checkPublication
-  } = useCheckPublications({ setError })
+  const { checkPublication } = useCheckPublications({ setError })
 
   const handleSubmit = async () => {
     if (!playerCreate) return
     const geometry = JSON.parse(localStorage.getItem('geometry') ?? '[0,0]')
+    const cs2Publications = Number(localStorage.getItem('cs2Publications')) ?? 0
+    const fortnitePublications = Number(localStorage.getItem('fortnitePublications')) ?? 0
+    const valorantPublications = Number(localStorage.getItem('valorantPublications')) ?? 0
+    const lolPublications = Number(localStorage.getItem('lolPublications')) ?? 0
+    const rocketLeaguePublications = Number(localStorage.getItem('rocketLeaguePublications')) ?? 0
+    const dota2Publications = Number(localStorage.getItem('dota2Publications')) ?? 0
     const email = localStorage.getItem('email')
     if (userProvider.email !== email) return
     const age = localStorage.getItem('age')
@@ -161,10 +158,7 @@ export const Step5 = (
         >Crear Usuario
         </button>
       </div>
-      {openGame === COLLECTIONS.cs2 && <GameForm />}
-      {openGame === COLLECTIONS.valorant && <GameForm />}
-      {openGame === COLLECTIONS.lol && <GameForm />}
-      {openGame === COLLECTIONS.fortnite && <GameForm />}
+      <GameForm />
     </section>
   )
 }
