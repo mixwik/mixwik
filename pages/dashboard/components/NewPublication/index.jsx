@@ -98,7 +98,7 @@ const NewPublication = ({ user, mixWikTeams, page }) => {
         <BackgroundDots />
         <div className='flex flex-col items-center md:h-[80vh] h-full justify-between py-5 bg-white w-full md:w-1/2 mx-auto rounded-md'>
           <h1 className='text-2xl font-bold'>
-            Selecciona categoría
+            Crea un Jugador
           </h1>
           {teams === 'maxPublications' && <p className='px-10 text-center text-red-400'>Has llegado al límite de publicaciones en este juego</p>}
           {teams === 'noMixWikTeams' && <p className='px-10 font-bold text-center text-pennBlue'>Hazte de mixWikTeams para poder hacer más publicaciones en cada juego</p>}

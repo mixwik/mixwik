@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { COLLECTIONS } from '../../../domain/constants'
 import { db } from '../../../firebase/initialize'
@@ -7,19 +7,18 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
   if (req.method === 'POST') {
     const { uid } = req.body
     if (uid) {
-      const querySnapshot = await getDocs(query(collection(db, COLLECTIONS.users), where('uid', '==', uid)))
-      if (querySnapshot.empty) {
-        res.status(200).json({ user: false })
-      } else {
-        querySnapshot.forEach((doc) => {
-          res.status(200).json({
-            user: true,
-            userServer: { ...doc.data(), id: doc.id }
-          })
+      const docRef = doc(db, COLLECTIONS.users, uid)
+      const docSnap = await getDoc(docRef)
+      if (docSnap.exists()) {
+        res.status(200).json({
+          user: true,
+          userServer: { ...docSnap.data() }
         })
+      } else {
+        res.status(200).json({ user: false })
       }
+    } else {
+      res.status(405).json({ error: 'uid undefine' })
     }
-  } else {
-    res.status(405).json({ error: 'Method Not Allowed' })
   }
 }

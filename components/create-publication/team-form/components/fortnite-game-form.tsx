@@ -2,8 +2,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { FORTNITE_POSITIONS, FORTNITE_PREFERENCE_TEAM, GAME_PUBLICATIONS, TYPE_OF_GAME } from '../../../../domain/constants'
-import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
+import { useOpenGameContext } from '../../../../context'
+import { FORTNITE_POSITIONS, FORTNITE_PREFERENCE_TEAM, TYPE_OF_GAME } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { Error } from '../../../../pages/registro/components/Error'
 import { ArrowBack } from '../../../Svg'
@@ -19,7 +19,6 @@ export const FortniteGameForm = () => {
   const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
-  const { setPlayerCreate } = usePlayerCreateContext()
   const [image, setImage] = useState<File>()
   const [imgUrl, setImgUrl] = useState('')
 
@@ -30,10 +29,10 @@ export const FortniteGameForm = () => {
     description: '',
     hours: 0,
     age: '',
-    level: '',
+    level: [],
     preferenceTeam: [] as string[],
     position: [] as string[],
-    premier: '',
+    premier: [],
     typeOfGamer: [] as string[]
   })
 
@@ -82,7 +81,7 @@ export const FortniteGameForm = () => {
     const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
       setLoading('creating')
-      const res = await fetch('/api/create-game', {
+      const res = await fetch('/api/create-team', {
         method: 'POST',
         body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry, age })
       })
@@ -90,8 +89,6 @@ export const FortniteGameForm = () => {
       if (response.message === 'Game created') {
         setTimeout(() => {
           setLoading('created')
-          localStorage.setItem(GAME_PUBLICATIONS.fortnite, '1')
-          setPlayerCreate(true)
           handleOpenGame('')
         }, 2000)
       } else {
@@ -130,14 +127,14 @@ export const FortniteGameForm = () => {
         <Title
           register={register}
           errors={errors.title}
-          title='Nombre de jugador'
+          title='Nombre del equipo'
           registerName='title'
         />
         <Description
           register={register}
           watch={watch}
           errors={errors.description}
-          title='Describete como jugador'
+          title='Descripción del equipo'
           registerName='description'
         />
 
@@ -147,7 +144,7 @@ export const FortniteGameForm = () => {
           errors={errors.preferenceTeam}
           game={FORTNITE_PREFERENCE_TEAM}
           type='checkbox'
-          title='¿Cómo sueles jugar?'
+          title='¿Qué tipo de equipo buscas?'
         />
         <BoxField
           register={register}
@@ -155,7 +152,7 @@ export const FortniteGameForm = () => {
           errors={errors.position}
           game={FORTNITE_POSITIONS}
           type='checkbox'
-          title='¿En qué posiciones juegas?'
+          title='¿Que posiciones quieres que haya en tu equipo?'
         />
         <BoxField
           register={register}
@@ -163,13 +160,13 @@ export const FortniteGameForm = () => {
           errors={errors.typeOfGamer}
           game={TYPE_OF_GAME}
           type='checkbox'
-          title='¿Qué tipo de jugador eres?'
+          title='¿Que tipo de jugadores buscas?'
         />
         <HoursField
           register={register}
           watch={watch}
           errors={errors.hours}
-          title='¿Cuántas horas has jugado?'
+          title='¿Cuántas horas como mínimo quieres que tengan los jugadores?'
           type='range'
           registerName='hours'
         />

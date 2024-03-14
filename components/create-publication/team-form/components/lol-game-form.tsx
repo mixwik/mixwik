@@ -2,8 +2,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { GAME_PUBLICATIONS, LOL_LEVELS, LOL_POSITIONS, TYPE_OF_GAME } from '../../../../domain/constants'
-import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
+import { useOpenGameContext } from '../../../../context'
+import { LOL_LEVELS, LOL_POSITIONS, TYPE_OF_GAME } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { Error } from '../../../../pages/registro/components/Error'
 import { ArrowBack } from '../../../Svg'
@@ -19,7 +19,6 @@ export const LolGameForm = () => {
   const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
-  const { setPlayerCreate } = usePlayerCreateContext()
   const [image, setImage] = useState<File>()
   const [imgUrl, setImgUrl] = useState('')
 
@@ -30,10 +29,10 @@ export const LolGameForm = () => {
     description: '',
     hours: 0,
     age: '',
-    level: '',
+    level: [],
     preferenceTeam: [] as string[],
     position: [] as string[],
-    premier: '',
+    premier: [],
     typeOfGamer: [] as string[]
   })
 
@@ -50,8 +49,8 @@ export const LolGameForm = () => {
         .min(100, 'Mínimo 100 caracteres')
         .max(350, 'Máximo 350 caracteres'),
       level: yup
-        .string()
-        .required('El campo nivel es obligatorio'),
+        .array()
+        .min(1, 'Selecciona al menos un nivel'),
       position: yup
         .array()
         .min(1, 'Selecciona al menos una posición'),
@@ -82,7 +81,7 @@ export const LolGameForm = () => {
     const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
       setLoading('creating')
-      const res = await fetch('/api/create-game', {
+      const res = await fetch('/api/create-team', {
         method: 'POST',
         body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry, age })
       })
@@ -90,8 +89,6 @@ export const LolGameForm = () => {
       if (response.message === 'Game created') {
         setTimeout(() => {
           setLoading('created')
-          localStorage.setItem(GAME_PUBLICATIONS.lol, '1')
-          setPlayerCreate(true)
           handleOpenGame('')
         }, 2000)
       } else {
@@ -130,14 +127,14 @@ export const LolGameForm = () => {
         <Title
           register={register}
           errors={errors.title}
-          title='Nombre de jugador'
+          title='Nombre del equipo'
           registerName='title'
         />
         <Description
           register={register}
           watch={watch}
           errors={errors.description}
-          title='Describete como jugador'
+          title='Descripción del equipo'
           registerName='description'
         />
         <BoxField
@@ -145,8 +142,8 @@ export const LolGameForm = () => {
           registerName='level'
           errors={errors.level}
           game={LOL_LEVELS}
-          type='radio'
-          title='¿Cuál es tu nivel en Competitivo?'
+          type='checkbox'
+          title='¿Cuál es el nivel competitivo que quieres en tu equipo?'
         />
         <BoxField
           register={register}
@@ -154,7 +151,7 @@ export const LolGameForm = () => {
           errors={errors.position}
           game={LOL_POSITIONS}
           type='checkbox'
-          title='¿En qué posiciones juegas?'
+          title='¿Que posiciones quieres que haya en tu equipo?'
         />
         <BoxField
           register={register}
@@ -162,13 +159,13 @@ export const LolGameForm = () => {
           errors={errors.typeOfGamer}
           game={TYPE_OF_GAME}
           type='checkbox'
-          title='¿Qué tipo de jugador eres?'
+          title='¿Que tipo de jugadores buscas?'
         />
         <HoursField
           register={register}
           watch={watch}
           errors={errors.hours}
-          title='¿Cuántas horas has jugado?'
+          title='¿Cuántas horas como mínimo quieres que tengan los jugadores?'
           type='range'
           registerName='hours'
         />

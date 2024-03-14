@@ -17,7 +17,7 @@ import Favorites from './components/Favorites'
 import MixWikTeams from './components/MixWikTeams'
 import MyPublications from './components/MyPublications'
 import NewPublication from './components/NewPublication'
-import NewTeam from './components/NewTeam'
+import { NewTeam } from './components/NewTeam'
 import Profile from './components/Profile'
 import Publications from './components/Publications'
 
@@ -29,10 +29,9 @@ import { useRouter } from 'next/router'
 import { BackgroundDots } from '../../components/background-dots'
 import { myLoader } from '../../components/myLoader'
 import { useHandleOpenContext } from '../../context'
-import { COLLECTIONS } from '../../domain/constants'
 import { useSignOut } from '../../firebase/auth/SignOut'
-import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
-import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
+import { useGetOneUser } from '../../hooks/use-get-one-user'
+import { useComproveRenovationSubscription, useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
 import { MiniCard } from './components/mini-card'
 import { ProfileImage } from './components/profile-image'
@@ -54,8 +53,9 @@ export default function Dashboard () {
   }
 
   const { userProvider } = useSession()
-  const currentUser = useGetOneData(COLLECTIONS.users, userProvider?.uid)
-  const mixWikTeams = useMixWikTeamsCheckSubscription(currentUser.mixWikTeams)
+  const { userServer } = useGetOneUser(userProvider?.uid)
+  const mixWikTeams = useMixWikTeamsCheckSubscription(userServer?.mixWikTeams)
+  const { date } = useComproveRenovationSubscription(userServer?.mixWikTeams, mixWikTeams)
 
   useEffect(() => {
     setToggle('loading')
@@ -65,7 +65,7 @@ export default function Dashboard () {
     return () => {
       setToggle(false)
     }
-  }, [currentUser, router])
+  }, [userServer, router])
 
   useConfirmUserRegister()
   if (toggle === 'loading') return <PageLoader />
@@ -74,28 +74,36 @@ export default function Dashboard () {
     <Layout>
       <section>
         <BackgroundDots />
-        {page === 'profile' && <Profile user={currentUser} mixWikTeams={mixWikTeams} />}
-        <NewPublication page={page} mixWikTeams={mixWikTeams} user={currentUser} setTeams={setToggle} teams={toggle} />
-        {page === 'myPublications' && <MyPublications user={currentUser} />}
-        {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={currentUser} />}
-        {page === 'teams' && <NewTeam mixWikTeams={mixWikTeams} user={currentUser} />}
+        {page === 'profile' && <Profile user={userServer} mixWikTeams={mixWikTeams} />}
+        <NewPublication
+          page={page}
+          mixWikTeams={mixWikTeams}
+          user={userServer}
+        />
+        <NewTeam
+          page={page}
+          mixWikTeams={mixWikTeams}
+          user={userServer}
+        />
+        {page === 'myPublications' && <MyPublications user={userServer} />}
+        {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={userServer} />}
         {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
         {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
-        {page === 'favorites' && <Favorites currentUser={currentUser} />}
+        {page === 'favorites' && <Favorites userServer={userServer} />}
         <nav className='flex items-center justify-center h-[90vh]'>
           <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 lg:w-1/2 md:3/5'>
             <li
               className='relative flex flex-col items-center col-span-4 row-span-2 gap-1 p-3 overflow-hidden bg-white rounded-lg shadow-lg md:p-5 md:col-span-3'
             >
               <div className='absolute top-0 left-0 w-full overflow-hidden rounded-t-lg h-1/3'>
-                <ProfileImage currentUser={currentUser} userProvider={userProvider} />
+                <ProfileImage userServer={userServer} userProvider={userProvider} />
               </div>
               <div className='z-10 overflow-hidden border-4 border-white border-solid rounded-full size-24 md:size-28'>
-                <ProfileImage currentUser={currentUser} userProvider={userProvider} />
+                <ProfileImage userServer={userServer} userProvider={userProvider} />
               </div>
-              <h1 className='text-lg font-bold'>{currentUser?.name}</h1>
-              <span className='text-xs text-gray-500'>{currentUser?.email}</span>
+              <h1 className='text-lg font-bold'>{userServer?.name}</h1>
+              <span className='text-xs text-gray-500'>{userServer?.email}</span>
               <button
                 onClick={() => handleClick('profile')}
                 className='relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded text-pennBlue hover:pl-10 hover:pr-6 bg-gray-50 group'
@@ -167,7 +175,10 @@ export default function Dashboard () {
               {
                 mixWikTeams
                   ? (
-                    <div className='flex items-center justify-center w-full'>MixWik Teams</div>
+                    <div className='flex flex-col items-center justify-center w-full gap-5'>
+                      <h3 className='text-xl md:text-2xl'>¡Eres de MixWikTeams!</h3>
+                      <span className='text-sm'>Fecha de finalización: {date}</span>
+                    </div>
                     )
                   : (
                     <div className='relative flex items-center justify-center w-full group'>

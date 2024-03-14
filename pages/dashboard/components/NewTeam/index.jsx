@@ -1,100 +1,154 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import { useState } from 'react'
-import { LOGOS } from '../../../../assets/images'
-import styles from './NewTeam.module.scss'
-import Csgo from './TeamsForms/Cs2'
-import Fortnite from './TeamsForms/Fortnite'
-import Lol from './TeamsForms/Lol'
-import Valorant from './TeamsForms/Valorant'
 
-const NewTeam = ({ user, mixWikTeams }) => {
-  const [toggle, setToggle] = useState('nav')
+import Link from 'next/link'
+import { BackgroundDots } from '../../../../components/background-dots'
+import { SelectGame } from '../../../../components/create-publication/select-game'
+import { TeamForm } from '../../../../components/create-publication/team-form'
+import { useOpenGameContext } from '../../../../context'
+import { COLLECTIONS } from '../../../../domain/constants'
+
+export const NewTeam = ({ user, mixWikTeams, page }) => {
+  const { handleOpenGame } = useOpenGameContext()
   const [teams, setTeams] = useState(false)
+
   const handleCheck = (name) => {
-    if (name === 'cs2') {
-      if (mixWikTeams) {
-        if (user.cs2Publications < 5) {
-          setToggle(name)
+    console.log('name', name)
+    if (name === COLLECTIONS.cs2) {
+      if (!mixWikTeams) {
+        if (!user.publications.cs2Publications) {
+          handleOpenGame(name)
+          setTeams('')
+        } else if (user.publications.cs2Publications < 1) {
+          handleOpenGame(name)
+          setTeams('')
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.publications.cs2Publications < 5) {
+          handleOpenGame(name)
         } else {
           setTeams('maxPublications')
         }
       }
     }
-    if (name === 'lol') {
-      if (mixWikTeams) {
-        if (user.lolPublications < 5) {
-          setToggle(name)
+    if (name === COLLECTIONS.lol) {
+      if (!mixWikTeams) {
+        if (!user.publications.lolPublications) {
+          handleOpenGame(name)
+          setTeams('')
+        } else if (user.publications.lolPublications < 1) {
+          handleOpenGame(name)
+          setTeams('')
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.publications.lolPublications < 5) {
+          handleOpenGame(name)
         } else {
           setTeams('maxPublications')
         }
       }
     }
-    if (name === 'fortnite') {
-      if (mixWikTeams) {
-        if (user.fortnitePublications < 5) {
-          setToggle(name)
+    if (name === COLLECTIONS.fortnite) {
+      if (!mixWikTeams) {
+        if (!user.publications.fortnitePublications) {
+          handleOpenGame(name)
+          setTeams('')
+        } else if (user.publications.fortnitePublications < 1) {
+          handleOpenGame(name)
+          setTeams('')
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.publications.fortnitePublications < 5) {
+          handleOpenGame(name)
         } else {
           setTeams('maxPublications')
         }
       }
     }
-    if (name === 'valorant') {
-      if (mixWikTeams) {
-        if (user.valorantPublications < 5) {
-          setToggle(name)
+    if (name === COLLECTIONS.valorant) {
+      if (!mixWikTeams) {
+        if (!user.publications.valorantPublications) {
+          handleOpenGame(name)
+          setTeams('')
+        } else if (user.publications.valorantPublications < 1) {
+          handleOpenGame(name)
+          setTeams('')
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.publications.valorantPublications < 5) {
+          handleOpenGame(name)
+        } else {
+          setTeams('maxPublications')
+        }
+      }
+    }
+    if (name === COLLECTIONS.rocketLeague) {
+      if (!mixWikTeams) {
+        if (!user.publications.rocketLeaguePublications) {
+          handleOpenGame(name)
+          setTeams('')
+        } else if (user.publications.rocketLeaguePublications < 1) {
+          handleOpenGame(name)
+          setTeams('')
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.publications.rocketLeaguePublications < 5) {
+          handleOpenGame(name)
+        } else {
+          setTeams('maxPublications')
+        }
+      }
+    }
+    if (name === COLLECTIONS.dota2) {
+      if (!mixWikTeams) {
+        if (!user.publications.dota2Publications) {
+          handleOpenGame(name)
+          setTeams('')
+        } else if (user.publications.dota2Publications < 1) {
+          handleOpenGame(name)
+          setTeams('')
+        } else {
+          setTeams('noMixWikTeams')
+        }
+      } else if (mixWikTeams) {
+        if (user.publications.dota2Publications < 5) {
+          handleOpenGame(name)
         } else {
           setTeams('maxPublications')
         }
       }
     }
   }
-
+  if (page !== 'teams') return null
   return (
-    <section className={styles.newTeam}>
-      <h1 className={styles.title}>
-        <Link href='/dashboard?page=publications'>
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-10 h-10 font-bold'>
-            <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75' />
-          </svg>
-        </Link>
-        Selecciona categoría
-      </h1>
-      {
-        teams === 'maxPublications' && <p>Has llegado al límite de publicaciones</p>
-      }
-      <div className={styles.selectCategory} onChange={(e) => setToggle(e.target.value)}>
-        <span onClick={() => handleCheck('cs2')}>
-          <Image src={LOGOS.cs2} alt='logo de csgo' />
-          Counter Strike 2
-        </span>
-        <span onClick={() => handleCheck('lol')}>
-          <Image src={LOGOS.lol} alt='logo de League Of Legends' />
-          League Of Legends<br />
-        </span>
-        <span onClick={() => handleCheck('fortnite')}>
-          <Image src={LOGOS.fortnite} alt='logo de Fortnite' />
-          Fortnite<br />
-        </span>
-        <span onClick={() => handleCheck('valorant')}>
-          <Image src={LOGOS.valorant} alt='logo de Valorant' />
-          Valorant<br />
-        </span>
-        <span>
-          <Image src={LOGOS.rocketLeague} alt='logo de Rocket League' />
-          Rocket League<br /> (Próximamente)
-        </span>
-        <span>
-          <Image src={LOGOS.dota2} alt='logo de Dota 2' />
-          Dota 2<br /> (Próximamente)
-        </span>
-      </div>
-      <Csgo setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
-      <Lol setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
-      <Fortnite setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
-      <Valorant setToggle={setToggle} toggle={toggle} currentUser={user} teams={mixWikTeams} />
-    </section>
+    <>
+      <TeamForm dashboard />
+      <section className='absolute md:top-[10vh] z-20 w-full h-[90vh] flex justify-center items-center'>
+        <BackgroundDots />
+        <div className='flex flex-col items-center md:h-[80vh] h-full justify-between py-5 bg-white w-full md:w-1/2 mx-auto rounded-md'>
+          <h1 className='text-2xl font-bold'>
+            Crea un Equipo
+          </h1>
+          {teams === 'maxPublications' && <p className='px-10 text-center text-red-400'>Has llegado al límite de publicaciones en este juego</p>}
+          {teams === 'noMixWikTeams' && <p className='px-10 font-bold text-center text-pennBlue'>Hazte de mixWikTeams para poder hacer más publicaciones en cada juego</p>}
+          <SelectGame handleCheck={handleCheck} />
+          <Link href='/dashboard' className='flex items-center gap-3 px-10 py-3 text-white duration-300 rounded-md bg-aero hover:bg-pennBlue'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='font-bold size-6'>
+              <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75' />
+            </svg>
+            Volver
+          </Link>
+        </div>
+      </section>
+    </>
   )
 }
-
-export default NewTeam

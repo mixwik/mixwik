@@ -99,5 +99,5 @@ export const useComproveRenovationSubscription = (stipeId, mixWikTeams) => {
     if (mixWikTeams) checkSubscription(stipeId)
   }, [stipeId, mixWikTeams])
 
-  return [date, isCancel]
+  return { date, isCancel }
 }

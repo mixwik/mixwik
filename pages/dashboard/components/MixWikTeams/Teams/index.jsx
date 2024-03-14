@@ -1,7 +1,7 @@
 import { useComproveRenovationSubscription } from '../../../../../hooks/useChecksStripe'
 
 const Teams = ({ currentUser, mixWikTeams }) => {
-  const [date] = useComproveRenovationSubscription(currentUser.mixWikTeams, mixWikTeams)
+  const { date } = useComproveRenovationSubscription(currentUser.mixWikTeams, mixWikTeams)
   return (
     <section className='flex flex-col items-center h-full md:justify-center'>
       <h2 className='text-2xl font-bold'>Ya eres de MixWikTeams</h2>
