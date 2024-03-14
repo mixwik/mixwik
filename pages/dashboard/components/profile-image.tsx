@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import { myLoader } from '../../../components/myLoader'
-import { User, UserProvider } from '../../../domain/types'
+import { UserServer, UserProvider } from '../../../domain/types'
 
 export const ProfileImage = (
   { userProvider, currentUser }:
-    { userProvider: UserProvider, currentUser: User }
+    { userProvider: UserProvider, currentUser: UserServer }
 ) => {
   return (
     <>
