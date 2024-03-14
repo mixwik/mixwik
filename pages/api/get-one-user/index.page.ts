@@ -11,11 +11,11 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
         res.status(200).json({
-          user: true,
+          user: 'data',
           userServer: { ...docSnap.data() }
         })
       } else {
-        res.status(200).json({ user: false })
+        res.status(200).json({ user: 'no-data' })
       }
     } else {
       res.status(405).json({ error: 'uid undefine' })

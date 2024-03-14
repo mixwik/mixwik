@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useSession } from '../firebase/auth/useSession'
-import { useGetOneUser } from '../firebase/hooks/getMethod/useGetOneUser'
+import { useGetOneUser } from './use-get-one-user'
 
 export const useConfirmUserRegister = (register?: string) => {
   const { userProvider, isSession } = useSession()
