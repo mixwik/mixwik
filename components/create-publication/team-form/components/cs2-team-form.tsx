@@ -18,7 +18,11 @@ import { Title } from '../../components/fields/title-field'
 
 export const Cs2TeamFrom = () => {
   const { currentPosition } = useCurrentPosition()
-  const [loading, setLoading] = useState('')
+  const [loading, setLoading] = useState({
+    title: '',
+    subtitle: '',
+    number: 0
+  })
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
   const [image, setImage] = useState<File>()
@@ -84,7 +88,7 @@ export const Cs2TeamFrom = () => {
     const date = localStorage.getItem('age') ?? '01-01-2000'
     const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
-      setLoading('creating')
+      setLoading({ title: 'Creando Team...', subtitle: 'Estamos creando tu team, por favor espera...', number: 0 })
       const res = await fetch('/api/create-team', {
         method: 'POST',
         body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
@@ -92,29 +96,23 @@ export const Cs2TeamFrom = () => {
       const response = await res.json()
       if (response.message === 'Game created') {
         setTimeout(() => {
-          setLoading('created')
+          setLoading({ title: 'Team creado', subtitle: 'Tu team ha sido creado con éxito', number: 1 })
           handleOpenGame('')
         }, 2000)
       } else {
         setError(response)
-        setLoading('')
+        setLoading({ title: '', subtitle: '', number: 0 })
       }
     } else {
       setError('Ha ocurrido un error')
-      setLoading('')
+      setLoading({ title: '', subtitle: '', number: 0 })
     }
   }
 
   return (
     <section className='size-full md:w-1/2 md:py-5'>
       <BackgroundDots />
-      <PopUpMessage
-        title1='Creando...'
-        title2='Jugador creado'
-        subtitle1='Estamos creando tu jugador, por favor espera...'
-        subtitle2='Tu jugador ha sido creado con éxito'
-        loading={loading}
-      />
+      <PopUpMessage loading={loading} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'

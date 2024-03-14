@@ -19,7 +19,11 @@ import { useUpdateCountPublications } from '../hooks/use-update-count-publicatio
 
 export const FortniteGameForm = ({ dashboard }) => {
   const { currentPosition } = useCurrentPosition()
-  const [loading, setLoading] = useState('')
+  const [loading, setLoading] = useState({
+    title: '',
+    subtitle: '',
+    number: 0
+  })
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
   const { setPlayerCreate } = usePlayerCreateContext()
@@ -83,7 +87,7 @@ export const FortniteGameForm = ({ dashboard }) => {
     const date = localStorage.getItem('age') ?? '01-01-2000'
     const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
-      setLoading('creating')
+      setLoading({ title: 'Creando jugador...', subtitle: 'Por favor espera', number: 0 })
       const res = await fetch('/api/create-game', {
         method: 'POST',
         body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
@@ -92,30 +96,24 @@ export const FortniteGameForm = ({ dashboard }) => {
       if (response.message === 'Game created') {
         if (dashboard) handleUpdate()
         setTimeout(() => {
-          setLoading('created')
+          setLoading({ title: 'Jugador creado', subtitle: 'Tu jugador ha sido creado', number: 1 })
           setPlayerCreate(true)
           handleOpenGame('')
         }, 2000)
       } else {
         setError(response)
-        setLoading('')
+        setLoading({ title: '', subtitle: '', number: 0 })
       }
     } else {
       setError('Ha ocurrido un error')
-      setLoading('')
+      setLoading({ title: '', subtitle: '', number: 0 })
     }
   }
 
   return (
     <section className='size-full md:w-1/2 md:py-5'>
       <BackgroundDots />
-      <PopUpMessage
-        title1='Creando...'
-        title2='Jugador creado'
-        subtitle1='Estamos creando tu jugador, por favor espera...'
-        subtitle2='Tu jugador ha sido creado con éxito'
-        loading={loading}
-      />
+      <PopUpMessage loading={loading} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
