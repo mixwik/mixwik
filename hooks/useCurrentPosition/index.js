@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const useCurrentPosition = () => {
   const [currentPosition, setCurrentPosition] = useState([])
@@ -26,5 +26,5 @@ export const useCurrentPosition = () => {
     }
   }, [])
 
-  return currentPosition
+  return { currentPosition }
 }

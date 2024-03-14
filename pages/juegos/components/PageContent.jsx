@@ -22,7 +22,7 @@ import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 
 const PageContent = ({ category, children, distance }) => {
   const { userProvider } = useSession()
-  const currentPosition = useCurrentPosition()
+  const { currentPosition } = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const users = useGetData(COLLECTIONS.users)
   const csgo = useGetData(category)

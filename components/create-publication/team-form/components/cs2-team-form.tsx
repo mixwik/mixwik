@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import { useOpenGameContext } from '../../../../context'
 import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
+import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { Error } from '../../../../pages/registro/components/Error'
 import { ArrowBack } from '../../../Svg'
 import { BackgroundDots } from '../../../background-dots'
@@ -16,6 +17,7 @@ import { FieldImage } from '../../components/fields/image-field'
 import { Title } from '../../components/fields/title-field'
 
 export const Cs2TeamFrom = () => {
+  const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState('')
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
@@ -79,14 +81,13 @@ export const Cs2TeamFrom = () => {
   })
 
   const onSubmit = async (data) => {
-    const geometry = JSON.parse(localStorage.getItem('geometry') ?? '[]')
     const date = localStorage.getItem('age') ?? '01-01-2000'
     const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
       setLoading('creating')
       const res = await fetch('/api/create-team', {
         method: 'POST',
-        body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry, age })
+        body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
       })
       const response = await res.json()
       if (response.message === 'Game created') {

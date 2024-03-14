@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useCurrentPosition } from '../useCurrentPosition'
 
 export const useUserFilterDistance = (locationUser, csgo, distance) => {
-  const currentPosition = useCurrentPosition()
+  const { currentPosition } = useCurrentPosition()
   const [filteredUsersDistance, setFilteredUsersDistance] = useState([])
   const radius = distance
   useEffect(() => {

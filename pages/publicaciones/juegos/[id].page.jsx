@@ -41,7 +41,7 @@ const User = () => {
   const { master } = useMaster()
   const router = useRouter()
   const { id, page } = router.query
-  const currentPosition = useCurrentPosition()
+  const { currentPosition } = useCurrentPosition()
   const publication = useGetOnePublication(page, id)
   const publicationUser = useGetOneData(COLLECTIONS.users, publication.uid)
   const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, publicationUser.uid)

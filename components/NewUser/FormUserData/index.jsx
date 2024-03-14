@@ -19,7 +19,7 @@ const FormUserData = () => {
   const [imgURL, setImgURL] = useState()
   const [image, setImage] = useState()
   const [, setProgress] = useState(true)
-  const currentPosition = useCurrentPosition()
+  const { currentPosition } = useCurrentPosition()
   const [, updateDataUser] = useUpdateDataUser()
   const { userProvider } = useSession()
 
