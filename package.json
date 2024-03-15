@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "4.1.0",
-    "@fontsource-variable/onest": "^5.0.3",
+    "@fontsource-variable/onest": "5.0.3",
     "@hookform/resolvers": "3.3.4",
     "@vercel/analytics": "1.0.0",
     "autoprefixer": "10.4.14",
@@ -27,7 +27,7 @@
     "next-videos": "1.4.1",
     "postcss": "8.4.26",
     "react": "18.2.0",
-    "react-confetti": "^6.1.0",
+    "react-confetti": "6.1.0",
     "react-content-loader": "6.2.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.50.1",

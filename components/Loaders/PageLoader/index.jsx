@@ -1,13 +1,14 @@
 import Image from 'next/image'
-import { BACKGROUNDS_IMAGES, WEB_LOGOS } from '../../../assets/images'
+import { WEB_LOGOS } from '../../../assets/images'
 import Layout from '../../Layout'
+import { BackgroundDots } from '../../background-dots'
 import { myLoader } from '../../myLoader'
 
 const PageLoader = () => {
   return (
     <Layout>
-      <div className='relative w-full h-[90vh] bg-gray-300 flex flex-col gap-5 justify-center items-center'>
-        <Image width={0} height={0} loader={myLoader} src={BACKGROUNDS_IMAGES.backgroundGray} alt='logo' className='absolute top-0 left-0 object-cover w-full h-full' />
+      <div className='relative w-full h-[90vh] flex flex-col gap-5 justify-center items-center'>
+        <BackgroundDots />
         <Image width={0} height={0} loader={myLoader} src={WEB_LOGOS.mixWik} alt='logo' className='z-10 object-cover h-auto w-96' />
         <div className='flex items-center gap-2'>
           <svg aria-hidden='true' className='inline mr-2 w-14 h-14 text-aero animate-spin dark:text-gray-600 fill-pennBlue' viewBox='0 0 100 101' fill='none' xmlns='http://www.w3.org/2000/svg'>

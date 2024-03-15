@@ -1,5 +1,5 @@
 // React hooks
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // db
 import PrivateRoute from '../../firebase/auth/PrivateRoute'
@@ -10,16 +10,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Bugs from '../../components/Bugs'
 import Layout from '../../components/Layout'
-import PageLoader from '../../components/Loaders/PageLoader'
 import AllUsers from './components/AllUsers'
 import BugsReports from './components/BugsReports'
 import Favorites from './components/Favorites'
 import MixWikTeams from './components/MixWikTeams'
 import MyPublications from './components/MyPublications'
-import NewPublication from './components/NewPublication'
-import { NewTeam } from './components/NewTeam'
 import Profile from './components/Profile'
 import Publications from './components/Publications'
+import { NewPublication } from './components/create-publication/new-gamer'
+import { NewTeam } from './components/create-publication/new-team'
 
 // Images
 import { BugsIcon, Company, ContactUs, FavSelectedIcon, LogOutIcon } from '../../components/Svg'
@@ -41,7 +40,6 @@ export default function Dashboard () {
   const handleSignOut = useSignOut()
   const router = useRouter()
   const { page } = router.query
-  const [toggle, setToggle] = useState(false)
   const [bugs, setBugs] = useState(false)
 
   function handleClick (name) {
@@ -57,19 +55,7 @@ export default function Dashboard () {
   const mixWikTeams = useMixWikTeamsCheckSubscription(userServer?.mixWikTeams)
   const { date } = useComproveRenovationSubscription(userServer?.mixWikTeams, mixWikTeams)
 
-  useEffect(() => {
-    setToggle('loading')
-    setTimeout(() => {
-      setToggle('profile')
-    }, 500)
-    return () => {
-      setToggle(false)
-    }
-  }, [userServer, router])
-
   useConfirmUserRegister()
-  if (toggle === 'loading') return <PageLoader />
-
   return (
     <Layout>
       <section>
