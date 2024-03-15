@@ -12,8 +12,8 @@ export const Step2 = (
 ) => {
   const [previewImage, setPreviewImage] = useState('')
   const [imgURL, setImgURL] = useState('')
-  const [error, setError] = useState(false)
   const [image, setImage] = useState<File>()
+  const [error, setError] = useState(false)
   const [, setProgress] = useState()
 
   useEffect(() => {

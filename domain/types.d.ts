@@ -1,13 +1,13 @@
 export type UserProvider = {
-    name?: string
+    name: string
     email: string
-    image?: string
+    image: string
     uid: string
 }
 
 export type UserServer = {
     admonition: boolean
-    age: number
+    age: string
     ban: boolean
     description: string
     email: string

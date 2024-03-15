@@ -1,7 +1,7 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import { differenceInYears, parseISO } from 'date-fns'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { ArrowBack } from '../../../../components/Svg'
 import { Error } from '../Error'

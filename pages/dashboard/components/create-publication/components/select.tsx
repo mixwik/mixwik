@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { BackgroundDots } from '../../../../../components/background-dots'
 import { SelectGame } from '../../../../../components/create-publication/select-game'
 import { useOpenGameContext } from '../../../../../context'
 import { COLLECTIONS } from '../../../../../domain/constants'
 import { Title } from '../../title'
+import { WindowLayout } from '../../window-layout'
 
 export const Select = ({ mixWikTeams, user, title }) => {
   const { handleOpenGame } = useOpenGameContext()
@@ -88,16 +88,13 @@ export const Select = ({ mixWikTeams, user, title }) => {
     }
   }
   return (
-    <section className='absolute md:top-[10vh] z-20 w-full h-[90vh] flex justify-center items-center md:py-5'>
-      <BackgroundDots />
-      <div className='flex flex-col items-center w-full h-full mx-auto bg-white rounded-md md:w-1/2'>
-        <Title title={title} />
-        <div className='flex items-center justify-center h-full'>
-          {teams === 'maxPublications' && <p className='px-10 text-center text-red-400'>Has llegado al límite de publicaciones en este juego</p>}
-          {teams === 'noMixWikTeams' && <p className='px-10 font-bold text-center text-pennBlue'>Hazte de mixWikTeams para poder hacer más publicaciones en cada juego</p>}
-          <SelectGame handleCheck={handleCheck} />
-        </div>
+    <WindowLayout>
+      <Title title={title} />
+      <div className='flex items-center justify-center h-full'>
+        {teams === 'maxPublications' && <p className='px-10 text-center text-red-400'>Has llegado al límite de publicaciones en este juego</p>}
+        {teams === 'noMixWikTeams' && <p className='px-10 font-bold text-center text-pennBlue'>Hazte de mixWikTeams para poder hacer más publicaciones en cada juego</p>}
+        <SelectGame handleCheck={handleCheck} />
       </div>
-    </section>
+    </WindowLayout>
   )
 }
