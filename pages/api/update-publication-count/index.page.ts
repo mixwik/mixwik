@@ -6,8 +6,6 @@ import { db } from '../../../firebase/initialize'
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { category, uid } = req.body
-    console.log('category', category)
-    console.log('uid', uid)
     const userRef = doc(db, COLLECTIONS.users, uid)
     if (category === COLLECTIONS.cs2) {
       await updateDoc(userRef, {

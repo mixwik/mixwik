@@ -19,7 +19,12 @@ export const Step5 = (
   const { handleOpenGame } = useOpenGameContext()
   const { playerCreate } = usePlayerCreateContext()
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState('')
+  const [loading, setLoading] = useState({
+    title: '',
+    subtitle: '',
+    number: 0
+
+  })
   const { checkPublication } = useCheckPublications({ setError })
 
   const handleSubmit = async () => {
@@ -43,7 +48,11 @@ export const Step5 = (
     const check = await checkPublication()
     if (!check) return
 
-    setLoading('creating')
+    setLoading({
+      title: 'Creando usuario...',
+      subtitle: 'Por favor espera un momento',
+      number: 0
+    })
     const response = await fetch('/api/create-user', {
       method: 'POST',
       headers: {
@@ -71,10 +80,18 @@ export const Step5 = (
     const data = await response.json()
     if (data === 'User created') {
       listOfRemove.forEach(item => localStorage.removeItem(item))
+      setLoading({
+        title: 'Usuario creado',
+        subtitle: 'Su usuario ha sido creado con éxito',
+        number: 0
+      })
       setTimeout(() => {
-        setLoading('created')
+        setLoading({
+          title: '',
+          subtitle: '',
+          number: 0
+        })
       }, 1000)
-      setLoading('')
       router.push('/dashboard')
     } else {
       if (data === 'gender') {
@@ -132,13 +149,7 @@ export const Step5 = (
   return (
     <section className='flex flex-col items-center justify-around w-full h-full gap-5 p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
       <PopUpError error={error} />
-      <PopUpMessage
-        title1='Creando usuario'
-        title2='Usuario creado'
-        subtitle1='Estamos creando tu usuario, por favor espera un momento'
-        subtitle2='Usuario creado con éxito'
-        loading={loading}
-      />
+      <PopUpMessage loading={loading} />
       <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea un jugador</h2>
       <SelectGame handleCheck={handleCheck} />
       <div className='flex justify-center w-full gap-10'>

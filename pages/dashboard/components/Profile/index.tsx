@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { Title } from '../title'
 import { WindowLayout } from '../window-layout'
+import { UpdateData } from './components/update-data'
 import { UserData } from './components/user-data'
 
 const Profile = ({ user, mixWikTeams }) => {
@@ -14,7 +15,8 @@ const Profile = ({ user, mixWikTeams }) => {
       <Title title='Perfil' />
       <div className='relative'>
         <button onClick={() => setEdit(prev => !prev)} className='absolute z-10 top-3 right-3'>Editar</button>
-        <UserData user={user} userProvider={userProvider} edit={edit} />
+        {edit ? <UpdateData user={user} mixWikTeams={mixWikTeams} /> : <UserData user={user} userProvider={userProvider} mixWikTeams={mixWikTeams} setEdit={setEdit} />}
+
       </div>
     </WindowLayout>
   )

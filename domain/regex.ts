@@ -4,5 +4,6 @@ export const REGEX = {
   instagram: /^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_]+$/,
   facebook: /^https?:\/\/(www\.)?facebook\.com\/[a-zA-Z0-9_]+$/,
   twitch: /^https?:\/\/(www\.)?twitch\.tv\/[a-zA-Z0-9_]+$/,
-  youtube: /^https?:\/\/(www\.)?youtube\.com\/[a-zA-Z0-9_]+$/
+  youtube: /^https?:\/\/(www\.)?youtube\.com\/[a-zA-Z0-9_]+$/,
+  tiktok: /^https?:\/\/(www\.)?tiktok\.com\/[a-zA-Z0-9_]+$/
 }

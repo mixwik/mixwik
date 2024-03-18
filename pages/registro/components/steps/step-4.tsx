@@ -2,8 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { ArrowBack, DiscordIcon, TwitterIcon } from '../../../../components/Svg'
+import { ArrowBack } from '../../../../components/Svg'
 import { REGEX } from '../../../../domain/regex'
+import { DiscordIcon } from '../../../../icons/social/discord'
+import { TwitterIcon } from '../../../../icons/social/twitter'
 
 export const Step4 = (
   { setSteps }:
@@ -70,7 +72,7 @@ export const Step4 = (
           )}
         </label>
         <label className='relative flex items-center w-full gap-2 md:w-1/2'>
-          <DiscordIcon className='absolute w-6 h-6 right-2' />
+          <DiscordIcon className='size-6' />
           <input
             {...register('discord', { pattern: REGEX.discord, required: 'El campo discord es obligatorio' })}
             className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'

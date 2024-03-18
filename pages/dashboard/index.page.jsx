@@ -85,11 +85,10 @@ export default function Dashboard () {
               <div className='absolute top-0 left-0 w-full overflow-hidden rounded-t-lg h-1/3'>
                 <ProfileImage userServer={userServer} userProvider={userProvider} />
               </div>
-              <div className='z-10 overflow-hidden border-4 border-white border-solid rounded-full size-24 md:size-28'>
+              <div className='z-10 overflow-hidden border-4 border-white border-solid rounded-full size-20 md:size-28'>
                 <ProfileImage userServer={userServer} userProvider={userProvider} />
               </div>
               <h1 className='text-lg font-bold'>{userServer?.name}</h1>
-              <span className='text-xs text-gray-500'>{userServer?.email}</span>
               <button
                 onClick={() => handleClick('profile')}
                 className='relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded text-pennBlue hover:pl-10 hover:pr-6 bg-gray-50 group'
@@ -101,7 +100,7 @@ export default function Dashboard () {
                 <span className='absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200'>
                   <svg className='w-5 h-5 text-aero' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M14 5l7 7m0 0l-7 7m7-7H3' /></svg>
                 </span>
-                <span className='relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white'>Editar Perfil</span>
+                <span className='relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white'>Ver Perfil</span>
               </button>
             </li>
             <li
