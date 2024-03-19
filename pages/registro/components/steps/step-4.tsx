@@ -30,7 +30,7 @@ export const Step4 = (
         .notRequired()
         .when('discord', {
           is: (value: string) => value?.length,
-          then: (rule) => rule.matches(REGEX.discord, 'La URL de twitter no es valida')
+          then: (rule) => rule.matches(REGEX.discord, 'La URL de discord no es valida')
         })
     }, [['twitter', 'twitter'], ['discord', 'discord']])
     .test(

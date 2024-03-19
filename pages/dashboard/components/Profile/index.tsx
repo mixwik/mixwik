@@ -13,11 +13,18 @@ const Profile = ({ user, mixWikTeams }) => {
   return (
     <WindowLayout>
       <Title title='Perfil' />
-      <div className='relative'>
-        <button onClick={() => setEdit(prev => !prev)} className='absolute z-10 top-3 right-3'>Editar</button>
-        {edit ? <UpdateData user={user} mixWikTeams={mixWikTeams} /> : <UserData user={user} userProvider={userProvider} mixWikTeams={mixWikTeams} setEdit={setEdit} />}
-
-      </div>
+      {edit
+        ? <UpdateData
+            user={user}
+            mixWikTeams={mixWikTeams}
+            setEdit={setEdit}
+          />
+        : <UserData
+            user={user}
+            userProvider={userProvider}
+            mixWikTeams={mixWikTeams}
+            setEdit={setEdit}
+          />}
     </WindowLayout>
   )
 }

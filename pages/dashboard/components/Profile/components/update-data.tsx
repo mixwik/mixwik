@@ -1,8 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { differenceInYears, parseISO } from 'date-fns'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
+import { PopUpError } from '../../../../../components/pop-up-error'
+import { PopUpMessage } from '../../../../../components/pop-up-message'
 import { REGEX } from '../../../../../domain/regex'
 import { UserServer } from '../../../../../domain/types'
 import { DiscordIcon } from '../../../../../icons/social/discord'
@@ -18,10 +21,18 @@ import { FieldImage } from './image-field'
 interface UpdateDataProps {
   user: UserServer
   mixWikTeams: boolean
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
+export const UpdateData = ({ user, mixWikTeams, setEdit }: UpdateDataProps) => {
+  const router = useRouter()
   const [imgURL, setImgURL] = useState('')
+  const [loading, setLoading] = useState({
+    title: '',
+    subtitle: '',
+    number: 0
+  })
+  const [error, setError] = useState('')
   const [image, setImage] = useState<File>()
   const [initialValues] = useState({
     age: user.age || '',
@@ -46,8 +57,8 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
       description: yup
         .string()
         .required('El campo descripción es obligatorio')
-        .min(100, 'La descripción debe tener al menos 100 caracteres')
-        .max(350, 'La descripción debe tener máximo 350 caracteres')
+        .min(100, 'Mínimo 100 caracteres')
+        .max(350, 'Máximo 350 caracteres')
     })
     .shape({
       twitter: yup
@@ -100,6 +111,11 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
           then: (rule) => rule.matches(REGEX.tiktok, 'La URL de tiktok no es valida')
         })
     }, [['twitter', 'twitter'], ['discord', 'discord'], ['instagram', 'instagram'], ['facebook', 'facebook'], ['twitch', 'twitch'], ['youtube', 'youtube'], ['tiktok', 'tiktok']])
+    .test(
+      'at-least-one-input',
+      'Al menos uno de los dos campos debe estar lleno',
+      obj => !!obj.twitter || !!obj.discord || !!obj.instagram || !!obj.facebook || !!obj.twitch || !!obj.youtube || !!obj.tiktok
+    )
     .required()
 
   const {
@@ -112,31 +128,46 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
   })
 
   const onSubmit = async (data) => {
-    const updateData = await fetch('/api/update-user-data', {
-      method: 'UPDATE',
+    const response = await fetch('/api/update-user-data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         uid: user.uid,
         age: data.age,
         description: data.description,
         discord: data.discord,
-        twitter: data.twitter,
         instagram: data.instagram,
         facebook: data.facebook,
+        twitter: data.twitter,
         twitch: data.twitch,
         youtube: data.youtube,
         tiktok: data.tiktok
       })
     })
-    const response = await updateData.json()
-    if (response.message === 'update') {
-      alert('Datos actualizados')
+    const update = await response.json()
+    if (update.message === 'update') {
+      setLoading({
+        title: 'Datos actualizados',
+        subtitle: 'Tus datos se han actualizado correctamente',
+        number: 0
+      })
+      setTimeout(() => {
+        router.push('/dashboard')
+      }, 1000)
     } else {
-      alert('Error al actualizar los datos')
+      setError(update.error)
+      setTimeout(() => {
+        setError('')
+      }, 2000)
     }
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex justify-center p-5'>
-      <div className='flex flex-col items-center w-4/5 gap-5'>
+      <PopUpError error={error} />
+      <PopUpMessage loading={loading} />
+      <div className='flex flex-col items-center w-4/5 gap-10'>
         <FieldImage
           image={image}
           setImage={setImage}
@@ -174,8 +205,8 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
               {...register('discord', { pattern: REGEX.discord, required: 'El campo discord es obligatorio' })}
               className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
             />
+            {errors.discord && <Error error={errors.discord.message} />}
           </div>
-          {errors.discord && <Error error={errors.discord.message} />}
         </label>
         <label className='flex flex-col justify-center w-full gap-2'>
           <span className='font-semibold text-slate-900'>
@@ -187,8 +218,8 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
               {...register('twitter', { pattern: REGEX.twitter, required: 'El campo twitter es obligatorio' })}
               className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
             />
+            {errors.twitter && <Error error={errors.twitter.message} />}
           </div>
-          {errors.twitter && <Error error={errors.twitter.message} />}
         </label>
         {
           mixWikTeams
@@ -204,8 +235,8 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
                       {...register('instagram', { pattern: REGEX.instagram, required: 'El campo instagram es obligatorio' })}
                       className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
                     />
+                    {errors.instagram && <Error error={errors.instagram.message} />}
                   </div>
-                  {errors.instagram && <Error error={errors.instagram.message} />}
                 </label>
                 <label className='flex flex-col justify-center w-full gap-2'>
                   <span className='font-semibold text-slate-900'>
@@ -217,8 +248,8 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
                       {...register('facebook', { pattern: REGEX.facebook, required: 'El campo facebook es obligatorio' })}
                       className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
                     />
+                    {errors.facebook && <Error error={errors.facebook.message} />}
                   </div>
-                  {errors.facebook && <Error error={errors.facebook.message} />}
                 </label>
                 <label className='flex flex-col justify-center w-full gap-2'>
                   <span className='font-semibold text-slate-900'>
@@ -230,9 +261,8 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
                       {...register('twitch', { pattern: REGEX.twitch, required: 'El campo twitch es obligatorio' })}
                       className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
                     />
+                    {errors.twitch && <Error error={errors.twitch.message} />}
                   </div>
-
-                  {errors.twitch && <Error error={errors.twitch.message} />}
                 </label>
                 <label className='flex flex-col justify-center w-full gap-2'>
                   <span className='font-semibold text-slate-900'>
@@ -244,9 +274,8 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
                       {...register('youtube', { pattern: REGEX.youtube, required: 'El campo youtube es obligatorio' })}
                       className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
                     />
+                    {errors.youtube && <Error error={errors.youtube.message} />}
                   </div>
-
-                  {errors.youtube && <Error error={errors.youtube.message} />}
                 </label>
                 <label className='flex flex-col justify-center w-full gap-2'>
                   <span className='font-semibold text-slate-900'>
@@ -258,8 +287,8 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
                       {...register('tiktok', { pattern: REGEX.tiktok, required: 'El campo tiktok es obligatorio' })}
                       className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
                     />
+                    {errors.tiktok && <Error error={errors.tiktok.message} />}
                   </div>
-                  {errors.tiktok && <Error error={errors.tiktok.message} />}
                 </label>
               </>
               )
@@ -272,13 +301,21 @@ export const UpdateData = ({ user, mixWikTeams }: UpdateDataProps) => {
               </div>
               )
         }
-
-        <button
-          type='submit'
-          className='w-1/2 py-3 text-white bg-pennBlue rounded-xl'
-        >
-          Guardar
-        </button>
+        <div className='flex gap-5'>
+          <button
+            type='button'
+            onClick={() => setEdit(false)}
+            className='w-1/2 py-3 font-bold text-aero'
+          >
+            Cancelar
+          </button>
+          <button
+            type='submit'
+            className='w-1/2 px-5 py-3 text-white bg-pennBlue rounded-xl'
+          >
+            Guardar
+          </button>
+        </div>
       </div>
     </form>
   )
