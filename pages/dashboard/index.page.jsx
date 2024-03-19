@@ -16,7 +16,6 @@ import Favorites from './components/Favorites'
 import MixWikTeams from './components/MixWikTeams'
 import MyPublications from './components/MyPublications'
 import Profile from './components/Profile/index.tsx'
-import Publications from './components/Publications'
 import { NewPublication } from './components/create-publication/new-gamer'
 import { NewTeam } from './components/create-publication/new-team'
 
@@ -76,11 +75,16 @@ export default function Dashboard () {
           mixWikTeams={mixWikTeams}
           user={userServer}
         />
-        <Favorites userServer={userServer} page={page} />
-        {page === 'myPublications' && <MyPublications user={userServer} />}
+        <Favorites
+          userServer={userServer}
+          page={page}
+        />
+        <MyPublications
+          user={userServer}
+          page={page}
+        />
         {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={userServer} />}
         {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
-        {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
         <nav className='flex items-center justify-center h-[90vh]'>
           <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 lg:w-1/2 md:3/5'>

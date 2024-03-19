@@ -8,7 +8,7 @@ import { Title } from '../title'
 import { WindowLayout } from '../window-layout'
 import BoxCards from './BoxCards'
 
-const MyPublications = ({ user }) => {
+const MyPublications = ({ user, page }) => {
   const [publications, setPublications] = useState([])
   const publicationsCSGO = useGetMyPublications(COLLECTIONS.cs2, user.uid)
   const publicationsLOL = useGetMyPublications(COLLECTIONS.lol, user.uid)
@@ -31,7 +31,7 @@ const MyPublications = ({ user }) => {
       ...publicationsValorantTeams
     ])
   }, [publicationsCSGO, publicationsLOL, publicationsFortnite, publicationsValorant, publicationsCsgoTeams, publicationsLolTeams, publicationsFortniteTeams, publicationsValorantTeams])
-
+  if (page !== 'myPublications') return null
   return (
     <WindowLayout>
       <Title title='Mis publicaciones' />

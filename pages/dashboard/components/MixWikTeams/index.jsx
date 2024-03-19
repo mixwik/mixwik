@@ -1,22 +1,21 @@
-import styles from './MixWikTeams.module.scss'
+import { Title } from '../title'
+import { WindowLayout } from '../window-layout'
 
 import NoTeams from './NoTeams'
 import Teams from './Teams'
 
 const MixWikTeams = ({ user, mixWikTeams }) => {
   return (
-    <section className={styles.mixWikTeams}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>MixWik Teams</h1>
-      </div>
-      <section className={styles.information}>
+    <WindowLayout>
+      <Title title='MixWik Teams' />
+      <section className='p-5'>
         {
-        mixWikTeams
+        !mixWikTeams
           ? <Teams currentUser={user} mixWikTeams={mixWikTeams} />
           : <NoTeams currentUser={user} />
         }
       </section>
-    </section>
+    </WindowLayout>
   )
 }
 

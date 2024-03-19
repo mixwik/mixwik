@@ -1,6 +1,4 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import logo from '../../../../../public/logos/mixwik-logo.png'
 
 const NoTeams = ({ currentUser }) => {
   return (
@@ -77,7 +75,6 @@ const NoTeams = ({ currentUser }) => {
             </li>
           </ul>
         </section>
-        <Image className='hidden object-cover w-auto h-20 md:flex' src={logo} alt='logo de MixWik' />
       </div>
       <Link className='p-3 mt-5 text-xl font-bold text-white transition-colors duration-500 rounded-md bg-aero hover:bg-pennBlue' href={`https://buy.stripe.com/bIY9BEdGg7KA66QdQQ?prefilled_email=${currentUser.email}&client_reference_id=${currentUser.uid}`}>Donar</Link>
     </div>
