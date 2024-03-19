@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { EditIcon } from '../../../../components/Svg'
+
 import EditTitle from './EditTitle'
 import styles from './Title.module.scss'
+import { EditIcon } from '../../../../icons/edit'
 
 const Title = ({ id, page, publication, limitedAdministrator }) => {
   const [edit, setEdit] = useState(false)

@@ -4,6 +4,8 @@ import { COLLECTIONS } from '../../../../domain/constants'
 import { useGetMyPublications } from '../../../../firebase/hooks/getMethod/useGetMyPublications'
 import { useGetMyTeams } from '../../../../firebase/hooks/getMethod/useGetMyTeam'
 import CardPublications from '../CardPublications'
+import { Title } from '../title'
+import { WindowLayout } from '../window-layout'
 import BoxCards from './BoxCards'
 
 const MyPublications = ({ user }) => {
@@ -31,9 +33,9 @@ const MyPublications = ({ user }) => {
   }, [publicationsCSGO, publicationsLOL, publicationsFortnite, publicationsValorant, publicationsCsgoTeams, publicationsLolTeams, publicationsFortniteTeams, publicationsValorantTeams])
 
   return (
-    <section className='h-[95vh] md:h-[90vh]'>
-      <h2 className='w-full bg-aero h-[5vh] flex items-center text-white font-bold pl-5 text-2xl'>Mis publicaciones</h2>
-      <div className='h-[85vh] bg-white overflow-scroll overflow-x-visible'>
+    <WindowLayout>
+      <Title title='Mis publicaciones' />
+      <div className='flex flex-wrap h-full gap-10 p-10'>
         {
         (publicationsCSGO.length !== 0 || publicationsCsgoTeams.length !== 0) && (
           <BoxCards title='Counter Strike 2'>
@@ -148,14 +150,17 @@ const MyPublications = ({ user }) => {
         publications.length === 0 && (
           <div className='flex flex-col items-center justify-center w-full h-full gap-5 text-center'>
             <h2 className='text-2xl font-bold text-gray-400'>No tienes publicaciones en este momento</h2>
-            <Link className='text-2xl font-bold text-blue-500' href='/dashboard?page=publications'>
-              Crea una publicación
+            <Link className='text-2xl font-bold text-aero' href='/dashboard?page=jugador'>
+              Crea un jugador
+            </Link>
+            <Link className='text-2xl font-bold text-aero' href='/dashboard?page=teams'>
+              Crea un team
             </Link>
           </div>
         )
       }
       </div>
-    </section>
+    </WindowLayout>
   )
 }
 

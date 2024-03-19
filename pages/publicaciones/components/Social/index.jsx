@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import SocialLinks from '../../../../components/SocialLinks'
-import { EditIcon } from '../../../../components/Svg'
+import { SocialLinks } from '../../../../components/social-links.tsx'
+import { EditIcon } from '../../../../icons/edit.tsx'
 import styles from './Social.module.scss'
 
 const Social = ({ publicationUser, mixWikTeams, limitedAdministrator }) => {

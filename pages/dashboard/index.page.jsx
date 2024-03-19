@@ -76,12 +76,12 @@ export default function Dashboard () {
           mixWikTeams={mixWikTeams}
           user={userServer}
         />
+        <Favorites userServer={userServer} page={page} />
         {page === 'myPublications' && <MyPublications user={userServer} />}
         {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={userServer} />}
         {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
         {page === 'publications' && <Publications mixWikTeams={mixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
-        {page === 'favorites' && <Favorites userServer={userServer} />}
         <nav className='flex items-center justify-center h-[90vh]'>
           <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 lg:w-1/2 md:3/5'>
             <li
@@ -113,7 +113,7 @@ export default function Dashboard () {
             >
               <button
                 className='flex flex-col items-center justify-center gap-1 duration-300 border border-solid rounded-lg md:gap-3 size-full border-aero bg-aero/5 hover:bg-aero/10'
-                onClick={() => handleClick('newPublication')}
+                onClick={() => handleClick('jugador')}
               >
                 <Image className='size-10 md:size-20' src='/logos/only-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
                 Jugador

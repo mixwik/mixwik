@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { EditIcon } from '../../../../components/Svg'
 import { COLLECTIONS } from '../../../../domain/constants'
+import { EditIcon } from '../../../../icons/edit'
 import EditCs2Position from './EditPosition/EditCs2Position'
 import EditFortnitePosition from './EditPosition/EditFortnitePosition'
 import EditLolPosition from './EditPosition/EditLolPosition'

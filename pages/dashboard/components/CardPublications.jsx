@@ -10,7 +10,7 @@ const CardPublications = ({ publication, equip, updateFav, remove, user }) => {
 
   const handleClick = () => {
     if (updateFav) {
-      setRemoveFavorites(user.id, publication.id)
+      setRemoveFavorites(user.uid, publication.id)
         .then(() => {
           setTimeout(() => {
             location.reload()
@@ -19,7 +19,7 @@ const CardPublications = ({ publication, equip, updateFav, remove, user }) => {
     }
     if (remove) {
       if (window.confirm('¿Estas seguro?')) {
-        deletePublication(category, publication.id, user.id, publication.category)
+        deletePublication(category, publication.id, user.uid, publication.category)
       }
     }
   }

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { COLLECTIONS } from '../../../../domain/constants'
 import styles from './Age.module.scss'
-import { EditIcon } from '../../../../components/Svg'
 import EditAge from './EditAge'
+import { EditIcon } from '../../../../icons/edit'
 
 const Age = ({ id, page, publication, limitedAdministrator }) => {
   const [edit, setEdit] = useState(false)

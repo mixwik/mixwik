@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { EditIcon } from '../../../../components/Svg'
+import { EditIcon } from '../../../../icons/edit'
 import EditTypeOfGamer from './EditTypeOfGamer'
 import styles from './TypeOfGamer.module.scss'
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { EditIcon } from '../../../../components/Svg'
+import { EditIcon } from '../../../../icons/edit'
 import EditHours from './EditHours'
 import styles from './Hours.module.scss'
 

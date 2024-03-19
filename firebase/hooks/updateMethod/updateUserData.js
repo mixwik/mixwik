@@ -48,8 +48,8 @@ export const updateTwitter = async (id, twitter, socials) => {
   })
 }
 
-export const updateUserNumberPublications = async (category, id, number) => {
-  const userRef = doc(db, COLLECTIONS.users, id)
+export const updateUserNumberPublications = async (category, uid, number) => {
+  const userRef = doc(db, COLLECTIONS.users, uid)
   if (category === COLLECTIONS.cs2) {
     await updateDoc(userRef, {
       cs2Publications: increment(number)

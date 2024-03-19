@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { EditIcon } from '../../../../components/Svg'
 import styles from './Description.module.scss'
 import EditDescription from './EditDescription'
+import { EditIcon } from '../../../../icons/edit'
 
 const Description = ({ id, page, publication, limitedAdministrator }) => {
   const [edit, setEdit] = useState()

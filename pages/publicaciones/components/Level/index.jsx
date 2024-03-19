@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { EditIcon } from '../../../../components/Svg'
 import { COLLECTIONS } from '../../../../domain/constants'
+import { EditIcon } from '../../../../icons/edit'
 import EditCs2 from './EditLevel/cs2'
 import EditLol from './EditLevel/lol'
 import EditValorant from './EditLevel/valorant'

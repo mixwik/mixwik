@@ -9,7 +9,7 @@ const Publications = ({ mixWikTeams }) => {
     <section className={styles.publications}>
       <h1>Crea una nueva publicación</h1>
       <div className={styles.buttons}>
-        <Link href='/dashboard?page=newPublication' className={styles.buttonOnly}>
+        <Link href='/dashboard?page=jugador' className={styles.buttonOnly}>
           <Image src={onlyIcon} alt='Icono de jugador' />
           Jugador
           <p className='p-5 text-lg'>

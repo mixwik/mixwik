@@ -1,10 +1,10 @@
+import Image from 'next/image'
 import { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
-import { EditIcon } from '../../../../components/Svg'
 import { myLoader } from '../../../../components/myLoader'
+import { EditIcon } from '../../../../icons/edit.tsx'
 import styles from './Carouse.module.scss'
 import { EditImages } from './EditImages'
-import Image from 'next/image'
 
 const ImagesCarousel = ({ images, limitedAdministrator, publication, publicationUser, mixWikTeams, id, page }) => {
   const [edit, setEdit] = useState(false)

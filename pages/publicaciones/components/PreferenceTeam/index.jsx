@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { EditIcon } from '../../../../components/Svg'
 import { COLLECTIONS } from '../../../../domain/constants'
 import EditPreferenceTeam from './EditPreferenceTeam'
 import styles from './PreferenceTeam.module.scss'
+import { EditIcon } from '../../../../icons/edit'
 
 const PreferenceTeam = ({ id, page, publication, limitedAdministrator }) => {
   const [edit, setEdit] = useState(false)
