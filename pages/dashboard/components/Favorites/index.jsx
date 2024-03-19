@@ -1,7 +1,6 @@
 import { useAllGames } from '../../../../hooks/useAllGames'
 import { useAllTeams } from '../../../../hooks/useAllTeams'
 import CardPublications from '../CardPublications'
-import { Title } from '../title'
 import { WindowLayout } from '../window-layout'
 
 const Favorites = ({ userServer, page }) => {
@@ -14,8 +13,7 @@ const Favorites = ({ userServer, page }) => {
 
   if (page !== 'favorites') return null
   return (
-    <WindowLayout>
-      <Title title='Favoritos' />
+    <WindowLayout title='Favoritos'>
       <div className='flex flex-wrap justify-between p-10 gap-y-10'>
         {
            favoritesTeams.map((fav) => (

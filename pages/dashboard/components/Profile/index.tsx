@@ -1,7 +1,6 @@
 // Session
 import { useState } from 'react'
 import { useSession } from '../../../../firebase/auth/useSession'
-import { Title } from '../title'
 import { WindowLayout } from '../window-layout'
 import { UpdateData } from './components/update-data'
 import { UserData } from './components/user-data'
@@ -12,8 +11,7 @@ const Profile = ({ user, mixWikTeams, page, setRefetch }) => {
 
   if (page !== 'profile') return null
   return (
-    <WindowLayout>
-      <Title title='Perfil' />
+    <WindowLayout title='Perfil'>
       {edit
         ? <UpdateData
             user={user}

@@ -4,7 +4,6 @@ import { COLLECTIONS } from '../../../../domain/constants'
 import { useGetMyPublications } from '../../../../firebase/hooks/getMethod/useGetMyPublications'
 import { useGetMyTeams } from '../../../../firebase/hooks/getMethod/useGetMyTeam'
 import CardPublications from '../CardPublications'
-import { Title } from '../title'
 import { WindowLayout } from '../window-layout'
 import BoxCards from './BoxCards'
 
@@ -33,8 +32,7 @@ const MyPublications = ({ user, page }) => {
   }, [publicationsCSGO, publicationsLOL, publicationsFortnite, publicationsValorant, publicationsCsgoTeams, publicationsLolTeams, publicationsFortniteTeams, publicationsValorantTeams])
   if (page !== 'myPublications') return null
   return (
-    <WindowLayout>
-      <Title title='Mis publicaciones' />
+    <WindowLayout title='Mis Publicaciones'>
       <div className='flex flex-wrap h-full gap-10 p-10'>
         {
         (publicationsCSGO.length !== 0 || publicationsCsgoTeams.length !== 0) && (

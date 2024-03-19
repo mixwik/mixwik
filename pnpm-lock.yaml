@@ -9,7 +9,7 @@ dependencies:
     specifier: 4.1.0
     version: 4.1.0
   '@fontsource-variable/onest':
-    specifier: ^5.0.3
+    specifier: 5.0.3
     version: 5.0.3
   '@hookform/resolvers':
     specifier: 3.3.4
@@ -60,7 +60,7 @@ dependencies:
     specifier: 18.2.0
     version: 18.2.0
   react-confetti:
-    specifier: ^6.1.0
+    specifier: 6.1.0
     version: 6.1.0(react@18.2.0)
   react-content-loader:
     specifier: 6.2.1

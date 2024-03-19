@@ -1,4 +1,3 @@
-import { Title } from '../title'
 import { WindowLayout } from '../window-layout'
 
 import NoTeams from './NoTeams'
@@ -6,8 +5,7 @@ import Teams from './Teams'
 
 const MixWikTeams = ({ user, mixWikTeams }) => {
   return (
-    <WindowLayout>
-      <Title title='MixWik Teams' />
+    <WindowLayout title='MixWik Teams'>
       <section className='p-5'>
         {
         !mixWikTeams

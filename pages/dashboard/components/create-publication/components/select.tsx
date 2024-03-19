@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { SelectGame } from '../../../../../components/create-publication/select-game'
 import { useOpenGameContext } from '../../../../../context'
 import { COLLECTIONS } from '../../../../../domain/constants'
-import { Title } from '../../title'
 import { WindowLayout } from '../../window-layout'
 
 export const Select = ({ mixWikTeams, user, title }) => {
@@ -88,8 +87,7 @@ export const Select = ({ mixWikTeams, user, title }) => {
     }
   }
   return (
-    <WindowLayout>
-      <Title title={title} />
+    <WindowLayout title={title}>
       <div className='flex items-center justify-center h-full'>
         {teams === 'maxPublications' && <p className='px-10 text-center text-red-400'>Has llegado al límite de publicaciones en este juego</p>}
         {teams === 'noMixWikTeams' && <p className='px-10 font-bold text-center text-pennBlue'>Hazte de mixWikTeams para poder hacer más publicaciones en cada juego</p>}
