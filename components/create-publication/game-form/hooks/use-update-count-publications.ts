@@ -15,7 +15,8 @@ export const useUpdateCountPublications = ({ openGame, userProvider }) => {
       },
       body: JSON.stringify({
         category: openGame,
-        uid: userProvider.uid
+        uid: userProvider.uid,
+        number: 1
       })
     })
     if (response.status !== 200) {
