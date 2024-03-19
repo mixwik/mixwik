@@ -4,6 +4,7 @@ import { UserServer } from '../domain/types'
 export const useGetOneUser = (uid) => {
   const [userServer, setUserServer] = useState({} as UserServer)
   const [isData, setIsData] = useState('')
+  const [refetch, setRefetch] = useState(false)
   useEffect(() => {
     (async () => {
       const user = await fetch('/api/get-one-user', {
@@ -21,6 +22,7 @@ export const useGetOneUser = (uid) => {
         setIsData(data.user)
       }
     })()
-  }, [uid])
-  return { userServer, isData }
+    console.log('refetch', refetch)
+  }, [uid, refetch])
+  return { userServer, isData, setRefetch }
 }

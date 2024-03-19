@@ -5,5 +5,5 @@ export const REGEX = {
   facebook: /^https?:\/\/(www\.)?facebook\.com\/[a-zA-Z0-9_]+$/,
   twitch: /^https?:\/\/(www\.)?twitch\.tv\/[a-zA-Z0-9_]+$/,
   youtube: /^https?:\/\/(www\.)?youtube\.com\/[a-zA-Z0-9_]+$/,
-  tiktok: /^https?:\/\/(www\.)?tiktok\.com\/[a-zA-Z0-9_]+$/
+  tiktok: /^(?:https?:\/\/)?(?:www\.)?tiktok\.com\/(?:@\w{2,32}(?:\/video\/\d+)?)?(?:\?lang=\w{2})?$/i
 }

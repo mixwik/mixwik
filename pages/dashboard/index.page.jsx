@@ -51,7 +51,7 @@ export default function Dashboard () {
   }
 
   const { userProvider } = useSession()
-  const { userServer } = useGetOneUser(userProvider?.uid)
+  const { userServer, setRefetch } = useGetOneUser(userProvider?.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(userServer?.mixWikTeams)
   const { date } = useComproveRenovationSubscription(userServer?.mixWikTeams, mixWikTeams)
 
@@ -60,7 +60,12 @@ export default function Dashboard () {
     <Layout>
       <section>
         <BackgroundDots />
-        {page === 'profile' && <Profile user={userServer} mixWikTeams={mixWikTeams} />}
+        <Profile
+          user={userServer}
+          mixWikTeams={mixWikTeams}
+          page={page}
+          setRefetch={setRefetch}
+        />
         <NewPublication
           page={page}
           mixWikTeams={mixWikTeams}

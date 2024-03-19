@@ -6,10 +6,11 @@ import { WindowLayout } from '../window-layout'
 import { UpdateData } from './components/update-data'
 import { UserData } from './components/user-data'
 
-const Profile = ({ user, mixWikTeams }) => {
+const Profile = ({ user, mixWikTeams, page, setRefetch }) => {
   const [edit, setEdit] = useState(false)
   const { userProvider } = useSession()
 
+  if (page !== 'profile') return null
   return (
     <WindowLayout>
       <Title title='Perfil' />
@@ -18,6 +19,7 @@ const Profile = ({ user, mixWikTeams }) => {
             user={user}
             mixWikTeams={mixWikTeams}
             setEdit={setEdit}
+            setRefetch={setRefetch}
           />
         : <UserData
             user={user}

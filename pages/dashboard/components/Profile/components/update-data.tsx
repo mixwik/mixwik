@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { differenceInYears, parseISO } from 'date-fns'
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -22,10 +21,10 @@ interface UpdateDataProps {
   user: UserServer
   mixWikTeams: boolean
   setEdit: React.Dispatch<React.SetStateAction<boolean>>
+  setRefetch: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const UpdateData = ({ user, mixWikTeams, setEdit }: UpdateDataProps) => {
-  const router = useRouter()
+export const UpdateData = ({ user, mixWikTeams, setEdit, setRefetch }: UpdateDataProps) => {
   const [imgURL, setImgURL] = useState('')
   const [loading, setLoading] = useState({
     title: '',
@@ -153,8 +152,9 @@ export const UpdateData = ({ user, mixWikTeams, setEdit }: UpdateDataProps) => {
         subtitle: 'Tus datos se han actualizado correctamente',
         number: 0
       })
+      setRefetch(prev => !prev)
       setTimeout(() => {
-        router.push('/dashboard')
+        setEdit(false)
       }, 1000)
     } else {
       setError(update.error)
