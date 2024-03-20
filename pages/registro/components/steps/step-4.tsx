@@ -61,22 +61,32 @@ export const Step4 = (
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-around w-full h-full gap-5 bg-white rounded-lg'
       >
-        <label className='relative flex items-center w-full gap-2 md:w-1/2'>
-          <TwitterIcon className='absolute w-6 h-6 right-2' />
-          <input
-            {...register('twitter')}
-            className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
-          />
+        <label className='flex flex-col justify-center w-full gap-2 md:w-1/2'>
+          <span className='font-semibold text-slate-900'>
+            Twitter:
+          </span>
+          <div className='relative flex items-center'>
+            <input
+              {...register('twitter')}
+              className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+            />
+            <TwitterIcon className='absolute size-6 right-2' />
+          </div>
           {errors.twitter && (
             <div className='absolute text-red-300 -bottom-7'>{errors.twitter.message}</div>
           )}
         </label>
-        <label className='relative flex items-center w-full gap-2 md:w-1/2'>
-          <DiscordIcon className='size-6' />
-          <input
-            {...register('discord', { pattern: REGEX.discord, required: 'El campo discord es obligatorio' })}
-            className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
-          />
+        <label className='flex flex-col justify-center w-full gap-2 md:w-1/2'>
+          <span className='font-semibold text-slate-900'>
+            Discord:
+          </span>
+          <div className='relative flex items-center gap-2'>
+            <input
+              {...register('discord', { pattern: REGEX.discord, required: 'El campo discord es obligatorio' })}
+              className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+            />
+            <DiscordIcon className='absolute size-6 right-2' />
+          </div>
           {errors.discord && (
             <div className='absolute text-red-300 -bottom-7'>{errors.discord.message}</div>
           )}

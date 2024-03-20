@@ -8,9 +8,9 @@ const MixWikTeams = ({ user, mixWikTeams }) => {
     <WindowLayout title='MixWik Teams'>
       <section className='p-5'>
         {
-        !mixWikTeams
-          ? <Teams currentUser={user} mixWikTeams={mixWikTeams} />
-          : <NoTeams currentUser={user} />
+         mixWikTeams
+           ? <Teams currentUser={user} mixWikTeams={mixWikTeams} />
+           : <NoTeams currentUser={user} />
         }
       </section>
     </WindowLayout>

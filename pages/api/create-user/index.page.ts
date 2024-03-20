@@ -24,7 +24,8 @@ const schema = yup.object().shape({
   valorantPublications: yup.number(),
   lolPublications: yup.number(),
   rocketLeaguePublications: yup.number(),
-  dota2Publications: yup.number()
+  dota2Publications: yup.number(),
+  affiliateCode: yup.string()
 })
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
@@ -44,7 +45,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       valorantPublications,
       lolPublications,
       rocketLeaguePublications,
-      dota2Publications
+      dota2Publications,
+      affiliateCode
     } = req.body
 
     if (req.method === 'POST') {
@@ -78,7 +80,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
             rocketLeaguePublications,
             dota2Publications
           },
-          likes: []
+          likes: [],
+          affiliateCode
         })
         res.status(200).json('User created')
       } catch (error) {

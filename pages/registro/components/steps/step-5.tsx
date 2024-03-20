@@ -26,6 +26,7 @@ export const Step5 = (
 
   })
   const { checkPublication } = useCheckPublications({ setError })
+  const [affiliateCode, setAffiliateCode] = useState('')
 
   const handleSubmit = async () => {
     if (!playerCreate) return
@@ -73,7 +74,8 @@ export const Step5 = (
         valorantPublications,
         lolPublications,
         rocketLeaguePublications,
-        dota2Publications
+        dota2Publications,
+        affiliateCode
       })
     })
 
@@ -83,7 +85,7 @@ export const Step5 = (
       setLoading({
         title: 'Usuario creado',
         subtitle: 'Su usuario ha sido creado con éxito',
-        number: 0
+        number: 1
       })
       setTimeout(() => {
         setLoading({
@@ -152,6 +154,17 @@ export const Step5 = (
       <PopUpMessage loading={loading} />
       <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea un jugador</h2>
       <SelectGame handleCheck={handleCheck} />
+      <label className='flex flex-col justify-center w-full gap-2 md:w-1/2'>
+        <div className='relative flex items-center gap-2'>
+          <input
+            type='text'
+            className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+            placeholder='Código de afiliado (opcional)'
+            value={affiliateCode}
+            onChange={(e) => setAffiliateCode(e.target.value)}
+          />
+        </div>
+      </label>
       <div className='flex justify-center w-full gap-10'>
         <button
           type='button'
