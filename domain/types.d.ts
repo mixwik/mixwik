@@ -37,3 +37,16 @@ export type UserServer = {
         tiktok: string
     }
 }
+
+export type gameServer = {
+    category: string
+    title: string
+    description: string
+    hours: number
+    age: string
+    level: string[]
+    preferenceTeam: string[]
+    position: string[]
+    premier: string
+    typeOfGamer: string[]
+}

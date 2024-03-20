@@ -19,8 +19,7 @@ const schema = yup.object({
     .array()
     .min(1, 'Selecciona al menos un nivel'),
   premier: yup
-    .array()
-    .min(1, 'Selecciona al menos un nivel'),
+    .array(),
   position: yup
     .array()
     .min(1, 'Selecciona al menos una posición'),

@@ -6,8 +6,8 @@ import { WindowLayout } from '../window-layout'
 const Favorites = ({ userServer, page }) => {
   const { allGames } = useAllGames()
   const { allTeams } = useAllTeams()
-  const favoritesGames = allGames.filter((res) => userServer.likes.includes(res.id))
-  const favoritesTeams = allTeams.filter((res) => userServer.likes.includes(res.id))
+  const favoritesGames = allGames.filter((res) => userServer.likes?.includes(res.id))
+  const favoritesTeams = allTeams.filter((res) => userServer.likes?.includes(res.id))
 
   const AllFavorites = [...favoritesGames, ...favoritesTeams]
 

@@ -7,9 +7,9 @@ import { LOL_LEVELS, LOL_POSITIONS, TYPE_OF_GAME } from '../../../../domain/cons
 import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
-import { Error } from '../../../../pages/registro/components/Error'
 import { ArrowBack } from '../../../Svg'
 import { BackgroundDots } from '../../../background-dots'
+import { PopUpError } from '../../../pop-up-error'
 import { PopUpMessage } from '../../../pop-up-message'
 import { BoxField } from '../../components/fields/box-field'
 import { Description } from '../../components/fields/description-field'
@@ -40,10 +40,10 @@ export const LolGameForm = ({ userServer }: LolGameFormProps) => {
     description: '',
     hours: 0,
     age: '',
-    level: [],
+    level: [] as string[],
     preferenceTeam: [] as string[],
     position: [] as string[],
-    premier: [],
+    premier: [] as string[],
     typeOfGamer: [] as string[]
   })
 
@@ -97,13 +97,16 @@ export const LolGameForm = ({ userServer }: LolGameFormProps) => {
       })
       const response = await res.json()
       if (response.message === 'Game created') {
+        setLoading({ title: 'Team creado', subtitle: 'Tu team ha sido creado con éxito', number: 1 })
         setTimeout(() => {
-          setLoading({ title: 'Team creado', subtitle: 'Tu team ha sido creado con éxito', number: 1 })
           handleOpenGame('')
         }, 2000)
       } else {
-        setError(response)
+        setError(response.message)
         setLoading({ title: '', subtitle: '', number: 0 })
+        setTimeout(() => {
+          setError('')
+        }, 1000)
       }
     } else {
       setError('Ha ocurrido un error')
@@ -115,6 +118,7 @@ export const LolGameForm = ({ userServer }: LolGameFormProps) => {
     <section className='size-full md:w-1/2 md:py-5'>
       <BackgroundDots />
       <PopUpMessage loading={loading} />
+      <PopUpError error={error} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
@@ -188,7 +192,6 @@ export const LolGameForm = ({ userServer }: LolGameFormProps) => {
             type='submit'
           >Guardar y continuar
           </button>
-          {error && <Error error={error} />}
         </div>
       </form>
     </section>

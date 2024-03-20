@@ -7,9 +7,9 @@ import { TYPE_OF_GAME, VALORANT_LEVELS, VALORANT_POSITION } from '../../../../do
 import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
-import { Error } from '../../../../pages/registro/components/Error'
 import { ArrowBack } from '../../../Svg'
 import { BackgroundDots } from '../../../background-dots'
+import { PopUpError } from '../../../pop-up-error'
 import { PopUpMessage } from '../../../pop-up-message'
 import { BoxField } from '../../components/fields/box-field'
 import { Description } from '../../components/fields/description-field'
@@ -108,7 +108,7 @@ export const ValorantGameFrom = ({ dashboard, userServer }: ValorantGameFromProp
           handleOpenGame('')
         }, 2000)
       } else {
-        setError(response)
+        setError(response.message)
         setLoading({ title: '', subtitle: '', number: 0 })
       }
     } else {
@@ -121,6 +121,7 @@ export const ValorantGameFrom = ({ dashboard, userServer }: ValorantGameFromProp
     <section className='size-full md:w-1/2 md:py-5'>
       <BackgroundDots />
       <PopUpMessage loading={loading} />
+      <PopUpError error={error} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
@@ -196,7 +197,6 @@ export const ValorantGameFrom = ({ dashboard, userServer }: ValorantGameFromProp
             type='submit'
           >Guardar y continuar
           </button>
-          {error && <Error error={error} />}
         </div>
       </form>
     </section>

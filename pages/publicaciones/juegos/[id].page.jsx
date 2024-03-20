@@ -84,7 +84,7 @@ const User = () => {
             mixWikTeams && (
               <div className={`text-xl font-bold text-center text-white bg-aero ${page === COLLECTIONS.teams && 'bg-orange text-black'}`}>
                 {
-                  page === 'teams' ? 'Equipo' : 'Jugador'
+                  page === COLLECTIONS.teams ? 'Equipo' : 'Jugador'
                 }
               </div>
             )
