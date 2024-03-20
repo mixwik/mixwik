@@ -40,13 +40,88 @@ export type UserServer = {
 
 export type gameServer = {
     category: string
+    date: string
     title: string
     description: string
     hours: number
-    age: string
-    level: string[]
+    age: number
+    level: string
+    premier: string
     preferenceTeam: string[]
     position: string[]
-    premier: string
     typeOfGamer: string[]
+    geometry: [number, number]
+    uid: string
+    img: {
+        url: string
+        name: string
+    }
+    img2: {
+        url: string
+        name: string
+    }
+    img3: {
+        url: string
+        name: string
+    }
+    img4: {
+        url: string
+        name: string
+    }
+    img5: {
+        url: string
+        name: string
+    }
+    img6: {
+        url: string
+        name: string
+    }
+    img7: {
+        url: string
+        name: string
+    }
+}
+
+export type teamServer = {
+    category: string
+    date: string
+    title: string
+    description: string
+    hours: number
+    age: number
+    level: string[]
+    premier: string[]
+    preferenceTeam: string[]
+    position: string[]
+    typeOfGamer: string[]
+    geometry: [number, number]
+    uid: string
+    img: {
+        url: string
+        name: string
+    }
+    img2: {
+        url: string
+        name: string
+    }
+    img3: {
+        url: string
+        name: string
+    }
+    img4: {
+        url: string
+        name: string
+    }
+    img5: {
+        url: string
+        name: string
+    }
+    img6: {
+        url: string
+        name: string
+    }
+    img7: {
+        url: string
+        name: string
+    }
 }
