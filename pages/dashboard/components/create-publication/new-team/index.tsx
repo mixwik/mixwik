@@ -5,7 +5,7 @@ export const NewTeam = ({ userServer, mixWikTeams, page }) => {
   if (page !== 'teams') return null
   return (
     <>
-      <TeamForm userServer={userServer} />
+      <TeamForm userServer={userServer} mixWikTeams={mixWikTeams} />
       <Select userServer={userServer} mixWikTeams={mixWikTeams} title='Crear Team' />
     </>
   )
