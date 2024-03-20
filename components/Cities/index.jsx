@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { BACKGROUNDS_IMAGES, CITIES_IMAGES } from '../../assets/images'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { CITIES_IMAGES } from '../../assets/images'
+import { BackgroundDots } from '../background-dots.tsx'
 
 const Cities = () => {
   const [city, setCity] = useState('')
@@ -16,9 +17,9 @@ const Cities = () => {
     }
   }
   return (
-    <section className='relative flex flex-col items-center w-[100vw] h-full'>
-      <Image src={BACKGROUNDS_IMAGES.backgroundBlue} className='absolute top-0 left-0 object-cover h-full' alt='Imagen de fondo de las ciudades' />
-      <h2 className='z-20 p-5 text-xl font-bold text-white md:text-3xl'>Principales Ciudades</h2>
+    <section className='relative flex flex-col items-center h-screen'>
+      <BackgroundDots />
+      <h2 className='z-20 p-5 text-2xl font-bold md:text-4xl text-pennBlue'>Principales Ciudades</h2>
       <div className='md:grid flex flex-col w-full grid-cols-3 gap-5 p-5 md:p-10 h-[80vh]'>
         <Link className='relative flex flex-col col-start-1 col-end-3 overflow-hidden text-center rounded-lg h-80 md:h-full' href='/poblacion/malaga'>
           <h3 className='z-10 p-1 text-xl font-bold text-center text-white md:text-3xl backdrop-blur-sm bg-pennBlue bg-opacity-30'>Málaga</h3>
@@ -38,7 +39,7 @@ const Cities = () => {
         </Link>
       </div>
       <form
-        className='z-10 flex justify-center pb-10'
+        className='z-10 flex justify-center mb-10 shadow-md'
         onSubmit={handleSubmit}
       >
         <input className='px-3 py-2 rounded-l-md md:w-80' type='text' placeholder='Busca tú ciudad' onChange={(e) => setCity(e.target.value)} />
