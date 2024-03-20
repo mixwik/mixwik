@@ -15,15 +15,17 @@ import { BoxField } from '../../components/fields/box-field'
 import { Description } from '../../components/fields/description-field'
 import { HoursField } from '../../components/fields/hours-field'
 import { FieldImage } from '../../components/fields/image-field'
+import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
 import { useUpdateCountPublications } from '../hooks/use-update-count-publications'
 
 interface ValorantGameFromProps {
   dashboard?: boolean
   userServer?: UserServer
+  mixWikTeams?: boolean
 }
 
-export const ValorantGameFrom = ({ dashboard, userServer }: ValorantGameFromProps) => {
+export const ValorantGameFrom = ({ dashboard, userServer, mixWikTeams }: ValorantGameFromProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -34,7 +36,19 @@ export const ValorantGameFrom = ({ dashboard, userServer }: ValorantGameFromProp
   const { openGame, handleOpenGame } = useOpenGameContext()
   const { setPlayerCreate } = usePlayerCreateContext()
   const [image, setImage] = useState<File>()
+  const [image2, setImage2] = useState<File>()
+  const [image3, setImage3] = useState<File>()
+  const [image4, setImage4] = useState<File>()
+  const [image5, setImage5] = useState<File>()
+  const [image6, setImage6] = useState<File>()
+  const [image7, setImage7] = useState<File>()
   const [imgUrl, setImgUrl] = useState('')
+  const [imgUrl2, setImgUrl2] = useState('')
+  const [imgUrl3, setImgUrl3] = useState('')
+  const [imgUrl4, setImgUrl4] = useState('')
+  const [imgUrl5, setImgUrl5] = useState('')
+  const [imgUrl6, setImgUrl6] = useState('')
+  const [imgUrl7, setImgUrl7] = useState('')
 
   const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
   const [error, setError] = useState('')
@@ -97,7 +111,7 @@ export const ValorantGameFrom = ({ dashboard, userServer }: ValorantGameFromProp
       setLoading({ title: 'Creando Jugador...', subtitle: 'Estamos creando tu jugador, por favor espera...', number: 0 })
       const res = await fetch('/api/create-game', {
         method: 'POST',
-        body: JSON.stringify({ ...data, imageName: image.name, imgUrl, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
+        body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
       })
       const response = await res.json()
       if (response.message === 'Game created') {
@@ -129,12 +143,49 @@ export const ValorantGameFrom = ({ dashboard, userServer }: ValorantGameFromProp
         <h2 className='text-2xl font-semibold text-pennBlue'>
           Valorant
         </h2>
-        <FieldImage
-          setImgURL={setImgUrl}
-          imgURL={imgUrl}
-          setImage={setImage}
-          image={image}
-        />
+        {
+          mixWikTeams
+            ? (
+              <FieldImages
+                setImgURL={setImgUrl}
+                setImage2={setImage2}
+                setImage3={setImage3}
+                setImage4={setImage4}
+                setImage5={setImage5}
+                setImage6={setImage6}
+                setImage7={setImage7}
+                imgURL={imgUrl}
+                imgURL2={imgUrl2}
+                imgURL3={imgUrl3}
+                imgURL4={imgUrl4}
+                imgURL5={imgUrl5}
+                imgURL6={imgUrl6}
+                imgURL7={imgUrl7}
+                setImage={setImage}
+                setImgURL2={setImgUrl2}
+                setImgURL3={setImgUrl3}
+                setImgURL4={setImgUrl4}
+                setImgURL5={setImgUrl5}
+                setImgURL6={setImgUrl6}
+                setImgURL7={setImgUrl7}
+                image={image}
+                image2={image2}
+                image3={image3}
+                image4={image4}
+                image5={image5}
+                image6={image6}
+                image7={image7}
+              />
+              )
+            : (
+              <FieldImage
+                setImgURL={setImgUrl}
+                imgURL={imgUrl}
+                setImage={setImage}
+                image={image}
+              />
+              )
+        }
         <Title
           register={register}
           errors={errors.title}
