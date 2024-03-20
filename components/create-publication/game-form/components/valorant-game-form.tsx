@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
 import { TYPE_OF_GAME, VALORANT_LEVELS, VALORANT_POSITION } from '../../../../domain/constants'
+import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { Error } from '../../../../pages/registro/components/Error'
@@ -16,7 +17,13 @@ import { HoursField } from '../../components/fields/hours-field'
 import { FieldImage } from '../../components/fields/image-field'
 import { Title } from '../../components/fields/title-field'
 import { useUpdateCountPublications } from '../hooks/use-update-count-publications'
-export const ValorantGameFrom = ({ dashboard }) => {
+
+interface ValorantGameFromProps {
+  dashboard?: boolean
+  userServer?: UserServer
+}
+
+export const ValorantGameFrom = ({ dashboard, userServer }: ValorantGameFromProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -84,7 +91,7 @@ export const ValorantGameFrom = ({ dashboard }) => {
   })
 
   const onSubmit = async (data) => {
-    const date = localStorage.getItem('age') ?? '01-01-2000'
+    const date = userServer?.age ? userServer.age : localStorage.getItem('age') ?? '01-01-2000'
     const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
       setLoading({ title: 'Creando Jugador...', subtitle: 'Estamos creando tu jugador, por favor espera...', number: 0 })

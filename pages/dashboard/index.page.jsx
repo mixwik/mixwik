@@ -68,12 +68,12 @@ export default function Dashboard () {
         <NewPublication
           page={page}
           mixWikTeams={mixWikTeams}
-          user={userServer}
+          userServer={userServer}
         />
         <NewTeam
           page={page}
           mixWikTeams={mixWikTeams}
-          user={userServer}
+          userServer={userServer}
         />
         <Favorites
           userServer={userServer}

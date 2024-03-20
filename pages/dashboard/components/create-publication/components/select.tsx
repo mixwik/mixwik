@@ -4,17 +4,17 @@ import { useOpenGameContext } from '../../../../../context'
 import { COLLECTIONS } from '../../../../../domain/constants'
 import { WindowLayout } from '../../window-layout'
 
-export const Select = ({ mixWikTeams, user, title }) => {
+export const Select = ({ mixWikTeams, userServer, title }) => {
   const { handleOpenGame } = useOpenGameContext()
   const [teams, setTeams] = useState('')
   const handleCheck = (name) => {
     console.log('name', name)
     if (name === COLLECTIONS.cs2) {
       if (!mixWikTeams) {
-        if (!user.publications.cs2Publications) {
+        if (!userServer.publications.cs2Publications) {
           handleOpenGame(name)
           setTeams('')
-        } else if (user.publications.cs2Publications < 1) {
+        } else if (userServer.publications.cs2Publications < 1) {
           handleOpenGame(name)
           setTeams('')
         } else {
@@ -22,7 +22,7 @@ export const Select = ({ mixWikTeams, user, title }) => {
           handleOpenGame('')
         }
       } else if (mixWikTeams) {
-        if (user.publications.cs2Publications < 5) {
+        if (userServer.publications.cs2Publications < 5) {
           handleOpenGame(name)
         } else {
           setTeams('maxPublications')
@@ -32,10 +32,10 @@ export const Select = ({ mixWikTeams, user, title }) => {
     }
     if (name === COLLECTIONS.lol) {
       if (!mixWikTeams) {
-        if (!user.publications.lolPublications) {
+        if (!userServer.publications.lolPublications) {
           handleOpenGame(name)
           setTeams('')
-        } else if (user.publications.lolPublications < 1) {
+        } else if (userServer.publications.lolPublications < 1) {
           handleOpenGame(name)
           setTeams('')
         } else {
@@ -43,7 +43,7 @@ export const Select = ({ mixWikTeams, user, title }) => {
           handleOpenGame('')
         }
       } else if (mixWikTeams) {
-        if (user.publications.lolPublications < 5) {
+        if (userServer.publications.lolPublications < 5) {
           handleOpenGame(name)
           setTeams('')
         } else {
@@ -54,10 +54,10 @@ export const Select = ({ mixWikTeams, user, title }) => {
     }
     if (name === COLLECTIONS.fortnite) {
       if (!mixWikTeams) {
-        if (!user.publications.fortnitePublications) {
+        if (!userServer.publications.fortnitePublications) {
           handleOpenGame(name)
           setTeams('')
-        } else if (user.publications.fortnitePublications < 1) {
+        } else if (userServer.publications.fortnitePublications < 1) {
           handleOpenGame(name)
           setTeams('')
         } else {
@@ -65,7 +65,7 @@ export const Select = ({ mixWikTeams, user, title }) => {
           handleOpenGame('')
         }
       } else if (mixWikTeams) {
-        if (user.publications.fortnitePublications < 5) {
+        if (userServer.publications.fortnitePublications < 5) {
           handleOpenGame(name)
           setTeams('')
         } else {
@@ -76,10 +76,10 @@ export const Select = ({ mixWikTeams, user, title }) => {
     }
     if (name === COLLECTIONS.valorant) {
       if (!mixWikTeams) {
-        if (!user.publications.valorantPublications) {
+        if (!userServer.publications.valorantPublications) {
           handleOpenGame(name)
           setTeams('')
-        } else if (user.publications.valorantPublications < 1) {
+        } else if (userServer.publications.valorantPublications < 1) {
           handleOpenGame(name)
           setTeams('')
         } else {
@@ -87,7 +87,7 @@ export const Select = ({ mixWikTeams, user, title }) => {
           handleOpenGame('')
         }
       } else if (mixWikTeams) {
-        if (user.publications.valorantPublications < 5) {
+        if (userServer.publications.valorantPublications < 5) {
           handleOpenGame(name)
           setTeams('')
         } else {
