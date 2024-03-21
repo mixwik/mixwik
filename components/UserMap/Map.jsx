@@ -36,7 +36,7 @@ const Map = ({ publication }) => {
   return (
     <MapContainer
       className={styles.map}
-      center={publication.geometry}
+      center={publication?.geometry}
       zoomAnimation
       doubleClickZoom={false}
       zoomControl={false}
@@ -47,13 +47,11 @@ const Map = ({ publication }) => {
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      {publication.category === COLLECTIONS.cs2 && <Marker position={publication.geometry} icon={cs2Icon} />}
-      {publication.category === COLLECTIONS.lol && <Marker position={publication.geometry} icon={lolIcon} />}
-      {publication.category === COLLECTIONS.valorant && <Marker position={publication.geometry} icon={valorantIcon} />}
-      {publication.category === COLLECTIONS.fortnite && <Marker position={publication.geometry} icon={fortniteIcon} />}
-
+      {publication?.category === COLLECTIONS.cs2 && <Marker position={publication?.geometry} icon={cs2Icon} />}
+      {publication?.category === COLLECTIONS.lol && <Marker position={publication?.geometry} icon={lolIcon} />}
+      {publication?.category === COLLECTIONS.valorant && <Marker position={publication?.geometry} icon={valorantIcon} />}
+      {publication?.category === COLLECTIONS.fortnite && <Marker position={publication?.geometry} icon={fortniteIcon} />}
     </MapContainer>
-
   )
 }
 

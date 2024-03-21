@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
+import { gameServer, teamServer } from '../../../domain/types'
 
 export const useGetGameCategory = ({ id, collection }) => {
-  const [game, setGame] = useState()
+  const [game, setGame] = useState<gameServer | teamServer>()
   const [gameError, setGameError] = useState('')
   useEffect(() => {
     const getGameCategory = async () => {
