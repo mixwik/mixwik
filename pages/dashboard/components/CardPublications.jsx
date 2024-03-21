@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { myLoader } from '../../../components/myLoader'
 import { COLLECTIONS } from '../../../domain/constants'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
-import { setRemoveFavorites } from '../../publicaciones/components/infrastructure/setRemoveFavorites'
+import { setRemoveFavorites } from '../../publicaciones-old/components/infrastructure/setRemoveFavorites'
 
 const CardPublications = ({ publication, equip, updateFav, remove, user }) => {
   const category = equip ? COLLECTIONS.teams : publication.category
