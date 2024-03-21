@@ -1,7 +1,7 @@
 // Components
 import Cities from '../components/Cities'
 import Footer from '../components/Footer'
-import Video from '../components/Home-video'
+import { Hero } from '../components/hero.tsx'
 import Layout from '../components/Layout'
 
 // Images
@@ -9,7 +9,7 @@ import Layout from '../components/Layout'
 export default function Home () {
   return (
     <Layout title='MixWik'>
-      <Video />
+      <Hero />
       <Cities />
       <Footer />
     </Layout>
