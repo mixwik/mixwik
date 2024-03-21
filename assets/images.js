@@ -1,6 +1,3 @@
-import backgroundBlue from '../public/bg/bg_dark_blue.svg'
-import backgroundGray from '../public/bg/bg_gray.svg'
-import backgroundOrange from '../public/bg/bg_orange.svg'
 import barcelona from '../public/cities/barcelona.jpg'
 import madrid from '../public/cities/madrid.jpg'
 import malaga from '../public/cities/malaga.jpg'
@@ -12,12 +9,6 @@ import dota2 from '../public/logos/dota2.png'
 import fortnite from '../public/logos/fortnite.png'
 import mixWik from '../public/logos/mixwik-logo.png'
 import rocketLeague from '../public/logos/rocket.png'
-
-export const BACKGROUNDS_IMAGES = {
-  backgroundGray,
-  backgroundBlue,
-  backgroundOrange
-}
 
 export const WEB_LOGOS = {
   mixWik
