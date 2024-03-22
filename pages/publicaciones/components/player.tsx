@@ -1,7 +1,13 @@
+import { gameServer, teamServer } from '../../../domain/types'
 import { Field } from './fields/field'
 import { IterableField } from './fields/iterable-field'
 
-export const Player = ({ field, page }) => {
+interface PlayerProps {
+    field: gameServer | teamServer
+    page: string | string[] | undefined
+    }
+
+export const Player = ({ field, page }: PlayerProps) => {
   if (page === 'teams') return null
   return (
     <div className='flex flex-col gap-10'>

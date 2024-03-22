@@ -33,6 +33,7 @@ const PublicationsGamesPage = () => {
           <Header
             title={publication?.title}
             age={publication?.age}
+            date={publication?.date}
             mixWikTeams={mixWikTeams}
             limitedAdministrator={limitedAdministrator}
           />

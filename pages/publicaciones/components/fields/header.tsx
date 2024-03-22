@@ -1,4 +1,6 @@
-export const Header = ({ title, age, mixWikTeams, limitedAdministrator }) => {
+export const Header = ({ title, age, mixWikTeams, limitedAdministrator, date }) => {
+  const dateFormated = new Date(date).toLocaleDateString()
+  console.log('dateFormated', dateFormated)
   return (
     <header className='sticky top-0 left-0 z-20 flex items-center justify-between gap-2 p-5 bg-white shadow-md'>
       <div className='flex flex-col'>
@@ -11,6 +13,7 @@ export const Header = ({ title, age, mixWikTeams, limitedAdministrator }) => {
         <p className='text-sm text-gray-500'>{age} años</p>
       </div>
       {limitedAdministrator && <button className=''>Editar</button>}
+      <p className='text-sm text-gray-500'>{}</p>
     </header>
   )
 }
