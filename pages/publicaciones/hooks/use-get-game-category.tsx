@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { gameServer, teamServer } from '../../../domain/types'
 
 export const useGetGameCategory = ({ id, collection }) => {
-  const [game, setGame] = useState<gameServer | teamServer>()
-  const [gameError, setGameError] = useState('')
+  const [publication, setPublication] = useState<gameServer | teamServer>()
+  const [publicationError, setPublicationError] = useState('')
   useEffect(() => {
     const getGameCategory = async () => {
       const response = await fetch('/api/get-one-publication', {
@@ -13,12 +13,12 @@ export const useGetGameCategory = ({ id, collection }) => {
       })
       const data = await response.json()
       if (data.game === 'data') {
-        setGame(data.gameServer)
+        setPublication(data.gameServer)
       } else {
-        setGameError(data.game)
+        setPublicationError(data.game)
       }
     }
     getGameCategory()
   }, [id, collection])
-  return { game, gameError }
+  return { publication, publicationError }
 }
