@@ -6,6 +6,7 @@
 import Card from '../../../components/Card'
 import Map from '../../../components/Map'
 import { BackgroundDots } from '../../../components/background-dots.tsx'
+import { Spinner } from '../../../icons/spinner.tsx'
 
 // Customs Hooks
 import { useGetData } from '../../../firebase/hooks/getMethod/useGetData'
@@ -15,12 +16,17 @@ import { useGamesFilters } from '../../../hooks/useGamesFilters'
 import { useHandleOpenContext } from '../../../context'
 
 import Link from 'next/link'
+import { useState } from 'react'
 import { COLLECTIONS } from '../../../domain/constants'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetTeams } from '../../../firebase/hooks/getMethod/useGetTeams'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 
 const PageContent = ({ category, children, distance }) => {
+  const [loading, setLoading] = useState(true)
+  setTimeout(() => {
+    setLoading(false)
+  }, 3000)
   const { userProvider } = useSession()
   const { currentPosition } = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
@@ -40,9 +46,17 @@ const PageContent = ({ category, children, distance }) => {
         <BackgroundDots />
         {children}
         <section
-          className='grid grid-cols-[repeat(auto-fit,_minmax(10rem,1fr))] place-items-center overflow-y-scroll h-[73vh] md:w-[50vw] w-screen md:overflow-y-auto py-5 gap-y-5'
+          className='flex justify-between flex-wrap overflow-y-scroll h-[80vh] md:h-[74vh] md:w-[50vw] w-screen md:overflow-y-auto p-2 gap-y-5'
           onClick={() => handleOpen('')}
         >
+          {loading &&
+            <div className='flex items-center justify-center size-full'>
+              <BackgroundDots />
+              <span className='flex flex-col items-center justify-center gap-5 text-xl font-bold text-gray-500'>
+                <Spinner />
+                Cargando jugadores y equipos...
+              </span>
+            </div>}
           {
               csgo.length > 0 && (
                 csgo.map((res) => (

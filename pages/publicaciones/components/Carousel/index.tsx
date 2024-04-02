@@ -13,12 +13,13 @@ export const ImagesCarousel = ({ images }: ImagesCarouselProps) => {
       <Carousel
         className={styles.carousel}
         showStatus={false}
+        showThumbs={false}
       >
         {
           images
             .filter(image => image?.url !== '')
             .map((image, index) => (
-              <Image key={index} loader={myLoader} width={0} height={0} src={image.url} alt={image.name} />
+              <Image key={index} loader={myLoader} width={100} height={100} src={image.url} alt={image.name} />
             ))
         }
       </Carousel>

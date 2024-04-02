@@ -8,7 +8,6 @@ export const Select = ({ mixWikTeams, userServer, title }) => {
   const { handleOpenGame } = useOpenGameContext()
   const [teams, setTeams] = useState('')
   const handleCheck = (name) => {
-    console.log('name', name)
     if (name === COLLECTIONS.cs2) {
       if (!mixWikTeams) {
         if (!userServer.publications.cs2Publications) {

@@ -17,12 +17,12 @@ import { useImages } from '../hooks/use-images'
 const PublicationsGamesPage = () => {
   const router = useRouter()
   const { userProvider } = useSession()
-  const { userServer } = useGetOneUser(userProvider?.uid)
-  const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
-  const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, userServer.uid)
   const { id, page } = router.query
   const { publication } = useGetGameCategory({ id, collection: page })
   const { images } = useImages({ publication })
+  const { userServer } = useGetOneUser(publication?.uid)
+  const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, userServer.uid)
+  const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
 
   if (!publication) return null
   return (
@@ -32,6 +32,7 @@ const PublicationsGamesPage = () => {
         <div className='relative flex flex-col h-full gap-10 overflow-scroll bg-white no-scrollbar md:w-1/2'>
           <Header
             title={publication?.title}
+            image={userServer?.profileImg || userProvider.image}
             age={publication?.age}
             date={publication?.date}
             mixWikTeams={mixWikTeams}
