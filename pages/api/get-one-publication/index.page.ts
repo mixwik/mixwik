@@ -11,7 +11,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       if (docSnap.exists()) {
         res.status(200).json({
           game: 'data',
-          gameServer: { ...docSnap.data() }
+          gameServer: { ...docSnap.data(), id: docSnap.id }
         })
       } else {
         res.status(200).json({ game: 'Esta publicación ya no existe' })

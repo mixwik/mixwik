@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { myLoader } from '../../../../components/myLoader'
 import { EditIcon } from '../../../../icons/edit'
 
-export const Header = ({ title, age, mixWikTeams, limitedAdministrator, date, image }) => {
+export const Header = ({ title, age, mixWikTeams, limitedAdministrator, date, image, setEdit }) => {
   const data = new Date(date.seconds * 1000)
   return (
     <header className='sticky top-0 left-0 z-20 flex items-center justify-between gap-2 p-5 bg-white shadow-md'>
@@ -25,7 +25,7 @@ export const Header = ({ title, age, mixWikTeams, limitedAdministrator, date, im
           <p className='text-sm text-gray-500'>{age} años</p>
         </div>
       </div>
-      {limitedAdministrator && <button><EditIcon className='size-8 fill-aero' /></button>}
+      {limitedAdministrator && <button onClick={() => setEdit(true)}><EditIcon className='size-8 fill-aero' /></button>}
       <p className='absolute text-xs text-gray-500 bottom-1 right-1'>Creado el: {data.toLocaleDateString()}</p>
     </header>
   )

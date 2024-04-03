@@ -1,40 +1,32 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
+import { ArrowBack } from '../../../../components/Svg'
+import { BoxField } from '../../../../components/create-publication/components/fields/box-field'
+import { Description } from '../../../../components/create-publication/components/fields/description-field'
+import { HoursField } from '../../../../components/create-publication/components/fields/hours-field'
+import { FieldImage } from '../../../../components/create-publication/components/fields/image-field'
+import { FieldImages } from '../../../../components/create-publication/components/fields/images-field'
+import { Title } from '../../../../components/create-publication/components/fields/title-field'
+import { PopUpError } from '../../../../components/pop-up-error'
+import { PopUpMessage } from '../../../../components/pop-up-message'
 import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../../domain/constants'
-import { cs2SchemaGame } from '../../../../domain/domain/cs2-schema'
-import { UserServer } from '../../../../domain/types'
-import { useSession } from '../../../../firebase/auth/useSession'
-import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
-import { ArrowBack } from '../../../Svg'
-import { BackgroundDots } from '../../../background-dots'
-import { PopUpError } from '../../../pop-up-error'
-import { PopUpMessage } from '../../../pop-up-message'
-import { BoxField } from '../../components/fields/box-field'
-import { Description } from '../../components/fields/description-field'
-import { HoursField } from '../../components/fields/hours-field'
-import { FieldImage } from '../../components/fields/image-field'
-import { FieldImages } from '../../components/fields/images-field'
-import { Title } from '../../components/fields/title-field'
-import { useUpdateCountPublications } from '../hooks/use-update-count-publications'
+import { gameServer, teamServer } from '../../../../domain/types'
 
-interface Cs2GameFromProps {
-  dashboard?: boolean
-  userServer?: UserServer
-  mixWikTeams?: boolean
+interface EditCs2Props {
+  page: string
+  setEdit: (value: boolean) => void
+  mixWikTeams: boolean
+  publication: gameServer | teamServer
+  setRefetch: (value: boolean) => void
 }
 
-export const Cs2GameFrom = ({ dashboard, userServer, mixWikTeams }: Cs2GameFromProps) => {
-  const { currentPosition } = useCurrentPosition()
+export const EditCs2 = ({ page, setEdit, mixWikTeams, publication }: EditCs2Props, setRefetch) => {
   const [loading, setLoading] = useState({
     title: '',
     subtitle: '',
     number: 0
   })
-  const { userProvider } = useSession()
-  const { openGame, handleOpenGame } = useOpenGameContext()
-  const { setPlayerCreate } = usePlayerCreateContext()
+
   const [image, setImage] = useState<File>()
   const [image2, setImage2] = useState<File>()
   const [image3, setImage3] = useState<File>()
@@ -42,27 +34,25 @@ export const Cs2GameFrom = ({ dashboard, userServer, mixWikTeams }: Cs2GameFromP
   const [image5, setImage5] = useState<File>()
   const [image6, setImage6] = useState<File>()
   const [image7, setImage7] = useState<File>()
-  const [imgUrl, setImgUrl] = useState('')
-  const [imgUrl2, setImgUrl2] = useState('')
-  const [imgUrl3, setImgUrl3] = useState('')
-  const [imgUrl4, setImgUrl4] = useState('')
-  const [imgUrl5, setImgUrl5] = useState('')
-  const [imgUrl6, setImgUrl6] = useState('')
-  const [imgUrl7, setImgUrl7] = useState('')
-  const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
+  const [imgUrl, setImgUrl] = useState(publication.img.url)
+  const [imgUrl2, setImgUrl2] = useState(publication.img2.url)
+  const [imgUrl3, setImgUrl3] = useState(publication.img3.url)
+  const [imgUrl4, setImgUrl4] = useState(publication.img4.url)
+  const [imgUrl5, setImgUrl5] = useState(publication.img5.url)
+  const [imgUrl6, setImgUrl6] = useState(publication.img6.url)
+  const [imgUrl7, setImgUrl7] = useState(publication.img7.url)
 
   const [error, setError] = useState('')
+
   const [initialValues] = useState({
-    category: openGame as string,
-    title: '',
-    description: '',
-    hours: 0,
-    age: '',
-    level: '',
-    preferenceTeam: [] as string[],
-    position: [] as string[],
-    premier: '',
-    typeOfGamer: [] as string[]
+    title: publication.title,
+    description: publication.description,
+    hours: publication.hours,
+    level: publication.level,
+    preferenceTeam: publication.preferenceTeam,
+    position: publication.position,
+    premier: publication.premier,
+    typeOfGamer: publication.typeOfGamer
   })
 
   const {
@@ -71,44 +61,34 @@ export const Cs2GameFrom = ({ dashboard, userServer, mixWikTeams }: Cs2GameFromP
     watch,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(cs2SchemaGame),
     defaultValues: initialValues
   })
 
   const onSubmit = async (data) => {
-    const date = userServer?.age ? userServer.age : localStorage.getItem('age') ?? '01-01-2000'
-    const age = new Date().getFullYear() - new Date(date).getFullYear()
-    if (Object.keys(data).length > 0 && imgUrl && image) {
-      setLoading({ title: 'Creando jugador...', subtitle: 'Estamos creando tu jugador', number: 0 })
-      const res = await fetch('/api/create-game', {
-        method: 'POST',
-        body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
+    setLoading({ title: 'Actualizando datos...', subtitle: 'Estamos actualizando los datos', number: 0 })
+    const res = await fetch('/api/update-publication-data', {
+      method: 'POST',
+      body: JSON.stringify({ ...data, imageName: image?.name || publication.img.name, imageName2: image2?.name || publication.img2.name, imageName3: image3?.name || publication.img3.name, imageName4: image4?.name || publication.img4.name, imageName5: image5?.name || publication.img5.name, imageName6: image6?.name || publication.img6.name, imageName7: image7?.name || publication.img7.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: page, id: publication.id })
+    })
+    const response = await res.json()
+    if (response.message === 'Game updated') {
+      setLoading({
+        title: 'Los datos han sido actualizados',
+        subtitle: 'Los datos han sido actualizados correctamente',
+        number: 0
       })
-      const response = await res.json()
-      if (response.message === 'Game created') {
-        if (dashboard) handleUpdate()
-        setLoading({
-          title: 'Jugador creado',
-          subtitle: 'Tu jugador ha sido creado con éxito',
-          number: 1
-        })
-        setTimeout(() => {
-          setPlayerCreate(true)
-          handleOpenGame('')
-        }, 2000)
-      } else {
-        setError(response.message)
-        setLoading({ title: '', subtitle: '', number: 0 })
-      }
+      setTimeout(() => {
+        setRefetch(true)
+        setEdit(false)
+      }, 2000)
     } else {
-      setError('Ha ocurrido un error')
+      setError(response.message)
       setLoading({ title: '', subtitle: '', number: 0 })
     }
   }
 
   return (
-    <section className='size-full md:w-1/2 md:py-5'>
-      <BackgroundDots />
+    <div className=''>
       <PopUpMessage loading={loading} />
       <PopUpError error={error} />
       <form
@@ -222,10 +202,10 @@ export const Cs2GameFrom = ({ dashboard, userServer, mixWikTeams }: Cs2GameFromP
           <button
             type='button'
             className='flex items-center gap-1 text-sm md:text-base'
-            onClick={() => handleOpenGame('')}
+            onClick={() => setEdit(false)}
           >
             <ArrowBack className='w-6 h-6 text-white' />
-            Volver
+            Cancelar
           </button>
           <button
             disabled={!imgUrl || Object.keys(errors).length > 0}
@@ -235,6 +215,6 @@ export const Cs2GameFrom = ({ dashboard, userServer, mixWikTeams }: Cs2GameFromP
           </button>
         </div>
       </form>
-    </section>
+    </div>
   )
 }

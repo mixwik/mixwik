@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { gameServer, teamServer } from '../../../domain/types'
 
 export const useGetGameCategory = ({ id, collection }) => {
+  const [refetch, setRefetch] = useState(false)
   const [publication, setPublication] = useState<gameServer | teamServer>()
   const [publicationError, setPublicationError] = useState('')
   useEffect(() => {
@@ -19,6 +20,6 @@ export const useGetGameCategory = ({ id, collection }) => {
       }
     }
     getGameCategory()
-  }, [id, collection])
-  return { publication, publicationError }
+  }, [id, collection, refetch])
+  return { publication, publicationError, setRefetch }
 }

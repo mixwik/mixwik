@@ -1,9 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
 import { useOpenGameContext } from '../../../../context'
 import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../../domain/constants'
+import { cs2SchemaTeams } from '../../../../domain/domain/cs2-schema'
 import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
@@ -62,37 +62,6 @@ export const Cs2TeamFrom = ({ userServer, mixWikTeams }: Cs2TeamFromProps) => {
     typeOfGamer: [] as string[]
   })
   const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
-  const schema = yup
-    .object({
-      title: yup
-        .string()
-        .required('El campo nombre es obligatorio')
-        .min(3, 'Mínimo 3 caracteres')
-        .max(30, 'Máximo 30 caracteres'),
-      description: yup
-        .string()
-        .required('El campo descripción es obligatorio')
-        .min(100, 'Mínimo 100 caracteres')
-        .max(350, 'Máximo 350 caracteres'),
-      level: yup
-        .array()
-        .min(1, 'Selecciona al menos un nivel'),
-      premier: yup
-        .array()
-        .min(1, 'Selecciona al menos un nivel'),
-      position: yup
-        .array()
-        .min(1, 'Selecciona al menos una posición'),
-      typeOfGamer: yup
-        .array()
-        .min(1, 'Selecciona al menos un tipo'),
-      hours: yup
-        .number()
-        .required('El campo horas es obligatorio')
-        .min(1, 'El campo horas es obligatorio')
-        .max(5000, 'Máximo 5000 horas')
-    })
-    .required()
 
   const {
     register,
@@ -100,7 +69,7 @@ export const Cs2TeamFrom = ({ userServer, mixWikTeams }: Cs2TeamFromProps) => {
     watch,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(cs2SchemaTeams),
     defaultValues: initialValues
   })
 

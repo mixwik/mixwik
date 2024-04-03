@@ -40,6 +40,7 @@ export type UserServer = {
 }
 
 export type gameServer = {
+    id: string
     category: string
     date: string
     title: string
@@ -84,6 +85,7 @@ export type gameServer = {
 }
 
 export type teamServer = {
+    id: string
     category: string
     date: string
     title: string
