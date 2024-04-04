@@ -16,8 +16,7 @@ const schema = yup.object({
     .min(100, 'Mínimo 100 caracteres')
     .max(350, 'Máximo 350 caracteres'),
   level: yup
-    .array()
-    .min(1, 'Selecciona al menos un nivel'),
+    .array(),
   premier: yup
     .array(),
   position: yup

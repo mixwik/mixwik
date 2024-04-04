@@ -15,10 +15,12 @@ export const Team = ({ field, page }: TeamProps) => {
         field={field?.position}
         title={field?.position?.length > 1 ? 'Posiciones que buscamos cubrir:' : 'Posición que buscamos cubrir:'}
       />
-      <IterableField
-        field={field?.level}
-        title={field?.level?.length > 1 ? 'Mínimo tener los niveles:' : 'Mínimo tener el nivel:'}
-      />
+      {field?.level.length >= 1 && (
+        <IterableField
+          field={field?.level}
+          title={field?.level?.length > 1 ? 'Mínimo tener los niveles:' : 'Mínimo tener el nivel:'}
+        />
+      )}
       {field?.premier.length >= 1 && (
         <IterableField
           field={field.premier}

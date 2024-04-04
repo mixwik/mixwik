@@ -15,6 +15,7 @@ import { Player } from '../components/player'
 import { Team } from '../components/team'
 import { useGetGameCategory } from '../hooks/use-get-game-category'
 import { useImages } from '../hooks/use-images'
+import { Title } from '../components/fields/title'
 
 const PublicationsGamesPage = () => {
   const [edit, setEdit] = useState(false)
@@ -34,7 +35,7 @@ const PublicationsGamesPage = () => {
         <BackgroundDots />
         <div className='relative flex flex-col h-full gap-10 overflow-scroll bg-white no-scrollbar md:w-1/2'>
           <Header
-            title={publication?.title}
+            name={userServer?.name}
             image={userServer?.profileImg || userProvider.image}
             age={publication?.age}
             date={publication?.date}
@@ -44,6 +45,7 @@ const PublicationsGamesPage = () => {
           />
           <div className='flex flex-col gap-10 p-3 pt-0 md:p-5 md:pt-0'>
             <ImagesCarousel images={images} />
+            <Title title={publication?.title} />
             <Description description={publication?.description} />
             <Team field={publication} page={page} />
             <Player field={publication} page={page} />
@@ -55,7 +57,6 @@ const PublicationsGamesPage = () => {
       </section>
       {edit &&
         <Edit
-          category={publication.category}
           page={page}
           setEdit={setEdit}
           mixWikTeams={mixWikTeams}

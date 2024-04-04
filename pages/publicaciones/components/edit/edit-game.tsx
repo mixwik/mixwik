@@ -1,5 +1,7 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 import { ArrowBack } from '../../../../components/Svg'
 import { BoxField } from '../../../../components/create-publication/components/fields/box-field'
 import { Description } from '../../../../components/create-publication/components/fields/description-field'
@@ -9,18 +11,22 @@ import { FieldImages } from '../../../../components/create-publication/component
 import { Title } from '../../../../components/create-publication/components/fields/title-field'
 import { PopUpError } from '../../../../components/pop-up-error'
 import { PopUpMessage } from '../../../../components/pop-up-message'
-import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../../domain/constants'
+import { COLLECTIONS, TYPE_OF_GAME } from '../../../../domain/constants'
 import { gameServer, teamServer } from '../../../../domain/types'
+import { Cs2 } from './cs2'
+import { Fortnite } from './fortnite'
+import { Lol } from './lol'
+import { Valorant } from './valorant'
 
 interface EditCs2Props {
   page: string
   setEdit: (value: boolean) => void
   mixWikTeams: boolean
   publication: gameServer | teamServer
-  setRefetch: (value: boolean) => void
+  setRefetch: (value: any) => void
 }
 
-export const EditCs2 = ({ page, setEdit, mixWikTeams, publication }: EditCs2Props, setRefetch) => {
+export const EditGame = ({ page, setEdit, mixWikTeams, publication, setRefetch }: EditCs2Props) => {
   const [loading, setLoading] = useState({
     title: '',
     subtitle: '',
@@ -55,12 +61,28 @@ export const EditCs2 = ({ page, setEdit, mixWikTeams, publication }: EditCs2Prop
     typeOfGamer: publication.typeOfGamer
   })
 
+  const schema = yup
+    .object({
+      title: yup
+        .string()
+        .required('El campo nombre es obligatorio')
+        .min(3, 'Mínimo 3 caracteres')
+        .max(30, 'Máximo 30 caracteres'),
+      description: yup
+        .string()
+        .required('El campo descripción es obligatorio')
+        .min(100, 'Mínimo 100 caracteres')
+        .max(350, 'Máximo 350 caracteres')
+    })
+    .required()
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors }
   } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: initialValues
   })
 
@@ -78,7 +100,7 @@ export const EditCs2 = ({ page, setEdit, mixWikTeams, publication }: EditCs2Prop
         number: 0
       })
       setTimeout(() => {
-        setRefetch(true)
+        setRefetch((prevState) => !prevState)
         setEdit(false)
       }, 2000)
     } else {
@@ -155,36 +177,34 @@ export const EditCs2 = ({ page, setEdit, mixWikTeams, publication }: EditCs2Prop
           registerName='description'
         />
 
-        <BoxField
-          register={register}
-          registerName='level'
-          errors={errors.level}
-          game={CS2_LEVELS}
-          type='radio'
-          title='¿Cuál es tu nivel en Competitivo?'
-        />
-        <BoxField
-          register={register}
-          registerName='premier'
-          errors={errors.premier}
-          game={CS2_PREMIER}
-          type='radio'
-          title='¿Cuál es tu nivel en Premier?'
-        />
-
-        <BoxField
-          register={register}
-          registerName='position'
-          errors={errors.position}
-          game={CS2_POSITIONS}
-          type='checkbox'
-          title='¿En qué posiciones juegas?'
-        />
+        {publication.category === COLLECTIONS.cs2 &&
+          <Cs2
+            page={page}
+            register={register}
+            errors={errors}
+          />}
+        {publication.category === COLLECTIONS.lol &&
+          <Lol
+            page={page}
+            register={register}
+            errors={errors}
+          />}
+        {publication.category === COLLECTIONS.fortnite &&
+          <Fortnite
+            register={register}
+            errors={errors}
+          />}
+        {publication.category === COLLECTIONS.valorant &&
+          <Valorant
+            page={page}
+            register={register}
+            errors={errors}
+          />}
 
         <BoxField
           register={register}
           registerName='typeOfGamer'
-          errors={errors.typeOfGamer}
+          errors={errors.root}
           game={TYPE_OF_GAME}
           type='checkbox'
           title='¿Qué tipo de jugador eres?'
@@ -192,7 +212,7 @@ export const EditCs2 = ({ page, setEdit, mixWikTeams, publication }: EditCs2Prop
         <HoursField
           register={register}
           watch={watch}
-          errors={errors.hours}
+          errors={errors.root}
           title='¿Cuántas horas has jugado?'
           type='range'
           registerName='hours'

@@ -15,10 +15,12 @@ export const Player = ({ field, page }: PlayerProps) => {
         field={field?.position}
         title={field?.position?.length > 1 ? 'Suelo jugar en las posiciones:' : 'Solo juego en la posición:'}
       />
-      <Field
-        field={field?.level}
-        title='Mi nivel es:'
-      />
+      {field.level && (
+        <Field
+          field={field?.level}
+          title='Mi nivel es:'
+        />
+      )}
       {field?.premier.length >= 1 && (
         <Field
           field={field.premier}
