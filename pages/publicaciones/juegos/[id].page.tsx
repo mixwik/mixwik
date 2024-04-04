@@ -11,11 +11,11 @@ import { ImagesCarousel } from '../components/carousel'
 import { Edit } from '../components/edit'
 import { Description } from '../components/fields/description'
 import { Header } from '../components/fields/header'
+import { Title } from '../components/fields/title'
 import { Player } from '../components/player'
 import { Team } from '../components/team'
 import { useGetGameCategory } from '../hooks/use-get-game-category'
 import { useImages } from '../hooks/use-images'
-import { Title } from '../components/fields/title'
 
 const PublicationsGamesPage = () => {
   const [edit, setEdit] = useState(false)
