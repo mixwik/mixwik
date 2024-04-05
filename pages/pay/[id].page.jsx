@@ -21,7 +21,7 @@ const Pay = () => {
     cancelSubscription(stripeId)
     updateUserMixWikTeams(stripeId, userProvider?.id, router)
   }
-  if (!stripeId && loading) return <LoadingPage />
+  if (!stripeId || loading) return <LoadingPage />
 }
 
 export default Pay
