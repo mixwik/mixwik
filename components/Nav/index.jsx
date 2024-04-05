@@ -70,7 +70,7 @@ const Nav = () => {
                     userProvider?.image
                       ? (
 
-                        <Image width={0} height={0} src={userServer.profileImg ? userServer.profileImg : userProvider?.image} alt={userProvider?.name} loader={myLoader} quality={1} />
+                        <Image width={0} height={0} src={userServer?.profileImg?.url ? userServer?.profileImg.url : userProvider?.image} alt={userProvider?.name} loader={myLoader} quality={1} />
                         )
                       : (
                         <UserIconLogin />

@@ -45,6 +45,8 @@ export const Step5 = (
     const gender = localStorage.getItem('gender')
     const twitter = localStorage.getItem('twitter')
     const discord = localStorage.getItem('discord')
+    const imageUrl = localStorage.getItem('image')
+    const imageName = localStorage.getItem('imageName')
 
     const check = await checkPublication()
     if (!check) return
@@ -75,7 +77,9 @@ export const Step5 = (
         lolPublications,
         rocketLeaguePublications,
         dota2Publications,
-        affiliateCode
+        affiliateCode,
+        imageUrl,
+        imageName
       })
     })
 

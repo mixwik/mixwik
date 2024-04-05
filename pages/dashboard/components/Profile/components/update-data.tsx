@@ -142,7 +142,9 @@ export const UpdateData = ({ user, mixWikTeams, setEdit, setRefetch }: UpdateDat
         twitter: data.twitter,
         twitch: data.twitch,
         youtube: data.youtube,
-        tiktok: data.tiktok
+        tiktok: data.tiktok,
+        imageUrl: imgURL,
+        imageName: image?.name
       })
     })
     const update = await response.json()

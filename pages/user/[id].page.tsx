@@ -12,7 +12,9 @@ import { BoxCardsGames } from './components/box-card-games'
 import { BoxCardsTeams } from './components/box-card-teams'
 import { ReportPlayer } from './components/report-player'
 import { useGetAllGamesAndTeams } from './hooks/use-get-all-games-and-teams'
+import { useSession } from '../../firebase/auth/useSession'
 const User = () => {
+  const { userProvider } = useSession()
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
@@ -35,7 +37,7 @@ const User = () => {
           <section className='z-10 flex flex-col justify-between w-full bg-white'>
             <div className='sticky top-0 flex items-center justify-between p-3 bg-white shadow-md'>
               <div className='flex gap-2'>
-                <Image className='flex object-cover rounded-full size-20' width={0} height={0} loader={myLoader} src={userServer.profileImg} alt={userServer.name} />
+                <Image className='flex object-cover rounded-full size-20' width={0} height={0} loader={myLoader} src={userServer?.profileImg?.url || userProvider.image} alt={userServer?.profileImg?.name} />
                 <div className='flex flex-col justify-center gap-2'>
                   <h2 className='font-bold md:text-2xl'>{userServer.name}</h2>
                   <p className='text-xs'>{age} Años</p>

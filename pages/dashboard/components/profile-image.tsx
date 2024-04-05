@@ -12,7 +12,7 @@ export const ProfileImage = (
       width={96}
       height={96}
       loader={myLoader}
-      src={userServer?.profileImg ? userServer.profileImg : userProvider.image}
+      src={userServer?.profileImg?.url ? userServer.profileImg.url : userProvider.image}
       alt={userProvider?.name ?? 'user'}
     />
   )

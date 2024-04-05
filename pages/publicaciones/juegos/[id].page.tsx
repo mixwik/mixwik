@@ -39,7 +39,7 @@ const PublicationsGamesPage = () => {
         <div className='relative flex flex-col h-full gap-10 overflow-scroll bg-white no-scrollbar md:w-1/2'>
           <Header
             userServer={userServer}
-            image={userServer?.profileImg || userProvider.image}
+            image={userServer?.profileImg.url || userProvider.image}
             age={publication?.age}
             date={publication?.date}
             mixWikTeams={mixWikTeams}

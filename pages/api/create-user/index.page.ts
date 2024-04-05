@@ -46,7 +46,9 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       lolPublications,
       rocketLeaguePublications,
       dota2Publications,
-      affiliateCode
+      affiliateCode,
+      imageUrl,
+      imageName
     } = req.body
 
     if (req.method === 'POST') {
@@ -60,6 +62,10 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           name,
           description,
           gender,
+          profileImg: {
+            url: imageUrl,
+            name: imageName
+          },
           ban: false,
           dateOfRegister: new Date(),
           admonition: 0,

@@ -80,7 +80,7 @@ const schema = yup
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { uid, age, description, twitter, discord, instagram, youtube, tiktok, facebook, twitch } = req.body
+    const { uid, age, description, twitter, discord, instagram, youtube, tiktok, facebook, twitch, imageUrl, imageName } = req.body
     try {
       await schema.validate(req.body)
     } catch (error) {
@@ -90,6 +90,10 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     await updateDoc(userRef, {
       description,
       age,
+      profileImg: {
+        url: imageUrl,
+        name: imageName
+      },
       social: {
         twitter,
         discord,

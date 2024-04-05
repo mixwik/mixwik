@@ -14,7 +14,10 @@ export type UserServer = {
     gender: 'M' | 'F' | 'O'
     geometry: [number, number]
     name: string
-    profileImg: string
+    profileImg: {
+        url: string
+        name: string
+    }
     uid: string
     likes: string[]
     dateOfRegister: string
