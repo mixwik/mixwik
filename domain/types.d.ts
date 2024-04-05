@@ -54,6 +54,7 @@ export type gameServer = {
     typeOfGamer: string[]
     geometry: [number, number]
     uid: string
+    promotion: string
     img: {
         url: string
         name: string
@@ -98,6 +99,7 @@ export type teamServer = {
     position: string[]
     typeOfGamer: string[]
     geometry: [number, number]
+    promotion: string
     uid: string
     img: {
         url: string

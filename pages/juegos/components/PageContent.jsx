@@ -63,8 +63,8 @@ const PageContent = ({ category, children, distance }) => {
                   res.promotion && (
                     <Card
                       key={res.id}
-                      user={users}
-                      csgo={res}
+                      userServer={users}
+                      publications={res}
                       link={res.category}
                       promotions
                     />
@@ -77,8 +77,8 @@ const PageContent = ({ category, children, distance }) => {
                 listUserTeams.map((res) => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     equips
                   />
@@ -90,8 +90,8 @@ const PageContent = ({ category, children, distance }) => {
                 listUserCsgo.map((res) => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     teams
                   />
@@ -104,7 +104,8 @@ const PageContent = ({ category, children, distance }) => {
                     listUserCsgo.map((res) => (
                       <Card
                         key={res.id}
-                        user={users} csgo={res}
+                        userServer={users} csgo={res}
+                        publication={res}
                         link={res.category}
                         basic
                       />

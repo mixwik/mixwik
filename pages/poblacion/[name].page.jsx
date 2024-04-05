@@ -40,8 +40,8 @@ const City = () => {
                 listUserAllGames.map(res => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     promotions
                   />
@@ -53,8 +53,8 @@ const City = () => {
                 listUserTeams.map((res) => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     equips
                   />
@@ -66,8 +66,8 @@ const City = () => {
                 listUserAllGames.map(res => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     teams
                   />
@@ -79,8 +79,8 @@ const City = () => {
                 listUserAllGames.map(res => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     basic
                   />

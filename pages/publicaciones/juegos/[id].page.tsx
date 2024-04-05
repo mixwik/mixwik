@@ -38,7 +38,7 @@ const PublicationsGamesPage = () => {
         <BackgroundDots />
         <div className='relative flex flex-col h-full gap-10 overflow-scroll bg-white no-scrollbar md:w-1/2'>
           <Header
-            name={userServer?.name}
+            userServer={userServer}
             image={userServer?.profileImg || userProvider.image}
             age={publication?.age}
             date={publication?.date}

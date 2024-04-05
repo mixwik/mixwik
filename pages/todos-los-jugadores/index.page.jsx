@@ -69,8 +69,8 @@ const AllGames = () => {
                 listUserAllGames.map(res => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     promotions
                   />
@@ -82,8 +82,8 @@ const AllGames = () => {
                 listUserTeams.map((res) => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     equips
                   />
@@ -95,8 +95,8 @@ const AllGames = () => {
                 listUserAllGames.map(res => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     teams
                   />
@@ -108,8 +108,8 @@ const AllGames = () => {
                 listUserAllGames.map(res => (
                   <Card
                     key={res.id}
-                    user={users}
-                    csgo={res}
+                    userServer={users}
+                    publication={res}
                     link={res.category}
                     basic
                   />

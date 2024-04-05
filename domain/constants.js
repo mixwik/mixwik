@@ -12,6 +12,8 @@ export const COLLECTIONS = {
   bugs: 'bugs'
 }
 
+export const CATEGORIES = [COLLECTIONS.cs2, COLLECTIONS.fortnite, COLLECTIONS.lol, COLLECTIONS.valorant, COLLECTIONS.rocketLeague, COLLECTIONS.dota2]
+
 export const GAME_PUBLICATIONS = {
   cs2: 'cs2Publications',
   fortnite: 'fortnitePublications',
