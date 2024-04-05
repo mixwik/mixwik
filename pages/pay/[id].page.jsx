@@ -1,23 +1,27 @@
 import { useRouter } from 'next/router'
-import { COLLECTIONS } from '../../domain/constants'
 import PrivateRoute from '../../firebase/auth/PrivateRoute'
 import { useSession } from '../../firebase/auth/useSession'
-import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { updateUserMixWikTeams } from '../../firebase/hooks/updateMethod/updateUserData'
 import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChecksStripe'
+import { LoadingPage } from './components/loading-page.tsx'
+import { useState } from 'react'
 
 const Pay = () => {
+  const [loading, setLoading] = useState(true)
+  setTimeout(() => {
+    setLoading(false)
+  }, 3000)
   const router = useRouter()
   const { id } = router.query
   const { userProvider } = useSession()
   const cancelSubscription = useCancelRenovationSubscription()
-  const user = useGetOneData(COLLECTIONS.users, userProvider?.uid)
+
   const stripeId = useCheckPay(id, userProvider?.email)
-  if (stripeId && user.id) {
+  if (stripeId && userProvider.id) {
     cancelSubscription(stripeId)
-    updateUserMixWikTeams(stripeId, user.id, router)
+    updateUserMixWikTeams(stripeId, userProvider?.id, router)
   }
-  if (!stripeId) return <div>Cargando...</div>
+  if (!stripeId && loading) return <LoadingPage />
 }
 
 export default Pay
