@@ -19,7 +19,7 @@ const Pay = () => {
   const stripeId = useCheckPay(id, userProvider?.email)
   if (stripeId && userProvider.id) {
     cancelSubscription(stripeId)
-    updateUserMixWikTeams(stripeId, userProvider?.id, router)
+    updateUserMixWikTeams(stripeId, userProvider?.uid, router)
   }
   if (!stripeId || loading) return <LoadingPage />
 }
