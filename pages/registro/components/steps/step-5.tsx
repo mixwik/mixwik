@@ -6,6 +6,7 @@ import { SelectGame } from '../../../../components/create-publication/select-gam
 import { PopUpError } from '../../../../components/pop-up-error'
 import { PopUpMessage } from '../../../../components/pop-up-message'
 import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
+import { COLLECTIONS } from '../../../../domain/constants'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { listOfRemove } from '../../domain/consts'
 import { useCheckPublications } from '../../hooks/use-check-publication'
@@ -25,7 +26,7 @@ export const Step5 = (
     number: 0
 
   })
-  const { checkPublication } = useCheckPublications({ setError })
+  const { checkPublication } = useCheckPublications()
   const [affiliateCode, setAffiliateCode] = useState('')
 
   const handleSubmit = async () => {
@@ -48,8 +49,13 @@ export const Step5 = (
     const imageUrl = localStorage.getItem('image')
     const imageName = localStorage.getItem('imageName')
 
-    const check = await checkPublication()
-    if (!check) return
+    const cs2Check = await checkPublication(COLLECTIONS.cs2)
+    const fortniteCheck = await checkPublication(COLLECTIONS.fortnite)
+    const valorantCheck = await checkPublication(COLLECTIONS.valorant)
+    const lolCheck = await checkPublication(COLLECTIONS.lol)
+    const rocketLeagueCheck = await checkPublication(COLLECTIONS.rocketLeague)
+    const dota2Check = await checkPublication(COLLECTIONS.dota2)
+    if (!cs2Check && !fortniteCheck && !valorantCheck && !lolCheck && !rocketLeagueCheck && !dota2Check) return
 
     setLoading({
       title: 'Creando usuario...',
@@ -140,7 +146,7 @@ export const Step5 = (
   }
 
   const handleCheck = async (collection: string) => {
-    const check = await checkPublication()
+    const check = await checkPublication(collection)
     if (check) {
       setError('Ya tienes una publicación, por ahora es suficiente, ¡Ya puedes crear tu usuario!')
       setTimeout(() => {

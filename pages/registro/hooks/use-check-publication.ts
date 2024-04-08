@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePlayerCreateContext } from '../../../context'
 import { COLLECTIONS, GAME_PUBLICATIONS } from '../../../domain/constants'
 import { useSession } from '../../../firebase/auth/useSession'
 
-export const useCheckPublications = (
-  { setError }:
-  {setError: React.Dispatch<React.SetStateAction<string>>}
-) => {
+export const useCheckPublications = () => {
   const { userProvider } = useSession()
   const { setPlayerCreate } = usePlayerCreateContext()
   const [cs2Publications, setCs2Publications] = useState(0)
@@ -25,14 +22,14 @@ export const useCheckPublications = (
     setDota2Publications(Number(localStorage.getItem(GAME_PUBLICATIONS.dota2)) ?? 0)
   }, [])
 
-  const checkPublication = async () => {
+  const checkPublication = async (collections) => {
     const checkResponse = await fetch('/api/check-publication', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        uid: userProvider.uid
+        uid: userProvider.uid, collections
       })
     })
     const checkData = await checkResponse.json()
