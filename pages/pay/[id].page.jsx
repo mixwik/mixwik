@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import PrivateRoute from '../../firebase/auth/PrivateRoute'
 import { useSession } from '../../firebase/auth/useSession'
 import { updateUserMixWikTeams } from '../../firebase/hooks/updateMethod/updateUserData'
 import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChecksStripe'
 import { LoadingPage } from './components/loading-page.tsx'
-import { useState } from 'react'
 
 const Pay = () => {
   const [loading, setLoading] = useState(true)
@@ -17,7 +17,7 @@ const Pay = () => {
   const cancelSubscription = useCancelRenovationSubscription()
 
   const stripeId = useCheckPay(id, userProvider?.email)
-  if (stripeId && userProvider.id) {
+  if (stripeId && userProvider?.uid) {
     cancelSubscription(stripeId)
     updateUserMixWikTeams(stripeId, userProvider?.uid, router)
   }
