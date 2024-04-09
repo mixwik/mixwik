@@ -8,7 +8,7 @@ export const ProfileImage = (
 ) => {
   return (
     <Image
-      className='w-full h-full'
+      className='object-cover w-full h-full'
       width={96}
       height={96}
       loader={myLoader}

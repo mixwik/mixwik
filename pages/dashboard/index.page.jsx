@@ -31,8 +31,10 @@ import { useSignOut } from '../../firebase/auth/SignOut'
 import { useGetOneUser } from '../../hooks/use-get-one-user'
 import { useComproveRenovationSubscription, useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { useConfirmUserRegister } from '../../hooks/useConfirmUserRegister'
+import { PromotionIcon } from '../../icons/promotion'
 import { MiniCard } from './components/mini-card'
 import { ProfileImage } from './components/profile-image'
+import { Promotion } from './components/promotion'
 
 export default function Dashboard () {
   const handleOpen = useHandleOpenContext()
@@ -83,24 +85,30 @@ export default function Dashboard () {
           user={userServer}
           page={page}
         />
+        <Promotion
+          user={userServer}
+          page={page}
+        />
         {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={userServer} />}
         {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
         <nav className='flex items-center justify-center h-[90vh]'>
           <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 lg:w-1/2 md:3/5'>
             <li
-              className='relative flex flex-col items-center col-span-4 row-span-2 gap-1 p-3 overflow-hidden bg-white rounded-lg shadow-lg md:p-5 md:col-span-3'
+              className='relative flex flex-col items-center col-span-4 row-span-2 gap-1 overflow-hidden bg-white rounded-lg shadow-lg md:col-span-3'
             >
-              <div className='absolute top-0 left-0 w-full overflow-hidden rounded-t-lg h-1/3'>
-                <ProfileImage userServer={userServer} userProvider={userProvider} />
+              <div className='relative left-0 flex justify-center w-full rounded-t-lg h-1/2'>
+                <div className='w-full overflow-hidden'>
+                  <ProfileImage userServer={userServer} userProvider={userProvider} />
+                </div>
+                <div className='absolute z-20 overflow-hidden border-4 border-white border-solid rounded-full md:-bottom-10 -bottom-5 size-20 md:size-28'>
+                  <ProfileImage userServer={userServer} userProvider={userProvider} />
+                </div>
               </div>
-              <div className='z-10 overflow-hidden border-4 border-white border-solid rounded-full size-20 md:size-28'>
-                <ProfileImage userServer={userServer} userProvider={userProvider} />
-              </div>
-              <h1 className='text-lg font-bold'>{userServer?.name}</h1>
+              <h1 className='mt-5 text-lg font-bold md:mt-10'>{userServer?.name}</h1>
               <button
                 onClick={() => handleClick('profile')}
-                className='relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded text-pennBlue hover:pl-10 hover:pr-6 bg-gray-50 group'
+                className='relative inline-flex items-center justify-start py-3 pl-4 pr-12 mb-3 overflow-hidden font-semibold transition-all duration-150 ease-in-out rounded text-pennBlue hover:pl-10 hover:pr-6 bg-gray-50 group'
               >
                 <span className='absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-pennBlue group-hover:h-full' />
                 <span className='absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12'>
@@ -122,7 +130,7 @@ export default function Dashboard () {
                 <Image className='size-10 md:size-20' src='/logos/only-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
                 Jugador
               </button>
-              <span className='text-xs text-center'>Crear publicación</span>
+              <h2 className='text-xs font-bold text-center md:text-base'>Crear publicación</h2>
               <button
                 className='flex flex-col items-center justify-center gap-1 duration-300 border border-solid rounded-lg md:gap-3 size-full border-pennBlue bg-pennBlue/10 hover:bg-pennBlue/15'
                 onClick={() => handleClick(mixWikTeams ? 'teams' : 'noTeams')}
@@ -142,9 +150,9 @@ export default function Dashboard () {
                   <FavSelectedIcon className='absolute fill-current text-pennBlue size-full' />
                   <FavSelectedIcon className='absolute text-red-500 duration-300 scale-0 fill-current size-full group-hover:scale-110' />
                 </div>
-                <span className='text-sm font-bold text-red-500 md:text-base'>
+                <h2 className='text-sm font-bold text-red-500 md:text-base'>
                   Favoritos
-                </span>
+                </h2>
               </button>
             </li>
             <li
@@ -157,21 +165,21 @@ export default function Dashboard () {
                 <MiniCard borderColor='border-orange' bg='bg-orange' position='left-12 top-2' />
                 <MiniCard borderColor='border-purple-500' bg='bg-purple-500' position='left-20 top-3' />
               </div>
-              <span className='self-center mt-2 font-bold'>
+              <h2 className='self-center mt-2 font-bold'>
                 Publicaciones
-              </span>
+              </h2>
             </li>
             <li
-              className='flex text-white duration-300 rounded-lg shadow-lg cursor-pointer md:col-span-3 col-span-full bg-pennBlue hover:bg-aero'
+              className='flex col-span-2 text-white duration-300 rounded-lg shadow-lg cursor-pointer md:col-span-2 bg-pennBlue hover:bg-aero'
               onClick={() => handleClick('mixWikTeams')}
             >
-              <Image className='w-auto h-full p-2 rounded-l-lg bg-aero' width={10} height={10} src='/logos/icon-logo.png' alt='Icono del logo MixWik' loader={myLoader} />
+              <Image className='hidden w-auto h-full p-2 rounded-l-lg bg-aero md:block' width={10} height={10} src='/logos/icon-logo.png' alt='Icono del logo MixWik' loader={myLoader} />
               {
                 mixWikTeams
                   ? (
-                    <div className='flex flex-col items-center justify-center w-full gap-5'>
-                      <h3 className='text-xl md:text-2xl'>¡Eres de MixWikTeams!</h3>
-                      <span className='text-sm'>Fecha de finalización: {date}</span>
+                    <div className='flex flex-col items-center justify-center w-full p-2 md:gap-5'>
+                      <h2 className='md:text-2xl'>¡Eres de MixWikTeams!</h2>
+                      <span className='text-sm'>Finaliza el: {date}</span>
                     </div>
                     )
                   : (
@@ -183,32 +191,55 @@ export default function Dashboard () {
                     )
               }
             </li>
+            <li
+              className='col-span-2 p-1 duration-300 rounded-lg shadow-lg cursor-pointer bg-orange hover:bg-slate-100'
+              onClick={() => handleClick('promotion')}
+            >
+              <button className='relative flex flex-col items-center justify-center font-bold size-full'>
+                <h2 className='self-center mt-2 font-bold'>
+                  Promocionar una publicación
+                </h2>
+                <div className='flex justify-between'>
+                  <PromotionIcon className='md:size-20 size-10 drop-shadow-2xl rounded-full text-[#cd7f32]' />
+                  <PromotionIcon className='md:size-20 size-10 text-[#c0c0c0]' />
+                  <PromotionIcon className='md:size-20 size-10 text-[#ffd700]' />
+                </div>
+              </button>
+            </li>
             <li className='col-span-2 bg-white rounded-lg shadow-lg md:col-span-1'>
               <button
                 className='flex flex-col items-center justify-center w-full h-full gap-2 font-bold duration-300 bg-white rounded-lg cursor-pointer md:gap-5 hover:bg-slate-100'
                 onClick={() => setBugs(!bugs)}
               >
                 <BugsIcon className='size-9 text-pennBlue' />
-                Reportar Bug
+                <h2>
+                  Reportar Bug
+                </h2>
               </button>
             </li>
             <li className='flex flex-col items-center justify-center col-span-2 p-1 duration-300 bg-white rounded-lg shadow-lg cursor-pointer md:col-span-1 hover:bg-slate-100'>
               <Link href='/sobre-nosotros' className='flex flex-col items-center gap-2 font-bold md:gap-5'>
                 <Company className='size-9 text-pennBlue' />
-                Sobre Nosotros
+                <h2>
+                  Sobre Nosotros
+                </h2>
               </Link>
             </li>
             <li className='flex items-center justify-center col-span-2 p-1 duration-300 bg-white rounded-lg shadow-lg cursor-pointer md:col-span-1 hover:bg-slate-100'>
               <Link href='/contacto' className='flex flex-col items-center gap-2 font-bold md:gap-5'>
                 <ContactUs className='size-9 text-pennBlue' />
-                Contáctanos
+                <h2>
+                  Contáctanos
+                </h2>
               </Link>
             </li>
             <li
-              className='flex items-center justify-center col-span-2 gap-2 p-1 font-bold text-white duration-300 bg-red-400 rounded-lg shadow-lg cursor-pointer md:gap-5 cursor-pointe hover:bg-red-500'
+              className='flex items-center justify-center col-span-2 gap-2 p-1 font-bold text-white duration-300 bg-red-400 rounded-lg shadow-lg cursor-pointer md:col-span-1 md:gap-5 cursor-pointe hover:bg-red-500'
               onClick={() => handleSignOut()}
             >
-              Cerrar sesión
+              <h2>
+                Cerrar sesión
+              </h2>
               <LogOutIcon className='text-white size-9' />
             </li>
           </ul>

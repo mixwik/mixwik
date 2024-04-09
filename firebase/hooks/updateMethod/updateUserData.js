@@ -107,7 +107,7 @@ export const updateUserMixWikTeams = async (payID, id, router) => {
   await updateDoc(userRef, {
     mixWikTeams: payID
   }).then(
-    router.push('/')
+    router.push('/dashboard')
   )
 }
 
