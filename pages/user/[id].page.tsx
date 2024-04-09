@@ -21,8 +21,6 @@ const User = () => {
   const { id } = router.query
   const { userServer } = useGetOneUser(id)
   const { games, teams } = useGetAllGamesAndTeams(id as string)
-  console.log('games', games)
-  console.log('teams', teams)
   const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
   const age = new Date().getFullYear() - new Date(userServer.age).getFullYear()
   setTimeout(() => {

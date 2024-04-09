@@ -24,9 +24,9 @@ interface CardProps {
 
 const Card = ({ userServer, publication, basic, teams, equips, promotions }: CardProps) => {
   const [loading, setLoading] = useState(true)
-  const csgoUser = userServer.find(find => find.uid === publication.uid)
+  const csgoUser = userServer.find(find => find.uid === publication?.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(csgoUser?.mixWikTeams)
-  const promotion = useMixWikTeamsCheckSubscription(publication.promotion)
+  const promotion = useMixWikTeamsCheckSubscription(publication?.promotion)
   const { images } = useImages({ publication })
 
   setTimeout(() => {
@@ -42,7 +42,7 @@ const Card = ({ userServer, publication, basic, teams, equips, promotions }: Car
   if (loading) return null
 
   return (
-    <Link href={equips ? `/publicaciones/juegos/${publication.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${publication.id}?page=${publication.category}`}>
+    <Link href={equips ? `/publicaciones/juegos/${publication?.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${publication?.id}?page=${publication?.category}`}>
       <section className='relative flex flex-col items-center w-40 overflow-hidden bg-white rounded-md shadow-md h-80'>
         <div className='object-cover size-full'>
           <Carousel
@@ -61,11 +61,11 @@ const Card = ({ userServer, publication, basic, teams, equips, promotions }: Car
           </Carousel>
         </div>
 
-        <h3 className='absolute top-0 w-full p-1 font-bold text-center text-white bg-black/60'>{publication.title.slice(0, 15)}...</h3>
+        <h3 className='absolute top-0 w-full p-1 font-bold text-center text-white bg-black/60'>{publication?.title.slice(0, 15)}...</h3>
         <Badges
           equips={equips}
           mixWikTeams={mixWikTeams}
-          promotions={promotions}
+          promotions={promotion}
         />
       </section>
     </Link>
