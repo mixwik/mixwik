@@ -101,7 +101,7 @@ export default function Dashboard () {
                 <div className='w-full overflow-hidden'>
                   <ProfileImage userServer={userServer} userProvider={userProvider} />
                 </div>
-                <div className='absolute z-20 overflow-hidden border-4 border-white border-solid rounded-full md:-bottom-10 -bottom-5 size-20 md:size-28'>
+                <div className='absolute z-10 overflow-hidden border-4 border-white border-solid rounded-full md:-bottom-10 -bottom-5 size-20 md:size-28'>
                   <ProfileImage userServer={userServer} userProvider={userProvider} />
                 </div>
               </div>

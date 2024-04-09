@@ -10,30 +10,40 @@ export const Promotion = ({ page, userServer }) => {
         <p>Selecciona el plan que más te convenga para <span className='font-semibold text-aero'>promocionar</span> tu publicación.</p>
         <p>Una vez realizado el pago <span className='font-semibold text-pennBlue'>podrás elegir cual de tus publicaciones quieres promocionar.</span></p>
         <p>La publicación elegida se mostrará en <span className='font-semibold text-aero'>los primeros puestos a nivel nacional</span> durante 3, 7 o 15 días, dependiendo del nivel que hayas elegido</p>
+        <p className='font-bold text-pennBlue'>Ninguno de los planes se auto-renueva</p>
       </div>
       <ul className='grid gap-5 md:grid-cols-3'>
-        <li className='bg-[#cd7f32] m-5 p-5 rounded-md shadow-lg'>
-          <Link className='flex flex-col items-center gap-3' href={`https://buy.stripe.com/7sIg0231C4yo0Mw7st?prefilled_email=${userServer?.email}&client_reference_id=${userServer?.uid}`}>
+        <li
+          className='bg-[#cd7f32] m-5 p-5 rounded-md h-40 flex justify-center items-center shadow-xl'
+          style={{ clipPath: 'polygon(49% 0, 100% 30%, 100% 100%, 50% 80%, 0 100%, 0 30%)' }}
+        >
+          <Link className='flex flex-col items-center' href={`https://buy.stripe.com/7sIg0231C4yo0Mw7st?prefilled_email=${userServer?.email}&client_reference_id=${userServer?.uid}`}>
             <h3 className='text-xl font-bold text-black'>Bronce</h3>
             <p className='text-balance'>
-              Promociona tu publicación durante 3 días por 1€, (no se auto-renueva)
+              3 días por 1€
             </p>
           </Link>
         </li>
-        <li className='bg-[#c0c0c0] m-5 p-5 rounded-md shadow-lg flex items-center flex-col gap-3'>
+        <li
+          className='bg-[#c0c0c0] m-5 p-5 rounded-md shadow-lg flex items-center justify-center flex-col gap-3 h-40'
+          style={{ clipPath: 'polygon(49% 0, 100% 30%, 100% 100%, 50% 80%, 0 100%, 0 30%)' }}
+        >
           <Link href={`https://buy.stripe.com/4gwdRUau4gh6bra28a?prefilled_email=${userServer?.email}&client_reference_id=${userServer?.uid}`}>
             <h3 className='text-xl font-bold text-center text-black'>Plata</h3>
             <p className='text-balance'>
-              Promociona tu publicación durante 7 días por 2€, (no se auto-renueva)
+              7 días por 2€
             </p>
 
           </Link>
         </li>
-        <li className='bg-[#ffd700] m-5 p-5 rounded-md shadow-lg flex items-center flex-col gap-3'>
+        <li
+          className='bg-[#ffd700] m-5 p-5 rounded-md shadow-lg flex items-center flex-col gap-3 h-40 justify-center'
+          style={{ clipPath: 'polygon(49% 0, 100% 30%, 100% 100%, 50% 80%, 0 100%, 0 30%)' }}
+        >
           <Link href={`https://buy.stripe.com/3cs1589q0fd2dzi7sv?prefilled_email=${userServer?.email}&client_reference_id=${userServer?.uid}`}>
             <h3 className='text-xl font-bold text-center text-black'>Oro</h3>
             <p className='text-balance'>
-              Promociona tu publicación durante 15 días por 3€, (no se auto-renueva)
+              15 días por 3€
             </p>
           </Link>
         </li>
