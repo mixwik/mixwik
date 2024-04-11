@@ -57,7 +57,7 @@ const PageContent = ({ category, children, distance }) => {
               </span>
             </div>}
           {publicationsFiltered.map((res) => {
-            const promotion = checkSubscription(res.promotion, res.uid)
+            const promotion = checkSubscription(res.promotion, res.category, res.id)
             return (
               (res.promotion && promotion) && (
                 <Card
