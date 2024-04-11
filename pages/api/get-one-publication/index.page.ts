@@ -4,9 +4,9 @@ import { db } from '../../../firebase/initialize'
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { id, collection } = req.body
+    const { id, category } = req.body
     if (id) {
-      const docRef = doc(db, collection, id)
+      const docRef = doc(db, category, id)
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
         res.status(200).json({

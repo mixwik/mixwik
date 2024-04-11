@@ -47,7 +47,7 @@ export const useMixWikTeamsCheckSubscription = (stripeId) => {
 export const useMixWikTeamsCheckSubscriptionFunction = () => {
   const stripe = new Stripe(key)
 
-  const checkSubscription = async (stripeId) => {
+  const checkSubscription = async (stripeId, userId) => {
     const subscriptions = await stripe.subscriptions.list({ customer: stripeId })
 
     const activeSubscription = subscriptions.data.find(subscription => subscription.status === 'active')
@@ -55,6 +55,10 @@ export const useMixWikTeamsCheckSubscriptionFunction = () => {
     if (activeSubscription) {
       return true
     } else {
+      await fetch('/api/delete-promotion', {
+        method: 'DELETE',
+        body: JSON.stringify({ userId })
+      })
       return false
     }
   }

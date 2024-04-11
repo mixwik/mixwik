@@ -23,6 +23,22 @@ export const GAME_PUBLICATIONS = {
   dota2: 'dota2Publications'
 }
 
+export const PUBLICATION_STATUS = {
+  active: 'active',
+  inactive: 'inactive'
+}
+
+export const PUBLICATION_TYPE = {
+  team: 'team',
+  player: 'player'
+}
+
+export const PUBLICATION_PLAN = {
+  basic: 'basic',
+  mixWikTeams: 'mixWikTeams',
+  promotion: 'promotion'
+}
+
 export const GAMES = [
   {
     collection: COLLECTIONS.cs2,

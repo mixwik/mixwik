@@ -3,7 +3,6 @@ import { COLLECTIONS } from '../../domain/constants'
 import MapLoader from '../Loaders/MapLoader'
 import GameMarker from './GameMarker'
 import styles from './Map.module.scss'
-import TeamMarker from './TeamMarker'
 
 const Markers = ({ position, users, currentPosition, gamesCategory, teamsCategory }) => {
   const user = users.find(find => find.uid === position.uid)
@@ -74,42 +73,7 @@ const Markers = ({ position, users, currentPosition, gamesCategory, teamsCategor
           />
         )
       }
-      {
-        teamsCategory === COLLECTIONS.cs2 && (
-          <TeamMarker
-            icon={csgoIcon}
-            user={user}
-            position={position}
-          />
-        )
-      }
-      {
-        teamsCategory === COLLECTIONS.lol && (
-          <TeamMarker
-            icon={lolIcon}
-            user={user}
-            position={position}
-          />
-        )
-      }
-      {
-        teamsCategory === COLLECTIONS.fortnite && (
-          <TeamMarker
-            icon={fortniteIcon}
-            user={user}
-            position={position}
-          />
-        )
-      }
-      {
-        teamsCategory === COLLECTIONS.valorant && (
-          <TeamMarker
-            icon={valorantIcon}
-            user={user}
-            position={position}
-          />
-        )
-      }
+
     </>
 
   )

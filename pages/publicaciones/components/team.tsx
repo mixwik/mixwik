@@ -1,14 +1,15 @@
+import { PUBLICATION_TYPE } from '../../../domain/constants'
 import { gameServer, teamServer } from '../../../domain/types'
 import { Field } from './fields/field'
 import { IterableField } from './fields/iterable-field'
 
 interface TeamProps {
     field: teamServer | gameServer
-    page: string | string[] | undefined
+    type: string | string[] | undefined
     }
 
-export const Team = ({ field, page }: TeamProps) => {
-  if (page !== 'teams') return null
+export const Team = ({ field, type }: TeamProps) => {
+  if (type !== PUBLICATION_TYPE.team) return null
   return (
     <div className='flex flex-col gap-10'>
       <IterableField

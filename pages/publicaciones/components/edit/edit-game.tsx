@@ -19,14 +19,14 @@ import { Lol } from './lol'
 import { Valorant } from './valorant'
 
 interface EditCs2Props {
-  page: string
+  type: string
   setEdit: (value: boolean) => void
   mixWikTeams: boolean
   publication: gameServer | teamServer
   setRefetch: (value: any) => void
 }
 
-export const EditGame = ({ page, setEdit, mixWikTeams, publication, setRefetch }: EditCs2Props) => {
+export const EditGame = ({ type, setEdit, mixWikTeams, publication, setRefetch }: EditCs2Props) => {
   const [loading, setLoading] = useState({
     title: '',
     subtitle: '',
@@ -90,7 +90,7 @@ export const EditGame = ({ page, setEdit, mixWikTeams, publication, setRefetch }
     setLoading({ title: 'Actualizando datos...', subtitle: 'Estamos actualizando los datos', number: 0 })
     const res = await fetch('/api/update-publication-data', {
       method: 'POST',
-      body: JSON.stringify({ ...data, imageName: image?.name || publication.img.name, imageName2: image2?.name || publication.img2.name, imageName3: image3?.name || publication.img3.name, imageName4: image4?.name || publication.img4.name, imageName5: image5?.name || publication.img5.name, imageName6: image6?.name || publication.img6.name, imageName7: image7?.name || publication.img7.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: page, id: publication.id })
+      body: JSON.stringify({ ...data, imageName: image?.name || publication.img.name, imageName2: image2?.name || publication.img2.name, imageName3: image3?.name || publication.img3.name, imageName4: image4?.name || publication.img4.name, imageName5: image5?.name || publication.img5.name, imageName6: image6?.name || publication.img6.name, imageName7: image7?.name || publication.img7.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: publication.category, id: publication.id })
     })
     const response = await res.json()
     if (response.message === 'Game updated') {
@@ -179,13 +179,13 @@ export const EditGame = ({ page, setEdit, mixWikTeams, publication, setRefetch }
 
         {publication.category === COLLECTIONS.cs2 &&
           <Cs2
-            page={page}
+            type={type}
             register={register}
             errors={errors}
           />}
         {publication.category === COLLECTIONS.lol &&
           <Lol
-            page={page}
+            type={type}
             register={register}
             errors={errors}
           />}
@@ -196,7 +196,7 @@ export const EditGame = ({ page, setEdit, mixWikTeams, publication, setRefetch }
           />}
         {publication.category === COLLECTIONS.valorant &&
           <Valorant
-            page={page}
+            type={type}
             register={register}
             errors={errors}
           />}

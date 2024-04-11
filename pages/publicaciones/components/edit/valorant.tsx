@@ -1,7 +1,7 @@
 import { BoxField } from '../../../../components/create-publication/components/fields/box-field'
-import { COLLECTIONS, VALORANT_LEVELS, VALORANT_POSITION } from '../../../../domain/constants'
+import { PUBLICATION_TYPE, VALORANT_LEVELS, VALORANT_POSITION } from '../../../../domain/constants'
 
-export const Valorant = ({ page, register, errors }) => {
+export const Valorant = ({ type, register, errors }) => {
   return (
     <>
       <BoxField
@@ -9,7 +9,7 @@ export const Valorant = ({ page, register, errors }) => {
         registerName='level'
         errors={errors.root}
         game={VALORANT_LEVELS}
-        type={page === COLLECTIONS.teams ? 'checkbox' : 'radio'}
+        type={type === PUBLICATION_TYPE.team ? 'checkbox' : 'radio'}
         title='¿Cuál es tu nivel en Competitivo?'
       />
       <BoxField

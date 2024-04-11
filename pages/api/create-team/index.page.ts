@@ -1,7 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore'
 import { NextApiRequest, NextApiResponse } from 'next'
 import * as yup from 'yup'
-import { COLLECTIONS } from '../../../domain/constants'
+import { PUBLICATION_TYPE } from '../../../domain/constants'
 import { db } from '../../../firebase/initialize'
 
 const schema = yup.object({
@@ -44,7 +44,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       return res.status(400).json({ message: error.message })
     }
 
-    await addDoc(collection(db, COLLECTIONS.teams), {
+    await addDoc(collection(db, data.category), {
+      type: PUBLICATION_TYPE.team,
       date: new Date(),
       position: data.position,
       level: data.level,

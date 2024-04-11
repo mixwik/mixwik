@@ -14,7 +14,7 @@ import { updatePublicationPromotion, updateUserCopper, updateUserGold, updateUse
 // Components
 import { PublicationCard } from './components/publication-card.tsx'
 // Hooks
-import { CATEGORIES, COLLECTIONS } from '../../domain/constants'
+import { COLLECTIONS, PUBLICATION_TYPE } from '../../domain/constants'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChecksStripe'
 import { useGetAllGamesAndTeams } from '../user/hooks/use-get-all-games-and-teams.tsx'
@@ -28,7 +28,7 @@ const Promotion = () => {
   const { userProvider } = useSession()
   const user = useGetOneData(COLLECTIONS.users, userProvider?.uid)
   const stripeId = useCheckPay(id, userProvider?.email)
-  const { games, teams } = useGetAllGamesAndTeams(userProvider.uid)
+  const { publications } = useGetAllGamesAndTeams(userProvider?.uid)
   const cancelSubscription = useCancelRenovationSubscription()
 
   if (stripeId && user.id && method === '2m25S789gDS8') updateUserCopper(stripeId, user.id, router)
@@ -71,34 +71,32 @@ const Promotion = () => {
           Elige la publicación que quieres <span className='text-aero'>promocionar</span>.
         </p>
         <div className='flex flex-col w-full gap-10'>
-          {
-            teams.length > 0 && (
-              <div className=''>
-                <h2 className='p-5 text-xl font-bold'>Equipos</h2>
-                <div className='flex flex-wrap gap-5'>
-                  {
-                    teams.map(publication => (
-                      <PublicationCard key={publication.id} handlePromotion={handlePromotion} publication={publication} stripeId={stripeId} category={CATEGORIES.teams} />
+          <div className=''>
+            <div className=''>
+              <h2 className='p-5 text-xl font-bold'>Equipos</h2>
+              <div className='flex flex-wrap gap-5'>
+                {
+                    publications?.map(publication => (
+                      publication.type === PUBLICATION_TYPE.team && (
+                        <PublicationCard key={publication.id} handlePromotion={handlePromotion} publication={publication} stripeId={stripeId} />
+                      )
                     ))
                   }
-                </div>
               </div>
-            )
-          }
-          {
-            games.length > 0 && (
-              <div className=''>
-                <h2 className='p-5 text-xl font-bold'>Jugadores</h2>
-                <div className='flex flex-wrap gap-5'>
-                  {
-                    games.map(publication => (
-                      <PublicationCard key={publication.id} handlePromotion={handlePromotion} publication={publication} stripeId={stripeId} category={publication.category} />
-                    ))
+            </div>
+            <div className=''>
+              <h2 className='p-5 text-xl font-bold'>Jugadores</h2>
+              <div className='flex flex-wrap gap-5'>
+                {
+                    publications?.map(publication => (
+                      publication.type === PUBLICATION_TYPE.player && (
+                        <PublicationCard key={publication.id} handlePromotion={handlePromotion} publication={publication} stripeId={stripeId} />
+                      ))
+                    )
                   }
-                </div>
               </div>
-            )
-          }
+            </div>
+          </div>
         </div>
       </div>
     </section>

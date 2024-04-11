@@ -1,6 +1,8 @@
 import Card from '../../../components/Card'
+import { PUBLICATION_TYPE } from '../../../domain/constants'
 
-export const BoxCardsTeams = ({ userServer, teams, title }) => {
+export const BoxCardsTeams = ({ userServer, publications, title }) => {
+  const teams = publications.filter((res) => res.type === PUBLICATION_TYPE.team)
   return (
     <article>
       <h3 className='p-5 pt-10 text-xl font-bold'>

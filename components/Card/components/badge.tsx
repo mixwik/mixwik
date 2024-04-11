@@ -1,16 +1,15 @@
+import { PUBLICATION_TYPE } from '../../../domain/constants'
+
 interface BadgeProps {
-    className: string
-    jugador?: boolean
-    team?: boolean
+    type?: string
     promotion?: boolean
     }
 
-export const Badge = ({ className, jugador, team, promotion }: BadgeProps) => {
+export const Badge = ({ type, promotion }: BadgeProps) => {
   return (
-    <div className={`absolute w-full text-center z-10 p-1 font-bold text-white bottom-0 ${className}`}>
-      {jugador && <span>Jugador</span>}
-      {team && <span>Equipo</span>}
-      {promotion && <span>Promocionado</span>}
+    <div className={`absolute w-full text-center z-10 p-1 font-bold text-white bottom-0 ${type === PUBLICATION_TYPE.team && 'bg-orange'} ${type === PUBLICATION_TYPE.player && 'bg-aero'} ${promotion && 'bg-indigo-800'}`}>
+      {type === PUBLICATION_TYPE.player && <span>Jugador</span>}
+      {type === PUBLICATION_TYPE.team && <span>Equipo</span>}
     </div>
   )
 }

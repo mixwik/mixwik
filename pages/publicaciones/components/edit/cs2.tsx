@@ -1,7 +1,7 @@
 import { BoxField } from '../../../../components/create-publication/components/fields/box-field'
-import { COLLECTIONS, CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER } from '../../../../domain/constants'
+import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, PUBLICATION_TYPE } from '../../../../domain/constants'
 
-export const Cs2 = ({ page, register, errors }) => {
+export const Cs2 = ({ type, register, errors }) => {
   return (
     <>
       <BoxField
@@ -9,7 +9,7 @@ export const Cs2 = ({ page, register, errors }) => {
         registerName='level'
         errors={errors.root}
         game={CS2_LEVELS}
-        type={page === COLLECTIONS.teams ? 'checkbox' : 'radio'}
+        type={type === PUBLICATION_TYPE.team ? 'checkbox' : 'radio'}
         title='¿Cuál es tu nivel en Competitivo?'
       />
       <BoxField
@@ -17,7 +17,7 @@ export const Cs2 = ({ page, register, errors }) => {
         registerName='premier'
         errors={errors.root}
         game={CS2_PREMIER}
-        type={page === COLLECTIONS.teams ? 'checkbox' : 'radio'}
+        type={type === PUBLICATION_TYPE.team ? 'checkbox' : 'radio'}
         title='¿Cuál es tu nivel en Premier?'
       />
 

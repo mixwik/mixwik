@@ -1,17 +1,18 @@
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { CATEGORIES } from '../../../domain/constants'
-import { gameServer } from '../../../domain/types'
+import { gameServer, teamServer } from '../../../domain/types'
 import { db } from '../../../firebase/initialize'
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { id } = req.body
     if (id) {
-      const gamesServer = [] as gameServer[]
+      const publications = [] as gameServer[] | teamServer[]
       const push = (docSnap) => {
-        gamesServer.push({
+        publications.push({
           id: docSnap.id,
+          type: docSnap.data().type,
           category: docSnap.data().category,
           uid: docSnap.data().uid,
           date: docSnap.data().date,
@@ -62,7 +63,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           push(doc)
         })
       }
-      res.status(200).json(gamesServer)
+      res.status(200).json(publications)
     } else {
       res.status(405).json({ error: 'id' })
     }

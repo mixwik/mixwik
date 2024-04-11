@@ -11,7 +11,7 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 import MapLoader from '../Loaders/MapLoader'
 import Markers from './Markers'
 
-const Map = ({ location, users, games, teams, zoom, currentPosition }) => {
+const Map = ({ location, users, games, zoom, currentPosition }) => {
   if (currentPosition.length === 0) return <MapLoader />
   return (
     <MapContainer
@@ -33,17 +33,6 @@ const Map = ({ location, users, games, teams, zoom, currentPosition }) => {
             currentPosition={currentPosition}
             users={users}
             gamesCategory={position.category}
-          />
-        ))
-      }
-      {
-        teams.map(position => (
-          <Markers
-            key={position.id}
-            position={position}
-            currentPosition={currentPosition}
-            users={users}
-            teamsCategory={position.category}
           />
         ))
       }

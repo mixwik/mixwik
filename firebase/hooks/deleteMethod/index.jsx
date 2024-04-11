@@ -1,7 +1,7 @@
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../../initialize'
 
-export const deletePublication = async (category, id, uid, deleteCategory) => {
+export const deletePublication = async (category, id, uid) => {
   const userRef = doc(db, category, id)
   await deleteDoc(userRef)
     .then(async () => {

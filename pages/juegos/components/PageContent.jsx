@@ -17,9 +17,9 @@ import { useHandleOpenContext } from '../../../context'
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { COLLECTIONS } from '../../../domain/constants'
+import { COLLECTIONS, PUBLICATION_TYPE } from '../../../domain/constants'
 import { useSession } from '../../../firebase/auth/useSession'
-import { useGetTeams } from '../../../firebase/hooks/getMethod/useGetTeams'
+import { useMixWikTeamsCheckSubscriptionFunction } from '../../../hooks/useChecksStripe/index.jsx'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
 
 const PageContent = ({ category, children, distance }) => {
@@ -29,17 +29,16 @@ const PageContent = ({ category, children, distance }) => {
   }, 3000)
   const { userProvider } = useSession()
   const { currentPosition } = useCurrentPosition()
+  const checkSubscription = useMixWikTeamsCheckSubscriptionFunction()
   const handleOpen = useHandleOpenContext()
   const users = useGetData(COLLECTIONS.users)
-  const csgo = useGetData(category)
-  const teams = useGetTeams(COLLECTIONS.teams, category)
+  const publications = useGetData(category)
 
   // filter current user of the list of users
   const user = users.find(res => res.uid === userProvider?.uid)
 
   // filter users list with different filters
-  const listUserCsgo = useGamesFilters(user, csgo, distance)
-  const listUserTeams = useGamesFilters(user, teams, distance)
+  const publicationsFiltered = useGamesFilters(user, publications, distance)
   return (
     <div className='flex flex-col md:flex-row'>
       <section className='md:w-[50vw]'>
@@ -57,77 +56,54 @@ const PageContent = ({ category, children, distance }) => {
                 Cargando jugadores y equipos...
               </span>
             </div>}
-          {
-              csgo.length > 0 && (
-                csgo.map((res) => (
-                  res.promotion && (
-                    <Card
-                      key={res.id}
-                      userServer={users}
-                      publications={res}
-                      link={res.category}
-                      promotions
-                    />
-                  )
-                ))
+          {publicationsFiltered.map((res) => {
+            const promotion = checkSubscription(res.promotion, res.uid)
+            return (
+              (res.promotion && promotion) && (
+                <Card
+                  key={res.id}
+                  userServer={users}
+                  publication={res}
+                  link={res.category}
+                  promotion={promotion}
+                />
               )
-            }
-          {
-              listUserTeams.length > 0 && (
-                listUserTeams.map((res) => (
-                  <Card
-                    key={res.id}
-                    userServer={users}
-                    publication={res}
-                    link={res.category}
-                    equips
-                  />
-                ))
-              )
-            }
-          {
-              listUserCsgo.length > 0 && (
-                listUserCsgo.map((res) => (
-                  <Card
-                    key={res.id}
-                    userServer={users}
-                    publication={res}
-                    link={res.category}
-                    teams
-                  />
-                ))
-              )
-            }
-          {
-              listUserCsgo.length > 0
-                ? (
-                    listUserCsgo.map((res) => (
-                      <Card
-                        key={res.id}
-                        userServer={users} csgo={res}
-                        publication={res}
-                        link={res.category}
-                        basic
-                      />
-                    ))
-                  )
-                : (
-                  <div className='flex flex-col items-center justify-center w-full h-full gap-5 text-center'>
-                    <h2 className='text-2xl font-bold text-gray-400'>No hay jugadores en este momento, modifica los filtros</h2>
-                    <Link className='font-bold text-blue-500' href='/'>
-                      Volver a la página principal
-                    </Link>
-                  </div>
-                  )
-            }
+            )
+          })}
+          {publicationsFiltered.map((res) => (
+            res.type === PUBLICATION_TYPE.team && (
+              <Card
+                key={res.id}
+                userServer={users}
+                publication={res}
+                link={res.category}
+              />
+            )
+          ))}
+          {publicationsFiltered.map((res) => (
+            res.type === PUBLICATION_TYPE.player && (
+              <Card
+                key={res.id}
+                userServer={users}
+                publication={res}
+                link={res.category}
+              />
+            )
+          ))}
+          {publicationsFiltered.length < 1 &&
+            <div className='flex flex-col items-center justify-center w-full h-full gap-5 text-center'>
+              <h2 className='text-2xl font-bold text-gray-400'>No hay jugadores en este momento, modifica los filtros</h2>
+              <Link className='font-bold text-blue-500' href='/'>
+                Volver a la página principal
+              </Link>
+            </div>}
         </section>
       </section>
       <Map
         location={user}
         users={users}
         currentPosition={currentPosition}
-        games={listUserCsgo}
-        teams={listUserTeams}
+        games={publicationsFiltered}
         zoom={7}
         size={30}
       />

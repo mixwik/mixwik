@@ -5,6 +5,7 @@ import Layout from '../../components/Layout'
 import { BackgroundDots } from '../../components/background-dots'
 import { myLoader } from '../../components/myLoader'
 import { SocialLinks } from '../../components/social-links'
+import { useSession } from '../../firebase/auth/useSession'
 import { useGetOneUser } from '../../hooks/use-get-one-user'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { Spinner } from '../../icons/spinner'
@@ -12,7 +13,6 @@ import { BoxCardsGames } from './components/box-card-games'
 import { BoxCardsTeams } from './components/box-card-teams'
 import { ReportPlayer } from './components/report-player'
 import { useGetAllGamesAndTeams } from './hooks/use-get-all-games-and-teams'
-import { useSession } from '../../firebase/auth/useSession'
 const User = () => {
   const { userProvider } = useSession()
   const [isOpen, setIsOpen] = useState(false)
@@ -20,7 +20,7 @@ const User = () => {
   const router = useRouter()
   const { id } = router.query
   const { userServer } = useGetOneUser(id)
-  const { games, teams } = useGetAllGamesAndTeams(id as string)
+  const { publications } = useGetAllGamesAndTeams(id as string)
   const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
   const age = new Date().getFullYear() - new Date(userServer.age).getFullYear()
   setTimeout(() => {
@@ -64,20 +64,20 @@ const User = () => {
                   </div>
                 )
             }
-            {teams.length > 0 && (
+            {publications.length > 0 && (
               <BoxCardsTeams
                 title='Teams creados'
-                teams={teams}
+                publications={publications}
                 userServer={[userServer]}
               />
             )}
-            {games.length > 0 && (
+            {publications.length > 0 && (
               <BoxCardsGames
-                games={games}
+                publications={publications}
                 userServer={[userServer]}
               />
             )}
-            {(teams.length <= 0 && games.length <= 0) && (
+            {(publications.length <= 0) && (
               <div className='flex items-center justify-center h-[50vh]'>
                 <p className='text-center'>No hay publicaciones</p>
               </div>

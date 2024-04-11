@@ -24,8 +24,8 @@ const PublicationsGamesPage = () => {
   const [edit, setEdit] = useState(false)
   const router = useRouter()
   const { userProvider } = useSession()
-  const { id, page } = router.query
-  const { publication, setRefetch } = useGetGameCategory({ id, collection: page })
+  const { id, type, category } = router.query
+  const { publication, setRefetch } = useGetGameCategory({ id, category })
   const { images } = useImages({ publication })
   const { userServer } = useGetOneUser(publication?.uid)
   const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, userServer.uid)
@@ -64,8 +64,8 @@ const PublicationsGamesPage = () => {
             </div>
             <Title title={publication?.title} />
             <Description description={publication?.description} />
-            <Team field={publication} page={page} />
-            <Player field={publication} page={page} />
+            <Team field={publication} type={type} />
+            <Player field={publication} type={type} />
             <div className='flex items-center justify-center'>
               {publication?.geometry && <UserMap publication={publication} />}
             </div>
@@ -74,7 +74,7 @@ const PublicationsGamesPage = () => {
       </section>
       {edit &&
         <Edit
-          page={page}
+          type={type}
           setEdit={setEdit}
           mixWikTeams={mixWikTeams}
           publication={publication}

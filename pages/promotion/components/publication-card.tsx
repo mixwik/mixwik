@@ -11,7 +11,7 @@ interface PublicationCardProps {
 
 export const PublicationCard = ({ publication, handlePromotion, stripeId, category }: PublicationCardProps) => {
   return (
-    <button className='relative w-40 overflow-hidden border border-solid rounded-md shadow-lg h-60 border-slate-200' onClick={() => handlePromotion(category, stripeId, publication.id)}>
+    <button className='relative w-40 overflow-hidden border border-solid rounded-md shadow-lg h-60 border-slate-200' onClick={() => handlePromotion(publication.category, stripeId, publication.id)}>
       <Image
         className='object-cover size-full'
         src={publication.img.url}
