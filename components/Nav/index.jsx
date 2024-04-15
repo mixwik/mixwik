@@ -15,13 +15,11 @@ import logo from '../../public/logos/mixwik-logo.png'
 import { myLoader } from '../myLoader'
 
 // Log In
-import { useLogInOpenContext } from '../../context'
 import { useSession } from '../../firebase/auth/useSession'
 import { useGetOneUser } from '../../hooks/use-get-one-user'
 import Bugs from '../Bugs'
 
 const Nav = () => {
-  const { setLogInOpen } = useLogInOpenContext()
   const router = useRouter()
   useEffect(() => {
     if (router.asPath === '/') setTransparent(true)
@@ -79,9 +77,9 @@ const Nav = () => {
                   </Link>
                   )
                 : (
-                  <button className={styles.logInButton} onClick={() => setLogInOpen(true)}>
+                  <Link href='/logIn' className={styles.logInButton}>
                     <UserIcon />
-                  </button>
+                  </Link>
                   )
             }
         </div>

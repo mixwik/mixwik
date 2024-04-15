@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
@@ -6,6 +7,7 @@ import Layout from '../../../components/Layout'
 import UserMap from '../../../components/UserMap'
 import { BackgroundDots } from '../../../components/background-dots'
 import { myLoader } from '../../../components/myLoader'
+import { SocialLinks } from '../../../components/social-links'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useGetOneUser } from '../../../hooks/use-get-one-user'
 import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
@@ -29,6 +31,7 @@ const PublicationsGamesPage = () => {
   const { publication, setRefetch } = useGetGameCategory({ id, category })
   const { images } = useImages({ publication })
   const { userServer } = useGetOneUser(publication?.uid)
+  const { isData } = useGetOneUser(userProvider?.uid)
   const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, userServer.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
 
@@ -67,6 +70,12 @@ const PublicationsGamesPage = () => {
             <Description description={publication?.description} />
             <Team field={publication} type={type} />
             <Player field={publication} type={type} />
+            <h2 className='text-xl font-bold'>Vias de contacto</h2>
+            <div className='flex flex-wrap gap-5'>
+              {isData === 'data'
+                ? <SocialLinks mixWikTeams={mixWikTeams} user={userServer} />
+                : <p>Para poder ver las vías de contacto, primero tienes que <Link className='text-aero decoration-white' href='/logIn'>Registrarte / Iniciar Sesión en MixWik</Link></p>}
+            </div>
             <div className='flex items-center justify-center'>
               {publication?.geometry && <UserMap publication={publication} />}
             </div>

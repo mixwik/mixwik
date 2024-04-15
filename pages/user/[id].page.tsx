@@ -11,12 +11,14 @@ import { useGetAllPublicationsOneUser } from '../../hooks/use-get-all-publicatio
 import { useGetOneUser } from '../../hooks/use-get-one-user'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { ReportPlayer } from './components/report-player'
+import Link from 'next/link'
 const User = () => {
   const { userProvider } = useSession()
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
   const { id } = router.query
   const { userServer } = useGetOneUser(id)
+  const { isData } = useGetOneUser(userProvider?.uid)
   const { publications } = useGetAllPublicationsOneUser(id as string)
   const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
   const age = new Date().getFullYear() - new Date(userServer.age).getFullYear()
@@ -40,7 +42,9 @@ const User = () => {
             <section className='flex flex-col items-center p-3'>
               <h2 className='text-xl font-bold text-center'>Redes Sociales</h2>
               <div className='flex flex-wrap justify-center gap-5 p-5'>
-                <SocialLinks mixWikTeams={mixWikTeams} user={userServer} />
+                {isData === 'data'
+                  ? <SocialLinks mixWikTeams={mixWikTeams} user={userServer} />
+                  : <p>Para poder ver las vías de contacto, primero tienes que <Link className='text-aero decoration-white' href='/logIn'>Registrarte / Iniciar Sesión en MixWik</Link></p>}
               </div>
               <button className='w-40 h-10 p-2 font-bold text-center text-white rounded-md bg-pennBlue' onClick={() => setIsOpen(!isOpen)}>
                 Reportar Jugador
