@@ -1,4 +1,4 @@
-import Card from '../../../components/Card/components/card'
+import Card from '../../../components/cards/components/card'
 import { PUBLICATION_TYPE } from '../../../domain/constants'
 
 export const BoxCardsGames = ({ userServer, publications }) => {
@@ -14,7 +14,7 @@ export const BoxCardsGames = ({ userServer, publications }) => {
             key={res.id}
             publication={res}
             userServer={userServer}
-            promotions
+            promotion
           />
         ))}
         {games.map((res) => (
@@ -22,7 +22,6 @@ export const BoxCardsGames = ({ userServer, publications }) => {
             key={res.id}
             publication={res}
             userServer={userServer}
-            teams
           />
         ))}
         {games.map((res) => (
@@ -30,7 +29,6 @@ export const BoxCardsGames = ({ userServer, publications }) => {
             key={res.id}
             publication={res}
             userServer={userServer}
-            basic
           />
         ))}
       </div>

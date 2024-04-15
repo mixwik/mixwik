@@ -3,29 +3,23 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Layout from '../../components/Layout'
 import { BackgroundDots } from '../../components/background-dots'
+import { Cards } from '../../components/cards'
 import { myLoader } from '../../components/myLoader'
 import { SocialLinks } from '../../components/social-links'
 import { useSession } from '../../firebase/auth/useSession'
+import { useGetAllPublicationsOneUser } from '../../hooks/use-get-all-publications-one-user'
 import { useGetOneUser } from '../../hooks/use-get-one-user'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
-import { Spinner } from '../../icons/spinner'
-import { BoxCardsGames } from './components/box-card-games'
-import { BoxCardsTeams } from './components/box-card-teams'
 import { ReportPlayer } from './components/report-player'
-import { useGetAllGamesAndTeams } from './hooks/use-get-all-games-and-teams'
 const User = () => {
   const { userProvider } = useSession()
   const [isOpen, setIsOpen] = useState(false)
-  const [loading, setLoading] = useState(true)
   const router = useRouter()
   const { id } = router.query
   const { userServer } = useGetOneUser(id)
-  const { publications } = useGetAllGamesAndTeams(id as string)
+  const { publications } = useGetAllPublicationsOneUser(id as string)
   const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
   const age = new Date().getFullYear() - new Date(userServer.age).getFullYear()
-  setTimeout(() => {
-    setLoading(false)
-  }, 4000)
   return (
     <Layout title={`perfil de ${userServer.name}`}>
       <div className='relative flex justify-center w-screen'>
@@ -54,34 +48,8 @@ const User = () => {
             </section>
           </section>
           <section className='relative z-10 w-full pb-10 bg-white'>
-            <h1 className='z-10 px-5 pt-5 text-2xl font-bold text-center'>Publicaciones</h1>
-            {
-              loading &&
-                (
-                  <div className='absolute flex items-center justify-center bg-white top-15 size-full'>
-                    <Spinner />
-                    Cargando Publicaciones...
-                  </div>
-                )
-            }
-            {publications.length > 0 && (
-              <BoxCardsTeams
-                title='Teams creados'
-                publications={publications}
-                userServer={[userServer]}
-              />
-            )}
-            {publications.length > 0 && (
-              <BoxCardsGames
-                publications={publications}
-                userServer={[userServer]}
-              />
-            )}
-            {(publications.length <= 0) && (
-              <div className='flex items-center justify-center h-[50vh]'>
-                <p className='text-center'>No hay publicaciones</p>
-              </div>
-            )}
+            <h1 className='z-10 p-5 text-2xl font-bold text-center'>Publicaciones</h1>
+            <Cards publications={publications} users={[userServer]} isVoid='Este usuario aún no ha creado ningún jugador' />
           </section>
         </div>
       </div>

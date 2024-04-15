@@ -48,7 +48,7 @@ const AllGames = () => {
             className='overflow-y-scroll h-[79vh] md:w-[50vw] w-screen md:overflow-y-auto py-5 gap-y-5'
             onClick={() => handleOpen('')}
           >
-            <Cards publications={allPublications} users={users} />
+            <Cards publications={allPublications} users={users} isVoid='No hay jugadores en este momento, prueba a modifica los filtros' />
           </div>
         </section>
         <Map

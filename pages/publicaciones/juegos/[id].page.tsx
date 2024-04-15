@@ -25,6 +25,7 @@ const PublicationsGamesPage = () => {
   const router = useRouter()
   const { userProvider } = useSession()
   const { id, type, category } = router.query
+  console.log('id', id, type, category)
   const { publication, setRefetch } = useGetGameCategory({ id, category })
   const { images } = useImages({ publication })
   const { userServer } = useGetOneUser(publication?.uid)
@@ -39,7 +40,7 @@ const PublicationsGamesPage = () => {
         <div className='relative flex flex-col h-full gap-10 overflow-scroll bg-white no-scrollbar md:w-1/2'>
           <Header
             userServer={userServer}
-            image={userServer?.profileImg.url || userProvider.image}
+            image={userServer?.profileImg?.url || userProvider.image}
             age={publication?.age}
             date={publication?.date}
             mixWikTeams={mixWikTeams}
@@ -57,7 +58,7 @@ const PublicationsGamesPage = () => {
                 images
                   .filter(image => image?.url !== '')
                   .map((image, index) => (
-                    <Image key={index} loader={myLoader} width={100} height={100} src={image.url} alt={image.name} />
+                    <Image key={index} loader={myLoader} width={100} height={100} src={image?.url} alt={image?.name} />
                   ))
                 }
               </Carousel>

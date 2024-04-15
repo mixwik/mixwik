@@ -6,7 +6,7 @@ import { Spinner } from '../../icons/spinner'
 import { BackgroundDots } from '../background-dots'
 import Card from './components/card'
 
-export const Cards = ({ publications, users }) => {
+export const Cards = ({ publications, users, isVoid }) => {
   const checkSubscription = useMixWikTeamsCheckSubscriptionFunction()
   const [loading, setLoading] = useState(true)
   const [promo, setPromo] = useState(false)
@@ -64,7 +64,7 @@ export const Cards = ({ publications, users }) => {
               {publications.length < 1 && (
                 <div className='flex flex-col items-center justify-center w-full h-full col-span-2 gap-5 text-center md:col-span-4'>
                   <h2 className='text-2xl font-bold text-gray-400'>
-                    No hay jugadores en este momento, modifica los filtros
+                    {isVoid}
                   </h2>
                   <Link className='font-bold text-blue-500' href='/'>
                     Volver a la página principal

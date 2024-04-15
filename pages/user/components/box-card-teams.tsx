@@ -1,4 +1,4 @@
-import Card from '../../../components/Card/components/card'
+import Card from '../../../components/cards/components/card'
 import { PUBLICATION_TYPE } from '../../../domain/constants'
 
 export const BoxCardsTeams = ({ userServer, publications, title }) => {
@@ -17,7 +17,6 @@ export const BoxCardsTeams = ({ userServer, publications, title }) => {
             key={res.id}
             publication={res}
             userServer={userServer}
-            equips
           />
         ))}
       </div>

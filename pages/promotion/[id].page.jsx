@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 
 // NextJS Components
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { BackgroundDots } from '../../components/background-dots.tsx'
 
@@ -17,7 +16,7 @@ import { PublicationCard } from './components/publication-card.tsx'
 import { COLLECTIONS, PUBLICATION_TYPE } from '../../domain/constants'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
 import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChecksStripe'
-import { useGetAllGamesAndTeams } from '../user/hooks/use-get-all-games-and-teams.tsx'
+import { useGetAllPublicationsOneUser } from '../../hooks/use-get-all-publications-one-user.ts'
 import { Loading } from './components/loading.tsx'
 
 const Promotion = () => {
@@ -28,7 +27,7 @@ const Promotion = () => {
   const { userProvider } = useSession()
   const user = useGetOneData(COLLECTIONS.users, userProvider?.uid)
   const stripeId = useCheckPay(id, userProvider?.email)
-  const { publications } = useGetAllGamesAndTeams(userProvider?.uid)
+  const { publications } = useGetAllPublicationsOneUser(userProvider?.uid)
   const cancelSubscription = useCancelRenovationSubscription()
 
   if (stripeId && user.id && method === '2m25S789gDS8') updateUserCopper(stripeId, user.id, router)
@@ -60,43 +59,20 @@ const Promotion = () => {
 
   if (!stripeId || loading) return <Loading />
 
-  if (stripeId === user.cobre) return <div className=''>Ya tienes la promoción activada <Link href='/'>Ir a la Home</Link></div>
-
   return (
     <section className='flex flex-col items-center justify-center w-screen h-screen'>
       <BackgroundDots />
       <div className='flex flex-col items-center h-full gap-10 p-5 overflow-scroll bg-white rounded-md md:w-1/2 size-full no-scrollbar'>
         <p className='font-bold text-red-500'>¡ATENCIÓN! No cierres esta venta hasta seleccionar una publicación.</p>
-        <p className='text-xl font-bold'>¡Gracias por tu compra!.
-          Elige la publicación que quieres <span className='text-aero'>promocionar</span>.
+        <p className='text-xl font-bold'>Elige la publicación que quieres <span className='text-indigo-600'>promocionar</span>.
         </p>
-        <div className='flex flex-col w-full gap-10'>
-          <div className=''>
-            <div className=''>
-              <h2 className='p-5 text-xl font-bold'>Equipos</h2>
-              <div className='flex flex-wrap gap-5'>
-                {
-                    publications?.map(publication => (
-                      publication.type === PUBLICATION_TYPE.team && (
-                        <PublicationCard key={publication.id} handlePromotion={handlePromotion} publication={publication} stripeId={stripeId} />
-                      )
-                    ))
-                  }
-              </div>
-            </div>
-            <div className=''>
-              <h2 className='p-5 text-xl font-bold'>Jugadores</h2>
-              <div className='flex flex-wrap gap-5'>
-                {
-                    publications?.map(publication => (
-                      publication.type === PUBLICATION_TYPE.player && (
-                        <PublicationCard key={publication.id} handlePromotion={handlePromotion} publication={publication} stripeId={stripeId} />
-                      ))
-                    )
-                  }
-              </div>
-            </div>
-          </div>
+        <div className='flex flex-col w-full'>
+          <PublicationCard
+            handlePromotion={handlePromotion}
+            publications={publications}
+            stripeId={stripeId}
+            type={PUBLICATION_TYPE.team}
+          />
         </div>
       </div>
     </section>

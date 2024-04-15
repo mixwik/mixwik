@@ -39,7 +39,7 @@ const PageContent = ({ category, children, distance }) => {
           className='overflow-y-scroll h-[80vh] md:h-[74vh] md:w-[50vw] w-screen md:overflow-y-auto p-2 gap-y-5'
           onClick={() => handleOpen('')}
         >
-          <Cards publications={publicationsFiltered} users={users} />
+          <Cards publications={publicationsFiltered} users={users} isVoid='No hay jugadores en este momento, prueba a modificar los filtros' />
         </section>
       </section>
       <Map

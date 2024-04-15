@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { gameServer, teamServer } from '../../../domain/types'
+import { gameServer, teamServer } from '../domain/types'
 
-export const useGetAllGamesAndTeams = (id: string) => {
+export const useGetAllPublicationsOneUser = (id: string) => {
   const [publications, setPublications] = useState<gameServer[] | teamServer[]>([])
 
   useEffect(() => {

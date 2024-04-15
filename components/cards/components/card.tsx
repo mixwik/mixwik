@@ -25,7 +25,7 @@ const Card = ({ userServer, publication, promotion }: CardProps) => {
   if (publication?.promotion && !promotion) return null
 
   return (
-    <Link href={`/publicaciones/juegos/${publication?.id}?type=${publication?.type}?category=${publication?.category}`}>
+    <Link href={`/publicaciones/juegos/${publication?.id}?type=${publication?.type}&category=${publication?.category}`}>
       <section className='relative flex flex-col items-center w-40 overflow-hidden bg-white rounded-md shadow-md h-80'>
         <div className='object-cover size-full'>
           <Carousel
