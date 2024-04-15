@@ -234,13 +234,13 @@ export default function Dashboard () {
               </Link>
             </li>
             <li
-              className='flex items-center justify-center col-span-2 gap-2 p-1 font-bold text-white duration-300 bg-red-400 rounded-lg shadow-lg cursor-pointer md:col-span-1 md:gap-5 cursor-pointe hover:bg-red-500'
+              className='flex flex-col items-center justify-center col-span-2 gap-2 p-1 font-bold text-white duration-300 bg-red-400 rounded-lg shadow-lg cursor-pointer md:col-span-1 cursor-pointe hover:bg-red-500'
               onClick={() => handleSignOut()}
             >
               <h2>
                 Cerrar sesión
               </h2>
-              <LogOutIcon className='text-white size-9' />
+              <LogOutIcon className='text-white size-6 md:size-9' />
             </li>
           </ul>
         </nav>
