@@ -1,4 +1,4 @@
-import Card from '../../../components/Card'
+import Card from '../../../components/Card/components/card'
 import { PUBLICATION_TYPE } from '../../../domain/constants'
 
 export const BoxCardsTeams = ({ userServer, publications, title }) => {

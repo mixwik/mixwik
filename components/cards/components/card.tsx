@@ -5,18 +5,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { UserServer, gameServer, teamServer } from '../../domain/types'
-import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
-import { useImages } from '../../pages/publicaciones/hooks/use-images'
-import { myLoader } from '../myLoader'
-import { Badge } from './components/badge'
+import { UserServer, gameServer, teamServer } from '../../../domain/types'
+import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
+import { useImages } from '../../../pages/publicaciones/hooks/use-images'
+import { myLoader } from '../../myLoader'
+import { Badge } from './badge'
 
 interface CardProps {
   userServer: UserServer[]
   publication: gameServer | teamServer
-  basic?: boolean
-  teams?: boolean
-  equips?: boolean
   promotion?: boolean
 }
 
