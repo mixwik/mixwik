@@ -7,7 +7,7 @@ export const Promotion = ({ page, userServer }) => {
     <WindowLayout title='Promociona una publicación'>
       <h1 className='p-5 text-2xl font-extrabold text-center md:text-4xl'>Elige tu plan</h1>
       <div className='flex flex-col gap-5 p-5'>
-        <p>Selecciona el plan que más te convenga para <span className='font-semibold text-aero'>promocionar</span> tu publicación.</p>
+        <p>Selecciona el plan que más te convenga para <span className='font-bold text-indigo-600'>promocionar</span> tu publicación.</p>
         <p>Una vez realizado el pago <span className='font-semibold text-pennBlue'>podrás elegir cual de tus publicaciones quieres promocionar.</span></p>
         <p>La publicación elegida se mostrará en <span className='font-semibold text-aero'>los primeros puestos a nivel nacional</span> durante 3, 7 o 15 días, dependiendo del nivel que hayas elegido</p>
         <p className='font-bold text-pennBlue'>Ninguno de los planes se auto-renueva</p>

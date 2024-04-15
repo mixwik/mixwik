@@ -192,7 +192,7 @@ export default function Dashboard () {
               }
             </li>
             <li
-              className='col-span-2 p-1 duration-300 rounded-lg shadow-lg cursor-pointer bg-orange hover:bg-slate-100'
+              className='col-span-2 p-1 text-white duration-300 bg-indigo-600 rounded-lg shadow-lg cursor-pointer hover:bg-indigo-800'
               onClick={() => handleClick('promotion')}
             >
               <button className='relative flex flex-col items-center justify-center font-bold size-full'>
