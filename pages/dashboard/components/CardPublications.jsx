@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { myLoader } from '../../../components/myLoader'
 import { COLLECTIONS } from '../../../domain/constants'
 import { deletePublication } from '../../../firebase/hooks/deleteMethod'
-import { setRemoveFavorites } from '../../publicaciones-old/components/infrastructure/setRemoveFavorites'
+import { removeFavorites } from '../hooks/remove-favorites'
 
 const CardPublications = ({ publication, equip, updateFav, remove, user }) => {
   const category = equip ? COLLECTIONS.teams : publication.category
 
   const handleClick = () => {
     if (updateFav) {
-      setRemoveFavorites(user.uid, publication.id)
+      removeFavorites(user.uid, publication.id)
         .then(() => {
           setTimeout(() => {
             location.reload()
