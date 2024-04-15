@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Layout from '../../components/Layout'
@@ -11,7 +12,6 @@ import { useGetAllPublicationsOneUser } from '../../hooks/use-get-all-publicatio
 import { useGetOneUser } from '../../hooks/use-get-one-user'
 import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { ReportPlayer } from './components/report-player'
-import Link from 'next/link'
 const User = () => {
   const { userProvider } = useSession()
   const [isOpen, setIsOpen] = useState(false)
@@ -39,22 +39,25 @@ const User = () => {
               </div>
             </div>
             <p className='p-3'>{userServer.description}</p>
-            <section className='flex flex-col items-center p-3'>
-              <h2 className='text-xl font-bold text-center'>Redes Sociales</h2>
-              <div className='flex flex-wrap justify-center gap-5 p-5'>
+            <section className='flex flex-col p-3'>
+              <h2 className='text-xl font-bold'>Redes Sociales</h2>
+              <div className='flex flex-wrap gap-5 p-5'>
                 {isData === 'data'
                   ? <SocialLinks mixWikTeams={mixWikTeams} user={userServer} />
                   : <p>Para poder ver las vías de contacto, primero tienes que <Link className='text-aero decoration-white' href='/logIn'>Registrarte / Iniciar Sesión en MixWik</Link></p>}
               </div>
-              <button className='w-40 h-10 p-2 font-bold text-center text-white rounded-md bg-pennBlue' onClick={() => setIsOpen(!isOpen)}>
-                Reportar Jugador
-              </button>
+
             </section>
           </section>
           <section className='relative z-10 w-full pb-10 bg-white'>
-            <h1 className='z-10 p-5 text-2xl font-bold text-center'>Publicaciones</h1>
+            <h1 className='z-10 p-5 text-2xl font-bold'>Publicaciones</h1>
             <Cards publications={publications} users={[userServer]} isVoid='Este usuario aún no ha creado ningún jugador' />
           </section>
+          <div className='flex items-center justify-center w-full mb-5'>
+            <button className='w-40 h-10 p-2 font-bold text-center text-white rounded-md bg-pennBlue' onClick={() => setIsOpen(!isOpen)}>
+              Reportar Jugador
+            </button>
+          </div>
         </div>
       </div>
     </Layout>
