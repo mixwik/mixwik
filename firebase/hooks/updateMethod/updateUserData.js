@@ -137,7 +137,7 @@ export const updatePublicationPromotion = async (name, payID, id, router) => {
   await updateDoc(userRef, {
     promotion: payID
   }).then(
-    router.push('/')
+    router.push('/dashboard')
   )
 }
 
