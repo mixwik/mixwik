@@ -27,7 +27,6 @@ const PublicationsGamesPage = () => {
   const router = useRouter()
   const { userProvider } = useSession()
   const { id, type, category } = router.query
-  console.log('id', id, type, category)
   const { publication, setRefetch } = useGetGameCategory({ id, category })
   const { images } = useImages({ publication })
   const { userServer } = useGetOneUser(publication?.uid)
@@ -49,6 +48,8 @@ const PublicationsGamesPage = () => {
             mixWikTeams={mixWikTeams}
             limitedAdministrator={limitedAdministrator}
             setEdit={setEdit}
+            uid={userProvider?.uid}
+            id={id}
           />
           <div className='flex flex-col gap-10 p-3 pt-0 md:p-5 md:pt-0'>
             <div className={styles.imgBox}>

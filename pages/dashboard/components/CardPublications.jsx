@@ -25,7 +25,7 @@ const CardPublications = ({ publication, equip, updateFav, remove, user }) => {
   }
   return (
     <section className='flex flex-col justify-between h-32 overflow-hidden bg-gray-100 rounded-md shadow-sm w-72 shadow-aero'>
-      <Link className='flex' href={equip ? `/publicaciones/juegos/${publication.id}?page=${COLLECTIONS.teams}` : `/publicaciones/juegos/${publication.id}?page=${publication.category}`}>
+      <Link className='flex' href={`/publicaciones/juegos/${publication?.id}?type=${publication?.type}&category=${publication?.category}`}>
         <Image className='w-20 h-20 pt-1 pl-1 rounded-full' loader={myLoader} width={0} height={0} src={publication.img.url} alt={publication.title} />
         <div>
           <h2 className='p-1 font-bold'>{publication.title.slice(0, 15)}...</h2>
