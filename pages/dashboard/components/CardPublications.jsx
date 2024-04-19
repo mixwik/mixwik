@@ -24,10 +24,10 @@ const CardPublications = ({ publication, equip, updateFav, remove, user }) => {
     }
   }
   return (
-    <section className='flex flex-col justify-between h-32 overflow-hidden bg-gray-100 rounded-md shadow-sm w-72 shadow-aero'>
-      <Link className='flex' href={`/publicaciones/juegos/${publication?.id}?type=${publication?.type}&category=${publication?.category}`}>
-        <Image className='w-20 h-20 pt-1 pl-1 rounded-full' loader={myLoader} width={0} height={0} src={publication.img.url} alt={publication.title} />
-        <div>
+    <section className='flex flex-col justify-between h-40 overflow-hidden bg-gray-100 rounded-md shadow-xl w-80'>
+      <Link className='relative flex items-center justify-center size-full' href={`/publicaciones/juegos/${publication?.id}?type=${publication?.type}&category=${publication?.category}`}>
+        <Image className='absolute top-0 left-0 w-full h-full' loader={myLoader} width={0} height={0} src={publication.img.url} alt={publication.title} />
+        <div className='absolute bottom-0 w-full text-white bg-black/50'>
           <h2 className='p-1 font-bold'>{publication.title.slice(0, 15)}...</h2>
           <p className='pl-1 text-sm'>{publication.description.slice(0, 35)}...</p>
         </div>

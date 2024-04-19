@@ -36,7 +36,7 @@ const PageContent = ({ category, children, distance }) => {
         <BackgroundDots />
         {children}
         <section
-          className='overflow-y-scroll h-[80vh] md:h-[74vh] md:w-[50vw] w-screen md:overflow-y-auto p-2 gap-y-5'
+          className='overflow-y-scroll h-[80vh] md:h-[73vh] md:w-[50vw] w-screen md:overflow-y-auto p-2 gap-y-5 no-scrollbar'
           onClick={() => handleOpen('')}
         >
           <Cards publications={publicationsFiltered} users={users} isVoid='No hay jugadores en este momento, prueba a modificar los filtros' />
