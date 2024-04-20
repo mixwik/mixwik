@@ -4,10 +4,8 @@ import MapLoader from '../Loaders/MapLoader'
 import GameMarker from './GameMarker'
 import styles from './Map.module.scss'
 
-const Markers = ({ position, users, currentPosition, gamesCategory, teamsCategory }) => {
-  const user = users.find(find => find.uid === position.uid)
-
-  if (!position || !currentPosition) return <MapLoader />
+const Markers = ({ publication, user, currentPosition }) => {
+  if (!publication || !currentPosition) return <MapLoader />
 
   const csgoIcon = L.divIcon({
     className: styles.csgoIcon,
@@ -34,48 +32,43 @@ const Markers = ({ position, users, currentPosition, gamesCategory, teamsCategor
   return (
     <>
       {
-        gamesCategory === COLLECTIONS.cs2 && (
+        publication.category === COLLECTIONS.cs2 && (
           <GameMarker
             user={user}
-            position={position}
+            publication={publication}
             icon={csgoIcon}
-            gamesCategory={gamesCategory}
           />
         )
       }
       {
-        gamesCategory === COLLECTIONS.lol && (
+        publication.category === COLLECTIONS.lol && (
           <GameMarker
             user={user}
-            position={position}
+            publication={publication}
             icon={lolIcon}
-            gamesCategory={gamesCategory}
           />
         )
       }
       {
-        gamesCategory === COLLECTIONS.fortnite && (
+        publication.category === COLLECTIONS.fortnite && (
           <GameMarker
             user={user}
-            position={position}
+            publication={publication}
             icon={fortniteIcon}
-            gamesCategory={gamesCategory}
           />
         )
       }
       {
-        gamesCategory === COLLECTIONS.valorant && (
+        publication.category === COLLECTIONS.valorant && (
           <GameMarker
             user={user}
-            position={position}
+            publication={publication}
             icon={valorantIcon}
-            gamesCategory={gamesCategory}
           />
         )
       }
 
     </>
-
   )
 }
 

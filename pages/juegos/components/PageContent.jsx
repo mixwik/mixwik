@@ -43,10 +43,9 @@ const PageContent = ({ category, children, distance }) => {
         </section>
       </section>
       <Map
-        location={user}
-        users={users}
+        user={user}
         currentPosition={currentPosition}
-        games={publicationsFiltered}
+        publications={publicationsFiltered}
         zoom={7}
         size={30}
       />
