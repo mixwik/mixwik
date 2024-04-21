@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { useGetUsers } from '../../application/useGetUsers'
 import { CityGamesFilter } from '../../components/Filters/city-games'
 import Layout from '../../components/Layout'
 import PageLoader from '../../components/Loaders/PageLoader'
@@ -7,16 +6,20 @@ import Map from '../../components/Map'
 import { BackgroundDots } from '../../components/background-dots'
 import { Cards } from '../../components/cards'
 import { useGetAllPublications } from '../../hooks/use-get-all-publications'
+import { useGetAllUsers } from '../../hooks/use-get-all-users'
 import { useCityFilterDistance } from '../../hooks/useCityFilterDistance'
 import { useLocation } from './hooks/useLocation'
+import { useSession } from '../../firebase/auth/useSession'
 
 const City = () => {
   const router = useRouter()
+  const { userProvider } = useSession()
   const { name } = router.query
-  const { users } = useGetUsers()
+  const { users } = useGetAllUsers()
+  const publicationUser = users.find(res => res.uid === userProvider?.uid)
   const { city } = useLocation(name)
   const { publications } = useGetAllPublications()
-  const allPublications = useCityFilterDistance(city, publications, 30)
+  const publicationsFiltered = useCityFilterDistance(city, publications, 30)
   if (!city) return <PageLoader />
   return (
     <Layout>
@@ -28,17 +31,14 @@ const City = () => {
             Todos los jugadores en {name}
           </h1>
           <div className='z-10 h-[74vh] md:overflow-y-scroll md:w-[50vw] w-screen overflow-y-auto no-scrollbar'>
-            <Cards publications={allPublications} users={users} />
+            <Cards publications={publicationsFiltered} users={users} />
           </div>
         </section>
         <Map
-          location={city.geometry}
-          users={users}
+          publicationUser={publicationUser}
           currentPosition={city.geometry}
-          games={allPublications}
+          publications={publicationsFiltered}
           zoom={14}
-          size={30}
-          category={allPublications}
         />
       </div>
     </Layout>

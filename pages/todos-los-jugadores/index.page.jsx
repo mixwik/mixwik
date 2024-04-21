@@ -31,10 +31,10 @@ const AllGames = () => {
   const { publications } = useGetAllPublications()
 
   // filter current user of the list of users
-  const user = users.find(res => res.uid === userProvider?.uid)
+  const publicationUser = users.find(res => res.uid === userProvider?.uid)
 
   // filter users list with different filters
-  const allPublications = useGamesFilters(user, publications, distance)
+  const publicationsFiltered = useGamesFilters(publicationUser, publications, distance)
   return (
     <Layout>
       <div className='flex flex-col md:flex-row'>
@@ -45,18 +45,16 @@ const AllGames = () => {
             Todos los jugadores
           </h1>
           <div
-            className='overflow-y-scroll h-[79vh] md:w-[50vw] w-screen md:overflow-y-auto py-5 gap-y-5'
+            className='overflow-y-scroll h-[79vh] md:w-[50vw] w-screen md:overflow-y-auto py-5 gap-y-5 no-scrollbar'
             onClick={() => handleOpen('')}
           >
-            <Cards publications={allPublications} users={users} isVoid='No hay jugadores en este momento, prueba a modifica los filtros' />
+            <Cards publications={publicationsFiltered} users={users} isVoid='No hay jugadores en este momento, prueba a modifica los filtros' />
           </div>
         </section>
         <Map
-          location={user}
-          users={users}
+          publicationUser={publicationUser}
           currentPosition={currentPosition}
-          games={allPublications}
-          teams={allPublications}
+          publications={publicationsFiltered}
           zoom={7}
           size={30}
         />

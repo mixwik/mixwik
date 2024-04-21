@@ -12,24 +12,19 @@ import { useGamesFilters } from '../../../hooks/useGamesFilters'
 
 // Context
 import { useHandleOpenContext } from '../../../context'
-
 import { Cards } from '../../../components/cards/index.tsx'
-import { COLLECTIONS } from '../../../domain/constants'
 import { useSession } from '../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../hooks/useCurrentPosition'
+import { useGetAllUsers } from '../../../hooks/use-get-all-users.ts'
 
 const PageContent = ({ category, children, distance }) => {
   const { userProvider } = useSession()
   const { currentPosition } = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
-  const users = useGetData(COLLECTIONS.users)
+  const { users } = useGetAllUsers()
   const publications = useGetData(category)
-
-  // filter current user of the list of users
-  const user = users.find(res => res.uid === userProvider?.uid)
-
-  // filter users list with different filters
-  const publicationsFiltered = useGamesFilters(user, publications, distance)
+  const publicationUser = users.find(res => res.uid === userProvider?.uid)
+  const publicationsFiltered = useGamesFilters(publicationUser, publications, distance)
   return (
     <div className='flex flex-col md:flex-row'>
       <section className='md:w-[50vw]'>
@@ -43,7 +38,7 @@ const PageContent = ({ category, children, distance }) => {
         </section>
       </section>
       <Map
-        user={user}
+        publicationUser={publicationUser}
         currentPosition={currentPosition}
         publications={publicationsFiltered}
         zoom={7}

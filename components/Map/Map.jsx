@@ -11,12 +11,12 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 import MapLoader from '../Loaders/MapLoader'
 import Markers from './Markers'
 
-const Map = ({ user, publications, zoom, currentPosition }) => {
+const Map = ({ publicationUser, publications, zoom, currentPosition }) => {
   if (currentPosition.length === 0) return <MapLoader />
   return (
     <MapContainer
       className={styles.map}
-      center={currentPosition || user.geometry}
+      center={currentPosition || publicationUser.geometry}
       zoomAnimation
       doubleClickZoom={false}
       zoom={zoom}
@@ -26,12 +26,12 @@ const Map = ({ user, publications, zoom, currentPosition }) => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {
-        publications.map(publication => (
+        publications?.map(publication => (
           <Markers
             key={publication.id}
             publication={publication}
             currentPosition={currentPosition}
-            user={user}
+            publicationUser={publicationUser}
           />
         ))
       }

@@ -4,7 +4,7 @@ import { Marker, Popup } from 'react-leaflet'
 import { PUBLICATION_TYPE } from '../../domain/constants'
 import { myLoader } from '../myLoader'
 
-const GameMarker = ({ icon, publication, user }) => {
+const GameMarker = ({ icon, publication, publicationUser }) => {
   return (
     <Marker position={publication.geometry} icon={icon}>
       <Popup>
@@ -13,15 +13,7 @@ const GameMarker = ({ icon, publication, user }) => {
           href={`/publicaciones/juegos/${publication.id}?type=${publication.type}&category=${publication.category}`} rel='noreferrer'
           className='relative size-52'
         >
-          <div className={`absolute z-10 flex items-center gap-3 top-0 left-0 w-52 h-10 ${publication.type === PUBLICATION_TYPE.player ? 'bg-aero' : 'bg-orange'}`}>
-            <Image
-              width={0}
-              height={0}
-              loader={myLoader}
-              src={user?.profileImg.url}
-              alt={user?.profileImg.name}
-              className='w-10 h-10'
-            />
+          <div className={`absolute z-10 flex items-center justify-center top-0 left-0 w-52 h-7 ${publication.type === PUBLICATION_TYPE.player ? 'bg-aero' : 'bg-orange'}`}>
             <span className='text-xl font-bold text-white'>
               {
                 publication.type === PUBLICATION_TYPE.player

@@ -4,7 +4,7 @@ import MapLoader from '../Loaders/MapLoader'
 import GameMarker from './GameMarker'
 import styles from './Map.module.scss'
 
-const Markers = ({ publication, user, currentPosition }) => {
+const Markers = ({ publication, publicationUser, currentPosition }) => {
   if (!publication || !currentPosition) return <MapLoader />
 
   const csgoIcon = L.divIcon({
@@ -34,7 +34,7 @@ const Markers = ({ publication, user, currentPosition }) => {
       {
         publication.category === COLLECTIONS.cs2 && (
           <GameMarker
-            user={user}
+            publicationUser={publicationUser}
             publication={publication}
             icon={csgoIcon}
           />
@@ -43,7 +43,7 @@ const Markers = ({ publication, user, currentPosition }) => {
       {
         publication.category === COLLECTIONS.lol && (
           <GameMarker
-            user={user}
+            publicationUser={publicationUser}
             publication={publication}
             icon={lolIcon}
           />
@@ -52,7 +52,7 @@ const Markers = ({ publication, user, currentPosition }) => {
       {
         publication.category === COLLECTIONS.fortnite && (
           <GameMarker
-            user={user}
+            publicationUser={publicationUser}
             publication={publication}
             icon={fortniteIcon}
           />
@@ -61,7 +61,7 @@ const Markers = ({ publication, user, currentPosition }) => {
       {
         publication.category === COLLECTIONS.valorant && (
           <GameMarker
-            user={user}
+            publicationUser={publicationUser}
             publication={publication}
             icon={valorantIcon}
           />
