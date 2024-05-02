@@ -6,7 +6,7 @@ export const Hero = () => {
     <header className='relative md:-top-[10vh] md:h-screen h-[90vh] flex justify-center items-center'>
       <div className='absolute z-50 flex flex-col items-center h-full gap-20 md:justify-center'>
         <div className='text-3xl font-bold text-center md:text-5xl'>
-          <h1 className='p-5 text-transparent bg-clip-text bg-gradient-to-r from-aero to-white'>
+          <h1 className='p-5 text-transparent bg-clip-text bg-gradient-to-r from-aero to-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
             Encuentra jugadores y equipos cerca de ti
           </h1>
         </div>
