@@ -21,10 +21,10 @@ import { useUpdateCountPublications } from '../../game-form/hooks/use-update-cou
 
 interface FortniteGameFormProps {
   userServer: UserServer
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
 }
 
-export const FortniteGameForm = ({ userServer, mixWikTeams }: FortniteGameFormProps) => {
+export const FortniteGameForm = ({ userServer, isMixWikTeams }: FortniteGameFormProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -141,7 +141,7 @@ export const FortniteGameForm = ({ userServer, mixWikTeams }: FortniteGameFormPr
           Fortnite
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}

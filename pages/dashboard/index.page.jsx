@@ -53,8 +53,8 @@ export default function Dashboard () {
 
   const { userProvider } = useSession()
   const { userServer, setRefetch } = useGetOneUser(userProvider?.uid)
-  const mixWikTeams = useMixWikTeamsCheckSubscription(userServer?.mixWikTeams)
-  const { date } = useComproveRenovationSubscription(userServer?.mixWikTeams, mixWikTeams)
+  const { isMixWikTeams } = useMixWikTeamsCheckSubscription(userServer?.mixWikTeams)
+  const { date } = useComproveRenovationSubscription(userServer?.mixWikTeams, isMixWikTeams)
 
   useConfirmUserRegister()
   return (
@@ -63,18 +63,18 @@ export default function Dashboard () {
         <BackgroundDots />
         <Profile
           user={userServer}
-          mixWikTeams={mixWikTeams}
+          isMixWikTeams={isMixWikTeams}
           page={page}
           setRefetch={setRefetch}
         />
         <NewPublication
           page={page}
-          mixWikTeams={mixWikTeams}
+          isMixWikTeams={isMixWikTeams}
           userServer={userServer}
         />
         <NewTeam
           page={page}
-          mixWikTeams={mixWikTeams}
+          isMixWikTeams={isMixWikTeams}
           userServer={userServer}
         />
         <Favorites
@@ -89,8 +89,8 @@ export default function Dashboard () {
           user={userServer}
           page={page}
         />
-        {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams mixWikTeams={mixWikTeams} user={userServer} />}
-        {page === 'allUsers' && <AllUsers mixWikTeams={mixWikTeams} />}
+        {(page === 'mixWikTeams' || page === 'noTeams' || page === 'noMixWikTeams') && <MixWikTeams isMixWikTeams={isMixWikTeams} user={userServer} />}
+        {page === 'allUsers' && <AllUsers isMixWikTeams={isMixWikTeams} />}
         {page === 'bugsReports' && <BugsReports />}
         <nav className='flex items-center justify-center h-[90vh]'>
           <ul className='grid h-full grid-cols-4 grid-rows-5 gap-3 p-3 lg:w-1/2 md:3/5'>
@@ -133,7 +133,7 @@ export default function Dashboard () {
               <h2 className='text-xs font-bold text-center md:text-base'>Crear publicación</h2>
               <button
                 className='flex flex-col items-center justify-center gap-1 duration-300 border border-solid rounded-lg md:gap-3 size-full border-pennBlue bg-pennBlue/10 hover:bg-pennBlue/15'
-                onClick={() => handleClick(mixWikTeams ? 'teams' : 'noTeams')}
+                onClick={() => handleClick(isMixWikTeams ? 'teams' : 'noTeams')}
               >
                 <Image className='size-10 md:size-20' src='/logos/team-icon.png' alt='Icono de publicaciones' width={50} height={50} loader={myLoader} />
                 Team
@@ -175,7 +175,7 @@ export default function Dashboard () {
             >
               <Image className='hidden w-auto h-full p-2 rounded-l-lg bg-aero md:block' width={10} height={10} src='/logos/icon-logo.png' alt='Icono del logo MixWik' loader={myLoader} />
               {
-                mixWikTeams
+                isMixWikTeams
                   ? (
                     <div className='flex flex-col items-center justify-center w-full p-2 md:gap-5'>
                       <h2 className='md:text-2xl'>¡Eres de MixWikTeams!</h2>

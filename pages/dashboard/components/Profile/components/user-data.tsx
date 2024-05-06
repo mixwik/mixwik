@@ -7,11 +7,11 @@ import { ProfileImage } from '../../profile-image'
 interface User {
   user: UserServer
   userProvider: UserProvider
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
   setEdit: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const UserData = ({ user, userProvider, mixWikTeams, setEdit }: User) => {
+export const UserData = ({ user, userProvider, isMixWikTeams, setEdit }: User) => {
   return (
     <section className='flex flex-col items-center'>
       <div className='relative flex justify-center w-full h-64'>
@@ -28,7 +28,7 @@ export const UserData = ({ user, userProvider, mixWikTeams, setEdit }: User) => 
         </div>
         <p className='my-5 text-sm text-pretty'>{user.description}</p>
         <div className='flex flex-wrap justify-center gap-5'>
-          <SocialLinks user={user} mixWikTeams={mixWikTeams} />
+          <SocialLinks user={user} isMixWikTeams={isMixWikTeams} />
         </div>
         <button className='flex items-center gap-2 px-5 py-2 text-white rounded-md bg-pennBlue' onClick={() => setEdit((prev) => !prev)}>
           Editar

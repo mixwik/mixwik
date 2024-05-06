@@ -21,10 +21,10 @@ import { useUpdateCountPublications } from '../../game-form/hooks/use-update-cou
 
 interface LolGameFormProps {
   userServer: UserServer
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
 }
 
-export const LolGameForm = ({ userServer, mixWikTeams }: LolGameFormProps) => {
+export const LolGameForm = ({ userServer, isMixWikTeams }: LolGameFormProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -143,7 +143,7 @@ export const LolGameForm = ({ userServer, mixWikTeams }: LolGameFormProps) => {
           League of Legends
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}

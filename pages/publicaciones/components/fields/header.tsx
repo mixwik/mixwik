@@ -7,7 +7,7 @@ import { EditIcon } from '../../../../icons/edit'
 import { useDeleteLike } from '../hooks/use-delete-like'
 import { useSetLike } from '../hooks/use-set-like'
 
-export const Header = ({ userServer, age, mixWikTeams, limitedAdministrator, date, image, setEdit, uid, id }) => {
+export const Header = ({ userServer, age, isMixWikTeams, limitedAdministrator, date, image, setEdit, uid, id }) => {
   const data = new Date(date.seconds * 1000)
   const { setLike } = useSetLike()
   const { deleteLike } = useDeleteLike()
@@ -34,7 +34,7 @@ export const Header = ({ userServer, age, mixWikTeams, limitedAdministrator, dat
         <Link href={`/user/${userServer.uid}`} className='flex flex-col'>
           <h1 className='flex gap-2 font-bold md:text-xl'>
             {userServer.name}
-            {mixWikTeams &&
+            {isMixWikTeams &&
               <span className='px-2 py-1 text-xs text-white rounded-full bg-aero'>
                 Teams
               </span>}

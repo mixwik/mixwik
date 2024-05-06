@@ -21,10 +21,10 @@ import { useUpdateCountPublications } from '../../game-form/hooks/use-update-cou
 
 interface ValorantGameFromProps {
   userServer: UserServer
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
 }
 
-export const ValorantGameFrom = ({ userServer, mixWikTeams }: ValorantGameFromProps) => {
+export const ValorantGameFrom = ({ userServer, isMixWikTeams }: ValorantGameFromProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -140,7 +140,7 @@ export const ValorantGameFrom = ({ userServer, mixWikTeams }: ValorantGameFromPr
           Valorant
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}

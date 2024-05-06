@@ -22,10 +22,10 @@ import { useUpdateCountPublications } from '../hooks/use-update-count-publicatio
 interface Cs2GameFromProps {
   dashboard?: boolean
   userServer?: UserServer
-  mixWikTeams?: boolean
+  isMixWikTeams?: boolean
 }
 
-export const Cs2GameFrom = ({ dashboard, userServer, mixWikTeams }: Cs2GameFromProps) => {
+export const Cs2GameFrom = ({ dashboard, userServer, isMixWikTeams }: Cs2GameFromProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -119,7 +119,7 @@ export const Cs2GameFrom = ({ dashboard, userServer, mixWikTeams }: Cs2GameFromP
           Counter Strike 2
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}

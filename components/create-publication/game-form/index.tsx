@@ -9,18 +9,18 @@ import { ValorantGameFrom } from './components/valorant-game-form'
 interface GameFormProps {
   dashboard?: boolean
   userServer?: UserServer
-  mixWikTeams?: boolean
+  isMixWikTeams?: boolean
 }
 
-export const GameForm = ({ dashboard, userServer, mixWikTeams }: GameFormProps) => {
+export const GameForm = ({ dashboard, userServer, isMixWikTeams }: GameFormProps) => {
   const { openGame } = useOpenGameContext()
   if (!openGame) return null
   return (
     <section className='flex items-center justify-center bg-white z-50 absolute md:top-[10vh] top-0 bottom-[10vh] md:bottom-0 h-[90vh] w-full overflow-scroll [&::-webkit-scrollbar]:hidden'>
-      {openGame === COLLECTIONS.cs2 && <Cs2GameFrom dashboard={dashboard} userServer={userServer} mixWikTeams={mixWikTeams} />}
-      {openGame === COLLECTIONS.valorant && <ValorantGameFrom dashboard={dashboard} userServer={userServer} mixWikTeams={mixWikTeams} />}
-      {openGame === COLLECTIONS.fortnite && <FortniteGameForm dashboard={dashboard} userServer={userServer} mixWikTeams={mixWikTeams} />}
-      {openGame === COLLECTIONS.lol && <LolGameForm dashboard={dashboard} userServer={userServer} mixWikTeams={mixWikTeams} />}
+      {openGame === COLLECTIONS.cs2 && <Cs2GameFrom dashboard={dashboard} userServer={userServer} isMixWikTeams={isMixWikTeams} />}
+      {openGame === COLLECTIONS.valorant && <ValorantGameFrom dashboard={dashboard} userServer={userServer} isMixWikTeams={isMixWikTeams} />}
+      {openGame === COLLECTIONS.fortnite && <FortniteGameForm dashboard={dashboard} userServer={userServer} isMixWikTeams={isMixWikTeams} />}
+      {openGame === COLLECTIONS.lol && <LolGameForm dashboard={dashboard} userServer={userServer} isMixWikTeams={isMixWikTeams} />}
     </section>
   )
 }

@@ -15,14 +15,16 @@ interface CardProps {
   userServer: UserServer[]
   publication: gameServer | teamServer
   promotion?: boolean
+  index?: number
 }
 
-const Card = ({ userServer, publication, promotion }: CardProps) => {
+const Card = ({ userServer, publication, promotion, index }: CardProps) => {
   const publicationUser = userServer.find(find => find.id === publication?.uid)
-  const mixWikTeams = useMixWikTeamsCheckSubscription(publicationUser?.mixWikTeams)
+  const { isMixWikTeams } = useMixWikTeamsCheckSubscription(publicationUser?.mixWikTeams)
   const { images } = useImages({ publication })
-  if (publication?.type === 'team' && !mixWikTeams) return null
+  if (publication?.type === 'team' && !isMixWikTeams) return null
   if (publication?.promotion && !promotion) return null
+  if (publication?.type === 'player' && !isMixWikTeams && index && index > 0) return null
 
   return (
     <Link href={`/publicaciones/juegos/${publication?.id}?type=${publication?.type}&category=${publication?.category}`}>

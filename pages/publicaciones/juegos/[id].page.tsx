@@ -31,8 +31,8 @@ const PublicationsGamesPage = () => {
   const { images } = useImages({ publication })
   const { userServer } = useGetOneUser(publication?.uid)
   const { isData } = useGetOneUser(userProvider?.uid)
-  const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, userServer.uid)
-  const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
+  const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, userServer.id)
+  const { isMixWikTeams } = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
 
   if (!publication) return null
   return (
@@ -45,7 +45,7 @@ const PublicationsGamesPage = () => {
             image={userServer?.profileImg?.url || userProvider.image}
             age={publication?.age}
             date={publication?.date}
-            mixWikTeams={mixWikTeams}
+            isMixWikTeams={isMixWikTeams}
             limitedAdministrator={limitedAdministrator}
             setEdit={setEdit}
             uid={userProvider?.uid}
@@ -74,7 +74,7 @@ const PublicationsGamesPage = () => {
             <h2 className='text-xl font-bold'>Vias de contacto</h2>
             <div className='flex flex-wrap gap-5'>
               {isData === 'data'
-                ? <SocialLinks mixWikTeams={mixWikTeams} user={userServer} />
+                ? <SocialLinks isMixWikTeams={isMixWikTeams} user={userServer} />
                 : <p>Para poder ver las vías de contacto, primero tienes que <Link className='text-aero decoration-white' href='/logIn'>Registrarte / Iniciar Sesión en MixWik</Link></p>}
             </div>
             <div className='flex items-center justify-center'>
@@ -87,7 +87,7 @@ const PublicationsGamesPage = () => {
         <Edit
           type={type}
           setEdit={setEdit}
-          mixWikTeams={mixWikTeams}
+          isMixWikTeams={isMixWikTeams}
           publication={publication}
           setRefetch={setRefetch}
         />}

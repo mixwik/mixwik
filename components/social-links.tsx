@@ -10,10 +10,10 @@ import { YoutubeIcon } from '../icons/social/youtube'
 
 interface SocialLinksProps {
   user: UserServer
-  mixWikTeams?: boolean
+  isMixWikTeams?: boolean
 }
 
-export const SocialLinks = ({ user, mixWikTeams }: SocialLinksProps) => {
+export const SocialLinks = ({ user, isMixWikTeams }: SocialLinksProps) => {
   return (
     <>
       {user.social?.discord && (
@@ -29,7 +29,7 @@ export const SocialLinks = ({ user, mixWikTeams }: SocialLinksProps) => {
         </a>
       )}
       {
-        mixWikTeams && (
+        isMixWikTeams && (
           <>
             {user.social?.instagram && (
               <a className='flex flex-col items-center text-sm' href={user.social.instagram} target='_blank' rel='noreferrer'>

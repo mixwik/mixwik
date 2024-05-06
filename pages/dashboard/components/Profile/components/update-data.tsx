@@ -19,12 +19,12 @@ import { FieldImage } from './image-field'
 
 interface UpdateDataProps {
   user: UserServer
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
   setEdit: React.Dispatch<React.SetStateAction<boolean>>
   setRefetch: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const UpdateData = ({ user, mixWikTeams, setEdit, setRefetch }: UpdateDataProps) => {
+export const UpdateData = ({ user, isMixWikTeams, setEdit, setRefetch }: UpdateDataProps) => {
   const [imgURL, setImgURL] = useState('')
   const [loading, setLoading] = useState({
     title: '',
@@ -133,7 +133,7 @@ export const UpdateData = ({ user, mixWikTeams, setEdit, setRefetch }: UpdateDat
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        uid: user.uid,
+        id: user.id,
         age: data.age,
         description: data.description,
         discord: data.discord,
@@ -224,7 +224,7 @@ export const UpdateData = ({ user, mixWikTeams, setEdit, setRefetch }: UpdateDat
           </div>
         </label>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <>
                 <label className='flex flex-col justify-center w-full gap-2'>

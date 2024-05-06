@@ -22,10 +22,10 @@ import { FieldImages } from '../../components/fields/images-field'
 interface LolGameFormProps {
   dashboard?: boolean
   userServer?: UserServer
-  mixWikTeams?: boolean
+  isMixWikTeams?: boolean
 }
 
-export const LolGameForm = ({ dashboard, userServer, mixWikTeams }: LolGameFormProps) => {
+export const LolGameForm = ({ dashboard, userServer, isMixWikTeams }: LolGameFormProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -143,7 +143,7 @@ export const LolGameForm = ({ dashboard, userServer, mixWikTeams }: LolGameFormP
           League of Legends
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}

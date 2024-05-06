@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { PUBLICATION_TYPE } from '../../domain/constants'
-import { useMixWikTeamsCheckSubscriptionFunction } from '../../hooks/useChecksStripe'
+import { usePromotionCheckSubscription } from '../../hooks/useChecksStripe'
 import { Spinner } from '../../icons/spinner'
 import { BackgroundDots } from '../background-dots'
 import Card from './components/card'
 
 export const Cards = ({ publications, users, isVoid }) => {
-  const checkSubscription = useMixWikTeamsCheckSubscriptionFunction()
+  const { checkSubscription } = usePromotionCheckSubscription()
   const [loading, setLoading] = useState(true)
   const [promo, setPromo] = useState(false)
   setTimeout(() => {
@@ -50,12 +50,13 @@ export const Cards = ({ publications, users, isVoid }) => {
                   />
                 )
               ))}
-              {publications.map((res) => (
+              {publications.map((res, index) => (
                 res.type === PUBLICATION_TYPE.player && (
                   <Card
                     key={res.id}
                     userServer={users}
                     publication={res}
+                    index={index}
                   />
                 )
               ))}

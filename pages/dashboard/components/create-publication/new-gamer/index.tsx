@@ -4,16 +4,16 @@ import { Select } from '../components/select'
 
 interface NewPublicationProps {
   userServer: UserServer
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
   page: string
 }
 
-export const NewPublication = ({ userServer, mixWikTeams, page }: NewPublicationProps) => {
+export const NewPublication = ({ userServer, isMixWikTeams, page }: NewPublicationProps) => {
   if (page !== 'jugador') return null
   return (
     <>
-      <GameForm dashboard userServer={userServer} mixWikTeams={mixWikTeams} />
-      <Select userServer={userServer} mixWikTeams={mixWikTeams} title='Crear Jugador' />
+      <GameForm dashboard userServer={userServer} isMixWikTeams={isMixWikTeams} />
+      <Select userServer={userServer} isMixWikTeams={isMixWikTeams} title='Crear Jugador' />
     </>
   )
 }

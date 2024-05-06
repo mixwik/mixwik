@@ -5,7 +5,7 @@ import { WindowLayout } from '../window-layout'
 import { UpdateData } from './components/update-data'
 import { UserData } from './components/user-data'
 
-const Profile = ({ user, mixWikTeams, page, setRefetch }) => {
+const Profile = ({ user, isMixWikTeams, page, setRefetch }) => {
   const [edit, setEdit] = useState(false)
   const { userProvider } = useSession()
 
@@ -15,14 +15,14 @@ const Profile = ({ user, mixWikTeams, page, setRefetch }) => {
       {edit
         ? <UpdateData
             user={user}
-            mixWikTeams={mixWikTeams}
+            isMixWikTeams={isMixWikTeams}
             setEdit={setEdit}
             setRefetch={setRefetch}
           />
         : <UserData
             user={user}
             userProvider={userProvider}
-            mixWikTeams={mixWikTeams}
+            isMixWikTeams={isMixWikTeams}
             setEdit={setEdit}
           />}
     </WindowLayout>

@@ -21,10 +21,10 @@ import { useUpdateCountPublications } from '../../game-form/hooks/use-update-cou
 
 interface Cs2TeamFromProps {
   userServer: UserServer
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
 }
 
-export const Cs2TeamFrom = ({ userServer, mixWikTeams }: Cs2TeamFromProps) => {
+export const Cs2TeamFrom = ({ userServer, isMixWikTeams }: Cs2TeamFromProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -112,7 +112,7 @@ export const Cs2TeamFrom = ({ userServer, mixWikTeams }: Cs2TeamFromProps) => {
           Counter Strike 2
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}

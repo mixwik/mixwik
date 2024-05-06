@@ -8,18 +8,18 @@ import { ValorantGameFrom } from './components/valorant-game-form'
 
 interface TeamFormProps {
   userServer: UserServer
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
 }
 
-export const TeamForm = ({ userServer, mixWikTeams }: TeamFormProps) => {
+export const TeamForm = ({ userServer, isMixWikTeams }: TeamFormProps) => {
   const { openGame } = useOpenGameContext()
   if (!openGame) return null
   return (
     <section className='flex items-center justify-center bg-white z-50 absolute md:top-[10vh] top-0 bottom-[10vh] md:bottom-0 h-[90vh] w-full overflow-scroll [&::-webkit-scrollbar]:hidden'>
-      {openGame === COLLECTIONS.cs2 && <Cs2TeamFrom userServer={userServer} mixWikTeams={mixWikTeams} />}
-      {openGame === COLLECTIONS.valorant && <ValorantGameFrom userServer={userServer} mixWikTeams={mixWikTeams} />}
-      {openGame === COLLECTIONS.fortnite && <FortniteGameForm userServer={userServer} mixWikTeams={mixWikTeams} />}
-      {openGame === COLLECTIONS.lol && <LolGameForm userServer={userServer} mixWikTeams={mixWikTeams} />}
+      {openGame === COLLECTIONS.cs2 && <Cs2TeamFrom userServer={userServer} isMixWikTeams={isMixWikTeams} />}
+      {openGame === COLLECTIONS.valorant && <ValorantGameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} />}
+      {openGame === COLLECTIONS.fortnite && <FortniteGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} />}
+      {openGame === COLLECTIONS.lol && <LolGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} />}
     </section>
   )
 }

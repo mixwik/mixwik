@@ -22,10 +22,10 @@ import { FieldImages } from '../../components/fields/images-field'
 interface FortniteGameFormProps {
   dashboard?: boolean
   userServer?: UserServer
-  mixWikTeams?: boolean
+  isMixWikTeams?: boolean
 }
 
-export const FortniteGameForm = ({ dashboard, userServer, mixWikTeams }: FortniteGameFormProps) => {
+export const FortniteGameForm = ({ dashboard, userServer, isMixWikTeams }: FortniteGameFormProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -143,7 +143,7 @@ export const FortniteGameForm = ({ dashboard, userServer, mixWikTeams }: Fortnit
           Fortnite
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}

@@ -23,7 +23,7 @@ export const useCheckPay = (id) => {
 }
 
 export const useMixWikTeamsCheckSubscription = (stripeId) => {
-  const [success, setSuccess] = useState(false)
+  const [isMixWikTeams, setIsMixWikTeams] = useState(false)
   const stripe = new Stripe(key)
 
   useEffect(() => {
@@ -33,18 +33,18 @@ export const useMixWikTeamsCheckSubscription = (stripeId) => {
       const activeSubscription = subscriptions.data.find(subscription => subscription.status === 'active')
 
       if (activeSubscription) {
-        setSuccess(true)
+        setIsMixWikTeams(true)
       } else {
-        setSuccess(false)
+        setIsMixWikTeams(false)
       }
     }
     if (stripeId) checkSubscription(stripeId)
   }, [stripeId])
 
-  return success
+  return { isMixWikTeams }
 }
 
-export const useMixWikTeamsCheckSubscriptionFunction = () => {
+export const usePromotionCheckSubscription = () => {
   const stripe = new Stripe(key)
 
   const checkSubscription = async (stripeId, category, id) => {
@@ -66,7 +66,7 @@ export const useMixWikTeamsCheckSubscriptionFunction = () => {
     }
   }
 
-  return checkSubscription
+  return { checkSubscription }
 }
 
 export const useCancelRenovationSubscription = (reload) => {

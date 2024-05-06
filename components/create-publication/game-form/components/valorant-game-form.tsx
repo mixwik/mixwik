@@ -22,10 +22,10 @@ import { useUpdateCountPublications } from '../hooks/use-update-count-publicatio
 interface ValorantGameFromProps {
   dashboard?: boolean
   userServer?: UserServer
-  mixWikTeams?: boolean
+  isMixWikTeams?: boolean
 }
 
-export const ValorantGameFrom = ({ dashboard, userServer, mixWikTeams }: ValorantGameFromProps) => {
+export const ValorantGameFrom = ({ dashboard, userServer, isMixWikTeams }: ValorantGameFromProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -144,7 +144,7 @@ export const ValorantGameFrom = ({ dashboard, userServer, mixWikTeams }: Valoran
           Valorant
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}

@@ -4,12 +4,12 @@ import { useOpenGameContext } from '../../../../../context'
 import { COLLECTIONS } from '../../../../../domain/constants'
 import { WindowLayout } from '../../window-layout'
 
-export const Select = ({ mixWikTeams, userServer, title }) => {
+export const Select = ({ isMixWikTeams, userServer, title }) => {
   const { handleOpenGame } = useOpenGameContext()
   const [teams, setTeams] = useState('')
   const handleCheck = (name) => {
     if (name === COLLECTIONS.cs2) {
-      if (!mixWikTeams) {
+      if (!isMixWikTeams) {
         if (!userServer.publications.cs2Publications) {
           handleOpenGame(name)
           setTeams('')
@@ -20,7 +20,7 @@ export const Select = ({ mixWikTeams, userServer, title }) => {
           setTeams('noMixWikTeams')
           handleOpenGame('')
         }
-      } else if (mixWikTeams) {
+      } else if (isMixWikTeams) {
         if (userServer.publications.cs2Publications < 5) {
           handleOpenGame(name)
         } else {
@@ -30,7 +30,7 @@ export const Select = ({ mixWikTeams, userServer, title }) => {
       }
     }
     if (name === COLLECTIONS.lol) {
-      if (!mixWikTeams) {
+      if (!isMixWikTeams) {
         if (!userServer.publications.lolPublications) {
           handleOpenGame(name)
           setTeams('')
@@ -41,7 +41,7 @@ export const Select = ({ mixWikTeams, userServer, title }) => {
           setTeams('noMixWikTeams')
           handleOpenGame('')
         }
-      } else if (mixWikTeams) {
+      } else if (isMixWikTeams) {
         if (userServer.publications.lolPublications < 5) {
           handleOpenGame(name)
           setTeams('')
@@ -52,7 +52,7 @@ export const Select = ({ mixWikTeams, userServer, title }) => {
       }
     }
     if (name === COLLECTIONS.fortnite) {
-      if (!mixWikTeams) {
+      if (!isMixWikTeams) {
         if (!userServer.publications.fortnitePublications) {
           handleOpenGame(name)
           setTeams('')
@@ -63,7 +63,7 @@ export const Select = ({ mixWikTeams, userServer, title }) => {
           setTeams('noMixWikTeams')
           handleOpenGame('')
         }
-      } else if (mixWikTeams) {
+      } else if (isMixWikTeams) {
         if (userServer.publications.fortnitePublications < 5) {
           handleOpenGame(name)
           setTeams('')
@@ -74,7 +74,7 @@ export const Select = ({ mixWikTeams, userServer, title }) => {
       }
     }
     if (name === COLLECTIONS.valorant) {
-      if (!mixWikTeams) {
+      if (!isMixWikTeams) {
         if (!userServer.publications.valorantPublications) {
           handleOpenGame(name)
           setTeams('')
@@ -85,7 +85,7 @@ export const Select = ({ mixWikTeams, userServer, title }) => {
           setTeams('noMixWikTeams')
           handleOpenGame('')
         }
-      } else if (mixWikTeams) {
+      } else if (isMixWikTeams) {
         if (userServer.publications.valorantPublications < 5) {
           handleOpenGame(name)
           setTeams('')

@@ -20,7 +20,7 @@ const User = () => {
   const { userServer } = useGetOneUser(id)
   const { isData } = useGetOneUser(userProvider?.uid)
   const { publications } = useGetAllPublicationsOneUser(id as string)
-  const mixWikTeams = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
+  const { isMixWikTeams } = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
   const age = new Date().getFullYear() - new Date(userServer.age).getFullYear()
   return (
     <Layout title={`perfil de ${userServer.name}`}>
@@ -43,7 +43,7 @@ const User = () => {
               <h2 className='text-xl font-bold'>Redes Sociales</h2>
               <div className='flex flex-wrap gap-5 p-5'>
                 {isData === 'data'
-                  ? <SocialLinks mixWikTeams={mixWikTeams} user={userServer} />
+                  ? <SocialLinks isMixWikTeams={isMixWikTeams} user={userServer} />
                   : <p>Para poder ver las vías de contacto, primero tienes que <Link className='text-aero decoration-white' href='/logIn'>Registrarte / Iniciar Sesión en MixWik</Link></p>}
               </div>
 

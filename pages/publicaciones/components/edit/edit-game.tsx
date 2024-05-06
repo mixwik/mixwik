@@ -21,12 +21,12 @@ import { Valorant } from './valorant'
 interface EditCs2Props {
   type: string
   setEdit: (value: boolean) => void
-  mixWikTeams: boolean
+  isMixWikTeams: boolean
   publication: gameServer | teamServer
   setRefetch: (value: any) => void
 }
 
-export const EditGame = ({ type, setEdit, mixWikTeams, publication, setRefetch }: EditCs2Props) => {
+export const EditGame = ({ type, setEdit, isMixWikTeams, publication, setRefetch }: EditCs2Props) => {
   const [loading, setLoading] = useState({
     title: '',
     subtitle: '',
@@ -121,7 +121,7 @@ export const EditGame = ({ type, setEdit, mixWikTeams, publication, setRefetch }
           Counter Strike 2
         </h2>
         {
-          mixWikTeams
+          isMixWikTeams
             ? (
               <FieldImages
                 setImgURL={setImgUrl}
