@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import { LolFilter } from '../../../components/Filters/lol-filter'
 import Layout from '../../../components/Layout'
+import { useDistance } from '../../../hooks/use-distance'
 import PageContent from '../components/PageContent'
 import TitlePage from '../components/TitlePage'
 
 const Lol = () => {
-  const [distance, setDistance] = useState(700)
+  const { distance, setDistance } = useDistance()
   return (
     <Layout>
       <PageContent

@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useDistance } from '../../..//hooks/use-distance.ts'
 import { Cs2Filter } from '../../../components/Filters/cs2-filter'
 import Layout from '../../../components/Layout'
+import { COLLECTIONS } from '../../../domain/constants'
 import PageContent from '../components/PageContent'
 import TitlePage from '../components/TitlePage'
-import { COLLECTIONS } from '../../../domain/constants'
 
 const Csgo = () => {
-  const [distance, setDistance] = useState(700)
+  const { distance, setDistance } = useDistance()
   return (
     <Layout>
       <PageContent

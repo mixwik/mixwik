@@ -5,7 +5,7 @@ import { FilterCancelIcon, FilterIcon, GamerType } from '../Svg'
 import { CheckFilter } from './components/CheckFilter'
 import { AgeFilter } from './components/ageFilter'
 
-export const CityGamesFilter = ({ distance, setDistance }) => {
+export const CityGamesFilter = () => {
   const handleSetFilter = useSetFilterContext()
   const filter = useFilterContext()
   const [openFilters, setOpenFilters] = useState(false)

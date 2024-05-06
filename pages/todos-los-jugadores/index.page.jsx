@@ -1,5 +1,4 @@
 // Hooks
-import { useState } from 'react'
 
 // Styles
 
@@ -19,11 +18,12 @@ import { BackgroundDots } from '../../components/background-dots'
 import { Cards } from '../../components/cards'
 import { COLLECTIONS } from '../../domain/constants'
 import { useSession } from '../../firebase/auth/useSession'
+import { useDistance } from '../../hooks/use-distance'
 import { useGetAllPublications } from '../../hooks/use-get-all-publications'
 import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 
 const AllGames = () => {
-  const [distance, setDistance] = useState(700)
+  const { distance, setDistance } = useDistance()
   const { userProvider } = useSession()
   const { currentPosition } = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
