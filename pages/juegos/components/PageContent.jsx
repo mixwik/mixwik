@@ -22,6 +22,7 @@ const PageContent = ({ category, children, distance }) => {
   const { currentPosition } = useCurrentPosition()
   const handleOpen = useHandleOpenContext()
   const { users } = useGetAllUsers()
+  console.log(users)
   const publications = useGetData(category)
   const publicationUser = users.find(res => res.uid === userProvider?.uid)
   const publicationsFiltered = useGamesFilters(publicationUser, publications, distance)

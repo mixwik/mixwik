@@ -6,6 +6,7 @@ export type UserProvider = {
 }
 
 export type UserServer = {
+    id: string
     admonition: boolean
     age: string
     ban: boolean
@@ -18,7 +19,6 @@ export type UserServer = {
         url: string
         name: string
     }
-    uid: string
     likes: string[]
     dateOfRegister: string
     mixWikTeams: string

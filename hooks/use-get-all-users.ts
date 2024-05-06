@@ -8,6 +8,7 @@ export const useGetAllUsers = () => {
       const users = await fetch('/api/get-all-users')
       const usersData = await users.json()
       setUsers(usersData)
+      console.log(usersData)
     })()
   }, [])
   return { users }

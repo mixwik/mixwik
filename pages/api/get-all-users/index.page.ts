@@ -10,7 +10,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     const querySnapshot = await getDocs(query(collection(db, COLLECTIONS.users)))
     querySnapshot.forEach((docSnap) => {
       publications.push({
-        uid: docSnap.data().uid,
+        id: docSnap.id,
         age: docSnap.data().age,
         name: docSnap.data().name,
         description: docSnap.data().description,
@@ -26,12 +26,11 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         publications: docSnap.data().publications,
         social: docSnap.data().social,
         profileImg: {
-          url: docSnap.data().img.url,
-          name: docSnap.data().img.name
+          url: docSnap.data().img?.url,
+          name: docSnap.data().img?.name
         }
       })
     })
-
     res.status(200).json(publications)
   } else {
     res.status(405).json({ error: 'id' })

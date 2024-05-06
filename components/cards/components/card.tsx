@@ -18,7 +18,7 @@ interface CardProps {
 }
 
 const Card = ({ userServer, publication, promotion }: CardProps) => {
-  const publicationUser = userServer.find(find => find.uid === publication?.uid)
+  const publicationUser = userServer.find(find => find.id === publication?.uid)
   const mixWikTeams = useMixWikTeamsCheckSubscription(publicationUser?.mixWikTeams)
   const { images } = useImages({ publication })
   if (publication?.type === 'team' && !mixWikTeams) return null
