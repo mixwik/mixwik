@@ -43,6 +43,23 @@ export const useMixWikTeamsCheckSubscription = (stripeId) => {
 
   return { isMixWikTeams }
 }
+export const useMixWikTeamsCheckSubscriptionFunction = () => {
+  const stripe = new Stripe(key)
+
+  const checkSubscription = async (stripeId) => {
+    const subscriptions = await stripe.subscriptions.list({ customer: stripeId })
+
+    const activeSubscription = subscriptions.data.find(subscription => subscription.status === 'active')
+
+    if (activeSubscription) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  return { checkSubscription }
+}
 
 export const usePromotionCheckSubscription = () => {
   const stripe = new Stripe(key)

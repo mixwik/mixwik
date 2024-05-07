@@ -26,8 +26,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         publications: docSnap.data().publications,
         social: docSnap.data().social,
         profileImg: {
-          url: docSnap.data().img?.url,
-          name: docSnap.data().img?.name
+          url: docSnap.data().profileImg?.url,
+          name: docSnap.data().profileImg?.name
         }
       })
     })
