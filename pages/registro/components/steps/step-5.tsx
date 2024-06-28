@@ -164,7 +164,7 @@ export const Step5 = (
       <PopUpMessage loading={loading} />
       <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea un jugador</h2>
       <SelectGame handleCheck={handleCheck} />
-      <div className='flex flex-col justify-between w-full gap-5 bg-red-300 md:flex-row'>
+      <div className='flex flex-col justify-between w-full gap-5 md:flex-row'>
         <label className='flex flex-col justify-center w-full gap-2 '>
           <div className='relative flex items-center gap-2'>
             <input
