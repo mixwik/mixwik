@@ -69,6 +69,7 @@ export const Step4 = (
             <input
               {...register('twitter')}
               className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+              placeholder='https://twitter.com/usuario'
             />
             <TwitterIcon className='absolute size-6 right-2' />
           </div>
@@ -84,6 +85,7 @@ export const Step4 = (
             <input
               {...register('discord', { pattern: REGEX.discord, required: 'El campo discord es obligatorio' })}
               className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+              placeholder='https://discord.gg/usuario'
             />
             <DiscordIcon className='absolute size-6 right-2' />
           </div>

@@ -164,33 +164,35 @@ export const Step5 = (
       <PopUpMessage loading={loading} />
       <h2 className='text-2xl font-bold text-pennBlue md:text-3xl'>Crea un jugador</h2>
       <SelectGame handleCheck={handleCheck} />
-      <label className='flex flex-col justify-center w-full gap-2 md:w-1/2'>
-        <div className='relative flex items-center gap-2'>
-          <input
-            type='text'
-            className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
-            placeholder='Código de afiliado (opcional)'
-            value={affiliateCode}
-            onChange={(e) => setAffiliateCode(e.target.value)}
-          />
+      <div className='flex flex-col justify-between w-full gap-5 bg-red-300 md:flex-row'>
+        <label className='flex flex-col justify-center w-full gap-2 '>
+          <div className='relative flex items-center gap-2'>
+            <input
+              type='text'
+              className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+              placeholder='Código de afiliado (opcional)'
+              value={affiliateCode}
+              onChange={(e) => setAffiliateCode(e.target.value)}
+            />
+          </div>
+        </label>
+        <div className='flex justify-center w-full gap-10 md:justify-end'>
+          <button
+            type='button'
+            className='flex items-center gap-1 text-sm md:text-base'
+            onClick={() => setSteps('step-4')}
+          >
+            <ArrowBack className='w-6 h-6 text-white' />
+            Volver
+          </button>
+          <button
+            disabled={!playerCreate}
+            onClick={handleSubmit}
+            className='px-5 py-3 text-sm text-white transition duration-500 ease-in-out transform shadow-xl md:text-base bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
+            type='submit'
+          >Crear Usuario
+          </button>
         </div>
-      </label>
-      <div className='flex justify-center w-full gap-10'>
-        <button
-          type='button'
-          className='flex items-center gap-1 text-sm md:text-base'
-          onClick={() => setSteps('step-4')}
-        >
-          <ArrowBack className='w-6 h-6 text-white' />
-          Volver
-        </button>
-        <button
-          disabled={!playerCreate}
-          onClick={handleSubmit}
-          className='px-5 py-3 text-sm text-white transition duration-500 ease-in-out transform shadow-xl md:text-base bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500'
-          type='submit'
-        >Crear Usuario
-        </button>
       </div>
       <GameForm />
     </section>
