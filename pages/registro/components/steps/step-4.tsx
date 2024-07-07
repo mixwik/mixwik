@@ -23,7 +23,7 @@ export const Step4 = (
         .notRequired()
         .when('twitter', {
           is: (value: string) => value?.length,
-          then: (rule) => rule.matches(REGEX.twitter, 'La URL de twitter no es valida')
+          then: (rule) => rule.matches(REGEX.twitterOrX, 'La URL de twitter no es valida')
         }),
       discord: yup
         .string()
@@ -69,7 +69,7 @@ export const Step4 = (
             <input
               {...register('twitter')}
               className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
-              placeholder='https://twitter.com/usuario'
+              placeholder='https://x.com/usuario o https://twitter.com/usuario'
             />
             <TwitterIcon className='absolute size-6 right-2' />
           </div>
