@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
-import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, TYPE_OF_GAME } from '../../../../domain/constants'
+import { CS2_LEVELS, CS2_POSITIONS, CS2_PREMIER, PUBLICATION_TYPE, TYPE_OF_GAME } from '../../../../domain/constants'
 import { cs2SchemaGame } from '../../../../domain/domain/cs2-schema'
 import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
@@ -82,7 +82,7 @@ export const Cs2GameFrom = ({ dashboard, userServer, isMixWikTeams }: Cs2GameFro
       setLoading({ title: 'Creando jugador...', subtitle: 'Estamos creando tu jugador', number: 0 })
       const res = await fetch('/api/create-game', {
         method: 'POST',
-        body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
+        body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age, type: isMixWikTeams ? PUBLICATION_TYPE.playerWithTeam : PUBLICATION_TYPE.player })
       })
       const response = await res.json()
       if (response.message === 'Game created') {

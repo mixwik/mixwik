@@ -28,7 +28,7 @@ const MyPublications = ({ user, page }) => {
             }
             {
               publications?.map((publication) => (
-                publication.type === PUBLICATION_TYPE.player &&
+                (publication.type === PUBLICATION_TYPE.player || publication.type === PUBLICATION_TYPE.playerWithTeam) &&
                   (
                     <CardPublications
                       key={publication.id}

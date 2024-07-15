@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
-import { FORTNITE_POSITIONS, FORTNITE_PREFERENCE_TEAM, TYPE_OF_GAME } from '../../../../domain/constants'
+import { FORTNITE_POSITIONS, FORTNITE_PREFERENCE_TEAM, PUBLICATION_TYPE, TYPE_OF_GAME } from '../../../../domain/constants'
 import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
@@ -110,7 +110,7 @@ export const FortniteGameForm = ({ dashboard, userServer, isMixWikTeams }: Fortn
       setLoading({ title: 'Creando jugador...', subtitle: 'Por favor espera', number: 0 })
       const res = await fetch('/api/create-game', {
         method: 'POST',
-        body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
+        body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age, type: isMixWikTeams ? PUBLICATION_TYPE.playerWithTeam : PUBLICATION_TYPE.player })
       })
       const response = await res.json()
       if (response.message === 'Game created') {

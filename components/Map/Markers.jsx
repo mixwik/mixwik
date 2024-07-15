@@ -1,11 +1,16 @@
 import L from 'leaflet'
-import { COLLECTIONS } from '../../domain/constants'
+import { COLLECTIONS, PUBLICATION_TYPE } from '../../domain/constants'
+import { useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import MapLoader from '../Loaders/MapLoader'
 import GameMarker from './GameMarker'
 import styles from './Map.module.scss'
 
-const Markers = ({ publication, publicationUser, currentPosition }) => {
+const Markers = ({ publication, publicationUser, currentPosition, promotion, index }) => {
+  const { isMixWikTeams } = useMixWikTeamsCheckSubscription(publicationUser?.mixWikTeams)
   if (!publication || !currentPosition) return <MapLoader />
+  if (publication?.promotion && !promotion) return null
+  if (publication?.type === PUBLICATION_TYPE.team && !isMixWikTeams) return null
+  if (publication?.type === PUBLICATION_TYPE.playerWithTeam && !isMixWikTeams) return null
 
   const csgoIcon = L.divIcon({
     className: styles.csgoIcon,

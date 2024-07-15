@@ -10,6 +10,7 @@ import { useMixWikTeamsCheckSubscription } from '../../../hooks/useChecksStripe'
 import { useImages } from '../../../pages/publicaciones/hooks/use-images'
 import { myLoader } from '../../myLoader'
 import { Badge } from './badge'
+import { PUBLICATION_TYPE } from '../../../domain/constants'
 
 interface CardProps {
   userServer: UserServer[]
@@ -22,9 +23,9 @@ const Card = ({ userServer, publication, promotion, index }: CardProps) => {
   const publicationUser = userServer.find(find => find.id === publication?.uid)
   const { isMixWikTeams } = useMixWikTeamsCheckSubscription(publicationUser?.mixWikTeams)
   const { images } = useImages({ publication })
-  if (publication?.type === 'team' && !isMixWikTeams) return null
+  if (publication?.type === PUBLICATION_TYPE.team && !isMixWikTeams) return null
   if (publication?.promotion && !promotion) return null
-  if (publication?.type === 'player' && !isMixWikTeams && index && index > 0) return null
+  if (publication?.type === PUBLICATION_TYPE.playerWithTeam && !isMixWikTeams) return null
 
   return (
     <Link href={`/publicaciones/juegos/${publication?.id}?type=${publication?.type}&category=${publication?.category}`}>

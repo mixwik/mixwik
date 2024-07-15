@@ -30,7 +30,8 @@ export const PUBLICATION_STATUS = {
 
 export const PUBLICATION_TYPE = {
   team: 'team',
-  player: 'player'
+  player: 'player',
+  playerWithTeam: 'playerWithTeam'
 }
 
 export const PUBLICATION_PLAN = {

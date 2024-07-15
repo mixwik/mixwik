@@ -15,7 +15,7 @@ import { PublicationCard } from './components/publication-card.tsx'
 // Hooks
 import { COLLECTIONS, PUBLICATION_TYPE } from '../../domain/constants'
 import { useGetOneData } from '../../firebase/hooks/getMethod/useGetOneData'
-import { useCancelRenovationSubscription, useCheckPay } from '../../hooks/useChecksStripe'
+import { useCancelRenovationSubscription, useCheckPay, useMixWikTeamsCheckSubscription } from '../../hooks/useChecksStripe'
 import { useGetAllPublicationsOneUser } from '../../hooks/use-get-all-publications-one-user.ts'
 import { Loading } from './components/loading.tsx'
 
@@ -29,6 +29,7 @@ const Promotion = () => {
   const stripeId = useCheckPay(id, userProvider?.email)
   const { publications } = useGetAllPublicationsOneUser(userProvider?.uid)
   const cancelSubscription = useCancelRenovationSubscription()
+  const { isMixWikTeams } = useMixWikTeamsCheckSubscription(user?.mixWikTeams)
 
   if (stripeId && user.id && method === '2m25S789gDS8') updateUserCopper(stripeId, user.id, router)
   if (stripeId && user.id && method === '236dgER88954SE') updateUserSilver(stripeId, user.id, router)
@@ -72,6 +73,7 @@ const Promotion = () => {
             publications={publications}
             stripeId={stripeId}
             type={PUBLICATION_TYPE.team}
+            isMixWikTeams={isMixWikTeams}
           />
         </div>
       </div>

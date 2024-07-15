@@ -9,7 +9,7 @@ interface PlayerProps {
     }
 
 export const Player = ({ field, type }: PlayerProps) => {
-  if (type !== PUBLICATION_TYPE.player) return null
+  if (type !== PUBLICATION_TYPE.player || type !== PUBLICATION_TYPE.playerWithTeam) return null
   return (
     <div className='flex flex-col gap-10'>
       <IterableField

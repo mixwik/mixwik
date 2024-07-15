@@ -6,6 +6,7 @@ export type UserProvider = {
 }
 
 export type UserServer = {
+    uid: string
     id: string
     admonition: boolean
     age: string

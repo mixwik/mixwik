@@ -8,10 +8,15 @@ import styles from './Map.module.scss'
 import { MapContainer, TileLayer } from 'react-leaflet'
 
 // Components
+import { useState } from 'react'
+import { usePromotionCheckSubscription } from '../../hooks/useChecksStripe'
 import MapLoader from '../Loaders/MapLoader'
 import Markers from './Markers'
+import { PUBLICATION_TYPE } from '../../domain/constants'
 
 const Map = ({ publicationUser, publications, zoom, currentPosition }) => {
+  const [promo, setPromo] = useState(false)
+  const { checkSubscription } = usePromotionCheckSubscription()
   if (currentPosition.length === 0) return <MapLoader />
   return (
     <MapContainer
@@ -26,13 +31,43 @@ const Map = ({ publicationUser, publications, zoom, currentPosition }) => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {
-        publications?.map(publication => (
-          <Markers
-            key={publication.id}
-            publication={publication}
-            currentPosition={currentPosition}
-            publicationUser={publicationUser}
-          />
+        publications?.map(res => {
+          const promotion = checkSubscription(res.promotion, res.category, res.id)
+          promotion.then((res) => setPromo(res))
+          return (
+            <Markers
+              key={res.id}
+              publication={res}
+              currentPosition={currentPosition}
+              publicationUser={publicationUser}
+              promotion={promo}
+            />
+          )
+        })
+      }
+      {
+        publications?.map(res => (
+          res.type === PUBLICATION_TYPE.team && (
+            <Markers
+              key={res.id}
+              publication={res}
+              currentPosition={currentPosition}
+              publicationUser={publicationUser}
+            />
+          )
+        ))
+      }
+      {
+        publications?.map((res, index) => (
+          (res.type === PUBLICATION_TYPE.player || res.type === PUBLICATION_TYPE.playerWithTeam) && (
+            <Markers
+              key={res.id}
+              publication={res}
+              currentPosition={currentPosition}
+              publicationUser={publicationUser}
+              index={index}
+            />
+          )
         ))
       }
 

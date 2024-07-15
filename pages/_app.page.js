@@ -1,5 +1,6 @@
 import '@fontsource-variable/onest'
 import { Analytics } from '@vercel/analytics/react'
+import { Toaster } from 'react-hot-toast'
 import CookieConsent from '../components/CookiesConsent'
 import DataProvider from '../context'
 import '../styles/globals.scss'
@@ -10,6 +11,10 @@ function MyApp ({ Component, pageProps }) {
   return (
     <DataProvider>
       <Auth>
+        <Toaster
+          position='center'
+          reverseOrder={false}
+        />
         <Component {...pageProps} />
         <Analytics />
         <CookieConsent />

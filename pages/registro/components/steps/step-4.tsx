@@ -1,10 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import { ArrowBack } from '../../../../components/Svg'
 import { REGEX } from '../../../../domain/regex'
 import { DiscordIcon } from '../../../../icons/social/discord'
+import { SteamIcon } from '../../../../icons/social/steam'
 import { TwitterIcon } from '../../../../icons/social/twitter'
 
 export const Step4 = (
@@ -13,7 +15,8 @@ export const Step4 = (
 ) => {
   const [initialValues] = useState({
     twitter: localStorage.getItem('twitter') || '',
-    discord: localStorage.getItem('discord') || ''
+    discord: localStorage.getItem('discord') || '',
+    steam: localStorage.getItem('steam') || ''
   })
   const schema = yup
     .object()
@@ -23,19 +26,25 @@ export const Step4 = (
         .notRequired()
         .when('twitter', {
           is: (value: string) => value?.length,
-          then: (rule) => rule.matches(REGEX.twitterOrX, 'La URL de twitter no es valida')
+          then: (rule) => rule.matches(REGEX.twitterOrX)
         }),
       discord: yup
         .string()
         .notRequired()
         .when('discord', {
           is: (value: string) => value?.length,
-          then: (rule) => rule.matches(REGEX.discord, 'La URL de discord no es valida')
+          then: (rule) => rule.matches(REGEX.discord)
+        }),
+      steam: yup
+        .string()
+        .notRequired()
+        .when('steam', {
+          is: (value: string) => value?.length,
+          then: (rule) => rule.matches(REGEX.steam)
         })
-    }, [['twitter', 'twitter'], ['discord', 'discord']])
+    }, [['twitter', 'twitter'], ['discord', 'discord'], ['steam', 'steam']])
     .test(
       'at-least-one-input',
-      'Al menos uno de los dos campos debe estar lleno',
       obj => !!obj.twitter || !!obj.discord
     )
     .required()
@@ -49,9 +58,14 @@ export const Step4 = (
   const onSubmit = (data) => {
     localStorage.setItem('twitter', data.twitter)
     localStorage.setItem('discord', data.discord)
+    localStorage.setItem('steam', data.steam)
     localStorage.setItem('step', 'step-5')
     setSteps('step-5')
   }
+
+  if (errors.twitter) toast.error('La URL de twitter no es valida')
+  if (errors.discord) toast.error('La URL de discord no es valida')
+  if (errors.steam) toast.error('La URL de steam no es valida')
 
   return (
     <section className='flex flex-col items-center justify-around w-full h-full gap-5 p-5 bg-white rounded-lg md:h-4/5 md:w-1/2'>
@@ -73,9 +87,6 @@ export const Step4 = (
             />
             <TwitterIcon className='absolute size-6 right-2' />
           </div>
-          {errors.twitter && (
-            <div className='absolute text-red-300 -bottom-7'>{errors.twitter.message}</div>
-          )}
         </label>
         <label className='flex flex-col justify-center w-full gap-2 md:w-1/2'>
           <span className='font-semibold text-slate-900'>
@@ -89,9 +100,19 @@ export const Step4 = (
             />
             <DiscordIcon className='absolute size-6 right-2' />
           </div>
-          {errors.discord && (
-            <div className='absolute text-red-300 -bottom-7'>{errors.discord.message}</div>
-          )}
+        </label>
+        <label className='flex flex-col justify-center w-full gap-2 md:w-1/2'>
+          <span className='font-semibold text-slate-900'>
+            Steam:
+          </span>
+          <div className='relative flex items-center gap-2'>
+            <input
+              {...register('steam', { pattern: REGEX.steam, required: 'El campo steam es obligatorio' })}
+              className='block w-full p-5 mt-1 bg-gray-100 border-none shadow-lg h-9 rounded-xl hover:bg-blue-100 focus:bg-blue-100 focus:ring-0'
+              placeholder='https://steamcommunity.com/id/usuario'
+            />
+            <SteamIcon className='absolute size-6 right-2' />
+          </div>
         </label>
         <div className='flex justify-center w-full gap-10'>
           <button

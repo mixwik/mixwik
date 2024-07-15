@@ -3,6 +3,7 @@ import { SelectGame } from '../../../../../components/create-publication/select-
 import { useOpenGameContext } from '../../../../../context'
 import { COLLECTIONS } from '../../../../../domain/constants'
 import { WindowLayout } from '../../window-layout'
+import toast from 'react-hot-toast'
 
 export const Select = ({ isMixWikTeams, userServer, title }) => {
   const { handleOpenGame } = useOpenGameContext()
@@ -96,11 +97,11 @@ export const Select = ({ isMixWikTeams, userServer, title }) => {
       }
     }
   }
+  if (teams === 'maxPublications') toast.error('Has llegado al límite de publicaciones en este juego')
+  else if (teams === 'noMixWikTeams') toast.error('Hazte de mixWikTeams para poder hacer más publicaciones en cada juego')
   return (
     <WindowLayout title={title}>
       <div className='relative flex items-center justify-center h-full'>
-        {teams === 'maxPublications' && <p className='absolute px-10 text-center text-red-400 bottom-10'>Has llegado al límite de publicaciones en este juego</p>}
-        {teams === 'noMixWikTeams' && <p className='absolute px-10 font-bold text-center bottom-10 text-pennBlue'>Hazte de mixWikTeams para poder hacer más publicaciones en cada juego</p>}
         <SelectGame handleCheck={handleCheck} />
       </div>
     </WindowLayout>

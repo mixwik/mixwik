@@ -31,7 +31,7 @@ const PublicationsGamesPage = () => {
   const { images } = useImages({ publication })
   const { userServer } = useGetOneUser(publication?.uid)
   const { isData } = useGetOneUser(userProvider?.uid)
-  const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, userServer.id)
+  const limitedAdministrator = useLimitedAdministrator(userProvider?.uid, userServer.uid)
   const { isMixWikTeams } = useMixWikTeamsCheckSubscription(userServer.mixWikTeams)
 
   if (!publication) return null

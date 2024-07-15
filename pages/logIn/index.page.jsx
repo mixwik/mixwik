@@ -2,7 +2,7 @@ import { useRef } from 'react'
 // Styles
 
 // LogIn
-import { GoogleAuthProvider } from 'firebase/auth'
+import { GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth'
 import { useLogInProvider } from '../../firebase/auth/useLogIn'
 
 // Icons
@@ -17,6 +17,7 @@ const LogIn = () => {
   const { register, successRegister, errorRegister } = useRegister()
   const [errorProvider, logInProvider] = useLogInProvider()
   const google = new GoogleAuthProvider()
+  const twitter = new TwitterAuthProvider()
 
   const handleLoginProvider = (provider) => {
     logInProvider(provider)
@@ -62,14 +63,12 @@ const LogIn = () => {
                   <hr className='w-1/2 border-gray-300 rounded-md border-1' />
                 </div>
 
-                <div className='flex justify-center w-full mt-7'>
-                  {/* <button onClick={() => handleLoginProvider(facebook)} className='px-4 py-2 mr-5 text-white transition duration-500 ease-in-out transform bg-blue-500 border-none shadow-xl cursor-pointer rounded-xl hover:shadow-inner hover:-translate-x hover:scale-105'>
-
-                  Facebook
-                </button> */}
+                <div className='flex justify-center w-full gap-5 mt-7'>
                   <button onClick={() => handleLoginProvider(google)} className='px-4 py-2 text-white transition duration-500 ease-in-out transform bg-red-500 border-none shadow-xl cursor-pointer rounded-xl hover:shadow-inner hover:-translate-x hover:scale-105'>
-
                     Google
+                  </button>
+                  <button onClick={() => handleLoginProvider(twitter)} className='px-4 py-2 text-white transition duration-500 ease-in-out transform bg-black border-none shadow-xl cursor-pointer rounded-xl hover:shadow-inner hover:-translate-x hover:scale-105'>
+                    Twitter
                   </button>
                 </div>
                 <div className='flex items-center justify-center text-center mt-7'>

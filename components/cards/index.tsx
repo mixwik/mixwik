@@ -51,7 +51,7 @@ export const Cards = ({ publications, users, isVoid }) => {
                 )
               ))}
               {publications.map((res, index) => (
-                res.type === PUBLICATION_TYPE.player && (
+                (res.type === PUBLICATION_TYPE.player || res.type === PUBLICATION_TYPE.playerWithTeam) && (
                   <Card
                     key={res.id}
                     userServer={users}

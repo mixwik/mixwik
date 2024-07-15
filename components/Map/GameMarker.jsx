@@ -13,10 +13,10 @@ const GameMarker = ({ icon, publication, publicationUser }) => {
           href={`/publicaciones/juegos/${publication.id}?type=${publication.type}&category=${publication.category}`} rel='noreferrer'
           className='relative size-52'
         >
-          <div className={`absolute z-10 flex items-center justify-center top-0 left-0 w-52 h-7 ${publication.type === PUBLICATION_TYPE.player ? 'bg-aero' : 'bg-orange'}`}>
+          <div className={`absolute z-10 flex items-center justify-center top-0 left-0 w-52 h-7 ${(publication.type === PUBLICATION_TYPE.player || publication.type === PUBLICATION_TYPE.playerWithTeam) ? 'bg-aero' : 'bg-orange'}`}>
             <span className='text-xl font-bold text-white'>
               {
-                publication.type === PUBLICATION_TYPE.player
+                publication.type === (PUBLICATION_TYPE.player || PUBLICATION_TYPE.playerWithTeam)
                   ? 'Jugador'
                   : 'Equipo'
               }

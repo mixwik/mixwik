@@ -26,7 +26,7 @@ const Favorites = ({ userServer, page }) => {
         }
             {
             publications?.map(fav => (
-              fav.type === PUBLICATION_TYPE.player && (
+              (fav.type === PUBLICATION_TYPE.player || fav.type === PUBLICATION_TYPE.playerWithTeam) && (
                 <CardPublications
                   publication={fav}
                   user={userServer}
