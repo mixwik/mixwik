@@ -11,6 +11,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     querySnapshot.forEach((docSnap) => {
       publications.push({
         id: docSnap.id,
+        uid: docSnap.data().uid,
         age: docSnap.data().age,
         name: docSnap.data().name,
         description: docSnap.data().description,
