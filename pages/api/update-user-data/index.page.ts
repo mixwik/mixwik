@@ -26,14 +26,14 @@ const schema = yup
       .notRequired()
       .when('twitter', {
         is: (value: string) => value?.length,
-        then: (rule) => rule.matches(REGEX.twitter, 'La URL de twitter no es valida')
+        then: (rule) => rule.matches(REGEX.twitterOrX, 'La URL de twitter/X no es valida')
       }),
     discord: yup
       .string()
       .notRequired()
       .when('discord', {
         is: (value: string) => value?.length,
-        then: (rule) => rule.matches(REGEX.discord, 'La URL de twitter no es valida')
+        then: (rule) => rule.matches(REGEX.discord, 'La URL de discord no es valida')
       }),
     instagram: yup
       .string()
