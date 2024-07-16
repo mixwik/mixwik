@@ -18,7 +18,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         geometry: docSnap.data().geometry,
         admonition: docSnap.data().admonition,
         ban: docSnap.data().ban,
-        affiliateCode: docSnap.data().affiliateCode,
         dateOfRegister: docSnap.data().dateOfRegister,
         email: docSnap.data().email,
         gender: docSnap.data().gender,
