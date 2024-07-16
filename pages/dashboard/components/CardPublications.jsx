@@ -27,7 +27,7 @@ const CardPublications = ({ publication, equip, updateFav, remove, user }) => {
   return (
     <section className='relative flex flex-col justify-between h-40 overflow-hidden bg-gray-100 rounded-md shadow-xl w-80'>
       {
-        !isMixWikTeams && (publication.type === PUBLICATION_TYPE.playerWithTeam || publication.type === PUBLICATION_TYPE.team)
+        !isMixWikTeams && !updateFav && (publication.type === PUBLICATION_TYPE.playerWithTeam || publication.type === PUBLICATION_TYPE.team)
           ? (
             <div className='relative flex items-center justify-center h-40'>
               <Image className='object-cover w-full h-full' loader={myLoader} width={0} height={0} src={publication.img.url} alt={publication.title} />
