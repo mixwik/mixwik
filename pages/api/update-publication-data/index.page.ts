@@ -15,6 +15,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       position: data.position,
       premier: data.premier,
       typeOfGamer: data.typeOfGamer,
+      affiliateCode: data.affiliateCode,
       img: {
         url: data.imgUrl || '',
         name: data.imageName || ''

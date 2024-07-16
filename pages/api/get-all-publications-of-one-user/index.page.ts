@@ -27,6 +27,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           typeOfGamer: docSnap.data().typeOfGamer,
           geometry: docSnap.data().geometry,
           promotion: docSnap.data().promotion,
+          affiliateCode: docSnap.data().affiliateCode,
           img: {
             url: docSnap.data().img.url,
             name: docSnap.data().img.name

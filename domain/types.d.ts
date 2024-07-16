@@ -107,6 +107,7 @@ export type teamServer = {
     geometry: [number, number]
     promotion: string
     uid: string
+    affiliateCode: string
     img: {
         url: string
         name: string

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ArrowBack } from '../../../../components/Svg'
+import { AffiliateCode } from '../../../../components/create-publication/components/fields/affiliate-code'
 import { BoxField } from '../../../../components/create-publication/components/fields/box-field'
 import { Description } from '../../../../components/create-publication/components/fields/description-field'
 import { HoursField } from '../../../../components/create-publication/components/fields/hours-field'
@@ -11,7 +12,7 @@ import { FieldImages } from '../../../../components/create-publication/component
 import { Title } from '../../../../components/create-publication/components/fields/title-field'
 import { PopUpError } from '../../../../components/pop-up-error'
 import { PopUpMessage } from '../../../../components/pop-up-message'
-import { COLLECTIONS, TYPE_OF_GAME } from '../../../../domain/constants'
+import { COLLECTIONS, PUBLICATION_TYPE, TYPE_OF_GAME } from '../../../../domain/constants'
 import { gameServer, teamServer } from '../../../../domain/types'
 import { Cs2 } from './cs2'
 import { Fortnite } from './fortnite'
@@ -58,7 +59,8 @@ export const EditGame = ({ type, setEdit, isMixWikTeams, publication, setRefetch
     preferenceTeam: publication.preferenceTeam,
     position: publication.position,
     premier: publication.premier,
-    typeOfGamer: publication.typeOfGamer
+    typeOfGamer: publication.typeOfGamer,
+    affiliateCode: publication.affiliateCode
   })
 
   const schema = yup
@@ -72,7 +74,9 @@ export const EditGame = ({ type, setEdit, isMixWikTeams, publication, setRefetch
         .string()
         .required('El campo descripción es obligatorio')
         .min(100, 'Mínimo 100 caracteres')
-        .max(350, 'Máximo 350 caracteres')
+        .max(350, 'Máximo 350 caracteres'),
+      affiliateCode: yup
+        .string()
     })
     .required()
 
@@ -217,7 +221,15 @@ export const EditGame = ({ type, setEdit, isMixWikTeams, publication, setRefetch
           type='range'
           registerName='hours'
         />
-
+        {
+        type !== PUBLICATION_TYPE.team &&
+          <AffiliateCode
+            register={register}
+            errors={errors.root}
+            title='Código de afiliado (opcional)'
+            registerName='affiliateCode'
+          />
+      }
         <div className='flex justify-center w-full gap-10'>
           <button
             type='button'
