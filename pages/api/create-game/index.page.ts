@@ -30,7 +30,9 @@ const schema = yup.object({
     .number()
     .required('El campo horas es obligatorio')
     .min(1, 'El campo horas es obligatorio')
-    .max(5000, 'Máximo 5000 horas')
+    .max(5000, 'Máximo 5000 horas'),
+  affiliateCode: yup
+    .string()
 })
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
@@ -58,6 +60,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       geometry: data.geometry,
       category: data.category,
       age: data.age,
+      affiliateCode: data.affiliateCode,
       img: {
         url: data.imgUrl || '',
         name: data.imageName || ''

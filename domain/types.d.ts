@@ -23,7 +23,6 @@ export type UserServer = {
     likes: string[]
     dateOfRegister: string
     mixWikTeams: string
-    affiliateCode: string
     publications: {
         cs2Publications: number
         fortnitePublications: number
@@ -60,6 +59,7 @@ export type gameServer = {
     geometry: [number, number]
     uid: string
     promotion: string
+    affiliateCode: string
     img: {
         url: string
         name: string

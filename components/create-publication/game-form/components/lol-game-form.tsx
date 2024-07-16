@@ -1,40 +1,35 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as yup from 'yup'
-import { useOpenGameContext, usePlayerCreateContext } from '../../../../context'
+import { useOpenGameContext } from '../../../../context'
 import { LOL_LEVELS, LOL_POSITIONS, PUBLICATION_TYPE, TYPE_OF_GAME } from '../../../../domain/constants'
 import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { ArrowBack } from '../../../Svg'
 import { BackgroundDots } from '../../../background-dots'
-import { PopUpError } from '../../../pop-up-error'
-import { PopUpMessage } from '../../../pop-up-message'
+import { AffiliateCode } from '../../components/fields/affiliate-code'
 import { BoxField } from '../../components/fields/box-field'
 import { Description } from '../../components/fields/description-field'
 import { HoursField } from '../../components/fields/hours-field'
 import { FieldImage } from '../../components/fields/image-field'
+import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
 import { useUpdateCountPublications } from '../hooks/use-update-count-publications'
-import { FieldImages } from '../../components/fields/images-field'
 
 interface LolGameFormProps {
   dashboard?: boolean
   userServer?: UserServer
   isMixWikTeams?: boolean
+  createUser?: () => void
 }
 
-export const LolGameForm = ({ dashboard, userServer, isMixWikTeams }: LolGameFormProps) => {
+export const LolGameForm = ({ dashboard, userServer, isMixWikTeams, createUser }: LolGameFormProps) => {
   const { currentPosition } = useCurrentPosition()
-  const [loading, setLoading] = useState({
-    title: '',
-    subtitle: '',
-    number: 0
-  })
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
-  const { setPlayerCreate } = usePlayerCreateContext()
   const [image, setImage] = useState<File>()
   const [image2, setImage2] = useState<File>()
   const [image3, setImage3] = useState<File>()
@@ -50,7 +45,6 @@ export const LolGameForm = ({ dashboard, userServer, isMixWikTeams }: LolGameFor
   const [imgUrl6, setImgUrl6] = useState('')
   const [imgUrl7, setImgUrl7] = useState('')
   const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
-  const [error, setError] = useState('')
   const [initialValues] = useState({
     category: openGame as string,
     title: '',
@@ -61,7 +55,8 @@ export const LolGameForm = ({ dashboard, userServer, isMixWikTeams }: LolGameFor
     preferenceTeam: [] as string[],
     position: [] as string[],
     premier: '',
-    typeOfGamer: [] as string[]
+    typeOfGamer: [] as string[],
+    affiliateCode: ''
   })
 
   const schema = yup
@@ -89,7 +84,9 @@ export const LolGameForm = ({ dashboard, userServer, isMixWikTeams }: LolGameFor
         .number()
         .required('El campo horas es obligatorio')
         .min(1, 'El campo horas es obligatorio')
-        .max(5000, 'Máximo 5000 horas')
+        .max(5000, 'Máximo 5000 horas'),
+      affiliateCode: yup
+        .string()
     })
     .required()
 
@@ -107,7 +104,6 @@ export const LolGameForm = ({ dashboard, userServer, isMixWikTeams }: LolGameFor
     const date = userServer?.age ? userServer.age : localStorage.getItem('age') ?? '01-01-2000'
     const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
-      setLoading({ title: 'Creando Jugador...', subtitle: 'Estamos creando tu jugador, por favor espera...', number: 0 })
       const res = await fetch('/api/create-game', {
         method: 'POST',
         body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age, type: isMixWikTeams ? PUBLICATION_TYPE.playerWithTeam : PUBLICATION_TYPE.player })
@@ -115,26 +111,19 @@ export const LolGameForm = ({ dashboard, userServer, isMixWikTeams }: LolGameFor
       const response = await res.json()
       if (dashboard) handleUpdate()
       if (response.message === 'Game created') {
-        setTimeout(() => {
-          setLoading({ title: 'Jugador creado', subtitle: 'Tu jugador ha sido creado con éxito', number: 1 })
-          setPlayerCreate(true)
-          handleOpenGame('')
-        }, 2000)
+        toast.success('Tu jugador ha sido creado con éxito')
+        createUser && createUser()
       } else {
-        setError(response.message)
-        setLoading({ title: '', subtitle: '', number: 0 })
+        toast.error(response.message)
       }
     } else {
-      setError('Ha ocurrido un error')
-      setLoading({ title: '', subtitle: '', number: 0 })
+      toast.error('Ha ocurrido un error')
     }
   }
 
   return (
     <section className='size-full md:w-1/2 md:py-5'>
       <BackgroundDots />
-      <PopUpMessage loading={loading} />
-      <PopUpError error={error} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
@@ -229,6 +218,12 @@ export const LolGameForm = ({ dashboard, userServer, isMixWikTeams }: LolGameFor
           title='¿Cuántas horas has jugado?'
           type='range'
           registerName='hours'
+        />
+        <AffiliateCode
+          register={register}
+          errors={errors.affiliateCode}
+          title='Código de afiliado (opcional)'
+          registerName='affiliateCode'
         />
         <div className='flex justify-center w-full gap-10'>
           <button

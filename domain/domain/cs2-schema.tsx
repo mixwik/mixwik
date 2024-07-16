@@ -28,7 +28,9 @@ export const cs2SchemaGame = yup
       .number()
       .required('El campo horas es obligatorio')
       .min(1, 'El campo horas es obligatorio')
-      .max(5000, 'Máximo 5000 horas')
+      .max(5000, 'Máximo 5000 horas'),
+    affiliateCode: yup
+      .string()
   })
   .required()
 
