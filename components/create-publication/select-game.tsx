@@ -1,9 +1,44 @@
 import Image from 'next/image'
-import { GAMES } from '../../domain/constants'
+import toast from 'react-hot-toast'
 import { useOpenGameContext } from '../../context'
+import { COLLECTIONS, GAMES } from '../../domain/constants'
+import { UserServer } from '../../domain/types'
 
-export const SelectGame = () => {
+interface SelectGameProps {
+    userServer?: UserServer
+    isMixWikTeams?: boolean
+}
+
+export const SelectGame = ({ userServer, isMixWikTeams }: SelectGameProps) => {
   const { handleOpenGame } = useOpenGameContext()
+  const checkPublications = async (collection: string) => {
+    if (!userServer) {
+      handleOpenGame(collection)
+      return
+    }
+    if (collection === COLLECTIONS.rocketLeague) {
+      toast.error('No puedes crear publicaciones en Rocket League por el momento, estará disponible pronto')
+      return
+    }
+    if (collection === COLLECTIONS.dota2) {
+      toast.error('No puedes crear publicaciones en Dota 2 por el momento, estará disponible pronto')
+      return
+    }
+    const res = await fetch('/api/check-publication', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uid: userServer.uid,
+        collections: collection,
+        isMixWikTeams
+      })
+    })
+    const publications = await res.json()
+    if (publications.message === '') handleOpenGame(collection)
+    else toast.error(publications.message)
+  }
   return (
     <ul
       className='flex flex-wrap justify-center w-full gap-5 md:gap-10 md:w-4/5'
@@ -11,7 +46,9 @@ export const SelectGame = () => {
       {GAMES.map(game => (
         <li
           key={game.collection}
-          onClick={() => handleOpenGame(game.collection)}
+          onClick={() => {
+            checkPublications(game.collection)
+          }}
           className='flex flex-col items-center justify-between w-32 h-32 p-2 py-8 text-xs text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl cursor-pointer bg-pennBlue md:w-36 md:h-36 hover:-translate-y hover:scale-105'
         >
           <Image className='object-cover w-10 h-10' src={game.logo} alt={game.name} />

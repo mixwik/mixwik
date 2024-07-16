@@ -23,7 +23,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         gender: docSnap.data().gender,
         likes: docSnap.data().likes,
         mixWikTeams: docSnap.data().mixWikTeams,
-        publications: docSnap.data().publications,
         social: docSnap.data().social,
         profileImg: {
           url: docSnap.data().profileImg?.url,

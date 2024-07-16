@@ -23,14 +23,6 @@ export type UserServer = {
     likes: string[]
     dateOfRegister: string
     mixWikTeams: string
-    publications: {
-        cs2Publications: number
-        fortnitePublications: number
-        lolPublications: number
-        valorantPublications: number
-        rocketLeaguePublications: number
-        dota2Publications: number
-    }
     social: {
         discord: string
         facebook: string

@@ -17,16 +17,14 @@ import { HoursField } from '../../components/fields/hours-field'
 import { FieldImage } from '../../components/fields/image-field'
 import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
-import { useUpdateCountPublications } from '../hooks/use-update-count-publications'
 
 interface Cs2GameFromProps {
-  dashboard?: boolean
   userServer?: UserServer
   isMixWikTeams?: boolean
   createUser?: () => void
 }
 
-export const Cs2GameFrom = ({ dashboard, userServer, isMixWikTeams, createUser }: Cs2GameFromProps) => {
+export const Cs2GameFrom = ({ userServer, isMixWikTeams, createUser }: Cs2GameFromProps) => {
   const { currentPosition } = useCurrentPosition()
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
@@ -44,7 +42,6 @@ export const Cs2GameFrom = ({ dashboard, userServer, isMixWikTeams, createUser }
   const [imgUrl5, setImgUrl5] = useState('')
   const [imgUrl6, setImgUrl6] = useState('')
   const [imgUrl7, setImgUrl7] = useState('')
-  const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
   const [initialValues] = useState({
     category: openGame as string,
     title: '',
@@ -79,7 +76,6 @@ export const Cs2GameFrom = ({ dashboard, userServer, isMixWikTeams, createUser }
       })
       const response = await res.json()
       if (response.message === 'Game created') {
-        if (dashboard) handleUpdate()
         createUser && createUser()
         toast.success('Tu jugador ha sido creado con éxito')
       } else {

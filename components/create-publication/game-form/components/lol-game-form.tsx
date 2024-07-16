@@ -17,16 +17,14 @@ import { HoursField } from '../../components/fields/hours-field'
 import { FieldImage } from '../../components/fields/image-field'
 import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
-import { useUpdateCountPublications } from '../hooks/use-update-count-publications'
 
 interface LolGameFormProps {
-  dashboard?: boolean
   userServer?: UserServer
   isMixWikTeams?: boolean
   createUser?: () => void
 }
 
-export const LolGameForm = ({ dashboard, userServer, isMixWikTeams, createUser }: LolGameFormProps) => {
+export const LolGameForm = ({ userServer, isMixWikTeams, createUser }: LolGameFormProps) => {
   const { currentPosition } = useCurrentPosition()
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
@@ -44,7 +42,6 @@ export const LolGameForm = ({ dashboard, userServer, isMixWikTeams, createUser }
   const [imgUrl5, setImgUrl5] = useState('')
   const [imgUrl6, setImgUrl6] = useState('')
   const [imgUrl7, setImgUrl7] = useState('')
-  const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
   const [initialValues] = useState({
     category: openGame as string,
     title: '',
@@ -109,7 +106,6 @@ export const LolGameForm = ({ dashboard, userServer, isMixWikTeams, createUser }
         body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age, type: isMixWikTeams ? PUBLICATION_TYPE.playerWithTeam : PUBLICATION_TYPE.player })
       })
       const response = await res.json()
-      if (dashboard) handleUpdate()
       if (response.message === 'Game created') {
         toast.success('Tu jugador ha sido creado con éxito')
         createUser && createUser()

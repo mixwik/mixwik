@@ -18,13 +18,7 @@ const schema = yup.object().shape({
   description: yup.string().required('description').min(100, 'description').max(350, 'description'),
   gender: yup.string().oneOf(['M', 'F', 'O'], 'gender').required('gender'),
   twitter: yup.string(),
-  discord: yup.string(),
-  cs2Publications: yup.number(),
-  fortnitePublications: yup.number(),
-  valorantPublications: yup.number(),
-  lolPublications: yup.number(),
-  rocketLeaguePublications: yup.number(),
-  dota2Publications: yup.number()
+  discord: yup.string()
 })
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
@@ -39,12 +33,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       gender,
       twitter,
       discord,
-      cs2Publications,
-      fortnitePublications,
-      valorantPublications,
-      lolPublications,
-      rocketLeaguePublications,
-      dota2Publications,
       imageUrl,
       imageName
     } = req.body
@@ -75,14 +63,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
             youtube: '',
             twitch: '',
             tiktok: ''
-          },
-          publications: {
-            cs2Publications,
-            fortnitePublications,
-            valorantPublications,
-            lolPublications,
-            rocketLeaguePublications,
-            dota2Publications
           },
           likes: []
         })

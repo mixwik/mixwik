@@ -17,7 +17,6 @@ import { HoursField } from '../../components/fields/hours-field'
 import { FieldImage } from '../../components/fields/image-field'
 import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
-import { useUpdateCountPublications } from '../../game-form/hooks/use-update-count-publications'
 
 interface LolGameFormProps {
   userServer: UserServer
@@ -61,7 +60,6 @@ export const LolGameForm = ({ userServer, isMixWikTeams }: LolGameFormProps) => 
     premier: [] as string[],
     typeOfGamer: [] as string[]
   })
-  const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
   const schema = yup
     .object({
       title: yup
@@ -112,7 +110,6 @@ export const LolGameForm = ({ userServer, isMixWikTeams }: LolGameFormProps) => 
       })
       const response = await res.json()
       if (response.message === 'Game created') {
-        handleUpdate()
         setLoading({ title: 'Team creado', subtitle: 'Tu team ha sido creado con éxito', number: 1 })
         setTimeout(() => {
           handleOpenGame('')

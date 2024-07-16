@@ -17,7 +17,6 @@ import { HoursField } from '../../components/fields/hours-field'
 import { FieldImage } from '../../components/fields/image-field'
 import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
-import { useUpdateCountPublications } from '../../game-form/hooks/use-update-count-publications'
 
 interface Cs2TeamFromProps {
   userServer: UserServer
@@ -61,7 +60,6 @@ export const Cs2TeamFrom = ({ userServer, isMixWikTeams }: Cs2TeamFromProps) => 
     premier: [],
     typeOfGamer: [] as string[]
   })
-  const { handleUpdate } = useUpdateCountPublications({ openGame, userProvider })
 
   const {
     register,
@@ -84,7 +82,6 @@ export const Cs2TeamFrom = ({ userServer, isMixWikTeams }: Cs2TeamFromProps) => 
       })
       const response = await res.json()
       if (response.message === 'Game created') {
-        handleUpdate()
         setTimeout(() => {
           setLoading({ title: 'Team creado', subtitle: 'Tu team ha sido creado con éxito', number: 1 })
           handleOpenGame('')
