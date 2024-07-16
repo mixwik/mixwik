@@ -102,7 +102,7 @@ export const Select = ({ isMixWikTeams, userServer, title }) => {
   return (
     <WindowLayout title={title}>
       <div className='relative flex items-center justify-center h-full'>
-        <SelectGame handleCheck={handleCheck} />
+        <SelectGame />
       </div>
     </WindowLayout>
   )
