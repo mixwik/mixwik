@@ -18,10 +18,10 @@ export const GameForm = ({ dashboard, userServer, isMixWikTeams, createUser }: G
   if (!openGame) return null
   return (
     <section className='flex items-center justify-center bg-white z-50 absolute md:top-[10vh] top-0 bottom-[10vh] md:bottom-0 h-[90vh] w-full overflow-scroll [&::-webkit-scrollbar]:hidden'>
-      {openGame === COLLECTIONS.cs2 && <Cs2GameFrom dashboard={dashboard} userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
-      {openGame === COLLECTIONS.valorant && <ValorantGameFrom dashboard={dashboard} userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
-      {openGame === COLLECTIONS.fortnite && <FortniteGameForm dashboard={dashboard} userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
-      {openGame === COLLECTIONS.lol && <LolGameForm dashboard={dashboard} userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
+      {openGame === COLLECTIONS.cs2 && <Cs2GameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
+      {openGame === COLLECTIONS.valorant && <ValorantGameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
+      {openGame === COLLECTIONS.fortnite && <FortniteGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
+      {openGame === COLLECTIONS.lol && <LolGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
     </section>
   )
 }
