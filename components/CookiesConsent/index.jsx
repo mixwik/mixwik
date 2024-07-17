@@ -1,7 +1,6 @@
 import Cookie from 'js-cookie'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import styles from './CookiesConsent.module.scss'
 
 const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState(false)
