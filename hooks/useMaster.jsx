@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react'
 import { useSession } from '../firebase/auth/useSession'
+import { useGetOneUser } from './use-get-one-user'
 
 export const useMaster = () => {
   const [master, setMaster] = useState(false)
   const { userProvider } = useSession()
-  const master1 = process.env.NEXT_PUBLIC_MASTER1
-  const master2 = process.env.NEXT_PUBLIC_MASTER2
+  const { userServer } = useGetOneUser(userProvider?.uid)
 
   useEffect(() => {
-    if (userProvider?.uid === master1 || userProvider?.uid === master2) {
+    if (userServer?.rol === 'admin') {
       setMaster(true)
     } else {
       setMaster(false)
     }
-  }, [master1, master2, userProvider?.uid])
+  }, [userServer?.rol])
 
   return { master }
 }
