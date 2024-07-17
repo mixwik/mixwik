@@ -30,10 +30,10 @@ const CookieConsent = () => {
   if (!showConsent) return null
 
   return (
-    <div className={styles.cookieConsent}>
+    <div className='fixed bottom-0 z-[100] flex flex-col items-center justify-center w-full bg-aero p-5 text-white'>
       <p>Usamos cookies para asegurar que te damos la mejor experiencia en nuestra web. <Link href='/legal/politica-de-cookies'>Política de Cookies</Link></p>
-      <div className={styles.buttonsCookies}>
-        <button onClick={handleAccept}>Aceptar</button>
+      <div className='flex gap-5'>
+        <button className='px-5 py-3 text-white transition duration-500 ease-in-out transform shadow-xl bg-pennBlue rounded-xl hover:shadow-inner focus:outline-none hover:-translate-x hover:scale-105 disabled:bg-slate-500' onClick={handleAccept}>Aceptar</button>
         <button onClick={handleDecline}>Rechazar</button>
       </div>
     </div>
