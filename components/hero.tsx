@@ -13,7 +13,7 @@ export const Hero = () => {
         <div className='grid grid-cols-3 gap-5 md:grid-cols-6 '>
           <ButtonGame />
         </div>
-        <Link href='/todos-los-jugadores' className='px-1 py-3 text-xl text-white transition-colors duration-500 rounded-md md:px-5 bg-pennBlue hover:bg-aero '>Buscar a todos los jugadores/teams</Link>
+        <Link href='/todos-los-jugadores' className='px-1 py-3 text-xl text-white transition-colors duration-500 rounded-md md:px-5 bg-pennBlue hover:bg-aero '>Buscar a todos los jugadores y equipos</Link>
       </div>
       <div className='relative size-full'>
         <video autoPlay loop muted className='absolute top-0 z-10 h-full' style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)' }}>
