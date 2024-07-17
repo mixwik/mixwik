@@ -4,6 +4,7 @@ import {
   ref,
   uploadBytesResumable
 } from 'firebase/storage'
+import toast from 'react-hot-toast'
 
 export const setImageDB = async (userUid, img, setImgURL, setProgress) => {
   const storage = getStorage()
@@ -14,8 +15,8 @@ export const setImageDB = async (userUid, img, setImgURL, setProgress) => {
     (snapshot) => {
       setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
     },
-    (error) => {
-      console.log(error)
+    () => {
+      toast.error('Ha ocurrido un error durante la subida de la imagen')
     },
     () => {
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -25,12 +26,14 @@ export const setImageDB = async (userUid, img, setImgURL, setProgress) => {
   )
 }
 
-export const removeImageDB = async (category, img) => {
+export const removeImageDB = async (uid, img) => {
   const storage = getStorage()
-  const desertRef = ref(storage, `${category}/${img}`)
+  const desertRef = ref(storage, `${uid}/${img}`)
   deleteObject(desertRef)
-    .then(() => {})
-    .catch((error) => {
-      console.log(error)
+    .then(() => {
+      toast.success('Imagen eliminada correctamente')
+    })
+    .catch(() => {
+      toast.error('Ha ocurrido un error durante la eliminación de la imagen')
     })
 }

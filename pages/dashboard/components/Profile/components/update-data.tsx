@@ -133,7 +133,7 @@ export const UpdateData = ({ user, isMixWikTeams, setEdit, setRefetch }: UpdateD
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: user.id,
+        uid: user.uid,
         age: data.age,
         description: data.description,
         discord: data.discord,

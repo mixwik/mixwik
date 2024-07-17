@@ -81,6 +81,7 @@ const schema = yup
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { uid, age, description, twitter, discord, instagram, youtube, tiktok, facebook, twitch, imageUrl, imageName } = req.body
+    console.log(uid, age, description, twitter, discord, instagram, youtube, tiktok, facebook, twitch, imageUrl, imageName)
     try {
       await schema.validate(req.body)
     } catch (error) {

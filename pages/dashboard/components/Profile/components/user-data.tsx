@@ -42,7 +42,7 @@ export const UserData = ({ user, userProvider, isMixWikTeams, setEdit }: User) =
           </button>
         </div>
       </div>
-      {deleteUser && <DeleteUser setDeleteUser={setDeleteUser} user={user} userProvider={userProvider} isMixWikTeams={isMixWikTeams} />}
+      {deleteUser && <DeleteUser setDeleteUser={setDeleteUser} user={user} />}
     </section>
   )
 }

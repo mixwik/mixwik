@@ -1,11 +1,13 @@
+import { deleteUser, getAuth } from 'firebase/auth'
 import { deleteDoc, doc } from 'firebase/firestore'
+import { deleteObject, getStorage, listAll, ref } from 'firebase/storage'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { COLLECTIONS } from '../../../../../domain/constants'
 import { db } from '../../../../../firebase/initialize'
 import { useGetAllPublicationsOneUser } from '../../../../../hooks/use-get-all-publications-one-user'
 
-export const DeleteUser = ({ setDeleteUser, user, userProvider, isMixWikTeams }) => {
+export const DeleteUser = ({ setDeleteUser, user }) => {
   const router = useRouter()
   const { publications } = useGetAllPublicationsOneUser(user.uid)
   const handleDeleteUser = async () => {
@@ -16,8 +18,20 @@ export const DeleteUser = ({ setDeleteUser, user, userProvider, isMixWikTeams })
           toast.error('Ha ocurrido un error durante el borrado de la publicación')
         })
       }
+      const storage = getStorage()
+      const listRef = ref(storage, `${user.uid}`)
+      listAll(listRef).then((list) => {
+        const result = list.items
+        for (const item of result) {
+          deleteObject(item)
+        }
+      })
+
       const userRef = doc(db, COLLECTIONS.users, user.uid)
       await deleteDoc(userRef).then(() => {
+        const auth = getAuth()
+        const currentUser = auth.currentUser
+        currentUser && deleteUser(currentUser)
         toast.success('Tu cuenta ha sido eliminada correctamente')
         router.push('/')
       }).catch(() => {

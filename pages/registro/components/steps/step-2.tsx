@@ -27,7 +27,7 @@ export const Step2 = (
   const handleSetImage = async (e) => {
     const reader = new FileReader()
     setImage(e.target.files[0])
-    setImageDB('profile', e.target.files[0], setImgURL, setProgress)
+    setImageDB(userProvider.uid, e.target.files[0], setImgURL, setProgress)
     reader.readAsDataURL(e.target.files[0])
     reader.onload = () => {
       setPreviewImage(reader.result as string)
@@ -36,7 +36,7 @@ export const Step2 = (
   const handleRemoveImage = async (e) => {
     e.preventDefault()
     const imageName = localStorage.getItem('imageName')
-    removeImageDB('profile', image?.name || imageName)
+    removeImageDB(userProvider.uid, image?.name || imageName)
     localStorage.removeItem('image')
     localStorage.removeItem('imageName')
     setImgURL('')
