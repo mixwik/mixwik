@@ -18,9 +18,6 @@ const schema = yup.object({
     .string(),
   premier: yup
     .string(),
-  position: yup
-    .array()
-    .min(1, 'Selecciona al menos una posición'),
   preferenceTeam: yup
     .array(),
   typeOfGamer: yup
@@ -48,7 +45,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     await addDoc(collection(db, data.category), {
       date: new Date(),
       type: data.type,
-      position: data.position,
+      position: data.position || [],
       level: data.level,
       premier: data.premier,
       preferenceTeam: data.preferenceTeam,

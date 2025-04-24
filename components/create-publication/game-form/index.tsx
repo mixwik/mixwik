@@ -4,6 +4,7 @@ import { UserServer } from '../../../domain/types'
 import { Cs2GameFrom } from './components/cs2-game-form'
 import { FortniteGameForm } from './components/fortnite-game-form'
 import { LolGameForm } from './components/lol-game-form'
+import { RocketLeagueGameFrom } from './components/rocket-game-form'
 import { ValorantGameFrom } from './components/valorant-game-form'
 
 interface GameFormProps {
@@ -13,7 +14,7 @@ interface GameFormProps {
   createUser?: () => void
 }
 
-export const GameForm = ({ dashboard, userServer, isMixWikTeams, createUser }: GameFormProps) => {
+export const GameForm = ({ userServer, isMixWikTeams, createUser }: GameFormProps) => {
   const { openGame } = useOpenGameContext()
   if (!openGame) return null
   return (
@@ -22,6 +23,7 @@ export const GameForm = ({ dashboard, userServer, isMixWikTeams, createUser }: G
       {openGame === COLLECTIONS.valorant && <ValorantGameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
       {openGame === COLLECTIONS.fortnite && <FortniteGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
       {openGame === COLLECTIONS.lol && <LolGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
+      {openGame === COLLECTIONS.rocketLeague && <RocketLeagueGameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
     </section>
   )
 }

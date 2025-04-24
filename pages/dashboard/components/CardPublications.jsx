@@ -46,7 +46,7 @@ const CardPublications = ({ publication, equip, updateFav, remove, user }) => {
             )
       }
       {
-      publication.type !== PUBLICATION_TYPE.player &&
+      user.uid === publication?.uid &&
         <button onClick={handleClick} className='absolute bottom-0 right-0 w-full h-8 font-semibold text-white bg-pennBlue'>
           {
           remove ? 'Eliminar' : 'Quitar favorito'

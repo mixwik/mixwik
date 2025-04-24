@@ -24,7 +24,7 @@ export const games = [{
   image: LOGOS.rocketLeague,
   title: 'Rocket League',
   alt: 'Icono del videojuego Clash Royal',
-  link: 'proximamente'
+  link: 'juegos/rocket-league'
 }, {
   image: LOGOS.dota2,
   title: 'Dota 2',

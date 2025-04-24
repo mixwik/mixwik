@@ -4,6 +4,7 @@ import { UserServer } from '../../../domain/types'
 import { Cs2TeamFrom } from './components/cs2-team-form'
 import { FortniteGameForm } from './components/fortnite-game-form'
 import { LolGameForm } from './components/lol-game-form'
+import { RocketLeagueGameFrom } from './components/rocket-game-form'
 import { ValorantGameFrom } from './components/valorant-game-form'
 
 interface TeamFormProps {
@@ -20,6 +21,7 @@ export const TeamForm = ({ userServer, isMixWikTeams }: TeamFormProps) => {
       {openGame === COLLECTIONS.valorant && <ValorantGameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} />}
       {openGame === COLLECTIONS.fortnite && <FortniteGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} />}
       {openGame === COLLECTIONS.lol && <LolGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} />}
+      {openGame === COLLECTIONS.rocketLeague && <RocketLeagueGameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} />}
     </section>
   )
 }

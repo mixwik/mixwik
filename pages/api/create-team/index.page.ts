@@ -47,7 +47,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     await addDoc(collection(db, data.category), {
       type: PUBLICATION_TYPE.team,
       date: new Date(),
-      position: data.position,
+      position: data.position || [],
       level: data.level,
       premier: data.premier,
       preferenceTeam: data.preferenceTeam,

@@ -64,8 +64,7 @@ export const GAMES = [
   {
     collection: COLLECTIONS.rocketLeague,
     logo: LOGOS.rocketLeague,
-    name: 'Rocket League',
-    comingSoon: true
+    name: 'Rocket League'
   },
   {
     collection: COLLECTIONS.dota2,
@@ -81,6 +80,11 @@ export const FILTER_KEYS = [
   'level',
   'premier',
   'preferenceTeam'
+]
+
+export const TYPE_OF_GAME = [
+  'Casual',
+  'Competitivo'
 ]
 
 export const CS2_LEVELS = [
@@ -170,7 +174,10 @@ export const VALORANT_POSITION = [
   'Controlador'
 ]
 
-export const TYPE_OF_GAME = [
-  'Casual',
-  'Competitivo'
+export const ROCKET_LEVELS = [
+  'Sin Nivel',
+  'Bronce',
+  'Plata',
+  'Oro',
+  'Platino'
 ]

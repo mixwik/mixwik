@@ -16,10 +16,6 @@ export const SelectGame = ({ userServer, isMixWikTeams }: SelectGameProps) => {
       handleOpenGame(collection)
       return
     }
-    if (collection === COLLECTIONS.rocketLeague) {
-      toast.error('No puedes crear publicaciones en Rocket League por el momento, estará disponible pronto')
-      return
-    }
     if (collection === COLLECTIONS.dota2) {
       toast.error('No puedes crear publicaciones en Dota 2 por el momento, estará disponible pronto')
       return
