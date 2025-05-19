@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import toast from 'react-hot-toast'
 import { useOpenGameContext } from '../../context'
-import { COLLECTIONS, GAMES } from '../../domain/constants'
+import { GAMES } from '../../domain/constants'
 import { UserServer } from '../../domain/types'
 
 interface SelectGameProps {
@@ -14,10 +14,6 @@ export const SelectGame = ({ userServer, isMixWikTeams }: SelectGameProps) => {
   const checkPublications = async (collection: string) => {
     if (!userServer) {
       handleOpenGame(collection)
-      return
-    }
-    if (collection === COLLECTIONS.dota2) {
-      toast.error('No puedes crear publicaciones en Dota 2 por el momento, estará disponible pronto')
       return
     }
     const res = await fetch('/api/check-publication', {

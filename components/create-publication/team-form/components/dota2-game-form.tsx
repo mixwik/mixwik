@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useOpenGameContext } from '../../../../context'
-import { ROCKET_LEVELS, TYPE_OF_GAME } from '../../../../domain/constants'
+import { TYPE_OF_GAME, DOTA2_LEVELS, DOTA2_POSITION } from '../../../../domain/constants'
 import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
@@ -18,12 +18,12 @@ import { FieldImage } from '../../components/fields/image-field'
 import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
 
-interface RocketLeagueGameFromProps {
+interface Dota2GameFromProps {
   userServer: UserServer
   isMixWikTeams: boolean
 }
 
-export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeagueGameFromProps) => {
+export const Dota2GameFrom = ({ userServer, isMixWikTeams }: Dota2GameFromProps) => {
   const { currentPosition } = useCurrentPosition()
   const [loading, setLoading] = useState({
     title: '',
@@ -75,6 +75,9 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
       level: yup
         .array()
         .min(1, 'Selecciona al menos un nivel'),
+      position: yup
+        .array()
+        .min(1, 'Selecciona al menos una posición'),
       typeOfGamer: yup
         .array()
         .min(1, 'Selecciona al menos un tipo'),
@@ -131,7 +134,7 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
       >
         <h2 className='text-2xl font-semibold text-pennBlue'>
-          Rocket League
+          Dota 2
         </h2>
         {
           isMixWikTeams
@@ -194,9 +197,17 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
           register={register}
           registerName='level'
           errors={errors.level}
-          game={ROCKET_LEVELS}
+          game={DOTA2_LEVELS}
           type='checkbox'
           title='¿Cuál es el nivel competitivo que quieres en tu equipo?'
+        />
+        <BoxField
+          register={register}
+          registerName='position'
+          errors={errors.position}
+          game={DOTA2_POSITION}
+          type='checkbox'
+          title='¿Que posiciones quieres que haya en tu equipo?'
         />
         <BoxField
           register={register}

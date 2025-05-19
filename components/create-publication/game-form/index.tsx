@@ -2,6 +2,7 @@ import { useOpenGameContext } from '../../../context'
 import { COLLECTIONS } from '../../../domain/constants'
 import { UserServer } from '../../../domain/types'
 import { Cs2GameFrom } from './components/cs2-game-form'
+import { Dota2GameFrom } from './components/dota2-game-form'
 import { FortniteGameForm } from './components/fortnite-game-form'
 import { LolGameForm } from './components/lol-game-form'
 import { RocketLeagueGameFrom } from './components/rocket-game-form'
@@ -24,6 +25,7 @@ export const GameForm = ({ userServer, isMixWikTeams, createUser }: GameFormProp
       {openGame === COLLECTIONS.fortnite && <FortniteGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
       {openGame === COLLECTIONS.lol && <LolGameForm userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
       {openGame === COLLECTIONS.rocketLeague && <RocketLeagueGameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
+      {openGame === COLLECTIONS.dota2 && <Dota2GameFrom userServer={userServer} isMixWikTeams={isMixWikTeams} createUser={createUser} />}
     </section>
   )
 }

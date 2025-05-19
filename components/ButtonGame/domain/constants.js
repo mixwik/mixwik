@@ -29,5 +29,5 @@ export const games = [{
   image: LOGOS.dota2,
   title: 'Dota 2',
   alt: 'Icono del videojuego Dota 2',
-  link: 'proximamente'
+  link: 'juegos/dota2'
 }]

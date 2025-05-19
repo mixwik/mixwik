@@ -1,16 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as yup from 'yup'
 import { useOpenGameContext } from '../../../../context'
-import { ROCKET_LEVELS, TYPE_OF_GAME } from '../../../../domain/constants'
+import { PUBLICATION_TYPE, TYPE_OF_GAME, DOTA2_LEVELS, DOTA2_POSITION } from '../../../../domain/constants'
 import { UserServer } from '../../../../domain/types'
 import { useSession } from '../../../../firebase/auth/useSession'
 import { useCurrentPosition } from '../../../../hooks/useCurrentPosition'
 import { ArrowBack } from '../../../Svg'
 import { BackgroundDots } from '../../../background-dots'
-import { PopUpError } from '../../../pop-up-error'
-import { PopUpMessage } from '../../../pop-up-message'
+import { AffiliateCode } from '../../components/fields/affiliate-code'
 import { BoxField } from '../../components/fields/box-field'
 import { Description } from '../../components/fields/description-field'
 import { HoursField } from '../../components/fields/hours-field'
@@ -18,18 +18,14 @@ import { FieldImage } from '../../components/fields/image-field'
 import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
 
-interface RocketLeagueGameFromProps {
-  userServer: UserServer
-  isMixWikTeams: boolean
+interface Dota2GameFromProps {
+  userServer?: UserServer
+  isMixWikTeams?: boolean
+  createUser?: () => void
 }
 
-export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeagueGameFromProps) => {
+export const Dota2GameFrom = ({ userServer, isMixWikTeams, createUser }: Dota2GameFromProps) => {
   const { currentPosition } = useCurrentPosition()
-  const [loading, setLoading] = useState({
-    title: '',
-    subtitle: '',
-    number: 0
-  })
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
   const [image, setImage] = useState<File>()
@@ -47,19 +43,20 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
   const [imgUrl6, setImgUrl6] = useState('')
   const [imgUrl7, setImgUrl7] = useState('')
 
-  const [error, setError] = useState('')
   const [initialValues] = useState({
     category: openGame as string,
     title: '',
     description: '',
     hours: 0,
     age: '',
-    level: [],
+    level: '',
     preferenceTeam: [] as string[],
     position: [] as string[],
-    premier: [],
-    typeOfGamer: [] as string[]
+    premier: '',
+    typeOfGamer: [] as string[],
+    affiliateCode: ''
   })
+
   const schema = yup
     .object({
       title: yup
@@ -73,8 +70,11 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
         .min(100, 'Mínimo 100 caracteres')
         .max(350, 'Máximo 350 caracteres'),
       level: yup
+        .string()
+        .required('El campo nivel es obligatorio'),
+      position: yup
         .array()
-        .min(1, 'Selecciona al menos un nivel'),
+        .min(1, 'Selecciona al menos una posición'),
       typeOfGamer: yup
         .array()
         .min(1, 'Selecciona al menos un tipo'),
@@ -82,7 +82,9 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
         .number()
         .required('El campo horas es obligatorio')
         .min(1, 'El campo horas es obligatorio')
-        .max(5000, 'Máximo 5000 horas')
+        .max(5000, 'Máximo 5000 horas'),
+      affiliateCode: yup
+        .string()
     })
     .required()
 
@@ -97,41 +99,34 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
   })
 
   const onSubmit = async (data) => {
-    const date = userServer.age ? userServer.age : localStorage.getItem('age') ?? '01-01-2000'
+    const date = userServer?.age ? userServer.age : localStorage.getItem('age') ?? '01-01-2000'
     const age = new Date().getFullYear() - new Date(date).getFullYear()
     if (Object.keys(data).length > 0 && imgUrl && image) {
-      setLoading({ title: 'Creando Team...', subtitle: 'Estamos creando tu team, por favor espera...', number: 0 })
-      const res = await fetch('/api/create-team', {
+      const res = await fetch('/api/create-game', {
         method: 'POST',
-        body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age })
+        body: JSON.stringify({ ...data, imageName: image.name, imageName2: image2?.name, imageName3: image3?.name, imageName4: image4?.name, imageName5: image5?.name, imageName6: image6?.name, imageName7: image7?.name, imgUrl, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7, category: openGame, uid: userProvider.uid, geometry: currentPosition, age, type: isMixWikTeams ? PUBLICATION_TYPE.playerWithTeam : PUBLICATION_TYPE.player })
       })
       const response = await res.json()
       if (response.message === 'Game created') {
-        setTimeout(() => {
-          setLoading({ title: 'Team creado', subtitle: 'Tu team ha sido creado con éxito', number: 1 })
-          handleOpenGame('')
-        }, 2000)
+        toast.success('Tu jugador ha sido creado con éxito')
+        createUser && createUser()
       } else {
-        setError(response.message)
-        setLoading({ title: '', subtitle: '', number: 0 })
+        toast.error(response.message)
       }
     } else {
-      setError('Ha ocurrido un error')
-      setLoading({ title: '', subtitle: '', number: 0 })
+      toast.error('Ha ocurrido un error')
     }
   }
 
   return (
     <section className='size-full md:w-1/2 md:py-5'>
       <BackgroundDots />
-      <PopUpMessage loading={loading} />
-      <PopUpError error={error} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-center gap-10 p-5 bg-white rounded-lg'
       >
         <h2 className='text-2xl font-semibold text-pennBlue'>
-          Rocket League
+          Dota 2
         </h2>
         {
           isMixWikTeams
@@ -179,14 +174,14 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
         <Title
           register={register}
           errors={errors.title}
-          title='Nombre del equipo'
+          title='Nombre de jugador'
           registerName='title'
         />
         <Description
           register={register}
           watch={watch}
           errors={errors.description}
-          title='Descripción del equipo'
+          title='Describete como jugador'
           registerName='description'
         />
 
@@ -194,9 +189,17 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
           register={register}
           registerName='level'
           errors={errors.level}
-          game={ROCKET_LEVELS}
+          game={DOTA2_LEVELS}
+          type='radio'
+          title='¿Cuál es tu nivel en Competitivo?'
+        />
+        <BoxField
+          register={register}
+          registerName='position'
+          errors={errors.position}
+          game={DOTA2_POSITION}
           type='checkbox'
-          title='¿Cuál es el nivel competitivo que quieres en tu equipo?'
+          title='¿En qué posiciones juegas?'
         />
         <BoxField
           register={register}
@@ -204,17 +207,22 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams }: RocketLeague
           errors={errors.typeOfGamer}
           game={TYPE_OF_GAME}
           type='checkbox'
-          title='¿Que tipo de jugadores buscas?'
+          title='¿Qué tipo de jugador eres?'
         />
         <HoursField
           register={register}
           watch={watch}
           errors={errors.hours}
-          title='¿Cuántas horas como mínimo quieres que tengan los jugadores?'
+          title='¿Cuántas horas has jugado?'
           type='range'
           registerName='hours'
         />
-
+        <AffiliateCode
+          register={register}
+          errors={errors.affiliateCode}
+          title='Código de afiliado (opcional)'
+          registerName='affiliateCode'
+        />
         <div className='flex justify-center w-full gap-10'>
           <button
             type='button'

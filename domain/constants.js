@@ -69,8 +69,7 @@ export const GAMES = [
   {
     collection: COLLECTIONS.dota2,
     logo: LOGOS.dota2,
-    name: 'Dota 2',
-    comingSoon: true
+    name: 'Dota 2'
   }
 ]
 
@@ -180,4 +179,23 @@ export const ROCKET_LEVELS = [
   'Plata',
   'Oro',
   'Platino'
+]
+
+export const DOTA2_LEVELS = [
+  'Heraldo',
+  'Guardian',
+  'Cruzado',
+  'Arconte',
+  'Leyenda',
+  'Antiguo',
+  'Divino',
+  'Inmortal'
+]
+
+export const DOTA2_POSITION = [
+  'Carry',
+  'Midlane',
+  'Offlane',
+  'Apoyo-blando',
+  'Apoyo-duro'
 ]

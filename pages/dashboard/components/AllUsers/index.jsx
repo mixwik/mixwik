@@ -19,7 +19,7 @@ const AllUsers = () => {
     }
   }
   const handleUnBan = (id) => {
-    if (window.confirm('¿Estás seguro de desbanear a este usuario?')) {
+    if (window.confirm('¿Estás seguro de quitar el ban a este usuario?')) {
       alert('Usuario desbaneado')
       updateUserBan(id, false)
     }
