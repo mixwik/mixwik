@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -25,6 +26,7 @@ interface FortniteGameFormProps {
 }
 
 export const FortniteGameForm = ({ userServer, isMixWikTeams, createUser }: FortniteGameFormProps) => {
+  const router = useRouter()
   const { currentPosition } = useCurrentPosition()
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
@@ -109,6 +111,7 @@ export const FortniteGameForm = ({ userServer, isMixWikTeams, createUser }: Fort
       if (response.message === 'Game created') {
         createUser && createUser()
         toast.success('Tu jugador ha sido creado con éxito')
+        setTimeout(() => router.refresh(), 1000)
       } else {
         toast.error(response.message)
       }

@@ -17,6 +17,7 @@ import { HoursField } from '../../components/fields/hours-field'
 import { FieldImage } from '../../components/fields/image-field'
 import { FieldImages } from '../../components/fields/images-field'
 import { Title } from '../../components/fields/title-field'
+import { useRouter } from 'next/navigation'
 
 interface RocketLeagueGameFromProps {
   userServer?: UserServer
@@ -25,6 +26,7 @@ interface RocketLeagueGameFromProps {
 }
 
 export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams, createUser }: RocketLeagueGameFromProps) => {
+  const router = useRouter()
   const { currentPosition } = useCurrentPosition()
   const { userProvider } = useSession()
   const { openGame, handleOpenGame } = useOpenGameContext()
@@ -106,6 +108,7 @@ export const RocketLeagueGameFrom = ({ userServer, isMixWikTeams, createUser }: 
       if (response.message === 'Game created') {
         toast.success('Tu jugador ha sido creado con éxito')
         createUser && createUser()
+        setTimeout(() => router.refresh(), 1000)
       } else {
         toast.error(response.message)
       }
