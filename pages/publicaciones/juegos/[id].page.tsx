@@ -75,7 +75,7 @@ const PublicationsGamesPage = () => {
             <div className='flex flex-wrap gap-5'>
               {isData === 'data'
                 ? <SocialLinks isMixWikTeams={isMixWikTeams} user={userServer} />
-                : <p>Para poder ver las vías de contacto, primero tienes que <Link className='text-aero decoration-white' href='/logIn'>Registrarte / Iniciar Sesión en MixWik</Link></p>}
+                : <p>Para poder ver las vías de contacto, primero tienes que <Link className='text-aero decoration-white' href='/logIn?#'>Registrarte / Iniciar Sesión en MixWik</Link></p>}
             </div>
             <div className='flex items-center justify-center'>
               {publication?.geometry && <UserMap publication={publication} />}

@@ -77,7 +77,7 @@ const Nav = () => {
                   </Link>
                   )
                 : (
-                  <Link href='/logIn' className={styles.logInButton}>
+                  <Link href='/logIn?#' className={styles.logInButton}>
                     <UserIcon />
                   </Link>
                   )

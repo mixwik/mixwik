@@ -14,9 +14,9 @@ import { FinishRegistration } from './components/finish-registration'
 
 const LogIn = () => {
   const emailRef = useRef()
+  const google = new GoogleAuthProvider()
   const { register, successRegister, errorRegister } = useRegister()
   const [errorProvider, logInProvider] = useLogInProvider()
-  const google = new GoogleAuthProvider()
   // const twitter = new TwitterAuthProvider()
 
   const handleLoginProvider = (provider) => {
