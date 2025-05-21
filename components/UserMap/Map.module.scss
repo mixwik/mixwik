@@ -16,7 +16,9 @@
 .cs2Icon,
 .lolIcon,
 .fortniteIcon,
-.valorantIcon {
+.valorantIcon,
+.dota2Icon,
+.rocketLeagueIcon {
   background-image: url('../../public/logos/CS2.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -33,4 +35,10 @@
 }
 .valorantIcon {
   background-image: url('../../public/logos/VALORANT.png');
+}
+.dota2Icon {
+  background-image: url('../../public/logos/dota2.png');
+}
+.rocketLeagueIcon {
+  background-image: url('../../public/logos/rocket.png');
 }

@@ -33,6 +33,16 @@ const Markers = ({ publication, publicationUser, currentPosition, promotion, ind
     iconSize: [40, 40],
     crossOrigin: true
   })
+  const dota2Icon = L.divIcon({
+    className: styles.dota2Icon,
+    iconSize: [40, 20],
+    crossOrigin: true
+  })
+  const rocketLeagueIcon = L.divIcon({
+    className: styles.rocketLeagueIcon,
+    iconSize: [40, 40],
+    crossOrigin: true
+  })
 
   return (
     <>
@@ -69,6 +79,24 @@ const Markers = ({ publication, publicationUser, currentPosition, promotion, ind
             publicationUser={publicationUser}
             publication={publication}
             icon={valorantIcon}
+          />
+        )
+      }
+      {
+        publication.category === COLLECTIONS.dota2 && (
+          <GameMarker
+            publicationUser={publicationUser}
+            publication={publication}
+            icon={dota2Icon}
+          />
+        )
+      }
+      {
+        publication.category === COLLECTIONS.rocketLeague && (
+          <GameMarker
+            publicationUser={publicationUser}
+            publication={publication}
+            icon={rocketLeagueIcon}
           />
         )
       }
