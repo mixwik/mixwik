@@ -1,10 +1,10 @@
 export const REGEX = {
   discord: /discord/i,
-  twitterOrX: /^(https?:\/\/)?(www\.)?x\.com\/([a-zA-Z0-9_]{1,15})$|^(https?:\/\/)?(www\.)?twitter\.com\/(#!\/)?[a-zA-Z0-9_]{1,15}(\/\w+)*$/,
-  instagram: /^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9_]+$/,
-  facebook: /^https?:\/\/(www\.)?facebook\.com\/[a-zA-Z0-9_]+$/,
-  twitch: /^https?:\/\/(www\.)?twitch\.tv\/[a-zA-Z0-9_]+$/,
-  youtube: /^https?:\/\/(www\.)?youtube\.com\/[a-zA-Z0-9_]+$/,
-  tiktok: /^(?:https?:\/\/)?(?:www\.)?tiktok\.com\/(?:@\w{2,32}(?:\/video\/\d+)?)?(?:\?lang=\w{2})?$/i,
-  steam: /^(https?:\/\/)?(www\.)?steamcommunity\.com\/(id|profiles)\/([0-9]{17,25})$/
+  twitterOrX: /x|^(https?:\/\/)?(www\.)?twitter\.com\/(#!\/)?[a-zA-Z0-9_]{1,15}(\/\w+)*$/,
+  instagram: /instagram/i,
+  facebook: /facebook/i,
+  twitch: /twitch/i,
+  youtube: /youtube/i,
+  tiktok: /tiktok/i,
+  steam: /steamcommunity/i
 }
