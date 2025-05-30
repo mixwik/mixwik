@@ -1,6 +1,6 @@
 export const REGEX = {
   discord: /discord/i,
-  twitterOrX: /x|^(https?:\/\/)?(www\.)?twitter\.com\/(#!\/)?[a-zA-Z0-9_]{1,15}(\/\w+)*$/,
+  twitterOrX: /^https?:\/\/(www\.)?(twitter\.com|x\.com)\//,
   instagram: /instagram/i,
   facebook: /facebook/i,
   twitch: /twitch/i,
