@@ -3,7 +3,6 @@ import { myLoader } from '../../../components/myLoader'
 import { PUBLICATION_TYPE } from '../../../domain/constants'
 
 export const Card = ({ publication, handlePromotion, stripeId, isMixWikTeams }) => {
-  console.log(publication.type, isMixWikTeams)
   if (publication.type === PUBLICATION_TYPE.team && !isMixWikTeams) return null
   if (publication.type === PUBLICATION_TYPE.playerWithTeam && !isMixWikTeams) return null
   return (

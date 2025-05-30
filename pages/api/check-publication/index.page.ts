@@ -5,7 +5,6 @@ import { db } from '../../../firebase/initialize'
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { uid, collections, isMixWikTeams } = req.body
-    console.log(uid, collections)
     if (uid) {
       const userRef = collection(db, collections)
       const q = query(userRef, where('uid', '==', uid))
