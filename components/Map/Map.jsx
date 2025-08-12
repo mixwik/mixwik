@@ -25,7 +25,7 @@ const Map = ({ publicationUser, publications, zoom, currentPosition }) => {
       zoomAnimation
       doubleClickZoom={false}
       zoom={zoom}
-      maxZoom={14}
+      maxZoom={12}
     >
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

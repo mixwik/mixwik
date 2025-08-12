@@ -14,7 +14,7 @@ import { COLLECTIONS } from '../../domain/constants'
 const Map = ({ publication }) => {
   const cs2Icon = L.divIcon({
     className: styles.cs2Icon,
-    iconSize: [170, 170],
+    iconSize: [100, 100],
     crossOrigin: true
   })
   const lolIcon = L.divIcon({
@@ -52,7 +52,7 @@ const Map = ({ publication }) => {
       zoomControl={false}
       scrollWheelZoom={false}
       dragging={false}
-      zoom={14.5}
+      zoom={13}
     >
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
